@@ -1,8 +1,9 @@
 import React from "react"
-import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput } from "../../commons/utility";
-import { Day } from "../../models/IDay";
-import { InputProps } from "../../models/InputProps";
-import { InputWrapper } from "./InputWrapper";
+import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput } from "../../commons/utility"
+import { Day } from "../../models/IDay"
+import { InputProps } from "../../models/InputProps"
+import { InputWrapper } from "./InputWrapper"
+import onClickOutside from "react-onclickoutside"
 
 export interface IProps extends InputProps {
     readonly defaultValue?: Date
@@ -20,7 +21,7 @@ export interface IState {
     readonly selectedYear: number
 }
 
-export class DatePicker extends React.PureComponent<IProps, IState>{
+class DatePicker extends React.PureComponent<IProps, IState>{
     constructor(props: IProps) {
         super(props)
 
@@ -94,7 +95,7 @@ export class DatePicker extends React.PureComponent<IProps, IState>{
         blurInput()
     }
 
-    showCalendar = (ref: HTMLInputElement) => this.setState({ showCalendar: true })///, () => ref.focus())
+    showCalendar = (    ) => this.setState({ showCalendar: true })
 
     hideCalendar = () => this.setState({ showCalendar: false })
 
@@ -156,6 +157,8 @@ export class DatePicker extends React.PureComponent<IProps, IState>{
 
     chooseToday = () => this.selectDay(new Date().getDate(), new Date().getMonth(), new Date().getFullYear())
 
+    handleClickOutside = () => this.hideCalendar()
+
     render = (): JSX.Element => {
         const { date, showCalendar, selectingMonth, selectingYear, currentYear, currentMonth, currentDecade } = this.state,
         props = this.props,
@@ -164,13 +167,11 @@ export class DatePicker extends React.PureComponent<IProps, IState>{
             type: "far",
             key: "calendar-day"
         }
-        let input: HTMLInputElement
 
-        return <InputWrapper style={props.wrapperStyle} onFocus={() => this.showCalendar(input)} onBlur={this.hideCalendar} label={props.label} icon={icon} focusBool={showCalendar} value={date} resetFunction={this.resetDate} disabled={props.disabled}>
+        return <InputWrapper style={props.wrapperStyle} onFocus={this.showCalendar} label={props.label} icon={icon} focusBool={showCalendar} value={date} resetFunction={this.resetDate} disabled={props.disabled} isFocusable>
             <input
                 type="text"
                 value={date}
-                ref={r => input = r}
                 required={props.required}
                 onKeyDown={props.onKeyDown ? props.onKeyDown : null}
                 onKeyPress={props.onKeyPress ? props.onKeyPress : null}
@@ -295,3 +296,5 @@ export class DatePicker extends React.PureComponent<IProps, IState>{
         </InputWrapper>
     }
 }
+
+export default onClickOutside(DatePicker)

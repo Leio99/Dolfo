@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { IIcon } from "../../models/IIcon";
+import { IIcon } from "../../models/IIcon"
 
 export interface IProps extends DefaultIconProps{
     readonly icon: IIcon

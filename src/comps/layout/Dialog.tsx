@@ -115,7 +115,6 @@ export class Dialog extends React.PureComponent<IProps, IState>{
     }
 
     componentDidUpdate = () => {
-        console.log("got update")
         this.setState({
             visible: this.props.visible !== null ? this.props.visible : this.props.autoLoad ? true : false
         })

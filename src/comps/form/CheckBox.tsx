@@ -1,6 +1,6 @@
 import React from "react"
-import { InputProps } from "../../models/InputProps";
-import { CheckIcon } from "../layout/Icon";
+import { InputProps } from "../../models/InputProps"
+import { CheckIcon } from "../layout/Icon"
 
 export interface IProps extends InputProps{
     readonly checked?: boolean

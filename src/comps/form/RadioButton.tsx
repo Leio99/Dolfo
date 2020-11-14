@@ -1,6 +1,6 @@
 import React from "react"
-import { InputProps } from "../../models/InputProps";
-import { Option } from "./Option";
+import { InputProps } from "../../models/InputProps"
+import { Option } from "./Option"
 
 export interface IProps extends InputProps{
     readonly controlName: string

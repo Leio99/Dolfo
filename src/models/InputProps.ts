@@ -1,5 +1,5 @@
-import { CSSProperties } from "react";
-import { IIcon } from "./IIcon";
+import { CSSProperties } from "react"
+import { IIcon } from "./IIcon"
 
 export interface InputProps{
     readonly label?: JSX.Element | string

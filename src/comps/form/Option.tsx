@@ -1,7 +1,7 @@
 import React from "react"
-import { blurInput } from "../../commons/utility";
-import { InputProps } from "../../models/InputProps";
-import { CheckBox } from "./CheckBox";
+import { blurInput } from "../../commons/utility"
+import { InputProps } from "../../models/InputProps"
+import { CheckBox } from "./CheckBox"
 
 export interface IProps extends InputProps{
     readonly value: any
@@ -15,7 +15,7 @@ export interface IProps extends InputProps{
 
 export class Option extends React.PureComponent<IProps>{
     selectOption = () => {
-        this.props.onChange(this.props.value);
+        this.props.onChange(this.props.value)
 
         !this.props.multiple && blurInput()
     }

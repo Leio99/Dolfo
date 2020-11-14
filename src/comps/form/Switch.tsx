@@ -1,6 +1,6 @@
 import React from "react"
-import { InputProps } from "../../models/InputProps";
-import { LoadingIcon } from "../layout/Icon";
+import { InputProps } from "../../models/InputProps"
+import { LoadingIcon } from "../layout/Icon"
 
 export interface IProps extends InputProps{
     readonly value?: any

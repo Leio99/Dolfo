@@ -1,8 +1,8 @@
 import React from "react"
-import { InputProps } from "../../models/InputProps";
-import { Icon } from "../layout/Icon";
-import { InputWrapper } from "./InputWrapper";
-import { Option } from "./Option";
+import { InputProps } from "../../models/InputProps"
+import { Icon } from "../layout/Icon"
+import { InputWrapper } from "./InputWrapper"
+import { Option } from "./Option"
 
 export interface IProps extends InputProps{
     readonly defaultValue?: any
@@ -50,7 +50,7 @@ export class Select extends React.PureComponent<IProps, IState>{
         if(this.state.value.includes(value))
             newList = this.state.value.filter((v: any) => v !== value)
         else
-            newList.splice(index, 0, value);
+            newList.splice(index, 0, value)
 
         this.setState({ value: newList })
 

@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react"
-import { Icon } from "./Icon";
-import { Slide } from "./Slide";
+import { Icon } from "./Icon"
+import { Slide } from "./Slide"
 
 export interface IProps{
     readonly style?: CSSProperties

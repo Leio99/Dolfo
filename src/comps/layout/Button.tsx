@@ -1,6 +1,6 @@
 import React from "react"
-import { InputProps } from "../../models/InputProps";
-import { LoadingIcon } from "./Icon";
+import { InputProps } from "../../models/InputProps"
+import { LoadingIcon } from "./Icon"
 
 export interface IProps extends InputProps{
     readonly type?: "button" | "submit"

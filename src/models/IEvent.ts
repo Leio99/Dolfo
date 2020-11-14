@@ -1,5 +1,5 @@
-import { IBuilding } from "./IBuilding";
-import { IRoom } from "./IRoom";
+import { IBuilding } from "./IBuilding"
+import { IRoom } from "./IRoom"
 
 export interface IEvent{
     readonly eventId: number

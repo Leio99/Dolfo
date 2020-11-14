@@ -2,6 +2,7 @@ import React from "react"
 import { zeroBefore } from "../../commons/utility"
 import { InputProps } from "../../models/InputProps"
 import { InputWrapper } from "./InputWrapper"
+import onClickOutside from "react-onclickoutside"
 
 export interface IProps extends InputProps{
     readonly defaultValue?: string
@@ -11,7 +12,7 @@ export interface IState{
     readonly showTime: boolean
 }
 
-export class TimePicker extends React.PureComponent<IProps, IState>{
+class TimePicker extends React.PureComponent<IProps, IState>{
     constructor(props: IProps){
         super(props)
 
@@ -81,6 +82,8 @@ export class TimePicker extends React.PureComponent<IProps, IState>{
 
     hideTime = () => this.setState({ showTime: false })
 
+    handleClickOutside = () => this.hideTime()
+
     render = (): JSX.Element => {
         const props = this.props,
         { value, showTime } = this.state,
@@ -91,7 +94,7 @@ export class TimePicker extends React.PureComponent<IProps, IState>{
         hour = value.split(":")[0],
         minute = value.split(":")[1]
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} onBlur={this.hideTime} focusBool={showTime} disabled={props.disabled}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled}>
             <input
                 type="text"
                 className="dolfo-input-time"
@@ -148,3 +151,5 @@ export class TimePicker extends React.PureComponent<IProps, IState>{
         </InputWrapper>
     }
 }
+
+export default onClickOutside(TimePicker)
