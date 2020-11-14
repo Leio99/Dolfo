@@ -1,0 +1,67 @@
+.dolfo-accordion{
+    background-color: #fff;
+    overflow: hidden;
+    max-width: 100%;
+
+    &:first-child .dolfo-accordion-header{
+        border-radius: $smallRadius $smallRadius 0 0
+    }
+
+    &:last-child{
+        border-radius: 0 0 $smallRadius $smallRadius;
+
+        .dolfo-accordion-content .dolfo-accordion-inner{
+            border-bottom: 1px solid #f1f1f1;
+            border-radius: 0 0 $smallRadius $smallRadius
+        }
+    }
+
+    .dolfo-accordion-header{
+        cursor: pointer;
+        padding: 0.7rem 2.5rem 0.7rem 1rem;
+        position: relative;
+        background-color: #f1f1f1;
+        font-weight: 500;
+        color: $dark;
+        text-transform: uppercase;
+        font-size: 13px;
+
+        &:hover{
+            background-color: darken(#f1f1f1, 5%)
+        }
+
+        .accordion-title{
+            overflow: hidden;
+            display: block;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+
+        .accordion-caret{
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            color: $disabled;
+            transition: 0.3s
+        }
+    }
+
+    &.opened{
+        .dolfo-accordion-header .accordion-caret{
+            transform: translateY(-50%) rotate(180deg)
+        }
+    }
+
+    .dolfo-accordion-content{
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+
+        .dolfo-accordion-inner{
+            padding: 0.7rem;
+            border-left: 1px solid #f1f1f1;
+            border-right: 1px solid #f1f1f1
+        }
+    }
+}

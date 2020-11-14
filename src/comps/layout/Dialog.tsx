@@ -1,0 +1,174 @@
+import React, { CSSProperties } from "react"
+import ReactDOM from "react-dom"
+import { Button } from "./Button"
+import { CheckCircleOutlineIcon, CloseIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, QuestionCircleOutlineIcon, WarningIconOutline } from "./Icon"
+import { Constants } from "../shared/Constants"
+
+export interface IProps{
+    readonly clickOutside?: boolean
+    readonly onClose?: () => void
+    readonly visible?: boolean
+    readonly onOk?: () => void
+    readonly okBtnClass?: string
+    readonly cancelBtnClass?: string
+    readonly okText?: string
+    readonly cancelText?: string
+    readonly hideCancel?: boolean
+    readonly title: string | JSX.Element
+    readonly content?: string | JSX.Element
+    readonly autoLoad?: boolean
+    readonly width?: string
+    readonly style?: CSSProperties
+    readonly okType?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white"
+    readonly cancelType?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white"
+    readonly className?: string
+    readonly customFooter?: React.ReactNode
+}
+export interface IState{
+    readonly visible: boolean
+}
+export interface DialogProps extends IProps{
+    readonly type?: "success" | "info" | "error" | "warning"
+    readonly icon?: JSX.Element
+}
+
+export class Dialog extends React.PureComponent<IProps, IState>{
+    constructor(props: IProps) {
+        super(props)
+
+        this.state = {
+            visible: props.visible || props.autoLoad ? true : false
+        }
+    }
+
+    static infoDialog = (data: {
+        title?: string | JSX.Element,
+        content: string | JSX.Element,
+        onOk?: () => void,
+        type?: "success" | "info" | "error" | "warning",
+        width?: string,
+        okText?: string
+    }) => {
+        let title = data.title || Constants.INFO_TEXT
+
+        if(!data.title){
+            if(data.type === "success") title = Constants.SUCCESS_TEXT
+            if(data.type === "error") title = Constants.ERROR_TEXT
+            if(data.type === "warning") title = Constants.WARNING_TEXT
+        }
+
+        return Dialog.openDialog({
+            ...data,
+            title,
+            hideCancel: true,
+            icon: Dialog.getIcon(data.type || "info") 
+        })
+    }
+
+    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: () => void) => {
+        return Dialog.openDialog({
+            title,
+            content: message,
+            onOk: onYes,
+            okText: Constants.YESY_TEXT,
+            cancelText: Constants.NO_TEXT,
+            icon: <QuestionCircleOutlineIcon color="var(--orange)" />
+        })
+    }
+
+    static loadingDialog = (loadingText: string | JSX.Element = Constants.LOADING_TEXT) => {
+        return Dialog.openDialog({
+            title: "",
+            content: <div>
+                <LoadingIcon spinning /> {loadingText}
+            </div>,
+            style: { height: 130 },
+            width: "270px",
+            className: "loading-dialog"
+        })
+    }
+
+    static openDialog = (data: DialogProps) => {
+        const popup = document.createElement('div'),
+        onCloseFunction = (props: IProps) => props.onClose && props.onClose(),
+        onOkFunction = (props: IProps) => props.onOk && props.onOk(),
+        icon = data.icon || Dialog.getIcon(data.type)
+
+        document.getElementById("root").appendChild(popup);
+
+        (popup as any).close = function(){
+            popup.remove()
+        }
+
+        ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width || "350px"} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={null} />, popup)
+
+        return popup as { close?: () => void }
+    }
+
+    static getIcon = (icon: string) => {
+        if(icon === "success") return <CheckCircleOutlineIcon color="var(--green)" />
+        if(icon === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
+        if(icon === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
+        if(icon === "warning") return <WarningIconOutline color="var(--orange)" />
+
+        return null
+    }
+
+    componentDidUpdate = () => {
+        console.log("got update")
+        this.setState({
+            visible: this.props.visible !== null ? this.props.visible : this.props.autoLoad ? true : false
+        })
+    }
+
+    onClose = () => {
+        this.setState({ visible: false })
+
+        this.props.onClose && this.props.onClose()
+    }
+
+    onOk = () => {
+        this.props.autoLoad && this.setState({ visible: false })
+
+        this.props.onOk && this.props.onOk()
+    }
+
+    render = (): JSX.Element => {
+        const props = this.props,
+        { visible } = this.state
+
+        return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "")}>
+            <div className="dolfo-dialog-overlay" onClick={props.clickOutside ? this.onClose : null}></div>
+
+            <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width }}>
+                <div className="dolfo-dialog-header">
+                    <Button textBtn onClick={this.onClose} className="dialog-close">
+                        <CloseIcon style={{ fontSize: 20 }} />
+                    </Button>
+
+                    <h4 className="dolfo-dialog-title">{props.title}</h4>
+                </div>
+
+                <div className="dolfo-dialog-content">
+                    {props.content || props.children}
+                </div>
+
+                {
+                    props.customFooter ? <div className="dolfo-dialog-footer">
+                        {props.customFooter}
+                    </div> : <div className="dolfo-dialog-footer">
+                        {
+                            !props.hideCancel && <Button onClick={this.onClose} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} smallBtn textBtn btnColor={props.cancelType || "red"}>
+                                {props.cancelText || Constants.CANCEL_TEXT}
+                            </Button>
+                        }
+
+                        <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} smallBtn btnColor={props.okType || "blue"}>
+                            {props.okText || Constants.OK_TEXT}
+                        </Button>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

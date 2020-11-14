@@ -1,0 +1,114 @@
+.dolfo-form-input{
+    margin-bottom: 7px;
+    outline: none;
+    position: relative;
+    pointer-events: none;
+
+    &.disabled{
+        opacity: 0.6
+    }
+
+    &:not(.disabled) *:not(.dolfo-input-label){
+        pointer-events: all
+    }
+
+    > label.dolfo-input-label{
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 5px
+    }
+
+    .dolfo-input-wrapper{
+        position: relative;
+        display: flex;
+        background-color: $lightGrey;
+        padding: 5px;
+        padding-left: 0;
+        align-items: center;
+        border-radius: $smallRadius;
+        transition: background-color 0.2s ease;
+
+        .reset-input, .toggle-password{
+            color: $disabled;
+            cursor: pointer;
+            position: absolute;
+            margin-right: 0.7rem;
+            top: 0.9rem;
+            right: 0;
+            font-size: 15px;
+            z-index: 1;
+
+            &:hover{
+                color: $dark
+            }
+
+            &.toggle-password{
+                right: 1.3rem;
+                top: 25%
+            }
+        }
+
+        &.focused{
+            background-color: $selectionBlue;
+
+            .dolfo-input-icon{
+                color: $white
+            }
+        }
+
+        .dolfo-input-icon{
+            flex: 0 0 50px;
+            text-align: center;
+            color: $dark
+        }
+
+        .dolfo-input-content{
+            flex-grow: 1;
+            position: relative;
+            display: inline-flex;
+
+            input[type="text"], input[type="password"], input[type="email"], textarea{
+                cursor: text;
+                outline: none;
+                border: 0;
+                border-radius: $smallRadius;
+                background-color: $white;
+                padding: 0.3rem 0.7rem;
+                flex-grow: 1;
+                width: 100%;
+                resize: none;
+                display: block;
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit
+            }
+        }
+    }
+
+    &.input-number{
+        .reset-input{
+            right: 1.3rem
+        }
+
+        .dolfo-input-number-btns{
+            position: absolute;
+            margin-right: 0.3rem;
+            top: 0;
+            right: 0;
+            font-size: 15px;
+            z-index: 1;
+            display: inline-flex;
+            flex-direction: column;
+
+            .increase, .decrease{
+                color: $disabled;
+                cursor: pointer;
+
+                &:hover{
+                    color: $dark
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@import "input";
+@import "datepicker";
+@import "select";
+@import "checkbox";
+@import "timepicker";
+@import "radiobutton";
+@import "switch";
+
+@keyframes spinIcon{
+    100%{ transform: rotate(360deg) }
+}

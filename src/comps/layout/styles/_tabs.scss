@@ -1,0 +1,94 @@
+.dolfo-tabs{
+    .dolfo-tabs-links{
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 0.6rem;
+        position: relative;
+        overflow-x: auto;
+        margin-bottom: 0.5rem;
+
+        .dolfo-tabs-underline{
+            height: 2px;
+            background-color: $selectionBlue;
+            transition: 0.4s ease;
+            position: absolute;
+            left: 0;
+            bottom: 0.6rem;
+            border-radius: $roundRadius
+        }
+        
+        .dolfo-tab-title{
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 12pt;
+            text-align: center;
+
+            &.current{
+                color: $selectionBlue !important
+            }
+
+            &:focus, &:hover{
+                outline: none;
+                color: darken($selectionBlue, 15%)
+            }
+        }
+    }
+
+    &.vertical{
+        display: flex;
+        flex-direction: row;
+
+        .dolfo-tabs-links{
+            flex-direction: column;
+            margin-bottom: 0;
+            margin-right: 1rem;
+            overflow-x: initial;
+            padding-bottom: 0;
+
+            .dolfo-tab-title{
+                max-width: 200px;
+                width: max-content
+            }
+
+            .dolfo-tabs-underline{
+                left: auto;
+                top: 0;
+                bottom: auto;
+                right: 0;
+                width: 2px;
+                height: auto
+            }
+        }
+
+        .dolfo-tabs-list{
+            width: 100%;
+            flex-direction: column;
+
+            .dolfo-tab-content{
+                display: none;
+
+                &.current{
+                    display: block
+                }
+            }
+        }
+    }
+
+    .dolfo-tabs-list{
+        display: flex;
+        flex-direction: row;
+        overflow-x: hidden;
+        overflow-y: visible;
+
+        .dolfo-tab-content{
+            flex: 0 0 100%;
+            opacity: 0;
+            max-width: 100%;
+            transition: margin-left 0.4s cubic-bezier(0, 1.12, 0.99, 0.99), opacity 0.5s ease;
+
+            &.current{
+                opacity: 1
+            }
+        }
+    }
+}

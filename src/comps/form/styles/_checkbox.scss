@@ -1,0 +1,84 @@
+.dolfo-checkbox{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+
+    &.disabled{
+        pointer-events: none;
+        opacity: 0.6;
+
+        .dolfo-checkbox-square.checked{
+            border-color: $disabled;
+            background-color: $disabled;
+
+            &:after{
+                background-color: $disabled
+            }
+        }
+    }
+
+    input[type="checkbox"]{
+        opacity: 0;
+        position: absolute;
+        pointer-events: none;
+        top: 25%;
+        left: 0
+    }
+
+    label{
+        vertical-align: middle;
+        font-size: 13px;
+        margin-bottom: 0;
+        cursor: pointer
+    }
+
+    .dolfo-checkbox-square{
+        width: 16px;
+        height: 16px;
+        border-radius: 0.15rem;
+        border: 1px solid $grey;
+        background-color: #fff;
+        display: inline-flex;
+        vertical-align: middle;
+        justify-content: center;
+        outline: none;
+        align-items: center;
+        position: relative;
+        margin-right: 0.5rem;
+
+        &:focus{
+            border-color: $selectionBlue
+        }
+
+        *{
+            color: #fff;
+            font-size: 9px
+        }
+
+        &.checked{
+            background-color: $selectionBlue;
+            border-color: $selectionBlue;
+            animation: expandSquare 1s ease;
+
+            &:after{
+                content: "";
+                display: block;
+                top: 0;
+                bottom: 0;
+                position: absolute;
+                left: 0;
+                right: 0;
+                animation: check 0.4s ease forwards;
+                background-color: $selectionBlue
+            }
+        }
+    }
+}
+
+@keyframes check{
+    100%{ left: 100% }
+}
+@keyframes expandSquare{
+    0%{ box-shadow: 0 0 0 3px $hoverBlue }
+    100%{ box-shadow: 0 0 0 0 transparent }
+}

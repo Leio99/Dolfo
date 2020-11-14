@@ -1,0 +1,68 @@
+.dolfo-circular-progress {  
+    .dolfo-progress-circle-bg{
+        fill: none;
+        stroke: $lightGrey;
+        stroke-width: 2.8;
+    }
+
+    .dolfo-progress-circle{
+        fill: none;
+        stroke-width: 2.8;
+        stroke-linecap: round;
+        animation: progress 1s ease forwards;
+
+        @each $key, $color in $colors {
+            &.line-#{$key}{
+                stroke: $color
+            }
+        }
+    }
+    .dolfo-progress-percentage{
+        fill: $dark;
+        font-family: sans-serif;
+        font-size: 0.5em;
+        text-anchor: middle
+    }
+}
+
+.dolfo-progress-line{
+    width: 100%;
+    display: block;
+    height: 10px;
+    border-radius: $roundRadius;
+    background-color: $lightGrey;
+    position: relative;
+    margin-top: 25px;
+
+    .percent-text{
+        position: absolute;
+        right: 0;
+        font-size: 14px;
+        top: -22px;
+        font-weight: 500
+    }
+
+    .dolfo-progress-inner{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        border-radius: $roundRadius;
+        width: 0;
+        transition: 0.5s ease;
+
+        @each $key, $color in $colors {
+            &.bar-#{$key}{
+                background-color: $color
+            }
+        }
+    }
+}
+
+@keyframes progress{
+  0% { stroke-dasharray: 0 100 }
+}
+
+@keyframes expandBar{
+    0%{ width: 0 }
+}

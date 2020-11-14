@@ -1,0 +1,30 @@
+$selectionBlue: #0997ff;
+$disabled: #aaa;
+$grey: #ccc;
+$lightGrey: #eee;
+$hoverBlue: rgba(25, 111, 202, 0.15);
+$hoverRed: rgba(255, 0, 0, 0.15);
+$roundRadius: 50px;
+$smallRadius: 0.25rem;
+$dark: #555;
+$white: #fff;
+$black: #000;
+
+$colors: (
+  "red": #eb1d1d,
+  "blue": #236fd1,
+  "green": #1c9222,
+  "orange": #f1a80b,
+  "black": #333,
+  "grey": $disabled,
+  "white": $white
+);
+
+@function setBtnColor($color){  
+  @if(lightness($color) > 80){
+    @return $black;
+  }
+  @else{
+    @return $white;
+  }
+}

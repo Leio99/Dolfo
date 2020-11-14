@@ -1,0 +1,86 @@
+@import url('../node_modules/antd/dist/antd.css');
+
+
+@import "comps/shared/styles/dolfo";
+@import "comps/form/styles/form";
+@import "comps/layout/styles/layout";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+body{
+    overflow-x: hidden
+}
+
+.cell{
+    display: table-cell;
+    padding: 3rem 0 !important;
+    cursor: pointer;
+    max-width: 0;
+    position: relative;
+
+    &:hover{
+        background-color: #d7fadb
+    }
+    
+    .details{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 12pt
+    }
+}
+.prenotazione{
+    padding: 0.1rem 0.4rem;
+    border-radius: 100px;
+    margin: 5px 10px;
+    font-size: 11px;
+    color: #fff;
+    background-color: #d61212
+}
+.swipe-col{
+    animation: swipeLeft 0.4s ease-out forwards;
+    position: relative
+}
+.close-popup{
+    cursor: pointer;
+    color: #ddd;
+
+    &:hover{
+        color: #777
+    }
+}
+#results-list{
+    margin: 0 -0.25rem;
+    
+    .result{
+        cursor: pointer;
+
+        &:hover{
+            background-color: #f1f1f1
+        }
+        
+        &.selected{
+            color: #fff;
+            border-color: transparent !important;
+            background-color: $selectionBlue;
+
+            h5{
+                color: #fff
+            }
+        }
+    }
+}
+
+::-webkit-scrollbar{
+    width: 7px;
+    height: 7px;
+    background: #ccc
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background: #666
+}
+
+@keyframes swipeLeft{
+    0%{ right: -50% }
+    100%{ right: 0 }
+}

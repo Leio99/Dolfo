@@ -1,0 +1,46 @@
+.dolfo-input-time{
+    text-align: center;
+
+    &:first-child{
+        margin-right: 5px
+    }
+}
+
+.dolfo-time-container{
+    position: absolute;
+    display: none;
+    margin-top: 44px;
+    background-color: $white;
+    border: 1px solid $grey;
+    border-radius: $smallRadius;
+    z-index: 1;
+    width: 100px;
+    padding: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    table{
+        width: 100%;
+        text-align: center;
+        font-size: 120%;
+
+        tr:first-child, tr:last-child{
+            td{
+                border-radius: $roundRadius;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: $hoverBlue
+                }
+            }
+        }
+
+        .time-display{
+            margin: 0.3rem 0
+        }
+    }
+
+    &.show{
+        display: block
+    }
+}

@@ -1,0 +1,74 @@
+.dolfo-slideshow{
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    min-height: 400px;
+    height: 100%;
+    position: relative;
+
+    .dolfo-prev-slide, .dolfo-next-slide{
+        position: absolute;
+        font-size: 70px;
+        color: $white;
+        cursor: pointer;
+        top: 50%;
+        transform: translateY(-50%);
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+        &:hover{
+            color: $grey
+        }
+
+        &:active{
+            color: $dark
+        }
+
+        &.dolfo-prev-slide{
+            left: 1rem
+        }
+
+        &.dolfo-next-slide{
+            right: 1rem
+        }
+    }
+
+    .dolfo-slides{
+        display: flex;
+        height: 100%;
+
+        .dolfo-slide{
+            flex: 0 0 100%;
+            max-width: 100%;
+            transition: margin-left 0.8s cubic-bezier(0.88, -0.01, 0.07, 1);
+            padding: 2rem
+        }
+    }
+
+    .dolfo-slides-dots{
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        text-align: center;
+
+        .slide-dot{
+            width: 15px;
+            height: 15px;
+            background-color: $white;
+            cursor: pointer;
+            border-radius: $roundRadius;
+            display: inline-block;
+            margin: 0 0.5rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: 0.2s ease;
+
+            &:hover{
+                background-color: $grey
+            }
+
+            &.selected{
+                background-color: $dark
+            }
+        }
+    }
+}

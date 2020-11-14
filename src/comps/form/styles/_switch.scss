@@ -1,0 +1,67 @@
+.dolfo-input-switch{
+    display: inline-block;
+
+    input[type="checkbox"]{
+        opacity: 0;
+        position: absolute;
+        pointer-events: none;
+        top: 25%;
+        left: 0
+    }
+    
+    &.disabled{
+        pointer-events: none;
+        opacity: 0.6
+    }
+
+    .dolfo-switch{
+        margin-right: 0.5rem;
+        border-radius: $roundRadius;
+        position: relative;
+        background: $grey;
+        height: 20px;
+        width: 40px;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+
+        .dolfo-switch-dot{
+            top: 2px;
+            bottom: 2px;
+            left: 2px;
+            position: absolute;
+            width: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $white;
+            border-radius: $roundRadius;
+            transition: 0.5s ease;
+
+            *{
+                font-size: 10px
+            }
+        }
+
+        &.checked{
+            background-color: $selectionBlue;
+            animation: expandSwitch 1s ease;
+
+            .dolfo-switch-dot{
+                transform: translateX(125%)
+            }
+        }
+    }
+
+    label{
+        vertical-align: middle;
+        font-size: 13px;
+        margin-bottom: 0;
+        cursor: pointer
+    }
+}
+
+@keyframes expandSwitch{
+    0%{ box-shadow: 0 0 0 3px $hoverBlue }
+    100%{ box-shadow: 0 0 0 0 transparent }
+}

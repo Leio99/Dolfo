@@ -1,0 +1,101 @@
+.dolfo-dialog{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    &.show{
+        display: flex
+    }
+
+    &.loading-dialog{
+        .dolfo-dialog-content{
+            font-size: 21px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%
+        }
+
+        .dolfo-dialog-header, .dolfo-dialog-footer{
+            display: none
+        }
+    }
+
+    .dolfo-dialog-overlay{
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1
+    }
+
+    .dolfo-dialog-inner{
+        position: relative;
+        z-index: 2;
+        background: $white;
+        border-radius: $smallRadius;
+        width: 500px;
+        animation: popUp 0.3s ease forwards;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+        .dolfo-dialog-header, .dolfo-dialog-footer{
+            padding: 1rem 1.3rem;
+            
+            &.dolfo-dialog-header{
+                .dialog-close{
+                    transform: translateY(25%);
+                    float: right;
+                    color: #ddd;
+
+                    &:hover{
+                        color: $disabled
+                    }
+
+                    &:active{
+                        color: $dark
+                    }
+                }
+
+                .dolfo-dialog-title{
+                    margin: 0;
+                    font-weight: 400
+                }
+            }
+
+            &.dolfo-dialog-footer{
+                text-align: right;
+
+                .dolfo-button:last-child{
+                    margin-left: 1rem
+                }
+            }
+        }
+
+        .dolfo-dialog-content{
+            padding: 0 1.3rem
+        }
+    }
+}
+
+@keyframes popUp{
+    0%{ transform: scale(0)}
+    60%{ transform: scale(1.2)}
+    100%{ transform: scale(1)}
+}
+
+@media screen and (max-width: 600px){
+    .dolfo-dialog{
+        .dolfo-dialog-inner{
+            width: 80vw
+        }
+    }
+}

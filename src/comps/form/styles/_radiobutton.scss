@@ -1,0 +1,87 @@
+.dolfo-input-radio-container{
+    &.disabled{
+        pointer-events: none;
+        opacity: 0.6;
+
+        .dolfo-input-radio .dolfo-radio-circle.checked{
+            border-color: $disabled;
+
+            &:after{
+                background-color: $disabled
+            }
+        }
+    }
+
+    .dolfo-input-radio{
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+
+        input[type="radio"]{
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
+            top: 25%;
+            left: 0
+        }
+
+        label{
+            vertical-align: middle;
+            font-size: 13px;
+            margin-bottom: 0;
+            cursor: pointer;
+            margin-right: 0.5rem
+        }
+
+        .dolfo-radio-circle{
+            width: 16px;
+            height: 16px;
+            border-radius: $roundRadius;
+            border: 1px solid $grey;
+            background-color: $white;
+            display: inline-flex;
+            justify-content: center;
+            vertical-align: middle;
+            align-items: center;
+            position: relative;
+            margin-right: 0.5rem;
+            outline: none;
+
+            &:focus{
+                border-color: $selectionBlue
+            }
+
+            *{
+                color: $white;
+                font-size: 9px
+            }
+
+            &.checked{
+                background-color: $white;
+                border-color: $selectionBlue;
+                animation: expandShadow 1s ease;
+
+                &:after{
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 7pt;
+                    height: 7pt;
+                    transform: scale(0);
+                    animation: radio 0.2s ease forwards;
+                    border-radius: $roundRadius;
+                    z-index: 1;
+                    background-color: $selectionBlue
+                }
+            }
+        }
+    }
+}
+
+@keyframes radio{
+    100%{ transform: scale(1) }
+}
+@keyframes expandShadow{
+    0%{ box-shadow: 0 0 0 3px $hoverBlue }
+    100%{ box-shadow: 0 0 0 0 transparent }
+}
