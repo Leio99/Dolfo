@@ -166,7 +166,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Button>
                     </Tab>
 
-                    <Tab title="Forms" isDefault>
+                    <Tab title="Forms">
                         <Tabs direction="vertical">
                             <Tab title="Text inputs">
                                 <TextInput label="Simple" />
