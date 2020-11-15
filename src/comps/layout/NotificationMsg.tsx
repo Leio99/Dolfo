@@ -71,7 +71,7 @@ export class NotificationMsg{
         },
         position = props.position || "centered-top"
         
-        props.type !== "loading" && setTimeout(closeFunc, props.hideDelay ? (props.hideDelay * 1000) : 2000)
+        props.type !== "loading" && setTimeout(closeFunc, props.hideDelay ? props.hideDelay : 2000)
         
         document.body.appendChild(notification);
 

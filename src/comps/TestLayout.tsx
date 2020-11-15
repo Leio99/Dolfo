@@ -339,12 +339,13 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </SlideShow>
                     </Tab>
 
-                    <Tab title="Messages" isDefault>
+                    <Tab title="Messages">
                         <Button onClick={() => {
                             MessageBox.show({
                                 title: "Message",
                                 content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis asperiores rerum velit aspernatur? Tempore, voluptas a quasi qui est repellat quod similique veritatis fuga eius explicabo nostrum adipisci, autem iusto?",
-                                position: "bottom-left"
+                                position: "bottom-left",
+                                hideDelay: 4000
                             })
                         }} btnColor="green" smallBtn className="mr-2">
                             Basic message
