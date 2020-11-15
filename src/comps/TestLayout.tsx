@@ -95,10 +95,10 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         <Button fullSize btnColor="blue" className="mt-2">Full size button</Button>
                     </Tab>
 
-                    <Tab title="Notifications">
+                    <Tab title="Notifications" isDefault>
                         <Button onClick={() => {
                             NotificationMsg.show({
-                                message: "In alto a destra!"
+                                message: "In alto!" + new Date().getSeconds()
                             })
                         }} btnColor="green" smallBtn className="mr-2">
                             Basic notification
@@ -138,7 +138,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         <Button onClick={() => {
                             let not = NotificationMsg.showLoading("Caricamento...")
 
-                            setTimeout(function(){
+                            setTimeout(() => {
                                 not.close()
                             }, 2000)
                         }} btnColor="green" smallBtn className="mr-2">

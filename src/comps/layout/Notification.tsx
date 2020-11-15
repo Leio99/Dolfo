@@ -59,22 +59,67 @@ export class NotificationMsg{
             if(type === "warning") return <CheckCircleOutlineIcon color="var(--orange)" />
 
             return null
-        }
-        
-        props.type !== "loading" && setTimeout(function(){
+        },
+        closeFunc = () => {
             notification.remove()
-        }, props.hideDelay ? (props.hideDelay * 1000) : 2000)
+            NotificationMsg.moveNotifications(1, props.position)
+        },
+        position = props.position || "centered-top"
+        
+        props.type !== "loading" && setTimeout(closeFunc, props.hideDelay ? (props.hideDelay * 1000) : 2000)
         
         document.body.appendChild(notification);
 
-        (notification as any).close = function(){
-            notification.remove()
-        }
+        (notification as any).close = closeFunc
+
+        NotificationMsg.moveNotifications(0, position)
         
-        ReactDOM.render(<div className={"dolfo-notification " + (props.position || "centered-top") + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" ? (() => notification.remove()) : null}>
+        ReactDOM.render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" ? closeFunc : null}>
             {props.icon || (props.type ? getIcon(props.type) : null)} {props.message}
         </div>, notification)
 
         return notification as { close?: () => void }
+    }
+
+    static moveNotifications = (minus?: number, pos = "") => {
+        let notsBtmLeft = document.querySelectorAll(".dolfo-notification.bottom-left"),
+        lengthBtmLeft = notsBtmLeft.length - (pos === "bottom-left" ? minus : 1)
+
+        notsBtmLeft.forEach((not: any) => {
+            not.style.marginBottom = (lengthBtmLeft * 3.5) + "rem"
+            lengthBtmLeft--
+        })
+
+        let notsBtmRight = document.querySelectorAll(".dolfo-notification.bottom-right"),
+        lengthBtmRight = notsBtmRight.length - (pos === "bottom-right" ? minus : 1)
+
+        notsBtmRight.forEach((not: any) => {
+            not.style.marginBottom = (lengthBtmRight * 3.5) + "rem"
+            lengthBtmRight--
+        })
+
+        let notsTopRight = document.querySelectorAll(".dolfo-notification.top-right"),
+        lengthTopRight = notsTopRight.length - (pos === "top-right" ? minus : 1)
+
+        notsTopRight.forEach((not: any) => {
+            not.style.marginTop = (lengthTopRight * 3.5) + "rem"
+            lengthTopRight--
+        })
+
+        let notsTopLeft = document.querySelectorAll(".dolfo-notification.top-left"),
+        lengthTopLeft = notsTopLeft.length - (pos === "top-left" ? minus : 1)
+
+        notsTopLeft.forEach((not: any) => {
+            not.style.marginTop = (lengthTopLeft * 3.5) + "rem"
+            lengthTopLeft--
+        })
+
+        let notsCentered = document.querySelectorAll(".dolfo-notification.centered-top"),
+        lengthCentered = notsCentered.length - (pos === "centered-top" ? minus : 1)
+
+        notsCentered.forEach((not: any) => {
+            not.style.marginTop = (lengthCentered * 3.5) + "rem"
+            lengthCentered--
+        })
     }
 }

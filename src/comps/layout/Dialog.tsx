@@ -96,7 +96,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
 
         document.getElementById("root").appendChild(popup);
 
-        (popup as any).close = function(){
+        (popup as any).close = () => {
             popup.remove()
         }
 
