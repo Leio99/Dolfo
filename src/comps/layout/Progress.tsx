@@ -20,7 +20,7 @@ export class Progress extends React.PureComponent<IProps>{
         if (props.circular) {
             return <svg viewBox="0 0 36 36" className="dolfo-circular-progress" style={{ width }}>
                 <path className="dolfo-progress-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                <path className={"dolfo-progress-circle line-" + color} stroke-dasharray={percent + ", 100"} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                <path className={"dolfo-progress-circle line-" + color} strokeDasharray={percent + ", 100"} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 <text x="18" y="20.35" className="dolfo-progress-percentage">
                     {percent}%
                 </text>
