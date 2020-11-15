@@ -3,6 +3,7 @@ import { InputProps } from "../../models/InputProps"
 import { Icon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
+import onClickOutside from "react-onclickoutside"
 
 export interface IProps extends InputProps{
     readonly defaultValue?: any
@@ -14,7 +15,7 @@ export interface IState{
     readonly options: Option[]
 }
 
-export class Select extends React.PureComponent<IProps, IState>{
+class Select extends React.PureComponent<IProps, IState>{
     constructor(props: IProps){
         super(props)
 
@@ -29,9 +30,28 @@ export class Select extends React.PureComponent<IProps, IState>{
 
     componentDidUpdate = (prevProps: any) => {
         if(prevProps.children !== this.props.children){
+            let value = this.state.value,
+            hasValues = false,
+            options = this.getOptions()
+
+            if(!this.props.multiple){
+                let find = options.find(opt => opt.props.value === value)
+
+                if(find) hasValues = true
+            }else{
+                options.forEach(opt => {
+                    value.forEach((v: any) => {
+                        if(v === opt.props.value) hasValues = true
+                    })
+                })
+            }
+
             this.setState({
-                options: this.getOptions()
+                options,
+                value: hasValues ? value : (this.props.multiple ? [] : (this.props.children as Option[])[0].props.value)
             })
+
+            value !== this.state.value && this.props.onChange && this.props.onChange(value)
         }
     }
 
@@ -66,14 +86,16 @@ export class Select extends React.PureComponent<IProps, IState>{
     decodeValue = (value: any) => {
         if(this.props.multiple){
             let list = this.state.value.map((v: any) => {
-                return this.state.options.find(option => option.props.value === v).props.label
-            })
+                return this.state.options.find(option => option.props.value === v)?.props.label
+            }).filter((v: any) => v)
 
             return list.join(", ")
         }
 
-        return this.state.options.find(option => option.props.value === value).props.label
+        return this.state.options.find(option => option.props.value === value)?.props.label
     }
+
+    handleClickOutside = () => this.onBlur()
 
     render = (): JSX.Element => {
         const props = this.props,
@@ -83,7 +105,7 @@ export class Select extends React.PureComponent<IProps, IState>{
             key: "hand-pointer"
         }
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={this.onFocus} focusBool={openSelect} onBlur={this.onBlur} isFocusable disabled={props.disabled}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={this.onFocus} focusBool={openSelect} isFocusable disabled={props.disabled}>
             <Icon icon={{ type: "far", key: "chevron-down"}} className="select-caret" />
 
             <div className="dolfo-input-select">
@@ -92,6 +114,7 @@ export class Select extends React.PureComponent<IProps, IState>{
                     value={value}
                     required={props.required}
                     tabIndex={-1}
+                    readOnly={props.readonly}
                 />
 
                 <span>{this.decodeValue(value)}</span>
@@ -115,3 +138,5 @@ export class Select extends React.PureComponent<IProps, IState>{
         </InputWrapper>
     }
 }
+
+export default onClickOutside(Select)

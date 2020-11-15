@@ -8,6 +8,7 @@ export interface InputProps{
     readonly required?: boolean
     readonly className?: string
     readonly disabled?: boolean
+    readonly readonly?: boolean
     readonly icon?: IIcon
     readonly onChange?: (value: any) => void
     readonly onKeyUp?: (e: any) => void

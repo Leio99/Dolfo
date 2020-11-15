@@ -137,6 +137,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     maxLength={props.maxLength}
                     minLength={props.minLength}
                     value={value}
+                    readOnly={props.readonly}
                     ref={r => input = r}
                     required={props.required}
                     onKeyDown={props.onKeyDown ? props.onKeyDown : null}
@@ -153,6 +154,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     maxLength={props.maxLength}
                     minLength={props.minLength}
                     className={props.className}
+                    readOnly={props.readonly}
                     rows={props.expandTextarea ? rows : props.rows}
                     onKeyUp={this.checkRows}
                     onKeyDown={props.onKeyDown ? props.onKeyDown : null}

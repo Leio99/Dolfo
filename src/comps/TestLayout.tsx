@@ -2,7 +2,7 @@ import React from "react"
 import { CheckBox } from "./form/CheckBox"
 import { Option } from "./form/Option"
 import { RadioButton } from "./form/RadioButton"
-import { Select } from "./form/Select"
+import Select from "./form/Select"
 import { TextInput } from "./form/TextInput"
 import TimePicker from "./form/TimePicker"
 import { Button } from "./layout/Button"
@@ -24,9 +24,10 @@ export interface IState{
     readonly checked: boolean
     readonly checkedSwitch: boolean
     readonly percent: number
+    readonly options: number[]
 }
 export class TestLayout extends React.PureComponent<any, IState>{
-    constructor(props: any){
+    constructor(props: never){
         super(props)
 
         this.state = {
@@ -34,7 +35,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
             loading: false,
             checked: false,
             checkedSwitch: false,
-            percent: 0
+            percent: 0,
+            options: [1,2,3]
         }
     }
 
@@ -49,6 +51,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 this.setState({ percent: percent })
             }
         }, 100)
+
+        setTimeout(() => this.setState({ options: [4,5,6]}), 5000)
     }
 
     toggleDialog = () => this.setState({ visibleDialog: !this.state.visibleDialog })
@@ -70,7 +74,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
             checkedSwitch,
             checked,
             percent,
-            visibleDialog
+            visibleDialog,
+            options
         } = this.state
 
         return <div className="p-5">
@@ -166,7 +171,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Button>
                     </Tab>
 
-                    <Tab title="Forms">
+                    <Tab title="Forms" isDefault>
                         <Tabs direction="vertical">
                             <Tab title="Text inputs">
                                 <TextInput label="Simple" />
@@ -187,7 +192,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                                 </Select>
                                 <Select label="Multi-select" multiple>
                                     {
-                                        [1,2,3].map(o => {
+                                        options.map(o => {
                                             return <Option value={o} label={"Opzione " + o} />
                                         })
                                     }
