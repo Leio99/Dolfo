@@ -37,6 +37,13 @@
         animation: swipeFromTop 0.3s ease forwards;
         transform: translateX(-50%)
     }
+
+    &.centered-bottom{
+        left: 50%;
+        bottom: -100%;
+        animation: swipeFromBottom 0.3s ease forwards;
+        transform: translateX(-50%)
+    }
 }
 
 @keyframes swipeFromRight{
@@ -49,4 +56,8 @@
 
 @keyframes swipeFromTop{
     100%{ top: 1rem }
+}
+
+@keyframes swipeFromBottom{
+    100%{ bottom: 1rem }
 }

@@ -1,0 +1,22 @@
+.dolfo-message-box{
+    border-radius: 0.1rem;
+    padding: 1rem;
+    max-width: 350px;
+
+    .dolfo-message-close{
+        float: right;
+        margin-left: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 20px;
+        color: $grey;
+        cursor: pointer;
+
+        &:hover{
+            color: $disabled
+        }
+
+        &:active{
+            color: $dark
+        }
+    }
+}

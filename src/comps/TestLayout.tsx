@@ -8,7 +8,8 @@ import TimePicker from "./form/TimePicker"
 import { Button } from "./layout/Button"
 import { Dialog } from "./layout/Dialog"
 import { CheckIcon, CloseIcon } from "./layout/Icon"
-import { NotificationMsg } from "./layout/Notification"
+import { NotificationMsg } from "./layout/NotificationMsg"
+import { MessageBox } from "./layout/MessageBox"
 import { Switch } from "./form/Switch"
 import { Tab } from "./layout/Tab"
 import { Tabs } from "./layout/Tabs"
@@ -95,10 +96,10 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         <Button fullSize btnColor="blue" className="mt-2">Full size button</Button>
                     </Tab>
 
-                    <Tab title="Notifications" isDefault>
+                    <Tab title="Notifications">
                         <Button onClick={() => {
                             NotificationMsg.show({
-                                message: "In alto!" + new Date().getSeconds()
+                                message: "In alto!"
                             })
                         }} btnColor="green" smallBtn className="mr-2">
                             Basic notification
@@ -134,6 +135,14 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             })
                         }} btnColor="green" smallBtn className="mr-2">
                             Bottom left
+                        </Button>
+                        <Button onClick={() => {
+                            NotificationMsg.show({
+                                message: "In basso al centro!",
+                                position: "centered-bottom"
+                            })
+                        }} btnColor="green" smallBtn className="mr-2">
+                            Bottom center
                         </Button>
                         <Button onClick={() => {
                             let not = NotificationMsg.showLoading("Caricamento...")
@@ -328,6 +337,18 @@ export class TestLayout extends React.PureComponent<any, IState>{
                                 <h1>Sono la terza</h1>
                             </Slide>
                         </SlideShow>
+                    </Tab>
+
+                    <Tab title="Messages" isDefault>
+                        <Button onClick={() => {
+                            MessageBox.show({
+                                title: "Message",
+                                content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis asperiores rerum velit aspernatur? Tempore, voluptas a quasi qui est repellat quod similique veritatis fuga eius explicabo nostrum adipisci, autem iusto?",
+                                position: "bottom-left"
+                            })
+                        }} btnColor="green" smallBtn className="mr-2">
+                            Basic message
+                        </Button>
                     </Tab>
                 </Tabs>
             </div>
