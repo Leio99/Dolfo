@@ -10,15 +10,18 @@ export class Navigator extends React.Component{
     render = (): JSX.Element => {
         return <Router history={history}>
             <Switch>
-                <Route exact path="/prenota" render={() => {
-                    return <Prenotazione />
+                <Route exact path="/" render={() => {
+                    history.push("/layout")
+                    return null
                 }} />
             </Switch>
 
             <Switch>
-                <Route exact path="/layout" render={() => {
-                    return <TestLayout />
-                }} />
+                <Route exact path="/prenota" render={() => <Prenotazione />} />
+            </Switch>
+
+            <Switch>
+                <Route exact path="/layout" render={() => <TestLayout />} />
             </Switch>
         </Router>
     }

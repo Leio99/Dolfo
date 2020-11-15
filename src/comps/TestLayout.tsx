@@ -24,7 +24,6 @@ export interface IState{
     readonly checked: boolean
     readonly checkedSwitch: boolean
     readonly percent: number
-    readonly options: number[]
 }
 export class TestLayout extends React.PureComponent<any, IState>{
     constructor(props: never){
@@ -35,8 +34,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
             loading: false,
             checked: false,
             checkedSwitch: false,
-            percent: 0,
-            options: [1,2,3]
+            percent: 0
         }
     }
 
@@ -51,8 +49,6 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 this.setState({ percent: percent })
             }
         }, 100)
-
-        setTimeout(() => this.setState({ options: [4,5,6]}), 5000)
     }
 
     toggleDialog = () => this.setState({ visibleDialog: !this.state.visibleDialog })
@@ -75,7 +71,6 @@ export class TestLayout extends React.PureComponent<any, IState>{
             checked,
             percent,
             visibleDialog,
-            options
         } = this.state
 
         return <div className="p-5">
@@ -192,7 +187,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                                 </Select>
                                 <Select label="Multi-select" multiple>
                                     {
-                                        options.map(o => {
+                                        [1,2,3].map(o => {
                                             return <Option value={o} label={"Opzione " + o} />
                                         })
                                     }
