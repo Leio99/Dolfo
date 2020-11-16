@@ -7,11 +7,12 @@ export interface NotificationProps{
     readonly type?: "info" | "error" | "success" | "loading" | "warning"
     readonly icon?: JSX.Element
     readonly message: string | JSX.Element
-    readonly hideDelay?: number
+    readonly hideDelay?: number | "never"
     readonly position?: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "centered-top" | "centered-bottom"
     readonly style?: CSSProperties
     readonly className?: string
-    readonly closeOnClick?: boolean
+    readonly dismissOnClick?: boolean
+	readonly onClose?: () => void
 }
 
 export class NotificationMsg{
@@ -68,10 +69,12 @@ export class NotificationMsg{
                 NotificationMsg.moveNotifications()
             
             notification.classList.add("removed")
+			
+			props.onClose && props.onClose()
         },
         position = props.position || "centered-top"
         
-        props.type !== "loading" && setTimeout(closeFunc, props.hideDelay ? props.hideDelay : 2000)
+        props.type !== "loading" && props.hideDelay !== "never" && setTimeout(closeFunc, props.hideDelay ? props.hideDelay : 2000)
         
         document.body.appendChild(notification);
 
@@ -79,7 +82,7 @@ export class NotificationMsg{
 
         setTimeout(() => NotificationMsg.moveNotifications())
         
-        ReactDOM.render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" && props.closeOnClick ? closeFunc : null}>
+        ReactDOM.render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" && props.dismissOnClick ? closeFunc : null}>
             {props.icon || (props.type ? getIcon(props.type) : null)} {props.message}
         </div>, notification)
 

@@ -6,7 +6,8 @@ export interface MessageProps{
     readonly position?: "top-left" | "top-right" | "bottom-left" | "bottom-right",
     readonly title?: string | JSX.Element
     readonly content: string | JSX.Element
-    readonly hideDelay?: number
+    readonly hideDelay?: number | "never"
+	readonly onClose?: () => void
 }
 
 export class MessageBox{
@@ -19,7 +20,8 @@ export class MessageBox{
             </div>,
             position: props.position || "top-right",
             className: "dolfo-message-box",
-            hideDelay: props.hideDelay
+            hideDelay: props.hideDelay,
+			onClose: props.onClose
         })
     }
 }
