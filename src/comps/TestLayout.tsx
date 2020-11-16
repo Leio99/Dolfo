@@ -258,7 +258,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                                 content: "Settings saved successfully.",
                                 type: "success"
                             })
-                        }} btnColor="green" className="mr-2">Error dialog</Button>
+                        }} btnColor="green" className="mr-2">Success dialog</Button>
                         
                         <Button onClick={() => {
                             Dialog.infoDialog({

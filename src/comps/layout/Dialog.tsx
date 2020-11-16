@@ -49,19 +49,30 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         width?: string,
         okText?: string
     }) => {
-        let title = data.title || Constants.INFO_TEXT
+        let title = data.title || Constants.INFO_TEXT,
+        okType: DialogProps["okType"] = "blue"
 
-        if(!data.title){
-            if(data.type === "success") title = Constants.SUCCESS_TEXT
-            if(data.type === "error") title = Constants.ERROR_TEXT
-            if(data.type === "warning") title = Constants.WARNING_TEXT
+        if(data.type === "success"){
+            if(!data.title) title = Constants.SUCCESS_TEXT
+            okType = "green"
+        }
+
+        if(data.type === "error"){
+            if(!data.title) title = Constants.ERROR_TEXT
+            okType = "red"
+        }
+
+        if(data.type === "warning"){
+            if(!data.title) title = Constants.WARNING_TEXT
+            okType = "orange"
         }
 
         return Dialog.openDialog({
             ...data,
             title,
             hideCancel: true,
-            icon: Dialog.getIcon(data.type || "info") 
+            icon: Dialog.getIcon(data.type || "info"),
+            okType
         })
     }
 
