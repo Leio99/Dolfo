@@ -93,7 +93,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
             content: <div>
                 <LoadingIcon spinning /> {loadingText}
             </div>,
-            style: { height: 130 },
+            style: { height: 100 },
             width: "270px",
             className: "loading-dialog"
         })
