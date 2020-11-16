@@ -1,5 +1,5 @@
 import React from "react"
-import { InputProps } from "../../models/InputProps"
+import { InputProps } from "../shared/models/InputProps"
 import { LoadingIcon } from "../layout/Icon"
 
 export interface IProps extends InputProps{

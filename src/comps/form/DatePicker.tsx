@@ -1,7 +1,7 @@
 import React from "react"
 import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput } from "../../commons/utility"
 import { Day } from "../../models/IDay"
-import { InputProps } from "../../models/InputProps"
+import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
 

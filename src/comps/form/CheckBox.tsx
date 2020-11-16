@@ -1,5 +1,5 @@
 import React from "react"
-import { InputProps } from "../../models/InputProps"
+import { InputProps } from "../shared/models/InputProps"
 import { CheckIcon } from "../layout/Icon"
 
 export interface IProps extends InputProps{

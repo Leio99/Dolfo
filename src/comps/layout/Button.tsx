@@ -1,6 +1,6 @@
 import React from "react"
-import { BtnOptions } from "../../models/BtnOptions"
-import { InputProps } from "../../models/InputProps"
+import { BtnOptions } from "../shared/models/BtnOptions"
+import { InputProps } from "../shared/models/InputProps"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
 

@@ -1,6 +1,6 @@
 import React from "react"
 import { zeroBefore } from "../../commons/utility"
-import { InputProps } from "../../models/InputProps"
+import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
 

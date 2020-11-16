@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { IIcon } from "../../models/IIcon"
+import { IIcon } from "../shared/models/IIcon"
 import { CloseIcon, Icon } from "../layout/Icon"
 
 export interface IProps{

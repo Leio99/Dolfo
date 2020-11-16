@@ -1,6 +1,6 @@
 import React from "react"
 import { blurInput } from "../../commons/utility"
-import { InputProps } from "../../models/InputProps"
+import { InputProps } from "../shared/models/InputProps"
 import { CheckBox } from "./CheckBox"
 
 export interface IProps extends InputProps{
