@@ -30,6 +30,9 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         }
     }
 
+	//click left: se il margin del primo link è 0, non va più indietro, se no va indietro di 50px (ma se il margine diventa negativo, margin = 0)
+	//click right:
+	
     // componentDidMount = () => {
     //     let tabLinks = document.getElementsByClassName("dolfo-tabs-links")
 
@@ -38,8 +41,6 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     //             let isOverflowing = link.clientWidth < link.scrollWidth,
     //             children = Array.from(link.childNodes),
     //             hasArrows = children.find((c: any) => c.classList.contains("dolfo-tab-link-prev"))
-
-    //             console.log(hasArrows)
 
     //             if(isOverflowing && !hasArrows){
     //                 let linkPrev = document.createElement("div")
