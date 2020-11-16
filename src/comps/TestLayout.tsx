@@ -5,7 +5,7 @@ import { RadioButton } from "./form/RadioButton"
 import Select from "./form/Select"
 import { TextInput } from "./form/TextInput"
 import TimePicker from "./form/TimePicker"
-import { Button } from "./layout/Button"
+import Button from "./layout/Button"
 import { Dialog } from "./layout/Dialog"
 import { CheckIcon, CloseIcon } from "./layout/Icon"
 import { NotificationMsg } from "./layout/NotificationMsg"
@@ -94,6 +94,20 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         <Button btnColor="blue" bigBtn>Big button</Button>
 
                         <Button fullSize btnColor="blue" className="mt-2">Full size button</Button>
+
+                        <Button fullSize btnColor="red" className="mt-2 mr-2" type="popup" options={[
+                            { text: "First option", onClick: () => alert("Cliccato") },
+                            { text: "Second option", onClick: () => console.log("cliccato 2") }
+                        ]}>
+                            Popup button
+                        </Button>
+
+                        <Button fullSize btnColor="blue" className="mt-2" type="popup" options={[
+                            { text: "First option", onClick: () => alert("Cliccato") },
+                            { text: "Second option", onClick: () => console.log("cliccato 2") }
+                        ]} popupPosition="bottom">
+                            Popup button
+                        </Button>
                     </Tab>
 
                     <Tab title="Notifications">

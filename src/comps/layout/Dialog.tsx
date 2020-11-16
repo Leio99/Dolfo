@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
-import { Button } from "./Button"
+import Button from "./Button"
 import { CheckCircleOutlineIcon, CloseIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, QuestionCircleOutlineIcon, WarningIconOutline } from "./Icon"
 import { Constants } from "../shared/Constants"
 

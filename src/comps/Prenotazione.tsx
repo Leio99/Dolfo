@@ -11,7 +11,7 @@ import Select from "./form/Select"
 import { Option } from "./form/Option"
 import TimePicker from "./form/TimePicker"
 import { CheckIcon, CloseIcon, LoadingIcon } from "./layout/Icon"
-import { Button } from "./layout/Button"
+import Button from "./layout/Button"
 import { Dialog } from "./layout/Dialog"
 
 export interface IProps { }
