@@ -1,5 +1,5 @@
 import { CSSProperties } from "react"
-import { IIcon } from "./IIcon"
+import { BaseIconProps } from "../../layout/Icon";
 
 export interface InputProps{
     readonly label?: JSX.Element | string
@@ -9,7 +9,7 @@ export interface InputProps{
     readonly className?: string
     readonly disabled?: boolean
     readonly readonly?: boolean
-    readonly icon?: IIcon
+    readonly icon?: BaseIconProps
     readonly onChange?: (value: any) => void
     readonly onKeyUp?: (e: any) => void
     readonly onKeyDown?: (e: any) => void

@@ -101,12 +101,11 @@ class Select extends React.PureComponent<IProps, IState>{
         const props = this.props,
         { value, openSelect, options } = this.state,
         icon = props.icon || {
-            type: "fa",
-            key: "hand-pointer"
+            iconKey: "hand-pointer"
         }
 
         return <InputWrapper icon={icon} label={props.label} onFocus={this.onFocus} focusBool={openSelect} isFocusable disabled={props.disabled}>
-            <Icon icon={{ type: "far", key: "chevron-down"}} className="select-caret" />
+            <Icon type="far" iconKey="chevron-down" className="select-caret" />
 
             <div className="dolfo-input-select">
                 <input

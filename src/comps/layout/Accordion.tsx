@@ -40,7 +40,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		
 		return <div className={"dolfo-accordion" + (opened ? " opened" : "")} style={props.wrapperStyle}>
 			<div className="dolfo-accordion-header" onClick={() => this.toggleAccordion(element)}>
-				<Icon icon={{ type: "fa", key: "chevron-down" }} className="accordion-caret" />
+				<Icon iconKey="chevron-down" className="accordion-caret" />
 				
 				<span className="accordion-title">{props.title}</span>
 			</div>

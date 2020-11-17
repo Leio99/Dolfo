@@ -110,20 +110,19 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         const props = this.props,
         { focused, rows, value, inputType } = this.state,
         icon = props.icon || {
-            type: "fa",
-            key: this.getDefaultIcon()
+            iconKey: this.getDefaultIcon()
         }
         let input: HTMLInputElement | HTMLTextAreaElement
 
         return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={props.number ? "input-number" : null}>
             {
-                props.password && props.togglePassword && value.length > 0 && !props.email && !props.number && <Icon icon={{ type: "far", key: "eye"}} onClick={this.toggleInputType} className="toggle-password" />
+                props.password && props.togglePassword && value.length > 0 && !props.email && !props.number && <Icon type="far" iconKey="eye" onClick={this.toggleInputType} className="toggle-password" />
             }
 
             {
                 props.number && !props.password && !props.email && <div className="dolfo-input-number-btns">
-                    <Icon icon={{ type: "fa", key: "caret-up" }} className="increase" onClick={this.increaseValue} />
-                    <Icon icon={{ type: "fa", key: "caret-down" }} className="decrease" onClick={this.decreaseValue} />
+                    <Icon iconKey="caret-up" className="increase" onClick={this.increaseValue} />
+                    <Icon iconKey="caret-down" className="decrease" onClick={this.decreaseValue} />
                 </div>
             }
 

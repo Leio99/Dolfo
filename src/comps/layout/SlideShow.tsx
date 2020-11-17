@@ -71,10 +71,10 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
 
         return <div className="dolfo-slideshow" style={props.style} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <div className="dolfo-prev-slide" onClick={this.prevSlide}>
-                <Icon icon={{ type: "far", key: "chevron-left" }} />
+                <Icon type="far" iconKey="chevron-left" />
             </div>
             <div className="dolfo-next-slide" onClick={this.nextSlide}>
-                <Icon icon={{ type: "far", key: "chevron-right" }} />
+                <Icon type="far" iconKey="chevron-right" />
             </div>
 
             <div className="dolfo-slides">

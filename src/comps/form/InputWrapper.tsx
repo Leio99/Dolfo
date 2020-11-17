@@ -1,13 +1,12 @@
 import React, { CSSProperties } from "react"
-import { IIcon } from "../shared/models/IIcon"
-import { CloseIcon, Icon } from "../layout/Icon"
+import { CloseIcon, Icon, BaseIconProps } from "../layout/Icon"
 
 export interface IProps{
     readonly label?: JSX.Element | string
     readonly style?: CSSProperties
     readonly onFocus?: (e: any) => void
     readonly onBlur?: (e: any) => void
-    readonly icon: IIcon
+    readonly icon: BaseIconProps
     readonly focusBool?: boolean
     readonly value?: string
     readonly isFocusable?: boolean
@@ -27,7 +26,7 @@ export class InputWrapper extends React.PureComponent<IProps>{
                 { (props.value && props.value.length && props.resetFunction) ? <CloseIcon className="reset-input" onClick={props.resetFunction} /> : null}
 
                 <div className="dolfo-input-icon">
-                    <Icon icon={props.icon} />
+                    <Icon {...props.icon} />
                 </div>
 
                 <div className="dolfo-input-content">

@@ -18,6 +18,7 @@ import { Progress } from "./layout/Progress"
 import { SlideShow } from "./layout/SlideShow"
 import { Slide } from "./layout/Slide"
 import DatePicker from "./form/DatePicker"
+import { Icon } from "./layout/Icon"
 
 export interface IState{
     readonly visibleDialog: boolean
@@ -103,7 +104,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Button>
 
                         <Button fullSize btnColor="blue" className="mt-2" type="popup" options={[
-                            { text: "First option", onClick: () => alert("Cliccato") },
+                            { text: <span>
+								<Icon iconKey="bullhorn" /> Alert
+							</span>, onClick: () => alert("Cliccato") },
                             { text: "Second option", onClick: () => console.log("cliccato 2") }
                         ]} popupPosition="bottom">
                             Popup button
@@ -311,7 +314,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             <Button btnColor="green" loading={loading} smallBtn onClick={this.toggleSwitch}>Complete</Button>
                         ]} onClose={this.toggleDialog}>
                             <form>
-                                <TextInput label="Username" icon={{ type: "fa", key: "user" }} />
+                                <TextInput label="Username" icon={{ iconKey: "user" }} />
                                 <TextInput password label="Password" />
                                 <TextInput email label="E-mail" />
                                 <DatePicker label="Date of birth" />

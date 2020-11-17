@@ -165,7 +165,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         monthCalendar = getCalendar(currentMonth, currentYear),
         icon = props.icon || {
             type: "far",
-            key: "calendar-day"
+            iconKey: "calendar-day"
         }
 
         return <InputWrapper style={props.wrapperStyle} onFocus={this.showCalendar} label={props.label} icon={icon} focusBool={showCalendar} value={date} resetFunction={this.resetDate} disabled={props.disabled} isFocusable>

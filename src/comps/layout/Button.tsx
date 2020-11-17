@@ -55,7 +55,7 @@ class Button extends React.PureComponent<IProps, IState>{
 
                 <div className={"dolfo-button dolfo-popup-button" + (" btn-" + props.btnColor || "blue")}>
                     <div className="dolfo-popup-arrow">
-                        <Icon icon={{ type: "fa", key: "caret-down" }} />
+                        <Icon iconKey="caret-down" />
                     </div>
 
                     <div className="dolfo-popup-button-content">{props.children}</div>

@@ -190,7 +190,7 @@ export class Prenotazione extends React.PureComponent<IProps, IState>{
                         </h4>
 
                             <div className="form-group">
-                                <Select onChange={this.changeBuilding} label="Edificio" icon={{ key: "building" }}>
+                                <Select onChange={this.changeBuilding} label="Edificio" icon={{ iconKey: "building" }}>
                                     <Option value={0} label="---" />
                                     {
                                         buildings.map(b => {
