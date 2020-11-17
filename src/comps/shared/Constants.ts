@@ -11,5 +11,6 @@ export const Constants = {
     SUCCESS_TEXT: "Complimenti!",
     YESY_TEXT: "Sì",
     NO_TEXT: "No",
-    LOADING_TEXT: "Caricamento..."
+    LOADING_TEXT: "Caricamento...",
+    SEARCH_PLACEHOLDER: "Cerca"
 }

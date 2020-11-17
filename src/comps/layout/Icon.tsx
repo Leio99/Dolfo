@@ -26,7 +26,7 @@ export class Icon extends React.PureComponent<IProps>{
             (props.spinning ? " spin" : "")
         }
         style={{ ...props.style, color: props.color }}
-        onClick={props.onClick ? props.onClick : null}></i>
+        onClick={props.onClick}></i>
     }
 }
 
@@ -77,4 +77,7 @@ export const WarningIcon = (props: DefaultIconProps) => {
 }
 export const WarningIconOutline = (props: DefaultIconProps) => {
     return <Icon {...props} type="far" iconKey="exclamation-triangle" />
+}
+export const SearchIcon = (props: DefaultIconProps) => {
+    return <Icon {...props} iconKey="search" />
 }

@@ -174,10 +174,10 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 value={date}
                 required={props.required}
                 readOnly={props.readonly}
-                onKeyDown={props.onKeyDown ? props.onKeyDown : null}
-                onKeyPress={props.onKeyPress ? props.onKeyPress : null}
-                onKeyUp={props.onKeyUp ? props.onKeyUp : null}
-                onPaste={this.props.onPaste && this.props.onPaste}
+                onKeyDown={props.onKeyDown}
+                onKeyPress={props.onKeyPress}
+                onKeyUp={props.onKeyUp}
+                onPaste={this.props.onPaste}
             />
             
             <div className={"dolfo-calendar-container" + (showCalendar ? " show" : "")}>

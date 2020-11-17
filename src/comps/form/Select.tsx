@@ -1,18 +1,22 @@
 import React from "react"
 import { InputProps } from "../shared/models/InputProps"
-import { Icon } from "../layout/Icon"
+import { CloseIcon, Icon, SearchIcon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 import onClickOutside from "react-onclickoutside"
+import { Constants } from "../shared/Constants"
 
 export interface IProps extends InputProps{
     readonly defaultValue?: any
     readonly multiple?: boolean
+    readonly canSearch?: boolean
 }
 export interface IState{
     readonly value: any
     readonly openSelect: boolean
     readonly options: Option[]
+    readonly searchValue: string
+    readonly currentSelection: number
 }
 
 class Select extends React.PureComponent<IProps, IState>{
@@ -24,7 +28,9 @@ class Select extends React.PureComponent<IProps, IState>{
         this.state = {
             value,
             openSelect: false,
-            options: this.getOptions()
+            options: this.getOptions(),
+            searchValue: "",
+            currentSelection: -1
         }
     }
 
@@ -61,6 +67,8 @@ class Select extends React.PureComponent<IProps, IState>{
             openSelect: false
         })
 
+        this.resetSearch()
+
         this.props.onChange && this.props.onChange(value)
     }
 
@@ -74,12 +82,21 @@ class Select extends React.PureComponent<IProps, IState>{
 
         this.setState({ value: newList })
 
+        this.resetSearch()
+
         this.props.onChange && this.props.onChange(newList)
     }
 
-    onFocus = () => this.setState({ openSelect: true })
+    onFocus = (ref: HTMLInputElement) => this.setState({ openSelect: true }, () => ref?.focus())
 
-    onBlur = () => this.setState({ openSelect: false })
+    onBlur = () => {
+        this.setState({
+            openSelect: false,
+            currentSelection: -1
+        })
+
+        this.resetSearch()
+    }
 
     getOptions = () => React.Children.map(this.props.children, (child: any) => child)
 
@@ -97,14 +114,54 @@ class Select extends React.PureComponent<IProps, IState>{
 
     handleClickOutside = () => this.onBlur()
 
+    changeSearch = (e: any) => {
+        this.setState({
+            searchValue: e.target.value,
+            options: this.getOptions().filter(opt => opt.props.label.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
+        })
+    }
+
+    resetSearch = () => this.changeSearch({ target: { value: "" }})
+
+    handleKeyDown = (e: any) => {
+        const options = this.state.options,
+        currentSelection = this.state.currentSelection,
+        currentIndex = currentSelection === -1 ? -1 : options.indexOf(options.find((_, i) => i === currentSelection))
+        let newIndex = -1
+
+        if(e.keyCode === 38){
+            if(currentIndex === 0) newIndex = options.length - 1
+            else if(currentIndex === -1) newIndex = 0
+            else newIndex = currentIndex - 1
+        }else if(e.keyCode === 40){
+            if(currentIndex === options.length - 1 || currentIndex === -1) newIndex = 0
+            else newIndex = currentIndex + 1
+        }else if(e.keyCode === 13){
+            const option = options[currentIndex]
+
+            if(this.props.multiple) this.changeMultiple(option.props.value, currentIndex)
+            else this.changeOption(option.props.value)
+        }
+
+        newIndex > -1 && this.setState({ currentSelection: newIndex })
+    }
+
     render = (): JSX.Element => {
         const props = this.props,
-        { value, openSelect, options } = this.state,
+        { value, openSelect, options, searchValue, currentSelection } = this.state,
         icon = props.icon || {
             iconKey: "hand-pointer"
         }
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={this.onFocus} focusBool={openSelect} isFocusable disabled={props.disabled}>
+        let input: HTMLInputElement,
+        searchInput = <div className="dolfo-select-search-content">
+            <SearchIcon className="dolfo-select-search-icon" />
+            { (searchValue.length) ? <CloseIcon className="reset-input" onClick={this.resetSearch} /> : null }
+
+            <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
+        </div>
+
+        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled} onKeyDown={this.handleKeyDown}>
             <Icon type="far" iconKey="chevron-down" className="select-caret" />
 
             <div className="dolfo-input-select">
@@ -120,16 +177,18 @@ class Select extends React.PureComponent<IProps, IState>{
             </div>
 
             {
-                props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")} style={props.style}>
+                props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
+                    { props.canSearch && searchInput }
                     {
                         options.map((option, i) => {
-                            return <Option {...option.props} selected={value.includes(option.props.value)} onChange={(val) => this.changeMultiple(val, i)} multiple />
+                            return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={(val) => this.changeMultiple(val, i)} multiple />
                         })
                     }
                 </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")} style={props.style}>
+                    { props.canSearch && searchInput }
                     {
-                        options.map(option => {
-                            return <Option {...option.props} selected={option.props.value === value} onChange={this.changeOption} />
+                        options.map((option, i) => {
+                            return <Option {...option.props} selected={option.props.value === value} focused={i === currentSelection} onChange={this.changeOption} />
                         })
                     }
                 </div>

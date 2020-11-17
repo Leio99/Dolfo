@@ -11,6 +11,7 @@ export interface IProps extends InputProps{
     readonly multiple?: boolean
     readonly isRadio?: boolean
     readonly controlName?: string
+    readonly focused?: boolean
 }
 
 export class Option extends React.PureComponent<IProps>{
@@ -36,7 +37,7 @@ export class Option extends React.PureComponent<IProps>{
             </div>
         }
 
-        return <div onClick={!props.unclickable ? this.selectOption : blurInput} className={"dolfo-option" + (props.selected ? " selected" : "") + (props.unclickable ? " unclick" : "")} style={props.style}>
+        return <div onClick={!props.unclickable ? this.selectOption : blurInput} className={"dolfo-option" + (props.selected ? " selected" : "") + (props.unclickable ? " unclick" : "") + (props.focused ? " focused" : "")} style={props.style}>
             {
                 (props.multiple && !props.unclickable) ? <CheckBox checked={props.selected} label={props.label} /> : props.label
             }

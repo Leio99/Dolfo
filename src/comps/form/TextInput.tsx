@@ -141,11 +141,11 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     readOnly={props.readonly}
                     ref={r => input = r}
                     required={props.required}
-                    onKeyDown={props.onKeyDown ? props.onKeyDown : null}
-                    onKeyPress={props.onKeyPress ? props.onKeyPress : null}
-                    onKeyUp={props.onKeyUp ? props.onKeyUp : null}
-                    onPaste={props.onPaste ? props.onPaste : null}
-                    onCopy={props.onCopy ? props.onCopy : null}
+                    onKeyDown={props.onKeyDown}
+                    onKeyPress={props.onKeyPress}
+                    onKeyUp={props.onKeyUp}
+                    onPaste={props.onPaste}
+                    onCopy={props.onCopy}
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
                 /> : <textarea
@@ -157,11 +157,11 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     className={props.className}
                     readOnly={props.readonly}
                     rows={props.expandTextarea ? rows : props.rows}
-                    onKeyUp={props.onKeyUp ? props.onKeyUp : null}
-                    onKeyDown={props.onKeyDown ? props.onKeyDown : null}
-                    onKeyPress={props.onKeyPress ? props.onKeyPress : null}
-                    onPaste={props.onPaste ? props.onPaste : null}
-                    onCopy={props.onCopy ? props.onCopy : null}
+                    onKeyUp={props.onKeyUp}
+                    onKeyDown={props.onKeyDown}
+                    onKeyPress={props.onKeyPress}
+                    onPaste={props.onPaste}
+                    onCopy={props.onCopy}
                     required={props.required}
                     value={value}
                     ref={r => input = r}
