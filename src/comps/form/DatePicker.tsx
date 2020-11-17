@@ -115,7 +115,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             return year + "-" + zeroBefore(month + 1) + "-" + zeroBefore(day)
     }
 
-    showCalendar = (    ) => this.setState({ showCalendar: true })
+    showCalendar = () => this.setState({ showCalendar: true })
 
     hideCalendar = () => this.setState({ showCalendar: false })
 
