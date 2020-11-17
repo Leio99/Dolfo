@@ -19,6 +19,9 @@ import { SlideShow } from "./layout/SlideShow"
 import { Slide } from "./layout/Slide"
 import DatePicker from "./form/DatePicker"
 import { Icon } from "./layout/Icon"
+import { SideMenu } from "./layout/SideMenu"
+import { MenuVoice } from "./layout/MenuVoice"
+import { SubMenu } from "./layout/SubMenu"
 
 export interface IState{
     readonly visibleDialog: boolean
@@ -26,6 +29,7 @@ export interface IState{
     readonly checked: boolean
     readonly checkedSwitch: boolean
     readonly percent: number
+    readonly showMenu: boolean
 }
 export class TestLayout extends React.PureComponent<any, IState>{
     constructor(props: never){
@@ -36,7 +40,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
             loading: false,
             checked: false,
             checkedSwitch: false,
-            percent: 0
+            percent: 0,
+            showMenu: false
         }
     }
 
@@ -66,6 +71,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
     check = () => this.setState({ checked: !this.state.checked })
 
+    toggleMenu = () => this.setState({ showMenu: !this.state.showMenu })
+
     render = () => {
         const {
             loading,
@@ -73,6 +80,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
             checked,
             percent,
             visibleDialog,
+            showMenu
         } = this.state
 
         return <div className="p-5">
@@ -339,7 +347,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                                 title: "My content is long",
                                 content: <div>
 									{
-										[1,2,3,4,5,6].map(v => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>)
+										[1,2,3,4,5,6].map(_ => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>)
 									}
 								</div>,
 								width: "500px"
@@ -375,20 +383,31 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </SlideShow>
                     </Tab>
 
-                    <Tab title="Messages">
+                    <Tab title="Other" isDefault>
                         <Button onClick={() => {
                             MessageBox.show({
                                 title: "Message",
-                                content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis asperiores rerum velit aspernatur? Tempore, voluptas a quasi qui est repellat quod similique veritatis fuga eius explicabo nostrum adipisci, autem iusto?",
-                                position: "bottom-left",
+                                content: "A message can be placed at: top-left, top-right, bottom-left, bottom-right",
                                 hideDelay: 4000
                             })
                         }} btnColor="green" smallBtn className="mr-2">
-                            Basic message
+                            Message
+                        </Button>
+                        <Button onClick={this.toggleMenu} btnColor="red" smallBtn className="mr-2">
+                            Menu
                         </Button>
                     </Tab>
                 </Tabs>
             </div>
+
+            <SideMenu opened={showMenu} onToggle={this.toggleMenu}>
+                <MenuVoice text="Sono una semplice voce" />
+
+                <SubMenu text="Altre voci">
+                    <MenuVoice text="Sottovoce" />
+                    <MenuVoice text="Sottovoce 2" />
+                </SubMenu>
+            </SideMenu>
         </div>
     }
 }
