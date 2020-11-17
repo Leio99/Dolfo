@@ -63,6 +63,8 @@ export class TextInput extends React.PureComponent<IProps, IState>{
 
             if(isNaN(number) || number > this.props.max || number < this.props.min) return
         }
+		
+		this.checkRows(e)
 
         this.props.onChange && this.props.onChange(e.target.value)
         this.setState({
@@ -80,7 +82,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     }
 
     checkRows = (e: any) => {
-        if((e.keyCode === 13 || e.keyCode === 8) && this.props.expandTextarea){
+        if(this.props.expandTextarea){
             let rows = e.target.value.split("\n").length,
             max = this.props.rows || MAX_ROWS
 
@@ -114,7 +116,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         }
         let input: HTMLInputElement | HTMLTextAreaElement
 
-        return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={props.number ? "input-number" : null}>
+        return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={props.number ? "input-number" : (props.password && props.togglePassword) ? "toggle-password" : null}>
             {
                 props.password && props.togglePassword && value.length > 0 && !props.email && !props.number && <Icon type="far" iconKey="eye" onClick={this.toggleInputType} className="toggle-password" />
             }
@@ -155,7 +157,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     className={props.className}
                     readOnly={props.readonly}
                     rows={props.expandTextarea ? rows : props.rows}
-                    onKeyUp={this.checkRows}
+                    onKeyUp={props.onKeyUp ? props.onKeyUp : null}
                     onKeyDown={props.onKeyDown ? props.onKeyDown : null}
                     onKeyPress={props.onKeyPress ? props.onKeyPress : null}
                     onPaste={props.onPaste ? props.onPaste : null}
