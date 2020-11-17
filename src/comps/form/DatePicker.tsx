@@ -7,6 +7,7 @@ import onClickOutside from "react-onclickoutside"
 
 export interface IProps extends InputProps {
     readonly defaultValue?: Date
+    readonly dateFormat?: "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
 }
 export interface IState {
     readonly date: string
@@ -78,7 +79,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear) => {
-        let date = zeroBefore(day) + "-" + zeroBefore(month + 1) + "-" + year
+        let date = this.handleDate(day, month, year)
 
         this.setState({
             showCalendar: false,
@@ -93,6 +94,25 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         this.props.onChange && this.props.onChange(date)
 
         blurInput()
+    }
+
+    handleDate = (day: number, month: number, year: number) => {
+        const dateFormat = this.props.dateFormat || "dd-mm-YYYY"
+
+        if(dateFormat === "dd-mm-YYYY")
+            return zeroBefore(day) + "-" + zeroBefore(month + 1) + "-" + year
+
+        if(dateFormat === "d-m-YYYY")
+            return day + "-" + (month + 1) + "-" + year
+
+        if(dateFormat === "mm-dd-YYYY")
+            return zeroBefore(month + 1) + "-" + zeroBefore(day) + "-" + year
+
+        if(dateFormat === "m-d-YYYY")
+            return (month + 1) + "-" + day + "-" + year
+
+        if(dateFormat === "YYYY-mm-dd")
+            return year + "-" + zeroBefore(month + 1) + "-" + zeroBefore(day)
     }
 
     showCalendar = (    ) => this.setState({ showCalendar: true })

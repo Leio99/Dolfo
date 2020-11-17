@@ -124,6 +124,8 @@ class Select extends React.PureComponent<IProps, IState>{
     resetSearch = () => this.changeSearch({ target: { value: "" }})
 
     handleKeyDown = (e: any) => {
+        e.preventDefault()
+        
         const options = this.state.options,
         currentSelection = this.state.currentSelection,
         currentIndex = currentSelection === -1 ? -1 : options.indexOf(options.find((_, i) => i === currentSelection))
