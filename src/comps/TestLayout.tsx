@@ -113,7 +113,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
                         <Button fullSize btnColor="blue" className="mt-2" type="popup" options={[
                             { text: <span>
-								<Icon iconKey="bullhorn" /> Alert
+								<Icon iconKey="magic" color="var(--blue)" /> Do magic
 							</span>, onClick: () => alert("Cliccato") },
                             { text: "Second option", onClick: () => console.log("cliccato 2") }
                         ]} popupPosition="bottom">
@@ -383,7 +383,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </SlideShow>
                     </Tab>
 
-                    <Tab title="Other" isDefault>
+                    <Tab title="Other">
                         <Button onClick={() => {
                             MessageBox.show({
                                 title: "Message",
