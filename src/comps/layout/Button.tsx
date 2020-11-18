@@ -11,6 +11,7 @@ export interface IProps extends InputProps{
     readonly textBtn?: boolean
     readonly bigBtn?: boolean
     readonly loading?: boolean
+    readonly circleBtn?: boolean
     readonly btnColor?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white"
     readonly options?: BtnOptions[]
     readonly popupPosition?: "top" | "bottom"
@@ -70,10 +71,11 @@ class Button extends React.PureComponent<IProps, IState>{
             (props.fullSize ? " full-size" : "") + 
             (props.smallBtn ? " small-button" : "") + 
             (props.textBtn ? " text-btn" : "") + 
+            (props.circleBtn ? " circle-btn" : "") + 
             (props.bigBtn ? " big-button" : "")
         }
         style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick}>
-            {props.loading && <LoadingIcon spinning />} {props.children}
+            {props.loading && <LoadingIcon spinning />} {props.circleBtn ? props.loading ? null : props.children : props.children}
         </button>
     }
 }

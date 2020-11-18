@@ -111,13 +111,17 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             Popup button
                         </Button>
 
-                        <Button fullSize btnColor="blue" className="mt-2" type="popup" options={[
+                        <Button fullSize btnColor="blue" className="mt-2 mr-2" type="popup" options={[
                             { text: <span>
 								<Icon iconKey="magic" color="var(--blue)" /> Do magic
 							</span>, onClick: () => alert("Cliccato") },
                             { text: "Second option", onClick: () => console.log("cliccato 2") }
                         ]} popupPosition="bottom">
                             Popup button
+                        </Button>
+
+                        <Button btnColor="green" circleBtn className="mt-2">
+                            <Icon iconKey="users" />
                         </Button>
                     </Tab>
 
