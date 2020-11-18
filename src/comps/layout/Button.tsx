@@ -75,7 +75,7 @@ class Button extends React.PureComponent<IProps, IState>{
             (props.bigBtn ? " big-button" : "")
         }
         style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick}>
-            {props.loading && <LoadingIcon spinning />} {props.circleBtn ? props.loading ? null : props.children : props.children}
+            {props.loading && <LoadingIcon spinning />} {props.circleBtn && props.loading ? null : props.children}
         </button>
     }
 }
