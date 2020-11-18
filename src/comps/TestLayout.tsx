@@ -20,7 +20,7 @@ import { Slide } from "./layout/Slide"
 import DatePicker from "./form/DatePicker"
 import { Icon } from "./layout/Icon"
 import { SideMenu } from "./layout/SideMenu"
-import { MenuVoice } from "./layout/MenuVoice"
+import { MenuItem } from "./layout/MenuItem"
 import { SubMenu } from "./layout/SubMenu"
 
 export interface IState{
@@ -356,7 +356,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Tab>
 
                     <Tab title="Accordion">
-                        <Accordion title="First">
+                        <Accordion title="First" opened={checkedSwitch}>
                             Hello, I am the first accordion
                         </Accordion>
                         <Accordion title="Second">
@@ -401,12 +401,30 @@ export class TestLayout extends React.PureComponent<any, IState>{
             </div>
 
             <SideMenu opened={showMenu} onToggle={this.toggleMenu}>
-                <MenuVoice text="Sono una semplice voce" />
+                <MenuItem>
+                    <Icon iconKey="home" /> Sono una semplice voce
+                </MenuItem>
 
-                <SubMenu text="Altre voci">
-                    <MenuVoice text="Sottovoce" />
-                    <MenuVoice text="Sottovoce 2" />
+                <SubMenu text={<span>
+                    <Icon iconKey="mouse" /> Altre voci
+                </span>}>
+                    <MenuItem>Sottovoce</MenuItem>
+                    <MenuItem>Sottovoce 2</MenuItem>
                 </SubMenu>
+                <SubMenu text="Altre sottovoci">
+                    <MenuItem>Sottovoce 3</MenuItem>
+                    <MenuItem>Sottovoce 4</MenuItem>
+                    <SubMenu text="Altre voci">
+                        <SubMenu text="Altre voci aaaa">
+                            <MenuItem selected>Sottovoce aaaaaaaa</MenuItem>
+                            <MenuItem>Sottovoce 2aaaaaaaaaa</MenuItem>
+                        </SubMenu>
+                        <MenuItem selected>Sottovoce</MenuItem>
+                        <MenuItem>Sottovoce 2</MenuItem>
+                    </SubMenu>
+                </SubMenu>
+
+                <MenuItem>Ultima voce</MenuItem>
             </SideMenu>
         </div>
     }

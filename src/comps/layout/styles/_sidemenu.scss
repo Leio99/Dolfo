@@ -1,3 +1,5 @@
+$menuBg: #333;
+
 .dolfo-side-menu{
     position: fixed;
     top: 0;
@@ -6,7 +8,7 @@
     overflow: auto;
     width: 300px;
     transition: 0.4s ease;
-    background-color: #333;
+    background-color: $menuBg;
     z-index: 2;
     color: $white;
 
@@ -30,8 +32,64 @@
             width: 100%;
             opacity: 1;
             pointer-events: all;
-            transition: 0.4s ease;
             transition-delay: 0.4s
+        }
+
+        .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
+            cursor: pointer;
+            padding: 0.7rem 1rem;
+            list-style: none;
+            position: sticky;
+            font-size: 16px;
+            font-weight: 500;
+            
+            &.selected{
+                color: lighten($selectionBlue, 15%)
+            }
+
+            &:hover{
+                color: lighten($selectionBlue, 30%) !important
+            }
+
+            &.dolfo-submenu-title{
+                position: relative;
+                padding-inline-start: 1rem;
+
+                .dolfo-submenu-arrow{
+                    position: absolute;
+                    right: 1rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    transition: 0.4s ease
+                }
+            }
+        }
+
+        .dolfo-submenu{
+            overflow: hidden;
+            list-style: none;
+            padding-inline-start: 0;
+            margin-bottom: 0;
+
+            .dolfo-submenu-inner{
+                padding-inline-start: 1rem;
+                max-height: 0;
+                transition: 0.2s ease
+            }
+
+            &.opened{
+                > .dolfo-submenu-title{
+                    color: lighten($selectionBlue, 15%);
+
+                    .dolfo-submenu-arrow{
+                        transform: rotate(180deg) translateY(50%)
+                    }
+                }
+
+                > .dolfo-submenu-inner{
+                    max-height: 1000px
+                }
+            }
         }
     }
 }

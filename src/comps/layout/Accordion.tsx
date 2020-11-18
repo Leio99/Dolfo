@@ -8,6 +8,7 @@ export interface IProps{
 }
 export interface IState{
 	readonly opened: boolean
+	readonly updated: boolean
 }
 
 export class Accordion extends React.PureComponent<IProps, IState>{
@@ -15,28 +16,35 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		super(props)
 		
 		this.state = {
-			opened: props.opened || false
+			opened: props.opened || false,
+			updated: props.opened || false
 		}
     }
     
     componendDidUpdate = (prevProps: IProps) => {
         if(prevProps.opened !== this.props.opened){
             this.setState({
-                opened: this.props.opened || false
+				opened: this.props.opened || false,
+				updated: true
             })
         }
     }
 	
-	toggleAccordion = (element: HTMLElement) => {
-		element.style.maxHeight = !this.state.opened ? element.scrollHeight + "px" : "0"
+	toggleAccordion = (element: HTMLElement, updated = false) => {
+		element.style.maxHeight = !this.state.opened || updated ? element.scrollHeight + "px" : "0"
 
-		this.setState({ opened: !this.state.opened })
+		!updated && this.setState({
+			opened: !this.state.opened,
+			updated: false
+		})
 	}
 	
 	render = (): JSX.Element => {
 		const props = this.props,
-		{ opened } = this.state
+		{ opened, updated } = this.state
 		let element: HTMLElement
+
+		if(updated) setTimeout(() => this.toggleAccordion(element, true))
 		
 		return <div className={"dolfo-accordion" + (opened ? " opened" : "")} style={props.wrapperStyle}>
 			<div className="dolfo-accordion-header" onClick={() => this.toggleAccordion(element)}>
