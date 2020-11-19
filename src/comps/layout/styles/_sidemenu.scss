@@ -38,7 +38,6 @@ $menuBg: #333;
         .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
             cursor: pointer;
             padding: 0.7rem 1rem;
-            list-style: none;
             position: sticky;
             font-size: 16px;
             font-weight: 500;
@@ -67,7 +66,6 @@ $menuBg: #333;
 
         .dolfo-submenu{
             overflow: hidden;
-            list-style: none;
             padding-inline-start: 0;
             margin-bottom: 0;
 

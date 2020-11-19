@@ -8,6 +8,7 @@
     line-height: inherit;
     display: inline-block;
     position: relative;
+    vertical-align: middle;
 
     &[disabled]{
         opacity: 0.7;
@@ -29,7 +30,6 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            vertical-align: top;
             border-radius: $roundRadius
         }
     }
@@ -106,6 +106,7 @@
         z-index: 0;
         animation: showUp 0.15s ease forwards;
         box-shadow: 0px 0 1px rgba(0, 0, 0, 0.3), 0px 0 1px rgba(0, 0, 0, 0.3);
+        transform-origin: top;
 
         &:not(.pos-bottom){
             border-bottom: 0;
@@ -117,6 +118,7 @@
             bottom: 0;
             border-top: 0;
             border-radius: 0 0 $smallRadius $smallRadius;
+            transform-origin: bottom;
 
             .dolfo-popup-option:last-child{
                 padding-bottom: 0.5rem
@@ -167,6 +169,6 @@
     100%{ transform: scaleY(1) translateY(calc(-100% + 10px)) }
 }
 @keyframes showDown{
-    0%{ transform: scaleY(0) translateY(calc(100% - calc(0.5rem + 8px))) }
-    100%{ transform: scaleY(1) translateY(calc(100% - calc(0.5rem + 8px))) }
+    0%{ transform: scaleY(0) translateY(calc(100% - 10px)) }
+    100%{ transform: scaleY(1) translateY(calc(100% - 10px)) }
 }

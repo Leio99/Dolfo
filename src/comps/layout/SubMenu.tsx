@@ -37,13 +37,13 @@ export class SubMenu extends React.PureComponent<IProps, IState>{
         const props = this.props,
         { opened } = this.state
 
-        return <ul className={"dolfo-submenu" + (opened ? " opened" : "")}>
-            <li className="dolfo-submenu-title" onClick={this.toggleSubMenu}>
+        return <div className={"dolfo-submenu" + (opened ? " opened" : "")}>
+            <div className="dolfo-submenu-title" onClick={this.toggleSubMenu}>
                 <Icon iconKey="chevron-down" className="dolfo-submenu-arrow" />
                 {props.text}
-            </li>
+            </div>
 
-            <ul className="dolfo-submenu-inner">{props.children}</ul>
-        </ul>
+            <div className="dolfo-submenu-inner">{props.children}</div>
+        </div>
     }
 }

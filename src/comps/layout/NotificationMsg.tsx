@@ -1,7 +1,7 @@
 import React from "react"
 import { CSSProperties } from "react"
 import ReactDOM from "react-dom"
-import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon } from "./Icon"
+import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 
 export interface NotificationProps{
     readonly type?: "info" | "error" | "success" | "loading" | "warning"
@@ -58,7 +58,7 @@ export class NotificationMsg{
             if(type === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
             if(type === "loading") return <LoadingIcon spinning />
             if(type === "success") return <CheckCircleOutlineIcon color="var(--green)" />
-            if(type === "warning") return <CheckCircleOutlineIcon color="var(--orange)" />
+            if(type === "warning") return <WarningIconOutline color="var(--orange)" />
 
             return null
         },

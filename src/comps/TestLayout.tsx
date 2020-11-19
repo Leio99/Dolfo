@@ -106,8 +106,6 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
                         <Button fullSize btnColor="red" className="mt-2 mr-2" type="popup" options={[
                             { text: "First option", onClick: () => alert("Cliccato") },
-                            { text: "First option", onClick: () => alert("Cliccato") },
-                            { text: "First option", onClick: () => alert("Cliccato") },
                             { text: "Second option", onClick: () => console.log("cliccato 2") }
                         ]}>
                             Popup button
@@ -118,14 +116,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
 								<Icon iconKey="magic" color="var(--blue)" /> Do magic
 							</span>, onClick: () => alert("Cliccato") },
                             { text: "Second option", onClick: () => console.log("cliccato 2") },
-                            { text: "Second option", onClick: () => console.log("cliccato 2") },
-                            { text: "Second option", onClick: () => console.log("cliccato 2") },
-                            { text: "Second option", onClick: () => console.log("cliccato 2") }
                         ]} popupPosition="bottom">
                             Popup button
                         </Button>
 
-                        <Button btnColor="green" circleBtn className="mt-2">
+                        <Button btnColor="green" circleBtn>
                             <Icon iconKey="users" />
                         </Button>
                     </Tab>
@@ -133,14 +128,14 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     <Tab title="Notifications">
                         <Button onClick={() => {
                             NotificationMsg.show({
-                                message: "In alto!"
+                                message: "Top center!"
                             })
                         }} btnColor="green" smallBtn className="mr-2">
                             Basic notification
                         </Button>
                         <Button onClick={() => {
                             NotificationMsg.show({
-                                message: "In alto a destra!",
+                                message: "Top right!",
                                 position: "top-right"
                             })
                         }} btnColor="green" smallBtn className="mr-2">
@@ -148,7 +143,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Button>
                         <Button onClick={() => {
                             NotificationMsg.show({
-                                message: "In alto a sinistra!",
+                                message: "Top left!",
                                 position: "top-left"
                             })
                         }} btnColor="green" smallBtn className="mr-2">
@@ -156,7 +151,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Button>
                         <Button onClick={() => {
                             NotificationMsg.show({
-                                message: "In basso a destra!",
+                                message: "Bottom right!",
                                 position: "bottom-right"
                             })
                         }} btnColor="green" smallBtn className="mr-2">
@@ -164,7 +159,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Button>
                         <Button onClick={() => {
                             NotificationMsg.show({
-                                message: "In basso a sinistra!",
+                                message: "Bottom left!",
                                 position: "bottom-left"
                             })
                         }} btnColor="green" smallBtn className="mr-2">
@@ -172,14 +167,14 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Button>
                         <Button onClick={() => {
                             NotificationMsg.show({
-                                message: "In basso al centro!",
+                                message: "Bottom center!",
                                 position: "centered-bottom"
                             })
                         }} btnColor="green" smallBtn className="mr-2">
                             Bottom center
                         </Button>
                         <Button onClick={() => {
-                            let not = NotificationMsg.showLoading("Caricamento...")
+                            let not = NotificationMsg.showLoading("Loading...")
 
                             setTimeout(() => {
                                 not.close()
@@ -224,21 +219,21 @@ export class TestLayout extends React.PureComponent<any, IState>{
                                 <Select label="Select">
                                     {
                                         [1,2,3].map(o => {
-                                            return <Option value={o} label={"Opzione " + o} />
+                                            return <Option value={o} label={"Option " + o} />
                                         })
                                     }
                                 </Select>
                                 <Select label="Multi-select" multiple>
                                     {
                                         [1,2,3].map(o => {
-                                            return <Option value={o} label={"Opzione " + o} />
+                                            return <Option value={o} label={"Option " + o} />
                                         })
                                     }
                                 </Select>
                                 <Select label="Search select" canSearch>
                                     {
                                         [1,2,3].map(o => {
-                                            return <Option value={o} label={"Opzione " + o} />
+                                            return <Option value={o} label={"Option " + o} />
                                         })
                                     }
                                 </Select>
@@ -383,11 +378,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         <SlideShow automatic>
                             <Slide imageUrl="https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero.jpg"></Slide>
                             <Slide>
-                                <h1>Sono la seconda slide</h1>
-                                Ciaooo
+                                <h1>I am the second slide</h1>
+                                Hello!
                             </Slide>
                             <Slide imageUrl="https://blog.prezi.com/wp-content/uploads/2019/03/jason-leung-479251-unsplash.jpg">
-                                <h1>Sono la terza</h1>
+                                <h1>I am the third one</h1>
                             </Slide>
                         </SlideShow>
                     </Tab>
@@ -396,7 +391,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         <Button onClick={() => {
                             MessageBox.show({
                                 title: "Message",
-                                content: "A message can be placed at: top-left, top-right, bottom-left, bottom-right",
+                                content: "A message can be placed at: top-left, top-right, bottom-left, bottom-right. It disappears after 4 seconds (you can change the delay, obv), or it can be closed by the X icon on the top-right corner.",
                                 hideDelay: 4000
                             })
                         }} btnColor="green" smallBtn className="mr-2">
@@ -411,29 +406,29 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
             <SideMenu opened={showMenu} onToggle={this.toggleMenu}>
                 <MenuItem>
-                    <Icon iconKey="home" /> Sono una semplice voce
+                    <Icon iconKey="home" /> I'm just a simple item
                 </MenuItem>
 
                 <SubMenu text={<span>
-                    <Icon iconKey="mouse" /> Altre voci
+                    <Icon iconKey="mouse" /> Some items
                 </span>}>
-                    <MenuItem>Sottovoce</MenuItem>
-                    <MenuItem>Sottovoce 2</MenuItem>
+                    <MenuItem>Sub item</MenuItem>
+                    <MenuItem>Sub item 2</MenuItem>
                 </SubMenu>
-                <SubMenu text="Altre sottovoci">
-                    <MenuItem>Sottovoce 3</MenuItem>
-                    <MenuItem>Sottovoce 4</MenuItem>
-                    <SubMenu text="Altre voci">
-                        <SubMenu text="Altre voci aaaa">
-                            <MenuItem selected>Sottovoce aaaaaaaa</MenuItem>
-                            <MenuItem>Sottovoce 2aaaaaaaaaa</MenuItem>
+                <SubMenu text="Other items">
+                    <MenuItem>Sub item 3</MenuItem>
+                    <MenuItem>Sub item 4</MenuItem>
+                    <SubMenu text="Other other items">
+                        <SubMenu text="Other other other items">
+                            <MenuItem selected>Sub sub item</MenuItem>
+                            <MenuItem>Sub sub item 2</MenuItem>
                         </SubMenu>
-                        <MenuItem selected>Sottovoce</MenuItem>
-                        <MenuItem>Sottovoce 2</MenuItem>
+                        <MenuItem selected>Sub item 5</MenuItem>
+                        <MenuItem>Sub item 6</MenuItem>
                     </SubMenu>
                 </SubMenu>
 
-                <MenuItem>Ultima voce</MenuItem>
+                <MenuItem>I am the last one</MenuItem>
             </SideMenu>
         </div>
     }
