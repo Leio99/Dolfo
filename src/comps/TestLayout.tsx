@@ -106,6 +106,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
                         <Button fullSize btnColor="red" className="mt-2 mr-2" type="popup" options={[
                             { text: "First option", onClick: () => alert("Cliccato") },
+                            { text: "First option", onClick: () => alert("Cliccato") },
+                            { text: "First option", onClick: () => alert("Cliccato") },
                             { text: "Second option", onClick: () => console.log("cliccato 2") }
                         ]}>
                             Popup button
@@ -115,6 +117,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             { text: <span>
 								<Icon iconKey="magic" color="var(--blue)" /> Do magic
 							</span>, onClick: () => alert("Cliccato") },
+                            { text: "Second option", onClick: () => console.log("cliccato 2") },
+                            { text: "Second option", onClick: () => console.log("cliccato 2") },
+                            { text: "Second option", onClick: () => console.log("cliccato 2") },
                             { text: "Second option", onClick: () => console.log("cliccato 2") }
                         ]} popupPosition="bottom">
                             Popup button
