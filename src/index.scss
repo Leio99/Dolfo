@@ -58,7 +58,7 @@ body{
         
         &.selected{
             color: #fff;
-            border-color: transparent !important;
+            border-color: darken($selectionBlue, 10%) !important;
             background-color: $selectionBlue;
 
             h5{

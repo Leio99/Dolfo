@@ -25,6 +25,14 @@
         display: inline-block;
         vertical-align: middle;
 
+        &:focus{
+            outline: none;
+
+            .dolfo-switch-dot{
+                background-color: darken($grey, 15%)
+            }
+        }
+
         .dolfo-switch-dot{
             top: 2px;
             bottom: 2px;

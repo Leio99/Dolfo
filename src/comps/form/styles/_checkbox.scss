@@ -47,7 +47,7 @@
         margin-right: 0.5rem;
 
         &:focus{
-            border-color: $selectionBlue
+            border-color: darken($selectionBlue, 10%) !important
         }
 
         *{
