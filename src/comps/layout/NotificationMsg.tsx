@@ -51,8 +51,9 @@ export class NotificationMsg{
         })
     }
 
-    static show = (props: NotificationProps) => {
-        const notification = document.createElement("div"),
+    static show = (data: string | NotificationProps) => {
+        const props = typeof data === "string" ? { message: data } : data,
+        notification = document.createElement("div"),
         getIcon = (type: string) => {
             if(type === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
             if(type === "error") return <ErrorCircleOutlineIcon color="var(--red)" />

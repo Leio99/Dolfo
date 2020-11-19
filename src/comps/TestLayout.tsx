@@ -127,9 +127,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
                     <Tab title="Notifications">
                         <Button onClick={() => {
-                            NotificationMsg.show({
-                                message: "Top center!"
-                            })
+                            NotificationMsg.show("Top center!")
                         }} btnColor="green" smallBtn className="mr-2">
                             Basic notification
                         </Button>
@@ -201,6 +199,14 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             NotificationMsg.showWarning("Warning!")
                         }} btnColor="orange" smallBtn className="mr-2">
                             Warning
+                        </Button>
+                        <Button onClick={() => {
+                            NotificationMsg.show({
+                                message: "Click me!",
+                                dismissOnClick: true
+                            })
+                        }} btnColor="green" smallBtn className="mr-2">
+                            Close on click
                         </Button>
                     </Tab>
 
