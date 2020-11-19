@@ -1,14 +1,14 @@
 .dolfo-calendar-container{
     height: 350px;
     padding: 0 10px;
-    border: 1px solid #ccc;
+    border: 1px solid $grey;
     border-radius: $smallRadius;
     align-items: center;
     justify-content: center;
     margin-top: 44px;
     position: absolute;
     z-index: 3;
-    background-color: #fff;
+    background-color: $white;
     width: 275px;
     display: none;
 

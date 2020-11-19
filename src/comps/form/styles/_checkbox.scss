@@ -25,10 +25,11 @@
         left: 0
     }
 
-    label{
+    label.dolfo-checkbox-label{
         vertical-align: middle;
         font-size: 13px;
         margin-bottom: 0;
+        margin-left: 0.5rem;
         cursor: pointer
     }
 
@@ -37,21 +38,20 @@
         height: 16px;
         border-radius: 0.15rem;
         border: 1px solid $grey;
-        background-color: #fff;
+        background-color: $white;
         display: inline-flex;
         vertical-align: middle;
         justify-content: center;
         outline: none;
         align-items: center;
         position: relative;
-        margin-right: 0.5rem;
 
         &:focus{
             border-color: darken($selectionBlue, 10%) !important
         }
 
         *{
-            color: #fff;
+            color: $white;
             font-size: 9px
         }
 

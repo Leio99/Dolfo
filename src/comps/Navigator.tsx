@@ -3,6 +3,7 @@ import { createBrowserHistory } from "history"
 import { Route, Switch, Router } from "react-router-dom"
 import { Prenotazione } from "./Prenotazione"
 import { TestLayout } from "./TestLayout"
+import { ListaStudenti } from "./ListaStudenti"
 
 export const history = createBrowserHistory()
 
@@ -22,6 +23,10 @@ export class Navigator extends React.Component{
 
             <Switch>
                 <Route exact path="/layout" render={() => <TestLayout />} />
+            </Switch>
+
+            <Switch>
+                <Route exact path="/prova" render={() => <ListaStudenti />} />
             </Switch>
         </Router>
     }

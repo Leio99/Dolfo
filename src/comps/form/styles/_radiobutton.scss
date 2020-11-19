@@ -25,11 +25,12 @@
             left: 0
         }
 
-        label{
+        label.dolfo-radio-label{
             vertical-align: middle;
             font-size: 13px;
             margin-bottom: 0;
             cursor: pointer;
+            margin-left: 0.5rem;
             margin-right: 0.5rem
         }
 
@@ -44,7 +45,6 @@
             vertical-align: middle;
             align-items: center;
             position: relative;
-            margin-right: 0.5rem;
             outline: none;
 
             &:focus{

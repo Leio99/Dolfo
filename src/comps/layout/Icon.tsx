@@ -10,6 +10,7 @@ export interface DefaultIconProps{
     readonly style?: CSSProperties
     readonly onClick?: () => void
     readonly color?: string
+    readonly large?: boolean
 }
 export interface IProps extends DefaultIconProps, BaseIconProps{}
 
@@ -22,6 +23,7 @@ export class Icon extends React.PureComponent<IProps>{
             " fa-" +
             props.iconKey +
             " fa-fw" +
+            (props.large ? " fa-lg" : "") +
             (props.className ? (" " + props.className) : "") + 
             (props.spinning ? " spin" : "")
         }
@@ -67,10 +69,13 @@ export const InfoCircleOutlineIcon = (props: DefaultIconProps) => {
     return <Icon {...props} type="far" iconKey="info-circle" />
 }
 export const LoadingIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="spinner-third" />
+    return <Icon {...props} type="fal" iconKey="spinner-third" />
 }
 export const CloseIcon = (props: DefaultIconProps) => {
     return <Icon {...props} type="far" iconKey="times" />
+}
+export const CloseCircleIcon = (props: DefaultIconProps) => {
+    return <Icon {...props} type="fa" iconKey="times-circle" />
 }
 export const WarningIcon = (props: DefaultIconProps) => {
     return <Icon {...props} iconKey="exclamation-triangle" />

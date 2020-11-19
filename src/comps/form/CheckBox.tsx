@@ -25,9 +25,11 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
     }
 
     onChange = () => {
-        this.setState({
+        !this.props.onChange && this.setState({
             checked: !this.state.checked
-        }, () => this.props.onChange ? this.props.onChange(this.props.value) : null)
+        })
+
+        this.props.onChange && this.props.onChange(this.props.value)
     }
 
     checkSpace = (e: any) => {
@@ -44,7 +46,7 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
             <div className={"dolfo-checkbox-square" + (checked ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace}>
                 <CheckIcon color="var(--white)" />
             </div>
-            <label>{props.label}</label>
+            {props.label && <label className="dolfo-checkbox-label">{props.label}</label>}
         </div>
     }
 }

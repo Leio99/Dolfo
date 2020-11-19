@@ -1,0 +1,21 @@
+.dolfo-table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: $white;
+
+    tr{
+        border-bottom: 1px solid $grey
+    }
+
+    tbody tr{
+        &:hover{
+            cursor: pointer;
+            background-color: lighten($lightGrey, 2%)
+        }
+    }
+
+    thead th, tbody td{
+        vertical-align: middle;
+        padding: 0.8rem
+    }
+}

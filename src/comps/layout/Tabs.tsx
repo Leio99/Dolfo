@@ -4,7 +4,7 @@ import { Tab } from "./Tab"
 export interface IProps {
     readonly style?: CSSProperties
     readonly className?: string
-    readonly direction?: "horizontal" | "vertical"
+    readonly vertical?: boolean
 }
 export interface IState {
     readonly children: Tab[]
@@ -38,7 +38,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     getChildrenTabs = () => React.Children.map(this.props.children, (child: any) => child)
 
     changeSelection = (index: number, element: HTMLElement) => {
-        const isVertical = this.props.direction === "vertical"
+        const isVertical = this.props.vertical
 
         this.setState({
             currentTab: index,
@@ -56,7 +56,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     render = (): JSX.Element => {
         const props = this.props,
         { children, currentTab, barMargin, barWidth, firstLoad } = this.state,
-        isVertical = props.direction === "vertical",
+        isVertical = props.vertical,
         barStyle = isVertical ? { marginTop: barMargin, height: barWidth } : { marginLeft: barMargin, width: barWidth }
 
         return <div className={"dolfo-tabs" + (props.className ? (" " + props.className) : "") + (isVertical ? " vertical" : "")} style={props.style}>

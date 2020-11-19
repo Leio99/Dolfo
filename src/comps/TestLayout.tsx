@@ -211,7 +211,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Tab>
 
                     <Tab title="Forms">
-                        <Tabs direction="vertical">
+                        <Tabs vertical>
                             <Tab title="Text inputs">
                                 <TextInput label="Simple" />
                                 <TextInput label="Password" password />

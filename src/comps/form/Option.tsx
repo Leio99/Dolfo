@@ -33,7 +33,7 @@ export class Option extends React.PureComponent<IProps>{
                 <input type="radio" required={props.required} checked={props.selected} tabIndex={-1} name={props.controlName} />
 
                 <div className={"dolfo-radio-circle" + (props.selected ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace}></div>
-                <label>{props.label}</label>
+                {props.label && <label className="dolfo-radio-label">{props.label}</label>}
             </div>
         }
 
