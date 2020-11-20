@@ -35,60 +35,60 @@ $menuWidth: 350px;
             pointer-events: all;
             transition-delay: 0.4s
         }
+    }
 
-        .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
-            cursor: pointer;
-            padding: 1rem 2rem;
-            position: sticky;
-            font-size: 20px;
-            font-weight: 400;
-            text-transform: uppercase;
-            
-            &.selected{
-                color: darken($selectionBlue, 30%)
-            }
-
-            &:hover{
-                color: darken($selectionBlue, 15%) !important
-            }
-
-            &.dolfo-submenu-title{
-                position: relative;
-                padding-inline-start: 2rem;
-
-                .dolfo-submenu-arrow{
-                    position: absolute;
-                    right: 2rem;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    transition: transform 0.4s ease
-                }
-            }
+    .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
+        cursor: pointer;
+        padding: 1rem 2rem;
+        position: sticky;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        
+        &.selected{
+            color: darken($selectionBlue, 30%)
         }
 
-        .dolfo-submenu{
-            overflow: hidden;
-            padding-inline-start: 0;
-            margin-bottom: 0;
+        &:hover{
+            color: darken($selectionBlue, 15%) !important
+        }
 
-            .dolfo-submenu-inner{
-                padding-inline-start: 2rem;
-                max-height: 0;
-                transition: 0.2s ease
+        &.dolfo-submenu-title{
+            position: relative;
+            padding-inline-start: 2rem;
+
+            .dolfo-submenu-arrow{
+                position: absolute;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+                transition: transform 0.4s ease
+            }
+        }
+    }
+
+    .dolfo-submenu{
+        overflow: hidden;
+        padding-inline-start: 0;
+        margin-bottom: 0;
+
+        .dolfo-submenu-inner{
+            padding-inline-start: 2rem;
+            max-height: 0;
+            transition: 0.2s ease
+        }
+
+        &.opened{
+            > .dolfo-submenu-title{
+                color: darken($selectionBlue, 30%);
+
+                .dolfo-submenu-arrow{
+                    transform: rotate(180deg) translateY(50%)
+                }
             }
 
-            &.opened{
-                > .dolfo-submenu-title{
-                    color: darken($selectionBlue, 30%);
-
-                    .dolfo-submenu-arrow{
-                        transform: rotate(180deg) translateY(50%)
-                    }
-                }
-
-                > .dolfo-submenu-inner{
-                    max-height: 1000px
-                }
+            > .dolfo-submenu-inner{
+                max-height: 1000px
             }
         }
     }
