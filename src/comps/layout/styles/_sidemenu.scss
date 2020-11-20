@@ -1,4 +1,5 @@
-$menuBg: #333;
+$menuBg: #1e99d5;
+$menuWidth: 350px;
 
 .dolfo-side-menu{
     position: fixed;
@@ -6,7 +7,7 @@ $menuBg: #333;
     left: -100%;
     bottom: 0;
     overflow: auto;
-    width: 300px;
+    width: $menuWidth;
     transition: 0.4s ease;
     background-color: $menuBg;
     z-index: 2;
@@ -15,7 +16,7 @@ $menuBg: #333;
     .dolfo-menu-overlay{
         position: fixed;
         top: 0;
-        left: 300px;
+        left: $menuWidth;
         bottom: 0;
         width: 0;
         background-color: rgba(0, 0, 0, 0.3);
@@ -37,29 +38,30 @@ $menuBg: #333;
 
         .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
             cursor: pointer;
-            padding: 0.7rem 1rem;
+            padding: 1rem 2rem;
             position: sticky;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
             
             &.selected{
-                color: lighten($selectionBlue, 15%)
+                color: darken($selectionBlue, 30%)
             }
 
             &:hover{
-                color: lighten($selectionBlue, 30%) !important
+                color: darken($selectionBlue, 15%) !important
             }
 
             &.dolfo-submenu-title{
                 position: relative;
-                padding-inline-start: 1rem;
+                padding-inline-start: 2rem;
 
                 .dolfo-submenu-arrow{
                     position: absolute;
-                    right: 1rem;
+                    right: 2rem;
                     top: 50%;
                     transform: translateY(-50%);
-                    transition: 0.4s ease
+                    transition: transform 0.4s ease
                 }
             }
         }
@@ -70,14 +72,14 @@ $menuBg: #333;
             margin-bottom: 0;
 
             .dolfo-submenu-inner{
-                padding-inline-start: 1rem;
+                padding-inline-start: 2rem;
                 max-height: 0;
                 transition: 0.2s ease
             }
 
             &.opened{
                 > .dolfo-submenu-title{
-                    color: lighten($selectionBlue, 15%);
+                    color: darken($selectionBlue, 30%);
 
                     .dolfo-submenu-arrow{
                         transform: rotate(180deg) translateY(50%)

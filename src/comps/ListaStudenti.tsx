@@ -17,6 +17,8 @@ export interface IState{
     readonly checkList: any[]
 }
 export class ListaStudenti extends React.PureComponent<any, IState>{
+    static PAGE_TITLE = "Studenti del corso"
+    
     constructor(props: any){
         super(props)
 
@@ -144,70 +146,72 @@ export class ListaStudenti extends React.PureComponent<any, IState>{
             <LoadingIcon spinning style={{ fontSize: 50 }} />
         </div>
 
-        return <Tabs className="p-5">
-            <Tab title={<span>
-                <Icon type="far" iconKey="user" /> Studenti attivi
-            </span>}>
-                <div>
-                    <Button type="popup" popupPosition="bottom" options={[
-                        { text: <span>
-                            <Icon iconKey="plus" color="var(--green)" /> Aggiungi
-                        </span>, onClick: () => null },
-                        { text: <span>
-                            <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
-                        </span>, onClick: () => null },
-                        { text: <span>
-                            <Icon iconKey="arrows-alt" color="var(--orange)" /> Sposta
-                        </span>, onClick: this.moveStudents }
-                    ]} btnColor="darkblue" className="float-right">Gestisci studenti</Button>
+        return <div className="px-5">
+            <Tabs>
+                <Tab title={<span>
+                    <Icon type="far" iconKey="user" /> Studenti attivi
+                </span>}>
+                    <div>
+                        <Button type="popup" popupPosition="bottom" options={[
+                            { text: <span>
+                                <Icon iconKey="plus" color="var(--green)" /> Aggiungi
+                            </span>, onClick: () => null },
+                            { text: <span>
+                                <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
+                            </span>, onClick: () => null },
+                            { text: <span>
+                                <Icon iconKey="arrows-alt" color="var(--orange)" /> Sposta
+                            </span>, onClick: this.moveStudents }
+                        ]} btnColor="darkblue" className="float-right">Gestisci studenti</Button>
 
-                    <div className="clearfix"></div>
+                        <div className="clearfix"></div>
 
-                    <Tabs className="mt-2">
-                        <Tab title="Primo anno">
-                            {
-                                !primoAnno ? loadingIcon : this.buildTable(primoAnno)
-                            }
-                        </Tab>
-                        <Tab title="Secondo anno">
-                            {
-                                !secondoAnno ? loadingIcon : this.buildTable(secondoAnno)
-                            }
-                        </Tab>
-                    </Tabs>
-                </div>
-            </Tab>
+                        <Tabs className="mt-2">
+                            <Tab title="Primo anno">
+                                {
+                                    !primoAnno ? loadingIcon : this.buildTable(primoAnno)
+                                }
+                            </Tab>
+                            <Tab title="Secondo anno">
+                                {
+                                    !secondoAnno ? loadingIcon : this.buildTable(secondoAnno)
+                                }
+                            </Tab>
+                        </Tabs>
+                    </div>
+                </Tab>
 
-            <Tab title={<span>
-                <Icon type="far" iconKey="user-graduate" /> Studenti archiviati
-            </span>}>
-                {
-                    !listaArchiviati ? loadingIcon : <Table columns={[
-                        { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },
-                        { label: "Studente", field: "desStudente", canSearch: true },
-                        { label: "Codice Fiscale", field: "cf", canSearch: true },
-                        { label: "Anno", field: "anno", width: "15%", align: "center", canSearch: true },
-                        { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
-                        { label: "Azioni", field: "azioni", width: "26%", align: "center" },
-                    ]} data={
-                        listaArchiviati.map(s => {
-                            return {
-                                onDoubleClick: () => console.log("Hai cliccato ", s),
-                                check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" /> : <CloseCircleIcon large color="var(--red)" />,
-                                desStudente: s.nome + " " + s.cognome,
-                                cf: s.cf,
-                                anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
-                                frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
-                                azioni: <div>
-                                    <Button circleBtn btnColor="blue">
-                                        <DetailIcon />
-                                    </Button>
-                                </div>
-                            }
-                        })
-                    } />
-                }
-            </Tab>
-        </Tabs>
+                <Tab title={<span>
+                    <Icon type="far" iconKey="user-graduate" /> Studenti archiviati
+                </span>}>
+                    {
+                        !listaArchiviati ? loadingIcon : <Table columns={[
+                            { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },
+                            { label: "Studente", field: "desStudente", canSearch: true },
+                            { label: "Codice Fiscale", field: "cf", canSearch: true },
+                            { label: "Anno", field: "anno", width: "15%", align: "center", canSearch: true },
+                            { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
+                            { label: "Azioni", field: "azioni", width: "26%", align: "center" },
+                        ]} data={
+                            listaArchiviati.map(s => {
+                                return {
+                                    onDoubleClick: () => console.log("Hai cliccato ", s),
+                                    check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" /> : <CloseCircleIcon large color="var(--red)" />,
+                                    desStudente: s.nome + " " + s.cognome,
+                                    cf: s.cf,
+                                    anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
+                                    frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
+                                    azioni: <div>
+                                        <Button circleBtn btnColor="blue">
+                                            <DetailIcon />
+                                        </Button>
+                                    </div>
+                                }
+                            })
+                        } />
+                    }
+                </Tab>
+            </Tabs>
+        </div>
     }
 }
