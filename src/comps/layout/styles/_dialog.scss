@@ -86,6 +86,11 @@
 			max-height: 70vh
         }
     }
+
+    &.place-top .dolfo-dialog-inner{
+        align-self: flex-start;
+        margin-top: 9vh
+    }
 }
 
 @keyframes popUp{

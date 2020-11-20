@@ -12,7 +12,7 @@ export interface IProps extends InputProps{
     readonly bigBtn?: boolean
     readonly loading?: boolean
     readonly circleBtn?: boolean
-    readonly btnColor?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white"
+    readonly btnColor?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
     readonly options?: BtnOptions[]
     readonly popupPosition?: "top" | "bottom"
 }
@@ -54,7 +54,7 @@ class Button extends React.PureComponent<IProps, IState>{
                     }
                 </div>
 
-                <div className={"dolfo-button dolfo-popup-button" + (" btn-" + props.btnColor || "blue")}>
+                <div className={"dolfo-button dolfo-popup-button" + (" btn-" + props.btnColor || "darkblue")}>
                     <div className="dolfo-popup-arrow">
                         <Icon iconKey="caret-down" />
                     </div>

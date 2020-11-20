@@ -86,9 +86,10 @@ export class TestLayout extends React.PureComponent<any, IState>{
         return <div className="p-5">
             <div style={{ marginTop: 15 }}>
                 <Tabs>
-                <Tab title="Buttons">
+                <Tab title="Buttons" style={{ height: "80vh" }}>
                         <Button btnColor="red" className="mr-2">Red</Button>
                         <Button btnColor="blue" className="mr-2">Blue</Button>
+                        <Button btnColor="darkblue" className="mr-2">Dark Blue</Button>
                         <Button btnColor="green" className="mr-2">Green</Button>
                         <Button btnColor="orange" className="mr-2">Orange</Button>
                         <Button btnColor="black" className="mr-2">Black</Button>
@@ -96,13 +97,13 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         <Button btnColor="white">White</Button>
                         <div className="mb-2"></div>
                         <Button btnColor="red" textBtn className="mr-2">Text button</Button>
-                        <Button btnColor="blue" textBtn className="mr-2"><CloseIcon /> Text button with icon</Button>
-                        <Button btnColor="blue" smallBtn className="mr-2">Small button</Button>
-                        <Button btnColor="blue" className="mr-2"><CheckIcon /> Button with icon</Button>
-                        <Button btnColor="blue" loading className="mr-2">Loading</Button>
-                        <Button btnColor="blue" bigBtn>Big button</Button>
+                        <Button btnColor="darkblue" textBtn className="mr-2"><CloseIcon /> Text button with icon</Button>
+                        <Button btnColor="darkblue" smallBtn className="mr-2">Small button</Button>
+                        <Button btnColor="darkblue" className="mr-2"><CheckIcon /> Button with icon</Button>
+                        <Button btnColor="darkblue" loading className="mr-2">Loading</Button>
+                        <Button btnColor="darkblue" bigBtn>Big button</Button>
 
-                        <Button fullSize btnColor="blue" className="mt-2">Full size button</Button>
+                        <Button fullSize btnColor="darkblue" className="mt-2">Full size button</Button>
 
                         <Button fullSize btnColor="red" className="mt-2 mr-2" type="popup" options={[
                             { text: "First option", onClick: () => alert("Cliccato") },
@@ -111,9 +112,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             Popup button
                         </Button>
 
-                        <Button fullSize btnColor="blue" className="mt-2 mr-2" type="popup" options={[
+                        <Button fullSize btnColor="darkblue" className="mt-2 mr-2" type="popup" options={[
                             { text: <span>
-								<Icon iconKey="magic" color="var(--blue)" /> Do magic
+								<Icon iconKey="magic" color="var(--darkblue)" /> Do magic
 							</span>, onClick: () => alert("Cliccato") },
                             { text: "Second option", onClick: () => console.log("cliccato 2") },
                         ]} popupPosition="bottom">
@@ -324,15 +325,15 @@ export class TestLayout extends React.PureComponent<any, IState>{
                                 content: "The mask is the transparent-black part outside the dialog.",
                                 clickOutside: true
                             })
-                        }} btnColor="blue" className="mr-2">Close on mask click</Button>
+                        }} btnColor="darkblue" className="mr-2">Close on mask click</Button>
 
                         <Button onClick={() => {
                             let dialog = Dialog.loadingDialog("Caricamento...")
 
                             setTimeout(() => dialog.close(), 2000)
-                        }} btnColor="blue" className="mr-2">Loading dialog</Button>
+                        }} btnColor="darkblue" className="mr-2">Loading dialog</Button>
 
-                        <Button onClick={this.toggleDialog} btnColor="blue" className="mr-2">Dialog with form</Button>
+                        <Button onClick={this.toggleDialog} btnColor="darkblue" className="mr-2">Dialog with form</Button>
 
                         <Dialog title="I'm a form dialog" visible={visibleDialog} customFooter={[
                             <Button btnColor="red" smallBtn textBtn onClick={this.toggleDialog}>Cancel</Button>,
@@ -362,7 +363,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
 								</div>,
 								width: "500px"
                             })
-                        }} btnColor="blue" className="mr-2">Long content dialog</Button>
+                        }} btnColor="darkblue" className="mr-2">Long content dialog</Button>
                     </Tab>
 
                     <Tab title="Accordion">
@@ -376,7 +377,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
                     <Tab title="Progress">
                         <Progress percent={60} color="red" />
-                        <Progress percent={percent} color="blue" loading={percent !== 100} loadingText="Loading..." />
+                        <Progress percent={percent} color="darkblue" loading={percent !== 100} loadingText="Loading..." />
                         <Progress percent={80} circular color="orange" />
                     </Tab>
 

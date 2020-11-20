@@ -85,7 +85,7 @@
             flex: 0 0 100%;
             opacity: 0;
             max-width: 100%;
-            transition: margin-left 0.4s cubic-bezier(0, 1.12, 1, 1);
+            transition: margin-left 0.4s cubic-bezier(0, 1.12, 0.99, 0.99);
             height: 0;
 
             &.current{

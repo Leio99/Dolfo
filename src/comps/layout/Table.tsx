@@ -23,7 +23,7 @@ export class Table extends React.PureComponent<IProps>{
 
             <tbody>
                 {
-                    data.map(d => {
+                    data.length ? data.map(d => {
                         return <tr style={d.rowStyle} onDoubleClick={d.onDoubleClick}>
                             {
                                 columns.map(col => <td style={{ textAlign: col.align }}>
@@ -31,7 +31,9 @@ export class Table extends React.PureComponent<IProps>{
                                 </td>)
                             }
                         </tr>
-                    })
+                    }) : <tr>
+                        <td className="dolfo-table-noresults" colSpan={columns.length}>Nessun risultato</td>
+                    </tr>
                 }
             </tbody>
         </table>

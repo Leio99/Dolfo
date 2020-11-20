@@ -4,7 +4,7 @@ import { LoadingIcon } from "./Icon"
 export interface IProps {
     readonly percent: number
     readonly circular?: boolean
-    readonly color?: "red" | "orange" | "black" | "blue" | "green" | "grey"
+    readonly color?: "red" | "orange" | "black" | "blue" | "green" | "grey" | "darkblue"
     readonly circleWidth?: number
     readonly loading?: boolean
     readonly loadingText?: string | JSX.Element
@@ -14,7 +14,7 @@ export class Progress extends React.PureComponent<IProps>{
     render = (): JSX.Element => {
         const props = this.props,
         percent = props.percent < 0 || props.percent > 100 ? 0 : props.percent,
-        color = props.color || "blue",
+        color = props.color || "darkblue",
         width = props.circleWidth >= 0 ? props.circleWidth : 150
 
         if (props.circular) {

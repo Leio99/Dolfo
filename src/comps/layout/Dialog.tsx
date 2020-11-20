@@ -19,10 +19,11 @@ export interface IProps{
     readonly autoLoad?: boolean
     readonly width?: string
     readonly style?: CSSProperties
-    readonly okType?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white"
-    readonly cancelType?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white"
+    readonly okType?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
+    readonly cancelType?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
     readonly className?: string
     readonly customFooter?: React.ReactNode
+    readonly top?: boolean
 }
 export interface IState{
     readonly visible: boolean
@@ -147,7 +148,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         const props = this.props,
         { visible } = this.state
 
-        return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "")}>
+        return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "") + (props.top ? " place-top" : "")}>
             <div className="dolfo-dialog-overlay" onClick={props.clickOutside ? this.onClose : null}></div>
 
             <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width }}>
@@ -173,7 +174,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
                             </Button>
                         }
 
-                        <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} smallBtn btnColor={props.okType || "blue"}>
+                        <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} smallBtn btnColor={props.okType || "darkblue"}>
                             {props.okText || Constants.OK_TEXT}
                         </Button>
                     </div>

@@ -13,9 +13,9 @@
 
         span{
             position: absolute;
-            top: 0.3rem;
+            top: 0.5rem;
             right: 2rem;
-            left: 0.7rem;
+            left: 0.8rem;
             display: block;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -58,7 +58,7 @@
         }
 
         .dolfo-option{
-            padding: calc(0.3rem - 1px) calc(0.7rem - 1px);
+            padding: calc(0.5rem - 1px) calc(0.8rem - 1px);
             cursor: pointer;
 
             &:not(.unclick):hover, &.selected{
@@ -101,7 +101,7 @@
             .dolfo-select-search-icon{
                 right: auto;
                 left: 0.7rem;
-                top: 0.2rem;
+                top: 0.4rem;
                 transform: translateY(50%);
                 font-size: 12px;
                 pointer-events: none

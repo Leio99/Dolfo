@@ -5,6 +5,7 @@ export interface IProps{
 	readonly title: string | JSX.Element
 	readonly opened?: boolean
 	readonly wrapperStyle?: CSSProperties
+	readonly className?: string
 }
 export interface IState{
 	readonly opened: boolean
@@ -46,7 +47,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 
 		if(updated) setTimeout(() => this.toggleAccordion(element, true))
 		
-		return <div className={"dolfo-accordion" + (opened ? " opened" : "")} style={props.wrapperStyle}>
+		return <div className={"dolfo-accordion" + (opened ? " opened" : "") + (props.className ? (" " + props.className) : "")} style={props.wrapperStyle}>
 			<div className="dolfo-accordion-header" onClick={() => this.toggleAccordion(element)}>
 				<Icon iconKey="chevron-down" className="accordion-caret" />
 				

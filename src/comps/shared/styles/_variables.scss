@@ -9,12 +9,18 @@ $smallRadius: 0.25rem;
 $dark: #555;
 $white: #fff;
 $black: #000;
+$green: #1c9222;
+$blue:  #239ad1;
+$darkBlue: #236fd1;
+$red: #eb1d1d;
+$orange: #f1a80b;
 
 $colors: (
-  "red": #eb1d1d,
-  "blue": #236fd1,
-  "green": #1c9222,
-  "orange": #f1a80b,
+  "red": $red,
+  "blue": $blue,
+  "darkblue": $darkBlue,
+  "green": $green,
+  "orange": $orange,
   "black": #333,
   "grey": $disabled,
   "white": $white

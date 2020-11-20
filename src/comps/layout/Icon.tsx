@@ -86,3 +86,9 @@ export const WarningIconOutline = (props: DefaultIconProps) => {
 export const SearchIcon = (props: DefaultIconProps) => {
     return <Icon {...props} iconKey="search" />
 }
+export const DetailIcon = (props: DefaultIconProps) => {
+    return <Icon {...props} iconKey="external-link" />
+}
+export const EditIcon = (props: DefaultIconProps) => {
+    return <Icon {...props} iconKey="pen" />
+}

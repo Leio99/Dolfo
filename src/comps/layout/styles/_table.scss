@@ -4,7 +4,11 @@
     background-color: $white;
 
     tr{
-        border-bottom: 1px solid $grey
+        border-bottom: 1px solid $grey;
+
+        td.dolfo-table-noresults{
+            text-align: center
+        }
     }
 
     tbody tr{
