@@ -30,10 +30,11 @@ export class Navigator extends React.PureComponent<any, IState>{
     }
     
     componentDidMount = () => {
-        console.log(window.location)
         this.setState({
             currentComponent: (Components as any)[this.state.currentPath]
         })
+
+        Object.keys(Components).map(d => console.log(d)) // se è compatibile la metti in state
 
         history.listen(loc => {
             console.log(loc)
