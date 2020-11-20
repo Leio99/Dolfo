@@ -1,25 +1,61 @@
-.dolfo-table{
-    width: 100%;
-    border-collapse: collapse;
-    background-color: $white;
+.dolfo-table-content{
+    overflow: auto;
+    word-break: initial;
 
-    tr{
-        border-bottom: 1px solid $grey;
+    .dolfo-table{
+        width: 100%;
+        border-collapse: collapse;
+        background-color: $white;
 
-        td.dolfo-table-noresults{
-            text-align: center
+        tr{
+            border-bottom: 1px solid $grey;
+            background-color: #fff;
+
+            td.dolfo-table-noresults{
+                text-align: center
+            }
         }
-    }
 
-    tbody tr{
-        &:hover{
-            cursor: pointer;
-            background-color: lighten($lightGrey, 2%)
+        tbody tr{
+            &:hover{
+                cursor: pointer;
+                background-color: lighten($lightGrey, 2%)
+            }
         }
-    }
 
-    thead th, tbody td{
-        vertical-align: middle;
-        padding: 0.8rem
+        thead th, tbody td{
+            vertical-align: middle;
+            padding: 0.8rem
+        }
+
+        thead th{
+            position: relative;
+
+            .dolfo-column-search-icon{
+                position: absolute;
+                right: 0.8rem;
+                transform: translateY(25%);
+                visibility: hidden;
+                cursor: pointer
+            }
+
+            &:hover .dolfo-column-search-icon{
+                visibility: visible
+            }
+
+            .dolfo-column-search-input{
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0.5rem;
+                width: 100%;
+                outline: none;
+                border: 1px solid $selectionBlue;
+                border-radius: $roundRadius;
+                padding: 0 1rem;
+                background-color: $white;
+                height: 27px
+            }
+        }
     }
 }

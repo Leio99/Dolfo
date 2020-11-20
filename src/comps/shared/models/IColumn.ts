@@ -5,6 +5,7 @@ export interface IColumn{
     readonly label: string | JSX.Element
     readonly width?: number | string
     readonly align?: "left" | "right" | "center"
+    readonly canSearch?: boolean
 }
 
 export interface IDataColumn{

@@ -3,7 +3,6 @@ import React from "react"
 import { CheckBox } from "./form/CheckBox"
 import Select from "./form/Select"
 import { Option } from "./form/Option"
-import { TextInput } from "./form/TextInput"
 import Button from "./layout/Button"
 import { Dialog } from "./layout/Dialog"
 import { CheckCircleIcon, CloseCircleIcon, DetailIcon, EditIcon, Icon, LoadingIcon } from "./layout/Icon"
@@ -36,7 +35,8 @@ export class ListaStudenti extends React.PureComponent<any, IState>{
     }
 
     toggleCheckAll = (anno: number) => {
-        const checkList = this.state.checkList.length > 0 && this.state.checkList[0].annoFrequentazione === anno ? [] : this.state.studenti.filter(s => !s.ritirato && s.annoFrequentazione === anno)
+        const current = this.state.checkList,
+        checkList = current.find(s => s.annoFrequentazione === anno) ? current.filter(s => s.annoFrequentazione !== anno) : current.concat(this.state.studenti.filter(s => !s.ritirato && s.annoFrequentazione === anno && !s.promosso))
 
         this.setState({ checkList })
     }
@@ -63,9 +63,9 @@ export class ListaStudenti extends React.PureComponent<any, IState>{
 
         return <Table columns={[
             { label: <CheckBox checked={checkedAll} onChange={() => this.toggleCheckAll(studenti[0].annoFrequentazione)} />, field: "check", width: "5%", align: "center" },
-            { label: "Studente", field: "desStudente" },
-            { label: "Codice Fiscale", field: "cf" },
-            { label: "Frequenza", field: "frequenza", width: "15%", align: "center" },
+            { label: "Studente", field: "desStudente", canSearch: true },
+            { label: "Codice Fiscale", field: "cf", canSearch: true },
+            { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
             { label: "Azioni", field: "azioni", width: "26%", align: "center" },
         ]} data={
             studenti.sort((s, _) => s.ritirato ? 0 : -1).map(s => {
@@ -108,10 +108,8 @@ export class ListaStudenti extends React.PureComponent<any, IState>{
     }
 
     moveStudents = () => {
-        if(!this.state.checkList.length){
-            NotificationMsg.showError("Seleziona almeno uno studente!")
-            return
-        }
+        if(!this.state.checkList.length)
+            return NotificationMsg.showError("Seleziona almeno uno studente!")
 
         Dialog.openDialog({
             title: "Sposta studenti",
@@ -127,8 +125,8 @@ export class ListaStudenti extends React.PureComponent<any, IState>{
                 <Accordion title="Mostra studenti selezionati" className="mt-3">
                     {
                         this.state.checkList.map(s => {
-                            return <div>
-                                <strong>{s.nome} {s.cognome}</strong> ({s.annoFrequentazione}° anno)
+                            return <div className="py-2">
+                                <strong>{s.nome} {s.cognome}</strong> <div className="float-right">{s.annoFrequentazione}° anno</div>
                             </div>
                         })
                     }
@@ -153,15 +151,15 @@ export class ListaStudenti extends React.PureComponent<any, IState>{
                 <div>
                     <Button type="popup" popupPosition="bottom" options={[
                         { text: <span>
-                            <Icon iconKey="plus" /> Aggiungi
+                            <Icon iconKey="plus" color="var(--green)" /> Aggiungi
                         </span>, onClick: () => null },
                         { text: <span>
-                            <Icon iconKey="file-csv" /> Importa da CSV
+                            <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
                         </span>, onClick: () => null },
                         { text: <span>
-                            <Icon iconKey="arrows-alt" /> Sposta
+                            <Icon iconKey="arrows-alt" color="var(--orange)" /> Sposta
                         </span>, onClick: this.moveStudents }
-                    ]} btnColor="green" className="float-right">Gestisci studenti</Button>
+                    ]} btnColor="darkblue" className="float-right">Gestisci studenti</Button>
 
                     <div className="clearfix"></div>
 
@@ -184,36 +182,30 @@ export class ListaStudenti extends React.PureComponent<any, IState>{
                 <Icon type="far" iconKey="user-graduate" /> Studenti archiviati
             </span>}>
                 {
-                    !listaArchiviati ? loadingIcon : <div>
-                        <div className="float-right mb-2">
-                            <TextInput placeHolder="Cerca studenti" icon={{ iconKey: "search" }} />
-                        </div>
-                        <div className="clearfix"></div>
-
-                        <Table columns={[
-                            { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },
-                            { label: "Studente", field: "desStudente" },
-                            { label: "Codice Fiscale", field: "cf" },
-                            { label: "Anno", field: "anno", width: "15%", align: "center" },
-                            { label: "Frequenza", field: "frequenza", width: "15%", align: "center" },
-                            { label: "Azioni", field: "azioni", width: "26%", align: "center" },
-                        ]} data={
-                            listaArchiviati.map(s => {
-                                return {
-                                    check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" /> : <CloseCircleIcon large color="var(--red)" />,
-                                    desStudente: s.nome + " " + s.cognome,
-                                    cf: s.cf,
-                                    anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
-                                    frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
-                                    azioni: <div>
-                                        <Button circleBtn btnColor="blue">
-                                            <DetailIcon />
-                                        </Button>
-                                    </div>
-                                }
-                            })
-                        } />
-                    </div>
+                    !listaArchiviati ? loadingIcon : <Table columns={[
+                        { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },
+                        { label: "Studente", field: "desStudente", canSearch: true },
+                        { label: "Codice Fiscale", field: "cf", canSearch: true },
+                        { label: "Anno", field: "anno", width: "15%", align: "center", canSearch: true },
+                        { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
+                        { label: "Azioni", field: "azioni", width: "26%", align: "center" },
+                    ]} data={
+                        listaArchiviati.map(s => {
+                            return {
+                                onDoubleClick: () => console.log("Hai cliccato ", s),
+                                check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" /> : <CloseCircleIcon large color="var(--red)" />,
+                                desStudente: s.nome + " " + s.cognome,
+                                cf: s.cf,
+                                anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
+                                frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
+                                azioni: <div>
+                                    <Button circleBtn btnColor="blue">
+                                        <DetailIcon />
+                                    </Button>
+                                </div>
+                            }
+                        })
+                    } />
                 }
             </Tab>
         </Tabs>
