@@ -76,7 +76,7 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
         const { showForgotPassword, loading } = this.state
 
         return <div>
-            <form className="floating-centered p-3 rounded shadow w-50 bg-white" onSubmit={this.tryLogin}>
+            <form className="floating-centered p-3 rounded shadow bg-white col-10 col-md-5" onSubmit={this.tryLogin}>
                 <h2>Accesso coordinatori</h2>
 
                 <TextInput label="Username" onChange={this.changeName} />

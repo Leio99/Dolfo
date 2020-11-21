@@ -12,6 +12,7 @@ import { Accordion } from "../../layout/Accordion"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { history } from "../../Navigator"
 import { StudentiService } from "../../../services/StudentiService"
+import { ComponentsPaths } from "../ComponentsPaths"
 
 export interface IState{
     readonly studenti: any[]
@@ -54,7 +55,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         this.setState({ checkList })
     }
 
-    openDetail = (id: number) => history.push("/studenti/" + id)
+    openDetail = (id: number) => history.push(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI + "/" + id)
 
     buildTable = (studenti: any[]) => {
         const { checkList } = this.state

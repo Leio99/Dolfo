@@ -21,13 +21,13 @@ export const Components: IComponentList = {
         component: null,
         pageTitle: null,
         hideMenu: true,
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkEmptyPathCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI + "/"]: {
         component: null,
         pageTitle: null,
         hideMenu: true,
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkEmptyPathCoordinatore
     },
     "/layout": {
         component: TestLayout,
