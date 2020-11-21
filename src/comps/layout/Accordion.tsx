@@ -34,12 +34,20 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 	toggleAccordion = () => this.setState({ opened: !this.state.opened }, this.handleAccordions)
 
 	handleAccordions = () => {
-		const accordions = document.querySelectorAll(".dolfo-accordion")
-		accordions.forEach(acc => {
+		const accordions = document.querySelectorAll(".dolfo-accordion"),
+		resizeAccordion = (acc: HTMLElement) => {
 			const content = acc.children[1] as HTMLElement,
 			isOpened = acc.classList.contains("opened")
-			
+
 			content.style.maxHeight = isOpened ? content.scrollHeight + "px" : "0"
+		}
+		
+		accordions.forEach(acc => {
+			const parentAccordion = acc.closest(".dolfo-accordion")
+
+			resizeAccordion(acc as HTMLElement)
+
+			if(parentAccordion) setTimeout(() => resizeAccordion(parentAccordion as HTMLElement), 200)
 		})
 	}
 	

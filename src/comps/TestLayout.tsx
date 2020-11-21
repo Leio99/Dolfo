@@ -368,6 +368,12 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 <Tab title="Accordion">
                     <Accordion title="First" opened={checkedSwitch}>
                         Hello, I am the first accordion
+                        <Accordion title="First" opened={checkedSwitch}>
+                            Hello, I am the first accordion
+                        </Accordion>
+                        <Accordion title="Second">
+                            Hello, I am the second accordion
+                        </Accordion>
                     </Accordion>
                     <Accordion title="Second">
                         Hello, I am the second accordion
