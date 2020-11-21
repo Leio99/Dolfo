@@ -11,6 +11,7 @@ import { Table } from "./layout/Table"
 import { Tabs } from "./layout/Tabs"
 import { Accordion } from "./layout/Accordion"
 import { NotificationMsg } from "./layout/NotificationMsg"
+import { history } from "./Navigator"
 
 export interface IState{
     readonly studenti: any[]
@@ -53,6 +54,8 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         this.setState({ checkList })
     }
 
+    openDetail = (id: number) => history.push("/studenti/" + id)
+
     buildTable = (studenti: any[]) => {
         const { checkList } = this.state
         let checkedAll = true
@@ -71,13 +74,13 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
             studenti.sort((s, _) => s.ritirato ? 0 : -1).map(s => {
                 return {
                     rowStyle: s.ritirato ? { backgroundColor: "#eee" } : null,
-                    onDoubleClick: () => console.log("Hai cliccato ", s),
+                    onDoubleClick: () => this.openDetail(s.idStudente),
                     check: s.ritirato ? <CheckBox disabled /> : <CheckBox onChange={() => this.toggleCheck(s)} checked={checkList.includes(s)} />,
                     desStudente: s.nome + " " + s.cognome,
                     cf: s.cf,
                     frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
                     azioni: <div>
-                        <Button btnColor="blue" className="mx-2" circleBtn>
+                        <Button btnColor="blue" className="mx-2" circleBtn onClick={() => this.openDetail(s.idStudente)}>
                             <DetailIcon />
                         </Button>
                         
@@ -181,7 +184,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
 
             <Tab title={<span>
                 <Icon type="far" iconKey="user-graduate" /> Studenti archiviati
-            </span>} isDefault>
+            </span>}>
                 {
                     !listaArchiviati ? loadingIcon : <Table columns={[
                         { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },
@@ -193,14 +196,14 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     ]} data={
                         listaArchiviati.map(s => {
                             return {
-                                onDoubleClick: () => console.log("Hai cliccato ", s),
+                                onDoubleClick: () => this.openDetail(s.idStudente),
                                 check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" /> : <CloseCircleIcon large color="var(--red)" />,
                                 desStudente: s.nome + " " + s.cognome,
                                 cf: s.cf,
                                 anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
                                 frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
                                 azioni: <div>
-                                    <Button circleBtn btnColor="blue">
+                                    <Button circleBtn btnColor="blue" onClick={() => this.openDetail(s.idStudente)}>
                                         <DetailIcon />
                                     </Button>
                                 </div>
