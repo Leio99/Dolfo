@@ -27,7 +27,9 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
         }
     }
 
-    componentDidMount = () => document.body.classList.add("login")
+    componentDidMount = () => {
+        document.body.classList.add("login")
+    }
 
     componentWillUnmount = () => document.body.classList.remove("login")
 

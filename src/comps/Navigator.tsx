@@ -49,7 +49,7 @@ export class Navigator extends React.PureComponent<any, IState>{
             return false
         })
 
-        currentComponent?.permission && currentComponent.permission();
+        currentComponent?.permission && currentComponent.permission()
 
         this.setState({
             currentComponent
