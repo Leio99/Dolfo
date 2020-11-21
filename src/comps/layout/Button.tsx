@@ -37,7 +37,7 @@ class Button extends React.PureComponent<IProps, IState>{
 
     render = (): JSX.Element => {
         const props = this.props,
-        btnType = props.type === "popup" ? props.options ? "popup" : "button" : props.type,
+        btnType = props.type === "popup" && props.options ? "popup" : (props.type || "button"),
         { openPopup } = this.state
 
         if(btnType === "popup"){

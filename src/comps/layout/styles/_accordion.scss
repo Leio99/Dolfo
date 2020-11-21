@@ -5,6 +5,11 @@
     border-radius: $smallRadius;
     box-shadow: inset 0 0 0 1px $lightGrey;
 
+    &.disabled{
+        opacity: 0.6;
+        pointer-events: none
+    }
+
     .dolfo-accordion-header{
         cursor: pointer;
         padding: 0.7rem 2.5rem 0.7rem 1rem;

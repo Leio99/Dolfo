@@ -5,7 +5,14 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
 body{
-    overflow-x: hidden
+    overflow-x: hidden;
+
+    &.login {
+        background-image: url("https://registrofitstic.azurewebsites.net/login_bg.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 }
 
 .cell{
@@ -66,6 +73,12 @@ body{
             }
         }
     }
+}
+.floating-centered{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
 }
 
 ::-webkit-scrollbar{

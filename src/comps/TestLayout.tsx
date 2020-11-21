@@ -214,11 +214,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     <Tabs vertical>
                         <Tab title="Text inputs">
                             <TextInput label="Simple" />
-                            <TextInput label="Password" password />
-                            <TextInput label="Password toggle" password togglePassword />
-                            <TextInput label="E-mail" email />
-                            <TextInput label="Number" number />
-                            <TextInput label="Textarea expandable" isTextarea expandTextarea />
+                            <TextInput label="Password" type="password" />
+                            <TextInput label="Password toggle" type="password" togglePassword />
+                            <TextInput label="E-mail" type="email" />
+                            <TextInput label="Number" type="number" />
+                            <TextInput label="Textarea expandable" type="textarea" expandTextarea />
                         </Tab>
                         
                         <Tab title="Select">
@@ -340,8 +340,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     ]} onClose={this.toggleDialog}>
                         <form>
                             <TextInput label="Username" icon={{ iconKey: "user" }} />
-                            <TextInput password label="Password" />
-                            <TextInput email label="E-mail" />
+                            <TextInput type="password" label="Password" />
+                            <TextInput type="email" label="E-mail" />
                             <DatePicker label="Date of birth" />
                             <RadioButton controlName="gender">
                                 <Option value="M" label="Male" />

@@ -6,10 +6,10 @@ export interface IProps{
 	readonly opened?: boolean
 	readonly wrapperStyle?: CSSProperties
 	readonly className?: string
+	readonly disabled?: boolean
 }
 export interface IState{
 	readonly opened: boolean
-	readonly updated: boolean
 }
 
 export class Accordion extends React.PureComponent<IProps, IState>{
@@ -17,43 +17,43 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		super(props)
 		
 		this.state = {
-			opened: props.opened || false,
-			updated: props.opened || false
+			opened: props.opened || false
 		}
-    }
+	}
+	
+	componentDidMount = () => this.handleAccordions()
     
-    componendDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps) => {
         if(prevProps.opened !== this.props.opened){
             this.setState({
-				opened: this.props.opened || false,
-				updated: true
-            })
-        }
-    }
+				opened: this.props.opened || false
+            }, this.handleAccordions)
+		}
+	}
 	
-	toggleAccordion = (element: HTMLElement, updated = false) => {
-		element.style.maxHeight = !this.state.opened || updated ? element.scrollHeight + "px" : "0"
+	toggleAccordion = () => this.setState({ opened: !this.state.opened }, this.handleAccordions)
 
-		!updated && this.setState({
-			opened: !this.state.opened,
-			updated: false
+	handleAccordions = () => {
+		const accordions = document.querySelectorAll(".dolfo-accordion")
+		accordions.forEach(acc => {
+			const content = acc.children[1] as HTMLElement,
+			isOpened = acc.classList.contains("opened")
+			
+			content.style.maxHeight = isOpened ? content.scrollHeight + "px" : "0"
 		})
 	}
 	
 	render = (): JSX.Element => {
 		const props = this.props,
-		{ opened, updated } = this.state
-		let element: HTMLElement
-
-		if(updated) setTimeout(() => this.toggleAccordion(element, true))
+		{ opened } = this.state
 		
-		return <div className={"dolfo-accordion" + (opened ? " opened" : "") + (props.className ? (" " + props.className) : "")} style={props.wrapperStyle}>
-			<div className="dolfo-accordion-header" onClick={() => this.toggleAccordion(element)}>
+		return <div className={"dolfo-accordion" + (opened ? " opened" : "") + (props.className ? (" " + props.className) : "") + (props.disabled ? " disabled" : "")} style={props.wrapperStyle}>
+			<div className="dolfo-accordion-header" onClick={this.toggleAccordion}>
 				<Icon iconKey="chevron-down" className="accordion-caret" />
 				
 				<span className="accordion-title">{props.title}</span>
 			</div>
-			<div className="dolfo-accordion-content" ref={r => element = r}>
+			<div className="dolfo-accordion-content">
 				<div className="dolfo-accordion-inner">
 					{props.children}
 				</div>

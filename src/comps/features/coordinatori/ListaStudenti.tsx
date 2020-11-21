@@ -1,17 +1,17 @@
-import Axios from "axios"
 import React from "react"
-import { CheckBox } from "./form/CheckBox"
-import Select from "./form/Select"
-import { Option } from "./form/Option"
-import Button from "./layout/Button"
-import { Dialog } from "./layout/Dialog"
-import { CheckCircleIcon, CloseCircleIcon, DetailIcon, EditIcon, Icon, LoadingIcon } from "./layout/Icon"
-import { Tab } from "./layout/Tab"
-import { Table } from "./layout/Table"
-import { Tabs } from "./layout/Tabs"
-import { Accordion } from "./layout/Accordion"
-import { NotificationMsg } from "./layout/NotificationMsg"
-import { history } from "./Navigator"
+import { CheckBox } from "../../form/CheckBox"
+import Select from "../../form/Select"
+import { Option } from "../../form/Option"
+import Button from "../../layout/Button"
+import { Dialog } from "../../layout/Dialog"
+import { CheckCircleIcon, CloseCircleIcon, DetailIcon, EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
+import { Tab } from "../../layout/Tab"
+import { Table } from "../../layout/Table"
+import { Tabs } from "../../layout/Tabs"
+import { Accordion } from "../../layout/Accordion"
+import { NotificationMsg } from "../../layout/NotificationMsg"
+import { history } from "../../Navigator"
+import { StudentiService } from "../../../services/StudentiService"
 
 export interface IState{
     readonly studenti: any[]
@@ -28,7 +28,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     }
 
     componentDidMount = () => {
-        Axios.get("https://registrofitstic.azurewebsites.net/api/studenti/1").then(response => {
+        StudentiService.getStudentiCorso(1).then(response => {
             this.setState({
                 studenti: response.data
             })

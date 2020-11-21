@@ -9,9 +9,19 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
 
     &.show{
-        display: flex
+        visibility: visible;
+        opacity: 1;
+        pointer-events: all;
+        
+        .dolfo-dialog-inner{
+            animation: popUp 0.3s ease forwards
+        }
     }
 
     &.loading-dialog{
@@ -44,7 +54,6 @@
         background: $white;
         border-radius: $smallRadius;
         width: 500px;
-        animation: popUp 0.3s ease forwards;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 
         .dolfo-dialog-header, .dolfo-dialog-footer{

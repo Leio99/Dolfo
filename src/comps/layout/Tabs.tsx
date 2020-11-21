@@ -25,7 +25,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     }
 
     componentDidMount = () => {
-        this.handleBar()
+        window.addEventListener('load', this.handleBar)
     }
 
     componentDidUpdate = (prevProps: any) => {

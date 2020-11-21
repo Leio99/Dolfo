@@ -4,12 +4,9 @@ import { Icon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 
 export interface IProps extends InputProps{
-    readonly password?: boolean
-    readonly number?: boolean
+    readonly type?: "textarea" | "password" | "email" | "number"
     readonly expandTextarea?: boolean
     readonly rows?: number
-    readonly isTextarea?: boolean
-    readonly email?: boolean
     readonly togglePassword?: boolean
     readonly placeHolder?: string
     readonly minLength?: number
@@ -35,7 +32,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
             focused: false,
             rows: 1,
             value: props.value || "",
-            inputType: props.password ? "password" : props.email ? "email" : "text"
+            inputType: !props.type || props.type === "number" ? "text" : props.type
         }
     }
 
@@ -45,8 +42,8 @@ export class TextInput extends React.PureComponent<IProps, IState>{
 
         if(prevProps.value !== this.props.value)
             value = this.props.value
-        if(prevProps.password !== this.props.password || prevProps.email !== this.props.email)
-            inputType = this.props.password ? "password" : this.props.email ? "email" : "text"
+        if(prevProps.type !== this.props.type)
+            inputType = this.props.type
 
         this.setState({ value, inputType })
     }
@@ -58,7 +55,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     onFocus = () => this.setState({ focused: true })
 
     onChange = (e: any) => {
-        if(this.props.number){
+        if(this.props.type === "number"){
             let number =  Number(e.target.value)
 
             if(isNaN(number) || number > this.props.max || number < this.props.min) return
@@ -97,9 +94,9 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     getDefaultIcon = () => {
         const props = this.props
 
-        if(props.password) return "lock"
-        if(props.email) return "envelope"
-        if(props.number) return "calculator"
+        if(props.type === "password") return "lock"
+        if(props.type === "email") return "envelope"
+        if(props.type === "number") return "calculator"
 
         return "pen"
     }
@@ -116,20 +113,20 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         }
         let input: HTMLInputElement | HTMLTextAreaElement
 
-        return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={props.number ? "input-number" : (props.password && props.togglePassword) ? "toggle-password" : ""}>
+        return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={props.type === "number" ? "input-number" : (props.type === "password" && props.togglePassword) ? "toggle-password" : ""}>
             {
-                props.password && props.togglePassword && value.length > 0 && !props.email && !props.number && <Icon type="far" iconKey="eye" onClick={this.toggleInputType} className="toggle-password" />
+                props.type === "password" && props.togglePassword && value.length > 0 && <Icon type="far" iconKey="eye" onClick={this.toggleInputType} className="toggle-password" />
             }
 
             {
-                props.number && !props.password && !props.email && <div className="dolfo-input-number-btns">
+                props.type === "number" && <div className="dolfo-input-number-btns">
                     <Icon iconKey="caret-up" className="increase" onClick={this.increaseValue} />
                     <Icon iconKey="caret-down" className="decrease" onClick={this.decreaseValue} />
                 </div>
             }
 
             {
-                !props.isTextarea ? <input
+                props.type !== "textarea" ? <input
                     type={inputType}
                     onChange={this.onChange}
                     className={props.className}

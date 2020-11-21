@@ -1,19 +1,18 @@
 import React from "react"
 import { createBrowserHistory } from "history"
 import { Route, Switch, Router } from "react-router-dom"
-import { SideMenu } from "./layout/SideMenu"
-import { SubMenu } from "./layout/SubMenu"
-import { MenuItem } from "./layout/MenuItem"
 import { Icon } from "./layout/Icon"
 import Button from "./layout/Button"
-import { Components } from "./Components"
+import { Components } from "./features/Components"
+import { IComponent, IComponentList } from "../models/IComponent"
+import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
 
 export const history = createBrowserHistory()
 
 export interface IState{
     readonly currentPath: string
     readonly openMenu: boolean
-    readonly currentComponent: any
+    readonly currentComponent: IComponent
 }
 export class Navigator extends React.PureComponent<any, IState>{
     constructor(){
@@ -33,25 +32,27 @@ export class Navigator extends React.PureComponent<any, IState>{
             this.setState({
                 currentPath: loc.pathname,
                 openMenu: false
-            }, () => this.findComponent())
+            }, this.findComponent)
         })
     }
 
     findComponent = () => {
-        const path = window.location.pathname.replace(/[\d+]/g, ':id')
-        let newPath: string
+        const path = window.location.pathname.replace(/[\d+](.*)/g, ':id')
+        let currentComponent: IComponent
 
         Object.keys(Components).some(key => {
             if(key === path){
-                newPath = key
+                currentComponent = (Components as unknown as IComponentList)[key]
                 return true
             }
 
             return false
         })
 
+        currentComponent?.permission && currentComponent.permission();
+
         this.setState({
-            currentComponent: (Components as any)[newPath]
+            currentComponent
         })
     }
 
@@ -61,58 +62,21 @@ export class Navigator extends React.PureComponent<any, IState>{
         const { currentPath, openMenu, currentComponent } = this.state
 
         return <Router history={history}>
-            <div className="p-5">
-                <div className="dolfo-header" style={{ borderRadius: 50 }}>
-                    <Button circleBtn bigBtn onClick={this.toggleMenu} btnColor="white" className="dolfo-menu-button">
-                        <Icon iconKey="bars" />
-                    </Button>
+                {
+                    !currentComponent?.hideMenu && <div className="dolfo-header">
+                        <Button circleBtn bigBtn onClick={this.toggleMenu} btnColor="white" className="dolfo-menu-button">
+                            <Icon iconKey="bars" />
+                        </Button>
 
-                    <h2 className="dolfo-header-title">{currentComponent?.PAGE_TITLE}</h2>
+                        <h2 className="dolfo-header-title">{currentComponent?.pageTitle}</h2>
 
-                    <div className="clearfix"></div>
-                </div>
+                        <div className="clearfix"></div>
+                    </div>
+                }
+                
+                <CoordinatoriMenu currentPath={currentPath} opened={openMenu} toggleMenu={this.toggleMenu} isHidden={currentComponent?.hideMenu} />
 
-                <SideMenu onToggle={this.toggleMenu} opened={openMenu}>
-                    <img src="https://i.imgur.com/5Z1DbN7.png" height="100" className="my-4 mx-auto d-block" style={{ filter: "drop-shadow(1.5px 0 0 #fff) drop-shadow(-.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff)" }} alt="" />
-
-                    <MenuItem>
-                        <Icon iconKey="home-alt" className="mr-2" /> Home
-                    </MenuItem>
-
-                    <SubMenu text={<span>
-                        <Icon iconKey="users-class" className="mr-2" /> Studenti
-                    </span>} opened={currentPath.indexOf("/prova") >= 0}>
-                        <MenuItem>Lista studenti</MenuItem>
-                        <MenuItem>Aggiungi</MenuItem>
-                    </SubMenu>
-
-                    <SubMenu text={<span>
-                        <Icon iconKey="chalkboard-teacher" className="mr-2" /> Docenti
-                    </span>}>
-                        <MenuItem>Lista docenti</MenuItem>
-                        <MenuItem>Aggiungi</MenuItem>
-                    </SubMenu>
-
-                    <MenuItem>
-                        <Icon iconKey="list-alt" className="mr-2" /> Materie
-                    </MenuItem>
-
-                    <SubMenu text={<span>
-                        <Icon iconKey="wrench" className="mr-2" /> Funzioni
-                    </span>}>
-                        <MenuItem>Configura calendario</MenuItem>
-                        <MenuItem>Firma da remoto</MenuItem>
-                    </SubMenu>
-
-                    <MenuItem>
-                        <Icon iconKey="book-reader" className="mr-2" /> Documentazione
-                    </MenuItem>
-
-                    <MenuItem>
-                        <Icon iconKey="power-off" className="mr-2" /> Esci
-                    </MenuItem>
-                </SideMenu>
-
+            <div className="px-5 pb-5">
                 <Switch>
                     <Route exact path="/" render={() => {
                         history.push("/layout")
@@ -122,11 +86,13 @@ export class Navigator extends React.PureComponent<any, IState>{
 
                 {
                     Object.keys(Components).map(key => {
-                        const Component = (Components as any)[key]?.COMPONENT
+                        const Component = (Components as any)[key]?.component
 
-                        return <Route exact path={key} render={(routeProps) => (
-                            <Component {...routeProps} />
-                        )} />
+                        return <Route exact path={key} render={(routeProps) => {
+                            if(Component) return <Component {...routeProps} />
+
+                            return <div></div>
+                        }} />
                     })
                 }
             </div>

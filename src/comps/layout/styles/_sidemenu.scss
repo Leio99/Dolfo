@@ -10,7 +10,7 @@ $menuWidth: 350px;
     width: $menuWidth;
     transition: 0.4s ease;
     background-color: $menuBg;
-    z-index: 2;
+    z-index: 5;
     color: $white;
 
     .dolfo-menu-overlay{
