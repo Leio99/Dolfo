@@ -14,7 +14,6 @@ import { CheckIcon, CloseIcon, LoadingIcon } from "./layout/Icon"
 import Button from "./layout/Button"
 import { Dialog } from "./layout/Dialog"
 
-export interface IProps { }
 export interface IState {
     readonly clickIndex: number
     readonly buildings: IBuilding[]
@@ -30,8 +29,8 @@ export interface IState {
     readonly endTime: string
 }
 
-export class Prenotazione extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps) {
+export class Prenotazione extends React.PureComponent<undefined, IState>{
+    constructor(props: undefined) {
         super(props)
 
         this.state = {

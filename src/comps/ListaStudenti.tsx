@@ -16,10 +16,8 @@ export interface IState{
     readonly studenti: any[]
     readonly checkList: any[]
 }
-export class ListaStudenti extends React.PureComponent<any, IState>{
-    static PAGE_TITLE = "Studenti del corso"
-    
-    constructor(props: any){
+export class ListaStudenti extends React.PureComponent<undefined, IState>{
+    constructor(props: undefined){
         super(props)
 
         this.state = {
@@ -183,7 +181,7 @@ export class ListaStudenti extends React.PureComponent<any, IState>{
 
             <Tab title={<span>
                 <Icon type="far" iconKey="user-graduate" /> Studenti archiviati
-            </span>}>
+            </span>} isDefault>
                 {
                     !listaArchiviati ? loadingIcon : <Table columns={[
                         { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },

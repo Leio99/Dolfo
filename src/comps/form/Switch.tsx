@@ -13,6 +13,8 @@ export class Switch extends React.PureComponent<IProps>{
 
     checkSpace = (e: any) => {
         if(e.keyCode === 32){
+            e.preventDefault()
+            
             !this.props.loading && this.onChange()
             e.target.blur()
         }

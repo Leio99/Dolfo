@@ -32,8 +32,6 @@ export interface IState{
     readonly showMenu: boolean
 }
 export class TestLayout extends React.PureComponent<any, IState>{
-    static PAGE_TITLE = "Layout di test"
-    
     constructor(props: never){
         super(props)
 

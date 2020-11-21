@@ -9,9 +9,6 @@ export interface IProps {
 export interface IState {
     readonly children: Tab[]
     readonly currentTab: number
-    readonly barMargin: number
-    readonly barWidth: number
-    readonly firstLoad: boolean
 }
 
 export class Tabs extends React.PureComponent<IProps, IState>{
@@ -23,11 +20,12 @@ export class Tabs extends React.PureComponent<IProps, IState>{
 
         this.state = {
             children,
-            currentTab: findCurrent >= 0 ? findCurrent : 0,
-            barMargin: 0,
-            barWidth: 0,
-            firstLoad: true
+            currentTab: findCurrent >= 0 ? findCurrent : 0
         }
+    }
+
+    componentDidMount = () => {
+        this.handleBar()
     }
 
     componentDidUpdate = (prevProps: any) => {
@@ -37,39 +35,52 @@ export class Tabs extends React.PureComponent<IProps, IState>{
 
     getChildrenTabs = () => React.Children.map(this.props.children, (child: any) => child)
 
-    changeSelection = (index: number, element: HTMLElement) => {
-        const isVertical = this.props.vertical
-
+    changeSelection = (index: number) => {
         this.setState({
-            currentTab: index,
-            barWidth: isVertical ? element?.clientHeight : element?.clientWidth,
-            barMargin: isVertical ? element?.offsetTop : element?.offsetLeft,
-            firstLoad: false
+            currentTab: index
+        }, this.handleBar)
+    }
+
+    handleBar = () => {
+        const tabs = document.querySelectorAll(".dolfo-tabs")
+
+        tabs.forEach(tab => {
+            const header = tab.querySelector(".dolfo-tabs-links"),
+            isVertical = tab.classList.contains("vertical")
+
+            const titles = header.querySelectorAll(".dolfo-tab-title"),
+            bar = header.querySelector(".dolfo-tabs-underline") as HTMLElement,
+            current = Array.from(titles).find(t => t.classList.contains("current")) as HTMLElement
+
+            if(isVertical){
+                bar.style.marginTop = current.offsetTop + "px"
+                bar.style.height = current.clientHeight + "px"
+            }else{
+                bar.style.marginLeft = current.offsetLeft + "px"
+                bar.style.width = current.clientWidth + "px"
+            }
         })
     }
 
-    checkKey = (e: any, index: number, element: HTMLElement) => {
-        if(e.keyCode === 32 || e.keyCode === 13)
-            this.changeSelection(index, element)
+    checkKey = (e: any, index: number) => {
+        if(e.keyCode === 32 || e.keyCode === 13){
+            this.changeSelection(index)
+            e.preventDefault()
+        }
     }
 
     render = (): JSX.Element => {
         const props = this.props,
-        { children, currentTab, barMargin, barWidth, firstLoad } = this.state,
-        isVertical = props.vertical,
-        barStyle = isVertical ? { marginTop: barMargin, height: barWidth } : { marginLeft: barMargin, width: barWidth }
+        { children, currentTab } = this.state,
+        isVertical = props.vertical
 
         return <div className={"dolfo-tabs" + (props.className ? (" " + props.className) : "") + (isVertical ? " vertical" : "")} style={props.style}>
             <div className="dolfo-tabs-links">
-                <div className="dolfo-tabs-underline" style={barStyle}></div>
+                <div className="dolfo-tabs-underline"></div>
 
                 {
                     children.map((child, i) => {
-                        let el: HTMLElement
-
-                        if(firstLoad && currentTab === i) setTimeout(() => this.changeSelection(i, el))
-
-                        return <div className={"dolfo-tab-title" + (currentTab === i ? " current" : "")} onClick={() => this.changeSelection(i, el)} ref={r => el = r} tabIndex={0} onKeyUp={(e) => this.checkKey(e, i, el)}>
+                        return <div className={"dolfo-tab-title" + (currentTab === i ? " current" : "")} onClick={() => this.changeSelection(i)} tabIndex={0} onKeyUp={(e) => this.checkKey(e, i)}>
                             {child.props.title}
                         </div>
                     })

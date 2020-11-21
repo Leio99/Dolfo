@@ -1,9 +1,6 @@
 import React from "react"
 import { createBrowserHistory } from "history"
 import { Route, Switch, Router } from "react-router-dom"
-import { Prenotazione } from "./Prenotazione"
-import { TestLayout } from "./TestLayout"
-import { ListaStudenti } from "./ListaStudenti"
 import { SideMenu } from "./layout/SideMenu"
 import { SubMenu } from "./layout/SubMenu"
 import { MenuItem } from "./layout/MenuItem"
@@ -78,7 +75,7 @@ export class Navigator extends React.PureComponent<any, IState>{
                 <SideMenu onToggle={this.toggleMenu} opened={openMenu}>
                     <img src="https://i.imgur.com/5Z1DbN7.png" height="100" className="my-4 mx-auto d-block" style={{ filter: "drop-shadow(1.5px 0 0 #fff) drop-shadow(-.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff)" }} alt="" />
 
-                    <MenuItem onClick={() => history.push("/prova/1")}>
+                    <MenuItem>
                         <Icon iconKey="home-alt" className="mr-2" /> Home
                     </MenuItem>
 
@@ -123,17 +120,15 @@ export class Navigator extends React.PureComponent<any, IState>{
                     }} />
                 </Switch>
 
-                <Switch>
-                    <Route exact path="/prenota" render={() => <Prenotazione />} />
-                </Switch>
+                {
+                    Object.keys(Components).map(key => {
+                        const Component = (Components as any)[key]?.COMPONENT
 
-                <Switch>
-                    <Route exact path="/layout" render={() => <TestLayout />} />
-                </Switch>
-
-                <Switch>
-                    <Route exact path="/prova" render={() => <ListaStudenti />} />
-                </Switch>
+                        return <Route exact path={key} render={(routeProps) => (
+                            <Component {...routeProps} />
+                        )} />
+                    })
+                }
             </div>
         </Router>
     }

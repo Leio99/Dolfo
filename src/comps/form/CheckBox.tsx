@@ -33,7 +33,10 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
     }
 
     checkSpace = (e: any) => {
-        if(e.keyCode === 32) this.onChange()
+        if(e.keyCode === 32){
+            this.onChange()
+            e.preventDefault()
+        }
     }
 
     render = (): JSX.Element => {
