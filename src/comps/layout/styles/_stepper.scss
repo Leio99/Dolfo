@@ -1,0 +1,91 @@
+.dolfo-stepper{
+    .dolfo-stepper-header{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .dolfo-step-separator{
+            background-color: $grey;
+            height: 1px;
+            flex: 1
+        }
+
+        .dolfo-stepper-step-title{
+            margin: 0 1rem;
+            text-align: center;
+            position: relative;
+
+            &:first-child{
+                text-align: left;
+                margin-left: 0
+            }
+
+            &:last-child{
+                text-align: right;
+                margin-right: 0
+            }
+
+            .dolfo-stepper-step-circle{
+                display: inline-flex;
+                background-color: $lightGrey;
+                color: $dark;
+                align-items: center;
+                justify-content: center;
+                width: 35px;
+                height: 35px;
+                border-radius: $roundRadius;
+                transition: background-color 0.4s ease
+            }
+
+            .dolfo-stepper-label{
+                margin-left: 0.7rem
+            }
+
+            &.current{
+                .dolfo-stepper-step-circle{
+                    background-color: $selectionBlue;
+                    color: $white
+                }
+            }
+        }
+    }
+
+    .dolfo-stepper-steps{
+        display: flex;
+        overflow: hidden;
+
+        .dolfo-step{
+            flex: 0 0 100%;
+            transition: 0.4s ease;
+            position: relative;
+            height: 0;
+            opacity: 0;
+
+            &.current{
+                height: auto;
+                opacity: 1
+            }
+
+            &.loading{
+                &, *{
+                    pointer-events: none !important
+                }
+            }
+
+            .dolfo-step-loading{
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $selectionBlue;
+                z-index: 1
+            }
+        }
+    }
+}

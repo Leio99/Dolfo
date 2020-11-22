@@ -24,6 +24,7 @@ export interface IProps{
     readonly className?: string
     readonly customFooter?: React.ReactNode
     readonly top?: boolean
+    readonly hideFooter?: boolean
 }
 export interface IState{
     readonly visible: boolean
@@ -165,19 +166,20 @@ export class Dialog extends React.PureComponent<IProps, IState>{
                 </div>
 
                 {
-                    props.customFooter ? <div className="dolfo-dialog-footer">
-                        {props.customFooter}
-                    </div> : <div className="dolfo-dialog-footer">
-                        {
-                            !props.hideCancel && <Button onClick={this.onClose} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} smallBtn textBtn btnColor={props.cancelType || "red"}>
-                                {props.cancelText || Constants.CANCEL_TEXT}
-                            </Button>
-                        }
+                    !props.hideFooter && (props.customFooter ? <div className="dolfo-dialog-footer">
+                            {props.customFooter}
+                        </div> : <div className="dolfo-dialog-footer">
+                            {
+                                !props.hideCancel && <Button onClick={this.onClose} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} smallBtn textBtn btnColor={props.cancelType || "red"}>
+                                    {props.cancelText || Constants.CANCEL_TEXT}
+                                </Button>
+                            }
 
-                        <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} smallBtn btnColor={props.okType || "darkblue"}>
-                            {props.okText || Constants.OK_TEXT}
-                        </Button>
-                    </div>
+                            <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} smallBtn btnColor={props.okType || "darkblue"}>
+                                {props.okText || Constants.OK_TEXT}
+                            </Button>
+                        </div>
+                    )
                 }
             </div>
         </div>

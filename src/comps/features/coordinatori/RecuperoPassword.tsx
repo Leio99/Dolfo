@@ -2,10 +2,11 @@ import React from "react"
 import { Cifratore } from "../../../commons/Cifratore"
 import { CoordinatoriService } from "../../../services/CoordinatoriService"
 import { TextInput } from "../../form/TextInput"
-import { Accordion } from "../../layout/Accordion"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { NotificationMsg } from "../../layout/NotificationMsg"
+import { Step } from "../../layout/Step"
+import { Stepper } from "../../layout/Stepper"
 
 export interface IProps{
     readonly visible: boolean
@@ -26,7 +27,7 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
         super(props)
 
         this.state = {
-            currentStep: 1,
+            currentStep: 0,
             email: "",
             code: "",
             newPassword: "",
@@ -38,7 +39,7 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
     
     cancelRecover = () => {
         this.setState({
-            currentStep: 1,
+            currentStep: 0,
             email: "",
             code: "",
             newPassword: "",
@@ -78,11 +79,19 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
             let data = response.data,
             idUtente = parseInt(data)
 
-            this.setState({
-                idUtente
-            })
-
-            this.increaseStep()
+            if(!isNaN(idUtente)){
+                this.setState({
+                    idUtente
+                })
+    
+                this.increaseStep()
+            }else{
+                Dialog.infoDialog({
+                    title: "Errore!",
+                    content: "Questa e-mail non corrisponde a nessun utente.",
+                    type: "error"
+                }) 
+            }
 
             this.switchLoading()
         }).catch(() => {
@@ -170,41 +179,41 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
         const { visible } = this.props,
         { currentStep, email, code, newPassword, newPasswordConfirm, loading } = this.state
 
-        return <Dialog title="Recupero della password" visible={visible} onClose={this.cancelRecover} customFooter={[<Button onClick={this.cancelRecover} textBtn smallBtn btnColor="red">
-            Chiudi
-        </Button>]}>
-            <Accordion title="E-mail" disabled={currentStep !== 1} opened={currentStep === 1}>
-                <form onSubmit={this.confirmFirstStep}>
-                    <TextInput label="Inserisci la tua e-mail" value={email} type="email" onChange={this.changeMail} disabled={loading} />
+        return <Dialog title="Recupero della password" visible={visible} onClose={this.cancelRecover} hideFooter>
+            <Stepper currentStep={currentStep}>
+                <Step title="E-mail" loading={loading}>
+                    <form onSubmit={this.confirmFirstStep}>
+                        <TextInput label="Inserisci la tua e-mail" value={email} type="email" onChange={this.changeMail} />
 
-                    <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right" loading={loading}>Prosegui</Button>
+                        <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right" >Prosegui</Button>
 
-                    <div className="clearfix"></div>
-                </form>
-            </Accordion>
+                        <div className="clearfix"></div>
+                    </form>
+                </Step>
 
-            <Accordion title="Codice" disabled={currentStep !== 2} opened={currentStep === 2}>
-                <form onSubmit={this.confirmSecondStep}>
-                    <TextInput value={code} label="Inserisci il codice ricevuto via e-mail" onChange={this.changeCode} icon={{ iconKey: "hashtag" }} />
+                <Step title="Codice">
+                    <form onSubmit={this.confirmSecondStep}>
+                        <TextInput value={code} label="Inserisci il codice ricevuto via e-mail" onChange={this.changeCode} icon={{ iconKey: "hashtag" }} />
 
-                    <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
-                    <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Prosegui</Button>
+                        <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
+                        <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Prosegui</Button>
 
-                    <div className="clearfix"></div>
-                </form>
-            </Accordion>
+                        <div className="clearfix"></div>
+                    </form>
+                </Step>
 
-            <Accordion title="Nuova password" disabled={currentStep !== 3} opened={currentStep === 3}>
-                <form onSubmit={this.savePassword}>
-                    <TextInput value={newPassword} label="Crea la tua nuova password" type="password" onChange={this.changePassword} disabled={loading} />
-                    <TextInput value={newPasswordConfirm} label="Conferma la nuova password" type="password" onChange={this.changePasswordConfirm} disabled={loading} />
+                <Step title="Nuova password" loading={loading}>
+                    <form onSubmit={this.savePassword}>
+                        <TextInput value={newPassword} label="Crea la tua nuova password" type="password" onChange={this.changePassword} />
+                        <TextInput value={newPasswordConfirm} label="Conferma la nuova password" type="password" onChange={this.changePasswordConfirm} />
 
-                    <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep} disabled={loading}>Indietro</Button>
-                    <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right" loading={loading}>Salva la password</Button>
+                        <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
+                        <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Salva la password</Button>
 
-                    <div className="clearfix"></div>
-                </form>
-            </Accordion>
+                        <div className="clearfix"></div>
+                    </form>
+                </Step>
+            </Stepper>
         </Dialog>
     }
 }

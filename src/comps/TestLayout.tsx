@@ -22,6 +22,8 @@ import { Icon } from "./layout/Icon"
 import { SideMenu } from "./layout/SideMenu"
 import { MenuItem } from "./layout/MenuItem"
 import { SubMenu } from "./layout/SubMenu"
+import { Stepper } from "./layout/Stepper"
+import { Step } from "./layout/Step"
 
 export interface IState{
     readonly visibleDialog: boolean
@@ -30,6 +32,7 @@ export interface IState{
     readonly checkedSwitch: boolean
     readonly percent: number
     readonly showMenu: boolean
+    readonly currentStep: number
 }
 export class TestLayout extends React.PureComponent<any, IState>{
     constructor(props: never){
@@ -41,7 +44,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
             checked: false,
             checkedSwitch: false,
             percent: 0,
-            showMenu: false
+            showMenu: false,
+            currentStep: 0
         }
     }
 
@@ -73,6 +77,17 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
     toggleMenu = () => this.setState({ showMenu: !this.state.showMenu })
 
+    nextStep = () => {
+        this.setState({
+            loading: true
+        })
+
+        setTimeout(() => this.setState({ 
+            currentStep: this.state.currentStep + 1,
+            loading: false 
+        }), 2000)
+    }
+
     render = () => {
         const {
             loading,
@@ -80,7 +95,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
             checked,
             percent,
             visibleDialog,
-            showMenu
+            showMenu,
+            currentStep
         } = this.state
 
         return <div style={{ marginTop: 15 }}>
@@ -412,6 +428,29 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     <Button onClick={this.toggleMenu} btnColor="red" smallBtn className="mr-2">
                         Menu
                     </Button>
+                </Tab>
+
+                <Tab title="Stepper">
+                    <Stepper currentStep={currentStep}>
+                        <Step title="First step" loading={loading}>
+                            Step 1
+
+                            <Button onClick={this.nextStep}>Next</Button>
+                        </Step>
+                        <Step title="Second step" loading={loading}>
+                            Step 2
+
+                            <Button onClick={this.nextStep}>Next</Button>
+                        </Step>
+                        <Step title="Loading" loading={loading}>
+                            Step 3
+
+                            <Button onClick={this.nextStep}>Next</Button>
+                        </Step>
+                        <Step icon={{ iconKey: "check" }} title="Completed">
+                            Step 4
+                        </Step>
+                    </Stepper>
                 </Tab>
             </Tabs>
             
