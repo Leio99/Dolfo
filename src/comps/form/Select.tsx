@@ -123,9 +123,7 @@ class Select extends React.PureComponent<IProps, IState>{
 
     resetSearch = () => this.changeSearch({ target: { value: "" }})
 
-    handleKeyDown = (e: any) => {
-        e.preventDefault()
-        
+    handleKeyDown = (e: any) => {        
         const options = this.state.options,
         currentSelection = this.state.currentSelection,
         currentIndex = currentSelection === -1 ? -1 : options.indexOf(options.find((_, i) => i === currentSelection))
@@ -135,14 +133,20 @@ class Select extends React.PureComponent<IProps, IState>{
             if(currentIndex === 0) newIndex = options.length - 1
             else if(currentIndex === -1) newIndex = 0
             else newIndex = currentIndex - 1
+            
+            e.preventDefault()
         }else if(e.keyCode === 40){
             if(currentIndex === options.length - 1 || currentIndex === -1) newIndex = 0
             else newIndex = currentIndex + 1
+            
+            e.preventDefault()
         }else if(e.keyCode === 13){
             const option = options[currentIndex] || options[0]
 
             if(this.props.multiple) this.changeMultiple(option.props.value, currentIndex)
             else this.changeOption(option.props.value)
+            
+            e.preventDefault()
         }
 
         newIndex > -1 && this.setState({ currentSelection: newIndex })
@@ -151,14 +155,12 @@ class Select extends React.PureComponent<IProps, IState>{
     render = (): JSX.Element => {
         const props = this.props,
         { value, openSelect, options, searchValue, currentSelection } = this.state,
-        icon = props.icon || {
-            iconKey: "hand-pointer"
-        }
+        icon = props.icon || { iconKey: "hand-pointer" }
 
         let input: HTMLInputElement,
         searchInput = <div className="dolfo-select-search-content">
             <SearchIcon className="dolfo-select-search-icon" />
-            { (searchValue.length) ? <CloseIcon className="reset-input" onClick={this.resetSearch} /> : null }
+            {searchValue.length ? <CloseIcon className="reset-input" onClick={this.resetSearch} /> : null}
 
             <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
         </div>
@@ -180,14 +182,14 @@ class Select extends React.PureComponent<IProps, IState>{
 
             {
                 props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
-                    { props.canSearch && searchInput }
+                    {props.canSearch && searchInput}
                     {
                         options.map((option, i) => {
                             return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={(val) => this.changeMultiple(val, i)} multiple />
                         })
                     }
                 </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")} style={props.style}>
-                    { props.canSearch && searchInput }
+                    {props.canSearch && searchInput}
                     {
                         options.map((option, i) => {
                             return <Option {...option.props} selected={option.props.value === value} focused={i === currentSelection} onChange={this.changeOption} />
@@ -198,5 +200,4 @@ class Select extends React.PureComponent<IProps, IState>{
         </InputWrapper>
     }
 }
-
 export default onClickOutside(Select)

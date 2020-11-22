@@ -29,6 +29,10 @@
         border-radius: $smallRadius;
         transition: background-color 0.2s ease;
 
+        &:hover .reset-input, &:hover .toggle-password{
+            visibility: visible !important
+        }
+
         .reset-input, .toggle-password, .dolfo-select-search-icon{
             color: $disabled;
             cursor: pointer;
@@ -41,6 +45,10 @@
 
             &:hover{
                 color: $dark
+            }
+
+            &.reset-input, &.toggle-password{
+                visibility: hidden
             }
 
             &.toggle-password{

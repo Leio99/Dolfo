@@ -157,7 +157,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     <Button type="popup" popupPosition="bottom" options={[
                         { text: <span>
                             <Icon iconKey="plus" color="var(--green)" /> Aggiungi
-                        </span>, onClick: () => null },
+                        </span>, onClick: () => history.push(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE) },
                         { text: <span>
                             <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
                         </span>, onClick: () => null },

@@ -5,6 +5,7 @@ import { ComponentsPaths } from "./ComponentsPaths"
 import { ComponentsPermissions } from "./ComponentsPermissions"
 import { LoginCoordinatore } from "./coordinatori/LoginCoordinatore"
 import { HomeCoordinatore } from "./coordinatori/HomeCoordinatore"
+import { AddStudente } from "./coordinatori/AddStudente"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI]: {
@@ -28,6 +29,11 @@ export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI_HOME]: {
         component: HomeCoordinatore,
         pageTitle: "Homepage",
+        permission: ComponentsPermissions.checkPermissionCoordinatore
+    },
+    [ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE]: {
+        component: AddStudente,
+        pageTitle: "Nuovo studente",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI]: {

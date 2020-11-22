@@ -38,7 +38,11 @@ input::-ms-reveal, input::-ms-clear {
     .dolfo-header-title{
         transform: translateY(25%);
         display: inline-block;
-        margin: 0
+        margin: 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 70%
     }
 }
 
