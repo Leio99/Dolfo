@@ -6,6 +6,7 @@ import Button from "./layout/Button"
 import { Components } from "./features/Components"
 import { IComponent, IComponentList } from "../models/IComponent"
 import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 export const history = createBrowserHistory()
 
@@ -37,12 +38,12 @@ export class Navigator extends React.PureComponent<any, IState>{
     }
 
     findComponent = () => {
-        const path = window.location.pathname.replace(/[\d+](.*)/g, ':id')
+        const path = this.state.currentPath.replace(/[\d+](.*)/g, ':id')
         let currentComponent: IComponent
 
         Object.keys(Components).some(key => {
             if(key === path){
-                currentComponent = (Components as unknown as IComponentList)[key]
+                currentComponent = (Components as IComponentList)[key]
                 return true
             }
 
@@ -62,40 +63,48 @@ export class Navigator extends React.PureComponent<any, IState>{
         const { currentPath, openMenu, currentComponent } = this.state
 
         return <Router history={history}>
-                {
-                    !currentComponent?.hideMenu && <div className="dolfo-header">
-                        <Button circleBtn bigBtn onClick={this.toggleMenu} btnColor="white" className="dolfo-menu-button">
-                            <Icon iconKey="bars" />
-                        </Button>
+            <Route render={({ location }) => (
+                <div>
+                    {
+                        !currentComponent?.hideMenu && <div className="dolfo-header">
+                            <Button circleBtn bigBtn onClick={this.toggleMenu} btnColor="white" className="dolfo-menu-button">
+                                <Icon iconKey="bars" />
+                            </Button>
 
-                        <h2 className="dolfo-header-title">{currentComponent?.pageTitle}</h2>
+                            <h2 className="dolfo-header-title">{currentComponent?.pageTitle}</h2>
 
-                        <div className="clearfix"></div>
-                    </div>
-                }
-                
-                <CoordinatoriMenu currentPath={currentPath} opened={openMenu} toggleMenu={this.toggleMenu} isHidden={currentComponent?.hideMenu} />
+                            <div className="clearfix"></div>
+                        </div>
+                    }
+                    
+                    <CoordinatoriMenu currentPath={currentPath} opened={openMenu} toggleMenu={this.toggleMenu} isHidden={currentComponent?.hideMenu} />
 
-            <div className="px-5 pb-5">
-                <Switch>
-                    <Route exact path="/" render={() => {
-                        history.push("/layout")
-                        return null
-                    }} />
-                </Switch>
+                    <div className="px-5 pb-5">
+                        <TransitionGroup>
+                            <CSSTransition key={location.key} timeout={0} classNames="fade">
+                                <Switch location={location}>
+                                    <Route exact path="/" render={() => {
+                                        history.push("/layout")
+                                        return null
+                                    }} />
 
-                {
-                    Object.keys(Components).map(key => {
-                        const Component = (Components as any)[key]?.component
+                                    {
+                                        Object.keys(Components).map(key => {
+                                            const Component = (Components as any)[key]?.component
 
-                        return <Route exact path={key} render={(routeProps) => {
-                            if(Component) return <Component {...routeProps} />
+                                            return <Route exact path={key} render={(routeProps) => {
+                                                if(Component) return <Component {...routeProps} />
 
-                            return <div></div>
-                        }} />
-                    })
-                }
-            </div>
+                                                return <div></div>
+                                            }} />
+                                        })
+                                    }
+                                </Switch>
+                            </CSSTransition>
+                        </TransitionGroup>
+                    </div>                    
+                </div>
+            )} />
         </Router>
     }
 }

@@ -3,6 +3,8 @@ import { Icon } from "../../layout/Icon"
 import { MenuItem } from "../../layout/MenuItem"
 import { SideMenu } from "../../layout/SideMenu"
 import { SubMenu } from "../../layout/SubMenu"
+import { history } from "../../Navigator"
+import { ComponentsPaths } from "../ComponentsPaths"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IProps{
@@ -26,14 +28,14 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
         return <SideMenu onToggle={props.toggleMenu} opened={props.opened}>
             <img src="https://i.imgur.com/5Z1DbN7.png" height="100" className="my-4 mx-auto d-block" style={{ filter: "drop-shadow(1.5px 0 0 #fff) drop-shadow(-.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff)" }} alt="" />
 
-            <MenuItem>
+            <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_HOME} onClick={() => history.push(ComponentsPaths.PATH_COORDINATORI_HOME)}>
                 <Icon iconKey="home-alt" className="mr-2" /> Home
             </MenuItem>
 
             <SubMenu text={<span>
                 <Icon iconKey="users-class" className="mr-2" /> Studenti
             </span>} opened={props.currentPath.indexOf("/studenti") >= 0}>
-                <MenuItem selected={props.currentPath === "/studenti"}>Lista studenti</MenuItem>
+                <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI} onClick={() => history.push(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI)}>Lista studenti</MenuItem>
                 <MenuItem selected={props.currentPath === "/studenti/new"}>Aggiungi</MenuItem>
             </SubMenu>
 

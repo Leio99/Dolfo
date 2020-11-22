@@ -84,6 +84,11 @@ body{
     top: 50%;
     transform: translate(-50%, -50%)
 }
+.fade-enter-done{
+    position: relative;
+    opacity: 0;
+    animation: slideLeft 0.4s ease forwards;
+}
 
 ::-webkit-scrollbar{
     width: 7px;
@@ -98,4 +103,8 @@ body{
 @keyframes swipeLeft{
     0%{ right: -50% }
     100%{ right: 0 }
+}
+@keyframes slideLeft{
+    0%{ opacity: 0; left: 300px }
+    100%{ opacity: 1; left: 0 }
 }

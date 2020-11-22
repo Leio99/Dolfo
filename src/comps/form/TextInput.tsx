@@ -128,6 +128,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
             {
                 props.type !== "textarea" ? <input
                     type={inputType}
+                    name={props.name}
                     onChange={this.onChange}
                     className={props.className}
                     disabled={props.disabled}
@@ -146,6 +147,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
                 /> : <textarea
+                    name={props.name}
                     onChange={this.onChange}
                     disabled={props.disabled}
                     placeholder={props.placeHolder}

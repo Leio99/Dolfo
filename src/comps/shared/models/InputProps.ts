@@ -2,6 +2,7 @@ import { CSSProperties } from "react"
 import { BaseIconProps } from "../../layout/Icon";
 
 export interface InputProps{
+    readonly name?: string
     readonly label?: JSX.Element | string
     readonly style?: CSSProperties
     readonly wrapperStyle?: CSSProperties

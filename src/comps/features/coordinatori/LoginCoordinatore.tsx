@@ -27,9 +27,7 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
         }
     }
 
-    componentDidMount = () => {
-        document.body.classList.add("login")
-    }
+    componentDidMount = () => document.body.classList.add("login")
 
     componentWillUnmount = () => document.body.classList.remove("login")
 
@@ -81,8 +79,8 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
             <form className="floating-centered p-3 rounded shadow bg-white col-10 col-md-5" onSubmit={this.tryLogin}>
                 <h2>Accesso coordinatori</h2>
 
-                <TextInput label="Username" onChange={this.changeName} />
-                <TextInput type="password" label="Password" onChange={this.changePassword} togglePassword />
+                <TextInput name="username" label="Username" onChange={this.changeName} />
+                <TextInput name="password" type="password" label="Password" onChange={this.changePassword} togglePassword />
 
                 <Button type="submit" fullSize bigBtn btnColor="green" className="text-uppercase mt-2" loading={loading}>Accedi</Button>
                 <Button onClick={this.toggleForgot} fullSize textBtn btnColor="darkblue" className="mt-2">Hai dimenticato la password?</Button>
