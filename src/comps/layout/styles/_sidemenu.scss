@@ -10,6 +10,7 @@ $menuWidth: 350px;
     width: $menuWidth;
     transition: 0.4s ease;
     background-color: $menuBg;
+    box-shadow: inset -5px 0 0 darken($menuBg, 10%);
     z-index: 5;
     color: $white;
 

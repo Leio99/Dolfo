@@ -34,7 +34,7 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
 
             <SubMenu text={<span>
                 <Icon iconKey="users-class" className="mr-2" /> Studenti
-            </span>} opened={props.currentPath.indexOf("/studenti") >= 0}>
+            </span>} opened={props.currentPath.indexOf(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI) >= 0}>
                 <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI} onClick={() => history.push(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI)}>Lista studenti</MenuItem>
                 <MenuItem selected={props.currentPath === "/studenti/new"}>Aggiungi</MenuItem>
             </SubMenu>

@@ -1,0 +1,19 @@
+.dolfo-card{
+    padding: 1rem;
+    border-radius: $smallRadius;
+    border: 1px solid $grey;
+    position: relative;
+    background-color: $white;
+
+    .dolfo-card-title{
+        position: absolute;
+        background-color: inherit;
+        border-radius: $roundRadius;
+        padding: 0.1rem 1rem;
+        top: 0;
+        color: $dark;
+        transform: translateY(-50%);
+        text-transform: uppercase;
+        font-weight: 500
+    }
+}

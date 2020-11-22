@@ -12,9 +12,8 @@ export interface DefaultIconProps{
     readonly color?: string
     readonly large?: boolean
 }
-export interface IProps extends DefaultIconProps, BaseIconProps{}
 
-export class Icon extends React.PureComponent<IProps>{
+export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
     render = (): JSX.Element => {
         const props = this.props
 
