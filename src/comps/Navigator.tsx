@@ -14,6 +14,7 @@ export interface IState{
     readonly currentPath: string
     readonly openMenu: boolean
     readonly currentComponent: IComponent
+    readonly toolLength: number
 }
 export class Navigator extends React.PureComponent<any, IState>{
     constructor(){
@@ -22,18 +23,57 @@ export class Navigator extends React.PureComponent<any, IState>{
         this.state = {
             currentPath: window.location.pathname,
             openMenu: false,
-            currentComponent: null
+            currentComponent: null,
+            toolLength: 0
         }
     }
     
     componentDidMount = () => {
         this.findComponent()
 
+        const context = this
+
+        document.addEventListener('mouseover', () => {
+            const length = document.querySelectorAll("[data-tooltip]").length
+
+            if(context.state.toolLength !== length){
+                context.checkTooltips()
+            }
+        })
+
         history.listen(loc => {
             this.setState({
                 currentPath: loc.pathname,
                 openMenu: false
             }, this.findComponent)
+        })
+    }
+
+    checkTooltips = () => {
+        const elements = document.querySelectorAll("[data-tooltip]")
+
+        this.setState({ toolLength: elements.length })
+
+        elements.forEach(tool => {
+            const tooltip = document.createElement("div");
+
+            (tool as any).tooltip?.remove();
+            (tool as any).tooltip = tooltip
+
+            tooltip.classList.add("dolfo-tooltip")
+            tooltip.innerHTML = tool.getAttribute("data-tooltip")
+
+            tool.addEventListener("mouseover", () => {
+                const bound = tool.getBoundingClientRect()
+                
+                tooltip.style.top = bound.top + "px"
+                tooltip.style.left = (bound.left + (bound.width / 2)) + "px"
+
+                document.body.appendChild((tool as any).tooltip)
+            })
+            tool.addEventListener("mouseout", () => {
+                (tool as any).tooltip.remove()
+            })
         })
     }
 

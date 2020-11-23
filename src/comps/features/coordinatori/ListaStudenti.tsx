@@ -84,28 +84,28 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     cf: s.cf,
                     frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
                     azioni: <div>
-                        <Button btnColor="blue" className="mx-2" circleBtn onClick={() => this.openDetail(s.idStudente)}>
+                        <Button btnColor="blue" className="mx-2" circleBtn onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
                             <DetailIcon />
                         </Button>
                         
                         {
-                            !s.ritirato && <Button circleBtn btnColor="orange" className="mx-2">
+                            !s.ritirato && <Button circleBtn btnColor="orange" className="mx-2" tooltip="Modifica">
                                 <EditIcon />
                             </Button>
                         }
                         {
-                            !s.ritirato && <Button circleBtn btnColor="red" className="mx-2">
+                            !s.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira">
                                 <Icon iconKey="user-times" />
                             </Button>
                         }
 
                         {
-                            s.ritirato && <Button circleBtn disabled btnColor="white" className="mx-2">
+                            s.ritirato && <Button circleBtn disabled btnColor="white" className="mx-2" tooltip="Ritirato">
                                 <Icon iconKey="user-slash" color="black" />
                             </Button>
                         }
 
-                        <Button circleBtn btnColor="green" className="mx-2">
+                        <Button circleBtn btnColor="green" className="mx-2" tooltip="Archivia">
                             <Icon iconKey="user-check" />
                         </Button>    
                     </div>
@@ -206,11 +206,9 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                                 cf: s.cf,
                                 anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
                                 frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
-                                azioni: <div>
-                                    <Button circleBtn btnColor="blue" onClick={() => this.openDetail(s.idStudente)}>
-                                        <DetailIcon />
-                                    </Button>
-                                </div>
+                                azioni: <Button circleBtn btnColor="blue" onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
+                                    <DetailIcon />
+                                </Button>
                             }
                         })
                     } />

@@ -1,0 +1,29 @@
+$tooltipBg: rgba(0, 0, 0, 0.8);
+
+.dolfo-tooltip{
+    background-color: $tooltipBg;
+    color: $white;
+    border-radius: $smallRadius;
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    position: fixed;
+    z-index: 10;
+    transform-origin: bottom;
+    animation: showTooltip 0.1s ease forwards;
+
+    &:after{
+        content: "";
+        display: block;
+        border: 5px solid transparent;
+        border-top-color: $tooltipBg;
+        position: absolute;
+        left: 50%;
+        top: calc(100% + 5px);
+        transform: translate(-50%, -50%)
+    }
+}
+
+@keyframes showTooltip{
+    0%{ transform: translate(-50%, -130%) scale(0) }
+    100%{ transform: translate(-50%, -130%) scale(1) }
+}

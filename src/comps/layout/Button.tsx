@@ -15,6 +15,7 @@ export interface IProps extends InputProps{
     readonly btnColor?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
     readonly options?: BtnOptions[]
     readonly popupPosition?: "top" | "bottom"
+    readonly tooltip?: string
 }
 export interface IState{
     readonly openPopup: boolean
@@ -73,7 +74,7 @@ class Button extends React.PureComponent<IProps, IState>{
             (props.textBtn ? " text-btn" : "") + 
             (props.circleBtn ? " circle-btn" : "") + 
             (props.bigBtn ? " big-button" : "")
-        }
+        } data-tooltip={props.tooltip}
         style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick}>
             {props.loading && <LoadingIcon spinning />} {props.circleBtn && props.loading ? null : props.children}
         </button>

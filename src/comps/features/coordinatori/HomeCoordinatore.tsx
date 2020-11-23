@@ -14,7 +14,7 @@ export class HomeCoordinatore extends React.Component{
                 <h3 className="text-uppercase">{this.login.nome} {this.login.cognome}</h3>
                 <span>
                     Codice di accesso alla firma: <strong>{this.login.codiceCorso}</strong>
-                    <Button textBtn btnColor="grey" className="ml-2" onClick={() => copyToClipBoard(this.login.codiceCorso)}>
+                    <Button tooltip="Copia il codice" textBtn btnColor="grey" className="ml-2" onClick={() => copyToClipBoard(this.login.codiceCorso)}>
                         <Icon iconKey="copy" />
                     </Button>
                 </span>
