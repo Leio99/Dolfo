@@ -1,4 +1,5 @@
 import React from "react"
+import { Constants } from "../shared/Constants"
 
 export interface IProps{
     readonly opened?: boolean
@@ -38,6 +39,10 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
         return <div className={"dolfo-side-menu" + (opened ? " opened": "")}>
             <div className="dolfo-menu-overlay" onClick={this.toggleMenu}></div>
             {props.children}
+
+            <div className="dolfo-side-menu-close">
+                <a onClick={this.toggleMenu}>{Constants.CLOSE_TEXT}</a>
+            </div>
         </div>
     }
 }
