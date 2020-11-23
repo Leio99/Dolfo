@@ -12,5 +12,7 @@ export const Constants = {
     YESY_TEXT: "Sì",
     NO_TEXT: "No",
     LOADING_TEXT: "Caricamento...",
-    SEARCH_PLACEHOLDER: "Cerca"
+    SEARCH_PLACEHOLDER: "Cerca",
+    FILTER_TEXT: "Filtra",
+    RESET_INPUT_TEXT: "Pulisci",
 }

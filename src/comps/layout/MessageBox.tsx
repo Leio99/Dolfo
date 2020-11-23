@@ -1,4 +1,5 @@
 import React from "react"
+import { Constants } from "../shared/Constants"
 import { CloseIcon } from "./Icon"
 import { NotificationMsg } from "./NotificationMsg"
 
@@ -14,7 +15,7 @@ export class MessageBox{
     static show = (props: MessageProps) => {
         let message = NotificationMsg.show({
             message: <div className="dolfo-message-box-inner">
-                <CloseIcon className="dolfo-message-close" onClick={() => message.close()} />
+                <CloseIcon className="dolfo-message-close" onClick={() => message.close()} tooltip={Constants.CLOSE_TEXT} />
                 {props.title && <h5 className="dolfo-message-box-title">{props.title}</h5>}
                 <div className="dolfo-message-box-content">{props.content}</div>
             </div>,

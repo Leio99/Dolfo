@@ -69,9 +69,9 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         })
 
         return <Table columns={[
-            { label: <CheckBox checked={checkedAll} onChange={() => this.toggleCheckAll(studenti[0].annoFrequentazione)} />, field: "check", width: "5%", align: "center" },
-            { label: "Studente", field: "desStudente", canSearch: true },
-            { label: "Codice Fiscale", field: "cf", canSearch: true },
+            { label: <CheckBox checked={checkedAll} onChange={() => this.toggleCheckAll(studenti[0].annoFrequentazione)} tooltip="Seleziona tutti" />, field: "check", width: "5%", align: "center" },
+            { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
+            { label: "Codice Fiscale", field: "cf", canSearch: true, tooltip: true },
             { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
             { label: "Azioni", field: "azioni", width: "26%", align: "center" },
         ]} data={
@@ -192,8 +192,8 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                 {
                     !listaArchiviati ? loadingIcon : <Table columns={[
                         { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },
-                        { label: "Studente", field: "desStudente", canSearch: true },
-                        { label: "Codice Fiscale", field: "cf", canSearch: true },
+                        { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
+                        { label: "Codice Fiscale", field: "cf", canSearch: true, tooltip: true },
                         { label: "Anno", field: "anno", width: "15%", align: "center", canSearch: true },
                         { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
                         { label: "Azioni", field: "azioni", width: "26%", align: "center" },
@@ -201,7 +201,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                         listaArchiviati.map(s => {
                             return {
                                 onDoubleClick: () => this.openDetail(s.idStudente),
-                                check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" /> : <CloseCircleIcon large color="var(--red)" />,
+                                check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" tooltip="Promosso" /> : <CloseCircleIcon large color="var(--red)" tooltip="Ritirato/Bocciato" />,
                                 desStudente: s.nome + " " + s.cognome,
                                 cf: s.cf,
                                 anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",

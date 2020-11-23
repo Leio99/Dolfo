@@ -11,6 +11,7 @@ export interface DefaultIconProps{
     readonly onClick?: () => void
     readonly color?: string
     readonly large?: boolean
+    readonly tooltip?: string
 }
 
 export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
@@ -25,7 +26,7 @@ export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
             (props.large ? " fa-lg" : "") +
             (props.className ? (" " + props.className) : "") + 
             (props.spinning ? " spin" : "")
-        }
+        } data-tooltip={props.tooltip}
         style={{ ...props.style, color: props.color }}
         onClick={props.onClick}></i>
     }

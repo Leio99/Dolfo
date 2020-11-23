@@ -160,7 +160,7 @@ class Select extends React.PureComponent<IProps, IState>{
         let input: HTMLInputElement,
         searchInput = <div className="dolfo-select-search-content">
             <SearchIcon className="dolfo-select-search-icon" />
-            {searchValue.length ? <CloseIcon className="reset-input" onClick={this.resetSearch} /> : null}
+            {searchValue.length ? <CloseIcon className="reset-input" onClick={this.resetSearch} tooltip={Constants.RESET_INPUT_TEXT} /> : null}
 
             <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
         </div>

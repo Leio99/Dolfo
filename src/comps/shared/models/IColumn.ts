@@ -6,6 +6,7 @@ export interface IColumn{
     readonly width?: number | string
     readonly align?: "left" | "right" | "center"
     readonly canSearch?: boolean
+    readonly tooltip?: boolean
 }
 
 export interface IDataColumn{

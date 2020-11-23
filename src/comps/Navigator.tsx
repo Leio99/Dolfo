@@ -41,6 +41,10 @@ export class Navigator extends React.PureComponent<any, IState>{
             }
         })
 
+        document.addEventListener("click", () => {
+            document.querySelector(".dolfo-tooltip")?.remove()
+        })
+
         history.listen(loc => {
             this.setState({
                 currentPath: loc.pathname,

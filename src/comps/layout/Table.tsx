@@ -49,7 +49,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                     <tr>
                         {
                             props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
-                                {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" onClick={() => this.changeActiveFiler(col.field)} />}
+                                {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" tooltip={Constants.FILTER_TEXT} onClick={() => this.changeActiveFiler(col.field)} />}
 
                                 {col.label}
 
@@ -64,7 +64,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                         data.length ? data.map(d => {
                             return <tr style={d.rowStyle} onDoubleClick={d.onDoubleClick}>
                                 {
-                                    props.columns.map(col => <td style={{ textAlign: col.align }}>
+                                    props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip ? d[col.field] : null}>
                                         {d[col.field]}
                                     </td>)
                                 }

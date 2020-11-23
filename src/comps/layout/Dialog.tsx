@@ -154,7 +154,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
 
             <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width }}>
                 <div className="dolfo-dialog-header">
-                    <Button textBtn onClick={this.onClose} className="dialog-close">
+                    <Button textBtn onClick={this.onClose} className="dialog-close" tooltip={Constants.CLOSE_TEXT}>
                         <CloseIcon style={{ fontSize: 20 }} />
                     </Button>
 

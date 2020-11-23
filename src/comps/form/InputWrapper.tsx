@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react"
 import { CloseIcon, Icon, BaseIconProps } from "../layout/Icon"
+import { Constants } from "../shared/Constants"
 
 export interface IProps{
     readonly label?: JSX.Element | string
@@ -24,7 +25,7 @@ export class InputWrapper extends React.PureComponent<IProps>{
             {props.label && <label className="dolfo-input-label">{props.label}</label>}
             
             <div className={"dolfo-input-wrapper" + (props.focusBool ? " focused" : "")} onClick={props.forceFocus}>
-                { (props.value && props.value.length && props.resetFunction) ? <CloseIcon className="reset-input" onClick={props.resetFunction} /> : null }
+                { (props.value && props.value.length && props.resetFunction) ? <CloseIcon className="reset-input" onClick={props.resetFunction} tooltip={Constants.RESET_INPUT_TEXT} /> : null }
 
                 <div className="dolfo-input-icon">
                     <Icon {...props.icon} />
