@@ -15,4 +15,11 @@ export const Constants = {
     SEARCH_PLACEHOLDER: "Cerca",
     FILTER_TEXT: "Filtra",
     RESET_INPUT_TEXT: "Pulisci",
+    TOGGLE_PASSWORD_TEXT: "Mostra",
+    INCREASE_TEXT: "Aumenta",
+    DECREASE_TEXT: "Riduci",
+    PREV_TEXT: "Precedente",
+    NEXT_TEXT: "Successivo",
+    CHANGE_MONTH: "Cambia mese",
+    CHANGE_YEAR: "Cambia anno",
 }

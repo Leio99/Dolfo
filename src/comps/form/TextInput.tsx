@@ -2,6 +2,7 @@ import React from "react"
 import { InputProps } from "../shared/models/InputProps"
 import { Icon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
+import { Constants } from "../shared/Constants"
 
 export interface IProps extends InputProps{
     readonly type?: "textarea" | "password" | "email" | "number"
@@ -115,13 +116,13 @@ export class TextInput extends React.PureComponent<IProps, IState>{
 
         return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={props.type === "number" ? "input-number" : (props.type === "password" && props.togglePassword) ? "toggle-password" : ""}>
             {
-                props.type === "password" && props.togglePassword && value.length > 0 && <Icon type="far" iconKey="eye" onClick={this.toggleInputType} className="toggle-password" />
+                props.type === "password" && props.togglePassword && value.length > 0 && <Icon type="far" iconKey="eye" onClick={this.toggleInputType} className="toggle-password" tooltip={Constants.TOGGLE_PASSWORD_TEXT} />
             }
 
             {
                 props.type === "number" && <div className="dolfo-input-number-btns">
-                    <Icon iconKey="caret-up" className="increase" onClick={this.increaseValue} />
-                    <Icon iconKey="caret-down" className="decrease" onClick={this.decreaseValue} />
+                    <Icon iconKey="caret-up" className="increase" onClick={this.increaseValue} tooltip={Constants.INCREASE_TEXT} />
+                    <Icon iconKey="caret-down" className="decrease" onClick={this.decreaseValue} tooltip={Constants.DECREASE_TEXT} />
                 </div>
             }
 

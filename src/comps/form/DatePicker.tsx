@@ -4,6 +4,8 @@ import { Day } from "../../models/IDay"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
+import { Icon } from "../layout/Icon"
+import { Constants } from "../shared/Constants"
 
 export interface IProps extends InputProps {
     readonly defaultValue?: Date
@@ -205,17 +207,17 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                     !selectingMonth && !selectingYear && <table className="dolfo-calendar">
                         <thead>
                             <tr>
-                                <th className="prev-month" onClick={this.prevMonth}>
-                                    <i className="fa fa-chevron-left fa-fw"></i>
+                                <th className="prev-month" onClick={this.prevMonth} data-tooltip={Constants.PREV_TEXT}>
+                                    <Icon iconKey="chevron-left" />
                                 </th>
-                                <th colSpan={3} className="select-month" onClick={this.changeMonth}>
+                                <th colSpan={3} className="select-month" onClick={this.changeMonth} data-tooltip={Constants.CHANGE_MONTH}>
                                     {decodeMonth(currentMonth)}
                                 </th>
-                                <th colSpan={2} className="select-year" onClick={this.changeYear}>
+                                <th colSpan={2} className="select-year" onClick={this.changeYear} data-tooltip={Constants.CHANGE_YEAR}>
                                     {currentYear}
                                 </th>
-                                <th className="next-month" onClick={this.nextMonth}>
-                                    <i className="fa fa-chevron-right fa-fw"></i>
+                                <th className="next-month" onClick={this.nextMonth} data-tooltip={Constants.NEXT_TEXT}>
+                                    <Icon iconKey="chevron-right" />
                                 </th>
                             </tr>
 
@@ -282,14 +284,14 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                     selectingYear && <table className="year-selection">
                         <thead>
                             <tr>
-                                <th className="prev-month" onClick={this.prevDecade}>
-                                    <i className="fa fa-chevron-left fa-fw"></i>
+                                <th className="prev-month" onClick={this.prevDecade} data-tooltip={Constants.PREV_TEXT}>
+                                    <Icon iconKey="chevron-left" />
                                 </th>
                                 <th>
                                     {currentDecade}
                                 </th>
-                                <th className="next-month" onClick={this.nextDecade}>
-                                    <i className="fa fa-chevron-right fa-fw"></i>
+                                <th className="next-month" onClick={this.nextDecade} data-tooltip={Constants.NEXT_TEXT}>
+                                    <Icon iconKey="chevron-right" />
                                 </th>
                             </tr>
                         </thead>
