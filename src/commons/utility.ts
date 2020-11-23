@@ -1,3 +1,4 @@
+import { NotificationMsg } from "../comps/layout/NotificationMsg"
 import { Day } from "../models/IDay"
 
 export const formatDate = (date: Date) => {
@@ -131,4 +132,19 @@ export const getCalendar = (month?: number, year?: number) => {
     }
 
     return table
+}
+
+export const copyToClipBoard = (text: string) => {
+    const el = document.createElement('textarea')
+    el.value = text
+    el.style.opacity = "0"
+    el.style.width = "0"
+    el.style.height = "0"
+
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand('copy')
+    document.body.removeChild(el)
+
+    NotificationMsg.showInfo("Codice copiato negli appunti!")
 }
