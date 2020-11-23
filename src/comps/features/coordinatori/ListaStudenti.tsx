@@ -14,6 +14,7 @@ import { history } from "../../Navigator"
 import { StudentiService } from "../../../services/StudentiService"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { ComponentsPermissions } from "../ComponentsPermissions"
+import { StageSwitch } from "./StageSwitch"
 
 export interface IState{
     readonly studenti: any[]
@@ -84,6 +85,12 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     cf: s.cf,
                     frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
                     azioni: <div>
+                        {
+                            s.ritirato && <Button circleBtn className="mx-2" tooltip="Ritirato">
+                                <Icon iconKey="user-slash" />
+                            </Button>
+                        }
+
                         <Button btnColor="blue" className="mx-2" circleBtn onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
                             <DetailIcon />
                         </Button>
@@ -96,12 +103,6 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                         {
                             !s.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira">
                                 <Icon iconKey="user-times" />
-                            </Button>
-                        }
-
-                        {
-                            s.ritirato && <Button circleBtn disabled btnColor="white" className="mx-2" tooltip="Ritirato">
-                                <Icon iconKey="user-slash" color="black" />
                             </Button>
                         }
 
@@ -173,11 +174,13 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
 
                     <Tabs className="mt-2">
                         <Tab title="Primo anno">
+                            <StageSwitch anno={1} idCorso={this.session.idCorso} />
                             {
                                 !primoAnno ? loadingIcon : this.buildTable(primoAnno)
                             }
                         </Tab>
                         <Tab title="Secondo anno">
+                            <StageSwitch anno={2} idCorso={this.session.idCorso} />
                             {
                                 !secondoAnno ? loadingIcon : this.buildTable(secondoAnno)
                             }

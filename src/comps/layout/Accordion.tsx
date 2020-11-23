@@ -21,7 +21,11 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		}
 	}
 	
-	componentDidMount = () => this.handleAccordions()
+	componentDidMount = () => {
+		this.handleAccordions()
+
+		window.addEventListener("resize", this.handleAccordions)
+	}
     
     componentDidUpdate = (prevProps: IProps) => {
         if(prevProps.opened !== this.props.opened){

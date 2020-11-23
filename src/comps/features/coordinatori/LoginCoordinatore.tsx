@@ -65,6 +65,7 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
                     type: "error"
                 })
             }else{
+                data.password = cipher.encode(adminPassword)
                 sessionStorage.setItem("sessionCoordinatore", JSON.stringify(data))
                 ComponentsPermissions.checkLoginCoordinatore()
                 NotificationMsg.showSuccess("Login effettuato con successo!")

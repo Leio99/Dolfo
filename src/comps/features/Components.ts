@@ -37,6 +37,11 @@ export const Components: IComponentList = {
         pageTitle: "Studenti del corso",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
+    [ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE]: {
+        component: null,
+        pageTitle: "Dettaglio studente",
+        permission: ComponentsPermissions.checkPermissionCoordinatore
+    },
     "/layout": {
         component: TestLayout,
         pageTitle: "Layout di test"

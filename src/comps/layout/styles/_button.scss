@@ -9,6 +9,7 @@
     display: inline-block;
     position: relative;
     vertical-align: middle;
+    background-color: unset;
 
     &[disabled]{
         opacity: 0.7;
