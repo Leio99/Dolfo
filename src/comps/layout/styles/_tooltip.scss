@@ -7,7 +7,8 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
     display: inline-block;
     padding: 0.3rem 0.7rem;
     position: fixed;
-    z-index: 100;
+    z-index: 151;
+    width: fit-content;
     transform-origin: bottom;
     animation: showTooltip 0.1s ease forwards;
 
