@@ -6,23 +6,19 @@ import { ComponentsPermissions } from "./ComponentsPermissions"
 import { LoginCoordinatore } from "./coordinatori/LoginCoordinatore"
 import { HomeCoordinatore } from "./coordinatori/HomeCoordinatore"
 import { AddStudente } from "./coordinatori/AddStudente"
+import { history } from "../Navigator"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI]: {
-        component: null,
-        pageTitle: null,
         hideMenu: true,
         permission: ComponentsPermissions.checkEmptyPathCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI + "/"]: {
-        component: null,
-        pageTitle: null,
         hideMenu: true,
         permission: ComponentsPermissions.checkEmptyPathCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI_LOGIN]: {
         component: LoginCoordinatore,
-        pageTitle: null,
         permission: ComponentsPermissions.checkLoginCoordinatore,
         hideMenu: true
     },
@@ -44,5 +40,9 @@ export const Components: IComponentList = {
     "/layout": {
         component: TestLayout,
         pageTitle: "Layout di test"
+    },
+    "/": {
+        pageTitle: "Layout di test",
+        permission: () => history.push("/layout")
     }
 }

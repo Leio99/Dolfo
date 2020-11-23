@@ -3,8 +3,8 @@ export interface IComponentList{
 }
 
 export interface IComponent{
-    component: any,
-    pageTitle: string,
+    component?: any,
+    pageTitle?: string,
     permission?: () => void,
     hideMenu?: boolean
 }

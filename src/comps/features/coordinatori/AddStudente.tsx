@@ -93,7 +93,7 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
                 
                 <div className="col-12 col-md-6">
-                    <Select label="Anno frequentato" disabled={loading} onChange={this.changeAnno} icon={{ iconKey: "graduation-cap" }} canSearch>
+                    <Select label="Anno frequentato" disabled={loading} onChange={this.changeAnno} icon={{ iconKey: "graduation-cap" }}>
                         <Option label="Primo anno" value={1} />
                         <Option label="Secondo anno" value={2} />
                     </Select>

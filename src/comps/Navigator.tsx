@@ -83,11 +83,6 @@ export class Navigator extends React.PureComponent<any, IState>{
                         <TransitionGroup>
                             <CSSTransition key={location.key} timeout={0} classNames="fade">
                                 <Switch location={location}>
-                                    <Route exact path="/" render={() => {
-                                        history.push("/layout")
-                                        return null
-                                    }} />
-
                                     {
                                         Object.keys(Components).map(key => {
                                             const Component = (Components as any)[key]?.component
