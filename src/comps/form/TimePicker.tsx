@@ -3,6 +3,8 @@ import { zeroBefore } from "../../commons/utility"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
+import { Icon } from "../layout/Icon"
+import { Constants } from "../shared/Constants"
 
 export interface IProps extends InputProps{
     readonly defaultValue?: string
@@ -119,12 +121,12 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                 <table>
                     <tbody>
                         <tr>
-                            <td onClick={this.increaseHour}>
-                                <i className="fa fa-caret-up fa-fw"></i>
+                            <td onClick={this.increaseHour} data-tooltip={Constants.INCREASE_TEXT}>
+                                <Icon iconKey="caret-up" />
                             </td>
                             <td></td>
-                            <td onClick={this.increaseMinute}>
-                                <i className="fa fa-caret-up fa-fw"></i>
+                            <td onClick={this.increaseMinute} data-tooltip={Constants.INCREASE_TEXT}>
+                                <Icon iconKey="caret-up" />
                             </td>
                         </tr>
                         <tr>
@@ -137,12 +139,12 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                             </td>
                         </tr>
                         <tr>
-                            <td onClick={this.decreaseHour}>
-                                <i className="fa fa-caret-down fa-fw"></i>
+                            <td onClick={this.decreaseHour} data-tooltip={Constants.DECREASE_TEXT}>
+                                <Icon iconKey="caret-down" />
                             </td>
                             <td></td>
-                            <td onClick={this.decreaseMinute}>
-                                <i className="fa fa-caret-down fa-fw"></i>
+                            <td onClick={this.decreaseMinute} data-tooltip={Constants.DECREASE_TEXT}>
+                                <Icon iconKey="caret-down" />
                             </td>
                         </tr>
                     </tbody>
