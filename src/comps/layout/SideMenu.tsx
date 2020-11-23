@@ -41,7 +41,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
             {props.children}
 
             <div className="dolfo-side-menu-close">
-                <a onClick={this.toggleMenu}>{Constants.CLOSE_TEXT}</a>
+                <span onClick={this.toggleMenu}>{Constants.CLOSE_TEXT}</span>
             </div>
         </div>
     }
