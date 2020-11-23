@@ -29,10 +29,11 @@ input::-ms-reveal, input::-ms-clear {
     background: $white;
     z-index: 3;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    padding: 0.6rem 3rem;
+    padding: 0.6rem 2rem;
 
     .dolfo-menu-button{
-        float: right
+        vertical-align: top;
+        margin-right: 1rem
     }
 
     .dolfo-header-title{

@@ -13,12 +13,15 @@ import { NotificationMsg } from "../../layout/NotificationMsg"
 import { history } from "../../Navigator"
 import { StudentiService } from "../../../services/StudentiService"
 import { ComponentsPaths } from "../ComponentsPaths"
+import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IState{
     readonly studenti: any[]
     readonly checkList: any[]
 }
 export class ListaStudenti extends React.PureComponent<undefined, IState>{
+    readonly session = ComponentsPermissions.getLoginCoordinatore()
+
     constructor(props: undefined){
         super(props)
 
@@ -29,7 +32,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     }
 
     componentDidMount = () => {
-        StudentiService.getStudentiCorso(1).then(response => {
+        StudentiService.getStudentiCorso(this.session.idCorso).then(response => {
             this.setState({
                 studenti: response.data
             })

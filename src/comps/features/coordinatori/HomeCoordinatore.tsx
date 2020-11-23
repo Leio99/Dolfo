@@ -6,7 +6,7 @@ import { NotificationMsg } from "../../layout/NotificationMsg"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export class HomeCoordinatore extends React.Component{
-    readonly login = ComponentsPermissions.getLoginCoordinatore() || {}
+    readonly login = ComponentsPermissions.getLoginCoordinatore()
 
     copyToClipBoard = () => {
         const el = document.createElement('textarea');
