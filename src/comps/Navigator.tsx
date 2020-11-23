@@ -14,7 +14,7 @@ export interface IState{
     readonly currentPath: string
     readonly openMenu: boolean
     readonly currentComponent: IComponent
-    readonly toolLength: number
+    readonly tooltips: NodeListOf<Element>
 }
 export class Navigator extends React.PureComponent<any, IState>{
     constructor(){
@@ -24,7 +24,7 @@ export class Navigator extends React.PureComponent<any, IState>{
             currentPath: window.location.pathname,
             openMenu: false,
             currentComponent: null,
-            toolLength: 0
+            tooltips: null
         }
     }
     
@@ -34,9 +34,9 @@ export class Navigator extends React.PureComponent<any, IState>{
         const context = this
 
         document.addEventListener('mouseover', () => {
-            const length = document.querySelectorAll("[data-tooltip]").length
+            const tooltips = document.querySelectorAll("[data-tooltip]")
 
-            if(context.state.toolLength !== length){
+            if(context.areDifferentTooltips(context.state.tooltips, tooltips)){
                 context.checkTooltips()
             }
         })
@@ -53,10 +53,20 @@ export class Navigator extends React.PureComponent<any, IState>{
         })
     }
 
+    areDifferentTooltips = (currentTips: NodeListOf<Element>, newTips: NodeListOf<Element>) => {
+        if(!currentTips || !newTips || currentTips.length !== newTips.length) return true
+
+        for(let i = 0; i < currentTips.length; i++)
+            if(currentTips[i] !== newTips[i])
+                return true
+
+        return false
+    }
+
     checkTooltips = () => {
         const elements = document.querySelectorAll("[data-tooltip]")
 
-        this.setState({ toolLength: elements.length })
+        this.setState({ tooltips: elements })
 
         elements.forEach(tool => {
             const tooltip = document.createElement("div");
