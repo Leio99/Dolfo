@@ -5,8 +5,10 @@ export class ServerCall{
     static handleAuthFailed(promise: Promise<AxiosResponse<any>>){
         promise.catch(err => {
             if(err.response && err.response.data){
+                const msg = typeof err.response.data === "string" ? err.response.data : "C'è stato un errore. Riprova."
+
                 Dialog.infoDialog({
-                    content: err.response.data,
+                    content: msg,
                     type: "error"
                 })
             }

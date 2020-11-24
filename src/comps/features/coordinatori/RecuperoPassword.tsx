@@ -88,7 +88,7 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
             }
 
             this.switchLoading()
-        })
+        }).catch(this.switchLoading)
     }
 
     confirmSecondStep = (e: any) => {
@@ -151,15 +151,12 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
                 Dialog.infoDialog({
                     title: "Errore!",
                     content: "Non è stato possibile completare l'operazione.",
-                    onOk: () => {
-                        this.setState({
-                            loading: false
-                        })
-                    },
                     type: "error"
                 })
+
+                this.switchLoading()
             }
-        })
+        }).catch(this.switchLoading)
     }
 
     render = (): JSX.Element => {
