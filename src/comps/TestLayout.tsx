@@ -259,6 +259,13 @@ export class TestLayout extends React.PureComponent<any, IState>{
                                     })
                                 }
                             </Select>
+                            <Select label="Loading select" loading>
+                                {
+                                    [1,2,3].map(o => {
+                                        return <Option value={o} label={"Option " + o} />
+                                    })
+                                }
+                            </Select>
                         </Tab>
 
                         <Tab title="Pickers">

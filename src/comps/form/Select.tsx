@@ -1,6 +1,6 @@
 import React from "react"
 import { InputProps } from "../shared/models/InputProps"
-import { CloseIcon, Icon, SearchIcon } from "../layout/Icon"
+import { CloseIcon, Icon, LoadingIcon, SearchIcon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 import onClickOutside from "react-onclickoutside"
@@ -10,6 +10,7 @@ export interface IProps extends InputProps{
     readonly defaultValue?: any
     readonly multiple?: boolean
     readonly canSearch?: boolean
+    readonly loading?: boolean
 }
 export interface IState{
     readonly value: any
@@ -165,8 +166,10 @@ class Select extends React.PureComponent<IProps, IState>{
             <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
         </div>
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled} onKeyDown={this.handleKeyDown}>
-            <Icon type="far" iconKey="chevron-down" className="select-caret" />
+        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown}>
+            <span className="select-icon">
+                {props.loading ? <LoadingIcon spinning className="loading" /> : <Icon type="far" iconKey="chevron-down" />}
+            </span>
 
             <div className="dolfo-input-select">
                 <input
