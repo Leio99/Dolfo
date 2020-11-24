@@ -74,7 +74,7 @@ export class Navigator extends React.PureComponent<any, IState>{
             tooltip.classList.add("dolfo-tooltip")
             tooltip.innerHTML = tool.getAttribute("data-tooltip")
 
-            tool.addEventListener("mouseover", () => {
+            tool.addEventListener("mouseenter", () => {
                 const bound = tool.getBoundingClientRect()
                 
                 tooltip.style.top = bound.top + "px"
@@ -82,9 +82,8 @@ export class Navigator extends React.PureComponent<any, IState>{
 
                 document.body.appendChild((tool as any).tooltip)
             })
-            tool.addEventListener("mouseout", () => {
-                (tool as any).tooltip.remove()
-            })
+
+            tool.addEventListener("mouseleave", () => (tool as any).tooltip.remove())
         })
     }
 
