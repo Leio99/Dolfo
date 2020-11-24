@@ -16,37 +16,6 @@ html, body{
         animation: spinIcon 0.8s linear infinite
     }
 }
-input::-ms-reveal, input::-ms-clear {
-    display: none
-}
-.dolfo-header{
-    margin-bottom: 2rem;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    right: 0;
-    left: 0;
-    background: $white;
-    z-index: 3;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    padding: 0.6rem 2rem;
-
-    .dolfo-menu-button{
-        vertical-align: top;
-        margin-right: 1rem
-    }
-
-    .dolfo-header-title{
-        transform: translateY(25%);
-        display: inline-block;
-        margin: 0;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 70%;
-        padding-bottom: 0.5rem
-    }
-}
 
 @keyframes spinIcon{
     100%{ transform: rotate(360deg) }

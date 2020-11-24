@@ -29,21 +29,18 @@ export class Navigator extends React.PureComponent<any, IState>{
     }
     
     componentDidMount = () => {
-        this.findComponent()
-
         const context = this
+
+        this.findComponent()
 
         document.addEventListener('mouseover', () => {
             const tooltips = document.querySelectorAll("[data-tooltip]")
 
-            if(context.areDifferentTooltips(context.state.tooltips, tooltips)){
+            if(context.areDifferentTooltips(context.state.tooltips, tooltips))
                 context.checkTooltips()
-            }
         })
 
-        document.addEventListener("click", () => {
-            document.querySelector(".dolfo-tooltip")?.remove()
-        })
+        document.addEventListener("click", () => document.querySelector(".dolfo-tooltip")?.remove())
 
         history.listen(loc => {
             this.setState({
