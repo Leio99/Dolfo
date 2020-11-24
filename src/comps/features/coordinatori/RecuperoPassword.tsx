@@ -85,21 +85,8 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
                 })
     
                 this.increaseStep()
-            }else{
-                Dialog.infoDialog({
-                    title: "Errore!",
-                    content: "Questa e-mail non corrisponde a nessun utente.",
-                    type: "error"
-                }) 
             }
 
-            this.switchLoading()
-        }).catch(() => {
-            Dialog.infoDialog({
-                title: "Errore!",
-                content: "Questa e-mail non corrisponde a nessun utente.",
-                type: "error"
-            })
             this.switchLoading()
         })
     }

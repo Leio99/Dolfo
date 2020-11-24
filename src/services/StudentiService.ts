@@ -1,14 +1,14 @@
-import Axios from "axios"
 import { API_URL_REGISTRO } from "../commons/consts/costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
+import { ServerCall } from "./ServerCall"
 
 export class StudentiService{
     static getStudentiCorso(idCorso: number){
-        return Axios.get(API_URL_REGISTRO + "/studenti/" + idCorso)
+        return ServerCall.get(API_URL_REGISTRO + "/studenti/" + idCorso)
     }
 
     static getStatoStage(idCorso: number, anno: number){
-        return Axios.get(API_URL_REGISTRO + "/corsi/getstagevalue/" + idCorso + "/" + anno)
+        return ServerCall.get(API_URL_REGISTRO + "/corsi/getstagevalue/" + idCorso + "/" + anno)
     }
 
     static cambiaStatoStage(anno: number){
@@ -20,6 +20,6 @@ export class StudentiService{
             },
             anno
         }
-        return Axios.post(API_URL_REGISTRO + "/corsi/switchabilitastage", params)
+        return ServerCall.post(API_URL_REGISTRO + "/corsi/switchabilitastage", params)
     }
 }
