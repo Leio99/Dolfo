@@ -4,11 +4,9 @@ import { Dialog } from "../comps/layout/Dialog";
 export class ServerCall{
     static handleAuthFailed(promise: Promise<AxiosResponse<any>>){
         promise.catch(err => {
-            if(err.response && err.response.data){
-                const msg = typeof err.response.data === "string" ? err.response.data : "C'è stato un errore. Riprova."
-
+            if(typeof err.response.data === "string"){
                 Dialog.infoDialog({
-                    content: msg,
+                    content: err.response.data,
                     type: "error"
                 })
             }
