@@ -4,13 +4,17 @@ import { Dialog } from "../comps/layout/Dialog";
 export class ServerCall{
     static handleAuthFailed(promise: Promise<AxiosResponse<any>>){
         promise.catch(err => {
-            if(typeof err.response.data === "string"){
+            if(err.response && err.response.data && typeof err.response.data === "string"){
                 Dialog.infoDialog({
                     content: err.response.data,
                     type: "error"
                 })
             }
         })
+    }
+
+    static emptyCallResult = () =>  {
+        return{ then: () => { } }
     }
 
     static get(url: string): Promise<AxiosResponse<any>> {

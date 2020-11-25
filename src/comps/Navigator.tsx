@@ -7,6 +7,7 @@ import { Components } from "./features/Components"
 import { IComponent, IComponentList } from "../models/IComponent"
 import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
+import { ComponentsPaths } from "./features/ComponentsPaths"
 
 export const history = createBrowserHistory()
 
@@ -144,6 +145,8 @@ export class Navigator extends React.PureComponent<any, IState>{
                                             }} />
                                         })
                                     }
+
+                                    <Route render={() => <div>Non trovata</div>} />
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>

@@ -46,7 +46,7 @@ export const Components: IComponentList = {
         component: TestLayout,
         pageTitle: "Layout di test"
     },
-    "/": {
+    [ComponentsPaths.SITE_BASE]: {
         pageTitle: "Layout di test",
         permission: () => history.push("/layout")
     }
