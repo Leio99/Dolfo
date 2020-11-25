@@ -195,7 +195,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 type="text"
                 value={date}
                 required={props.required}
-                readOnly={props.readonly}
+                readOnly
                 onKeyDown={props.onKeyDown}
                 onKeyPress={props.onKeyPress}
                 onKeyUp={props.onKeyUp}
