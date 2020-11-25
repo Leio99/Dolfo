@@ -42,12 +42,12 @@ export const Components: IComponentList = {
         pageTitle: "Dettaglio studente",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
-    "/layout": {
+    [ComponentsPaths.SITE_BASE + "layout"]: {
         component: TestLayout,
         pageTitle: "Layout di test"
     },
     [ComponentsPaths.SITE_BASE]: {
         pageTitle: "Layout di test",
-        permission: () => history.push("/layout")
+        permission: () => history.push(ComponentsPaths.SITE_BASE + "layout")
     }
 }
