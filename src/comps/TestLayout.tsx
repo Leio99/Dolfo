@@ -24,6 +24,7 @@ import { MenuItem } from "./layout/MenuItem"
 import { SubMenu } from "./layout/SubMenu"
 import { Stepper } from "./layout/Stepper"
 import { Step } from "./layout/Step"
+import { Uploader } from "./form/Uploader"
 
 export interface IState{
     readonly visibleDialog: boolean
@@ -226,7 +227,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Button>
                 </Tab>
 
-                <Tab title="Forms">
+                <Tab title="Forms" isDefault>
                     <Tabs vertical>
                         <Tab title="Text inputs">
                             <TextInput label="Simple" />
@@ -281,6 +282,10 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             </RadioButton>
 
                             <Switch label="I'm a switch" onChange={this.toggleSwitch} checked={checkedSwitch} loading={loading} />
+                        </Tab>
+
+                        <Tab title="Uploader" isDefault>
+                            <Uploader dropArea />
                         </Tab>
                     </Tabs>
                 </Tab>
