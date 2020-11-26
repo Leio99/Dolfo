@@ -164,7 +164,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                         </span>, onClick: () => history.push(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE) },
                         { text: <span>
                             <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
-                        </span>, onClick: () => null },
+                        </span>, onClick: () =>  history.push(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI) },
                         { text: <span>
                             <Icon iconKey="arrows-alt" color="var(--orange)" /> Sposta
                         </span>, onClick: this.moveStudents }
