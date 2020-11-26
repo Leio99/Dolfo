@@ -227,7 +227,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Button>
                 </Tab>
 
-                <Tab title="Forms" isDefault>
+                <Tab title="Forms">
                     <Tabs vertical>
                         <Tab title="Text inputs">
                             <TextInput label="Simple" />
@@ -284,8 +284,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             <Switch label="I'm a switch" onChange={this.toggleSwitch} checked={checkedSwitch} loading={loading} />
                         </Tab>
 
-                        <Tab title="Uploader" isDefault>
-                            <Uploader label="Simple uploader" multiple />
+                        <Tab title="Uploader">
+                            <Uploader label="Simple uploader"/>
                             <Uploader dropArea multiple />
                         </Tab>
                     </Tabs>
