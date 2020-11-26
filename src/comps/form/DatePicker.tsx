@@ -181,6 +181,8 @@ class DatePicker extends React.PureComponent<IProps, IState>{
 
     handleClickOutside = () => this.hideCalendar()
 
+    handleTabKey = (e: any) => e.keyCode === 9 && this.hideCalendar()
+
     render = (): JSX.Element => {
         const { date, showCalendar, selectingMonth, selectingYear, currentYear, currentMonth, currentDecade } = this.state,
         props = this.props,
@@ -190,7 +192,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             iconKey: "calendar-day"
         }
 
-        return <InputWrapper style={props.wrapperStyle} onFocus={this.showCalendar} label={props.label} icon={icon} focusBool={showCalendar} value={date} resetFunction={this.resetDate} disabled={props.disabled} isFocusable>
+        return <InputWrapper style={props.wrapperStyle} onFocus={this.showCalendar} label={props.label} icon={icon} focusBool={showCalendar} value={date} resetFunction={this.resetDate} disabled={props.disabled} onKeyDown={this.handleTabKey}>
             <input
                 type="text"
                 value={date}
