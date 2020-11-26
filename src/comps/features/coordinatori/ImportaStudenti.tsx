@@ -73,7 +73,7 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
     showImportPreview = () => {
         const { rows, fields, anno } = this.state,
         data = rows.map(r => {
-            const pieces = r.trim().replace(/["']/g, "").split(";")
+            const pieces = this.splitRow(r)
 
             return {
                 nome: pieces[fields.nome],
@@ -103,9 +103,9 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
         const reader = new FileReader()
 
         reader.onload = (e: any) => {
-            const fileContent = String(e.target.result).trim(),
+            const fileContent = e.target.result.trim(),
             rows = fileContent.split("\n"),
-            firstFields = rows[0].replace(/["']/g, "").split(";")
+            firstFields = this.splitRow(rows[0])
 
             Dialog.openDialog({
                 width: "500px",
@@ -131,8 +131,13 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
         }
 
         reader.readAsText(files[0], "ISO-8859-1")
+    }
 
-        return false
+    splitRow = (row: string) => {
+        let regex = /(["'])(?:(?=(\\?))\2.)*?\1/g,
+        pieces = row.trim().match(regex)
+
+        return pieces.map(p => p.replace(/["]/g, '')).filter(p => p !== "" && isNaN(Number(p)) && p.toLowerCase().indexOf("via") < 0 && p.length > 1)
     }
 
     render = (): JSX.Element => <Uploader onChange={this.readFile} dropArea accept=".csv" label={<div>
