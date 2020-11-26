@@ -26,4 +26,5 @@ export const Constants = {
     UPLOAD_FILE_DROP_LABEL: "Carica o trascina un file",
     UPLOAD_FILE_ERROR_NOT_MULTIPLE: "Puoi caricare soltanto un file!",
     SELECTED_FILES_LABEL: "File selezionati:",
+    UPLOAD_FILE_NOT_ACCEPTABLE: "Non puoi caricare questo tipo di file!",
 }

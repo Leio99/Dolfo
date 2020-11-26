@@ -35,7 +35,24 @@ class Select extends React.PureComponent<IProps, IState>{
         }
     }
 
+    componentDidMount = () => {
+        window.addEventListener("load", this.resizeFunc)
+        window.addEventListener("resize", this.resizeFunc)
+    }
+
+    resizeFunc = () => {
+        const selectOpts = document.querySelectorAll(".dolfo-select-options")
+
+        selectOpts.forEach(opt => {
+            const input = opt.parentElement.querySelector(".dolfo-input-select input");
+            
+            (opt as HTMLElement).style.width = input.clientWidth + "px"
+        })
+    }
+
     componentDidUpdate = (prevProps: any) => {
+        this.resizeFunc()
+
         if(prevProps.children !== this.props.children){
             let value = this.state.value,
             hasValues = false,
@@ -191,7 +208,7 @@ class Select extends React.PureComponent<IProps, IState>{
                             return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={(val) => this.changeMultiple(val, i)} multiple />
                         })
                     }
-                </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")} style={props.style}>
+                </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>
                     {props.canSearch && searchInput}
                     {
                         options.map((option, i) => {

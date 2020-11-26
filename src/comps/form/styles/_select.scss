@@ -46,14 +46,13 @@
     }
 
     .dolfo-select-options{
-        position: absolute;
+        position: fixed;
         z-index: 2;
         width: 100%;
         border: 1px solid $grey;
         background-color: $white;
         border-radius: $smallRadius;
         display: none;
-        top: 0;
         max-height: 300px;
         overflow: auto;
 
@@ -64,6 +63,10 @@
         .dolfo-option{
             padding: calc(0.5rem - 1px) calc(0.8rem - 1px);
             cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-right: 2rem;
 
             &:not(.unclick):hover, &.selected{
                 background-color: $lightGrey

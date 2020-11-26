@@ -6,6 +6,7 @@ import { ComponentsPermissions } from "./ComponentsPermissions"
 import { LoginCoordinatore } from "./coordinatori/LoginCoordinatore"
 import { HomeCoordinatore } from "./coordinatori/HomeCoordinatore"
 import { AddStudente } from "./coordinatori/AddStudente"
+import { ImportaStudenti } from "./coordinatori/ImportaStudenti"
 import { history } from "../Navigator"
 
 export const Components: IComponentList = {
@@ -35,6 +36,11 @@ export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI]: {
         component: ListaStudenti,
         pageTitle: "Studenti del corso",
+        permission: ComponentsPermissions.checkPermissionCoordinatore
+    },
+    [ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI]: {
+        component: ImportaStudenti,
+        pageTitle: "Importa studenti",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE]: {

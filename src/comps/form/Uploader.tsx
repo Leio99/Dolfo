@@ -30,9 +30,9 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         this.setState({
             files: input.files,
             value: input.value
-         })
+        })
 
-        this.props.onChange && this.props.onChange(input.files)
+        input.files && input.value && this.props.onChange && this.props.onChange(input.files)
     }
 
     onDragEnter = (e: any) => {
@@ -62,10 +62,32 @@ export class Uploader extends React.PureComponent<IProps, IState>{
     onDrop = (e: any, input: HTMLInputElement) => {
         e.preventDefault()
 
-        if(!this.props.multiple && e.dataTransfer.files.length > 1)
-            return
+        const files = e.dataTransfer.files,
+        accepts = this.props.accept
 
-        let files = e.dataTransfer.files
+        let notAcceptable = false
+
+        if(accepts && accepts !== "" && accepts !== "all"){
+            for(let i = 0; i < files.length; i++){
+                const loop = accepts.split(",")
+                
+                for(let i2 = 0; i2 < loop.length; i2++){
+                    const ext = loop[i2].trim()
+
+                    if(files[i].name.indexOf(ext) !== files[i].name.length - ext.length){
+                        notAcceptable = true
+                        NotificationMsg.showError(Constants.UPLOAD_FILE_NOT_ACCEPTABLE)
+                    }
+                }
+            }
+        }
+
+        if(notAcceptable) return
+
+        input.value = null
+
+        if(!this.props.multiple && files.length > 1)
+            return
 
         input.files = files
 
@@ -73,6 +95,8 @@ export class Uploader extends React.PureComponent<IProps, IState>{
             files,
             value: input.value
         })
+
+        input.files && input.value && this.props.onChange && this.props.onChange(input.files)
     }
 
     getFilesNameSeparated = () => {
@@ -80,8 +104,6 @@ export class Uploader extends React.PureComponent<IProps, IState>{
 
         for(let i = 0; i < this.state.files.length; i++)
             names.push(this.state.files[i].name)
-
-        
 
         return names.join(", ")
     }
@@ -94,6 +116,11 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         })
     }
 
+    clickInput = (e: any) => {
+        this.setState({ value: "" })
+        e.target.value = null
+    }
+
     render = (): JSX.Element => {
         const props = this.props,
         { files, value } = this.state,
@@ -101,12 +128,12 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         let input: HTMLInputElement
 
         return <div className="dolfo-uploader">
-            <input type="file" accept={props.accept} value={value} multiple={props.multiple} ref={r => input = r} onChange={() => this.onChange(input)} />
+            <input type="file" accept={props.accept} value={value} multiple={props.multiple} ref={r => input = r} onChange={() => this.onChange(input)} onClick={this.clickInput} />
 
             {
-                !props.dropArea ? <InputWrapper onClick={() => input.click()} icon={icon} style={props.wrapperStyle}label={props.label} resetFunction={this.resetFiles} value={files ? this.getFilesNameSeparated() : ""}>
+                !props.dropArea ? <InputWrapper onClick={() => input.click()} icon={icon} style={props.wrapperStyle}label={props.label} resetFunction={this.resetFiles} value={files ? this.getFilesNameSeparated() : ""} disabled={props.disabled}>
                     <input type="text" readOnly value={files && value.length ? this.getFilesNameSeparated() : Constants.UPLOAD_FILE_LABEL} style={props.style} />
-                </InputWrapper> : <div className="dolfo-uploader-drop" onDrop={(e) => this.onDrop(e, input)} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDragEnter={this.onDragEnter} onClick={() => input.click()} style={props.style} onMouseLeave={this.onDragLeave}>
+                </InputWrapper> : <div className={"dolfo-uploader-drop" + (props.disabled ? " disabled" : "")} onDrop={(e) => this.onDrop(e, input)} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDragEnter={this.onDragEnter} onClick={() => input.click()} style={props.style} onMouseLeave={this.onDragLeave}>
                     <div className="dolfo-uploader-drop-label">{props.label || Constants.UPLOAD_FILE_DROP_LABEL}</div>
 
                     {

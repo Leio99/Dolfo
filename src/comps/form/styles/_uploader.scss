@@ -11,7 +11,7 @@
         border: 2px dashed $grey;
         color: darken($grey, 25%);
         cursor: pointer;
-        transition: 0.2s ease;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         flex-direction: column;
         border-radius: $smallRadius;
         font-size: 18px;
