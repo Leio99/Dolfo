@@ -7,7 +7,7 @@
 }
 
 .dolfo-time-container{
-    position: absolute;
+    position: fixed;
     display: none;
     margin-top: 44px;
     background-color: $white;
@@ -16,8 +16,6 @@
     z-index: 1;
     width: 100px;
     padding: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
 
     table{
         width: 100%;
