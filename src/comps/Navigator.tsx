@@ -15,6 +15,7 @@ export interface IState{
     readonly openMenu: boolean
     readonly currentComponent: IComponent
     readonly tooltips: NodeListOf<Element>
+    readonly toolTexts: string[]
 }
 export class Navigator extends React.PureComponent<any, IState>{
     constructor(){
@@ -24,7 +25,8 @@ export class Navigator extends React.PureComponent<any, IState>{
             currentPath: window.location.pathname,
             openMenu: false,
             currentComponent: null,
-            tooltips: null
+            tooltips: null,
+            toolTexts: null
         }
     }
     
@@ -36,7 +38,7 @@ export class Navigator extends React.PureComponent<any, IState>{
         document.addEventListener('mouseover', () => {
             const tooltips = document.querySelectorAll("[data-tooltip]")
 
-            if(context.areDifferentTooltips(context.state.tooltips, tooltips))
+            if(context.areDifferentTooltips(tooltips))
                 context.checkTooltips()
         })
 
@@ -50,29 +52,37 @@ export class Navigator extends React.PureComponent<any, IState>{
         })
     }
 
-    areDifferentTooltips = (currentTips: NodeListOf<Element>, newTips: NodeListOf<Element>) => {
+    areDifferentTooltips = (newTips: NodeListOf<Element>) => {
+        const currentTips = this.state.tooltips
+
         if(!currentTips || !newTips || currentTips.length !== newTips.length) return true
 
-        for(let i = 0; i < currentTips.length; i++)
-            if(currentTips[i] !== newTips[i])
+        for(let i = 0; i < currentTips.length; i++){
+            const current = currentTips[i],
+            newTip = newTips[i]
+
+            if(current !== newTip || this.state.toolTexts[i] !== newTip.getAttribute("data-tooltip"))
                 return true
+        }
 
         return false
     }
 
     checkTooltips = () => {
-        const elements = document.querySelectorAll("[data-tooltip]")
-
-        this.setState({ tooltips: elements })
+        const elements = document.querySelectorAll("[data-tooltip]"),
+        toolTexts: string[] = []
 
         elements.forEach(tool => {
-            const tooltip = document.createElement("div");
+            const tooltip = document.createElement("div"),
+            content = tool.getAttribute("data-tooltip")
+
+            toolTexts.push(content);
 
             (tool as any).tooltip?.remove();
-            (tool as any).tooltip = tooltip
+            (tool as any).tooltip = tooltip;
 
             tooltip.classList.add("dolfo-tooltip")
-            tooltip.innerHTML = tool.getAttribute("data-tooltip")
+            tooltip.innerHTML = content
 
             tool.addEventListener("mouseenter", () => {
                 const bound = tool.getBoundingClientRect()
@@ -84,6 +94,11 @@ export class Navigator extends React.PureComponent<any, IState>{
             })
 
             tool.addEventListener("mouseleave", () => (tool as any).tooltip.remove())
+        })
+
+        this.setState({
+            tooltips: elements,
+            toolTexts
         })
     }
 

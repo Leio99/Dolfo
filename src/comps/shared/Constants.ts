@@ -22,4 +22,8 @@ export const Constants = {
     NEXT_TEXT: "Successivo",
     CHANGE_MONTH: "Cambia mese",
     CHANGE_YEAR: "Cambia anno",
+    UPLOAD_FILE_LABEL: "Carica un file",
+    UPLOAD_FILE_DROP_LABEL: "Carica o trascina un file",
+    UPLOAD_FILE_ERROR_NOT_MULTIPLE: "Puoi caricare soltanto un file!",
+    SELECTED_FILES_LABEL: "File selezionati:",
 }

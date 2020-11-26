@@ -11,6 +11,7 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
     width: fit-content;
     transform-origin: bottom;
     animation: showTooltip 0.1s ease forwards;
+    max-width: 350px;
 
     &:after{
         content: "";
@@ -25,6 +26,6 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
 }
 
 @keyframes showTooltip{
-    0%{ transform: translate(-50%, -130%) scale(0) }
-    100%{ transform: translate(-50%, -130%) scale(1) }
+    0%{ transform: translate(-50%, calc(-100% - 10px)) scale(0) }
+    100%{ transform: translate(-50%, calc(-100% - 10px)) scale(1) }
 }

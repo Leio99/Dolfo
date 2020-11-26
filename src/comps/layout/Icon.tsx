@@ -8,7 +8,7 @@ export interface DefaultIconProps{
     readonly className?: string
     readonly spinning?: boolean
     readonly style?: CSSProperties
-    readonly onClick?: () => void
+    readonly onClick?: (e: any) => void
     readonly color?: string
     readonly large?: boolean
     readonly tooltip?: string

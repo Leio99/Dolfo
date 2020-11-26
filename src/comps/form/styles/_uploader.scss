@@ -1,0 +1,67 @@
+.dolfo-uploader{
+    input[type="file"]{
+        display: none
+    }
+
+    .dolfo-uploader-drop{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        border: 2px dashed $grey;
+        color: darken($grey, 25%);
+        cursor: pointer;
+        transition: 0.2s ease;
+        flex-direction: column;
+        border-radius: $smallRadius;
+        font-size: 18px;
+        background-color: lighten($grey, 17%);
+
+        &:hover, &.dragging{
+            border-color: $selectionBlue;
+            color: $selectionBlue;
+            background-color: lighten($selectionBlue, 45%)
+        }
+
+        .dolfo-uploader-drop-label{
+            pointer-events: none
+        }
+
+        .selected-files{
+            max-width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 0.5rem;
+            font-size: 16px;
+            
+            strong{
+                font-weight: 500
+            }
+        }
+    }
+
+    .dolfo-input-content input{
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap
+    }
+
+    .dolfo-input-wrapper:hover{
+        cursor: pointer;
+        background-color: $selectionBlue;
+
+        *{
+            pointer-events: none
+        }
+
+        .dolfo-input-icon{
+            color: $white
+        }
+
+        .reset-input{
+            pointer-events: all
+        }
+    }
+}

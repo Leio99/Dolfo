@@ -13,7 +13,7 @@ export interface IProps{
     readonly className?: string
     readonly onFocus?: (e: any) => void
     readonly onBlur?: (e: any) => void
-    readonly resetFunction?: () => void
+    readonly resetFunction?: (e: any) => void
     readonly forceFocus?: () => void
     readonly onKeyDown?: (e: any) => void
     readonly onClick?: () => void
