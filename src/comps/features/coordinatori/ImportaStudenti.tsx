@@ -5,6 +5,7 @@ import Select from "../../form/Select"
 import { Option } from "../../form/Option"
 import { Uploader } from "../../form/Uploader"
 import { Table } from "../../layout/Table"
+import { capitalizeFirst } from "../../../commons/utility"
 
 const fields = [{
     label: "Nome",
@@ -76,8 +77,8 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
             const pieces = this.splitRow(r)
 
             return {
-                nome: pieces[fields.nome],
-                cognome: pieces[fields.cognome],
+                nome: capitalizeFirst(pieces[fields.nome]),
+                cognome: capitalizeFirst(pieces[fields.cognome]),
                 cf: pieces[fields.cf],
                 email: pieces[fields.email],
                 dataNascita: pieces[fields.dataNascita],

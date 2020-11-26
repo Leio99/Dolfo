@@ -46,7 +46,8 @@
     }
 
     .dolfo-select-options{
-        position: fixed;
+        position: absolute;
+        top: 0;
         z-index: 2;
         width: 100%;
         border: 1px solid $grey;

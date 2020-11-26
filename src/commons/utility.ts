@@ -148,3 +148,23 @@ export const copyToClipBoard = (text: string) => {
 
     NotificationMsg.showInfo("Codice copiato negli appunti!")
 }
+
+export const capitalizeFirst = (name: string) => {
+    let splitStr = capitalizeQuote(name.toLowerCase()).split(" ")
+
+    for (let i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1) 
+    }
+   
+    return splitStr.join(" ")
+}
+
+export const capitalizeQuote = (name: string) => {
+    let splitStr = name.toLowerCase().split("'")
+
+    for (let i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1)
+    }
+   
+    return splitStr.join("'")
+}

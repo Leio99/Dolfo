@@ -35,24 +35,7 @@ class Select extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidMount = () => {
-        window.addEventListener("load", this.resizeFunc)
-        window.addEventListener("resize", this.resizeFunc)
-    }
-
-    resizeFunc = () => {
-        const selectOpts = document.querySelectorAll(".dolfo-select-options")
-
-        selectOpts.forEach(opt => {
-            const input = opt.parentElement.querySelector(".dolfo-input-select input");
-            
-            (opt as HTMLElement).style.width = input.clientWidth + "px"
-        })
-    }
-
     componentDidUpdate = (prevProps: any) => {
-        this.resizeFunc()
-
         if(prevProps.children !== this.props.children){
             let value = this.state.value,
             hasValues = false,
