@@ -28,8 +28,6 @@ export class Navigator extends React.PureComponent<any, IState>{
     }
     
     componentDidMount = () => {
-        const context = this
-
         this.findComponent()
 
         initializeTooltips()
