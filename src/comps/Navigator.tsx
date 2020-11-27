@@ -3,6 +3,7 @@ import { createBrowserHistory } from "history"
 import { Route, Switch, Router } from "react-router-dom"
 import { Icon } from "./layout/Icon"
 import Button from "./layout/Button"
+import { initializeTooltips } from "./layout/Tooltip"
 import { Components } from "./features/Components"
 import { IComponent, IComponentList } from "../models/IComponent"
 import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
@@ -14,8 +15,6 @@ export interface IState{
     readonly currentPath: string
     readonly openMenu: boolean
     readonly currentComponent: IComponent
-    readonly tooltips: NodeListOf<Element>
-    readonly toolTexts: string[]
 }
 export class Navigator extends React.PureComponent<any, IState>{
     constructor(){
@@ -24,9 +23,7 @@ export class Navigator extends React.PureComponent<any, IState>{
         this.state = {
             currentPath: window.location.pathname,
             openMenu: false,
-            currentComponent: null,
-            tooltips: null,
-            toolTexts: null
+            currentComponent: null
         }
     }
     
@@ -35,70 +32,13 @@ export class Navigator extends React.PureComponent<any, IState>{
 
         this.findComponent()
 
-        document.addEventListener('mouseover', () => {
-            const tooltips = document.querySelectorAll("[data-tooltip]")
-
-            if(context.areDifferentTooltips(tooltips))
-                context.checkTooltips()
-        })
-
-        document.addEventListener("click", () => document.querySelector(".dolfo-tooltip")?.remove())
+        initializeTooltips()
 
         history.listen(loc => {
             this.setState({
                 currentPath: loc.pathname,
                 openMenu: false
             }, this.findComponent)
-        })
-    }
-
-    areDifferentTooltips = (newTips: NodeListOf<Element>) => {
-        const currentTips = this.state.tooltips
-
-        if(!currentTips || !newTips || currentTips.length !== newTips.length) return true
-
-        for(let i = 0; i < currentTips.length; i++){
-            const current = currentTips[i],
-            newTip = newTips[i]
-
-            if(current !== newTip || this.state.toolTexts[i] !== newTip.getAttribute("data-tooltip"))
-                return true
-        }
-
-        return false
-    }
-
-    checkTooltips = () => {
-        const elements = document.querySelectorAll("[data-tooltip]"),
-        toolTexts: string[] = []
-
-        elements.forEach(tool => {
-            const tooltip = document.createElement("div"),
-            content = tool.getAttribute("data-tooltip")
-
-            toolTexts.push(content);
-
-            (tool as any).tooltip?.remove();
-            (tool as any).tooltip = tooltip;
-
-            tooltip.classList.add("dolfo-tooltip")
-            tooltip.innerHTML = content
-
-            tool.addEventListener("mouseenter", () => {
-                const bound = tool.getBoundingClientRect()
-                
-                tooltip.style.top = bound.top + "px"
-                tooltip.style.left = (bound.left + (bound.width / 2)) + "px"
-
-                document.body.appendChild((tool as any).tooltip)
-            })
-
-            tool.addEventListener("mouseleave", () => (tool as any).tooltip.remove())
-        })
-
-        this.setState({
-            tooltips: elements,
-            toolTexts
         })
     }
 
