@@ -8,17 +8,18 @@ export interface IProps {
     readonly circleWidth?: number
     readonly loading?: boolean
     readonly loadingText?: string | JSX.Element
+    readonly className?: string
 }
 
 export class Progress extends React.PureComponent<IProps>{
     render = (): JSX.Element => {
         const props = this.props,
-        percent = props.percent < 0 || props.percent > 100 ? 0 : props.percent,
+        percent = props.percent < 0 ? 0 : props.percent > 100 ? 100 : props.percent,
         color = props.color || "darkblue",
         width = props.circleWidth >= 0 ? props.circleWidth : 150
 
-        if (props.circular) {
-            return <svg viewBox="0 0 36 36" className="dolfo-circular-progress" style={{ width }}>
+        if(props.circular){
+            return <svg viewBox="0 0 36 36" className={"dolfo-circular-progress" + (props.className ? (" " + props.className) : "")} style={{ width }}>
                 <path className="dolfo-progress-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 <path className={"dolfo-progress-circle line-" + color} strokeDasharray={percent + ", 100"} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 <text x="18" y="20.35" className="dolfo-progress-percentage">
@@ -27,7 +28,7 @@ export class Progress extends React.PureComponent<IProps>{
             </svg>
         }
 
-        return <div className={"dolfo-progress-line " + (props.loading ? " progress-loading" : "")}>
+        return <div className={"dolfo-progress-line " + (props.className ? (" " + props.className) : "") + (props.loading ? " progress-loading" : "")}>
             <span className="percent-text">
                 {props.loading ? (props.loadingText || <LoadingIcon spinning />) :( props.percent + "%")}
             </span>

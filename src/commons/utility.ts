@@ -1,9 +1,9 @@
 import { NotificationMsg } from "../comps/layout/NotificationMsg"
 import { Day } from "../models/IDay"
 
-export const formatDate = (date: Date) => {
-    return `${zeroBefore(date.getDate())}-${zeroBefore(date.getMonth()+1)}-${date.getFullYear()}`
-}
+export const formatDate = (date: Date) => `${zeroBefore(date.getDate())}-${zeroBefore(date.getMonth() + 1)}-${date.getFullYear()}`
+
+export const formatItalian = (date: string) => formatDate(new Date(date))
 
 export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
 
@@ -26,7 +26,7 @@ export const decodeMonth = (month: number, short: boolean = false) => {
     }
 }
 
-export const zeroBefore = (n: number) => n < 10 ? "0" + n : n.toString()
+export const zeroBefore = (n: number) => n < 10 ? ("0" + n) : n.toString()
 
 export const getLastDay = (inputMonth?: number, inputYear?: number) => {
     let date = new Date(),
@@ -167,4 +167,17 @@ export const capitalizeQuote = (name: string) => {
     }
    
     return splitStr.join("'")
+}
+
+export const convertFromUTC = (date: string) => {
+    let localDate = new Date(date)
+
+    return `${zeroBefore(localDate.getHours())}:${zeroBefore(localDate.getMinutes())}`
+}
+
+export const getDateTime = (date: string) => {
+    let clearDate = date.replace("Z", ""),
+    converted = new Date(clearDate)
+
+    return `${zeroBefore(converted.getHours())}:${zeroBefore(converted.getMinutes())}`
 }

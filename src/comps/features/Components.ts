@@ -8,6 +8,7 @@ import { HomeCoordinatore } from "./coordinatori/HomeCoordinatore"
 import { AddStudente } from "./coordinatori/AddStudente"
 import { ImportaStudenti } from "./coordinatori/ImportaStudenti"
 import { history } from "../Navigator"
+import { DettaglioStudente } from "./coordinatori/DettaglioStudente"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI]: {
@@ -44,7 +45,7 @@ export const Components: IComponentList = {
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE]: {
-        component: null,
+        component: DettaglioStudente,
         pageTitle: "Dettaglio studente",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },

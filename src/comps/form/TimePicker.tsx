@@ -118,37 +118,35 @@ class TimePicker extends React.PureComponent<IProps, IState>{
             />
 
             <div className={"dolfo-time-container" + (showTime ? " show" : "")}>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td onClick={this.increaseHour} data-tooltip={Constants.INCREASE_TEXT}>
-                                <Icon iconKey="caret-up" />
-                            </td>
-                            <td></td>
-                            <td onClick={this.increaseMinute} data-tooltip={Constants.INCREASE_TEXT}>
-                                <Icon iconKey="caret-up" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className="time-display">{hour}</div>
-                            </td>
-                            <td>:</td>
-                            <td>
-                                <div className="time-display">{minute}</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td onClick={this.decreaseHour} data-tooltip={Constants.DECREASE_TEXT}>
-                                <Icon iconKey="caret-down" />
-                            </td>
-                            <td></td>
-                            <td onClick={this.decreaseMinute} data-tooltip={Constants.DECREASE_TEXT}>
-                                <Icon iconKey="caret-down" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div className="dolfo-picker-table">
+                    <div className="dolfo-picker-row">
+                        <div className="dolfo-picker-cell" onClick={this.increaseHour} data-tooltip={Constants.INCREASE_TEXT}>
+                            <Icon iconKey="caret-up" />
+                        </div>
+                        <div className="dolfo-picker-cell"></div>
+                        <div className="dolfo-picker-cell" onClick={this.increaseMinute} data-tooltip={Constants.INCREASE_TEXT}>
+                            <Icon iconKey="caret-up" />
+                        </div>
+                    </div>
+                    <div className="dolfo-picker-row">
+                        <div className="dolfo-picker-cell">
+                            <div className="time-display">{hour}</div>
+                        </div>
+                        <div className="dolfo-picker-cell">:</div>
+                        <div className="dolfo-picker-cell">
+                            <div className="time-display">{minute}</div>
+                        </div>
+                    </div>
+                    <div className="dolfo-picker-row">
+                        <div className="dolfo-picker-cell" onClick={this.decreaseHour} data-tooltip={Constants.DECREASE_TEXT}>
+                            <Icon iconKey="caret-down" />
+                        </div>
+                        <div className="dolfo-picker-cell"></div>
+                        <div className="dolfo-picker-cell" onClick={this.decreaseMinute} data-tooltip={Constants.DECREASE_TEXT}>
+                            <Icon iconKey="caret-down" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </InputWrapper>
     }

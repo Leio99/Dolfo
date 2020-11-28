@@ -7,7 +7,7 @@
 }
 
 .dolfo-time-container{
-    position: fixed;
+    position: absolute;
     display: none;
     margin-top: 44px;
     background-color: $white;
@@ -17,13 +17,22 @@
     width: 100px;
     padding: 0.5rem;
 
-    table{
+    .dolfo-picker-table{
         width: 100%;
         text-align: center;
         font-size: 120%;
+        display: table;
 
-        tr:first-child, tr:last-child{
-            td{
+        .dolfo-picker-row{
+            display: table-row;
+
+            .dolfo-picker-cell{
+                display: table-cell
+            }
+        }
+
+        .dolfo-picker-row:first-child, .dolfo-picker-row:last-child{
+            .dolfo-picker-cell{
                 border-radius: $roundRadius;
                 cursor: pointer;
 

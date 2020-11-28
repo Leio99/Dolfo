@@ -89,6 +89,13 @@ body{
     opacity: 0;
     animation: slideLeft 0.4s ease forwards;
 }
+.progress-label{
+    font-size: 20px;
+    display: inline-block;
+    transform: translateY(-50%);
+    position: relative;
+    top: 50%
+}
 
 ::-webkit-scrollbar{
     width: 7px;

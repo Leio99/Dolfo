@@ -26,4 +26,33 @@ export class StudentiService{
         }
         return ServerCall.post(API_URL_REGISTRO + "/corsi/switchabilitastage", params)
     }
+
+    static getStudente(id: string){
+        return ServerCall.get(API_URL_REGISTRO + "/studenti/getstudentibyid/" + id)
+    }
+
+    static getOreStudente(id: string){
+        return ServerCall.get(API_URL_REGISTRO + "/studenti/gettotaleorelezioni/" + id)
+    }
+
+    static getTotaleOre(id: string){
+        return ServerCall.get(API_URL_REGISTRO + "/studenti/gethoursamount/" + id)
+    }
+
+    static getPresenze(id: number){
+        return ServerCall.get(API_URL_REGISTRO + "/studenti/getdetailedpresences/" + id)
+    }
+
+    static editPresenza(id: number, body: any){
+        const login = ComponentsPermissions.getLoginCoordinatore(),
+		params = {
+            authCoordinatore: {
+                idCoordinatore: login.idCoordinatore,
+                password: login.password
+            },
+            ...body
+        }
+
+        return ServerCall.put(API_URL_REGISTRO + "/presenze/" + id, params)
+    }
 }

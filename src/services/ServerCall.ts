@@ -9,6 +9,11 @@ export class ServerCall{
                     content: err.response.data,
                     type: "error"
                 })
+            }else{
+                Dialog.infoDialog({
+                    type: "error",
+                    content: "C'è stato un errore. Riprova."
+                })
             }
         })
     }

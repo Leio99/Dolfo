@@ -90,6 +90,7 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
             width: "80vw",
             title: "Anteprima dati",
             okText: "Conferma",
+            okType: "green",
             content: <Table data={data} columns={[
                 { label: "Nome", field: "nome", tooltip: true },
                 { label: "Cognome", field: "cognome", tooltip: true },
@@ -138,7 +139,7 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
         let regex = /(["'])(?:(?=(\\?))\2.)*?\1/g,
         pieces = row.trim().match(regex)
 
-        return pieces.map(p => p.replace(/["]/g, '')).filter(p => p !== "" && isNaN(Number(p)) && p.toLowerCase().indexOf("via") < 0 && p.length > 1)
+        return pieces.map(p => p.replace(/["']/g, "")).filter(p => isNaN(Number(p)) && p.toLowerCase().indexOf("via") < 0 && p.length > 1)
     }
 
     render = (): JSX.Element => <Uploader onChange={this.readFile} dropArea accept=".csv" label={<div>

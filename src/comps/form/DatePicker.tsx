@@ -206,116 +206,108 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             
             <div className={"dolfo-calendar-container" + (showCalendar ? " show" : "")}>
                 {
-                    !selectingMonth && !selectingYear && <table className="dolfo-calendar">
-                        <thead>
-                            <tr>
-                                <th className="prev-month" onClick={this.prevMonth} data-tooltip={Constants.PREV_TEXT}>
-                                    <Icon iconKey="chevron-left" />
-                                </th>
-                                <th colSpan={3} className="select-month" onClick={this.changeMonth} data-tooltip={Constants.CHANGE_MONTH}>
-                                    {decodeMonth(currentMonth)}
-                                </th>
-                                <th colSpan={2} className="select-year" onClick={this.changeYear} data-tooltip={Constants.CHANGE_YEAR}>
-                                    {currentYear}
-                                </th>
-                                <th className="next-month" onClick={this.nextMonth} data-tooltip={Constants.NEXT_TEXT}>
-                                    <Icon iconKey="chevron-right" />
-                                </th>
-                            </tr>
+                    !selectingMonth && !selectingYear && <div className="dolfo-calendar">
+                        <div className="dolfo-calendar-row">
+                            <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevMonth} data-tooltip={Constants.PREV_TEXT}>
+                                <Icon iconKey="chevron-left" />
+                            </div>
+                            <div className="select-month dolfo-calendar-cell-h" onClick={this.changeMonth} data-tooltip={Constants.CHANGE_MONTH}>
+                                {decodeMonth(currentMonth)}
+                            </div>
+                            <div className="select-year dolfo-calendar-cell-h" onClick={this.changeYear} data-tooltip={Constants.CHANGE_YEAR}>
+                                {currentYear}
+                            </div>
+                            <div className="next-month dolfo-calendar-cell-h" onClick={this.nextMonth} data-tooltip={Constants.NEXT_TEXT}>
+                                <Icon iconKey="chevron-right" />
+                            </div>
+                        </div>
 
-                            <tr>
-                                <th>L</th>
-                                <th>M</th>
-                                <th>M</th>
-                                <th>G</th>
-                                <th>V</th>
-                                <th>S</th>
-                                <th>D</th>
-                            </tr>
-                        </thead>
+                        <div className="dolfo-calendar-row">
+                            <div className="dolfo-calendar-cell-h">L</div>
+                            <div className="dolfo-calendar-cell-h">M</div>
+                            <div className="dolfo-calendar-cell-h">M</div>
+                            <div className="dolfo-calendar-cell-h">G</div>
+                            <div className="dolfo-calendar-cell-h">V</div>
+                            <div className="dolfo-calendar-cell-h">S</div>
+                            <div className="dolfo-calendar-cell-h">D</div>
+                        </div>
 
-                        <tbody>
-                            {
-                                monthCalendar.map(week => {
-                                    return <tr>
-                                        {
-                                            week.map(day => {
-                                                if (day.prevMonth >= 0) {
-                                                    return <td className="ext-day" onClick={() => this.selectDay(day.day, day.prevMonth, day.prevYear)}>{day.day}</td>
-                                                }
-
-                                                if (day.nextMonth >= 0) {
-                                                    return <td className="ext-day" onClick={() => this.selectDay(day.day, day.nextMonth, day.nextYear)}>{day.day}</td>
-                                                }
-
-                                                return <td className={this.isCurrentDay(day) ? "selected" : this.isToday(day) ? "today" : ""} onClick={() => this.selectDay(day.day)}>{day.day}</td>
-                                            })
-                                        }
-                                    </tr>
-                                })
-                            }
-
-                            <tr>
-                                <td colSpan={7} onClick={this.chooseToday}>
-                                    Oggi
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                }
-
-                {
-                    selectingMonth && <table className="month-selection">
                         {
-                            [[0,1,2],[3,4,5],[6,7,8],[9,10,11]].map(tris => {
-                                return <tr>
+                            monthCalendar.map(week => {
+                                return <div className="dolfo-calendar-row">
                                     {
-                                        tris.map(month => {
-                                            return <td className={"select" + (currentMonth === month ? " selected" : "")} onClick={() => this.selectMonth(month)}>
-                                                <span>{decodeMonth(month, true)}</span>
-                                            </td>
+                                        week.map(day => {
+                                            if (day.prevMonth >= 0) {
+                                                return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.prevMonth, day.prevYear)}>{day.day}</div>
+                                            }
+
+                                            if (day.nextMonth >= 0) {
+                                                return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.nextMonth, day.nextYear)}>{day.day}</div>
+                                            }
+
+                                            return <div className={"dolfo-calendar-cell" + (this.isCurrentDay(day) ? " selected" : this.isToday(day) ? " today" : "")} onClick={() => this.selectDay(day.day)}>{day.day}</div>
                                         })
                                     }
-                                </tr>
+                                </div>
                             })
                         }
-                    </table>
+
+                        <div className="dolfo-calendar-row">
+                            <div className="dolfo-calendar-cell select-today" onClick={this.chooseToday}>
+                                Oggi
+                            </div>
+                        </div>
+                    </div>
                 }
 
                 {
-                    selectingYear && <table className="year-selection">
-                        <thead>
-                            <tr>
-                                <th className="prev-month" onClick={this.prevDecade} data-tooltip={Constants.PREV_TEXT}>
-                                    <Icon iconKey="chevron-left" />
-                                </th>
-                                <th>
-                                    {currentDecade}
-                                </th>
-                                <th className="next-month" onClick={this.nextDecade} data-tooltip={Constants.NEXT_TEXT}>
-                                    <Icon iconKey="chevron-right" />
-                                </th>
-                            </tr>
-                        </thead>
+                    selectingMonth && <div className="month-selection">
+                        {
+                            [[0,1,2],[3,4,5],[6,7,8],[9,10,11]].map(tris => {
+                                return <div className="dolfo-calendar-row">
+                                    {
+                                        tris.map(month => {
+                                            return <div className={"dolfo-calendar-cell select" + (currentMonth === month ? " selected" : "")} onClick={() => this.selectMonth(month)}>
+                                                <span>{decodeMonth(month, true)}</span>
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            })
+                        }
+                    </div>
+                }
 
-                        <tbody>
-                            {
-                                [[-1, 0, 1],[2,3,4],[5,6,7],[8,9,10]].map(tris => {
-                                    return <tr>
-                                        {
-                                            tris.map(n => {
-                                                let year = currentDecade + n
+                {
+                    selectingYear && <div className="year-selection">
+                        <div className="dolfo-calendar-row">
+                            <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevDecade} data-tooltip={Constants.PREV_TEXT}>
+                                <span><Icon iconKey="chevron-left" /></span>
+                            </div>
+                            <div className="dolfo-calendar-cell-h">
+                                <span>{currentDecade}</span>
+                            </div>
+                            <div className="next-month dolfo-calendar-cell-h" onClick={this.nextDecade} data-tooltip={Constants.NEXT_TEXT}>
+                                <span><Icon iconKey="chevron-right" /></span>
+                            </div>
+                        </div>
 
-                                                return <td className={"select" + (currentYear === year ? " selected" : "") + (n === -1 || n === 10 ? " ext-year" : "")} onClick={() => this.selectYear(currentDecade + n)}>
-                                                    <span>{year}</span>
-                                                </td>
-                                            })
-                                        }
-                                    </tr>
-                                })
-                            }
-                        </tbody>
-                    </table>
+                        {
+                            [[-1, 0, 1],[2,3,4],[5,6,7],[8,9,10]].map(tris => {
+                                return <div className="dolfo-calendar-row">
+                                    {
+                                        tris.map(n => {
+                                            let year = currentDecade + n
+
+                                            return <div className={"dolfo-calendar-cell select" + (currentYear === year ? " selected" : "") + (n === -1 || n === 10 ? " ext-year" : "")} onClick={() => this.selectYear(currentDecade + n)}>
+                                                <span>{year}</span>
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            })
+                        }
+                    </div>
                 }
             </div>
         </InputWrapper>
