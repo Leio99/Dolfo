@@ -75,7 +75,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                 <Card title={studente.ritirato ? "Ritirato: " + formatItalian(studente.dataRitiro) : studente.annoFrequentazione === 1 ? "Primo anno" : "Secondo anno"} className="col-12 col-md mr-0 mr-md-2 mb-3">
                     <h3 className="text-uppercase mb-2 text-truncate">{studente.nome} {studente.cognome}</h3>
                     <p className="mb-1">
-                        <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatItalian(studente.dataNascita)}
+                        <Icon large type="far" iconKey="calendar-star" className="mr-1" /> {formatItalian(studente.dataNascita)}
                     </p>
                     <p className="mb-0">
                         <Icon large type="far" iconKey="envelope" className="mr-1" /> <a href={"mailto:" + studente.email}>{studente.email}</a>
