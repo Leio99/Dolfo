@@ -185,7 +185,7 @@ export const getDateTime = (date: string) => {
 
 export const LoadingIconCentered = () => {
     return LoadingIcon({
-        color: "var(--darkBlue)",
+        color: "var(--darkblue)",
         style: { fontSize: 50 },
         spinning: true,
         className: "d-block mx-auto"
