@@ -1,10 +1,10 @@
 import React from "react"
-import { convertFromUTC, formatItalian, getDateTime } from "../../../commons/utility"
+import { convertFromUTC, formatItalian, getDateTime, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import TimePicker from "../../form/TimePicker"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
-import { CheckIcon, CloseIcon, EditIcon, LoadingIcon } from "../../layout/Icon"
+import { CheckIcon, CloseIcon, EditIcon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
 
 export interface IProps{
@@ -14,7 +14,7 @@ export interface IProps{
 export interface IState{
     readonly presenze: any[]
     readonly editingList: any[]
-    readonly loading: boolean
+    readonly loadingList: number[]
 }
 
 export default class TabellaPresenze extends React.PureComponent<IProps, IState>{
@@ -25,7 +25,7 @@ export default class TabellaPresenze extends React.PureComponent<IProps, IState>
         this.state = {
             presenze: null,
             editingList: [],
-            loading: false
+            loadingList: []
         }
     }
 
@@ -77,12 +77,16 @@ export default class TabellaPresenze extends React.PureComponent<IProps, IState>
         })
     }
 
+    startToLoad = (id: number) => this.setState({ loadingList: this.state.loadingList.concat(id) })
+
+    finishToLoad = (id: number) => this.setState({ loadingList: this.state.loadingList.filter(d => d !== id) })
+
     confirmEdit = (id: number) => {
         const { presenze, editingList } = this.state,
         presenza = editingList.find(p => p.idPresenza === id),
         data = new Date()
 
-        this.toggleLoading()
+        this.startToLoad(id)
 
         StudentiService.editPresenza(id, {
             idPresenza: presenza.idPresenza,
@@ -116,8 +120,8 @@ export default class TabellaPresenze extends React.PureComponent<IProps, IState>
                 })
             }
 
-            this.toggleLoading()
-        }).catch(this.toggleLoading)
+            this.finishToLoad(id)
+        }).catch(() => this.finishToLoad(id))
     }
 
     getCategorie = () => {
@@ -138,37 +142,36 @@ export default class TabellaPresenze extends React.PureComponent<IProps, IState>
         })
     }
 
-    toggleLoading = () => this.setState({ loading: !this.state.loading })
-
     render = (): JSX.Element => {
-        const { presenze, editingList, loading } = this.state
+        const { presenze, editingList, loadingList } = this.state
 
-        if(!presenze) return <LoadingIcon spinning style={{ fontSize: 50 }} />
+        if(!presenze) return <LoadingIconCentered />
 
         return <div>
             <h3>Presenze dello studente</h3>
 
             <Table columns={[
-                { label: "Giorno", field: "data", canSearch: true, width: 150 },
-                { label: "Entrata", field: "ingresso" },
-                { label: "Uscita", field: "uscita" },
+                { label: "Giorno", field: "data", canSearch: true, width: 150, align: "center" },
+                { label: "Entrata", field: "ingresso", width: 200, align: "center" },
+                { label: "Uscita", field: "uscita", width: 200, align: "center" },
                 { label: "Lezione", field: "lezione", tooltip: true, canSearch: true },
                 { label: "Azioni", field: "azioni", width: "20%", align: "center" },
             ]} data={
                 presenze.map(p => {
-                    let presenzaEdit = editingList.find(pre => pre.idPresenza === p.idPresenza)
-                    
+                    const presenzaEdit = editingList.find(pre => pre.idPresenza === p.idPresenza),
+                    isLoading = loadingList.includes(p.idPresenza)
+
                     return {
                         data: formatItalian(p.data),
-                        ingresso: presenzaEdit ? <TimePicker defaultValue={p.ingresso} onChange={(v) => this.changeEntrata(v, p.idPresenza)} disabled={loading} /> : p.ingresso,
-                        uscita: presenzaEdit ? <TimePicker defaultValue={p.uscita} onChange={(v) => this.changeEntrata(v, p.idPresenza)} disabled={loading} /> : p.uscita,
+                        ingresso: presenzaEdit ? <TimePicker defaultValue={p.ingresso} onChange={(v) => this.changeEntrata(v, p.idPresenza)} disabled={isLoading} /> : p.ingresso,
+                        uscita: presenzaEdit ? <TimePicker defaultValue={p.uscita} onChange={(v) => this.changeUscita(v, p.idPresenza)} disabled={isLoading} /> : p.uscita,
                         lezione: p.lezione,
                         azioni: presenzaEdit ? <div>
-                            <Button tooltip="Annulla" btnColor="red" circleBtn onClick={() => this.annullaModifica(p)} className="mr-2" disabled={loading}>
+                            <Button tooltip="Annulla" btnColor="red" circleBtn onClick={() => this.annullaModifica(p)} className="mr-2" disabled={isLoading}>
                                 <CloseIcon />
                             </Button>
 
-                            <Button tooltip="Conferma modifiche" circleBtn onClick={() => this.confirmEdit(p.idPresenza)} btnColor="green" loading={loading}>
+                            <Button tooltip="Conferma modifiche" circleBtn onClick={() => this.confirmEdit(p.idPresenza)} btnColor="green" loading={isLoading}>
                                 <CheckIcon />
                             </Button>
                         </div> : <Button tooltip="Modifica orari" circleBtn onClick={() => this.startTimeEdit(p)} btnColor="orange">

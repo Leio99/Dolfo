@@ -123,7 +123,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                         <div className="dolfo-picker-cell" onClick={this.increaseHour} data-tooltip={Constants.INCREASE_TEXT}>
                             <Icon iconKey="caret-up" />
                         </div>
-                        <div className="dolfo-picker-cell"></div>
+                        <div className="dolfo-picker-cell-e"></div>
                         <div className="dolfo-picker-cell" onClick={this.increaseMinute} data-tooltip={Constants.INCREASE_TEXT}>
                             <Icon iconKey="caret-up" />
                         </div>
@@ -141,7 +141,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                         <div className="dolfo-picker-cell" onClick={this.decreaseHour} data-tooltip={Constants.DECREASE_TEXT}>
                             <Icon iconKey="caret-down" />
                         </div>
-                        <div className="dolfo-picker-cell"></div>
+                        <div className="dolfo-picker-cell-e"></div>
                         <div className="dolfo-picker-cell" onClick={this.decreaseMinute} data-tooltip={Constants.DECREASE_TEXT}>
                             <Icon iconKey="caret-down" />
                         </div>

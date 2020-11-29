@@ -4,7 +4,7 @@ import Select from "../../form/Select"
 import { Option } from "../../form/Option"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
-import { CheckCircleIcon, CloseCircleIcon, DetailIcon, EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
+import { CheckCircleIcon, CloseCircleIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
 import { Tab } from "../../layout/Tab"
 import { Table } from "../../layout/Table"
 import { Tabs } from "../../layout/Tabs"
@@ -15,6 +15,7 @@ import { StudentiService } from "../../../services/StudentiService"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 import { StageSwitch } from "./StageSwitch"
+import { LoadingIconCentered } from "../../../commons/utility"
 
 export interface IState{
     readonly studenti: any[]
@@ -149,9 +150,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         primoAnno = studenti ? studenti.filter(s => s.annoFrequentazione === 1 && !s.promosso) : null,
         secondoAnno = studenti ? studenti.filter(s => s.annoFrequentazione === 2 && !s.promosso) : null,
         listaArchiviati = studenti ? studenti.filter(s => s.promosso) : null,
-        loadingIcon = <div className="text-center">
-            <LoadingIcon spinning style={{ fontSize: 50 }} />
-        </div>
+        loadingIcon = <LoadingIconCentered />
 
         return <Tabs>
             <Tab title={<span>

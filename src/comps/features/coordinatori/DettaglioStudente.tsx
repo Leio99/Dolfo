@@ -1,6 +1,6 @@
 import React from "react"
 import { RouteComponentProps } from "react-router-dom";
-import { formatItalian } from "../../../commons/utility";
+import { formatItalian, LoadingIconCentered } from "../../../commons/utility";
 import { StudentiService } from "../../../services/StudentiService";
 import { Card } from "../../layout/Card";
 import { LoadingIcon } from "../../layout/Icon";
@@ -13,7 +13,7 @@ export interface IRouteParams{
     readonly id: string
 }
 export interface IState{
-    readonly student: any
+    readonly studente: any
     readonly totPresenze: number
     readonly oreTotali: number
 }
@@ -23,7 +23,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         super(props)
 
         this.state = {
-            student: null,
+            studente: null,
             totPresenze: 0,
             oreTotali: 0
         }
@@ -37,7 +37,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
 
         StudentiService.getStudente(id).then(response => {
             this.setState({
-                student: response.data
+                studente: response.data
             })
         }).catch(() => history.push(ComponentsPaths.PATH_COORDINATORI_HOME))
 
@@ -63,37 +63,35 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
     }
 
     render = (): JSX.Element => {
-        const { student, totPresenze, oreTotali } = this.state,
+        const { studente, totPresenze, oreTotali } = this.state,
         idStudente = this.props.match.params.id,
-        perc = student?.frequenza !== null ? Math.round(100 * totPresenze / oreTotali) : null,
+        perc = studente?.frequenza !== null ? Math.round(100 * totPresenze / oreTotali) : null,
         color = perc >= 80 ? "green" : "red"
 
+        if(!studente) return <LoadingIconCentered />
+
         return <div>
-            {
-                student ? <div className="row mx-0">
-                    <Card title={student.ritirato ? "Ritirato: " + formatItalian(student.dataRitiro) : student.annoFrequentazione === 1 ? "Primo anno" : "Secondo anno"} className="col-12 col-md mr-0 mr-md-2 mb-3">
-                        <h3 className="text-uppercase mb-2 text-truncate">{student.nome} {student.cognome}</h3>
-                        <p className="mb-0"><strong>Data di nascita</strong>: {formatItalian(student.dataNascita)}</p>
-                        <p className="mb-0"><strong>E-mail</strong>: {student.email}</p>
-                    </Card>
+            <div className="row mx-0">
+                <Card title={studente.ritirato ? "Ritirato: " + formatItalian(studente.dataRitiro) : studente.annoFrequentazione === 1 ? "Primo anno" : "Secondo anno"} className="col-12 col-md mr-0 mr-md-2 mb-3">
+                    <h3 className="text-uppercase mb-2 text-truncate">{studente.nome} {studente.cognome}</h3>
+                    <p className="mb-0"><strong>Data di nascita</strong>: {formatItalian(studente.dataNascita)}</p>
+                    <p className="mb-0"><strong>E-mail</strong>: {studente.email}</p>
+                </Card>
 
-                    <Card title="Presenze totali (ore)" className="col-12 col-md mb-3">
+                <Card title="Presenze totali (ore)" className="col-12 col-md mb-3">
+                    {
+                        !isNaN(perc) ? <Progress circular percent={perc} circleWidth={80} className="float-left mr-3" color={color} /> : <LoadingIcon spinning />
+                    }
+
+                    <div className="progress-label">
                         {
-                            !isNaN(perc) ? <Progress circular percent={perc} circleWidth={80} className="float-left mr-3" color={color} /> : <LoadingIcon spinning />
+                            oreTotali !== null && totPresenze !== null ? <span>
+                                {totPresenze}/{oreTotali}
+                            </span> : <LoadingIcon spinning />
                         }
-
-                        <div className="progress-label">
-                            {
-                                oreTotali !== null && totPresenze !== null ? <span>
-                                    {totPresenze}/{oreTotali}
-                                </span> : <LoadingIcon spinning />
-                            }
-                        </div>
-                    </Card>
-                </div> : <div>
-                    <LoadingIcon spinning style={{ fontSize: 50 }} />
-                </div>
-            }
+                    </div>
+                </Card>
+            </div>
 
             <TabellaPresenze idStudente={parseInt(idStudente)} reloadTotali={this.loadTotali} />
         </div>

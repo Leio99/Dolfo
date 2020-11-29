@@ -1,5 +1,6 @@
 import { NotificationMsg } from "../comps/layout/NotificationMsg"
 import { Day } from "../models/IDay"
+import { LoadingIcon } from "../comps/layout/Icon"
 
 export const formatDate = (date: Date) => `${zeroBefore(date.getDate())}-${zeroBefore(date.getMonth() + 1)}-${date.getFullYear()}`
 
@@ -180,4 +181,13 @@ export const getDateTime = (date: string) => {
     converted = new Date(clearDate)
 
     return `${zeroBefore(converted.getHours())}:${zeroBefore(converted.getMinutes())}`
+}
+
+export const LoadingIconCentered = () => {
+    return LoadingIcon({
+        color: "var(--darkblue)",
+        style: { fontSize: 50 },
+        spinning: true,
+        className: "d-block mx-auto"
+    })
 }
