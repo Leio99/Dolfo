@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { formatItalian, LoadingIconCentered } from "../../../commons/utility";
 import { StudentiService } from "../../../services/StudentiService";
 import { Card } from "../../layout/Card";
-import { LoadingIcon } from "../../layout/Icon";
+import { Icon, LoadingIcon } from "../../layout/Icon";
 import { Progress } from "../../layout/Progress";
 import { history } from "../../Navigator";
 import { ComponentsPaths } from "../ComponentsPaths";
@@ -74,8 +74,12 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
             <div className="row mx-0">
                 <Card title={studente.ritirato ? "Ritirato: " + formatItalian(studente.dataRitiro) : studente.annoFrequentazione === 1 ? "Primo anno" : "Secondo anno"} className="col-12 col-md mr-0 mr-md-2 mb-3">
                     <h3 className="text-uppercase mb-2 text-truncate">{studente.nome} {studente.cognome}</h3>
-                    <p className="mb-0"><strong>Data di nascita</strong>: {formatItalian(studente.dataNascita)}</p>
-                    <p className="mb-0"><strong>E-mail</strong>: {studente.email}</p>
+                    <p className="mb-1">
+                        <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatItalian(studente.dataNascita)}
+                    </p>
+                    <p className="mb-0">
+                        <Icon large type="far" iconKey="envelope" className="mr-1" /> <a href={"mailto:" + studente.email}>{studente.email}</a>
+                    </p>
                 </Card>
 
                 <Card title="Presenze totali (ore)" className="col-12 col-md mb-3">

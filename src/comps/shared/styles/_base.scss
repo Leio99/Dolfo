@@ -16,6 +16,15 @@ html, body{
         animation: spinIcon 0.8s linear infinite
     }
 }
+a[href]{
+    color: $darkBlue;
+    text-decoration: none;
+
+    &:hover, &:active{
+        text-decoration: underline;
+        color: darken($darkBlue, 15%)
+    }
+}
 
 @keyframes spinIcon{
     100%{ transform: rotate(360deg) }
