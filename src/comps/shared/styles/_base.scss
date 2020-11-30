@@ -11,10 +11,8 @@ html, body{
     color: $black;
     word-break: break-word
 }
-.dolfo-icon{
-    &.spin{
-        animation: spinIcon 0.8s linear infinite
-    }
+.dolfo-icon.spin{
+    animation: spinIcon 0.8s linear infinite
 }
 a[href]{
     color: $darkBlue;
@@ -24,6 +22,16 @@ a[href]{
         text-decoration: underline;
         color: darken($darkBlue, 15%)
     }
+}
+
+::-webkit-scrollbar{
+    width: 7px;
+    height: 7px;
+    background: #ccc
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background: #666
 }
 
 @keyframes spinIcon{

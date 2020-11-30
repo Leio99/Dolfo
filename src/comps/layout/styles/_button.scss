@@ -190,8 +190,12 @@
             }
         }
 
-        .dolfo-button:active{
+        .dolfo-button:hover{
             background-color: $lightGrey
+        }
+
+        .dolfo-button:active{
+            background-color: $grey
         }
     }
 
