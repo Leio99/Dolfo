@@ -19,7 +19,14 @@ export class ServerCall{
     }
 
     static emptyCallResult = () =>  {
-        return{ then: () => { } }
+        return {
+            then: () => {
+                return {
+                    catch: () => {}
+                }
+            },
+            catch: () => {}
+        }
     }
 
     static get(url: string): Promise<AxiosResponse<any>> {

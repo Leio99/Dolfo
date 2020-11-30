@@ -28,14 +28,23 @@ export class StudentiService{
     }
 
     static getStudente(id: string){
+        if(!ComponentsPermissions.getLoginCoordinatore(false))
+            return ServerCall.emptyCallResult()
+
         return ServerCall.get(API_URL_REGISTRO + "/studenti/getstudentibyid/" + id)
     }
 
     static getOreStudente(id: string){
+        if(!ComponentsPermissions.getLoginCoordinatore(false))
+            return ServerCall.emptyCallResult()
+        
         return ServerCall.get(API_URL_REGISTRO + "/studenti/gettotaleorelezioni/" + id)
     }
 
     static getTotaleOre(id: string){
+        if(!ComponentsPermissions.getLoginCoordinatore(false))
+            return ServerCall.emptyCallResult()
+        
         return ServerCall.get(API_URL_REGISTRO + "/studenti/gethoursamount/" + id)
     }
 
