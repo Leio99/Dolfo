@@ -163,6 +163,8 @@
             border-radius: $smallRadius;
             animation: showScale 0.15s ease forwards;
             transform-origin: center left;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            border: 0;
 
             &.show{
                 transform: scale(1) translateY(calc(100% - 5px))
