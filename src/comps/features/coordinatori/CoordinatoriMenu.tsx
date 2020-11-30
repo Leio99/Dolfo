@@ -9,7 +9,6 @@ import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IProps{
     readonly currentPath: string
-    readonly isHidden?: boolean
     readonly toggleMenu: () => void
     readonly opened?: boolean
 }
@@ -22,8 +21,6 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
 
     render = (): JSX.Element => {
         const props = this.props
-
-        if(props.isHidden) return <div></div>
 
         return <SideMenu onToggle={props.toggleMenu} opened={props.opened}>
             <img src="https://i.imgur.com/5Z1DbN7.png" height="100" className="my-4 mx-auto d-block" style={{ filter: "drop-shadow(1.5px 0 0 #fff) drop-shadow(-.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff)" }} alt="" />

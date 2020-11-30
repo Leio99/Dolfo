@@ -1,10 +1,3 @@
-import { IEvent } from "./IEvent"
-
-export interface IDay{
-    readonly index: number
-    readonly events: IEvent[]
-}
-
 export interface Day{
     readonly day: number,
     readonly month: number,

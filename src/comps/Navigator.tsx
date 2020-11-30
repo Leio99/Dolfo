@@ -8,6 +8,7 @@ import { Components } from "./features/Components"
 import { IComponent, IComponentList } from "../models/IComponent"
 import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
+import { ComponentsPaths } from "./features/ComponentsPaths"
 
 export const history = createBrowserHistory()
 
@@ -80,7 +81,9 @@ export class Navigator extends React.PureComponent<any, IState>{
                         </div>
                     }
                     
-                    <CoordinatoriMenu currentPath={currentPath} opened={openMenu} toggleMenu={this.toggleMenu} isHidden={currentComponent?.hideMenu} />
+                    {
+                        currentPath.indexOf(ComponentsPaths.PATH_COORDINATORI) >= 0 && currentPath !== ComponentsPaths.PATH_COORDINATORI_LOGIN && <CoordinatoriMenu currentPath={currentPath} opened={openMenu} toggleMenu={this.toggleMenu} />
+                    }
 
                     <div className="px-5 pb-5">
                         <TransitionGroup>

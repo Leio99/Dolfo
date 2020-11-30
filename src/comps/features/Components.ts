@@ -12,17 +12,14 @@ import { DettaglioStudente } from "./coordinatori/DettaglioStudente"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI]: {
-        hideMenu: true,
         permission: ComponentsPermissions.checkEmptyPathCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI + "/"]: {
-        hideMenu: true,
         permission: ComponentsPermissions.checkEmptyPathCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI_LOGIN]: {
         component: LoginCoordinatore,
-        permission: ComponentsPermissions.checkLoginCoordinatore,
-        hideMenu: true
+        permission: ComponentsPermissions.checkLoginCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI_HOME]: {
         component: HomeCoordinatore,
