@@ -16,6 +16,7 @@ export interface IProps extends InputProps{
     readonly options?: BtnOptions[]
     readonly popupPosition?: "top" | "bottom"
     readonly tooltip?: string
+    readonly iconPopup?: boolean
 }
 export interface IState{
     readonly openPopup: boolean
@@ -42,9 +43,9 @@ class Button extends React.PureComponent<IProps, IState>{
         { openPopup } = this.state
 
         if(btnType === "popup"){
-            const popupDir = props.popupPosition || "top"
+            const popupDir = props.popupPosition || "bottom"
 
-            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "")} onClick={this.togglePopup}>
+            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "")} onClick={this.togglePopup}>
                 <div className={"dolfo-popup-options" + (openPopup ? " show" : "") + (" pos-" + popupDir)}>
                     {
                         props.options.map(opt => {
@@ -55,10 +56,12 @@ class Button extends React.PureComponent<IProps, IState>{
                     }
                 </div>
 
-                <div className={"dolfo-button dolfo-popup-button" + (" btn-" + props.btnColor || "darkblue")}>
-                    <div className="dolfo-popup-arrow">
-                        <Icon iconKey="caret-down" />
-                    </div>
+                <div className={"dolfo-button dolfo-popup-button" + (!props.iconPopup ? (" btn-" + props.btnColor || "darkblue") : "")}>
+                    {
+                        !props.iconPopup && <div className="dolfo-popup-arrow">
+                            <Icon iconKey="caret-down" />
+                        </div>
+                    }
 
                     <div className="dolfo-popup-button-content">{props.children}</div>
                 </div>
