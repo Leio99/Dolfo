@@ -36,8 +36,14 @@ body{
     position: relative;
     top: 50%
 }
+.star-animated{
+    animation: blinkStar 5s infinite
+}
 
 @keyframes slideLeft{
     0%{ opacity: 0; left: 300px }
     100%{ opacity: 1; left: 0 }
+}
+@keyframes blinkStar{
+    50%{ color: $darkBlue }
 }

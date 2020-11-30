@@ -191,3 +191,10 @@ export const LoadingIconCentered = () => {
         className: "d-block mx-auto"
     })
 }
+
+export const dateIsToday = (d: string) => {
+    const date = new Date(d),
+    newDate = new Date()
+
+    return date.getDate() === newDate.getDate() && date.getMonth() === newDate.getMonth()
+}
