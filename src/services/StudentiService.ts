@@ -52,6 +52,10 @@ export class StudentiService{
         return ServerCall.get(API_URL_REGISTRO + "/studenti/getdetailedpresences/" + id)
     }
 
+    static getOreStage(id: number){
+        return ServerCall.get(API_URL_REGISTRO + "/studenti/getorestage/" + id)
+    }
+
     static editPresenza(id: number, body: any){
         const login = ComponentsPermissions.getLoginCoordinatore(),
 		params = {

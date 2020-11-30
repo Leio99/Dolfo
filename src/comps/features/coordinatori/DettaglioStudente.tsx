@@ -2,11 +2,13 @@ import React from "react"
 import { RouteComponentProps } from "react-router-dom";
 import { dateIsToday, formatItalian, LoadingIconCentered } from "../../../commons/utility";
 import { StudentiService } from "../../../services/StudentiService";
+import Button from "../../layout/Button";
 import { Card } from "../../layout/Card";
 import { Icon, LoadingIcon } from "../../layout/Icon";
 import { Progress } from "../../layout/Progress";
 import { history } from "../../Navigator";
 import { ComponentsPaths } from "../ComponentsPaths";
+import { DialogOreStage } from "./DialogOreStage";
 import TabellaPresenze from "./TabellaPresenze";
 
 export interface IRouteParams{
@@ -16,6 +18,7 @@ export interface IState{
     readonly studente: any
     readonly totPresenze: number
     readonly oreTotali: number
+    readonly showStage: boolean
 }
 
 export class DettaglioStudente extends React.PureComponent<RouteComponentProps<IRouteParams>, IState>{
@@ -25,7 +28,8 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         this.state = {
             studente: null,
             totPresenze: 0,
-            oreTotali: 0
+            oreTotali: 0,
+            showStage: false
         }
     }
 
@@ -62,8 +66,10 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         })
     }
 
+    toggleStage = () => this.setState({ showStage: !this.state.showStage })
+
     render = (): JSX.Element => {
-        const { studente, totPresenze, oreTotali } = this.state,
+        const { studente, totPresenze, oreTotali, showStage } = this.state,
         idStudente = this.props.match.params.id,
         perc = studente?.frequenza !== null ? Math.round(100 * totPresenze / oreTotali) : null,
         color = perc >= 80 ? "green" : "red"
@@ -98,10 +104,20 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                             </span> : <LoadingIcon spinning />
                         }
                     </div>
+
+                    <div className="clearfix"></div>
+
+                    <Button className="float-right" textBtn onClick={this.toggleStage} btnColor="darkblue">
+                        Mostra ore di stage
+                    </Button>
+
+                    <div className="clearfix"></div>
                 </Card>
             </div>
 
             <TabellaPresenze idStudente={parseInt(idStudente)} reloadTotali={this.loadTotali} />
+
+            <DialogOreStage idStudente={parseInt(idStudente)} visible={showStage} onClose={this.toggleStage} />
         </div>
     }
 }

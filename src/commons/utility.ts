@@ -198,3 +198,9 @@ export const dateIsToday = (d: string) => {
 
     return date.getDate() === newDate.getDate() && date.getMonth() === newDate.getMonth()
 }
+
+export const getTime = (d: string) => {
+    const date = new Date(d)
+
+    return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
+}
