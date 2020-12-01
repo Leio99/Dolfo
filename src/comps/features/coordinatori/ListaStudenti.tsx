@@ -127,7 +127,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
             okType: "green",
             top: true,
             content: <div>
-                <Select label="Scegli l'anno in cui spostare gli studenti">
+                <Select label="Scegli l'anno in cui spostare gli studenti" icon={{ iconKey: "graduation-cap" }}>
                     <Option value={1} label="Primo anno" />
                     <Option value={2} label="Secondo anno" />
                 </Select>
