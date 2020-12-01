@@ -44,5 +44,6 @@ body{
     100%{ opacity: 1; left: 0 }
 }
 @keyframes blinkStar{
-    50%{ color: $darkBlue }
+    0%, 10%, 16%{ color: inherit }
+    5%, 15%{ color: $red }
 }

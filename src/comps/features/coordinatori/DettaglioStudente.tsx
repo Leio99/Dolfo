@@ -84,12 +84,12 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                     }
 
                     <h2 className="text-uppercase mb-2 text-truncate">{studente.nome} {studente.cognome}</h2>
-                    <p className="mb-1">
-                        <Icon large type="far" iconKey="calendar-star" className="mr-1" /> {formatItalian(studente.dataNascita)}
-                    </p>
-                    <p className="mb-0">
+                    <div className="mb-1">
+                        <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatItalian(studente.dataNascita)}
+                    </div>
+                    <div>
                         <Icon large type="far" iconKey="envelope" className="mr-1" /> <a href={"mailto:" + studente.email}>{studente.email}</a>
-                    </p>
+                    </div>
                 </Card>
 
                 <Card title="Presenze totali (ore)" className="col-12 col-md mb-3">
@@ -105,10 +105,8 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                         }
                     </div>
 
-                    <div className="clearfix"></div>
-
-                    <Button className="float-right" textBtn onClick={this.toggleStage} btnColor="darkblue">
-                        Mostra ore di stage
+                    <Button className="float-right" textBtn onClick={this.toggleStage} btnColor="darkblue" tooltip="Ore di stage" style={{ position: "relative", transform:"translateY(-100%)", top: "100%" }}>
+                        <Icon iconKey="clipboard-list-check" className="fa-2x" />
                     </Button>
 
                     <div className="clearfix"></div>
