@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { BaseIconProps, LoadingIcon } from "./Icon";
+import { BaseIconProps, LoadingIcon } from "./Icon"
 
 export interface IProps{
     readonly title?: string

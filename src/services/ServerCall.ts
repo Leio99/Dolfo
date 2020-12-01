@@ -1,5 +1,5 @@
-import Axios, { AxiosResponse } from "axios";
-import { Dialog } from "../comps/layout/Dialog";
+import Axios, { AxiosResponse } from "axios"
+import { Dialog } from "../comps/layout/Dialog"
 
 export class ServerCall{
     static handleAuthFailed(promise: Promise<AxiosResponse<any>>){

@@ -1,15 +1,15 @@
 import React from "react"
-import { RouteComponentProps } from "react-router-dom";
-import { dateIsToday, formatItalian, LoadingIconCentered } from "../../../commons/utility";
-import { StudentiService } from "../../../services/StudentiService";
-import Button from "../../layout/Button";
-import { Card } from "../../layout/Card";
-import { Icon, LoadingIcon } from "../../layout/Icon";
-import { Progress } from "../../layout/Progress";
-import { history } from "../../Navigator";
-import { ComponentsPaths } from "../ComponentsPaths";
-import { DialogOreStage } from "./DialogOreStage";
-import TabellaPresenze from "./TabellaPresenze";
+import { RouteComponentProps } from "react-router-dom"
+import { dateIsToday, formatItalian, LoadingIconCentered } from "../../../commons/utility"
+import { StudentiService } from "../../../services/StudentiService"
+import Button from "../../layout/Button"
+import { Card } from "../../layout/Card"
+import { Icon, LoadingIcon } from "../../layout/Icon"
+import { Progress } from "../../layout/Progress"
+import { history } from "../../Navigator"
+import { ComponentsPaths } from "../ComponentsPaths"
+import { DialogOreStage } from "./DialogOreStage"
+import TabellaPresenze from "./TabellaPresenze"
 
 export interface IRouteParams{
     readonly id: string

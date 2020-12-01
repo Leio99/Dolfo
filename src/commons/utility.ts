@@ -136,7 +136,7 @@ export const getCalendar = (month?: number, year?: number) => {
 }
 
 export const copyToClipBoard = (text: string) => {
-    const el = document.createElement('textarea')
+    const el = document.createElement("textarea")
     el.value = text
     el.style.opacity = "0"
     el.style.width = "0"
@@ -144,7 +144,7 @@ export const copyToClipBoard = (text: string) => {
 
     document.body.appendChild(el)
     el.select()
-    document.execCommand('copy')
+    document.execCommand("copy")
     document.body.removeChild(el)
 
     NotificationMsg.showInfo("Codice copiato negli appunti!")

@@ -1,8 +1,8 @@
 import React from "react"
-import { NotificationMsg } from "../layout/NotificationMsg";
-import { Constants } from "../shared/Constants";
-import { InputProps } from "../shared/models/InputProps";
-import { InputWrapper } from "./InputWrapper";
+import { NotificationMsg } from "../layout/NotificationMsg"
+import { Constants } from "../shared/Constants"
+import { InputProps } from "../shared/models/InputProps"
+import { InputWrapper } from "./InputWrapper"
 
 export interface IProps extends InputProps{
     readonly multiple?: boolean

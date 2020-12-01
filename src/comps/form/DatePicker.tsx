@@ -32,7 +32,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         currentDay = props.defaultValue ? props.defaultValue.getDate() : 0,
         currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
         currentMonth = props.defaultValue ? props.defaultValue.getMonth() :  new Date().getMonth(),
-        currentDecade = parseInt(currentYear.toString().slice(0, -1) + '0')
+        currentDecade = parseInt(currentYear.toString().slice(0, -1) + "0")
 
         this.state = {
             date,
@@ -152,7 +152,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         this.setState({
             selectingYear: false,
             currentYear: year,
-            currentDecade: parseInt(year.toString().slice(0, -1) + '0')
+            currentDecade: parseInt(year.toString().slice(0, -1) + "0")
         })
     }
 
@@ -161,7 +161,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         currentDay = props.defaultValue ? props.defaultValue.getDate() : 0,
         currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
         currentMonth = props.defaultValue ? props.defaultValue.getMonth() :  new Date().getMonth(),
-        currentDecade = parseInt(currentYear.toString().slice(0, -1) + '0')
+        currentDecade = parseInt(currentYear.toString().slice(0, -1) + "0")
 
         this.setState({ 
             date: "",

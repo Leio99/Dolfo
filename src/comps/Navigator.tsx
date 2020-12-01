@@ -42,7 +42,7 @@ export class Navigator extends React.PureComponent<any, IState>{
     }
 
     findComponent = () => {
-        const path = this.state.currentPath.replace(/[\d+](.*)/g, ':id')
+        const path = this.state.currentPath.replace(/[\d+](.*)/g, ":id")
         let currentComponent: IComponent
 
         Object.keys(Components).some(key => {

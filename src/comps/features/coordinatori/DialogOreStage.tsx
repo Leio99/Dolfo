@@ -42,6 +42,7 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
         document.body.appendChild(link)
 
         link.click()
+        link.remove()
     }
 
     render = (): JSX.Element => {

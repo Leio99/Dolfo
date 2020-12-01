@@ -102,7 +102,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
     }
 
     static openDialog = (data: DialogProps) => {
-        const popup = document.createElement('div'),
+        const popup = document.createElement("div"),
         onCloseFunction = (props: IProps) => props.onClose && props.onClose(),
         onOkFunction = (props: IProps) => props.onOk && props.onOk(),
         icon = data.icon || Dialog.getIcon(data.type)

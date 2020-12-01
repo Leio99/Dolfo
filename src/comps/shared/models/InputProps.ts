@@ -1,5 +1,5 @@
 import { CSSProperties } from "react"
-import { BaseIconProps } from "../../layout/Icon";
+import { BaseIconProps } from "../../layout/Icon"
 
 export interface InputProps{
     readonly name?: string

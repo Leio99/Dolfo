@@ -2,7 +2,7 @@ let tooltips: NodeListOf<Element> = null,
 toolTexts: string[] = []
 
 export const initializeTooltips = () => {
-    document.addEventListener('mouseover', () => {
+    document.addEventListener("mouseover", () => {
         const newTips = document.querySelectorAll("[data-tooltip]")
 
         if(areDifferentTooltips(newTips))
