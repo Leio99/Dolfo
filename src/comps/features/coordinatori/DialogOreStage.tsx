@@ -25,11 +25,11 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
     }
 
     componentDidUpdate = () => {
-        this.props.visible ? StudentiService.getOreStage(this.props.idStudente).then(response => {
+        StudentiService.getOreStage(this.props.idStudente).then(response => {
             this.setState({
                 listaOre: response.data
             })
-        }) : this.setState({ listaOre: null })
+        })
     }
 
     downloadCSV = () => {

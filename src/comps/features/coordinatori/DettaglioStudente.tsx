@@ -83,7 +83,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                         dateIsToday(studente.dataNascita) && <Icon iconKey="birthday-cake" large tooltip="Oggi è il compleanno" className="star-animated ml-2 float-right" />
                     }
 
-                    <h3 className="text-uppercase mb-2 text-truncate">{studente.nome} {studente.cognome}</h3>
+                    <h2 className="text-uppercase mb-2 text-truncate">{studente.nome} {studente.cognome}</h2>
                     <p className="mb-1">
                         <Icon large type="far" iconKey="calendar-star" className="mr-1" /> {formatItalian(studente.dataNascita)}
                     </p>
