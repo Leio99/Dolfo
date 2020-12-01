@@ -105,7 +105,7 @@ export class Navigator extends React.PureComponent<any, IState>{
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>
-                    </div>                    
+                    </div>        
                 </div>
             )} />
         </Router>
