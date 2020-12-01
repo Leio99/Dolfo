@@ -5,7 +5,7 @@ export interface IProps {
     readonly percent: number
     readonly circular?: boolean
     readonly color?: "red" | "orange" | "black" | "blue" | "green" | "grey" | "darkblue"
-    readonly circleWidth?: number
+    readonly circleWidth?: number | string
     readonly loading?: boolean
     readonly loadingText?: string | JSX.Element
     readonly className?: string

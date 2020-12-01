@@ -32,9 +32,8 @@ body{
 .progress-label{
     font-size: 20px;
     display: inline-block;
-    transform: translateY(-50%);
-    position: relative;
-    top: 50%
+    transform: translateY(75%);
+    position: relative
 }
 .star-animated{
     animation: blinkStar 5s infinite
