@@ -50,7 +50,7 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
 
         return <Dialog visible={props.visible} onClose={props.onClose} title="Ore di stage segnate" width="70vw" customFooter={[
             <Button textBtn onClick={props.onClose} btnColor="red">Chiudi</Button>,
-            <Button onClick={this.downloadCSV} btnColor="darkblue" smallBtn>
+            <Button onClick={this.downloadCSV} btnColor="darkblue" smallBtn disabled={!listaOre || !listaOre.length}>
                 <Icon iconKey="download" /> Scarica CSV
             </Button>
         ]}>
