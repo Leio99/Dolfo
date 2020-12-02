@@ -2,9 +2,15 @@ import { NotificationMsg } from "../comps/layout/NotificationMsg"
 import { Day } from "../models/IDay"
 import { LoadingIcon } from "../comps/layout/Icon"
 
-export const formatDate = (date: Date) => `${zeroBefore(date.getDate())}-${zeroBefore(date.getMonth() + 1)}-${date.getFullYear()}`
+export const formatDate = (date: Date, monthString = false) => {
+    const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " "): ("-" + zeroBefore(date.getMonth() + 1) + "-")
+
+    return `${zeroBefore(date.getDate()) + month + date.getFullYear()}`
+}
 
 export const formatItalian = (date: string) => formatDate(new Date(date))
+
+export const formatWithMonth = (date: string) => formatDate(new Date(date), true)
 
 export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
 

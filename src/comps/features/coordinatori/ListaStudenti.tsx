@@ -154,7 +154,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
 
         return <Tabs>
             <Tab title={<span>
-                <Icon type="far" iconKey="user" /> Studenti attivi
+                <Icon type="far" iconKey="users" /> Studenti attivi
             </span>}>
                 <div>
                     <Button type="popup" popupPosition="bottom" options={[

@@ -1,6 +1,6 @@
 import React from "react"
 import { RouteComponentProps } from "react-router-dom"
-import { dateIsToday, formatItalian, LoadingIconCentered } from "../../../commons/utility"
+import { dateIsToday, formatItalian, formatWithMonth, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
@@ -85,7 +85,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
 
                     <h2 className="text-uppercase mb-2 text-truncate">{studente.nome} {studente.cognome}</h2>
                     <div className="mb-1">
-                        <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatItalian(studente.dataNascita)}
+                        <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatWithMonth(studente.dataNascita)}
                     </div>
                     <div>
                         <Icon large type="far" iconKey="envelope" className="mr-1" /> <a href={"mailto:" + studente.email}>{studente.email}</a>
