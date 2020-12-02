@@ -11,7 +11,7 @@ export class HomeCoordinatore extends React.Component{
     render = (): JSX.Element => {
         return <div>
             <Card title="Dati generali">
-                <h3 className="text-uppercase">{this.login.nome} {this.login.cognome}</h3>
+                <h2 className="text-uppercase">{this.login.nome} {this.login.cognome}</h2>
                 <span>
                     Codice di accesso alla firma: <strong>{this.login.codiceCorso}</strong>
                     <Button tooltip="Copia il codice" textBtn btnColor="grey" className="ml-2" onClick={() => copyToClipBoard(this.login.codiceCorso)}>

@@ -92,3 +92,9 @@ export const DetailIcon = (props: DefaultIconProps) => {
 export const EditIcon = (props: DefaultIconProps) => {
     return <Icon {...props} iconKey="pen" />
 }
+export const AddIcon = (props: DefaultIconProps) => {
+    return <Icon {...props} iconKey="plus" />
+}
+export const MinusIcon = (props: DefaultIconProps) => {
+    return <Icon {...props} iconKey="minus" />
+}

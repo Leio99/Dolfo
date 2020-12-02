@@ -7,7 +7,6 @@ import { Icon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
 
 export interface IProps{
-    readonly visible: boolean
     readonly idStudente: number
     readonly onClose: () => void
 }
@@ -24,7 +23,7 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = () => {
+    componentDidMount = () => {
         StudentiService.getOreStage(this.props.idStudente).then(response => {
             this.setState({
                 listaOre: response.data
@@ -49,7 +48,7 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
         const { listaOre } = this.state,
         props = this.props
 
-        return <Dialog visible={props.visible} onClose={props.onClose} title="Ore di stage segnate" width="70vw" customFooter={[
+        return <Dialog visible={true} onClose={props.onClose} title="Ore di stage segnate" width="70vw" customFooter={[
             <Button textBtn onClick={props.onClose} btnColor="red">Chiudi</Button>,
             <Button onClick={this.downloadCSV} btnColor="darkblue" smallBtn disabled={!listaOre || !listaOre.length}>
                 <Icon iconKey="download" /> Scarica CSV

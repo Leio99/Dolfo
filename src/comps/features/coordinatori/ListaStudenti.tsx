@@ -4,7 +4,7 @@ import Select from "../../form/Select"
 import { Option } from "../../form/Option"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
-import { CheckCircleIcon, CloseCircleIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
+import { AddIcon, CheckCircleIcon, CloseCircleIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
 import { Tab } from "../../layout/Tab"
 import { Table } from "../../layout/Table"
 import { Tabs } from "../../layout/Tabs"
@@ -159,7 +159,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                 <div>
                     <Button type="popup" popupPosition="bottom" options={[
                         { text: <span>
-                            <Icon iconKey="plus" color="var(--green)" /> Aggiungi
+                            <AddIcon color="var(--green)" /> Aggiungi
                         </span>, onClick: () => history.push(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE) },
                         { text: <span>
                             <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV

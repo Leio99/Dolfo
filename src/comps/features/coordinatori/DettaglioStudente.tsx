@@ -115,7 +115,9 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
 
             <TabellaPresenze idStudente={parseInt(idStudente)} reloadTotali={this.loadTotali} />
 
-            <DialogOreStage idStudente={parseInt(idStudente)} visible={showStage} onClose={this.toggleStage} />
+            {
+                showStage && <DialogOreStage idStudente={parseInt(idStudente)} onClose={this.toggleStage} />
+            }
         </div>
     }
 }

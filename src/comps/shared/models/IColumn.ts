@@ -4,7 +4,7 @@ export interface IColumn{
     readonly field: string
     readonly label: string | JSX.Element
     readonly width?: number | string
-    readonly align?: "left" | "right" | "center"
+    readonly align?: "left" | "right" | "center" | "justify"
     readonly canSearch?: boolean
     readonly tooltip?: boolean
 }
