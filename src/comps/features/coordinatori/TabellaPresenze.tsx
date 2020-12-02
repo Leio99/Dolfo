@@ -142,6 +142,10 @@ export default class TabellaPresenze extends React.PureComponent<IProps, IState>
         })
     }
 
+    checkEnter = (e: any, idPresenza: number) => {
+        if(e.keyCode === 13) this.confirmEdit(idPresenza)
+    }
+
     render = (): JSX.Element => {
         const { presenze, editingList, loadingList } = this.state
 
@@ -163,8 +167,8 @@ export default class TabellaPresenze extends React.PureComponent<IProps, IState>
 
                     return {
                         data: formatItalian(p.data),
-                        ingresso: presenzaEdit ? <TimePicker defaultValue={p.ingresso} onChange={(v) => this.changeEntrata(v, p.idPresenza)} disabled={isLoading} /> : p.ingresso,
-                        uscita: presenzaEdit ? <TimePicker defaultValue={p.uscita} onChange={(v) => this.changeUscita(v, p.idPresenza)} disabled={isLoading} /> : p.uscita,
+                        ingresso: presenzaEdit ? <TimePicker defaultValue={p.ingresso} onChange={(v) => this.changeEntrata(v, p.idPresenza)} disabled={isLoading} onKeyDown={(e) => this.checkEnter(e, p.idPresenza)} wrapperStyle={{ marginBottom: 0 }} /> : p.ingresso,
+                        uscita: presenzaEdit ? <TimePicker defaultValue={p.uscita} onChange={(v) => this.changeUscita(v, p.idPresenza)} disabled={isLoading} onKeyDown={(e) => this.checkEnter(e, p.idPresenza)} wrapperStyle={{ marginBottom: 0 }} /> : p.uscita,
                         lezione: p.lezione,
                         azioni: presenzaEdit ? <div>
                             <Button tooltip="Annulla" btnColor="red" circleBtn onClick={() => this.annullaModifica(p)} className="mr-2" disabled={isLoading}>

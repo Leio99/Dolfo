@@ -98,7 +98,7 @@
 }
 .dolfo-popup-button-container{
     position: relative;
-    z-index: 1;
+    z-index: 2;
     display: inline-block;
 
     .dolfo-popup-options{
@@ -141,6 +141,7 @@
         .dolfo-popup-option{
             padding: 0.5rem 0.8rem;
             cursor: pointer;
+            text-align: left;
 
             .dolfo-icon{
                 margin-right: 0.3rem
@@ -164,6 +165,7 @@
             transform-origin: center left;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
             border: 0;
+            z-index: 2;
 
             &.show{
                 transform: scale(1) translateY(calc(100% - 5px))
