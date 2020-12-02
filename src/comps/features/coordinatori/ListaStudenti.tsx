@@ -4,7 +4,7 @@ import Select from "../../form/Select"
 import { Option } from "../../form/Option"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
-import { AddIcon, CheckCircleIcon, CloseCircleIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
+import { AddIcon, CheckCircleIcon, CheckIcon, CloseCircleIcon, CloseIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
 import { Tab } from "../../layout/Tab"
 import { Table } from "../../layout/Table"
 import { Tabs } from "../../layout/Tabs"
@@ -73,7 +73,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         return <Table columns={[
             { label: <CheckBox checked={checkedAll} onChange={() => this.toggleCheckAll(studenti[0].annoFrequentazione)} tooltip="Seleziona tutti" />, field: "check", width: "5%", align: "center" },
             { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
-            { label: "Codice Fiscale", field: "cf", canSearch: true, tooltip: true },
+            { label: "Stato", field: "stato", width: "15%", align: "center" },
             { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
             { label: "Azioni", field: "azioni", width: "26%", align: "center" },
         ]} data={
@@ -83,15 +83,9 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     onDoubleClick: () => this.openDetail(s.idStudente),
                     check: s.ritirato ? <CheckBox disabled /> : <CheckBox onChange={() => this.toggleCheck(s)} checked={checkList.includes(s)} />,
                     desStudente: s.nome + " " + s.cognome,
-                    cf: s.cf,
+                    stato: s.ritirato ? <CloseIcon color="var(--red)" tooltip="Ritirato" large /> : <CheckIcon color="var(--green)" tooltip="Attivo" large />,
                     frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
                     azioni: <div>
-                        {
-                            s.ritirato && <Button circleBtn className="mx-2" tooltip="Ritirato">
-                                <Icon iconKey="user-slash" />
-                            </Button>
-                        }
-
                         <Button btnColor="blue" className="mx-2" circleBtn onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
                             <DetailIcon />
                         </Button>
@@ -195,7 +189,6 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     !listaArchiviati ? loadingIcon : <Table columns={[
                         { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },
                         { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
-                        { label: "Codice Fiscale", field: "cf", canSearch: true, tooltip: true },
                         { label: "Anno", field: "anno", width: "15%", align: "center", canSearch: true },
                         { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
                         { label: "Azioni", field: "azioni", width: "26%", align: "center" },
@@ -205,7 +198,6 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                                 onDoubleClick: () => this.openDetail(s.idStudente),
                                 check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" tooltip="Promosso" /> : <CloseCircleIcon large color="var(--red)" tooltip="Ritirato/Bocciato" />,
                                 desStudente: s.nome + " " + s.cognome,
-                                cf: s.cf,
                                 anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
                                 frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
                                 azioni: <Button circleBtn btnColor="blue" onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
