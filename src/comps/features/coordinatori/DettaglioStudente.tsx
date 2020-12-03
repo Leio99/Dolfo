@@ -8,6 +8,7 @@ import { Dialog } from "../../layout/Dialog"
 import { EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
 import { Progress } from "../../layout/Progress"
 import { history } from "../../Navigator"
+import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { DialogOreStage } from "./DialogOreStage"
 import { EditStudente } from "./EditStudente"
@@ -70,7 +71,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
     
     openModifica = () => {
         const dialog = Dialog.openDialog({
-            title: "Modifica studente",
+            title: Components[ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE].pageTitle,
             content: <EditStudente {...this.props} onSave={() => {
                 dialog.close()
                 this.componentDidMount()
