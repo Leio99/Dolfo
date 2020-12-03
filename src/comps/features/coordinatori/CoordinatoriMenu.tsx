@@ -44,7 +44,7 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
                 <MenuItem>Aggiungi</MenuItem>
             </SubMenu>
 
-            <MenuItem>
+            <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE} onClick={() => history.push(ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE)}>
                 <Icon iconKey="list-alt" className="mr-2" /> Materie
             </MenuItem>
 

@@ -10,6 +10,7 @@ import { EditStudente } from "./coordinatori/EditStudente"
 import { ImportaStudenti } from "./coordinatori/ImportaStudenti"
 import { history } from "../Navigator"
 import { DettaglioStudente } from "./coordinatori/DettaglioStudente"
+import { ListaMaterie } from "./coordinatori/ListaMaterie"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI]: {
@@ -53,6 +54,11 @@ export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE]: {
         component: EditStudente,
         pageTitle: "Modifica studente",
+        permission: ComponentsPermissions.checkPermissionCoordinatore
+    },
+    [ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE]: {
+        component: ListaMaterie,
+        pageTitle: "Materie del corso",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
     [ComponentsPaths.SITE_BASE + "layout"]: {

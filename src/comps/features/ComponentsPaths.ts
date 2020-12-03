@@ -9,4 +9,5 @@ export class ComponentsPaths{
     static PATH_COORDINATORI_EDIT_STUDENTE = ComponentsPaths.PATH_COORDINATORI_EDIT_BASE + "/:id"
     static PATH_COORDINATORI_DETAILS_STUDENTE = ComponentsPaths.PATH_COORDINATORI + "/studenti/:id"
     static PATH_COORDINATORI_IMPORT_STUDENTI = ComponentsPaths.PATH_COORDINATORI + "/studenti/import"
+    static PATH_COORDINATORI_LISTA_MATERIE = ComponentsPaths.PATH_COORDINATORI + "/materie"
 }
