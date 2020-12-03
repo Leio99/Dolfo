@@ -6,6 +6,7 @@ import { ComponentsPermissions } from "./ComponentsPermissions"
 import { LoginCoordinatore } from "./coordinatori/LoginCoordinatore"
 import { HomeCoordinatore } from "./coordinatori/HomeCoordinatore"
 import { AddStudente } from "./coordinatori/AddStudente"
+import { EditStudente } from "./coordinatori/EditStudente"
 import { ImportaStudenti } from "./coordinatori/ImportaStudenti"
 import { history } from "../Navigator"
 import { DettaglioStudente } from "./coordinatori/DettaglioStudente"
@@ -47,6 +48,11 @@ export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE]: {
         component: DettaglioStudente,
         pageTitle: "Dettaglio studente",
+        permission: ComponentsPermissions.checkPermissionCoordinatore
+    },
+    [ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE]: {
+        component: EditStudente,
+        pageTitle: "Modifica studente",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
     [ComponentsPaths.SITE_BASE + "layout"]: {

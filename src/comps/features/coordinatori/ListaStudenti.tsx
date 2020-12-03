@@ -61,6 +61,8 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     }
 
     openDetail = (id: number) => history.push(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI + "/" + id)
+    
+    openModifica = (id: number) => history.push(ComponentsPaths.PATH_COORDINATORI_EDIT_BASE + "/" + id)
 
     buildTable = (studenti: any[]) => {
         const { checkList } = this.state
@@ -91,7 +93,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                         </Button>
                         
                         {
-                            !s.ritirato && <Button circleBtn btnColor="orange" className="mx-2" tooltip="Modifica">
+                            !s.ritirato && <Button circleBtn btnColor="orange" className="mx-2" tooltip="Modifica" onClick={() => this.openModifica(s.idStudente)}>
                                 <EditIcon />
                             </Button>
                         }
