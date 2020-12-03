@@ -128,7 +128,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         return popup as { close?: () => void }
     }
 
-    static openDialogComponent = (Class: any, props: any) => {
+    static openDialogComponent = (Class: any, props?: any) => {
         const popup = document.createElement("div"),
         Component = <Class close={() => popup.remove()} {...props} />
 

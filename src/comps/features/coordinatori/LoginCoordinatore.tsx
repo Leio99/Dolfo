@@ -11,7 +11,6 @@ import { RecuperoPassword } from "./RecuperoPassword"
 export interface IState{
     readonly adminName: string
     readonly adminPassword: string
-    readonly showForgotPassword: boolean
     readonly loading: boolean
 }
 
@@ -22,7 +21,6 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
         this.state = {
             adminName: "",
             adminPassword: "",
-            showForgotPassword: false,
             loading: false
         }
     }
@@ -35,7 +33,7 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
 
     changePassword = (adminPassword: string) => this.setState({ adminPassword })
 
-    toggleForgot = () => this.setState({ showForgotPassword: !this.state.showForgotPassword })
+    openForgot = () => Dialog.openDialogComponent(RecuperoPassword)
 
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
@@ -74,7 +72,7 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
     }
 
     render = (): JSX.Element => {
-        const { showForgotPassword, loading } = this.state
+        const { loading } = this.state
 
         return <div>
             <form className="floating-centered p-3 rounded shadow bg-white col-10 col-md-5" onSubmit={this.tryLogin}>
@@ -84,10 +82,8 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
                 <TextInput name="password" type="password" label="Password" onChange={this.changePassword} togglePassword disabled={loading} />
 
                 <Button type="submit" fullSize bigBtn btnColor="green" className="text-uppercase mt-2" loading={loading}>Accedi</Button>
-                <Button onClick={this.toggleForgot} fullSize textBtn btnColor="darkblue" className="mt-2">Hai dimenticato la password?</Button>
+                <Button onClick={this.openForgot} fullSize textBtn btnColor="darkblue" className="mt-2">Hai dimenticato la password?</Button>
             </form>
-
-            <RecuperoPassword visible={showForgotPassword} onClose={this.toggleForgot} />
         </div>
     }
 }

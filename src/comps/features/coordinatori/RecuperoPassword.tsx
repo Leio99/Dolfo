@@ -3,15 +3,11 @@ import { Cifratore } from "../../../commons/Cifratore"
 import { CoordinatoriService } from "../../../services/CoordinatoriService"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
-import { Dialog } from "../../layout/Dialog"
+import { ComponentAsDialogProps, Dialog } from "../../layout/Dialog"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { Step } from "../../layout/Step"
 import { Stepper } from "../../layout/Stepper"
 
-export interface IProps{
-    readonly visible: boolean
-    readonly onClose: () => void
-}
 export interface IState{
     readonly currentStep: number
     readonly email: string
@@ -22,8 +18,8 @@ export interface IState{
     readonly loading: boolean
 }
 
-export class RecuperoPassword extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps, IState>{
+    constructor(props: ComponentAsDialogProps){
         super(props)
 
         this.state = {
@@ -48,7 +44,7 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
             loading: false
         })
 
-        this.props.onClose()
+        this.props.close()
     }
 
     changeMail = (email: string) => this.setState({ email })
@@ -160,10 +156,9 @@ export class RecuperoPassword extends React.PureComponent<IProps, IState>{
     }
 
     render = (): JSX.Element => {
-        const { visible } = this.props,
-        { currentStep, email, code, newPassword, newPasswordConfirm, loading } = this.state
+        const { currentStep, email, code, newPassword, newPasswordConfirm, loading } = this.state
 
-        return <Dialog title="Recupero della password" visible={visible} onClose={this.cancelRecover} hideFooter>
+        return <Dialog title="Recupero della password" onClose={this.cancelRecover} hideFooter visible>
             <Stepper currentStep={currentStep}>
                 <Step title="E-mail" loading={loading}>
                     <form onSubmit={this.confirmFirstStep}>

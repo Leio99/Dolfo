@@ -90,7 +90,7 @@ export class EditOrariStudente extends React.PureComponent<IProps, IState>{
 
     render = (): JSX.Element => {
         const { loading, ingresso, uscita } = this.state,
-        { presenza, close } = this.props
+        { close } = this.props
 
         return <Dialog title={<span>
             <Button textBtn btnColor="blue" tooltip="Dettagli presenza" className="align-top" onClick={this.openDettagli}>
