@@ -184,7 +184,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
                 </div>
 
                 {
-                    !props.hideFooter && (props.customFooter ? <div className="dolfo-dialog-footer">
+                    !props.hideFooter ? (props.customFooter ? <div className="dolfo-dialog-footer">
                             {props.customFooter}
                         </div> : <div className="dolfo-dialog-footer">
                             {
@@ -197,7 +197,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
                                 {props.okText || Constants.OK_TEXT}
                             </Button>
                         </div>
-                    )
+                    ) : <div className="dolfo-hidden-footer"></div>
                 }
             </div>
         </div>

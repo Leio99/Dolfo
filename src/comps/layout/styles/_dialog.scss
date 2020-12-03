@@ -55,6 +55,10 @@
         width: 500px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 
+        .dolfo-hidden-footer{
+            padding-bottom: 1rem
+        }
+
         .dolfo-dialog-header, .dolfo-dialog-footer{
             padding: 1rem 1.3rem;
             

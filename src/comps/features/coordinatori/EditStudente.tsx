@@ -12,6 +12,9 @@ import { NotificationMsg } from "../../layout/NotificationMsg"
 export interface IRouteParams{
     readonly id: string
 }
+export interface IProps extends RouteComponentProps<IRouteParams>{
+    readonly onSave?: () => void
+}
 export interface IState{
     readonly nome: string
     readonly cognome: string
@@ -23,8 +26,8 @@ export interface IState{
     readonly loadingForm: boolean
 }
 
-export class EditStudente extends React.PureComponent<RouteComponentProps<IRouteParams>, IState>{
-    constructor(props: RouteComponentProps<IRouteParams>){
+export class EditStudente extends React.PureComponent<IProps, IState>{
+    constructor(props: IProps){
         super(props)
 
         this.state = {
@@ -80,7 +83,11 @@ export class EditStudente extends React.PureComponent<RouteComponentProps<IRoute
 
         this.setState({ loadingForm: true })
 
-        setTimeout(() => this.setState({ loadingForm: false }), 2000)
+        setTimeout(() => {
+            this.setState({ loadingForm: false })
+
+            this.props.onSave && this.props.onSave()
+        }, 2000)
     }
 
     render = (): JSX.Element => {

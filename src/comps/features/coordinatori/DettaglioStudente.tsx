@@ -5,11 +5,12 @@ import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
 import { Dialog } from "../../layout/Dialog"
-import { Icon, LoadingIcon } from "../../layout/Icon"
+import { EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
 import { Progress } from "../../layout/Progress"
 import { history } from "../../Navigator"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { DialogOreStage } from "./DialogOreStage"
+import { EditStudente } from "./EditStudente"
 import TabellaPresenze from "./TabellaPresenze"
 
 export interface IRouteParams{
@@ -66,6 +67,18 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
     }
 
     openStageDialog = () => Dialog.openComponentAsDialog(DialogOreStage, { idStudente: parseInt(this.props.match.params.id) })
+    
+    openModifica = () => {
+        const dialog = Dialog.openDialog({
+            title: "Modifica studente",
+            content: <EditStudente {...this.props} onSave={() => {
+                dialog.close()
+                this.componentDidMount()
+            }} />,
+            hideFooter: true,
+            width: "70vw"
+        })
+    }
 
     render = (): JSX.Element => {
         const { studente, totPresenze, oreTotali } = this.state,
@@ -83,10 +96,17 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                     }
 
                     <h2 className="text-uppercase mb-2 text-truncate">{studente.nome} {studente.cognome}</h2>
+
                     <div className="mb-1">
                         <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatWithMonth(studente.dataNascita)}
                     </div>
                     <div>
+                        <div className="float-right">
+                            <Button textBtn onClick={this.openModifica} btnColor="orange" tooltip="Modifica">
+                                <EditIcon className="mr-2" large />
+                            </Button>
+                        </div>
+
                         <Icon large type="far" iconKey="envelope" className="mr-1" /> <a href={"mailto:" + studente.email}>{studente.email}</a>
                     </div>
                 </Card>
@@ -104,11 +124,11 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                         }
                     </div>
 
-                    <Button className="float-right" textBtn onClick={this.openStageDialog} btnColor="darkblue" tooltip="Ore di stage" style={{ position: "relative", transform:"translateY(-100%)", top: "100%" }}>
-                        <Icon iconKey="clipboard-list-check" className="fa-2x" />
-                    </Button>
-
-                    <div className="clearfix"></div>
+                    <div className="text-right" style={{ transform:"translateY(100%)" }}>
+                        <Button textBtn onClick={this.openStageDialog} btnColor="darkblue" tooltip="Ore di stage">
+                            <Icon iconKey="clipboard-list-check" className="fa-2x" />
+                        </Button>
+                    </div>
                 </Card>
             </div>
 
