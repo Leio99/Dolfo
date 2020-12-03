@@ -91,6 +91,7 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
             title: "Anteprima dati",
             okText: "Conferma",
             okType: "green",
+            overflows: true,
             onOk: () => {
                 const loading = Dialog.loadingDialog("Importazione...")
 

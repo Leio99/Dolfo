@@ -66,7 +66,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         })
     }
 
-    openStageDialog = () => Dialog.openComponentAsDialog(DialogOreStage, { idStudente: parseInt(this.props.match.params.id) })
+    openStageDialog = () => Dialog.openDialogComponent(DialogOreStage, { idStudente: parseInt(this.props.match.params.id) })
     
     openModifica = () => {
         const dialog = Dialog.openDialog({
@@ -101,13 +101,13 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                         <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatWithMonth(studente.dataNascita)}
                     </div>
                     <div>
-                        <div className="float-right">
-                            <Button textBtn onClick={this.openModifica} btnColor="orange" tooltip="Modifica">
-                                <EditIcon className="mr-2" large />
-                            </Button>
-                        </div>
-
                         <Icon large type="far" iconKey="envelope" className="mr-1" /> <a href={"mailto:" + studente.email}>{studente.email}</a>
+                    </div>
+
+                    <div className="text-right">
+                        <Button textBtn onClick={this.openModifica} btnColor="orange" tooltip="Modifica">
+                            <EditIcon className="mr-2" large />
+                        </Button>
                     </div>
                 </Card>
 
@@ -124,7 +124,9 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                         }
                     </div>
 
-                    <div className="text-right" style={{ transform:"translateY(100%)" }}>
+                    <div className="clearfix"></div>
+
+                    <div className="text-right">
                         <Button textBtn onClick={this.openStageDialog} btnColor="darkblue" tooltip="Ore di stage">
                             <Icon iconKey="clipboard-list-check" className="fa-2x" />
                         </Button>

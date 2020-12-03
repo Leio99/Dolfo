@@ -392,6 +392,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     
                     <Button onClick={() => {
                         Dialog.openDialog({
+                            overflows: true,
                             title: "My content is long",
                             content: <div>
                                 {

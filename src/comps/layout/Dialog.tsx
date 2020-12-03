@@ -25,6 +25,7 @@ export interface IProps{
     readonly customFooter?: React.ReactNode
     readonly top?: boolean
     readonly hideFooter?: boolean
+    readonly overflows?: boolean
 }
 export interface IState{
     readonly visible: boolean
@@ -127,7 +128,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         return popup as { close?: () => void }
     }
 
-    static openComponentAsDialog = (Class: any, props: any) => {
+    static openDialogComponent = (Class: any, props: any) => {
         const popup = document.createElement("div"),
         Component = <Class close={() => popup.remove()} {...props} />
 
@@ -167,7 +168,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         const props = this.props,
         { visible } = this.state
 
-        return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "") + (props.top ? " place-top" : "")}>
+        return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "") + (props.top ? " place-top" : "") + (props.overflows ? " overflows" : "")}>
             <div className="dolfo-dialog-overlay" onClick={props.clickOutside ? this.onClose : null}></div>
 
             <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width }}>
