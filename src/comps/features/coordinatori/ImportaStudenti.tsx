@@ -91,6 +91,11 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
             title: "Anteprima dati",
             okText: "Conferma",
             okType: "green",
+            onOk: () => {
+                const loading = Dialog.loadingDialog("Importazione...")
+
+                setTimeout(() => loading.close(), 2000)
+            },
             content: <Table data={data} columns={[
                 { label: "Nome", field: "nome", tooltip: true },
                 { label: "Cognome", field: "cognome", tooltip: true },

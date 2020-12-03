@@ -2,13 +2,12 @@ import React from "react"
 import { downloadCSV, formatItalian, getTime, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
-import { Dialog } from "../../layout/Dialog"
+import { Dialog, ComponentAsDialogProps } from "../../layout/Dialog"
 import { Icon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
 
-export interface IProps{
+export interface IProps extends ComponentAsDialogProps{
     readonly idStudente: number
-    readonly onClose: () => void
 }
 export interface IState{
     readonly listaOre: any[]
@@ -35,9 +34,9 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
         const { listaOre } = this.state,
         props = this.props
 
-        return <Dialog visible={true} onClose={props.onClose} title="Ore di stage segnate" width="70vw" customFooter={[
-            <Button textBtn onClick={props.onClose} btnColor="red">Chiudi</Button>,
-            <Button onClick={() => downloadCSV(this.state.listaOre)} btnColor="darkblue" smallBtn disabled={!listaOre || !listaOre.length}>
+        return <Dialog visible onClose={props.close} title="Ore di stage segnate" width="70vw" customFooter={[
+            <Button textBtn smallBtn onClick={props.close} btnColor="red">Chiudi</Button>,
+            <Button onClick={() => downloadCSV(this.state.listaOre)} btnColor="blue" smallBtn disabled={!listaOre || !listaOre.length}>
                 <Icon iconKey="download" /> Scarica CSV
             </Button>
         ]}>

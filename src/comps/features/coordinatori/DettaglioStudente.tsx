@@ -4,6 +4,7 @@ import { dateIsToday, formatItalian, formatWithMonth, LoadingIconCentered } from
 import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
+import { Dialog } from "../../layout/Dialog"
 import { Icon, LoadingIcon } from "../../layout/Icon"
 import { Progress } from "../../layout/Progress"
 import { history } from "../../Navigator"
@@ -18,7 +19,6 @@ export interface IState{
     readonly studente: any
     readonly totPresenze: number
     readonly oreTotali: number
-    readonly showStage: boolean
 }
 
 export class DettaglioStudente extends React.PureComponent<RouteComponentProps<IRouteParams>, IState>{
@@ -28,8 +28,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         this.state = {
             studente: null,
             totPresenze: 0,
-            oreTotali: 0,
-            showStage: false
+            oreTotali: 0
         }
     }
 
@@ -66,10 +65,10 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         })
     }
 
-    toggleStage = () => this.setState({ showStage: !this.state.showStage })
+    openStageDialog = () => Dialog.openComponentAsDialog(DialogOreStage, { idStudente: parseInt(this.props.match.params.id) })
 
     render = (): JSX.Element => {
-        const { studente, totPresenze, oreTotali, showStage } = this.state,
+        const { studente, totPresenze, oreTotali } = this.state,
         idStudente = this.props.match.params.id,
         perc = studente?.frequenza !== null ? Math.round(100 * totPresenze / oreTotali) : null,
         color = perc >= 80 ? "green" : "red"
@@ -105,7 +104,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                         }
                     </div>
 
-                    <Button className="float-right" textBtn onClick={this.toggleStage} btnColor="darkblue" tooltip="Ore di stage" style={{ position: "relative", transform:"translateY(-100%)", top: "100%" }}>
+                    <Button className="float-right" textBtn onClick={this.openStageDialog} btnColor="darkblue" tooltip="Ore di stage" style={{ position: "relative", transform:"translateY(-100%)", top: "100%" }}>
                         <Icon iconKey="clipboard-list-check" className="fa-2x" />
                     </Button>
 
@@ -114,10 +113,6 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
             </div>
 
             <TabellaPresenze idStudente={parseInt(idStudente)} reloadTotali={this.loadTotali} />
-
-            {
-                showStage && <DialogOreStage idStudente={parseInt(idStudente)} onClose={this.toggleStage} />
-            }
         </div>
     }
 }

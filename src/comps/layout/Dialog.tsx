@@ -11,8 +11,8 @@ export interface IProps{
     readonly onOk?: () => void
     readonly okBtnClass?: string
     readonly cancelBtnClass?: string
-    readonly okText?: string
-    readonly cancelText?: string
+    readonly okText?: string | JSX.Element
+    readonly cancelText?: string | JSX.Element
     readonly hideCancel?: boolean
     readonly title: string | JSX.Element
     readonly content?: string | JSX.Element
@@ -32,6 +32,9 @@ export interface IState{
 export interface DialogProps extends IProps{
     readonly type?: "success" | "info" | "error" | "warning"
     readonly icon?: JSX.Element
+}
+export interface ComponentAsDialogProps{
+    readonly close: () => void
 }
 
 export class Dialog extends React.PureComponent<IProps, IState>{
@@ -103,8 +106,14 @@ export class Dialog extends React.PureComponent<IProps, IState>{
 
     static openDialog = (data: DialogProps) => {
         const popup = document.createElement("div"),
-        onCloseFunction = (props: IProps) => props.onClose && props.onClose(),
-        onOkFunction = (props: IProps) => props.onOk && props.onOk(),
+        onCloseFunction = (props: IProps) => {
+            popup.remove()
+            props.onClose && props.onClose()
+        },
+        onOkFunction = (props: IProps) => {
+            popup.remove()
+            props.onOk && props.onOk()
+        },
         icon = data.icon || Dialog.getIcon(data.type)
 
         document.getElementById("root").appendChild(popup);
@@ -113,9 +122,18 @@ export class Dialog extends React.PureComponent<IProps, IState>{
             popup.remove()
         }
 
-        ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width || "350px"} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={null} />, popup)
+        ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width || "350px"} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={data.customFooter} />, popup)
 
         return popup as { close?: () => void }
+    }
+
+    static openComponentAsDialog = (Class: any, props: any) => {
+        const popup = document.createElement("div"),
+        Component = <Class close={() => popup.remove()} {...props} />
+
+        document.getElementById("root").appendChild(popup)
+
+        ReactDOM.render(Component, popup)
     }
 
     static getIcon = (icon: string) => {
