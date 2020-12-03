@@ -4,7 +4,7 @@ import Select from "../../form/Select"
 import { Option } from "../../form/Option"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
-import { AddIcon, CheckCircleIcon, CheckIcon, CloseCircleIcon, CloseIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
+import { AddIcon, CheckIcon, CloseIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
 import { Tab } from "../../layout/Tab"
 import { Table } from "../../layout/Table"
 import { Tabs } from "../../layout/Tabs"
@@ -105,7 +105,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
 
                         <Button circleBtn btnColor="green" className="mx-2" tooltip="Archivia">
                             <Icon iconKey="user-check" />
-                        </Button>    
+                        </Button>
                     </div>
                 }
             })
@@ -190,16 +190,16 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
             </span>}>
                 {
                     !listaArchiviati ? loadingIcon : <Table columns={[
-                        { label: <CheckCircleIcon large color="var(--green)" />, field: "check", align: "center" },
                         { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
                         { label: "Anno", field: "anno", width: "15%", align: "center", canSearch: true },
+                        { label: "Stato", field: "stato", align: "center" },
                         { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
                         { label: "Azioni", field: "azioni", width: "26%", align: "center" },
                     ]} data={
                         listaArchiviati.map(s => {
                             return {
                                 onDoubleClick: () => this.openDetail(s.idStudente),
-                                check: !s.ritirato ? <CheckCircleIcon large color="var(--green)" tooltip="Promosso" /> : <CloseCircleIcon large color="var(--red)" tooltip="Ritirato/Bocciato" />,
+                                stato: !s.ritirato ? <Icon iconKey="user-graduate" large color="var(--green)" tooltip="Promosso" /> : <Icon iconKey="user-times" large color="var(--red)" tooltip="Ritirato/Bocciato" />,
                                 desStudente: s.nome + " " + s.cognome,
                                 anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
                                 frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
