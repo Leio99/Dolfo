@@ -129,7 +129,7 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
             </div>
 
             <Button type="submit" className="mt-2 text-uppercase" btnColor="green" bigBtn fullSize loading={loadingForm}>
-                Modifica studente
+                Salva studente
             </Button>
         </form>
     }
