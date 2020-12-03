@@ -8,6 +8,8 @@ import { Option } from "../../form/Option"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { NotificationMsg } from "../../layout/NotificationMsg"
+import { ComponentsPaths } from "../ComponentsPaths"
+import { history } from "../../Navigator"
 
 export interface IRouteParams{
     readonly id: string
@@ -48,7 +50,7 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
                 ...response.data,
                 loading: false
             })
-        })
+        }).catch(() => history.push(ComponentsPaths.PATH_COORDINATORI_HOME))
     }
 
     changeNome = (nome: string) => this.setState({ nome })

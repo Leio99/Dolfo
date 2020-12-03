@@ -43,15 +43,15 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
             this.setState({
                 studente: response.data
             })
-        }).catch(() => history.push(ComponentsPaths.PATH_COORDINATORI_HOME))
 
-        StudentiService.getOreStudente(id).then(response => {
-            this.setState({
-                oreTotali: response.data as number
+            StudentiService.getOreStudente(id).then(response => {
+                this.setState({
+                    oreTotali: response.data as number
+                })
             })
-        })
-
-        this.loadTotali()
+    
+            this.loadTotali()
+        }).catch(() => history.push(ComponentsPaths.PATH_COORDINATORI_HOME))
     }
 
     loadTotali = () => {
@@ -112,16 +112,18 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                 </Card>
 
                 <Card title="Presenze totali (ore)" className="col-12 col-md mb-3">
-                    {
-                        !isNaN(perc) ? <Progress circular percent={perc} circleWidth={80} className="float-left mr-3" color={color} /> : <LoadingIcon spinning />
-                    }
-
-                    <div className="progress-label">
+                    <div className="float-left">
                         {
-                            oreTotali !== null && totPresenze !== null ? <span>
-                                {totPresenze}/{oreTotali}
-                            </span> : <LoadingIcon spinning />
+                            !isNaN(perc) ? <Progress circular percent={perc} circleWidth={80} className="mr-3" color={color} /> : <LoadingIcon spinning />
                         }
+
+                        <div className="progress-label">
+                            {
+                                oreTotali !== null && totPresenze !== null ? <span>
+                                    {totPresenze}/{oreTotali}
+                                </span> : <LoadingIcon spinning />
+                            }
+                        </div>
                     </div>
 
                     <div className="clearfix"></div>
