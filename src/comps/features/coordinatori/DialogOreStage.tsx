@@ -1,5 +1,5 @@
 import React from "react"
-import { formatItalian, getTime, LoadingIconCentered } from "../../../commons/utility"
+import { downloadCSV, formatItalian, getTime, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
@@ -31,26 +31,13 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
         })
     }
 
-    downloadCSV = () => {
-        const csvContent = "data:text/csv;charset=utf-8," + this.state.listaOre.map(e => Object.values(e).join(";")).join("\n"),
-        encodedUri = encodeURI(csvContent),
-        link = document.createElement("a")
-
-        link.setAttribute("href", encodedUri)
-        link.setAttribute("download", "OreStage.csv")
-        document.body.appendChild(link)
-
-        link.click()
-        link.remove()
-    }
-
     render = (): JSX.Element => {
         const { listaOre } = this.state,
         props = this.props
 
         return <Dialog visible={true} onClose={props.onClose} title="Ore di stage segnate" width="70vw" customFooter={[
             <Button textBtn onClick={props.onClose} btnColor="red">Chiudi</Button>,
-            <Button onClick={this.downloadCSV} btnColor="darkblue" smallBtn disabled={!listaOre || !listaOre.length}>
+            <Button onClick={() => downloadCSV(this.state.listaOre)} btnColor="darkblue" smallBtn disabled={!listaOre || !listaOre.length}>
                 <Icon iconKey="download" /> Scarica CSV
             </Button>
         ]}>

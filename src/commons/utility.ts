@@ -210,3 +210,16 @@ export const getTime = (d: string) => {
 
     return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
 }
+
+export const downloadCSV = (data: any[]) => {
+    const csvContent = "data:text/csv;charset=utf-8," + data.map(e => Object.values(e).join(";")).join("\n"),
+    encodedUri = encodeURI(csvContent),
+    link = document.createElement("a")
+
+    link.setAttribute("href", encodedUri)
+    link.setAttribute("download", "OreStage.csv")
+    document.body.appendChild(link)
+
+    link.click()
+    link.remove()
+}
