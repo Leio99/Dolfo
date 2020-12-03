@@ -61,7 +61,7 @@ export class ListaMaterie extends React.PureComponent<undefined, IState>{
 
             <div className="mt-3">
                 <Table columns={[
-                    { label: "Materia", field: "nome", canSearch: true, width: "85%", tooltip: true },
+                    { label: "Materia", field: "nome", canSearch: true, width: "90%", tooltip: true },
                     { label: "Azioni", field: "azioni" },
                 ]} data={materieList.map(m => {
                     m.azioni = <Button circleBtn tooltip="Modifica" btnColor="orange" onClick={() => this.openEditMateria(m)}>

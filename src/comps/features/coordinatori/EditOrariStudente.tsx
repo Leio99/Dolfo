@@ -102,7 +102,7 @@ export class EditOrariStudente extends React.PureComponent<IProps, IState>{
 
                 <TimePicker defaultValue={uscita} onChange={this.editUscita} disabled={loading} label="Orario di uscita" />
 
-                <Button type="submit" className="mt-2 text-uppercase" fullSize bigBtn loading={loading} btnColor="green">Salva presenza</Button>
+                <Button type="submit" className="mt-2 text-uppercase" fullSize loading={loading} btnColor="green">Salva presenza</Button>
             </form>
         </Dialog>
     }
