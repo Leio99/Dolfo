@@ -78,7 +78,8 @@ export class Dialog extends React.PureComponent<IProps, IState>{
             title,
             hideCancel: true,
             icon: Dialog.getIcon(data.type || "info"),
-            okType
+            okType,
+            width: "350px"
         })
     }
 
@@ -89,7 +90,8 @@ export class Dialog extends React.PureComponent<IProps, IState>{
             onOk: onYes,
             okText: Constants.YESY_TEXT,
             cancelText: Constants.NO_TEXT,
-            icon: <QuestionCircleOutlineIcon color="var(--orange)" />
+            icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
+            width: "350px"
         })
     }
 
@@ -123,7 +125,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
             popup.remove()
         }
 
-        ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width || "350px"} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={data.customFooter} />, popup)
+        ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={data.customFooter} />, popup)
 
         return popup as { close?: () => void }
     }

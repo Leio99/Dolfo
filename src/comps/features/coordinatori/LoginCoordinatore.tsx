@@ -37,7 +37,6 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
         const dialog = Dialog.openDialog({
             title: "Recupero della password",
             hideFooter: true,
-            width: "530px",
             content: <RecuperoPassword close={() => dialog.close()} />
         })
     }
