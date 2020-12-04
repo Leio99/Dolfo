@@ -101,8 +101,8 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                     <div className="mb-1">
                         <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatWithMonth(studente.dataNascita)}
                     </div>
-                    <div>
-                        <Icon large type="far" iconKey="envelope" className="mr-1" /> <a href={"mailto:" + studente.email}>{studente.email}</a>
+                    <div className="d-inline">
+                        <Icon large type="far" iconKey="envelope" className="mr-1" /> <a data-tooltip="Invia e-mail" href={"mailto:" + studente.email}>{studente.email}</a>
                     </div>
 
                     <div className="text-right">
