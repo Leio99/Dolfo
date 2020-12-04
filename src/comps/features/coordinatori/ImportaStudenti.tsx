@@ -107,7 +107,21 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
         })
     }
 
+    resetFields = () => {
+        this.setState({
+            fields: {
+                nome: 0,
+                cognome: 0,
+                cf: 0,
+                dataNascita: 0,
+                email: 0
+            }
+        })
+    }
+
     readFile = (files: FileList) => {
+        this.resetFields()
+        
         const reader = new FileReader()
 
         reader.onload = (e: any) => {
