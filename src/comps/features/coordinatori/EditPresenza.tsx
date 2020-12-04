@@ -16,7 +16,7 @@ export interface IState{
     readonly uscita: string
 }
 
-export class EditOrariStudente extends React.PureComponent<IProps, IState>{
+export class EditPresenza extends React.PureComponent<IProps, IState>{
     constructor(props: IProps){
         super(props)
 

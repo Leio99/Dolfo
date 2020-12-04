@@ -32,20 +32,6 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
             loading: false
         }
     }
-    
-    cancelRecover = () => {
-        this.setState({
-            currentStep: 0,
-            email: "",
-            code: "",
-            newPassword: "",
-            newPasswordConfirm: "",
-            idUtente: null,
-            loading: false
-        })
-
-        this.props.close()
-    }
 
     changeMail = (email: string) => this.setState({ email })
 
@@ -141,7 +127,7 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
                     title: "Complimenti!",
                     content: "Password modificata con successo. Effettua il login.",
                     type: "success",
-                    onOk: this.cancelRecover
+                    onOk: this.props.close
                 })
             }else{
                 Dialog.infoDialog({
@@ -149,50 +135,48 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
                     content: "Non è stato possibile completare l'operazione.",
                     type: "error"
                 })
-
-                this.switchLoading()
             }
+
+            this.switchLoading()
         }).catch(this.switchLoading)
     }
 
     render = (): JSX.Element => {
         const { currentStep, email, code, newPassword, newPasswordConfirm, loading } = this.state
 
-        return <Dialog title="Recupero della password" onClose={this.cancelRecover} hideFooter visible>
-            <Stepper currentStep={currentStep}>
-                <Step title="E-mail" loading={loading}>
-                    <form onSubmit={this.confirmFirstStep}>
-                        <TextInput label="Inserisci la tua e-mail" value={email} type="email" onChange={this.changeMail} />
+        return <Stepper currentStep={currentStep}>
+            <Step title="E-mail" loading={loading}>
+                <form onSubmit={this.confirmFirstStep}>
+                    <TextInput label="Inserisci la tua e-mail" value={email} type="email" onChange={this.changeMail} />
 
-                        <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right" >Prosegui</Button>
+                    <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right" >Prosegui</Button>
 
-                        <div className="clearfix"></div>
-                    </form>
-                </Step>
+                    <div className="clearfix"></div>
+                </form>
+            </Step>
 
-                <Step title="Codice">
-                    <form onSubmit={this.confirmSecondStep}>
-                        <TextInput value={code} label="Inserisci il codice ricevuto via e-mail" onChange={this.changeCode} icon={{ iconKey: "hashtag" }} />
+            <Step title="Codice">
+                <form onSubmit={this.confirmSecondStep}>
+                    <TextInput value={code} label="Inserisci il codice ricevuto via e-mail" onChange={this.changeCode} icon={{ iconKey: "hashtag" }} />
 
-                        <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
-                        <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Prosegui</Button>
+                    <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
+                    <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Prosegui</Button>
 
-                        <div className="clearfix"></div>
-                    </form>
-                </Step>
+                    <div className="clearfix"></div>
+                </form>
+            </Step>
 
-                <Step title="Nuova password" loading={loading}>
-                    <form onSubmit={this.savePassword}>
-                        <TextInput value={newPassword} label="Crea la tua nuova password" type="password" onChange={this.changePassword} />
-                        <TextInput value={newPasswordConfirm} label="Conferma la nuova password" type="password" onChange={this.changePasswordConfirm} />
+            <Step title="Nuova password" loading={loading}>
+                <form onSubmit={this.savePassword}>
+                    <TextInput value={newPassword} label="Crea la tua nuova password" type="password" onChange={this.changePassword} />
+                    <TextInput value={newPasswordConfirm} label="Conferma la nuova password" type="password" onChange={this.changePasswordConfirm} />
 
-                        <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
-                        <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Salva la password</Button>
+                    <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
+                    <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Salva la password</Button>
 
-                        <div className="clearfix"></div>
-                    </form>
-                </Step>
-            </Stepper>
-        </Dialog>
+                    <div className="clearfix"></div>
+                </form>
+            </Step>
+        </Stepper>
     }
 }

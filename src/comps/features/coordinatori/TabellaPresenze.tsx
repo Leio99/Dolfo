@@ -5,7 +5,7 @@ import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
-import { EditOrariStudente } from "./EditOrariStudente"
+import { EditPresenza } from "./EditPresenza"
 
 export interface IProps{
     readonly idStudente: number
@@ -53,7 +53,7 @@ export default class TabellaPresenze extends React.PureComponent<IProps, IState>
         this.props.reloadTotali()
     }
 
-    editPresenza = (presenza: any) => Dialog.openDialogComponent(EditOrariStudente, { presenza, onSave: this.savePresenza })
+    editPresenza = (presenza: any) => Dialog.openDialogComponent(EditPresenza, { presenza, onSave: this.savePresenza })
 
     render = (): JSX.Element => {
         const { presenze } = this.state

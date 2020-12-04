@@ -33,7 +33,14 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
 
     changePassword = (adminPassword: string) => this.setState({ adminPassword })
 
-    openForgot = () => Dialog.openDialogComponent(RecuperoPassword)
+    openForgot = () => {
+        const dialog = Dialog.openDialog({
+            title: "Recupero della password",
+            hideFooter: true,
+            width: "530px",
+            content: <RecuperoPassword close={() => dialog.close()} />
+        })
+    }
 
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
