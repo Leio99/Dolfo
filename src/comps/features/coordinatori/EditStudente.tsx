@@ -26,6 +26,7 @@ export interface IState{
     readonly annoFrequentazione: number
     readonly loading: boolean
     readonly loadingForm: boolean
+    readonly studente: any
 }
 
 export class EditStudente extends React.PureComponent<IProps, IState>{
@@ -40,7 +41,8 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
             dataNascita: "",
             annoFrequentazione: 1,
             loading: true,
-            loadingForm: false
+            loadingForm: false,
+            studente: null
         }
     }
 
@@ -48,7 +50,8 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
         StudentiService.getStudente(this.props.match.params.id).then(response => {
             this.setState({
                 ...response.data,
-                loading: false
+                loading: false,
+                studente: response.data
             })
         }).catch(() => history.push(ComponentsPaths.PATH_COORDINATORI_HOME))
     }
@@ -68,11 +71,12 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
     editStudente = (e: any) => {
         e.preventDefault()
 
-        const { nome, cognome, email, cf, annoFrequentazione, dataNascita } = this.state,
+        const { nome, cognome, email, cf, annoFrequentazione, dataNascita, studente } = this.state,
         sendNome = nome.trim(),
         sendCognome = cognome.trim(),
         sendEmail = email.trim(),
-        sendCF = cf.trim()
+        sendCF = cf.trim(),
+        idStudente = this.props.match.params.id
 
         if(sendNome === "" || sendCognome === "" || sendCF === "" || dataNascita === "" || sendEmail === "")
             return NotificationMsg.showError("Riempire tutti i campi!")
@@ -83,14 +87,27 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
         if(annoFrequentazione !== 1 && annoFrequentazione !== 2)
             return NotificationMsg.showError("Classe non valida!")
 
-        this.setState({ loadingForm: true })
+        this.toggleLoading()
 
-        setTimeout(() => {
-            this.setState({ loadingForm: false })
-
+        StudentiService.editStudente(idStudente, {
+            idStudente: parseInt(idStudente),
+            nome: sendNome,
+            cognome: sendCognome,
+            email: sendEmail,
+            cf: sendCF,
+            annoFrequentazione,
+            dataNascita: new Date(dataNascita),
+            promosso: studente.promosso,
+            ritirato: studente.ritirato,
+            idCorso: studente.idCorso
+        }).then(() => {
+            this.toggleLoading()
             this.props.onSave && this.props.onSave()
-        }, 2000)
+            NotificationMsg.showSuccess("Studente modificato!")
+        }).catch(this.toggleLoading)
     }
+
+    toggleLoading = () => this.setState({ loadingForm: !this.state.loadingForm })
 
     render = (): JSX.Element => {
         const { nome, cognome, cf, email, dataNascita, loading, loadingForm, annoFrequentazione } = this.state

@@ -68,4 +68,17 @@ export class StudentiService{
 
         return ServerCall.put(API_URL_REGISTRO + "/presenze/" + id, params)
     }
+
+    static editStudente(idStudente: string, body: any){
+        const login = ComponentsPermissions.getLoginCoordinatore(),
+		params = {
+            authCoordinatore: {
+                idCoordinatore: login.idCoordinatore,
+                password: login.password
+            },
+            studente: body
+        }
+
+        return ServerCall.put(API_URL_REGISTRO + "/studenti/" + idStudente, params)
+    }
 }
