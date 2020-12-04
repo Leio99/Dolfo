@@ -1,4 +1,4 @@
-import { API_URL_REGISTRO } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_STUDENTI, API_URL_REGISTRO_CORSI, API_URL_REGISTRO_PRESENZE } from "../commons/consts/costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
 
@@ -6,13 +6,13 @@ export class StudentiService{
     static getStudentiCorso(idCorso: number){
 		if(isNaN(idCorso)) return ServerCall.emptyCallResult()
 		
-        return ServerCall.get(API_URL_REGISTRO + "/studenti/" + idCorso)
+        return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/" + idCorso)
     }
 
     static getStatoStage(idCorso: number, anno: number){
 		if(isNaN(idCorso) || isNaN(anno)) return ServerCall.emptyCallResult()
 		
-		return ServerCall.get(API_URL_REGISTRO + "/corsi/getstagevalue/" + idCorso + "/" + anno)
+		return ServerCall.get(API_URL_REGISTRO_CORSI + "/getstagevalue/" + idCorso + "/" + anno)
     }
 
     static cambiaStatoStage(anno: number){
@@ -24,36 +24,36 @@ export class StudentiService{
             },
             anno
         }
-        return ServerCall.post(API_URL_REGISTRO + "/corsi/switchabilitastage", params)
+        return ServerCall.post(API_URL_REGISTRO_CORSI + "/switchabilitastage", params)
     }
 
     static getStudente(id: string){
         if(!ComponentsPermissions.getLoginCoordinatore(false))
             return ServerCall.emptyCallResult()
 
-        return ServerCall.get(API_URL_REGISTRO + "/studenti/getstudentibyid/" + id)
+        return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getstudentibyid/" + id)
     }
 
     static getOreStudente(id: string){
         if(!ComponentsPermissions.getLoginCoordinatore(false))
             return ServerCall.emptyCallResult()
         
-        return ServerCall.get(API_URL_REGISTRO + "/studenti/gettotaleorelezioni/" + id)
+        return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/gettotaleorelezioni/" + id)
     }
 
     static getTotaleOre(id: string){
         if(!ComponentsPermissions.getLoginCoordinatore(false))
             return ServerCall.emptyCallResult()
         
-        return ServerCall.get(API_URL_REGISTRO + "/studenti/gethoursamount/" + id)
+        return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/gethoursamount/" + id)
     }
 
     static getPresenze(id: number){
-        return ServerCall.get(API_URL_REGISTRO + "/studenti/getdetailedpresences/" + id)
+        return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getdetailedpresences/" + id)
     }
 
     static getOreStage(id: number){
-        return ServerCall.get(API_URL_REGISTRO + "/studenti/getorestage/" + id)
+        return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getorestage/" + id)
     }
 
     static editPresenza(id: number, body: any){
@@ -66,7 +66,7 @@ export class StudentiService{
             ...body
         }
 
-        return ServerCall.put(API_URL_REGISTRO + "/presenze/" + id, params)
+        return ServerCall.put(API_URL_REGISTRO_PRESENZE + "/" + id, params)
     }
 
     static editStudente(idStudente: string, body: any){
@@ -79,6 +79,6 @@ export class StudentiService{
             studente: body
         }
 
-        return ServerCall.put(API_URL_REGISTRO + "/studenti/" + idStudente, params)
+        return ServerCall.put(API_URL_REGISTRO_STUDENTI + "/" + idStudente, params)
     }
 }

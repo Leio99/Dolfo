@@ -1,1 +1,6 @@
 export const API_URL_REGISTRO = "https://registrofitstic.azurewebsites.net/api"
+export const API_URL_REGISTRO_STUDENTI = API_URL_REGISTRO + "/studenti"
+export const API_URL_REGISTRO_CORSI = API_URL_REGISTRO + "/corsi"
+export const API_URL_REGISTRO_PRESENZE = API_URL_REGISTRO + "/presenze"
+export const API_URL_REGISTRO_MATERIE = API_URL_REGISTRO + "/materie"
+export const API_URL_REGISTRO_COORDINATORI = API_URL_REGISTRO + "/coordinatori"

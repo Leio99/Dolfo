@@ -1,4 +1,4 @@
-import { API_URL_REGISTRO } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_MATERIE } from "../commons/consts/costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
 
@@ -7,7 +7,7 @@ export class MaterieService{
         if(!ComponentsPermissions.getLoginCoordinatore(false))
             return ServerCall.emptyCallResult()
 		
-        return ServerCall.get(API_URL_REGISTRO + "/materie/getmateriebycorso/" + idCorso)
+        return ServerCall.get(API_URL_REGISTRO_MATERIE + "/getmateriebycorso/" + idCorso)
     }
 
     static addMateria(idCorso: string, nomeMateria: string){
@@ -22,7 +22,7 @@ export class MaterieService{
             }
         }
 
-        return ServerCall.post(API_URL_REGISTRO + "/materie/" + idCorso, params)
+        return ServerCall.post(API_URL_REGISTRO_MATERIE + "/" + idCorso, params)
     }
 
     static editMateria(idMateria: number, nomeMateria: string){
@@ -38,6 +38,6 @@ export class MaterieService{
             }
         }
 
-        return ServerCall.put(API_URL_REGISTRO + "/materie/" + idMateria, params)
+        return ServerCall.put(API_URL_REGISTRO_MATERIE + "/" + idMateria, params)
     }
 }
