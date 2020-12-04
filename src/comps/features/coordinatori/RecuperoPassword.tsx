@@ -91,23 +91,19 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
             return NotificationMsg.showError("Riempire tutti i campi!")
 
         if(newPassword.length < 8){
-            Dialog.infoDialog({
+            return Dialog.infoDialog({
                 title: "Errore!",
                 content: "La password deve avere almeno 8 caratteri.",
                 type: "error"
             })
-
-            return
         }
 
         if(newPassword !== newPasswordConfirm){
-            Dialog.infoDialog({
+            return Dialog.infoDialog({
                 title: "Errore!",
                 content: "Le password non corrispondono.",
                 type: "error"
             })
-
-            return
         }
 
         this.switchLoading()
