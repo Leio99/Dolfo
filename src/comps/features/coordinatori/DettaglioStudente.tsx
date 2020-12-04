@@ -34,8 +34,10 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         }
     }
 
-    componentDidMount = () => {
-        let id = this.props.match.params.id
+    componentDidMount = () => this.loadStudente()
+
+    loadStudente = () => {
+        const id = this.props.match.params.id
 
         if(isNaN(parseInt(id)))
             history.push(ComponentsPaths.PATH_COORDINATORI_HOME)
@@ -74,7 +76,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
             title: Components[ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE].pageTitle,
             content: <EditStudente {...this.props} onSave={() => {
                 dialog.close()
-                this.componentDidMount()
+                this.loadStudente()
             }} />,
             hideFooter: true,
             width: "70vw"

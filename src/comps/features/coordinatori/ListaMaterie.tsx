@@ -23,7 +23,9 @@ export class ListaMaterie extends React.PureComponent<undefined, IState>{
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = () => this.loadMaterie()
+
+    loadMaterie = () => {
         MaterieService.getMaterie(this.session.idCorso).then(response => {
             this.setState({
                 materieList: response.data
@@ -35,7 +37,7 @@ export class ListaMaterie extends React.PureComponent<undefined, IState>{
         const dialog = Dialog.openDialog({
             title: "Nuova materia",
             hideFooter: true,
-            content: <AddEditMateria reloadList={this.componentDidMount} closeDialog={() => dialog.close()} />
+            content: <AddEditMateria reloadList={this.loadMaterie} closeDialog={() => dialog.close()} />
         })
     }
 
@@ -43,7 +45,7 @@ export class ListaMaterie extends React.PureComponent<undefined, IState>{
         const dialog = Dialog.openDialog({
             title: "Modifica materia",
             hideFooter: true,
-            content: <AddEditMateria reloadList={this.componentDidMount} closeDialog={() => dialog.close()} editMateria={materia} editing />
+            content: <AddEditMateria reloadList={this.loadMaterie} closeDialog={() => dialog.close()} editMateria={materia} editing />
         })
     }
 
