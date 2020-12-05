@@ -143,7 +143,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
             <h3 className="d-inline-block">Presenze da confermare</h3>
 
             <Button disabled={!selectedList.length} btnColor="green" onClick={this.confirmAll} className="float-right">
-                <Icon iconKey="check-double" /> Conferma presenze
+                <Icon iconKey="tasks" /> Conferma presenze
             </Button>
             
             <div className="clearfix mt-3"></div>
