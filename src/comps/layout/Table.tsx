@@ -6,6 +6,7 @@ import { Icon } from "./Icon"
 export interface IProps{
     readonly columns: IColumn[],
     readonly data: IDataColumn[]
+    readonly className?: string
 }
 export interface IState{
     readonly filter: { [x: string]: string }
@@ -43,7 +44,7 @@ export class Table extends React.PureComponent<IProps, IState>{
         { filter, activeFilterKey, activeFilter } = this.state,
         data = activeFilterKey === "" ? props.data : props.data.filter(d => d[activeFilterKey].toLowerCase().indexOf(filter[activeFilterKey].toLowerCase()) >= 0)
  
-        return <div className="dolfo-table-content">
+        return <div className={"dolfo-table-content" + (props.className ? (" " + props.className) : "")}>
             <table className="dolfo-table">
                 <thead>
                     <tr>

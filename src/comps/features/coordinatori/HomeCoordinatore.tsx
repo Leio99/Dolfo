@@ -4,13 +4,14 @@ import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
 import { Icon } from "../../layout/Icon"
 import { ComponentsPermissions } from "../ComponentsPermissions"
+import { ListaPresenzeDaConfermare } from "./ListaPresenzeDaConfermare"
 
 export class HomeCoordinatore extends React.Component{
     readonly login = ComponentsPermissions.getLoginCoordinatore()
 
     render = (): JSX.Element => {
         return <div>
-            <Card title="Dati generali">
+            <Card title="Dati generali" className="mb-3">
                 <h2 className="text-uppercase">{this.login.nome} {this.login.cognome}</h2>
                 <span>
                     Codice di accesso alla firma: <strong>{this.login.codiceCorso}</strong>
@@ -19,6 +20,8 @@ export class HomeCoordinatore extends React.Component{
                     </Button>
                 </span>
             </Card>
+
+            <ListaPresenzeDaConfermare />
         </div>
     }
 }

@@ -79,7 +79,8 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                 this.loadStudente()
             }} />,
             hideFooter: true,
-            width: "70vw"
+            width: "70vw",
+            icon: <Icon iconKey="user-edit" type="far" />
         })
     }
 
