@@ -33,7 +33,7 @@ export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
 }
 
 export const DeleteIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="fa" iconKey="trash" />
+    return <Icon {...props} type="fa" iconKey="trash-alt" />
 }
 export const CheckIcon = (props: DefaultIconProps) => {
     return <Icon {...props} type="far" iconKey="check" />
