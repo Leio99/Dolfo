@@ -141,16 +141,16 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         if(!listaPresenze) return <LoadingIconCentered />
 
         return <div className="mt-3">
+            <h3 className="d-inline-block">Presenze da confermare</h3>
+
             <Button disabled={!selectedList.length} btnColor="green" onClick={this.confirmAll} className="float-right">
                 <Icon iconKey="check-double" /> Conferma presenze
             </Button>
-
-            <h3>Presenze da confermare</h3>
             
             <div className="clearfix mt-3"></div>
 
             <Table columns={[
-                { label: <CheckBox checked={selectedList.length === listaPresenze.length} onChange={this.checkUncheckAll} tooltip="Seleziona tutte" disabled={!listaPresenze.length} />, field: "check", width: "5%", align: "center" },
+                { label: <CheckBox checked={selectedList.length === listaPresenze.length && selectedList.length > 0} onChange={this.checkUncheckAll} tooltip="Seleziona tutte" disabled={!listaPresenze.length} />, field: "check", width: "5%", align: "center" },
                 { label: "Data", field: "data", align: "center", canSearch: true },
                 { label: "Entrata", field: "ingresso", align: "center" },
                 { label: "Uscita", field: "uscita", align: "center" },
@@ -158,21 +158,26 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 { label: "Lezione", field: "lezione", tooltip: true, width: "30%" },
                 { label: "Azioni", field: "azioni", align: "center" }
             ]} data={listaPresenze.map(p => {
-                let newP = {...p}
-                newP.data = formatItalian(p.data)
+                let newP = {...p},
+                isSelected = selectedList.includes(newP.idPresenza)
 
-                newP.check = <CheckBox checked={selectedList.includes(p.idPresenza)} onChange={() => this.checkUnCheck(p.idPresenza)} />
+                newP.data = formatItalian(p.data)
+                newP.rowStyle = isSelected ? { backgroundColor: "rgba(25, 111, 202, 0.1)" } : null
+
+                newP.onDoubleClick = () => this.checkUnCheck(newP.idPresenza)
+
+                newP.check = <CheckBox checked={isSelected} onChange={newP.onDoubleClick} />
 
                 newP.azioni = <div>
-                    <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(p.idPresenza)} tooltip="Conferma" className="mx-2">
+                    <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="mx-2">
                         <CheckIcon />
                     </Button>
 
-                    <Button circleBtn btnColor="red" onClick={() => this.rejectPresenza(p.idPresenza)} tooltip="Rifiuta" className="mx-2">
+                    <Button circleBtn btnColor="red" onClick={() => this.rejectPresenza(newP.idPresenza)} tooltip="Rifiuta" className="mx-2">
                         <DeleteIcon />
                     </Button>
 
-                    <Button circleBtn btnColor="blue" onClick={() => this.openInfoStudente(p.idStudente)} tooltip="Info studente" className="mx-2">
+                    <Button circleBtn btnColor="blue" onClick={() => this.openInfoStudente(newP.idStudente)} tooltip="Info studente" className="mx-2">
                         <Icon iconKey="user" />
                     </Button>
                 </div>
