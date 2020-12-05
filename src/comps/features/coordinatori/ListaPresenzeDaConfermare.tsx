@@ -160,7 +160,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 let newP = {...p},
                 isSelected = selectedList.includes(newP.idPresenza)
 
-                newP.data = formatItalian(p.data)
+                newP.data = formatItalian(newP.data)
                 newP.rowStyle = isSelected ? { backgroundColor: "rgba(25, 111, 202, 0.1)" } : null
 
                 newP.onDoubleClick = () => this.checkUnCheck(newP.idPresenza)
