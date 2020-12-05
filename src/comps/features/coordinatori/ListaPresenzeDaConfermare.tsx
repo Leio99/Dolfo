@@ -4,7 +4,7 @@ import { formatItalian, LoadingIconCentered } from "../../../commons/utility"
 import { CheckBox } from "../../form/CheckBox"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
-import { CheckIcon, Icon } from "../../layout/Icon"
+import { CheckIcon, DeleteIcon, Icon } from "../../layout/Icon"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { Table } from "../../layout/Table"
 import { Components } from "../Components"
@@ -40,7 +40,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         Dialog.yesNoDialog("Attenzione", "Vuoi confermare la presenza selezionata?", () => {
             const loadingDialog = this.showLoadingDialog()
 
-            Axios.put("http://mygraphic.altervista.org/esame/?presenze&conferma", { idPresenza }).then(response => {
+            Axios.put("http://mygraphic.altervista.org/esame/?presenze&conferma", { idPresenza }).then(() => {
                 loadingDialog.close()
                 this.loadPresenze()
                 this.removeFromList(idPresenza)
@@ -58,11 +58,24 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         Dialog.yesNoDialog("Attenzione", "Vuoi confermare le presenze selezionate?", () => {
             const loadingDialog = this.showLoadingDialog()
 
-            Axios.put("http://mygraphic.altervista.org/esame/?presenze&confermaAll", { idPresenze }).then(response => {
+            Axios.put("http://mygraphic.altervista.org/esame/?presenze&confermaAll", { idPresenze }).then(() => {
                 loadingDialog.close()
                 this.loadPresenze()
                 this.removeAllFromList(idPresenze)
                 NotificationMsg.showSuccess("Presenze confermate!")
+            }).catch(loadingDialog.close)
+        })
+    }
+
+    rejectPresenza = (idPresenza: number) => {
+        Dialog.yesNoDialog("Attenzione", "Vuoi cancellare la presenza selezionata?", () => {
+            const loadingDialog = this.showLoadingDialog()
+
+            Axios.put("http://mygraphic.altervista.org/esame/?presenze&rifiuta", { idPresenza }).then(() => {
+                loadingDialog.close()
+                this.loadPresenze()
+                this.removeFromList(idPresenza)
+                NotificationMsg.showSuccess("Presenza cancellata!")
             }).catch(loadingDialog.close)
         })
     }
@@ -152,6 +165,10 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 p.azioni = <div>
                     <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(p.idPresenza)} tooltip="Conferma" className="mx-2">
                         <CheckIcon />
+                    </Button>
+
+                    <Button circleBtn btnColor="red" onClick={() => this.rejectPresenza(p.idPresenza)} tooltip="Rifiuta" className="mx-2">
+                        <DeleteIcon />
                     </Button>
 
                     <Button circleBtn btnColor="blue" onClick={() => this.openInfoStudente(p.idStudente)} tooltip="Info studente" className="mx-2">
