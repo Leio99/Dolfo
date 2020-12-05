@@ -1,5 +1,4 @@
 import React from "react"
-import { CheckBox } from "../../form/CheckBox"
 import Select from "../../form/Select"
 import { Option } from "../../form/Option"
 import Button from "../../layout/Button"
@@ -73,7 +72,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         })
 
         return <Table columns={[
-            { label: <CheckBox checked={checkedAll} onChange={() => this.toggleCheckAll(studenti[0].annoFrequentazione)} tooltip="Seleziona tutti" />, field: "check", width: "5%", align: "center" },
+            { isCheck: true, checkTooltip: "Seleziona tutti", onCheckAll: () => this.toggleCheckAll(studenti[0].annoFrequentazione), checked: checkedAll, width: "5%", align: "center" },
             { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
             { label: "Stato", field: "stato", width: "15%", align: "center" },
             { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
@@ -84,7 +83,9 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                 return {
                     rowStyle: s.ritirato ? { backgroundColor: "#eee" } : null,
                     onDoubleClick: () => this.openDetail(s.idStudente),
-                    check: s.ritirato ? <CheckBox disabled /> : <CheckBox onChange={() => this.toggleCheck(s)} checked={checkList.includes(s)} />,
+                    checked: checkList.includes(s),
+                    onCheckChange: () => this.toggleCheck(s),
+                    checkDisabled: s.ritirato,
                     desStudente: s.nome + " " + s.cognome,
                     stato: s.ritirato ? <CloseIcon color="var(--red)" tooltip="Ritirato" large /> : <CheckIcon color="var(--green)" tooltip="Attivo" large />,
                     frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",

@@ -1,7 +1,6 @@
 import Axios from "axios"
 import React from "react"
 import { formatItalian, LoadingIconCentered } from "../../../commons/utility"
-import { CheckBox } from "../../form/CheckBox"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { CheckIcon, DeleteIcon, Icon } from "../../layout/Icon"
@@ -150,7 +149,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
             <div className="clearfix mt-3"></div>
 
             <Table columns={[
-                { label: <CheckBox checked={selectedList.length === listaPresenze.length && selectedList.length > 0} onChange={this.checkUncheckAll} tooltip="Seleziona tutte" disabled={!listaPresenze.length} />, field: "check", width: "5%", align: "center" },
+                { isCheck: true, onCheckAll: this.checkUncheckAll, checked: selectedList.length === listaPresenze.length && selectedList.length > 0, checkTooltip: "Seleziona tutte", width: "5%", align: "center" },
                 { label: "Data", field: "data", align: "center", canSearch: true },
                 { label: "Entrata", field: "ingresso", align: "center" },
                 { label: "Uscita", field: "uscita", align: "center" },
@@ -165,8 +164,8 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 newP.rowStyle = isSelected ? { backgroundColor: "rgba(25, 111, 202, 0.1)" } : null
 
                 newP.onDoubleClick = () => this.checkUnCheck(newP.idPresenza)
-
-                newP.check = <CheckBox checked={isSelected} onChange={newP.onDoubleClick} />
+                newP.checked = isSelected
+                newP.onCheckChange = newP.onDoubleClick
 
                 newP.azioni = <div>
                     <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="mx-2">

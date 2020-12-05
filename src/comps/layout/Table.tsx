@@ -1,4 +1,5 @@
 import React from "react"
+import { CheckBox } from "../form/CheckBox"
 import { Constants } from "../shared/Constants"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import { Icon } from "./Icon"
@@ -50,6 +51,8 @@ export class Table extends React.PureComponent<IProps, IState>{
                     <tr>
                         {
                             props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
+                                {col.isCheck && <CheckBox tooltip={col.checkTooltip} checked={col.checked} onChange={col.onCheckAll} />}
+ 
                                 {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" tooltip={Constants.FILTER_TEXT} onClick={() => this.changeActiveFiler(col.field)} />}
 
                                 {col.label}
@@ -66,7 +69,9 @@ export class Table extends React.PureComponent<IProps, IState>{
                             return <tr style={d.rowStyle} onDoubleClick={d.onDoubleClick}>
                                 {
                                     props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip ? d[col.field] : null}>
-                                        {d[col.field]}
+                                        {
+                                            col.isCheck ? <CheckBox checked={d.checked} onChange={() => d.onCheckChange(d)} disabled={d.checkDisabled} /> : d[col.field]
+                                        }
                                     </td>)
                                 }
                             </tr>
