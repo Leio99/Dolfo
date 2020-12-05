@@ -47,11 +47,13 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
                     { label: "Ora fine", field: "oraFine", align: "center" },
                     { label: "Ore svolte", field: "totaleRelativo", align: "center" },
                 ]} data={listaOre.map(o => {
-                    o.data = formatItalian(o.data)
-                    o.oraInizio = getTime(o.oraInizio)
-                    o.oraFine = getTime(o.oraFine)
+                    let ora = {...o}
 
-                    return o
+                    ora.data = formatItalian(o.data)
+                    ora.oraInizio = getTime(o.oraInizio)
+                    ora.oraFine = getTime(o.oraFine)
+
+                    return ora
                 })} /> : <LoadingIconCentered />
             }
         </Dialog>

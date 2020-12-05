@@ -158,11 +158,12 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 { label: "Lezione", field: "lezione", tooltip: true, width: "30%" },
                 { label: "Azioni", field: "azioni", align: "center" }
             ]} data={listaPresenze.map(p => {
-                p.data = formatItalian(p.data)
+                let newP = {...p}
+                newP.data = formatItalian(p.data)
 
-                p.check = <CheckBox checked={selectedList.includes(p.idPresenza)} onChange={() => this.checkUnCheck(p.idPresenza)} />
+                newP.check = <CheckBox checked={selectedList.includes(p.idPresenza)} onChange={() => this.checkUnCheck(p.idPresenza)} />
 
-                p.azioni = <div>
+                newP.azioni = <div>
                     <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(p.idPresenza)} tooltip="Conferma" className="mx-2">
                         <CheckIcon />
                     </Button>
@@ -176,7 +177,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                     </Button>
                 </div>
 
-                return p
+                return newP
             })} />
         </div>
     }
