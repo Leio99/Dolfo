@@ -1,6 +1,6 @@
-import Axios from "axios"
 import React from "react"
 import { formatItalian, LoadingIconCentered } from "../../../commons/utility"
+import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { CheckIcon, DeleteIcon, Icon } from "../../layout/Icon"
@@ -28,7 +28,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
     componentDidMount = () => this.loadPresenze()
 
     loadPresenze = () => {
-        Axios.get("http://mygraphic.altervista.org/esame/?presenze").then(response => {
+        PresenzeService.getPresenzeDaConfermare().then(response => {
             this.setState({
                 listaPresenze: response.data
             })
@@ -39,7 +39,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         Dialog.yesNoDialog("Attenzione", "Vuoi confermare la presenza selezionata?", () => {
             const loadingDialog = this.showLoadingDialog()
 
-            Axios.put("http://mygraphic.altervista.org/esame/?presenze&conferma", { idPresenza }).then(() => {
+            PresenzeService.confermaPresenza(idPresenza).then(() => {
                 loadingDialog.close()
                 this.loadPresenze()
                 this.removeFromList(idPresenza)
@@ -57,7 +57,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         Dialog.yesNoDialog("Attenzione", "Vuoi confermare le presenze selezionate?", () => {
             const loadingDialog = this.showLoadingDialog()
 
-            Axios.put("http://mygraphic.altervista.org/esame/?presenze&confermaAll", { idPresenze }).then(() => {
+            PresenzeService.confermaPresenze(idPresenze).then(() => {
                 loadingDialog.close()
                 this.loadPresenze()
                 this.removeAllFromList(idPresenze)
@@ -70,7 +70,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         Dialog.yesNoDialog("Attenzione", "Vuoi cancellare la presenza selezionata?", () => {
             const loadingDialog = this.showLoadingDialog()
 
-            Axios.put("http://mygraphic.altervista.org/esame/?presenze&rifiuta", { idPresenza }).then(() => {
+            PresenzeService.rifiutaPresenza(idPresenza).then(() => {
                 loadingDialog.close()
                 this.loadPresenze()
                 this.removeFromList(idPresenza)

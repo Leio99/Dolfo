@@ -9,12 +9,11 @@ import { Table } from "../../layout/Table"
 import { Tabs } from "../../layout/Tabs"
 import { Accordion } from "../../layout/Accordion"
 import { NotificationMsg } from "../../layout/NotificationMsg"
-import { history } from "../../Navigator"
 import { StudentiService } from "../../../services/StudentiService"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 import { StageSwitch } from "./StageSwitch"
-import { LoadingIconCentered } from "../../../commons/utility"
+import { goTo, LoadingIconCentered } from "../../../commons/utility"
 
 export interface IState{
     readonly studenti: any[]
@@ -59,9 +58,9 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         this.setState({ checkList })
     }
 
-    openDetail = (id: number) => history.push(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI + "/" + id)
+    openDetail = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI + "/" + id)
     
-    openModifica = (id: number) => history.push(ComponentsPaths.PATH_COORDINATORI_EDIT_BASE + "/" + id)
+    openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_BASE + "/" + id)
 
     buildTable = (studenti: any[]) => {
         const { checkList } = this.state
@@ -80,7 +79,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         ]} data={
             studenti.sort(s => s.ritirato ? 0 : -1).map(s => {
                 return {
-                    rowStyle: s.ritirato ? { backgroundColor: "#eee" } : null,
+                    rowStyle: s.ritirato ? { backgroundColor: "#f8f8f8" } : null,
                     onDoubleClick: () => this.openDetail(s.idStudente),
                     checked: checkList.includes(s),
                     onCheckChange: () => this.toggleCheck(s),
@@ -158,10 +157,10 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     <Button type="popup" popupPosition="bottom" options={[
                         { text: <span>
                             <AddIcon color="var(--green)" /> Aggiungi
-                        </span>, onClick: () => history.push(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE) },
+                        </span>, onClick: () => goTo(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE) },
                         { text: <span>
                             <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
-                        </span>, onClick: () =>  history.push(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI) },
+                        </span>, onClick: () =>  goTo(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI) },
                         { text: <span>
                             <Icon iconKey="arrows-alt" color="var(--orange)" /> Sposta
                         </span>, onClick: this.moveStudents }

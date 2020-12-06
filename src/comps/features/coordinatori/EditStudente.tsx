@@ -1,6 +1,6 @@
 import React from "react"
 import { RouteComponentProps } from "react-router-dom"
-import { LoadingIconCentered } from "../../../commons/utility"
+import { goTo, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import DatePicker from "../../form/DatePicker"
 import Select from "../../form/Select"
@@ -9,7 +9,6 @@ import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { ComponentsPaths } from "../ComponentsPaths"
-import { history } from "../../Navigator"
 
 export interface IRouteParams{
     readonly id: string
@@ -53,7 +52,7 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
                 loading: false,
                 studente: response.data
             })
-        }).catch(() => history.push(ComponentsPaths.PATH_COORDINATORI_HOME))
+        }).catch(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
     }
 
     changeNome = (nome: string) => this.setState({ nome })

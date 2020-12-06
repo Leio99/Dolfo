@@ -1,6 +1,7 @@
 import { NotificationMsg } from "../comps/layout/NotificationMsg"
 import { Day } from "../models/IDay"
 import { LoadingIcon } from "../comps/layout/Icon"
+import { history } from "../comps/Navigator"
 
 export const formatDate = (date: Date, monthString = false) => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " "): ("-" + zeroBefore(date.getMonth() + 1) + "-")
@@ -223,3 +224,5 @@ export const downloadCSV = (data: any[]) => {
     link.click()
     link.remove()
 }
+
+export const goTo = (path: string) => window.location.pathname !== path && history.push(path)

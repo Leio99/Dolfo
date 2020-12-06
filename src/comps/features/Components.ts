@@ -8,9 +8,9 @@ import { HomeCoordinatore } from "./coordinatori/HomeCoordinatore"
 import { AddStudente } from "./coordinatori/AddStudente"
 import { EditStudente } from "./coordinatori/EditStudente"
 import { ImportaStudenti } from "./coordinatori/ImportaStudenti"
-import { history } from "../Navigator"
 import { DettaglioStudente } from "./coordinatori/DettaglioStudente"
 import { ListaMaterie } from "./coordinatori/ListaMaterie"
+import { goTo } from "../../commons/utility"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI]: {
@@ -67,6 +67,6 @@ export const Components: IComponentList = {
     },
     [ComponentsPaths.SITE_BASE]: {
         pageTitle: "Layout di test",
-        permission: () => history.push(ComponentsPaths.SITE_BASE + "layout")
+        permission: () => goTo(ComponentsPaths.SITE_BASE + "layout")
     }
 }

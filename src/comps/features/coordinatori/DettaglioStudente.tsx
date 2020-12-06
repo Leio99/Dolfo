@@ -1,13 +1,12 @@
 import React from "react"
 import { RouteComponentProps } from "react-router-dom"
-import { dateIsToday, formatItalian, formatWithMonth, LoadingIconCentered } from "../../../commons/utility"
+import { dateIsToday, formatItalian, formatWithMonth, goTo, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
 import { Progress } from "../../layout/Progress"
-import { history } from "../../Navigator"
 import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { DialogOreStage } from "./DialogOreStage"
@@ -40,7 +39,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         const id = this.props.match.params.id
 
         if(isNaN(parseInt(id)))
-            history.push(ComponentsPaths.PATH_COORDINATORI_HOME)
+            goTo(ComponentsPaths.PATH_COORDINATORI_HOME)
 
         StudentiService.getStudente(id).then(response => {
             this.setState({
@@ -54,7 +53,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
             })
     
             this.loadTotali()
-        }).catch(() => history.push(ComponentsPaths.PATH_COORDINATORI_HOME))
+        }).catch(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
     }
 
     loadTotali = () => {

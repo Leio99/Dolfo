@@ -1,6 +1,6 @@
 import React from "react"
 import { formatWithMonth } from "../../../commons/utility"
-import { StudentiService } from "../../../services/StudentiService"
+import { PresenzeService } from "../../../services/PresenzeService"
 import TimePicker from "../../form/TimePicker"
 import Button from "../../layout/Button"
 import { ComponentAsDialogProps, Dialog } from "../../layout/Dialog"
@@ -36,7 +36,7 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
 
         this.toggleLoading()
 
-        StudentiService.editPresenza(this.props.presenza.idPresenza, {
+        PresenzeService.editPresenzaStudente(this.props.presenza.idPresenza, {
             idPresenza: presenza.idPresenza,
             idStudente: presenza.idStudente,
             ingresso: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${ingresso}`),

@@ -1,6 +1,6 @@
 import React from "react"
 import { convertFromUTC, formatItalian, getDateTime, LoadingIconCentered } from "../../../commons/utility"
-import { StudentiService } from "../../../services/StudentiService"
+import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon } from "../../layout/Icon"
@@ -26,7 +26,7 @@ export default class TabellaPresenze extends React.PureComponent<IProps, IState>
     }
 
     componentDidMount = () => {
-        StudentiService.getPresenze(this.props.idStudente).then(response => {
+        PresenzeService.getPresenzeStudente(this.props.idStudente).then(response => {
 
             let presenze = response.data as any[]
 
