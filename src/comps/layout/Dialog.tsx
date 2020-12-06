@@ -89,6 +89,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
             content: message,
             onOk: onYes,
             okText: Constants.YESY_TEXT,
+            clickOutside: true,
             cancelText: Constants.NO_TEXT,
             icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
             width: "350px"
