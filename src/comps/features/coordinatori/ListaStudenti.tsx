@@ -76,7 +76,6 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
             { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
             { label: "Stato", field: "stato", width: "15%", align: "center" },
             { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
-            { label: "Frequenza", field: "data", width: "15%", align: "center", canSearch: true },
             { label: "Azioni", field: "azioni", width: "26%", align: "center" },
         ]} data={
             studenti.sort(s => s.ritirato ? 0 : -1).map(s => {
