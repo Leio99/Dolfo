@@ -1,19 +1,19 @@
 $selectionBlue: #0997ff;
-$disabled: #aaa;
-$grey: #ccc;
-$lightGrey: #eee;
 $hoverBlue: rgba(25, 111, 202, 0.15);
 $hoverRed: rgba(255, 0, 0, 0.15);
 $roundRadius: 50px;
 $smallRadius: 0.25rem;
-$dark: #555;
-$white: #fff;
-$black: #000;
 $green: #1c9222;
 $blue:  #239ad1;
 $darkBlue: #236fd1;
 $red: #eb1d1d;
 $orange: #f1a80b;
+$dark: #555;
+$white: #fff;
+$disabled: #aaa;
+$grey: #ccc;
+$lightGrey: #eee;
+$black: #000;
 
 $colors: (
   "red": $red,
@@ -25,6 +25,19 @@ $colors: (
   "grey": $disabled,
   "white": $white
 );
+
+:root{
+  --darkblue: #{$darkBlue};
+  --orange: #{$orange};
+  --green: #{$green};
+  --red: #{$red};
+  --blue: #{$blue};
+  --dark: #{$dark};
+  --white: #{$white};
+  --black: #{$black};
+  --hoverblue: #{$hoverBlue};
+  --hoverred: #{$hoverRed};
+}
 
 @function setBtnColor($color){  
   @if(lightness($color) > 80){

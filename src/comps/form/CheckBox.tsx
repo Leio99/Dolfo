@@ -48,7 +48,7 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
             <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} />
 
             <div className={"dolfo-checkbox-square" + (checked ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace} data-tooltip={props.tooltip}>
-                <CheckIcon color="var(--white)" />
+                <CheckIcon />
             </div>
             {props.label && <label className="dolfo-checkbox-label">{props.label}</label>}
         </div>
