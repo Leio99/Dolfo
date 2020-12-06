@@ -108,7 +108,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         Dialog.openDialog({
             title: Components[ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE].pageTitle,
             content: <DettaglioStudente match={{ 
-                params: { id: idStudente.toString()},
+                params: { id: idStudente.toString() },
                 isExact: true,
                 path: null,
                 url: null

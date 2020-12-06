@@ -37,7 +37,7 @@ export const checkTooltips = () => {
         newTexts.push(content);
 
         (tool as any).tooltip?.remove();
-        (tool as any).tooltip = tooltip;
+        (tool as any).tooltip = tooltip
 
         tooltip.classList.add("dolfo-tooltip")
         tooltip.innerHTML = content
