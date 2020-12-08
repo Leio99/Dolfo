@@ -171,12 +171,18 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     <Tabs className="mt-2">
                         <Tab title="Primo anno">
                             <StageSwitch anno={1} idCorso={this.session.idCorso} />
+                            
+                            <div className="clearfix"></div>
+
                             {
                                 !primoAnno ? loadingIcon : this.buildTable(primoAnno)
                             }
                         </Tab>
                         <Tab title="Secondo anno">
                             <StageSwitch anno={2} idCorso={this.session.idCorso} />
+
+                            <div className="clearfix"></div>
+                            
                             {
                                 !secondoAnno ? loadingIcon : this.buildTable(secondoAnno)
                             }

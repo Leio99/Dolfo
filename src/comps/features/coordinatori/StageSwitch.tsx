@@ -63,6 +63,6 @@ export class StageSwitch extends React.PureComponent<IProps, IState>{
     render = (): JSX.Element => {
         const { attivato, loading } = this.state
 
-        return <Switch loading={loading} label={(attivato ? "Disattiva" : "Attiva") + " lo stage per la classe"} onChange={this.switchStage} checked={attivato} className="mb-2" />
+        return <Switch loading={loading} label={(attivato ? "Disattiva" : "Attiva") + " lo stage per la classe"} onChange={this.switchStage} checked={attivato} className="mb-2 float-right" />
     }
 }

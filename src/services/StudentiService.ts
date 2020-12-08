@@ -4,13 +4,15 @@ import { ServerCall } from "./ServerCall"
 
 export class StudentiService{
     static getStudentiCorso(idCorso: number){
-		if(isNaN(idCorso)) return ServerCall.emptyCallResult()
+		if(!ComponentsPermissions.getLoginCoordinatore(false))
+            return ServerCall.emptyCallResult()
 		
         return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/" + idCorso)
     }
 
     static getStatoStage(idCorso: number, anno: number){
-		if(isNaN(idCorso) || isNaN(anno)) return ServerCall.emptyCallResult()
+		if(!ComponentsPermissions.getLoginCoordinatore(false))
+            return ServerCall.emptyCallResult()
 		
 		return ServerCall.get(API_URL_REGISTRO_CORSI + "/getstagevalue/" + idCorso + "/" + anno)
     }
