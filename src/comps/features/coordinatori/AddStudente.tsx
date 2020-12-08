@@ -72,28 +72,28 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
         return <form onSubmit={this.creaStudente}>
             <div className="row">
                 <div className="col-12 col-md-6">
-                    <TextInput name="nome" icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loading} />
+                    <TextInput name="nome" icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loading} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="cognome" icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loading} />
+                    <TextInput name="cognome" icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loading} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <DatePicker label="Data di nascita" onChange={this.changeDataNascita} disabled={loading} />
+                    <DatePicker label="Data di nascita" onChange={this.changeDataNascita} disabled={loading} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="cf" icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loading} maxLength={16} />
+                    <TextInput name="cf" icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loading} maxLength={16} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loading} />
+                    <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loading} required />
                 </div>
 
                 
                 <div className="col-12 col-md-6">
-                    <Select label="Anno frequentato" disabled={loading} onChange={this.changeAnno} icon={{ iconKey: "graduation-cap" }}>
+                    <Select label="Anno frequentato" disabled={loading} onChange={this.changeAnno} icon={{ iconKey: "graduation-cap" }} required>
                         <Option label="Primo anno" value={1} />
                         <Option label="Secondo anno" value={2} />
                     </Select>

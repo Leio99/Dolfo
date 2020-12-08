@@ -27,4 +27,6 @@ export const Constants = {
     UPLOAD_FILE_ERROR_NOT_MULTIPLE: "Puoi caricare soltanto un file!",
     SELECTED_FILES_LABEL: "File selezionati:",
     UPLOAD_FILE_NOT_ACCEPTABLE: "Non puoi caricare questo tipo di file!",
+    MULTI_SELECT_NO_SELECTION: "Nessuna selezione",
+    REQUIRED_FIELD: "Obbligatorio"
 }

@@ -97,23 +97,23 @@ export class AddDocente extends React.PureComponent<undefined, IState>{
         return <form onSubmit={this.creaDocente}>
             <div className="row">
                 <div className="col-12 col-md-6">
-                    <TextInput name="nome" icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loadingForm} />
+                    <TextInput name="nome" icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loadingForm} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="cognome" icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loadingForm} />
+                    <TextInput name="cognome" icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loadingForm} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="cf" icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loadingForm} maxLength={16} />
+                    <TextInput name="cf" icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loadingForm} maxLength={16} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loadingForm} />
+                    <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loadingForm} required />
                 </div>
                 
                 <div className="col-12 col-md-6">
-                    <Select label="Materie insegnate" disabled={loadingForm} onChange={this.changeMaterieScelte} icon={{ iconKey: "list-alt" }} multiple loading={!materieList} canSearch>
+                    <Select label="Materie insegnate" disabled={loadingForm} onChange={this.changeMaterieScelte} icon={{ iconKey: "list-alt" }} multiple loading={!materieList} canSearch required>
                         {
                             materieList?.map(m => <Option label={m.nome} value={m.idMateria} />)
                         }
@@ -121,7 +121,7 @@ export class AddDocente extends React.PureComponent<undefined, IState>{
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <Select label="Corsi in cui insegna" disabled={loadingForm} onChange={this.changeCorsiScelti} icon={{ iconKey: "chalkboard-teacher" }} multiple loading={!corsiList}>
+                    <Select label="Corsi in cui insegna" disabled={loadingForm} onChange={this.changeCorsiScelti} icon={{ iconKey: "chalkboard-teacher" }} multiple loading={!corsiList} required>
                         {
                             corsiList?.map(c => <Option label={c.nome} value={c.idCorso} />)
                         }

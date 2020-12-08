@@ -98,9 +98,9 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
             </Button> Modifica presenza
         </span>} visible hideFooter onClose={close}>
             <form onSubmit={this.modificaPresenza}>
-                <TimePicker defaultValue={ingresso} onChange={this.editIngresso} disabled={loading} label="Orario di ingresso" />
+                <TimePicker defaultValue={ingresso} onChange={this.editIngresso} disabled={loading} label="Orario di ingresso" required />
 
-                <TimePicker defaultValue={uscita} onChange={this.editUscita} disabled={loading} label="Orario di uscita" />
+                <TimePicker defaultValue={uscita} onChange={this.editUscita} disabled={loading} label="Orario di uscita" required />
 
                 <Button type="submit" className="mt-2 text-uppercase" fullSize loading={loading} btnColor="green">Salva presenza</Button>
             </form>

@@ -114,28 +114,28 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
         return <form onSubmit={this.editStudente}>
             <div className="row">
                 <div className="col-12 col-md-6">
-                    <TextInput name="nome" value={nome} icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loadingForm} />
+                    <TextInput name="nome" value={nome} icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loadingForm} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="cognome" value={cognome} icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loadingForm} />
+                    <TextInput name="cognome" value={cognome} icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loadingForm} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <DatePicker defaultValue={new Date(dataNascita)} label="Data di nascita" onChange={this.changeDataNascita} disabled={loadingForm} />
+                    <DatePicker defaultValue={new Date(dataNascita)} label="Data di nascita" onChange={this.changeDataNascita} disabled={loadingForm} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="cf" value={cf} icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loadingForm} maxLength={16} />
+                    <TextInput name="cf" value={cf} icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loadingForm} maxLength={16} required />
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="email" value={email} type="email" onChange={this.changeEmail} label="E-mail" disabled={loadingForm} />
+                    <TextInput name="email" value={email} type="email" onChange={this.changeEmail} label="E-mail" disabled={loadingForm} required />
                 </div>
 
                 
                 <div className="col-12 col-md-6">
-                    <Select label="Anno frequentato" defaultValue={annoFrequentazione} disabled icon={{ iconKey: "graduation-cap" }}>
+                    <Select label="Anno frequentato" defaultValue={annoFrequentazione} disabled icon={{ iconKey: "graduation-cap" }} required>
                         <Option label="Primo anno" value={1} />
                         <Option label="Secondo anno" value={2} />
                     </Select>

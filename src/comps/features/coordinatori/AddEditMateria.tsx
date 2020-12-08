@@ -57,7 +57,7 @@ export class AddEditMateria extends React.PureComponent<IProps, IState>{
         { editing } = this.props
 
         return <form onSubmit={this.addMateria}>
-            <TextInput icon={{ iconKey: "money-check-edit" }} label="Nome della materia" onChange={this.changeNome} value={nome} disabled={loading} />
+            <TextInput icon={{ iconKey: "money-check-edit" }} label="Nome della materia" onChange={this.changeNome} value={nome} disabled={loading} required />
 
             <div className="text-right">
                 <Button type="submit" className="mt-2 text-uppercase" fullSize btnColor="green" loading={loading}>

@@ -143,7 +143,7 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
         return <Stepper currentStep={currentStep}>
             <Step title="E-mail" loading={loading}>
                 <form onSubmit={this.confirmFirstStep}>
-                    <TextInput label="Inserisci la tua e-mail" value={email} type="email" onChange={this.changeMail} />
+                    <TextInput label="Inserisci la tua e-mail" value={email} type="email" onChange={this.changeMail} required />
 
                     <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right" >Prosegui</Button>
 
@@ -153,7 +153,7 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
 
             <Step title="Codice">
                 <form onSubmit={this.confirmSecondStep}>
-                    <TextInput value={code} label="Inserisci il codice ricevuto via e-mail" onChange={this.changeCode} icon={{ iconKey: "hashtag" }} />
+                    <TextInput value={code} label="Inserisci il codice ricevuto via e-mail" onChange={this.changeCode} icon={{ iconKey: "hashtag" }} required />
 
                     <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
                     <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Prosegui</Button>
@@ -164,8 +164,8 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
 
             <Step title="Nuova password" loading={loading}>
                 <form onSubmit={this.savePassword}>
-                    <TextInput value={newPassword} label="Crea la tua nuova password" type="password" onChange={this.changePassword} />
-                    <TextInput value={newPasswordConfirm} label="Conferma la nuova password" type="password" onChange={this.changePasswordConfirm} />
+                    <TextInput value={newPassword} label="Crea la tua nuova password" type="password" onChange={this.changePassword} required />
+                    <TextInput value={newPasswordConfirm} label="Conferma la nuova password" type="password" onChange={this.changePasswordConfirm} required />
 
                     <Button smallBtn textBtn btnColor="red" className="mt-2" onClick={this.decreaseStep}>Indietro</Button>
                     <Button type="submit" smallBtn btnColor="blue" className="mt-2 float-right">Salva la password</Button>

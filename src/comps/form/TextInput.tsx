@@ -114,7 +114,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         }
         let input: HTMLInputElement | HTMLTextAreaElement
 
-        return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={props.type === "number" ? "input-number" : (props.type === "password" && props.togglePassword) ? "toggle-password" : ""}>
+        return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={props.type === "number" ? "input-number" : (props.type === "password" && props.togglePassword) ? "toggle-password" : ""} required={props.required}>
             {
                 props.type === "password" && props.togglePassword && value.length > 0 && <Icon type="far" iconKey="eye" onClick={this.toggleInputType} className="toggle-password" tooltip={Constants.TOGGLE_PASSWORD_TEXT} />
             }

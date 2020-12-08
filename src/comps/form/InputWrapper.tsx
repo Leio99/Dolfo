@@ -10,6 +10,7 @@ export interface IProps{
     readonly value?: string
     readonly isFocusable?: boolean
     readonly disabled?: boolean
+    readonly required?: boolean
     readonly className?: string
     readonly onFocus?: (e: any) => void
     readonly onBlur?: (e: any) => void
@@ -23,7 +24,10 @@ export class InputWrapper extends React.PureComponent<IProps>{
         const props = this.props
 
         return <div className={"dolfo-form-input" + (props.disabled ? " disabled" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onFocus={props.onFocus} tabIndex={props.isFocusable ? 0 : -1} onBlur={props.onBlur} onKeyDown={props.onKeyDown} onClick={props.onClick}>
-            {props.label && <label className="dolfo-input-label">{props.label}</label>}
+            {props.label && <label className="dolfo-input-label">
+                {props.label}
+                {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>}    
+            </label>}
             
             <div className={"dolfo-input-wrapper" + (props.focusBool ? " focused" : "")} onClick={props.forceFocus}>
                 { (props.value && props.value.length && props.resetFunction) ? <CloseIcon className="reset-input" onClick={props.resetFunction} tooltip={Constants.RESET_INPUT_TEXT} /> : null }
