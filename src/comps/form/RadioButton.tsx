@@ -53,7 +53,7 @@ export class RadioButton extends React.PureComponent<IProps, IState>{
 
         return <div className={"dolfo-input-radio-container" + (props.disabled ? " disabled" : "")} style={props.style}>
             {
-                options.map(option => {
+                options?.map(option => {
                     return <Option {...option.props} selected={value === option.props.value} onChange={this.changeValue} controlName={props.controlName} required={props.required} isRadio />
                 })
             }

@@ -19,32 +19,41 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
         ComponentsPermissions.checkPermissionCoordinatore()
     }
 
+    getMenuItemProps = (path: string) => {
+        return {
+            selected: this.props.currentPath === path,
+            onClick: () => goTo(path)
+        }
+    }
+
+    isInPath = (path: string) => this.props.currentPath.indexOf(path) >= 0
+
     render = (): JSX.Element => {
         const props = this.props
 
         return <SideMenu onToggle={props.toggleMenu} opened={props.opened}>
             <img src="https://i.imgur.com/5Z1DbN7.png" height="100" className="my-4 mx-auto d-block" style={{ filter: "drop-shadow(1.5px 0 0 #fff) drop-shadow(-.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff)" }} alt="" />
 
-            <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_HOME} onClick={() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME)}>
+            <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_HOME)}>
                 <Icon iconKey="home-alt" className="mr-2" /> Home
             </MenuItem>
 
             <SubMenu text={<span>
                 <Icon iconKey="users-class" className="mr-2" /> Studenti
-            </span>} opened={props.currentPath.indexOf(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI) >= 0}>
-                <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI} onClick={() => goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI)}>Lista studenti</MenuItem>
-                <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE} onClick={() => goTo(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE)}>Aggiungi</MenuItem>
-                <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI} onClick={() => goTo(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI)}>Importa</MenuItem>
+            </span>} opened={this.isInPath(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI)}>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI)}>Lista studenti</MenuItem>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE)}>Aggiungi</MenuItem>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI)}>Importa</MenuItem>
             </SubMenu>
 
             <SubMenu text={<span>
                 <Icon iconKey="chalkboard-teacher" className="mr-2" /> Docenti
-            </span>}>
+            </span>} opened={this.isInPath(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI)}>
                 <MenuItem>Lista docenti</MenuItem>
-                <MenuItem>Aggiungi</MenuItem>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE)}>Aggiungi</MenuItem>
             </SubMenu>
 
-            <MenuItem selected={props.currentPath === ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE} onClick={() => goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE)}>
+            <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE)}>
                 <Icon iconKey="list-alt" className="mr-2" /> Materie
             </MenuItem>
 

@@ -10,4 +10,6 @@ export class ComponentsPaths{
     static PATH_COORDINATORI_DETAILS_STUDENTE = ComponentsPaths.PATH_COORDINATORI + "/studenti/:id"
     static PATH_COORDINATORI_IMPORT_STUDENTI = ComponentsPaths.PATH_COORDINATORI + "/studenti/import"
     static PATH_COORDINATORI_LISTA_MATERIE = ComponentsPaths.PATH_COORDINATORI + "/materie"
+    static PATH_COORDINATORI_LISTA_DOCENTI = ComponentsPaths.PATH_COORDINATORI + "/docenti"
+    static PATH_COORDINATORI_ADD_DOCENTE = ComponentsPaths.PATH_COORDINATORI + "/docenti/new"
 }

@@ -11,6 +11,7 @@ import { ImportaStudenti } from "./coordinatori/ImportaStudenti"
 import { DettaglioStudente } from "./coordinatori/DettaglioStudente"
 import { ListaMaterie } from "./coordinatori/ListaMaterie"
 import { goTo } from "../../commons/utility"
+import { AddDocente } from "./coordinatori/AddDocente"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI]: {
@@ -54,6 +55,11 @@ export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE]: {
         component: EditStudente,
         pageTitle: "Modifica studente",
+        permission: ComponentsPermissions.checkPermissionCoordinatore
+    },
+    [ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE]: {
+        component: AddDocente,
+        pageTitle: "Nuovo docente",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE]: {

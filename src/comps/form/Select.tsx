@@ -42,11 +42,11 @@ class Select extends React.PureComponent<IProps, IState>{
             options = this.getOptions()
 
             if(!this.props.multiple){
-                let find = options.find(opt => opt.props.value === value)
+                let find = options?.find(opt => opt.props.value === value)
 
                 if(find) hasValues = true
             }else{
-                options.forEach(opt => {
+                options?.forEach(opt => {
                     value.forEach((v: any) => {
                         if(v === opt.props.value) hasValues = true
                     })
@@ -118,7 +118,7 @@ class Select extends React.PureComponent<IProps, IState>{
     changeSearch = (e: any) => {
         this.setState({
             searchValue: e.target.value,
-            options: this.getOptions().filter(opt => opt.props.label.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
+            options: this.getOptions()?.filter(opt => opt.props.label.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
         })
     }
 
@@ -187,14 +187,14 @@ class Select extends React.PureComponent<IProps, IState>{
                 props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
                     {props.canSearch && searchInput}
                     {
-                        options.map((option, i) => {
+                        options?.map((option, i) => {
                             return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={(val) => this.changeMultiple(val, i)} multiple />
                         })
                     }
                 </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>
                     {props.canSearch && searchInput}
                     {
-                        options.map((option, i) => {
+                        options?.map((option, i) => {
                             return <Option {...option.props} selected={option.props.value === value} focused={i === currentSelection} onChange={this.changeOption} />
                         })
                     }

@@ -48,7 +48,7 @@ class Button extends React.PureComponent<IProps, IState>{
             return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "")} onClick={this.togglePopup} data-tooltip={props.tooltip}>
                 <div className={"dolfo-popup-options" + (openPopup ? " show" : "") + (" pos-" + popupDir)}>
                     {
-                        props.options.map(opt => {
+                        props.options?.map(opt => {
                             if(!opt.hiddenIf)
                                 return <div className="dolfo-popup-option" onClick={opt.onClick}>
                                     {opt.text}
