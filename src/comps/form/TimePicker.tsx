@@ -84,7 +84,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
 
     hideTime = () => this.setState({ showTime: false })
 
-    handleClickOutside = () => this.hideTime()
+    handleClickOutside = this.hideTime
 
     render = (): JSX.Element => {
         const props = this.props,

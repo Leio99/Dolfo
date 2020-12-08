@@ -25,8 +25,6 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         }
     }
 
-    componentDidMount = () => this.loadPresenze()
-
     loadPresenze = () => {
         PresenzeService.getPresenzeDaConfermare().then(response => {
             this.setState({
@@ -34,6 +32,8 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
             })
         })
     }
+
+    componentDidMount = this.loadPresenze
 
     confermaPresenza = (idPresenza: number) => {
         Dialog.yesNoDialog("Attenzione", "Vuoi confermare la presenza selezionata?", () => {

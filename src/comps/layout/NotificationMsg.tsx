@@ -81,7 +81,7 @@ export class NotificationMsg{
 
         (notification as any).close = closeFunc
 
-        setTimeout(() => NotificationMsg.moveNotifications())
+        setTimeout(NotificationMsg.moveNotifications)
         
         ReactDOM.render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" && props.dismissOnClick ? closeFunc : null}>
             {props.icon || (props.type ? getIcon(props.type) : null)} {props.message}

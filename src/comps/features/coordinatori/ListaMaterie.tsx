@@ -23,8 +23,6 @@ export class ListaMaterie extends React.PureComponent<undefined, IState>{
         }
     }
 
-    componentDidMount = () => this.loadMaterie()
-
     loadMaterie = () => {
         MaterieService.getMaterie(this.session.idCorso).then(response => {
             this.setState({
@@ -32,6 +30,8 @@ export class ListaMaterie extends React.PureComponent<undefined, IState>{
             })
         }).catch(() => this.setState({ materieList: [] }))
     }
+
+    componentDidMount = this.loadMaterie
 
     openAddMateria = () => {
         const dialog = Dialog.openDialog({

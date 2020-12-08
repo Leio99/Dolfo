@@ -60,7 +60,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
 
     openDetail = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI + "/" + id)
     
-    openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_BASE + "/" + id)
+    openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE_BASE + "/" + id)
 
     buildTable = (studenti: any[]) => {
         const { checkList } = this.state

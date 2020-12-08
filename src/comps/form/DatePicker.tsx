@@ -179,7 +179,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
 
     chooseToday = () => this.selectDay(new Date().getDate(), new Date().getMonth(), new Date().getFullYear())
 
-    handleClickOutside = () => this.hideCalendar()
+    handleClickOutside = this.hideCalendar
 
     handleTabKey = (e: any) => e.keyCode === 9 && this.hideCalendar()
 

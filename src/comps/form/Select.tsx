@@ -59,13 +59,17 @@ class Select extends React.PureComponent<IProps, IState>{
             })
 
             value !== this.state.value && this.props.onChange && this.props.onChange(value)
+        }else if(prevProps.defaultValue !== this.props.defaultValue){
+            this.setState({
+                value: this.props.defaultValue
+            })
         }
     }
 
     changeOption = (value: any) => {
         this.setState({
             value,
-            openSelect: false
+            openSelect: this.props.multiple ? true : false
         })
 
         this.resetSearch()
@@ -88,7 +92,7 @@ class Select extends React.PureComponent<IProps, IState>{
         this.props.onChange && this.props.onChange(newList)
     }
 
-    onFocus = (ref: HTMLInputElement) => this.setState({ openSelect: true }, () => ref?.focus())
+    onFocus = (ref: HTMLInputElement) => this.setState({ openSelect: true }, () => ref?.focus({ preventScroll: true }))
 
     onBlur = () => {
         this.setState({
@@ -104,16 +108,16 @@ class Select extends React.PureComponent<IProps, IState>{
     decodeValue = (value: any) => {
         if(this.props.multiple){
             let list = this.state.value.map((v: any) => {
-                return this.state.options.find(option => option.props.value === v)?.props.label
+                return this.state.options?.find(option => option.props.value === v)?.props.label
             }).filter((v: any) => v)
 
             return list.join(", ")
         }
 
-        return this.state.options.find(option => option.props.value === value)?.props.label
+        return this.state.options?.find(option => option.props.value === value)?.props.label
     }
 
-    handleClickOutside = () => this.onBlur()
+    handleClickOutside = this.onBlur
 
     changeSearch = (e: any) => {
         this.setState({

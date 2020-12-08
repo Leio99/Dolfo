@@ -33,8 +33,6 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         }
     }
 
-    componentDidMount = () => this.loadStudente()
-
     loadStudente = () => {
         const id = this.props.match.params.id
 
@@ -55,6 +53,8 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
             this.loadTotali()
         }).catch(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
     }
+
+    componentDidMount = this.loadStudente
 
     loadTotali = () => {
         this.setState({
