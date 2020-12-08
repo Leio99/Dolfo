@@ -95,10 +95,10 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
         sendEmail = email.trim(),
         sendCF = cf.trim()
 
-        if(sendNome === "" || sendCognome === "" || sendCF === "" || sendEmail === "")
+        if(sendNome === "" || sendCognome === "" || sendEmail === "")
             return NotificationMsg.showError("Riempire tutti i campi!")
 
-        if(sendCF.length !== 16)
+        if(sendCF.length !== 16 && sendCF !== "")
             return NotificationMsg.showError("Codice Fiscale non valido!")
 
         if(!materieScelte.length)
@@ -128,7 +128,7 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
                 </div>
 
                 <div className="col-12 col-md-6">
-                    <TextInput name="cf" icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loadingForm} maxLength={16} required value={cf} />
+                    <TextInput name="cf" icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loadingForm} maxLength={16} value={cf} />
                 </div>
 
                 <div className="col-12 col-md-6">
