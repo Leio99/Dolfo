@@ -226,3 +226,5 @@ export const downloadCSV = (data: any[]) => {
 }
 
 export const goTo = (path: string) => window.location.pathname !== path && history.push(path)
+
+export const notImplemented = () => NotificationMsg.show({ message: "Funzionalità da implementare", position: "top-right", type: "info" })

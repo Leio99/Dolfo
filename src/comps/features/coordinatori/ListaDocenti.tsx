@@ -4,7 +4,7 @@ import { AddIcon, CheckIcon, CloseIcon, DetailIcon, EditIcon, Icon } from "../..
 import { Table } from "../../layout/Table"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { ComponentsPermissions } from "../ComponentsPermissions"
-import { goTo, LoadingIconCentered } from "../../../commons/utility"
+import { goTo, LoadingIconCentered, notImplemented } from "../../../commons/utility"
 import { DocentiService } from "../../../services/DocentiService"
 import { Switch } from "../../form/Switch"
 
@@ -36,7 +36,7 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
         return doc.corsi.indexOf(this.session.idCorso) >= 0
     }
 
-    openDetail = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI + "/" + id)
+    openDetail = (id: number) => notImplemented() //goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI + "/" + id)
     
     openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_DOCENTE_BASE + "/" + id)
 
@@ -67,13 +67,13 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
                             </Button>
                         }
                         {
-                            !d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira">
+                            !d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira" onClick={notImplemented}>
                                 <Icon iconKey="user-times" />
                             </Button>
                         }
 
                         {
-                            d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Reintegra">
+                            d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Reintegra" onClick={notImplemented}>
                                 <Icon iconKey="reply" />
                             </Button>
                         }

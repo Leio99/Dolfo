@@ -13,7 +13,7 @@ import { StudentiService } from "../../../services/StudentiService"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 import { StageSwitch } from "./StageSwitch"
-import { goTo, LoadingIconCentered } from "../../../commons/utility"
+import { goTo, LoadingIconCentered, notImplemented } from "../../../commons/utility"
 
 export interface IState{
     readonly studenti: any[]
@@ -98,12 +98,12 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                             </Button>
                         }
                         {
-                            !s.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira">
+                            !s.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira" onClick={notImplemented}>
                                 <Icon iconKey="user-times" />
                             </Button>
                         }
 
-                        <Button circleBtn btnColor="green" className="mx-2" tooltip="Archivia">
+                        <Button circleBtn btnColor="green" className="mx-2" tooltip="Archivia" onClick={notImplemented}>
                             <Icon iconKey="user-check" />
                         </Button>
                     </div>
@@ -121,6 +121,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
             width: "450px",
             okText: "Conferma",
             okType: "green",
+            onOk: notImplemented,
             overflows: true,
             top: true,
             content: <div>
