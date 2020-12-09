@@ -63,6 +63,13 @@ export class Navigator extends React.PureComponent<any, IState>{
 
     toggleMenu = () => this.setState({ openMenu: !this.state.openMenu })
 
+    setErrorPage = () => {
+        this.setState({
+            currentComponent: Components[ComponentsPaths.ERROR_404_PATH],
+            currentPath: ComponentsPaths.ERROR_404_PATH
+        })
+    }
+
     render = (): JSX.Element => {
         const { currentPath, openMenu, currentComponent } = this.state
 
@@ -101,7 +108,13 @@ export class Navigator extends React.PureComponent<any, IState>{
                                         })
                                     }
 
-                                    <Route render={() => <div>Non trovata</div>} />
+                                    <Route render={() => {
+                                        this.setErrorPage()
+
+                                        const Component = (Components as any)[ComponentsPaths.ERROR_404_PATH]?.component
+
+                                        return <Component />
+                                    }} />
                                 </Switch>
                             </CSSTransition>
                         </TransitionGroup>

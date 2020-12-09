@@ -14,6 +14,7 @@ import { goTo } from "../../commons/utility"
 import { AddDocente } from "./coordinatori/AddDocente"
 import { ListaDocenti } from "./coordinatori/ListaDocenti"
 import { EditDocente } from "./coordinatori/EditDocente"
+import { ErrorPage } from "./ErrorPage"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI]: {
@@ -86,5 +87,9 @@ export const Components: IComponentList = {
     [ComponentsPaths.SITE_BASE]: {
         pageTitle: "Layout di test",
         permission: () => goTo(ComponentsPaths.SITE_BASE + "layout")
+    },
+    [ComponentsPaths.ERROR_404_PATH]: {
+        hideMenu: true,
+        component: ErrorPage
     }
 }

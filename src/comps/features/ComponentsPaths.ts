@@ -1,5 +1,6 @@
 export class ComponentsPaths{
     static SITE_BASE = "/"
+    static ERROR_404_PATH = "404"
     static PATH_COORDINATORI = ComponentsPaths.SITE_BASE + "coordinatori"
     static PATH_COORDINATORI_LOGIN = ComponentsPaths.PATH_COORDINATORI + "/login"
     static PATH_COORDINATORI_HOME = ComponentsPaths.PATH_COORDINATORI + "/home"
