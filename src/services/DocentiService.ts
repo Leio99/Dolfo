@@ -9,4 +9,11 @@ export class DocentiService{
 		
         return ServerCall.get(API_URL_REGISTRO_DOCENTI + "/getdocentibyid/" + idDocente)
     }
+
+    static getDocenti(){
+        if(!ComponentsPermissions.getLoginCoordinatore(false))
+            return ServerCall.emptyCallResult()
+		
+        return ServerCall.get(API_URL_REGISTRO_DOCENTI)
+    }
 }

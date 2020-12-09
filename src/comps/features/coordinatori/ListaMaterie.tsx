@@ -55,8 +55,12 @@ export class ListaMaterie extends React.PureComponent<undefined, IState>{
         if(!materieList) return <LoadingIconCentered />
 
         return <div>
-            <Button btnColor="green" className="float-right" onClick={this.openAddMateria}>
-                <AddIcon /> Aggiungi materia
+            <Button type="popup" btnColor="darkblue" className="float-right" options={[
+                { text: <span>
+                    <AddIcon color="var(--green)" /> Aggiungi
+                </span>, onClick: this.openAddMateria }
+            ]}>
+                Gestione materie
             </Button>
 
             <div className="clearfix"></div>

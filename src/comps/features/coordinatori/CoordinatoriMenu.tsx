@@ -49,7 +49,7 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
             <SubMenu text={<span>
                 <Icon iconKey="chalkboard-teacher" className="mr-2" /> Docenti
             </span>} opened={this.isInPath(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI)}>
-                <MenuItem>Lista docenti</MenuItem>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI)}>Lista docenti</MenuItem>
                 <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE)}>Aggiungi</MenuItem>
             </SubMenu>
 
