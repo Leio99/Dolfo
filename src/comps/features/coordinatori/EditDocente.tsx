@@ -85,11 +85,13 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
     changeMaterieScelte = (materieScelte: number[]) => this.setState({ materieScelte })
 
     changeCorsiScelti = (corsiScelti: number[]) => this.setState({ corsiScelti })
+
+    toggleLoading = () => this.setState({ loadingForm: !this.state.loadingForm })
     
     editDocente = (e: any) => {
         e.preventDefault()
 
-        const { nome, cognome, email, cf, materieScelte, corsiScelti } = this.state,
+        const { nome, cognome, email, cf, materieScelte, corsiScelti, docente } = this.state,
         sendNome = nome.trim(),
         sendCognome = cognome.trim(),
         sendEmail = email.trim(),
@@ -107,9 +109,21 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
         if(!corsiScelti.length)
             return NotificationMsg.showError("Scegliere almeno un corso!")
 
-        this.setState({ loadingForm: true })
+        this.toggleLoading()
 
-        setTimeout(() => this.setState({ loadingForm: false }), 2000)
+        DocentiService.editDocente(docente.idDocente, {
+            idDocente: parseInt(this.props.match.params.id),
+            nome: sendNome,
+            cognome: sendCognome,
+            email: sendEmail,
+            cf: sendCF,
+            tenere: corsiScelti.map(c => { return { idCorso: c, idDocente: docente.idDocente } }),
+            insegnare: materieScelte.map(m => { return { idMateria: m, idDocente: docente.idDocente } }),
+            ritirato: docente.ritirato
+        }).then(() => {
+            this.toggleLoading()
+            NotificationMsg.showSuccess("Docente modificato con successo!")
+        }).catch(this.toggleLoading)
     }
 
     render = (): JSX.Element => {

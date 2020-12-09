@@ -16,4 +16,17 @@ export class DocentiService{
 		
         return ServerCall.get(API_URL_REGISTRO_DOCENTI)
     }
+
+    static editDocente(idDocente: string, body: any){
+        const login = ComponentsPermissions.getLoginCoordinatore(),
+        params = {
+            authCoordinatore: {
+                idCoordinatore: login.idCoordinatore,
+                password: login.password
+            },
+            docente: body
+        }
+
+        return ServerCall.put(API_URL_REGISTRO_DOCENTI + "/" + idDocente, params)
+    }
 }
