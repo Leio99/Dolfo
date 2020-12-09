@@ -34,7 +34,7 @@ export class DialogMaterieDocente extends React.PureComponent<IProps, IState>{
     render = (): JSX.Element => {
         const { materie } = this.state
 
-        return <Dialog title="Materie insegnate" visible clickOutside overflows hideCancel onClose={this.props.close} onOk={this.props.close} okType="blue">
+        return <Dialog title="Materie insegnate" visible clickOutside overflows={!!materie} hideCancel onClose={this.props.close} onOk={this.props.close} okType="blue">
             {
                 materie ? <div>
                     {
