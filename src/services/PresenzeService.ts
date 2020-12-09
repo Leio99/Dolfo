@@ -1,4 +1,4 @@
-import { API_URL_REGISTRO_PRESENZE, API_URL_REGISTRO_STUDENTI } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO, API_URL_REGISTRO_PRESENZE, API_URL_REGISTRO_PRESENZE_DOCENTE, API_URL_REGISTRO_STUDENTI } from "../commons/consts/costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
 
@@ -7,7 +7,11 @@ export class PresenzeService{
         return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getdetailedpresences/" + id)
     }
 
-    static editPresenzaStudente(id: number, body: any){
+    static getPresenzeDocente(idDocente: number, idCorso: number){
+        return ServerCall.get(API_URL_REGISTRO + "/lezioni/getlezionidocente/" + idDocente + "/" + idCorso)
+    }
+
+    static editPresenza(id: number, body: any){
         const login = ComponentsPermissions.getLoginCoordinatore(),
 		params = {
             authCoordinatore: {

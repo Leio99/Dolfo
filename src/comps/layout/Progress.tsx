@@ -30,7 +30,7 @@ export class Progress extends React.PureComponent<IProps>{
 
         return <div className={"dolfo-progress-line " + (props.className ? (" " + props.className) : "") + (props.loading ? " progress-loading" : "")}>
             <span className="percent-text">
-                {props.loading ? (props.loadingText || <LoadingIcon spinning />) :( props.percent + "%")}
+                {props.loading ? (props.loadingText || <LoadingIcon spinning />) : (props.percent + "%")}
             </span>
             <div className={"dolfo-progress-inner bar-" + color} style={{ width: percent + "%", animation: props.loading === undefined ? "expandBar 1s ease forwards" : "none" }}></div>
         </div>

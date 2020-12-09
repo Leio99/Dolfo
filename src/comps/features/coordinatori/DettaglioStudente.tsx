@@ -11,7 +11,7 @@ import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { DialogOreStage } from "./DialogOreStage"
 import { EditStudente } from "./EditStudente"
-import TabellaPresenze from "./TabellaPresenze"
+import { TabellaPresenze } from "./TabellaPresenze"
 
 export interface IRouteParams{
     readonly id: string
@@ -103,13 +103,13 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                     <div className="mb-1">
                         <Icon large type="far" iconKey="calendar-day" className="mr-1" /> {formatWithMonth(studente.dataNascita)}
                     </div>
-                    <div className="d-inline">
+                    <div>
                         <Icon large type="far" iconKey="envelope" className="mr-1" /> <a data-tooltip="Invia e-mail" href={"mailto:" + studente.email}>{studente.email}</a>
                     </div>
 
                     <div className="text-right">
                         <Button textBtn onClick={this.openModifica} btnColor="orange" tooltip="Modifica">
-                            <EditIcon className="mr-2" large />
+                            <EditIcon large />
                         </Button>
                     </div>
                 </Card>
@@ -133,7 +133,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
 
                     <div className="text-right">
                         <Button textBtn onClick={this.openStageDialog} btnColor="darkblue" tooltip="Ore di stage">
-                            <Icon iconKey="clipboard-list-check" className="fa-2x" />
+                            <Icon iconKey="clipboard-list-check" className="fa-2x" notFW />
                         </Button>
                     </div>
                 </Card>

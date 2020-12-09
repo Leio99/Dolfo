@@ -36,7 +36,7 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
         return doc.corsi.indexOf(this.session.idCorso) >= 0
     }
 
-    openDetail = (id: number) => notImplemented() //goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI + "/" + id)
+    openDetail = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI + "/" + id)
     
     openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_DOCENTE_BASE + "/" + id)
 

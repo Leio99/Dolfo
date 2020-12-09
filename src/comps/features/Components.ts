@@ -14,6 +14,7 @@ import { goTo } from "../../commons/utility"
 import { AddDocente } from "./coordinatori/AddDocente"
 import { ListaDocenti } from "./coordinatori/ListaDocenti"
 import { EditDocente } from "./coordinatori/EditDocente"
+import { DettaglioDocente } from "./coordinatori/DettaglioDocente"
 import { ErrorPage } from "./ErrorPage"
 
 export const Components: IComponentList = {
@@ -73,6 +74,11 @@ export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI_EDIT_DOCENTE]: {
         component: EditDocente,
         pageTitle: "Modifica docente",
+        permission: ComponentsPermissions.checkPermissionCoordinatore
+    },
+    [ComponentsPaths.PATH_COORDINATORI_DETAILS_DOCENTE]: {
+        component: DettaglioDocente,
+        pageTitle: "Dettaglio docente",
         permission: ComponentsPermissions.checkPermissionCoordinatore
     },
     [ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE]: {

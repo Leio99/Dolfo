@@ -12,6 +12,7 @@ export interface DefaultIconProps{
     readonly color?: string
     readonly large?: boolean
     readonly tooltip?: string
+    readonly notFW?: boolean
 }
 
 export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
@@ -22,7 +23,7 @@ export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
             (props.type || "fa") +
             " fa-" +
             props.iconKey +
-            " fa-fw" +
+            (!props.notFW ? " fa-fw" : "") +
             (props.large ? " fa-lg" : "") +
             (props.className ? (" " + props.className) : "") + 
             (props.spinning ? " spin" : "")

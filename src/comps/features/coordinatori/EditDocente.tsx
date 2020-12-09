@@ -122,6 +122,7 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
             ritirato: docente.ritirato
         }).then(() => {
             this.toggleLoading()
+            this.props.onSave && this.props.onSave()
             NotificationMsg.showSuccess("Docente modificato con successo!")
         }).catch(this.toggleLoading)
     }

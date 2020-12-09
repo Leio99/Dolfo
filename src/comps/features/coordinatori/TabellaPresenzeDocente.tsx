@@ -5,17 +5,19 @@ import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
+import { ComponentsPermissions } from "../ComponentsPermissions"
 import { EditPresenza } from "./EditPresenza"
 
 export interface IProps{
-    readonly idStudente: number
-    reloadTotali(): void
+    readonly idDocente: number
+    refreshDocente(): void
 }
 export interface IState{
     readonly presenze: any[]
 }
 
-export class TabellaPresenze extends React.PureComponent<IProps, IState>{
+export class TabellaPresenzeDocente extends React.PureComponent<IProps, IState>{
+    readonly session = ComponentsPermissions.getLoginCoordinatore()
 
     constructor(props: IProps){
         super(props)
@@ -26,7 +28,7 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
     }
 
     componentDidMount = () => {
-        PresenzeService.getPresenzeStudente(this.props.idStudente).then(response => {
+        PresenzeService.getPresenzeDocente(this.props.idDocente, this.session.idCorso).then(response => {
 
             let presenze = response.data as any[]
 
@@ -50,10 +52,10 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
             })
         })
 
-        this.props.reloadTotali()
+        this.props.refreshDocente()
     }
 
-    editPresenza = (presenza: any) => Dialog.openDialogComponent(EditPresenza, { presenza, onSave: this.savePresenza })
+    editPresenza = (presenza: any) => Dialog.openDialogComponent(EditPresenza, { presenza, onSave: this.savePresenza, isDocente: true })
 
     render = (): JSX.Element => {
         const { presenze } = this.state
@@ -61,7 +63,7 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
         if(!presenze) return <LoadingIconCentered />
 
         return <div>
-            <h3>Presenze dello studente</h3>
+            <h3>Lezioni tenute</h3>
 
             <Table columns={[
                 { label: "Giorno", field: "data", canSearch: true, width: 150, align: "center" },

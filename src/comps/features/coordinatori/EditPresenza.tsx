@@ -9,6 +9,7 @@ import { QuestionCircleIcon } from "../../layout/Icon"
 export interface IProps extends ComponentAsDialogProps{
     readonly presenza: any
     readonly onSave: (presenza: any) => void
+    readonly isDocente?: boolean
 }
 export interface IState{
     readonly loading: boolean
@@ -31,14 +32,15 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
         e.preventDefault()
 
         const { ingresso, uscita } = this.state,
-        { presenza } = this.props,
+        { presenza, isDocente } = this.props,
+        idObj = isDocente ? { idDocente: presenza.idDocente } : { idStudente: presenza.idStudente },
         data = new Date()
 
         this.toggleLoading()
 
-        PresenzeService.editPresenzaStudente(this.props.presenza.idPresenza, {
+        PresenzeService.editPresenza(this.props.presenza.idPresenza, {
+            ...idObj,
             idPresenza: presenza.idPresenza,
-            idStudente: presenza.idStudente,
             ingresso: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${ingresso}`),
             uscita: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${uscita}`),
             idLezione: presenza.idLezione

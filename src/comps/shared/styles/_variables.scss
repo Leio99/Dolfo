@@ -37,6 +37,8 @@ $colors: (
   --black: #{$black};
   --hoverblue: #{$hoverBlue};
   --hoverred: #{$hoverRed};
+  --roundradius: #{$roundRadius};
+  --smallradius: #{$smallRadius};
 }
 
 @function setBtnColor($color){  
