@@ -86,7 +86,7 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
 
                     <div className="text-right">
                         <Button textBtn onClick={this.openMaterieInsegnate} btnColor="darkblue" tooltip="Materie insegnate">
-                            <Icon iconKey="chalkboard-teacher" large />
+                            <Icon iconKey="list-alt" large />
                         </Button>
                     </div>
                 </Card>
