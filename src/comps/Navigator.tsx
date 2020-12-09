@@ -22,7 +22,7 @@ export class Navigator extends React.PureComponent<any, IState>{
         super(undefined)
 
         this.state = {
-            currentPath: window.location.pathname,
+            currentPath: "",
             openMenu: false,
             currentComponent: null
         }
@@ -32,6 +32,11 @@ export class Navigator extends React.PureComponent<any, IState>{
         this.findComponent()
 
         initializeTooltips()
+
+        this.setState({
+            currentPath: window.location.pathname,
+            openMenu: false
+        }, this.findComponent)
 
         history.listen(location => {
             location.pathname !== this.state.currentPath && this.setState({

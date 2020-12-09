@@ -39,10 +39,8 @@ body{
 .star-animated{
     animation: blinkStar 5s infinite
 }
-.dialog-404{
-    .dolfo-dialog-inner{
-        width: 400px
-    }
+.dialog-404 .dolfo-dialog-inner{
+    width: 400px;
 
     .dialog-close{
         display: none
