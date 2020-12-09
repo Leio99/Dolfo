@@ -5,7 +5,7 @@ import { Icon } from "./layout/Icon"
 import Button from "./layout/Button"
 import { initializeTooltips } from "./layout/Tooltip"
 import { Components } from "./features/Components"
-import { IComponent, IComponentList } from "../models/IComponent"
+import { IComponent } from "../models/IComponent"
 import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import { ComponentsPaths } from "./features/ComponentsPaths"
@@ -33,9 +33,9 @@ export class Navigator extends React.PureComponent<any, IState>{
 
         initializeTooltips()
 
-        history.listen(loc => {
-            this.setState({
-                currentPath: loc.pathname,
+        history.listen(location => {
+            location.pathname !== this.state.currentPath && this.setState({
+                currentPath: location.pathname,
                 openMenu: false
             }, this.findComponent)
         })
@@ -47,7 +47,7 @@ export class Navigator extends React.PureComponent<any, IState>{
 
         Object.keys(Components).some(key => {
             if(key === path){
-                currentComponent = (Components as IComponentList)[key]
+                currentComponent = Components[key]
                 return true
             }
 
@@ -64,7 +64,7 @@ export class Navigator extends React.PureComponent<any, IState>{
     toggleMenu = () => this.setState({ openMenu: !this.state.openMenu })
 
     setErrorPage = () => {
-        this.setState({
+        !this.state.currentComponent && this.setState({
             currentComponent: Components[ComponentsPaths.ERROR_404_PATH],
             currentPath: ComponentsPaths.ERROR_404_PATH
         })
@@ -98,7 +98,7 @@ export class Navigator extends React.PureComponent<any, IState>{
                                 <Switch location={location}>
                                     {
                                         Object.keys(Components).map(key => {
-                                            const Component = (Components as any)[key]?.component
+                                            const Component = Components[key]?.component
 
                                             return <Route exact path={key} render={(routeProps) => {
                                                 if(Component) return <Component {...routeProps} />
@@ -111,7 +111,7 @@ export class Navigator extends React.PureComponent<any, IState>{
                                     <Route render={() => {
                                         this.setErrorPage()
 
-                                        const Component = (Components as any)[ComponentsPaths.ERROR_404_PATH]?.component
+                                        const Component = Components[ComponentsPaths.ERROR_404_PATH].component
 
                                         return <Component />
                                     }} />

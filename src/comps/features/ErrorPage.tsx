@@ -3,6 +3,8 @@ import { goTo } from "../../commons/utility"
 import Button from "../layout/Button"
 import { ErrorCircleIcon, Icon } from "../layout/Icon"
 import { ComponentsPaths } from "./ComponentsPaths"
+import { history } from "../Navigator"
+import { Dialog } from "../layout/Dialog"
 
 export class ErrorPage extends React.Component{
 
@@ -11,17 +13,22 @@ export class ErrorPage extends React.Component{
     componentWillUnmount = () => document.body.classList.remove("login")
 
     render = (): JSX.Element => {
-        return <div className="floating-centered shadow p-4 rounded bg-white col-10 col-md-7 col-lg-4">
-            <h3>
+        return <div>
+            <Dialog title={<span>
                 <ErrorCircleIcon color="var(--red)" /> Pagina non trovata!
-            </h3>
-            <div>Ci dispiace, ma la pagina a cui stai tentando di accedere non esiste.</div>
-            
-            <div className="text-right mt-3">
-                <Button onClick={() => goTo(ComponentsPaths.SITE_BASE)} btnColor="blue" smallBtn>
-                    <Icon iconKey="shield-check" /> Torna al sicuro
-                </Button>
-            </div>
+            </span>} visible hideFooter className="dialog-404">
+                <div>Ci dispiace, ma la pagina a cui stai tentando di accedere non esiste.</div>
+                
+                <div className="d-flex mt-3">
+                    <Button onClick={history.goBack} textBtn btnColor="grey">
+                        <Icon iconKey="arrow-left" /> Torna indietro
+                    </Button>
+
+                    <Button onClick={() => goTo(ComponentsPaths.SITE_BASE)} btnColor="blue" smallBtn className="ml-auto">
+                        <Icon iconKey="shield-check" /> Torna al sicuro
+                    </Button>
+                </div>
+            </Dialog>
         </div>
     }
 }
