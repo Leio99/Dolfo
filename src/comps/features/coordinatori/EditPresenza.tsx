@@ -44,7 +44,7 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
             ingresso: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${ingresso}`),
             uscita: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${uscita}`),
             idLezione: presenza.idLezione
-        }).then(response => {
+        }, isDocente).then(response => {
             let output = response.data
 
             if(output.trim() === "success"){
