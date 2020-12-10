@@ -9,7 +9,7 @@ import { EditPresenza } from "./EditPresenza"
 
 export interface IProps{
     readonly idStudente: number
-    reloadTotali(): void
+    reloadTotali: () => void
 }
 export interface IState{
     readonly presenze: any[]
