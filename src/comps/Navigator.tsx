@@ -1,4 +1,6 @@
 import React from "react"
+import { connect } from "react-redux"
+import { setStudenti } from "../commons/Redux"
 import { createBrowserHistory } from "history"
 import { Route, Switch, Router } from "react-router-dom"
 import { Icon } from "./layout/Icon"
@@ -66,7 +68,10 @@ export class Navigator extends React.PureComponent<any, IState>{
         })
     }
 
-    toggleMenu = () => this.setState({ openMenu: !this.state.openMenu })
+    toggleMenu = () => this.setState({ openMenu: !this.state.openMenu }, () => {
+        this.props.setStudenti({ id: 1 })
+        console.log(this.props)
+    })
 
     setErrorPage = () => {
         !this.state.currentComponent && this.setState({
@@ -129,3 +134,16 @@ export class Navigator extends React.PureComponent<any, IState>{
         </Router>
     }
 }
+
+const mapStateToProps = (state: any) => ({
+    studenti: state.studenti
+})
+
+const mapDispatchToProps = { setStudenti }
+
+const NavContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
+
+export default NavContainer(Navigator)
