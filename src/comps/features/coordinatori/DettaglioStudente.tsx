@@ -86,7 +86,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
     render = (): JSX.Element => {
         const { studente, totPresenze, oreTotali } = this.state,
         idStudente = this.props.match.params.id,
-        perc = studente?.frequenza !== null ? Math.round(100 * totPresenze / oreTotali) : null,
+        perc = studente?.frequenza != null ? Math.round(100 * totPresenze / oreTotali) : null,
         color = perc >= 80 ? "green" : "red"
 
         if(!studente) return <LoadingIconCentered />
@@ -122,7 +122,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
 
                         <div className="progress-label">
                             {
-                                oreTotali !== null && totPresenze !== null ? <span>
+                                oreTotali != null && totPresenze != null ? <span>
                                     {totPresenze}/{oreTotali}
                                 </span> : <LoadingIcon spinning />
                             }
