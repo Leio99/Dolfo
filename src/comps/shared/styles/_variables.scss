@@ -27,14 +27,11 @@ $colors: (
 );
 
 :root{
-  --darkblue: #{$darkBlue};
-  --orange: #{$orange};
-  --green: #{$green};
-  --red: #{$red};
-  --blue: #{$blue};
+  @each $key, $color in $colors {
+   --#{$key}: #{$color}
+  }
+
   --dark: #{$dark};
-  --white: #{$white};
-  --black: #{$black};
   --hoverblue: #{$hoverBlue};
   --hoverred: #{$hoverRed};
   --roundradius: #{$roundRadius};
