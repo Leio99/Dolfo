@@ -1,4 +1,5 @@
 import React from "react"
+import { Constants } from "../shared/Constants"
 import { InputProps } from "../shared/models/InputProps"
 import { Option } from "./Option"
 
@@ -52,8 +53,14 @@ export class RadioButton extends React.PureComponent<IProps, IState>{
         { value } = this.state
 
         return <div className={"dolfo-input-radio-container" + (props.disabled ? " disabled" : "")} style={props.style}>
+            {props.label && <label className="dolfo-input-radio-label">
+                {props.label}
+                {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>}  
+            </label>}
             {
                 options?.map(option => {
+                    if((option as any).type !== Option) return option
+
                     return <Option {...option.props} selected={value === option.props.value} onChange={this.changeValue} controlName={props.controlName} required={props.required} isRadio />
                 })
             }
