@@ -191,15 +191,15 @@ export class Dialog extends React.PureComponent<IProps, IState>{
                     !props.hideFooter ? (props.customFooter ? <div className="dolfo-dialog-footer">
                             {props.customFooter}
                         </div> : <div className="dolfo-dialog-footer">
+                            <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} smallBtn btnColor={props.okType || "darkblue"}>
+                                {props.okText || Constants.OK_TEXT}
+                            </Button>
+
                             {
                                 !props.hideCancel && <Button onClick={this.onClose} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} smallBtn textBtn btnColor={props.cancelType || "red"}>
                                     {props.cancelText || Constants.CANCEL_TEXT}
                                 </Button>
                             }
-
-                            <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} smallBtn btnColor={props.okType || "darkblue"}>
-                                {props.okText || Constants.OK_TEXT}
-                            </Button>
                         </div>
                     ) : <div className="dolfo-hidden-footer"></div>
                 }
