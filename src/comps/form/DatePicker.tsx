@@ -80,7 +80,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         })
     }
 
-    selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear) => {
+    selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear, blur = true) => {
         let date = this.handleDate(day, month, year)
 
         this.setState({
@@ -95,7 +95,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
 
         this.props.onChange && this.props.onChange(date)
 
-        blurInput()
+        blur && blurInput()
     }
 
     handleDate = (day: number, month: number, year: number) => {
@@ -183,6 +183,14 @@ class DatePicker extends React.PureComponent<IProps, IState>{
 
     handleTabKey = (e: any) => e.keyCode === 9 && this.hideCalendar()
 
+    tryChangeDate = (e: any) => {
+        const date = e.target.value.trim(),
+        pieces = date.split("-")
+
+        if(date !== "" && pieces && pieces.length === 3)
+            this.selectDay(parseInt(pieces[0]), parseInt(pieces[1]) - 1, parseInt(pieces[2]), false)
+    }
+
     render = (): JSX.Element => {
         const { date, showCalendar, selectingMonth, selectingYear, currentYear, currentMonth, currentDecade } = this.state,
         props = this.props,
@@ -197,11 +205,11 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 type="text"
                 value={date}
                 required={props.required}
-                readOnly
+                onChange={this.tryChangeDate}
+                onPaste={props.onPaste}
                 onKeyDown={props.onKeyDown}
                 onKeyPress={props.onKeyPress}
                 onKeyUp={props.onKeyUp}
-                onPaste={this.props.onPaste}
             />
             
             <div className={"dolfo-calendar-container" + (showCalendar ? " show" : "")}>
