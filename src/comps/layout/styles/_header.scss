@@ -3,11 +3,16 @@
     position: sticky;
     position: -webkit-sticky;
     top: 0;
-    background: $blue;
-    color: $white;
     z-index: 3;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     padding: 0.6rem 2rem;
+
+    @each $key, $color in $colors {
+        &.dolfo-header-#{$key} {
+            color: setBtnColor($color);
+            background-color: $color
+        }
+    }
 
     .dolfo-menu-button{
         vertical-align: top;

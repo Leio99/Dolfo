@@ -4,8 +4,8 @@ import { BaseIconProps, Icon } from "./Icon"
 
 export interface IProps{
     readonly title?: string
+    readonly menuColor?: ButtonColors
     readonly menuTogglerFn?: () => void
-    readonly menuTogglerColor?: ButtonColors
     readonly menuTogglerIcon?: BaseIconProps
     readonly menuTogglerStyle?: CSSProperties
     readonly style?: CSSProperties
@@ -17,9 +17,9 @@ export class Header extends React.PureComponent<IProps>{
         const props = this.props,
         icon = props.menuTogglerIcon || { type: "far", iconKey: "bars" }
 
-        return <div className={"dolfo-header" + (props.className ? (" " + props.className) : "")} style={props.style}>
+        return <div className={"dolfo-header dolfo-header-" + (props.menuColor || "blue") + (props.className ? (" " + props.className) : "")} style={props.style}>
             {
-                props.menuTogglerFn && <Button circleBtn bigBtn onClick={this.props.menuTogglerFn} btnColor={props.menuTogglerColor || "blue"} className="dolfo-menu-button" style={props.menuTogglerStyle}>
+                props.menuTogglerFn && <Button circleBtn bigBtn onClick={this.props.menuTogglerFn} btnColor={props.menuColor || "blue"} className="dolfo-menu-button" style={props.menuTogglerStyle}>
                     <Icon {...icon} />
                 </Button>
             }
