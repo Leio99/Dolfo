@@ -4,8 +4,10 @@ import { Icon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Constants } from "../shared/Constants"
 
+export type InputTypes = "textarea" | "password" | "email" | "number"
+
 export interface IProps extends InputProps{
-    readonly type?: "textarea" | "password" | "email" | "number"
+    readonly type?: InputTypes
     readonly expandTextarea?: boolean
     readonly rows?: number
     readonly togglePassword?: boolean

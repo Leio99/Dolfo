@@ -3,14 +3,13 @@ import { connect } from "react-redux"
 import { setStudenti } from "../commons/Redux"
 import { createBrowserHistory } from "history"
 import { Route, Switch, Router } from "react-router-dom"
-import { Icon } from "./layout/Icon"
-import Button from "./layout/Button"
 import { initializeTooltips } from "./layout/Tooltip"
 import { Components } from "./features/Components"
 import { IComponent } from "../models/IComponent"
 import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import { ComponentsPaths } from "./features/ComponentsPaths"
+import { Header } from "./layout/Header"
 
 export const history = createBrowserHistory()
 
@@ -87,15 +86,7 @@ export class Navigator extends React.PureComponent<any, IState>{
             <Route render={({ location }) => (
                 <div>
                     {
-                        !currentComponent?.hideMenu && <div className="dolfo-header">
-                            <Button circleBtn bigBtn onClick={this.toggleMenu} btnColor="white" className="dolfo-menu-button">
-                                <Icon iconKey="bars" />
-                            </Button>
-
-                            <h2 className="dolfo-header-title">{currentComponent?.pageTitle}</h2>
-
-                            <div className="clearfix"></div>
-                        </div>
+                        !currentComponent?.hideMenu && <Header title={currentComponent?.pageTitle} menuTogglerFn={this.toggleMenu} />
                     }
                     
                     {

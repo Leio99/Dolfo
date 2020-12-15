@@ -165,7 +165,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                         { text: <span>
                             <Icon iconKey="arrows-alt" color="var(--orange)" /> Sposta
                         </span>, onClick: this.moveStudents }
-                    ]} btnColor="darkblue" className="float-right">Gestione studenti</Button>
+                    ]} className="float-right">Gestione studenti</Button>
 
                     <div className="clearfix"></div>
 

@@ -1,5 +1,5 @@
 import { NotificationMsg } from "../comps/layout/NotificationMsg"
-import { Day } from "../models/IDay"
+import { ICalendarDay } from "../models/ICalendarDay"
 import { LoadingIcon } from "../comps/layout/Icon"
 import { history } from "../comps/Navigator"
 
@@ -61,7 +61,7 @@ export const getLastDay = (inputMonth?: number, inputYear?: number) => {
 export const getCalendar = (month?: number, year?: number) => {
     let days = getLastDay(month, year),
     table = [],
-    cols: Day[] = [],
+    cols: ICalendarDay[] = [],
     today = new Date(),
     dateMonth = month >= 0 ? month : today.getMonth(),
     dateYear = year >= 0 ? year : today.getFullYear(),

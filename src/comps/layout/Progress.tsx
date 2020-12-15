@@ -1,10 +1,11 @@
 import React from "react"
+import { BaseColors } from "./Button"
 import { LoadingIcon } from "./Icon"
 
 export interface IProps {
     readonly percent: number
     readonly circular?: boolean
-    readonly color?: "red" | "orange" | "black" | "blue" | "green" | "grey" | "darkblue"
+    readonly color?: BaseColors
     readonly circleWidth?: number | string
     readonly loading?: boolean
     readonly loadingText?: string | JSX.Element

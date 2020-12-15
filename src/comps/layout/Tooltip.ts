@@ -1,4 +1,4 @@
-let tooltips: NodeListOf<Element> = null,
+let tooltips: NodeListOf<Element>,
 toolTexts: string[] = []
 
 export const initializeTooltips = () => {

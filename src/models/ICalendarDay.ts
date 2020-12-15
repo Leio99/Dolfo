@@ -1,4 +1,4 @@
-export interface Day{
+export interface ICalendarDay{
     readonly day: number,
     readonly month: number,
     readonly year: number,

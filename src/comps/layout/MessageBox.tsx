@@ -1,13 +1,13 @@
 import React from "react"
 import { Constants } from "../shared/Constants"
 import { CloseIcon } from "./Icon"
-import { NotificationMsg } from "./NotificationMsg"
+import { NotificationDelay, NotificationMsg, NotificationPosition } from "./NotificationMsg"
 
 export interface MessageProps{
-    readonly position?: "top-left" | "top-right" | "bottom-left" | "bottom-right",
+    readonly position?: NotificationPosition,
     readonly title?: string | JSX.Element
     readonly content: string | JSX.Element
-    readonly hideDelay?: number | "never"
+    readonly hideDelay?: NotificationDelay
 	readonly onClose?: () => void
 }
 

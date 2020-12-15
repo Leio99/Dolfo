@@ -4,6 +4,9 @@ import { InputProps } from "../shared/models/InputProps"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
 
+export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
+export type ButtonColors = BaseColors | "white"
+
 export interface IProps extends InputProps{
     readonly type?: "button" | "submit" | "popup"
     readonly fullSize?: boolean
@@ -12,7 +15,7 @@ export interface IProps extends InputProps{
     readonly bigBtn?: boolean
     readonly loading?: boolean
     readonly circleBtn?: boolean
-    readonly btnColor?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
+    readonly btnColor?: ButtonColors
     readonly options?: BtnOptions[]
     readonly popupPosition?: "top" | "bottom"
     readonly tooltip?: string
@@ -59,7 +62,7 @@ class Button extends React.PureComponent<IProps, IState>{
                     }
                 </div>
 
-                <div className={"dolfo-button dolfo-popup-button" + (!props.iconPopup ? (" btn-" + props.btnColor || "darkblue") : "")}>
+                <div className={"dolfo-button dolfo-popup-button" + (!props.iconPopup ? (" btn-" + (props.btnColor || "blue")) : "")}>
                     {
                         !props.iconPopup && <div className="dolfo-popup-arrow">
                             <Icon iconKey="caret-down" />

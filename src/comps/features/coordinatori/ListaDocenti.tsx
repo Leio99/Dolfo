@@ -96,7 +96,7 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
                 { text: <span>
                     <AddIcon color="var(--green)" /> Aggiungi
                 </span>, onClick: () => goTo(ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE) },
-            ]} btnColor="darkblue" className="float-right">Gestione docenti</Button>
+            ]} className="float-right">Gestione docenti</Button>
 
             <Switch checked={showAll} onChange={this.switchCheckAll} label="Mostra solo i docenti del corso" className="align-sub" />
 

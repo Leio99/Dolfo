@@ -1,14 +1,18 @@
 import React from "react"
 import { CSSProperties } from "react"
 import ReactDOM from "react-dom"
+import { DialogType } from "./Dialog"
 import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 
+export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
+export type NotificationDelay = number | "never"
+
 export interface NotificationProps{
-    readonly type?: "info" | "error" | "success" | "loading" | "warning"
+    readonly type?: DialogType | "loading"
     readonly icon?: JSX.Element
     readonly message: string | JSX.Element
-    readonly hideDelay?: number | "never"
-    readonly position?: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "centered-top" | "centered-bottom"
+    readonly hideDelay?: NotificationDelay
+    readonly position?: NotificationPosition | "centered-top" | "centered-bottom"
     readonly style?: CSSProperties
     readonly className?: string
     readonly dismissOnClick?: boolean

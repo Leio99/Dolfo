@@ -1,8 +1,10 @@
 import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
-import Button from "./Button"
+import Button, { ButtonColors } from "./Button"
 import { CheckCircleOutlineIcon, CloseIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, QuestionCircleOutlineIcon, WarningIconOutline } from "./Icon"
 import { Constants } from "../shared/Constants"
+
+export type DialogType = "success" | "info" | "error" | "warning"
 
 export interface IProps{
     readonly clickOutside?: boolean
@@ -19,8 +21,8 @@ export interface IProps{
     readonly autoLoad?: boolean
     readonly width?: string
     readonly style?: CSSProperties
-    readonly okType?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
-    readonly cancelType?: "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
+    readonly okType?: ButtonColors
+    readonly cancelType?: ButtonColors
     readonly className?: string
     readonly customFooter?: React.ReactNode
     readonly top?: boolean
@@ -31,7 +33,7 @@ export interface IState{
     readonly visible: boolean
 }
 export interface DialogProps extends IProps{
-    readonly type?: "success" | "info" | "error" | "warning"
+    readonly type?: DialogType
     readonly icon?: JSX.Element
 }
 export interface ComponentAsDialogProps{

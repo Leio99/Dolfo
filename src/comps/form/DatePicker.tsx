@@ -1,15 +1,17 @@
 import React from "react"
 import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput } from "../../commons/utility"
-import { Day } from "../../models/IDay"
+import { ICalendarDay } from "../../models/ICalendarDay"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 
+export type DateFormats = "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
+
 export interface IProps extends InputProps {
     readonly defaultValue?: Date
-    readonly dateFormat?: "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
+    readonly dateFormat?: DateFormats
 }
 export interface IState {
     readonly date: string
@@ -129,13 +131,13 @@ class DatePicker extends React.PureComponent<IProps, IState>{
 
     nextDecade = () => this.setState({ currentDecade: this.state.currentDecade + 10 })
 
-    isCurrentDay = (day: Day) => {
+    isCurrentDay = (day: ICalendarDay) => {
         const { currentDay, selectedMonth, selectedYear } = this.state
 
         return day.day === currentDay && day.month === selectedMonth && day.year === selectedYear
     }
 
-    isToday = (day: Day) => {
+    isToday = (day: ICalendarDay) => {
         let date = new Date()
 
         return day.day === date.getDate() && day.month === date.getMonth() && day.year === date.getFullYear()
