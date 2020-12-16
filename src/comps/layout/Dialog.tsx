@@ -87,7 +87,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
 
     static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: () => void) => {
         return Dialog.openDialog({
-            title,
+            title: title || Constants.CONFIRM_TITLE,
             content: message,
             onOk: onYes,
             okText: Constants.YESY_TEXT,
