@@ -11,6 +11,7 @@ import { ComponentsPaths } from "../ComponentsPaths"
 import { EditDocente } from "./EditDocente"
 import { TabellaPresenzeDocente } from "./TabellaPresenzeDocente"
 import { DialogMaterieDocente } from "./DialogMaterieDocente"
+import { Progress } from "../../layout/Progress"
 
 export interface IRouteParams{
     readonly id: string
@@ -81,8 +82,9 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
                 </Card>
 
                 <Card className="col-12 col-md mb-3 centered-vertical-card">
-                    <div className="circle-mark">{docente.monteOre}</div>
-                    <span className="ml-3">Ore svolte</span>
+                    <Progress circular percent={100} customCircleText={docente.monteOre} circleWidth={80} className="mr-3" color="green" />
+
+                    <div className="progress-label">Ore svolte</div>
 
                     <div className="text-right">
                         <Button textBtn onClick={this.openMaterieInsegnate} btnColor="darkblue" tooltip="Materie insegnate">

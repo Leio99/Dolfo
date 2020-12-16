@@ -10,6 +10,7 @@ export interface IProps {
     readonly loading?: boolean
     readonly loadingText?: string | JSX.Element
     readonly className?: string
+    readonly customCircleText?: string | JSX.Element
 }
 
 export class Progress extends React.PureComponent<IProps>{
@@ -24,7 +25,7 @@ export class Progress extends React.PureComponent<IProps>{
                 <path className="dolfo-progress-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 <path className={"dolfo-progress-circle line-" + color} strokeDasharray={percent + ", 100"} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 <text x="18" y="20.35" className="dolfo-progress-percentage">
-                    {percent}%
+                    {props.customCircleText || (percent + "%")}
                 </text>
             </svg>
         }
