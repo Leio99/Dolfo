@@ -135,7 +135,7 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
 
                 
                 <div className="col-12 col-md-6">
-                    <Select label="Anno frequentato" defaultValue={annoFrequentazione} disabled icon={{ iconKey: "graduation-cap" }} required>
+                    <Select label="Anno frequentato" defaultValue={annoFrequentazione} disabled icon={{ iconKey: "graduation-cap" }}>
                         <Option label="Primo anno" value={1} />
                         <Option label="Secondo anno" value={2} />
                     </Select>

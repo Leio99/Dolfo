@@ -213,6 +213,8 @@ export const getTime = (d: string) => {
 }
 
 export const downloadCSV = (data: any[]) => {
+    if(!data || !data.length) return
+    
     const csvContent = "data:text/csv;charset=utf-8," + data.map(e => Object.values(e).join(";")).join("\n"),
     encodedUri = encodeURI(csvContent),
     link = document.createElement("a")
