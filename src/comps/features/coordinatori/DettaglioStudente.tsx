@@ -4,6 +4,7 @@ import { dateIsToday, formatItalian, formatWithMonth, goTo, LoadingIconCentered 
 import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
+import { CardActions } from "../../layout/CardActions"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
 import { Progress } from "../../layout/Progress"
@@ -107,35 +108,31 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                         <Icon large type="far" iconKey="envelope" className="mr-1" /> <a data-tooltip="Invia e-mail" href={"mailto:" + studente.email}>{studente.email}</a>
                     </div>
 
-                    <div className="text-right">
+                    <CardActions className="text-right">
                         <Button textBtn onClick={this.openModifica} btnColor="orange" tooltip="Modifica">
                             <EditIcon large />
                         </Button>
-                    </div>
+                    </CardActions>
                 </Card>
 
                 <Card title="Presenze totali (ore)" className="col-12 col-md mb-3">
-                    <div className="float-left">
-                        {
-                            !isNaN(perc) ? <Progress circular percent={perc} circleWidth={80} className="mr-3" color={color} /> : <LoadingIcon spinning />
-                        }
+                    {
+                        !isNaN(perc) ? <Progress circular percent={perc} circleWidth={80} className="mr-3" color={color} /> : <LoadingIcon spinning />
+                    }
 
-                        <div className="progress-label">
-                            {
-                                oreTotali != null && totPresenze != null ? <span>
-                                    {totPresenze}/{oreTotali}
-                                </span> : <LoadingIcon spinning />
-                            }
-                        </div>
+                    <div className="progress-label">
+                        {
+                            oreTotali != null && totPresenze != null ? <span>
+                                {totPresenze}/{oreTotali}
+                            </span> : <LoadingIcon spinning />
+                        }
                     </div>
 
-                    <div className="clearfix"></div>
-
-                    <div className="text-right">
+                    <CardActions className="text-right">
                         <Button textBtn onClick={this.openStageDialog} btnColor="darkblue" tooltip="Ore di stage">
                             <Icon iconKey="clipboard-list-check" className="fa-2x" notFW />
                         </Button>
-                    </div>
+                    </CardActions>
                 </Card>
             </div>
 
