@@ -88,4 +88,48 @@
             }
         }
     }
+
+    &.vertical{
+        display: flex;
+
+        .dolfo-stepper-header{
+            flex-direction: column;
+            align-items: flex-start;
+            width: auto;
+            margin-right: 1.5rem;
+
+            .dolfo-step-separator{
+                background-color: $grey;
+                width: 1px;
+                height: auto;
+                flex: 0 0 50px;
+                margin-left: 17px
+            }
+
+            .dolfo-stepper-step-title{
+                margin: 1rem 0;
+    
+                &:first-child{
+                    margin-top: 0
+                }
+    
+                &:last-child{
+                    margin-bottom: 0
+                }
+            }
+        }
+
+        .dolfo-stepper-steps{
+            flex-direction: column;
+            flex-grow: 1;
+
+            .dolfo-step{
+                display: none;
+
+                &.current{
+                    display: block
+                }
+            }
+        }
+    }
 }

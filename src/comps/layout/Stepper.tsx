@@ -6,6 +6,7 @@ export interface IProps{
     readonly currentStep?: number
     readonly className?: string
     readonly style?: CSSProperties
+    readonly vertical?: boolean
 }
 
 export class Stepper extends React.PureComponent<IProps>{
@@ -30,7 +31,7 @@ export class Stepper extends React.PureComponent<IProps>{
         currentStep = props.currentStep >= 0 ? props.currentStep : 0,
         marginLeft = (-currentStep * 100) + "%"
 
-        return <div className={"dolfo-stepper" + (props.className ? (" " + props.className) : "")} style={props.style}>
+        return <div className={"dolfo-stepper" + (props.vertical ? " vertical" : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             <div className="dolfo-stepper-header">
                 {
                     stepsSeparated.map((child: { step: Step, index: number } | string) => {
@@ -51,7 +52,7 @@ export class Stepper extends React.PureComponent<IProps>{
             <div className="dolfo-stepper-steps">
                 {
                     steps.map((step: Step, i: number) => {
-                        const style = i === 0 ? { marginLeft } : null,
+                        const style = i === 0 ? props.vertical ? step.props.style : { ...step.props.style, marginLeft } : null,
                         isCurrent = currentStep === i
 
                         return <div className={"dolfo-step" + (isCurrent ? " current" : "")} style={style}>
