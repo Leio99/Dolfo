@@ -4,6 +4,7 @@ import { CoordinatoriService } from "../../../services/CoordinatoriService"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
+import { Icon } from "../../layout/Icon"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 import { RecuperoPassword } from "./RecuperoPassword"
@@ -37,6 +38,7 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
         const dialog = Dialog.openDialog({
             title: "Recupero della password",
             hideFooter: true,
+            icon: <Icon iconKey="key" type="far" />,
             content: <RecuperoPassword close={() => dialog.close()} />
         })
     }
