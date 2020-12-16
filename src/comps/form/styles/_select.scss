@@ -25,8 +25,6 @@
 
     .select-icon{
         position: absolute;
-        pointer-events: none;
-        cursor: pointer;
         margin-right: 0.7rem;
         color: $disabled;
         top: 50%;
@@ -38,6 +36,10 @@
 
         .loading{
             color: $selectionBlue
+        }
+
+        &, *{
+            pointer-events: none !important
         }
     }
 
