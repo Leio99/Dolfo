@@ -101,7 +101,7 @@ export class Navigator extends React.PureComponent<any, IState>{
             <Route render={({ location }) => (
                 <div>
                     {
-                        !currentComponent?.hideMenu && <Header title={currentComponent?.pageTitle} menuTogglerFn={this.toggleMenu} />
+                        !currentComponent?.hideMenu && <Header title={currentComponent?.pageTitle} menuTogglerFn={this.toggleMenu} className="mb-4" />
                     }
                     
                     {
