@@ -30,5 +30,6 @@ export const Constants = {
     SELECTED_FILES_LABEL: "File selezionati:",
     UPLOAD_FILE_NOT_ACCEPTABLE: "Non puoi caricare questo tipo di file!",
     MULTI_SELECT_NO_SELECTION: "Nessuna selezione",
-    REQUIRED_FIELD: "Obbligatorio"
+    REQUIRED_FIELD: "Obbligatorio",
+    NAVIGATE_BREADCRUMB: "Naviga"
 }

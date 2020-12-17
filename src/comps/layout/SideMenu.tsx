@@ -1,9 +1,11 @@
 import React from "react"
 import { Constants } from "../shared/Constants"
+import { ButtonColors } from "./Button"
 
 export interface IProps{
     readonly opened?: boolean
     readonly onToggle?: () => void
+    readonly menuColor?: ButtonColors
 }
 export interface IState{
     readonly opened: boolean
@@ -36,7 +38,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
         const props = this.props,
         { opened } = this.state
 
-        return <div className={"dolfo-side-menu" + (opened ? " opened": "")}>
+        return <div className={"dolfo-side-menu dolfo-side-menu-"+ (props.menuColor || "blue") + (opened ? " opened": "")}>
             <div className="dolfo-menu-overlay" onClick={this.toggleMenu}></div>
             {props.children}
 

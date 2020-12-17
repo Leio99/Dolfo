@@ -1,4 +1,5 @@
 import React from "react"
+import { Constants } from "../shared/Constants"
 import { Icon } from "./Icon"
 
 export interface IProps{
@@ -11,7 +12,7 @@ export class BreadCrumbItem extends React.PureComponent<IProps>{
         const props = this.props
 
         return <div className="dolfo-breadcrumb-item">
-            <div className={"dolfo-breadcrumb-item-inner" + (props.onClick ? " clickable" : "")} onClick={props.onClick}>
+            <div className={"dolfo-breadcrumb-item-inner" + (props.onClick ? " clickable" : "")} onClick={props.onClick} data-tooltip={props.onClick && Constants.NAVIGATE_BREADCRUMB}>
                 {props.children}
             </div>
 

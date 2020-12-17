@@ -17,9 +17,10 @@ export const areDifferentTooltips = (newTips: NodeListOf<Element>) => {
 
     for(let i = 0; i < tooltips.length; i++){
         const current = tooltips[i],
-        newTip = newTips[i]
+        newTip = newTips[i],
+        toolText = toolTexts[i]
 
-        if(current !== newTip || toolTexts[i] !== newTip.getAttribute("data-tooltip"))
+        if(current !== newTip || toolText !== newTip.getAttribute("data-tooltip"))
             return true
     }
 

@@ -108,47 +108,48 @@ export class Navigator extends React.PureComponent<any, IState>{
                         currentPath.indexOf(ComponentsPaths.PATH_COORDINATORI) >= 0 && currentPath !== ComponentsPaths.PATH_COORDINATORI_LOGIN && <CoordinatoriMenu currentPath={currentPath} opened={openMenu} toggleMenu={this.toggleMenu} />
                     }
 
-                    <div className="px-5 pb-5">
-                        {
-                            !currentComponent?.hideMenu && breadCrumbItems.length && <BreadCrumb className="mb-4">
-                                {
-                                    breadCrumbItems.map((b, i) => {
-                                        if(i === 0) return <BreadCrumbItem {...b.props}>
-                                            <Icon iconKey="home" className="mr-2" />{b.props.children}
-                                        </BreadCrumbItem>
-
-                                        return b
-                                    })
-                                }
-                            </BreadCrumb>
-                        }
-
                         <TransitionGroup>
                             <CSSTransition key={location.key} timeout={0} classNames="fade">
-                                <Switch location={location}>
+                                <div className="px-5 pb-5">
+
                                     {
-                                        Object.keys(Components).map(key => {
-                                            const Component = Components[key]?.component
+                                        !currentComponent?.hideMenu && breadCrumbItems.length && <BreadCrumb className="mb-4">
+                                            {
+                                                breadCrumbItems.map((b, i) => {
+                                                    if(i === 0) return <BreadCrumbItem {...b.props}>
+                                                        <Icon iconKey="home" className="mr-2" />{b.props.children}
+                                                    </BreadCrumbItem>
 
-                                            return <Route exact path={key} render={(routeProps) => {
-                                                if(Component) return <Component {...routeProps} />
-
-                                                return <div></div>
-                                            }} />
-                                        })
+                                                    return b
+                                                })
+                                            }
+                                        </BreadCrumb>
                                     }
 
-                                    <Route render={() => {
-                                        this.setErrorPage()
+                                    <Switch location={location}>                                    
+                                        {
+                                            Object.keys(Components).map(key => {
+                                                const Component = Components[key]?.component
 
-                                        const Component = Components[ComponentsPaths.ERROR_404_PATH].component
+                                                return <Route exact path={key} render={(routeProps) => {
+                                                    if(Component) return <Component {...routeProps} />
 
-                                        return <Component />
-                                    }} />
-                                </Switch>
+                                                    return <div></div>
+                                                }} />
+                                            })
+                                        }
+
+                                        <Route render={() => {
+                                            this.setErrorPage()
+
+                                            const Component = Components[ComponentsPaths.ERROR_404_PATH].component
+
+                                            return <Component />
+                                        }} />
+                                    </Switch>
+                                </div>
                             </CSSTransition>
                         </TransitionGroup>
-                    </div>        
                 </div>
             )} />
         </Router>
