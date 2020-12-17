@@ -8,7 +8,6 @@ import { NotificationMsg } from "../../layout/NotificationMsg"
 import { Table } from "../../layout/Table"
 import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
-import { DettaglioStudente } from "./DettaglioStudente"
 
 export interface IState{
     readonly listaPresenze: any[]
@@ -104,15 +103,13 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         else this.addToList(idPresenza)
     }
 
-    openInfoStudente = (idStudente: number) => {
+    openDettaglio = (id: number, docente = false) => {
+        const path = docente ? ComponentsPaths.PATH_COORDINATORI_DETAILS_DOCENTE : ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE,
+        Component = Components[path]
+
         Dialog.openDialog({
-            title: Components[ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE].pageTitle,
-            content: <DettaglioStudente match={{ 
-                params: { id: idStudente.toString() },
-                isExact: true,
-                path: null,
-                url: null
-            }} history={null} location={null} />,
+            title: Component.pageTitle,
+            content: <Component.component match={{ params: { id: id.toString() } }} />,
             width: "95vw",
             overflows: true,
             hideFooter: true,
@@ -153,7 +150,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 { label: "Data", field: "data", align: "center", canSearch: true },
                 { label: "Entrata", field: "ingresso", align: "center" },
                 { label: "Uscita", field: "uscita", align: "center" },
-                { label: "Studente", field: "desStudente", tooltip: true, canSearch: true },
+                { label: "Studente/Docente", field: "des", tooltip: true, canSearch: true },
                 { label: "Lezione", field: "lezione", tooltip: true, width: "30%" },
                 { label: "Azioni", field: "azioni", align: "center" }
             ]} data={listaPresenze.map(p => {
@@ -166,6 +163,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 newP.onDoubleClick = () => this.checkUnCheck(newP.idPresenza)
                 newP.checked = isSelected
                 newP.onCheckChange = newP.onDoubleClick
+                newP.des = p.des + (p.idStudente ? " (studente)" : " (docente)")
 
                 newP.azioni = <div>
                     <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="mx-2">
@@ -176,7 +174,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                         <DeleteIcon />
                     </Button>
 
-                    <Button circleBtn btnColor="blue" onClick={() => this.openInfoStudente(newP.idStudente)} tooltip="Info studente" className="mx-2">
+                    <Button circleBtn btnColor="blue" onClick={() => this.openDettaglio(newP.idStudente || newP.idDocente, newP.idDocente)} tooltip="Info studente" className="mx-2">
                         <Icon iconKey="user" />
                     </Button>
                 </div>
