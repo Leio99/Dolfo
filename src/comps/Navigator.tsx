@@ -4,12 +4,16 @@ import { setStudenti } from "../commons/Redux"
 import { createBrowserHistory } from "history"
 import { Route, Switch, Router } from "react-router-dom"
 import { initializeTooltips } from "./layout/Tooltip"
+import { BreadCrumb } from "./layout/BreadCrumb"
+import { BreadCrumbItem } from "./layout/BreadCrumbItem"
 import { Components } from "./features/Components"
 import { IComponent } from "../models/IComponent"
 import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import { ComponentsPaths } from "./features/ComponentsPaths"
 import { Header } from "./layout/Header"
+import { goTo } from "../commons/utility"
+import { Icon } from "./layout/Icon"
 
 export const history = createBrowserHistory()
 
@@ -81,6 +85,17 @@ export class Navigator extends React.PureComponent<any, IState>{
 
     render = (): JSX.Element => {
         const { currentPath, openMenu, currentComponent } = this.state
+        let parentKey = currentComponent?.parentKey,
+        breadCrumbItems = [<BreadCrumbItem>{currentComponent?.pageTitle}</BreadCrumbItem>]
+
+        while(parentKey){
+            const comp = Components[parentKey],
+            copy = parentKey
+
+            breadCrumbItems.unshift(<BreadCrumbItem onClick={() => goTo(copy)}>{comp.pageTitle}</BreadCrumbItem>)
+
+            parentKey = comp.parentKey
+        }
 
         return <Router history={history}>
             <Route render={({ location }) => (
@@ -94,6 +109,20 @@ export class Navigator extends React.PureComponent<any, IState>{
                     }
 
                     <div className="px-5 pb-5">
+                        {
+                            !currentComponent?.hideMenu && breadCrumbItems.length && <BreadCrumb className="mb-4">
+                                {
+                                    breadCrumbItems.map((b, i) => {
+                                        if(i === 0) return <BreadCrumbItem {...b.props}>
+                                            <Icon iconKey="home" className="mr-2" />{b.props.children}
+                                        </BreadCrumbItem>
+
+                                        return b
+                                    })
+                                }
+                            </BreadCrumb>
+                        }
+
                         <TransitionGroup>
                             <CSSTransition key={location.key} timeout={0} classNames="fade">
                                 <Switch location={location}>

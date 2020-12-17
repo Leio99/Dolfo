@@ -1,0 +1,46 @@
+.dolfo-breadcrumb{
+    font-size: 16px;
+
+    .dolfo-breadcrumb-item{
+        &, .dolfo-breadcrumb-item-inner, .dolfo-breadcrumb-arrow{
+            display: inline-block
+        }
+
+        .dolfo-breadcrumb-arrow{
+            margin: 0 0.5rem;
+            color: $disabled
+        }
+
+        .dolfo-breadcrumb-item-inner{
+            &.clickable{
+                color: $disabled;
+                cursor: pointer;
+
+                &:hover{
+                    text-decoration: underline;
+                    color: $dark
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 700px){
+    .dolfo-breadcrumb{
+        .dolfo-breadcrumb-item{
+            &, .dolfo-breadcrumb-arrow{
+                display: none
+            }
+
+            &:first-child{
+                display: block
+            }
+        }
+
+        &:hover{
+            .dolfo-breadcrumb-item{
+                display: block
+            }
+        }
+    }
+}

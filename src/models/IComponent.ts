@@ -1,10 +1,11 @@
 export interface IComponentList{
-    [x: string]: IComponent
+    readonly [x: string]: IComponent
 }
 
 export interface IComponent{
-    component?: any,
-    pageTitle?: string,
-    permission?: () => void,
-    hideMenu?: boolean
+    readonly component?: any,
+    readonly pageTitle?: string,
+    readonly permission?: () => void,
+    readonly hideMenu?: boolean
+    readonly parentKey?: string
 }

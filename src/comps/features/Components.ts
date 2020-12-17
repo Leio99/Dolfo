@@ -39,52 +39,62 @@ export const Components: IComponentList = {
     [ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE]: {
         component: AddStudente,
         pageTitle: "Nuovo studente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI
     },
     [ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI]: {
         component: ListaStudenti,
         pageTitle: "Studenti del corso",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_HOME
     },
     [ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI]: {
         component: ImportaStudenti,
         pageTitle: "Importa studenti",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE
     },
     [ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE]: {
         component: DettaglioStudente,
         pageTitle: "Dettaglio studente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI
     },
     [ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE]: {
         component: EditStudente,
         pageTitle: "Modifica studente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI
     },
     [ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI]: {
         component: ListaDocenti,
         pageTitle: "Tutti i docenti",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_HOME
     },
     [ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE]: {
         component: AddDocente,
         pageTitle: "Nuovo docente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI
     },
     [ComponentsPaths.PATH_COORDINATORI_EDIT_DOCENTE]: {
         component: EditDocente,
         pageTitle: "Modifica docente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI
     },
     [ComponentsPaths.PATH_COORDINATORI_DETAILS_DOCENTE]: {
         component: DettaglioDocente,
         pageTitle: "Dettaglio docente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI
     },
     [ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE]: {
         component: ListaMaterie,
         pageTitle: "Materie del corso",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionCoordinatore,
+        parentKey: ComponentsPaths.PATH_COORDINATORI_HOME
     },
     [ComponentsPaths.SITE_BASE + "layout"]: {
         component: TestLayout,
