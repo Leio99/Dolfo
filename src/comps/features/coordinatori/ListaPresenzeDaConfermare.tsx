@@ -102,14 +102,13 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         if(this.state.selectedList.includes(idPresenza)) this.removeFromList(idPresenza)
         else this.addToList(idPresenza)
     }
-
     openDettaglio = (id: number, docente = false) => {
         const path = docente ? ComponentsPaths.PATH_COORDINATORI_DETAILS_DOCENTE : ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE,
         Component = Components[path]
 
         Dialog.openDialog({
             title: Component.pageTitle,
-            content: <Component.component match={{ params: { id: id.toString() } }} />,
+            content: <Component.Component match={{ params: { id } }} />,
             width: "95vw",
             overflows: true,
             hideFooter: true,

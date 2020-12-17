@@ -3,7 +3,7 @@ export interface IComponentList{
 }
 
 export interface IComponent{
-    readonly component?: any,
+    readonly Component?: any,
     readonly pageTitle?: string,
     readonly permission?: () => void,
     readonly hideMenu?: boolean

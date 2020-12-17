@@ -129,7 +129,7 @@ export class Navigator extends React.PureComponent<any, IState>{
                                     <Switch location={location}>                                    
                                         {
                                             Object.keys(Components).map(key => {
-                                                const Component = Components[key]?.component
+                                                const Component = Components[key]?.Component
 
                                                 return <Route exact path={key} render={(routeProps) => {
                                                     if(Component) return <Component {...routeProps} />
@@ -142,7 +142,7 @@ export class Navigator extends React.PureComponent<any, IState>{
                                         <Route render={() => {
                                             this.setErrorPage()
 
-                                            const Component = Components[ComponentsPaths.ERROR_404_PATH].component
+                                            const Component = Components[ComponentsPaths.ERROR_404_PATH].Component
 
                                             return <Component />
                                         }} />
