@@ -187,10 +187,13 @@ class DatePicker extends React.PureComponent<IProps, IState>{
 
     tryChangeDate = (e: any) => {
         const date = e.target.value.trim(),
-        pieces = date.split("-")
+        pieces = date.split("-"),
+        day = parseInt(pieces[0]),
+        month = parseInt(pieces[1]) - 1,
+        year =  parseInt(pieces[2])
 
-        if(date !== "" && pieces && pieces.length === 3)
-            this.selectDay(parseInt(pieces[0]), parseInt(pieces[1]) - 1, parseInt(pieces[2]), false)
+        if(date !== "" && pieces && pieces.length === 3 && !isNaN(day) && !isNaN(month) && !isNaN(year) && day > 0 && month >= 0)
+            this.selectDay(day, month, year, false)
     }
 
     render = (): JSX.Element => {
