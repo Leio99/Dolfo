@@ -102,3 +102,6 @@ export const AddIcon = (props: DefaultIconProps) => {
 export const MinusIcon = (props: DefaultIconProps) => {
     return <Icon {...props} iconKey="minus" />
 }
+export const ReloadIcon = (props: DefaultIconProps) => {
+    return <Icon {...props} iconKey="sync" />
+}

@@ -145,9 +145,9 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     
     render = (): JSX.Element => {
         const { studenti } = this.state,
-        primoAnno = studenti ? studenti.filter(s => s.annoFrequentazione === 1 && !s.promosso) : null,
-        secondoAnno = studenti ? studenti.filter(s => s.annoFrequentazione === 2 && !s.promosso) : null,
-        listaArchiviati = studenti ? studenti.filter(s => s.promosso) : null,
+        primoAnno = studenti?.filter(s => s.annoFrequentazione === 1 && !s.promosso),
+        secondoAnno = studenti?.filter(s => s.annoFrequentazione === 2 && !s.promosso),
+        listaArchiviati = studenti?.filter(s => s.promosso),
         loadingIcon = <LoadingIconCentered />
 
         return <Tabs>
