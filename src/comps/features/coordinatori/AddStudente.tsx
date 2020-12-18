@@ -1,10 +1,13 @@
 import React from "react"
+import { goTo } from "../../../commons/utility"
 import DatePicker from "../../form/DatePicker"
 import { Option } from "../../form/Option"
 import Select from "../../form/Select"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
+import { Icon } from "../../layout/Icon"
 import { NotificationMsg } from "../../layout/NotificationMsg"
+import { ComponentsPaths } from "../ComponentsPaths"
 
 export interface IState{
     readonly nome: string
@@ -66,6 +69,8 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
         setTimeout(() => this.setState({ loading: false }), 2000)
     }
 
+    goToImportCSV = () => goTo(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI)
+
     render = (): JSX.Element => {
         const { loading } = this.state
 
@@ -100,9 +105,15 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
                 </div>
             </div>
 
-            <Button type="submit" className="mt-2 text-uppercase" btnColor="green" bigBtn fullSize loading={loading}>
-                Aggiungi studente
-            </Button>
+            <div className="d-flex">
+                <Button btnColor="blue" tooltip="Importa da CSV" className="mx-4 mt-2" textBtn bigBtn onClick={this.goToImportCSV}>
+                    <Icon iconKey="upload" />
+                </Button>
+            
+                <Button type="submit" className="mt-2 text-uppercase" btnColor="green" bigBtn fullSize loading={loading}>
+                    Aggiungi studente
+                </Button>
+            </div>
         </form>
     }
 }
