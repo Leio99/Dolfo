@@ -1,5 +1,6 @@
 import React from "react"
 import { goTo } from "../../../commons/utility"
+import { LogoCorsoMenu } from "../LogoCorsoMenu"
 import { Icon } from "../../layout/Icon"
 import { MenuItem } from "../../layout/MenuItem"
 import { SideMenu } from "../../layout/SideMenu"
@@ -14,6 +15,8 @@ export interface IProps{
 }
 
 export class CoordinatoriMenu extends React.PureComponent<IProps>{
+    readonly session = ComponentsPermissions.getLoginCoordinatore()
+
     destroySession = () => {
         sessionStorage.removeItem("sessionCoordinatore")
         ComponentsPermissions.checkPermissionCoordinatore()
@@ -32,7 +35,7 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
         const props = this.props
 
         return <SideMenu onToggle={props.toggleMenu} opened={props.opened}>
-            <img src="https://i.imgur.com/5Z1DbN7.png" height="100" className="my-4 mx-auto d-block" style={{ filter: "drop-shadow(1.5px 0 0 #fff) drop-shadow(-.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff)" }} alt="" />
+            <LogoCorsoMenu session={this.session} />
 
             <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_HOME)}>
                 <Icon iconKey="home-alt" className="mr-2" /> Home

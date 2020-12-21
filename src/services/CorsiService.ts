@@ -9,4 +9,11 @@ export class CorsiService{
 		
         return ServerCall.get(API_URL_REGISTRO_CORSI)
     }
+
+    static getCorso(idCorso: number){
+        if(!ComponentsPermissions.getLoginCoordinatore(false))
+            return ServerCall.emptyCallResult()
+		
+        return ServerCall.get(API_URL_REGISTRO_CORSI + "/" + idCorso)
+    }
 }
