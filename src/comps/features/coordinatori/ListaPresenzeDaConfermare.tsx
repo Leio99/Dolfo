@@ -162,7 +162,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 newP.onDoubleClick = () => this.checkUnCheck(newP.idPresenza)
                 newP.checked = isSelected
                 newP.onCheckChange = newP.onDoubleClick
-                newP.des = p.des + (p.idStudente ? " (studente)" : " (docente)")
+                newP.des = p.des + (p.tipo === "S" ? " (studente)" : " (docente)")
 
                 newP.azioni = <div>
                     <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="mx-2">
