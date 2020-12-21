@@ -173,7 +173,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                         <DeleteIcon />
                     </Button>
 
-                    <Button circleBtn btnColor="blue" onClick={() => this.openDettaglio(newP.targetId, newP.tipo === "D")} tooltip="Info studente" className="mx-2">
+                    <Button circleBtn btnColor="blue" onClick={() => this.openDettaglio(newP.targetId, newP.tipo === "D")} tooltip={"Info " + (newP.tipo === "D" ? "docente" : "studente")} className="mx-2">
                         <Icon iconKey="user" />
                     </Button>
                 </div>
