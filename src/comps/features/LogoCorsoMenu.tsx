@@ -1,10 +1,11 @@
 import React from "react"
 import { CorsiService } from "../../services/CorsiService"
+import { IGenericSession } from "../../models/IGenericSession"
 import { Dialog } from "../layout/Dialog"
 import { LoadingIcon } from "../layout/Icon"
 
 export interface IProps{
-    readonly session: any
+    readonly session: IGenericSession
 }
 export interface IState{
     readonly corso: any
