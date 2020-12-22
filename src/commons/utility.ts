@@ -220,7 +220,7 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
 
     if(heading) csvContent += heading.join(";") + "\n"
 
-    csvContent += data.map(e => Object.values(e).join(";")).join("\n")
+    csvContent += data.map(e => Object.values(e).map(a => a.toString().replaceAll(";",",")).join(";")).join("\n")
 
     const encodedUri = encodeURI(csvContent),
     link = document.createElement("a")

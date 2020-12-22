@@ -34,4 +34,5 @@ export const Constants = {
     NAVIGATE_BREADCRUMB: "Naviga",
     EXPORT_CSV_TEXT: "Esporta CSV",
     EXPORT_PDF_TEXT: "Esporta PDF",
+    ORDER_COLUMNS: "Ordina per"
 }

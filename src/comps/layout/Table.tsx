@@ -93,6 +93,21 @@ export class Table extends React.PureComponent<IProps, IState>{
  
         return <div className={"dolfo-table-content" + (props.className ? (" " + props.className) : "")}>
             <table className="dolfo-table">
+
+                {
+                    data.length > 0 && <thead className="dolfo-table-actions">
+                        <tr>
+                            <td colSpan={props.columns.length}>
+                                {
+                                    props.exportable && (!props.exportFormat || props.exportFormat.includes("csv")) && <Button textBtn btnColor="green" tooltip={Constants.EXPORT_CSV_TEXT} onClick={this.exportCSV}>
+                                        <Icon iconKey="file-csv" className="fa-2x" />
+                                    </Button>
+                                }
+                            </td>
+                        </tr>
+                    </thead>
+                }
+
                 <thead>
                     <tr>
                         {
@@ -126,20 +141,6 @@ export class Table extends React.PureComponent<IProps, IState>{
                         </tr>
                     }
                 </tbody>
-
-                {
-                    props.exportable && <tfoot>
-                        <tr>
-                            <td colSpan={props.columns.length}>
-                                {
-                                    (!props.exportFormat || props.exportFormat.includes("csv")) && <Button textBtn btnColor="green" tooltip={Constants.EXPORT_CSV_TEXT} onClick={this.exportCSV} disabled={!data.length}>
-                                        <Icon iconKey="file-csv" className="fa-2x" />
-                                    </Button>
-                                }
-                            </td>
-                        </tr>
-                    </tfoot>
-                }
             </table>
         </div>
     } 

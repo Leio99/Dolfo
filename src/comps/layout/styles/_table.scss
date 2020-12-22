@@ -8,8 +8,8 @@
         background-color: $white;
 
         tr{
-            border-bottom: 1px solid $grey;
             background-color: $white;
+            border-bottom: 1px solid $grey;
 
             td.dolfo-table-noresults{
                 text-align: center
@@ -23,7 +23,7 @@
             }
         }
 
-        thead th, tbody td, tfoot td{
+        thead th, thead td, tbody td{
             vertical-align: middle;
             padding: 0.8rem
         }
@@ -58,11 +58,13 @@
             }
         }
 
-        tfoot tr{
-            border: 0;
-            
-            td{
-                text-align: right
+        thead.dolfo-table-actions tr td{
+            padding-left: 0;
+            padding-right: 0;
+            text-align: right;
+
+            .dolfo-button{
+                margin-left: 0.5rem
             }
         }
     }
