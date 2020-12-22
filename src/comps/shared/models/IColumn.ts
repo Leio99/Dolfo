@@ -2,7 +2,7 @@ import { CSSProperties } from "react"
 
 export interface IColumn{
     readonly field?: string
-    readonly label?: string | JSX.Element
+    readonly label?: string
     readonly width?: number | string
     readonly align?: "left" | "right" | "center" | "justify"
     readonly canSearch?: boolean

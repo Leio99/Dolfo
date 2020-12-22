@@ -57,7 +57,7 @@ export class Table extends React.PureComponent<IProps, IState>{
     getExportData = () => {
         const exportAll = this.props.columns.filter(d => d.exportable).length === 0,
         columns = exportAll ? this.props.columns : this.props.columns.filter(c => c.exportable && c.type !== "check"),
-        header = columns.map(c => c.label.toString().replace(/(<([^>]+)>)/gi, "")),
+        header = columns.map(c => c.label),
         data = exportAll ? this.props.data : this.props.data.map(d => {
             let obj: any = {}
 
@@ -96,7 +96,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                 <thead>
                     <tr>
                         {
-                            props.columns.map(col => <th style={{ width: col.width }}>
+                            props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
                                 {col.type === "check" && <CheckBox tooltip={col.checkTooltip} checked={col.checked} onChange={col.onCheckAll} />}
  
                                 {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" tooltip={Constants.FILTER_TEXT} onClick={() => this.changeActiveFiler(col.field)} />}
