@@ -46,7 +46,7 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
             title: "Attenzione",
             icon: <WarningIconOutline color="var(--orange)" />,
             content: <div>
-                <div>Si sta per ritirare un docente (<strong>{d.nome} {d.cognome}</strong>)</div>
+                <div>Si sta per ritirare un docente (<strong>{d.nome} {d.cognome}</strong>).</div>
                 <div>I dati identificativi del docente, le lezioni e le presenze verranno comunque mantenuti, ma il docente verrà ritirato da tutti i corsi in cui insegna. In seguito sarà possibile reintegrarlo nel corso, se necessario.</div>
             </div>,
             okText: "Conferma",
