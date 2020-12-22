@@ -60,15 +60,14 @@ body{
     text-align: center;
     cursor: pointer;
     padding: 2rem 0;
-    margin-right: 5px;
-
-    &:hover{
-        background-color: rgba(0, 0, 0, 0.1)
-    }
 
     img{
-        filter: drop-shadow(1.5px 0 0 #fff) drop-shadow(-.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff);
-        height: 100px
+        filter: drop-shadow(1.5px 0 0 #fff) drop-shadow(-0.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff);
+        height: 100px;
+
+        &:hover{
+            filter: drop-shadow(1.5px 0 0.7px #fff) drop-shadow(-0.7px 0 0.7px #fff) drop-shadow(0 -1px 0.7px #fff) drop-shadow(0 1.5px 0.7px #fff)
+        }
     }
 }
 
