@@ -1,12 +1,13 @@
 import React from "react"
 import Button from "../../layout/Button"
-import { AddIcon, CheckIcon, CloseIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
+import { AddIcon, CheckIcon, CloseIcon, DetailIcon, EditIcon, Icon, WarningIconOutline } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 import { goTo, LoadingIconCentered, notImplemented } from "../../../commons/utility"
 import { DocentiService } from "../../../services/DocentiService"
 import { Switch } from "../../form/Switch"
+import { Dialog } from "../../layout/Dialog"
 
 export interface IState{
     readonly docenti: any[]
@@ -40,6 +41,33 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
     
     openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_DOCENTE_BASE + "/" + id)
 
+    ritiraDocente = (d: any) => {
+        Dialog.openDialog({
+            title: "Attenzione",
+            icon: <WarningIconOutline color="var(--orange)" />,
+            content: <div>
+                <div>Si sta per ritirare un docente (<strong>{d.nome} {d.cognome}</strong>)</div>
+                <div>I dati identificativi del docente, le lezioni e le presenze verranno comunque mantenuti, ma il docente verrà ritirato da tutti i corsi in cui insegna. In seguito sarà possibile reintegrarlo nel corso, se necessario.</div>
+            </div>,
+            okText: "Conferma",
+            onOk: notImplemented,
+            okType: "red",
+            cancelType: "black"
+        })
+    }
+
+    reintegraDocente = (d: any) => {
+        Dialog.openDialog({
+            title: `Reintegra docente: ${d.nome} ${d.cognome}`,
+            icon: <WarningIconOutline color="var(--orange)" />,
+            content: "Questo docente verrà reintegrato all'interno del corso.",
+            okText: "Conferma",
+            onOk: notImplemented,
+            okType: "red",
+            cancelType: "black"
+        })
+    }
+
     buildTable = (studenti: any[]) => {
         return <Table columns={[
             { label: "Docente", field: "desDocente", canSearch: true, tooltip: true },
@@ -67,13 +95,13 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
                             </Button>
                         }
                         {
-                            !d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira" onClick={notImplemented}>
+                            !d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira" onClick={() => this.ritiraDocente(d)}>
                                 <Icon iconKey="user-times" />
                             </Button>
                         }
 
                         {
-                            d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Reintegra" onClick={notImplemented}>
+                            d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Reintegra" onClick={() => this.reintegraDocente(d)}>
                                 <Icon iconKey="reply" />
                             </Button>
                         }
