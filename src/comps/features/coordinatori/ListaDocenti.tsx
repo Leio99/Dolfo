@@ -52,7 +52,7 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
             okText: "Conferma",
             onOk: notImplemented,
             okType: "red",
-            cancelType: "black"
+            cancelType: "grey"
         })
     }
 
@@ -64,7 +64,7 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
             okText: "Conferma",
             onOk: notImplemented,
             okType: "red",
-            cancelType: "black"
+            cancelType: "grey"
         })
     }
 
