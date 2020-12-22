@@ -7,10 +7,11 @@ export interface IColumn{
     readonly align?: "left" | "right" | "center" | "justify"
     readonly canSearch?: boolean
     readonly tooltip?: boolean
-    readonly isCheck?: boolean
+    readonly type?: "date" | "time" | "check"
     readonly onCheckAll?: () => void
     readonly checked?: boolean
     readonly checkTooltip?: string
+    readonly exportable?: boolean
 }
 
 export interface IDataColumn{

@@ -31,5 +31,7 @@ export const Constants = {
     UPLOAD_FILE_NOT_ACCEPTABLE: "Non puoi caricare questo tipo di file!",
     MULTI_SELECT_NO_SELECTION: "Nessuna selezione",
     REQUIRED_FIELD: "Obbligatorio",
-    NAVIGATE_BREADCRUMB: "Naviga"
+    NAVIGATE_BREADCRUMB: "Naviga",
+    EXPORT_CSV_TEXT: "Esporta CSV",
+    EXPORT_PDF_TEXT: "Esporta PDF",
 }

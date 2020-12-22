@@ -2,6 +2,7 @@ import { NotificationMsg } from "../comps/layout/NotificationMsg"
 import { ICalendarDay } from "../models/ICalendarDay"
 import { LoadingIcon } from "../comps/layout/Icon"
 import { history } from "../comps/Navigator"
+import { IDataColumn } from "../comps/shared/models/IColumn"
 
 export const formatDate = (date: Date, monthString = false) => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " "): ("-" + zeroBefore(date.getMonth() + 1) + "-")
@@ -212,11 +213,16 @@ export const getTime = (d: string) => {
     return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
 }
 
-export const downloadCSV = (data: any[]) => {
+export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
     if(!data || !data.length) return
     
-    const csvContent = "data:text/csv;charset=utf-8," + data.map(e => Object.values(e).join(";")).join("\n"),
-    encodedUri = encodeURI(csvContent),
+    let csvContent = "data:text/csv;charset=utf-8,"
+
+    if(heading) csvContent += heading.join(";") + "\n"
+
+    csvContent += data.map(e => Object.values(e).join(";")).join("\n")
+
+    const encodedUri = encodeURI(csvContent),
     link = document.createElement("a")
 
     link.setAttribute("href", encodedUri)

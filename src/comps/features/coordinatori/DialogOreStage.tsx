@@ -1,9 +1,7 @@
 import React from "react"
-import { downloadCSV, formatItalian, getTime, LoadingIconCentered } from "../../../commons/utility"
+import { LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
-import Button from "../../layout/Button"
 import { Dialog, ComponentAsDialogProps } from "../../layout/Dialog"
-import { Icon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
 
 export interface IProps extends ComponentAsDialogProps{
@@ -33,27 +31,15 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
     render = (): JSX.Element => {
         const { listaOre } = this.state
 
-        return <Dialog overflows={!!listaOre} visible clickOutside onClose={this.props.close} title="Ore di stage segnate" width="70vw" customFooter={[
-            <Button onClick={() => downloadCSV(this.state.listaOre)} btnColor="blue" smallBtn disabled={!listaOre || !listaOre.length}>
-                <Icon iconKey="download" /> Scarica CSV
-            </Button>
-        ]}>
+        return <Dialog overflows={!!listaOre} visible clickOutside onClose={this.props.close} title="Ore di stage segnate" width="70vw" hideFooter>
             {
                 listaOre ? <Table columns={[
-                    { label: "Data", field: "data", canSearch: true, align: "center" },
+                    { label: "Data", field: "data", canSearch: true, align: "center", type: "date" },
                     { label: "Descrizione", field: "argomento", width: "30%", tooltip: true },
-                    { label: "Ora inizio", field: "oraInizio", align: "center" },
-                    { label: "Ora fine", field: "oraFine", align: "center" },
+                    { label: "Ora inizio", field: "oraInizio", align: "center", type: "time" },
+                    { label: "Ora fine", field: "oraFine", align: "center", type: "time" },
                     { label: "Ore svolte", field: "totaleRelativo", align: "center" },
-                ]} data={listaOre.map(o => {
-                    let ora = {...o}
-
-                    ora.data = formatItalian(o.data)
-                    ora.oraInizio = getTime(o.oraInizio)
-                    ora.oraFine = getTime(o.oraFine)
-
-                    return ora
-                })} /> : <LoadingIconCentered />
+                ]} data={listaOre} exportable exportFormat={["csv"]} /> : <LoadingIconCentered />
             }
         </Dialog>
     }

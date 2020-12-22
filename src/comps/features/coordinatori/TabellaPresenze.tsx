@@ -1,5 +1,5 @@
 import React from "react"
-import { convertFromUTC, formatItalian, getDateTime, LoadingIconCentered } from "../../../commons/utility"
+import { convertFromUTC, getDateTime, LoadingIconCentered } from "../../../commons/utility"
 import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
@@ -64,22 +64,18 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
             <h3>Presenze dello studente</h3>
 
             <Table columns={[
-                { label: "Giorno", field: "data", canSearch: true, width: 150, align: "center" },
+                { label: "Data", field: "data", canSearch: true, width: 150, align: "center", type: "date" },
                 { label: "Entrata", field: "ingresso", width: 200, align: "center" },
                 { label: "Uscita", field: "uscita", width: 200, align: "center" },
                 { label: "Lezione", field: "lezione", tooltip: true, canSearch: true },
                 { label: "Azioni", field: "azioni", width: "20%", align: "center" },
             ]} data={
                 presenze.map(p => {
-                    return {
-                        data: formatItalian(p.data),
-                        ingresso: p.ingresso,
-                        uscita: p.uscita,
-                        lezione: p.lezione,
-                        azioni: <Button tooltip="Modifica orari" circleBtn onClick={() => this.editPresenza(p)} btnColor="orange">
-                            <EditIcon />
-                        </Button>
-                    }
+                    p.azioni = <Button tooltip="Modifica orari" circleBtn onClick={() => this.editPresenza(p)} btnColor="orange">
+                        <EditIcon />
+                    </Button>
+
+                    return p
                 })
             } />
         </div>

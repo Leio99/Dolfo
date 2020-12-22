@@ -23,13 +23,14 @@
             }
         }
 
-        thead th, tbody td{
+        thead th, tbody td, tfoot td{
             vertical-align: middle;
             padding: 0.8rem
         }
 
         thead th{
             position: relative;
+            text-align: center;
 
             .dolfo-column-search-icon{
                 position: absolute;
@@ -55,6 +56,14 @@
                 padding: 0 1rem;
                 background-color: $white;
                 height: 27px
+            }
+        }
+
+        tfoot tr{
+            border: 0;
+            
+            td{
+                text-align: right
             }
         }
     }

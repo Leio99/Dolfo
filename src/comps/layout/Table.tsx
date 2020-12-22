@@ -1,13 +1,17 @@
 import React from "react"
+import { downloadCSV, formatDate, getTime } from "../../commons/utility"
 import { CheckBox } from "../form/CheckBox"
 import { Constants } from "../shared/Constants"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
+import Button from "./Button"
 import { Icon } from "./Icon"
 
 export interface IProps{
     readonly columns: IColumn[],
     readonly data: IDataColumn[]
     readonly className?: string
+    readonly exportable?: boolean
+    readonly exportFormat?: ("csv")[]
 }
 export interface IState{
     readonly filter: { [x: string]: string }
@@ -40,6 +44,48 @@ export class Table extends React.PureComponent<IProps, IState>{
 
     blurSearch = () => this.setState({ activeFilter: "" })
 
+    getColumnDataType = (col: IColumn, data: IDataColumn) => {
+        const d = data[col.field]
+
+        if(col.type === "check") return <CheckBox checked={data.checked} onChange={() => data.onCheckChange(data)} disabled={data.checkDisabled} />
+        if(col.type === "date") return formatDate(new Date(d))
+        if(col.type === "time") return getTime(d)
+
+        return d
+    }
+
+    getExportData = () => {
+        const exportAll = this.props.columns.filter(d => d.exportable).length === 0,
+        columns = exportAll ? this.props.columns : this.props.columns.filter(c => c.exportable && c.type !== "check"),
+        header = columns.map(c => c.label.toString().replace(/(<([^>]+)>)/gi, "")),
+        data = exportAll ? this.props.data : this.props.data.map(d => {
+            let obj: any = {}
+
+            Object.keys(d).forEach(k => {
+                const find = columns.find(c => c.field === k)
+
+
+                if(find) obj[k] = d[k]
+            })
+
+            return obj
+        }),
+        orderedData = data.map(d => {
+            let obj: any = {}
+
+            columns.forEach(c => obj[c.field] = this.getColumnDataType(c, d))
+
+            return obj
+        })
+
+        return { data: orderedData, header, columns }
+    }
+
+    exportCSV = () => {
+        const exportData = this.getExportData()
+        downloadCSV(exportData.data, exportData.header)
+    }
+
     render = (): JSX.Element => {
         const props = this.props,
         { filter, activeFilterKey, activeFilter } = this.state,
@@ -50,8 +96,8 @@ export class Table extends React.PureComponent<IProps, IState>{
                 <thead>
                     <tr>
                         {
-                            props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
-                                {col.isCheck && <CheckBox tooltip={col.checkTooltip} checked={col.checked} onChange={col.onCheckAll} />}
+                            props.columns.map(col => <th style={{ width: col.width }}>
+                                {col.type === "check" && <CheckBox tooltip={col.checkTooltip} checked={col.checked} onChange={col.onCheckAll} />}
  
                                 {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" tooltip={Constants.FILTER_TEXT} onClick={() => this.changeActiveFiler(col.field)} />}
 
@@ -70,7 +116,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                                 {
                                     props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip ? d[col.field] : null}>
                                         {
-                                            col.isCheck ? <CheckBox checked={d.checked} onChange={() => d.onCheckChange(d)} disabled={d.checkDisabled} /> : d[col.field]
+                                            this.getColumnDataType(col, d)
                                         }
                                     </td>)
                                 }
@@ -80,6 +126,20 @@ export class Table extends React.PureComponent<IProps, IState>{
                         </tr>
                     }
                 </tbody>
+
+                {
+                    props.exportable && <tfoot>
+                        <tr>
+                            <td colSpan={props.columns.length}>
+                                {
+                                    (!props.exportFormat || props.exportFormat.includes("csv")) && <Button textBtn btnColor="green" tooltip={Constants.EXPORT_CSV_TEXT} onClick={this.exportCSV} disabled={!data.length}>
+                                        <Icon iconKey="file-csv" className="fa-2x" />
+                                    </Button>
+                                }
+                            </td>
+                        </tr>
+                    </tfoot>
+                }
             </table>
         </div>
     } 

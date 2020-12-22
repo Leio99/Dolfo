@@ -71,7 +71,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         })
 
         return <Table columns={[
-            { isCheck: true, checkTooltip: "Seleziona tutti", onCheckAll: () => this.toggleCheckAll(studenti[0].annoFrequentazione), checked: checkedAll, width: "5%", align: "center" },
+            { type: "check", checkTooltip: "Seleziona tutti", onCheckAll: () => this.toggleCheckAll(studenti[0].annoFrequentazione), checked: checkedAll, width: "5%", align: "center" },
             { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
             { label: "Stato", field: "stato", width: "15%", align: "center" },
             { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },

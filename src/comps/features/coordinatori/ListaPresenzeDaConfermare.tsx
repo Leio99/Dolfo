@@ -145,8 +145,8 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
             <div className="clearfix mt-3"></div>
 
             <Table columns={[
-                { isCheck: true, onCheckAll: this.checkUncheckAll, checked: selectedList.length === listaPresenze.length && selectedList.length > 0, checkTooltip: "Seleziona tutte", width: "5%", align: "center" },
-                { label: "Data", field: "data", align: "center", canSearch: true },
+                { type: "check", onCheckAll: this.checkUncheckAll, checked: selectedList.length === listaPresenze.length && selectedList.length > 0, checkTooltip: "Seleziona tutte", width: "5%", align: "center" },
+                { label: "Data", field: "data", align: "center", canSearch: true, type: "date" },
                 { label: "Entrata", field: "ingresso", align: "center" },
                 { label: "Uscita", field: "uscita", align: "center" },
                 { label: "Studente/Docente", field: "des", tooltip: true, canSearch: true },
@@ -156,7 +156,6 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 let newP = {...p},
                 isSelected = selectedList.includes(newP.idPresenza)
 
-                newP.data = formatItalian(newP.data)
                 newP.rowStyle = isSelected ? { backgroundColor: "var(--hoverblue)" } : null
 
                 newP.onDoubleClick = () => this.checkUnCheck(newP.idPresenza)
