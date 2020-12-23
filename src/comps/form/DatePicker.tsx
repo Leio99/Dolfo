@@ -183,7 +183,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
 
     handleClickOutside = this.hideCalendar
 
-    handleTabKey = (e: any) => e.keyCode === 9 && this.hideCalendar()
+    handleTabKey = (e: KeyboardEvent) => e.key.charCodeAt(0) === 84 && this.hideCalendar()
 
     tryChangeDate = (e: any) => {
         const date = e.target.value.trim(),

@@ -108,7 +108,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         return names.join(", ")
     }
 
-    resetFiles = (e: any) => {
+    resetFiles = (e: Event) => {
         e.stopPropagation()
         this.setState({
             files: null,

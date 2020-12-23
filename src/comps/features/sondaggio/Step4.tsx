@@ -60,7 +60,7 @@ export class Step4 extends React.PureComponent<StepProps, IState>{
         })
     }
 
-    openPolicy = (e: any) => this.openTerms(e, true)
+    openPolicy = (e: FormEvent) => this.openTerms(e, true)
 
     render = () => {
         const { accepted, loading } = this.state
