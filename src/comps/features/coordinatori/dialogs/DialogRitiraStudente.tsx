@@ -10,6 +10,7 @@ export interface IProps extends ComponentAsDialogProps{
 }
 export interface IState{
     readonly dataRitiro: string
+    readonly loading: boolean
 }
 
 export class DialogRitiraStudente extends React.PureComponent<IProps, IState>{
@@ -17,30 +18,26 @@ export class DialogRitiraStudente extends React.PureComponent<IProps, IState>{
         super(props)
 
         this.state = {
-            dataRitiro: formatDate(new Date())
+            dataRitiro: formatDate(new Date()),
+            loading: false
         }
     }
 
     confermaRitiro = () => {
-        const loading = Dialog.loadingDialog()
-
-        setTimeout(() => {
-            notImplemented()
-            loading.close()
-            this.props.close()
-        }, 2000)
+        notImplemented()
+        this.props.close()
     }
 
     changeDataRitiro = (dataRitiro: string) => this.setState({ dataRitiro })
 
     render = (): JSX.Element => {
         const { studente } = this.props,
-        { dataRitiro } = this.state
+        { dataRitiro, loading } = this.state
 
         return <Dialog title={<span>
             <WarningIconOutline color="var(--red)" /> Attenzione
         </span>} visible clickOutside onClose={this.props.close} customFooter={[
-            <Button btnColor="red" onClick={this.confermaRitiro} smallBtn disabled={dataRitiro === ""}>Conferma</Button>,
+            <Button btnColor="red" onClick={this.confermaRitiro} smallBtn disabled={dataRitiro === ""} loading={loading}>Conferma</Button>,
             <Button btnColor="grey" onClick={this.props.close} smallBtn textBtn>Annulla</Button>
         ]}>
             <div>Si sta per ritirare uno studente (<strong>{studente.nome} {studente.cognome}</strong>).</div>
