@@ -164,15 +164,15 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 newP.des = p.des + (p.tipo === "S" ? " (studente)" : " (docente)")
 
                 newP.azioni = <div>
-                    <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="mx-2">
+                    <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="m-2">
                         <CheckIcon />
                     </Button>
 
-                    <Button circleBtn btnColor="red" onClick={() => this.rejectPresenza(newP.idPresenza)} tooltip="Rifiuta" className="mx-2">
+                    <Button circleBtn btnColor="red" onClick={() => this.rejectPresenza(newP.idPresenza)} tooltip="Rifiuta" className="m-2">
                         <DeleteIcon />
                     </Button>
 
-                    <Button circleBtn btnColor="blue" onClick={() => this.openDettaglio(newP.targetId, newP.tipo === "D")} tooltip={"Info " + (newP.tipo === "D" ? "docente" : "studente")} className="mx-2">
+                    <Button circleBtn btnColor="blue" onClick={() => this.openDettaglio(newP.targetId, newP.tipo === "D")} tooltip={"Info " + (newP.tipo === "D" ? "docente" : "studente")} className="m-2">
                         <Icon iconKey="user" />
                     </Button>
                 </div>

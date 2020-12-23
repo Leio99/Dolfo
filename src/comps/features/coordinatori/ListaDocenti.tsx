@@ -87,23 +87,23 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
                     ore2: d.monteOre.oreSecondo,
                     stato: d.ritirato ? <CloseIcon color="var(--red)" tooltip="Ritirato" large /> : <CheckIcon color="var(--green)" tooltip="Attivo" large />,
                     azioni: <div>
-                        <Button btnColor="blue" className="mx-2" circleBtn onClick={() => this.openDetail(d.idDocente)} tooltip="Dettagli">
+                        <Button btnColor="blue" className="m-2" circleBtn onClick={() => this.openDetail(d.idDocente)} tooltip="Dettagli">
                             <DetailIcon />
                         </Button>
                         
                         {
-                            !d.ritirato && <Button circleBtn btnColor="orange" className="mx-2" tooltip="Modifica" onClick={() => this.openModifica(d.idDocente)}>
+                            !d.ritirato && <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(d.idDocente)}>
                                 <EditIcon />
                             </Button>
                         }
                         {
-                            !d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira" onClick={() => this.ritiraDocente(d)}>
+                            !d.ritirato && <Button circleBtn btnColor="red" className="m-2" tooltip="Ritira" onClick={() => this.ritiraDocente(d)}>
                                 <Icon iconKey="user-times" />
                             </Button>
                         }
 
                         {
-                            d.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Reintegra" onClick={() => this.reintegraDocente(d)}>
+                            d.ritirato && <Button circleBtn btnColor="red" className="m-2" tooltip="Reintegra" onClick={() => this.reintegraDocente(d)}>
                                 <Icon iconKey="reply" />
                             </Button>
                         }

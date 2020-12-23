@@ -109,22 +109,22 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     stato: s.ritirato ? <CloseIcon color="var(--red)" tooltip="Ritirato" large /> : <CheckIcon color="var(--green)" tooltip="Attivo" large />,
                     frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
                     azioni: <div>
-                        <Button btnColor="blue" className="mx-2" circleBtn onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
+                        <Button btnColor="blue" className="m-2" circleBtn onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
                             <DetailIcon />
                         </Button>
                         
                         {
-                            !s.ritirato && <Button circleBtn btnColor="orange" className="mx-2" tooltip="Modifica" onClick={() => this.openModifica(s.idStudente)}>
+                            !s.ritirato && <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.idStudente)}>
                                 <EditIcon />
                             </Button>
                         }
                         {
-                            !s.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira" onClick={() => this.ritiraStudente(s)}>
+                            !s.ritirato && <Button circleBtn btnColor="red" className="m-2" tooltip="Ritira" onClick={() => this.ritiraStudente(s)}>
                                 <Icon iconKey="user-times" />
                             </Button>
                         }
 
-                        <Button circleBtn btnColor="green" className="mx-2" tooltip="Archivia" onClick={() => this.archiviaStudente(s)}>
+                        <Button circleBtn btnColor="green" className="m-2" tooltip="Archivia" onClick={() => this.archiviaStudente(s)}>
                             <Icon iconKey="user-check" />
                         </Button>
                     </div>
