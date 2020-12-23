@@ -22,7 +22,7 @@ export class Option extends React.PureComponent<IProps>{
     }
 
     checkSpace = (e: any) => {
-        if(e.keyCode === 32){
+        if(e.key.charCodeAt(0) === 32){
             this.selectOption()
             e.preventDefault()
         }

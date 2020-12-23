@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { goTo, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
@@ -65,7 +65,7 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
 
     changeDataNascita = (dataNascita: string) => this.setState({ dataNascita })
 
-    editStudente = (e: any) => {
+    editStudente = (e: FormEvent) => {
         e.preventDefault()
 
         const { nome, cognome, email, cf, annoFrequentazione, dataNascita, studente } = this.state,

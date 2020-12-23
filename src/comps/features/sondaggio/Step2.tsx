@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { StepProps } from "./Base"
@@ -24,7 +24,7 @@ export class Step2 extends React.PureComponent<StepProps, IState>{
     changePassword = (password: string) => this.setState({ password })
     changeEmail = (email: string) => this.setState({ email })
 
-    sendStep = (e: any) => {
+    sendStep = (e: FormEvent) => {
         e.preventDefault()
         this.props.setVar("step2", this.state)
         this.props.nextStep()

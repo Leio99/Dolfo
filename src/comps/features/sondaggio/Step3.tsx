@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import DatePicker from "../../form/DatePicker"
 import Button from "../../layout/Button"
 import { StepProps } from "./Base"
@@ -18,7 +18,7 @@ export class Step3 extends React.PureComponent<StepProps, IState>{
 
     changeDataNascita = (dataNascita: string) => this.setState({ dataNascita })
 
-    sendStep = (e: any) => {
+    sendStep = (e: FormEvent) => {
         e.preventDefault()
         this.props.setVar("step3", this.state)
         this.props.nextStep()

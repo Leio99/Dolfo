@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { Option } from "../../form/Option"
 import { RadioButton } from "../../form/RadioButton"
 import Button from "../../layout/Button"
@@ -19,7 +19,7 @@ export class Step1 extends React.PureComponent<StepProps, IState>{
 
     changeGender = (gender: string) => this.setState({ gender })
 
-    sendStep = (e: any) => {
+    sendStep = (e: FormEvent) => {
         e.preventDefault()
         this.props.setVar("step1", this.state)
         this.props.nextStep()

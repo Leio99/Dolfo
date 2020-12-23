@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { MaterieService } from "../../../services/MaterieService"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
@@ -32,7 +32,7 @@ export class AddEditMateria extends React.PureComponent<IProps, IState>{
 
     changeNome = (nome: string) => this.setState({ nome })
 
-    addMateria = (e: any) => {
+    addMateria = (e: FormEvent) => {
         e.preventDefault()
 
         const { nome } = this.state,

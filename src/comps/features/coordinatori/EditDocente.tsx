@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { goTo, LoadingIconCentered } from "../../../commons/utility"
 import { CorsiService } from "../../../services/CorsiService"
@@ -88,7 +88,7 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
 
     toggleLoading = () => this.setState({ loadingForm: !this.state.loadingForm })
     
-    editDocente = (e: any) => {
+    editDocente = (e: FormEvent) => {
         e.preventDefault()
 
         const { nome, cognome, email, cf, materieScelte, corsiScelti, docente } = this.state,

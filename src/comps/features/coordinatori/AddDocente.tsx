@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { CorsiService } from "../../../services/CorsiService"
 import { MaterieService } from "../../../services/MaterieService"
 import { Option } from "../../form/Option"
@@ -65,7 +65,7 @@ export class AddDocente extends React.PureComponent<undefined, IState>{
 
     changeCorsiScelti = (corsiScelti: number[]) => this.setState({ corsiScelti })
     
-    creaDocente = (e: any) => {
+    creaDocente = (e: FormEvent) => {
         e.preventDefault()
 
         const { nome, cognome, email, cf, materieScelte, corsiScelti } = this.state,

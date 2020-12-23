@@ -128,7 +128,7 @@ class Select extends React.PureComponent<IProps, IState>{
 
     resetSearch = () => this.changeSearch({ target: { value: "" }})
 
-    handleKeyDown = (e: any) => {        
+    handleKeyDown = (e: KeyboardEvent) => {        
         const options = this.state.options,
         currentSelection = this.state.currentSelection,
         currentIndex = currentSelection === -1 ? -1 : options.indexOf(options.find((_, i) => i === currentSelection))
@@ -140,12 +140,12 @@ class Select extends React.PureComponent<IProps, IState>{
             else newIndex = currentIndex - 1
             
             e.preventDefault()
-        }else if(e.keyCode === 40){
+        }else if(e.key.charCodeAt(0) === 65){
             if(currentIndex === options.length - 1 || currentIndex === -1) newIndex = 0
             else newIndex = currentIndex + 1
             
             e.preventDefault()
-        }else if(e.keyCode === 13){
+        }else if(e.key.charCodeAt(0) === 69){
             const option = options[currentIndex] || options[0]
 
             if(this.props.multiple) this.changeMultiple(option.props.value, currentIndex)

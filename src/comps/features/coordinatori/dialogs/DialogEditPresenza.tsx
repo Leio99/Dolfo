@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { formatWithMonth } from "../../../../commons/utility"
 import { PresenzeService } from "../../../../services/PresenzeService"
 import TimePicker from "../../../form/TimePicker"
@@ -28,7 +28,7 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
         }
     }
 
-    modificaPresenza = (e: any) => {
+    modificaPresenza = (e: FormEvent) => {
         e.preventDefault()
 
         const { ingresso, uscita } = this.state,

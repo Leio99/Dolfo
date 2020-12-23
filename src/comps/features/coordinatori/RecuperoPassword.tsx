@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { Cifratore } from "../../../commons/Cifratore"
 import { CoordinatoriService } from "../../../services/CoordinatoriService"
 import { TextInput } from "../../form/TextInput"
@@ -47,7 +47,7 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
 
     switchLoading = () => this.setState({ loading: !this.state.loading })
 
-    confirmFirstStep = (e: any) => {
+    confirmFirstStep = (e: FormEvent) => {
         e.preventDefault()
         
         const { email } = this.state
@@ -73,7 +73,7 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
         }).catch(this.switchLoading)
     }
 
-    confirmSecondStep = (e: any) => {
+    confirmSecondStep = (e: FormEvent) => {
         e.preventDefault()
         
         if(this.state.code === "")
@@ -82,7 +82,7 @@ export class RecuperoPassword extends React.PureComponent<ComponentAsDialogProps
         this.increaseStep()
     }
 
-    savePassword = (e: any) => {
+    savePassword = (e: FormEvent) => {
         e.preventDefault()
 
         const { newPassword, newPasswordConfirm, idUtente, code } = this.state

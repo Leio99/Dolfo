@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { Cifratore } from "../../../commons/Cifratore"
 import { CoordinatoriService } from "../../../services/CoordinatoriService"
 import { TextInput } from "../../form/TextInput"
@@ -45,7 +45,7 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
 
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
-    tryLogin = (e: any) => {
+    tryLogin = (e: FormEvent) => {
         e.preventDefault()
 
         const { adminName, adminPassword } = this.state,

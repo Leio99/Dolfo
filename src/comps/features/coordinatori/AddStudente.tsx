@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { goTo } from "../../../commons/utility"
 import DatePicker from "../../form/DatePicker"
 import { Option } from "../../form/Option"
@@ -46,7 +46,7 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
     changeAnno = (anno: number) => this.setState({ anno })
     
-    creaStudente = (e: any) => {
+    creaStudente = (e: FormEvent) => {
         e.preventDefault()
 
         const { nome, cognome, email, cf, anno, dataNascita } = this.state,

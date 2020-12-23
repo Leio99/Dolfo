@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FormEvent } from "react"
 import { CheckBox } from "../../form/CheckBox"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
@@ -21,7 +21,7 @@ export class Step4 extends React.PureComponent<StepProps, IState>{
 
     switchAccept = () => this.setState({ accepted: !this.state.accepted })
 
-    sendStep = (e: any) => {
+    sendStep = (e: FormEvent) => {
         e.preventDefault()
         this.props.setVar("step4", { accepted: this.state.accepted })
 
@@ -40,7 +40,7 @@ export class Step4 extends React.PureComponent<StepProps, IState>{
 
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
-    openTerms = (e: any, policy = false) => {
+    openTerms = (e: FormEvent, policy = false) => {
         e.preventDefault()
         Dialog.openDialog({
             overflows: true,

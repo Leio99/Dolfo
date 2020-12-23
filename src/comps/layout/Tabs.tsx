@@ -65,7 +65,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     }
 
     checkKey = (e: any, index: number) => {
-        if(e.keyCode === 32 || e.keyCode === 13){
+        if(e.key.charCodeAt(0) === 32 || e.key.charCodeAt(0) === 69){
             this.changeSelection(index)
             e.preventDefault()
         }
