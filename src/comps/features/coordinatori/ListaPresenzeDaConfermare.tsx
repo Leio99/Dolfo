@@ -1,5 +1,5 @@
 import React from "react"
-import { formatItalian, LoadingIconCentered } from "../../../commons/utility"
+import { LoadingIconCentered } from "../../../commons/utility"
 import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
