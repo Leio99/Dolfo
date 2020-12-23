@@ -5,7 +5,7 @@ import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
-import { EditPresenza } from "./EditPresenza"
+import { EditPresenza } from "./dialogs/DialogEditPresenza"
 
 export interface IProps{
     readonly idStudente: number

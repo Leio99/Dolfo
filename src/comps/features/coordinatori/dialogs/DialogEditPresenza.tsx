@@ -1,10 +1,10 @@
 import React from "react"
-import { formatWithMonth } from "../../../commons/utility"
-import { PresenzeService } from "../../../services/PresenzeService"
-import TimePicker from "../../form/TimePicker"
-import Button from "../../layout/Button"
-import { ComponentAsDialogProps, Dialog } from "../../layout/Dialog"
-import { QuestionCircleIcon } from "../../layout/Icon"
+import { formatWithMonth } from "../../../../commons/utility"
+import { PresenzeService } from "../../../../services/PresenzeService"
+import TimePicker from "../../../form/TimePicker"
+import Button from "../../../layout/Button"
+import { ComponentAsDialogProps, Dialog } from "../../../layout/Dialog"
+import { QuestionCircleIcon } from "../../../layout/Icon"
 
 export interface IProps extends ComponentAsDialogProps{
     readonly presenza: any
@@ -79,6 +79,7 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
 
         Dialog.infoDialog({
             title: "Dettagli presenza",
+            clickOutside: true,
             content: <div>
                 <p className="mb-1">
                     <strong>Data</strong>: {formatWithMonth(presenza.data)}

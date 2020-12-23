@@ -6,20 +6,23 @@ import { Constants } from "../shared/Constants"
 
 export type DialogType = "success" | "info" | "error" | "warning"
 
-export interface IProps{
-    readonly clickOutside?: boolean
+export interface BaseProps{
+    title?: string | JSX.Element,
+    content?: string | JSX.Element,
+    onOk?: () => void,
+    width?: string,
+    okText?: string,
+    clickOutside?: boolean
+}
+
+export interface IProps extends BaseProps{
     readonly onClose?: () => void
     readonly visible?: boolean
-    readonly onOk?: () => void
     readonly okBtnClass?: string
     readonly cancelBtnClass?: string
-    readonly okText?: string | JSX.Element
     readonly cancelText?: string | JSX.Element
     readonly hideCancel?: boolean
-    readonly title: string | JSX.Element
-    readonly content?: string | JSX.Element
     readonly autoLoad?: boolean
-    readonly width?: string
     readonly style?: CSSProperties
     readonly okType?: ButtonColors
     readonly cancelType?: ButtonColors
@@ -49,14 +52,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         }
     }
 
-    static infoDialog = (data: {
-        title?: string | JSX.Element,
-        content: string | JSX.Element,
-        onOk?: () => void,
-        type?: "success" | "info" | "error" | "warning",
-        width?: string,
-        okText?: string
-    }) => {
+    static infoDialog = (data: BaseProps & DialogProps) => {
         let title = data.title || Constants.INFO_TEXT,
         okType: DialogProps["okType"] = "blue"
 

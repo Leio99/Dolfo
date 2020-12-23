@@ -6,7 +6,7 @@ import { Dialog } from "../../layout/Dialog"
 import { EditIcon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
 import { ComponentsPermissions } from "../ComponentsPermissions"
-import { EditPresenza } from "./EditPresenza"
+import { EditPresenza } from "./dialogs/DialogEditPresenza"
 
 export interface IProps{
     readonly idDocente: number
