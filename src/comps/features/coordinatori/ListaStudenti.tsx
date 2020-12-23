@@ -3,7 +3,7 @@ import Select from "../../form/Select"
 import { Option } from "../../form/Option"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
-import { AddIcon, CheckIcon, CloseIcon, DetailIcon, EditIcon, Icon } from "../../layout/Icon"
+import { AddIcon, CheckIcon, CloseIcon, DetailIcon, EditIcon, Icon, WarningIconOutline } from "../../layout/Icon"
 import { Tab } from "../../layout/Tab"
 import { Table } from "../../layout/Table"
 import { Tabs } from "../../layout/Tabs"
@@ -14,6 +14,7 @@ import { ComponentsPaths } from "../ComponentsPaths"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 import { StageSwitch } from "./StageSwitch"
 import { goTo, LoadingIconCentered, notImplemented } from "../../../commons/utility"
+import { DialogRitiraStudente } from "./dialogs/DialogRitiraStudente"
 
 export interface IState{
     readonly studenti: any[]
@@ -62,6 +63,26 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     
     openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE_BASE + "/" + id)
 
+    archiviaStudente = (s: any) => {
+        Dialog.openDialog({
+            title: "Attenzione",
+            icon: <WarningIconOutline color="var(--orange)" />, 
+            content: <div>
+                <div>Si sta per archiviare uno studente (<strong>{s.nome} {s.cognome}</strong>).</div>
+                <div>I dati identificativi dello studente e le presenze verranno comunque mantenuti, ma lo studente non potrà più registrare nuove presenze e non potrà essere spostato nuovamente.</div>
+            </div>,
+            onOk: notImplemented,
+            okText: "Conferma",
+            okType: "red",
+            clickOutside: true,
+            cancelType: "grey"
+        })
+    }
+
+    ritiraStudente = (studente: any) => {
+        Dialog.openDialogComponent(DialogRitiraStudente, { studente })
+    }
+
     buildTable = (studenti: any[]) => {
         const { checkList } = this.state
         let checkedAll = true
@@ -98,12 +119,12 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                             </Button>
                         }
                         {
-                            !s.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira" onClick={notImplemented}>
+                            !s.ritirato && <Button circleBtn btnColor="red" className="mx-2" tooltip="Ritira" onClick={() => this.ritiraStudente(s)}>
                                 <Icon iconKey="user-times" />
                             </Button>
                         }
 
-                        <Button circleBtn btnColor="green" className="mx-2" tooltip="Archivia" onClick={notImplemented}>
+                        <Button circleBtn btnColor="green" className="mx-2" tooltip="Archivia" onClick={() => this.archiviaStudente(s)}>
                             <Icon iconKey="user-check" />
                         </Button>
                     </div>

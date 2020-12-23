@@ -165,5 +165,5 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
     render = (): JSX.Element => <Uploader onChange={this.readFile} dropArea accept=".csv" label={<div>
         <Icon iconKey="file-csv" style={{ fontSize: 50, marginBottom: 10 }} />
         <div>Carica o trascina un file <strong>.csv</strong></div>
-    </div>} style={{ height: "calc(100vh - 96px - 6rem)" }} />
+    </div>} style={{ height: "calc(100vh - 97px - 6rem)" }} />
 }

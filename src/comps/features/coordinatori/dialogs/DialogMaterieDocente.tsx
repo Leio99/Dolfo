@@ -1,9 +1,9 @@
 import React from "react"
-import { LoadingIconCentered } from "../../../commons/utility"
-import { MaterieService } from "../../../services/MaterieService"
-import { ComponentAsDialogProps, Dialog } from "../../layout/Dialog"
-import { CheckIcon } from "../../layout/Icon"
-import { ComponentsPermissions } from "../ComponentsPermissions"
+import { LoadingIconCentered } from "../../../../commons/utility"
+import { MaterieService } from "../../../../services/MaterieService"
+import { ComponentAsDialogProps, Dialog } from "../../../layout/Dialog"
+import { CheckIcon } from "../../../layout/Icon"
+import { ComponentsPermissions } from "../../ComponentsPermissions"
 
 export interface IProps extends ComponentAsDialogProps{
     readonly materie: number[]

@@ -10,7 +10,7 @@ import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { EditDocente } from "./EditDocente"
 import { TabellaPresenzeDocente } from "./TabellaPresenzeDocente"
-import { DialogMaterieDocente } from "./DialogMaterieDocente"
+import { DialogMaterieDocente } from "./dialogs/DialogMaterieDocente"
 import { Progress } from "../../layout/Progress"
 import { CardActions } from "../../layout/CardActions"
 

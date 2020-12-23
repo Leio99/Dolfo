@@ -44,13 +44,14 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
     ritiraDocente = (d: any) => {
         Dialog.openDialog({
             title: "Attenzione",
-            icon: <WarningIconOutline color="var(--orange)" />,
+            icon: <WarningIconOutline color="var(--red)" />,
             content: <div>
                 <div>Si sta per ritirare un docente (<strong>{d.nome} {d.cognome}</strong>).</div>
                 <div>I dati identificativi del docente, le lezioni e le presenze verranno comunque mantenuti, ma il docente verrà ritirato da tutti i corsi in cui insegna. In seguito sarà possibile reintegrarlo nel corso, se necessario.</div>
             </div>,
             okText: "Conferma",
             onOk: notImplemented,
+            clickOutside: true,
             okType: "red",
             cancelType: "grey"
         })
@@ -62,6 +63,7 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
             icon: <WarningIconOutline color="var(--orange)" />,
             content: "Questo docente verrà reintegrato all'interno del corso.",
             okText: "Conferma",
+            clickOutside: true,
             onOk: notImplemented,
             okType: "red",
             cancelType: "grey"

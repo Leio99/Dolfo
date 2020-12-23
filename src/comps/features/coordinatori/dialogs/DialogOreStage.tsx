@@ -1,8 +1,8 @@
 import React from "react"
-import { LoadingIconCentered } from "../../../commons/utility"
-import { StudentiService } from "../../../services/StudentiService"
-import { Dialog, ComponentAsDialogProps } from "../../layout/Dialog"
-import { Table } from "../../layout/Table"
+import { LoadingIconCentered } from "../../../../commons/utility"
+import { StudentiService } from "../../../../services/StudentiService"
+import { Dialog, ComponentAsDialogProps } from "../../../layout/Dialog"
+import { Table } from "../../../layout/Table"
 
 export interface IProps extends ComponentAsDialogProps{
     readonly idStudente: number

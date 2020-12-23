@@ -98,6 +98,12 @@
         }
 
         .dolfo-select-search-content{
+            background-color: $white;
+            position: sticky;
+            position: -webkit-sticky;
+            top: 0;
+            z-index: 1;
+
             .reset-input{
                 right: 1.5rem;
                 top: 0.7rem

@@ -10,7 +10,7 @@ import { EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
 import { Progress } from "../../layout/Progress"
 import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
-import { DialogOreStage } from "./DialogOreStage"
+import { DialogOreStage } from "./dialogs/DialogOreStage"
 import { EditStudente } from "./EditStudente"
 import { TabellaPresenze } from "./TabellaPresenze"
 
