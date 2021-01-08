@@ -1,11 +1,7 @@
 import React, { FormEvent } from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { goTo, LoadingIconCentered } from "../../../commons/utility"
-import { CorsiService } from "../../../services/CorsiService"
 import { DocentiService } from "../../../services/DocentiService"
-import { MaterieService } from "../../../services/MaterieService"
-import { Option } from "../../form/Option"
-import Select from "../../form/Select"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { NotificationMsg } from "../../layout/NotificationMsg"
@@ -24,10 +20,6 @@ export interface IState{
     readonly email: string
     readonly cf: string
     readonly loadingForm: boolean
-    readonly materieList: any[]
-    readonly corsiList: any[]
-    readonly materieScelte: number[]
-    readonly corsiScelti: number[]
     readonly docente: any
 }
 
@@ -43,10 +35,6 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
             email: "",
             cf: "",
             loadingForm: false,
-            materieList: null,
-            corsiList: null,
-            corsiScelti: [],
-            materieScelte: [],
             docente: null
         }
     }
@@ -55,21 +43,7 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
         DocentiService.getDocente(this.props.match.params.id).then(response => {
             this.setState({
                 ...response.data,
-                docente: response.data,
-                corsiScelti: response.data.corsi,
-                materieScelte: response.data.materie
-            })
-
-            CorsiService.getCorsi().then(response => {
-                this.setState({
-                    corsiList: response.data
-                })
-            })
-    
-            MaterieService.getMaterie(this.session.idCorso).then(response => {
-                this.setState({
-                    materieList: response.data
-                })
+                docente: response.data
             })
         }).catch(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
     }
@@ -82,16 +56,12 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
 
     changeCF = (cf: string) => this.setState({ cf })
 
-    changeMaterieScelte = (materieScelte: number[]) => this.setState({ materieScelte })
-
-    changeCorsiScelti = (corsiScelti: number[]) => this.setState({ corsiScelti })
-
     toggleLoading = () => this.setState({ loadingForm: !this.state.loadingForm })
     
     editDocente = (e: FormEvent) => {
         e.preventDefault()
 
-        const { nome, cognome, email, cf, materieScelte, corsiScelti, docente } = this.state,
+        const { nome, cognome, email, cf, docente } = this.state,
         sendNome = nome.trim(),
         sendCognome = cognome.trim(),
         sendEmail = email.trim(),
@@ -103,12 +73,6 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
         if(sendCF.length !== 16 && sendCF !== "")
             return NotificationMsg.showError("Codice Fiscale non valido!")
 
-        if(!materieScelte.length)
-            return NotificationMsg.showError("Scegliere almeno una materia!")
-
-        if(!corsiScelti.length)
-            return NotificationMsg.showError("Scegliere almeno un corso!")
-
         this.toggleLoading()
 
         DocentiService.editDocente(docente.idDocente, {
@@ -117,8 +81,8 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
             cognome: sendCognome,
             email: sendEmail,
             cf: sendCF,
-            tenere: corsiScelti.map(c => { return { idCorso: c, idDocente: docente.idDocente } }),
-            insegnare: materieScelte.map(m => { return { idMateria: m, idDocente: docente.idDocente } }),
+            tenere: docente.corsi.map((c: number) => { return { idCorso: c, idDocente: docente.idDocente } }),
+            insegnare: docente.materie.map((m: number) => { return { idMateria: m, idDocente: docente.idDocente } }),
             ritirato: docente.ritirato
         }).then(() => {
             this.toggleLoading()
@@ -128,7 +92,7 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
     }
 
     render = (): JSX.Element => {
-        const { loadingForm, corsiList, materieList, nome, cognome, cf, corsiScelti, materieScelte, email, docente } = this.state
+        const { loadingForm, nome, cognome, cf, email, docente } = this.state
 
         if(!docente) return <LoadingIconCentered />
 
@@ -148,22 +112,6 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
 
                 <div className="col-12 col-md-6">
                     <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loadingForm} required value={email} />
-                </div>
-                
-                <div className="col-12 col-md-6">
-                    <Select label="Materie insegnate" disabled={loadingForm} onChange={this.changeMaterieScelte} icon={{ iconKey: "list-alt" }} multiple loading={!materieList} canSearch required defaultValue={materieScelte}>
-                        {
-                            materieList?.map(m => <Option label={m.nome} value={m.idMateria} />)
-                        }
-                    </Select>
-                </div>
-
-                <div className="col-12 col-md-6">
-                    <Select label="Corsi in cui insegna" disabled={loadingForm} onChange={this.changeCorsiScelti} icon={{ iconKey: "chalkboard-teacher" }} multiple loading={!corsiList} required defaultValue={corsiScelti}>
-                        {
-                            corsiList?.map(c => <Option label={c.nome} value={c.idCorso} />)
-                        }
-                    </Select>
                 </div>
             </div>
 

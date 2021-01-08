@@ -56,10 +56,6 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
                 <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE)}>Aggiungi</MenuItem>
             </SubMenu>
 
-            <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE)}>
-                <Icon iconKey="list-alt" className="mr-2" /> Materie
-            </MenuItem>
-
             <SubMenu text={<span>
                 <Icon iconKey="wrench" className="mr-2" /> Funzioni
             </span>}>

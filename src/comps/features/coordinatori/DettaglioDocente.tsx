@@ -10,7 +10,6 @@ import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { EditDocente } from "./EditDocente"
 import { TabellaPresenzeDocente } from "./TabellaPresenzeDocente"
-import { DialogMaterieDocente } from "./dialogs/DialogMaterieDocente"
 import { Progress } from "../../layout/Progress"
 import { CardActions } from "../../layout/CardActions"
 
@@ -58,8 +57,6 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
         })
     }
 
-    openMaterieInsegnate = () => Dialog.openDialogComponent(DialogMaterieDocente, { materie: this.state.docente.materie })
-
     render = (): JSX.Element => {
         const { docente } = this.state,
         idDocente = this.props.match.params.id
@@ -86,12 +83,6 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
                     <Progress circular percent={100} customCircleText={docente.monteOre} circleWidth={80} className="mr-3" color="green" />
 
                     <div className="progress-label">Ore svolte</div>
-
-                    <CardActions className="text-right">
-                        <Button textBtn onClick={this.openMaterieInsegnate} btnColor="darkblue" tooltip="Materie insegnate">
-                            <Icon iconKey="list-alt" className="fa-2x" notFW />
-                        </Button>
-                    </CardActions>
                 </Card>
             </div>
 

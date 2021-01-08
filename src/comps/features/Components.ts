@@ -9,7 +9,6 @@ import { AddStudente } from "./coordinatori/AddStudente"
 import { EditStudente } from "./coordinatori/EditStudente"
 import { ImportaStudenti } from "./coordinatori/ImportaStudenti"
 import { DettaglioStudente } from "./coordinatori/DettaglioStudente"
-import { ListaMaterie } from "./coordinatori/ListaMaterie"
 import { goTo } from "../../commons/utility"
 import { AddDocente } from "./coordinatori/AddDocente"
 import { ListaDocenti } from "./coordinatori/ListaDocenti"
@@ -89,12 +88,6 @@ export const Components: IComponentList = {
         pageTitle: "Dettaglio docente",
         permission: ComponentsPermissions.checkPermissionCoordinatore,
         parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI
-    },
-    [ComponentsPaths.PATH_COORDINATORI_LISTA_MATERIE]: {
-        Component: ListaMaterie,
-        pageTitle: "Materie del corso",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_HOME
     },
     [ComponentsPaths.SITE_BASE + "layout"]: {
         Component: TestLayout,

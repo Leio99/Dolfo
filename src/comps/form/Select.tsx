@@ -24,10 +24,10 @@ class Select extends React.PureComponent<IProps, IState>{
     constructor(props: IProps){
         super(props)
 
-        let value = props.defaultValue || (props.multiple ? [] : (this.props.children as Option[])[0].props.value)
+        const children = this.props.children as Option[]
 
         this.state = {
-            value,
+            value: props.defaultValue || (props.multiple ? [] : children ? children[0].props.value : null),
             openSelect: false,
             options: this.getOptions(),
             searchValue: "",
@@ -53,9 +53,10 @@ class Select extends React.PureComponent<IProps, IState>{
                 })
             }
 
+            const children = this.props.children as Option[]
             this.setState({
                 options,
-                value: hasValues ? value : (this.props.multiple ? [] : (this.props.children as Option[])[0].props.value)
+                value: hasValues ? value : (this.props.multiple ? [] : children ? children[0].props.value : null)
             })
 
             value !== this.state.value && this.props.onChange && this.props.onChange(value)
@@ -122,7 +123,7 @@ class Select extends React.PureComponent<IProps, IState>{
     changeSearch = (e: any) => {
         this.setState({
             searchValue: e.target.value,
-            options: this.getOptions()?.filter(opt => opt.props.label.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
+            options: this.getOptions()?.filter(opt => opt.props.label?.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
         })
     }
 
@@ -134,13 +135,13 @@ class Select extends React.PureComponent<IProps, IState>{
         currentIndex = currentSelection === -1 ? -1 : options.indexOf(options.find((_, i) => i === currentSelection))
         let newIndex = -1
 
-        if(e.keyCode === 38){
+        if(e.key === "ArrowUp"){
             if(currentIndex === 0) newIndex = options.length - 1
             else if(currentIndex === -1) newIndex = 0
             else newIndex = currentIndex - 1
             
             e.preventDefault()
-        }else if(e.key.charCodeAt(0) === 65){
+        }else if(e.key === "ArrowDown"){
             if(currentIndex === options.length - 1 || currentIndex === -1) newIndex = 0
             else newIndex = currentIndex + 1
             
@@ -170,7 +171,7 @@ class Select extends React.PureComponent<IProps, IState>{
             <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
         </div>
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required} className={props.className}>
             <span className="select-icon">
                 {props.loading ? <LoadingIcon spinning className="loading" /> : <Icon type="far" iconKey="chevron-down" />}
             </span>
