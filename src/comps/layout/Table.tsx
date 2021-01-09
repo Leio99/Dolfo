@@ -47,7 +47,7 @@ export class Table extends React.PureComponent<IProps, IState>{
     getColumnDataType = (col: IColumn, data: IDataColumn) => {
         const d = data[col.field]
 
-        if(col.type === "check") return <CheckBox checked={data.checked} onChange={() => data.onCheckChange(data)} disabled={data.checkDisabled} />
+        if(col.type === "check" && !data.hideCheck) return <CheckBox checked={data.checked} onChange={() => data.onCheckChange(data)} disabled={data.checkDisabled} />
         if(col.type === "date") return formatDate(new Date(d))
         if(col.type === "time") return getTime(d)
 

@@ -15,8 +15,6 @@ export interface IProps{
 }
 
 export class CoordinatoriMenu extends React.PureComponent<IProps>{
-    readonly session = ComponentsPermissions.getLoginCoordinatore()
-
     destroySession = () => {
         sessionStorage.removeItem("sessionCoordinatore")
         ComponentsPermissions.checkPermissionCoordinatore()
@@ -35,7 +33,7 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
         const props = this.props
 
         return <SideMenu onToggle={props.toggleMenu} opened={props.opened}>
-            <LogoCorsoMenu session={this.session} />
+            <LogoCorsoMenu />
 
             <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_HOME)}>
                 <Icon iconKey="home-alt" className="mr-2" /> Home

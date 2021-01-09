@@ -21,4 +21,5 @@ export interface IDataColumn{
     readonly onCheckChange?: (obj: any) => void
     readonly checked?: boolean
     readonly checkDisabled?: boolean
+    readonly hideCheck?: boolean
 }

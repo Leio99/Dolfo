@@ -1,6 +1,6 @@
 import React from "react"
 import { RouteComponentProps } from "react-router-dom"
-import { dateIsToday, formatItalian, formatWithMonth, goTo, LoadingIconCentered } from "../../../commons/utility"
+import { dateIsToday, formatWithMonth, goTo, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
@@ -94,7 +94,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
 
         return <div>
             <div className="row mx-0">
-                <Card title={studente.ritirato ? "Ritirato: " + formatItalian(studente.dataRitiro) : studente.annoFrequentazione === 1 ? "Primo anno" : "Secondo anno"} className="col-12 col-md mr-0 mr-md-2 mb-3">
+                <Card title={"Studente " + (studente.promosso ? "archiviato" : "attivo")} className="col-12 col-md mr-0 mr-md-2 mb-3">
                     {
                         dateIsToday(studente.dataNascita) && <Icon iconKey="birthday-cake" large tooltip="Oggi è il compleanno" className="star-animated ml-2 float-right" />
                     }

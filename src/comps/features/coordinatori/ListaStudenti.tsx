@@ -1,28 +1,20 @@
 import React from "react"
-import Select from "../../form/Select"
-import { Option } from "../../form/Option"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
-import { AddIcon, CheckIcon, CloseIcon, DetailIcon, EditIcon, Icon, WarningIconOutline } from "../../layout/Icon"
-import { Tab } from "../../layout/Tab"
+import { AddIcon, CheckIcon, DetailIcon, EditIcon, Icon, WarningIconOutline } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
-import { Tabs } from "../../layout/Tabs"
 import { Accordion } from "../../layout/Accordion"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { StudentiService } from "../../../services/StudentiService"
 import { ComponentsPaths } from "../ComponentsPaths"
-import { ComponentsPermissions } from "../ComponentsPermissions"
 import { StageSwitch } from "./StageSwitch"
 import { goTo, LoadingIconCentered, notImplemented } from "../../../commons/utility"
-import { DialogRitiraStudente } from "./dialogs/DialogRitiraStudente"
 
 export interface IState{
     readonly studenti: any[]
     readonly checkList: any[]
 }
 export class ListaStudenti extends React.PureComponent<undefined, IState>{
-    readonly session = ComponentsPermissions.getLoginCoordinatore()
-
     constructor(props: undefined){
         super(props)
 
@@ -33,7 +25,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     }
 
     componentDidMount = () => {
-        StudentiService.getStudentiCorso(this.session.idCorso).then(response => {
+        StudentiService.getStudentiCorso(1).then(response => {
             this.setState({
                 studenti: response.data
             })
@@ -42,7 +34,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
 
     toggleCheckAll = (anno: number) => {
         const current = this.state.checkList,
-        checkList = current.find(s => s.annoFrequentazione === anno) ? current.filter(s => s.annoFrequentazione !== anno) : current.concat(this.state.studenti.filter(s => !s.ritirato && s.annoFrequentazione === anno && !s.promosso))
+        checkList = current.find(s => s.annoFrequentazione === anno) ? current.filter(s => s.annoFrequentazione !== anno) : current.concat(this.state.studenti.filter(s => s.annoFrequentazione === anno && !s.promosso))
 
         this.setState({ checkList })
     }
@@ -63,24 +55,35 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     
     openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE_BASE + "/" + id)
 
-    archiviaStudente = (s: any) => {
+    archiviaStudenti = (target: any | any[]) => {
         Dialog.openDialog({
             title: "Attenzione",
             icon: <WarningIconOutline color="var(--orange)" />, 
-            content: <div>
-                <div>Si sta per archiviare uno studente (<strong>{s.nome} {s.cognome}</strong>).</div>
+            content: Array.isArray(target) ? <div>
+                <div>Si stanno per archiviare degli studenti (<strong>{target.length} totali</strong>).</div>
+                <div>I dati identificativi degli studenti e le presenze verranno comunque mantenuti, ma gli studenti non potranno più registrare nuove presenze e non potranno essere spostati nuovamente.</div>
+                
+                <Accordion title="Mostra studenti selezionati" className="mt-3">
+                    {
+                        target.map(s => {
+                            return <div className="py-2">
+                                <strong>{s.nome} {s.cognome}</strong>
+                            </div>
+                        })
+                    }
+                </Accordion>
+            </div> : <div>
+                <div>Si sta per archiviare uno studente (<strong>{target.nome} {target.cognome}</strong>).</div>
                 <div>I dati identificativi dello studente e le presenze verranno comunque mantenuti, ma lo studente non potrà più registrare nuove presenze e non potrà essere spostato nuovamente.</div>
             </div>,
             onOk: notImplemented,
             okText: "Conferma",
             okType: "red",
+            overflows: true,
+            top: true,
             clickOutside: true,
             cancelType: "grey"
         })
-    }
-
-    ritiraStudente = (studente: any) => {
-        Dialog.openDialogComponent(DialogRitiraStudente, { studente })
     }
 
     buildTable = (studenti: any[]) => {
@@ -88,7 +91,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         let checkedAll = true
 
         studenti.forEach(s => {
-            if(checkList.indexOf(s) === -1 && !s.ritirato) checkedAll = false
+            if(checkList.indexOf(s) === -1 && !s.promosso) checkedAll = false
         })
 
         return <Table columns={[
@@ -98,15 +101,15 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
             { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
             { label: "Azioni", field: "azioni", width: "26%", align: "center" },
         ]} data={
-            studenti.sort(s => s.ritirato ? 0 : -1).map(s => {
+            studenti.sort(s => s.promosso || s.ritirato ? 0 : -1).map(s => {
                 return {
-                    rowStyle: s.ritirato ? { backgroundColor: "#f8f8f8" } : null,
                     onDoubleClick: () => this.openDetail(s.idStudente),
                     checked: checkList.includes(s),
                     onCheckChange: () => this.toggleCheck(s),
-                    checkDisabled: s.ritirato,
+                    rowStyle: s.promosso ? { backgroundColor: "#f8f8f8" } : null,
                     desStudente: s.nome + " " + s.cognome,
-                    stato: s.ritirato ? <CloseIcon color="var(--red)" tooltip="Ritirato" large /> : <CheckIcon color="var(--green)" tooltip="Attivo" large />,
+                    hideCheck: s.promosso,
+                    stato: !s.promosso ? <Icon iconKey="dot-circle" type="far" color="var(--blue)" tooltip="Attivo" large /> : <CheckIcon color="var(--green)" tooltip="Archiviato" large />,
                     frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
                     azioni: <div>
                         <Button btnColor="blue" className="m-2" circleBtn onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
@@ -114,17 +117,12 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                         </Button>
                         
                         {
-                            !s.ritirato && <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.idStudente)}>
+                            !s.ritirato && !s.promosso && <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.idStudente)}>
                                 <EditIcon />
                             </Button>
                         }
-                        {
-                            !s.ritirato && <Button circleBtn btnColor="red" className="m-2" tooltip="Ritira" onClick={() => this.ritiraStudente(s)}>
-                                <Icon iconKey="user-times" />
-                            </Button>
-                        }
 
-                        <Button circleBtn btnColor="green" className="m-2" tooltip="Archivia" onClick={() => this.archiviaStudente(s)}>
+                        <Button circleBtn btnColor="red" className="m-2" tooltip="Archivia" onClick={() => this.archiviaStudenti(s)}>
                             <Icon iconKey="user-check" />
                         </Button>
                     </div>
@@ -133,112 +131,36 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         } />
     }
 
-    moveStudents = () => {
+    promuoviStudenti = () => {
         if(!this.state.checkList.length)
-            return NotificationMsg.showError("Seleziona almeno uno studente!")
+            return NotificationMsg.showError("Selezionare almeno uno studente!")
 
-        Dialog.openDialog({
-            title: "Sposta studenti",
-            width: "450px",
-            okText: "Conferma",
-            okType: "green",
-            onOk: notImplemented,
-            overflows: true,
-            top: true,
-            content: <div>
-                <Select label="Scegli l'anno in cui spostare gli studenti" icon={{ iconKey: "graduation-cap" }}>
-                    <Option value={1} label="Primo anno" />
-                    <Option value={2} label="Secondo anno" />
-                </Select>
-
-                <Accordion title="Mostra studenti selezionati" className="mt-3">
-                    {
-                        this.state.checkList.map(s => {
-                            return <div className="py-2">
-                                <strong>{s.nome} {s.cognome}</strong> <div className="float-right">{s.annoFrequentazione}° anno</div>
-                            </div>
-                        })
-                    }
-                </Accordion>
-            </div>
-        })
+        this.archiviaStudenti(this.state.checkList)
     }
     
     render = (): JSX.Element => {
         const { studenti } = this.state,
-        primoAnno = studenti?.filter(s => s.annoFrequentazione === 1 && !s.promosso),
-        secondoAnno = studenti?.filter(s => s.annoFrequentazione === 2 && !s.promosso),
-        listaArchiviati = studenti?.filter(s => s.promosso),
+        primoAnno = studenti?.filter(s => s.annoFrequentazione === 1),
         loadingIcon = <LoadingIconCentered />
 
-        return <Tabs>
-            <Tab title={<span>
-                <Icon type="far" iconKey="users" /> Studenti attivi
-            </span>}>
-                <div>
-                    <Button type="popup" popupPosition="bottom" options={[
-                        { text: <span>
-                            <AddIcon color="var(--green)" /> Aggiungi
-                        </span>, onClick: () => goTo(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE) },
-                        { text: <span>
-                            <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
-                        </span>, onClick: () =>  goTo(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI) },
-                        { text: <span>
-                            <Icon iconKey="arrows-alt" color="var(--orange)" /> Sposta
-                        </span>, onClick: this.moveStudents }
-                    ]} className="float-right">Gestione studenti</Button>
+        return <div>
+            <Button type="popup" popupPosition="bottom" options={[
+                { text: <span>
+                    <AddIcon color="var(--green)" /> Aggiungi
+                </span>, onClick: () => goTo(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE) },
+                { text: <span>
+                    <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
+                </span>, onClick: () =>  goTo(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI) },
+                { text: <span>
+                    <Icon iconKey="user-check" color="var(--red)" /> Archivia selezionati
+                </span>, onClick: this.promuoviStudenti }
+            ]} className="float-right">Gestione studenti</Button>
 
-                    <div className="clearfix"></div>
+            <StageSwitch idCorso={1} />
+            
+            <div className="clearfix"></div>
 
-                    <Tabs className="mt-2">
-                        <Tab title="Primo anno">
-                            <StageSwitch anno={1} idCorso={this.session.idCorso} />
-                            
-                            <div className="clearfix"></div>
-
-                            {
-                                !primoAnno ? loadingIcon : this.buildTable(primoAnno)
-                            }
-                        </Tab>
-                        <Tab title="Secondo anno">
-                            <StageSwitch anno={2} idCorso={this.session.idCorso} />
-
-                            <div className="clearfix"></div>
-                            
-                            {
-                                !secondoAnno ? loadingIcon : this.buildTable(secondoAnno)
-                            }
-                        </Tab>
-                    </Tabs>
-                </div>
-            </Tab>
-
-            <Tab title={<span>
-                <Icon type="far" iconKey="user-graduate" /> Studenti archiviati
-            </span>}>
-                {
-                    !listaArchiviati ? loadingIcon : <Table columns={[
-                        { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
-                        { label: "Anno", field: "anno", width: "15%", align: "center", canSearch: true },
-                        { label: "Stato", field: "stato", align: "center" },
-                        { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
-                        { label: "Azioni", field: "azioni", width: "26%", align: "center" },
-                    ]} data={
-                        listaArchiviati.map(s => {
-                            return {
-                                onDoubleClick: () => this.openDetail(s.idStudente),
-                                stato: !s.ritirato ? <Icon iconKey="user-graduate" large color="var(--green)" tooltip="Promosso" /> : <Icon iconKey="user-times" large color="var(--red)" tooltip="Ritirato/Bocciato" />,
-                                desStudente: s.nome + " " + s.cognome,
-                                anno: s.annoFrequentazione === 1 ? "Primo" : "Secondo",
-                                frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
-                                azioni: <Button circleBtn btnColor="blue" onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
-                                    <DetailIcon />
-                                </Button>
-                            }
-                        })
-                    } />
-                }
-            </Tab>
-        </Tabs>
+            { !primoAnno ? loadingIcon : this.buildTable(primoAnno) }
+        </div>
     }
 }

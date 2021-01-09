@@ -30,7 +30,6 @@ const fields = [{
 }]
 
 export interface IState{
-    readonly anno: number
     readonly loading: boolean
     readonly rows: string[]
     readonly fields: {
@@ -47,7 +46,6 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
         super(props)
 
         this.state = {
-            anno: 1,
             loading: false,
             rows: [],
             fields: {
@@ -60,8 +58,6 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
         }
     }
 
-    changeAnno = (anno: number) => this.setState({ anno })
-
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
     changeField = (field: string, position: number) => {
@@ -72,7 +68,7 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
     }
 
     showImportPreview = () => {
-        const { rows, fields, anno } = this.state,
+        const { rows, fields } = this.state,
         data = rows.map(r => {
             const pieces = this.splitRow(r)
 
@@ -81,8 +77,7 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
                 cognome: capitalizeFirst(pieces[fields.cognome]),
                 cf: pieces[fields.cf],
                 email: pieces[fields.email],
-                dataNascita: pieces[fields.dataNascita],
-                anno 
+                dataNascita: pieces[fields.dataNascita]
             }
         })
 
@@ -134,11 +129,6 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
                 title: "Selezionare i campi da abbinare",
                 icon: <Icon iconKey="code-branch" color="var(--green)" />,
                 content: <div>
-                    <Select label="Anno frequentato" onChange={this.changeAnno} icon={{ iconKey: "graduation-cap" }}>
-                        <Option value={1} label="Primo anno" />
-                        <Option value={2} label="Secondo anno" />
-                    </Select>
-
                     {
                         fields.map(f => <Select onChange={val => this.changeField(f.field, val)} label={f.label} icon={{ iconKey: f.icon }}>
                             {

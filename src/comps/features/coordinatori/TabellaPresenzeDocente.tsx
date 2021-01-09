@@ -5,7 +5,6 @@ import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
-import { ComponentsPermissions } from "../ComponentsPermissions"
 import { EditPresenza } from "./dialogs/DialogEditPresenza"
 
 export interface IProps{
@@ -17,8 +16,6 @@ export interface IState{
 }
 
 export class TabellaPresenzeDocente extends React.PureComponent<IProps, IState>{
-    readonly session = ComponentsPermissions.getLoginCoordinatore()
-
     constructor(props: IProps){
         super(props)
 
@@ -28,7 +25,7 @@ export class TabellaPresenzeDocente extends React.PureComponent<IProps, IState>{
     }
 
     componentDidMount = () => {
-        PresenzeService.getPresenzeDocente(this.props.idDocente, this.session.idCorso).then(response => {
+        PresenzeService.getPresenzeDocente(this.props.idDocente, 1).then(response => {
 
             let presenze = response.data as any[]
 

@@ -1,19 +1,15 @@
 import React from "react"
 import { CorsiService } from "../../services/CorsiService"
-import { IGenericSession } from "../../models/IGenericSession"
 import { Dialog } from "../layout/Dialog"
 import { LoadingIcon } from "../layout/Icon"
 
-export interface IProps{
-    readonly session: IGenericSession
-}
 export interface IState{
     readonly corso: any
 }
 
-export class LogoCorsoMenu extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
-        super(props)
+export class LogoCorsoMenu extends React.PureComponent<any, IState>{
+    constructor(){
+        super(undefined)
 
         this.state = {
             corso: null
@@ -21,7 +17,7 @@ export class LogoCorsoMenu extends React.PureComponent<IProps, IState>{
     }
 
     componentDidMount = () => {
-        CorsiService.getCorso(this.props.session.idCorso).then(response => {
+        CorsiService.getCorso(1).then(response => {
             this.setState({
                 corso: response.data
             })
@@ -29,8 +25,7 @@ export class LogoCorsoMenu extends React.PureComponent<IProps, IState>{
     }
 
     openInfoDialog = () => {
-        const session = this.props.session,
-        { corso } = this.state
+        const { corso } = this.state
 
         Dialog.openDialog({
             type: "info",
@@ -44,7 +39,7 @@ export class LogoCorsoMenu extends React.PureComponent<IProps, IState>{
                     <strong>Corso:</strong> {corso.nome}
                 </div>
                 <div>
-                    <strong>Utente:</strong> {session.nome} {session.cognome}
+                    <strong>Utente:</strong> Luca Arcangeli
                 </div>
             </div>
         })

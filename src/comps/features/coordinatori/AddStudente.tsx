@@ -1,8 +1,6 @@
 import React, { FormEvent } from "react"
 import { goTo } from "../../../commons/utility"
 import DatePicker from "../../form/DatePicker"
-import { Option } from "../../form/Option"
-import Select from "../../form/Select"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { Icon } from "../../layout/Icon"
@@ -12,7 +10,6 @@ import { ComponentsPaths } from "../ComponentsPaths"
 export interface IState{
     readonly nome: string
     readonly cognome: string
-    readonly anno: number
     readonly email: string
     readonly dataNascita: string
     readonly cf: string
@@ -27,7 +24,6 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
             nome: "",
             cognome: "",
             email: "",
-            anno: 1,
             dataNascita: "",
             cf: "",
             loading: false
@@ -44,12 +40,10 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
     changeDataNascita = (dataNascita: string) => this.setState({ dataNascita })
 
-    changeAnno = (anno: number) => this.setState({ anno })
-    
     creaStudente = (e: FormEvent) => {
         e.preventDefault()
 
-        const { nome, cognome, email, cf, anno, dataNascita } = this.state,
+        const { nome, cognome, email, cf, dataNascita } = this.state,
         sendNome = nome.trim(),
         sendCognome = cognome.trim(),
         sendEmail = email.trim(),
@@ -60,9 +54,6 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
         if(sendCF.length !== 16)
             return NotificationMsg.showError("Codice Fiscale non valido!")
-
-        if(anno !== 1 && anno !== 2)
-            return NotificationMsg.showError("Classe non valida!")
 
         this.setState({ loading: true })
 
@@ -76,12 +67,16 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
         return <form onSubmit={this.creaStudente}>
             <div className="row">
-                <div className="col-12 col-md-6">
+                <div className="col-12 col-md-4">
                     <TextInput name="nome" icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loading} required />
                 </div>
 
-                <div className="col-12 col-md-6">
+                <div className="col-12 col-md-4">
                     <TextInput name="cognome" icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loading} required />
+                </div>
+
+                <div className="col-12 col-md-4">
+                    <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loading} required />
                 </div>
 
                 <div className="col-12 col-md-6">
@@ -90,18 +85,6 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
                 <div className="col-12 col-md-6">
                     <TextInput name="cf" icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loading} maxLength={16} required />
-                </div>
-
-                <div className="col-12 col-md-6">
-                    <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loading} required />
-                </div>
-
-                
-                <div className="col-12 col-md-6">
-                    <Select label="Anno frequentato" disabled={loading} onChange={this.changeAnno} icon={{ iconKey: "graduation-cap" }} required>
-                        <Option label="Primo anno" value={1} />
-                        <Option label="Secondo anno" value={2} />
-                    </Select>
                 </div>
             </div>
 

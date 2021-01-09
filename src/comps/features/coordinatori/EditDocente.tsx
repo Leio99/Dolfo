@@ -6,7 +6,6 @@ import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { ComponentsPaths } from "../ComponentsPaths"
-import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IRouteParams{
     readonly id: string
@@ -24,8 +23,6 @@ export interface IState{
 }
 
 export class EditDocente extends React.PureComponent<IProps, IState>{
-    readonly session = ComponentsPermissions.getLoginCoordinatore()
-
     constructor(props: IProps){
         super(props)
 

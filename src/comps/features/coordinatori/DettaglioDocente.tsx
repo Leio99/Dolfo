@@ -10,7 +10,6 @@ import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { EditDocente } from "./EditDocente"
 import { TabellaPresenzeDocente } from "./TabellaPresenzeDocente"
-import { Progress } from "../../layout/Progress"
 import { CardActions } from "../../layout/CardActions"
 
 export interface IRouteParams{
@@ -65,7 +64,7 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
 
         return <div>
             <div className="row mx-0">
-                <Card title={docente.ritirato && "Ritirato"} className="col-12 col-sm mr-0 mr-sm-2 mb-3">
+                <Card title={docente.ritirato && "Ritirato"} className="col-12 col-sm-6 mb-3">
                     <h2 className="text-uppercase mb-2 text-truncate">{docente.nome} {docente.cognome}</h2>
 
                     <div>
@@ -77,12 +76,6 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
                             <EditIcon large />
                         </Button>
                     </CardActions>
-                </Card>
-
-                <Card className="col-12 col-md mb-3">
-                    <Progress circular percent={100} customCircleText={docente.monteOre} circleWidth={80} className="mr-3" color="green" />
-
-                    <div className="progress-label">Ore svolte</div>
                 </Card>
             </div>
 

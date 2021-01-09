@@ -6,7 +6,6 @@ import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
 import { Dialog } from "../../layout/Dialog"
 import { Icon } from "../../layout/Icon"
-import { ComponentsPermissions } from "../ComponentsPermissions"
 import { DialogListaEdizioni } from "./dialogs/DialogListaEdizioni"
 import { ListaPresenzeDaConfermare } from "./ListaPresenzeDaConfermare"
 
@@ -15,8 +14,6 @@ export interface IState{
 }
 
 export class HomeCoordinatore extends React.PureComponent<undefined, IState>{
-    readonly login = ComponentsPermissions.getLoginCoordinatore()
-
     constructor(){
         super(undefined)
 
@@ -86,10 +83,10 @@ export class HomeCoordinatore extends React.PureComponent<undefined, IState>{
                     </Select>
                 </div>
 
-                <h2 className="text-uppercase">{this.login.nome} {this.login.cognome}</h2>
+                <h2 className="text-uppercase">Luca Arcangeli</h2>
                 <span>
-                    Codice di accesso alla firma: <strong>{this.login.codiceCorso}</strong>
-                    <Button tooltip="Copia il codice" textBtn btnColor="grey" className="ml-2 align-top" onClick={() => copyToClipBoard(this.login.codiceCorso)}>
+                    Codice di accesso alla firma: <strong>{56576675}</strong>
+                    <Button tooltip="Copia il codice" textBtn btnColor="grey" className="ml-2 align-top" onClick={() => copyToClipBoard("56576675")}>
                         <Icon iconKey="copy" large />
                     </Button>
                 </span>

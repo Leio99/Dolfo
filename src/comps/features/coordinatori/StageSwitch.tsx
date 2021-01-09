@@ -1,12 +1,13 @@
 import React from "react"
 import { StudentiService } from "../../../services/StudentiService"
 import { Switch } from "../../form/Switch"
+import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
+import { QuestionCircleOutlineIcon } from "../../layout/Icon"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 
 export interface IProps{
     readonly idCorso: number
-    readonly anno: number
 }
 export interface IState{
     readonly loading: boolean
@@ -24,9 +25,9 @@ export class StageSwitch extends React.PureComponent<IProps, IState>{
     }
 
     componentDidMount = () => {
-        const { idCorso, anno } = this.props
+        const { idCorso } = this.props
 
-        StudentiService.getStatoStage(idCorso, anno).then(response => {
+        StudentiService.getStatoStage(idCorso, 1).then(response => {
             let status = response.data as boolean
 
             this.setState({
@@ -42,7 +43,7 @@ export class StageSwitch extends React.PureComponent<IProps, IState>{
     switchStage = () => {
         this.toggleLoading()
 
-        StudentiService.cambiaStatoStage(this.props.anno).then(response => {
+        StudentiService.cambiaStatoStage(1).then(response => {
             let message = response.data
 
             if(message === "success"){
@@ -60,9 +61,25 @@ export class StageSwitch extends React.PureComponent<IProps, IState>{
         })
     }
 
+    infoStage = () => {
+        Dialog.openDialog({
+            title: "Attiva/Disattiva lo stage",
+            width: "400px",
+            hideCancel: true,
+            okType: "blue",
+            icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
+            content: "Se attivata, quest'impostazione permette agli studenti di segnare le ore di stage svolte presso le aziende tramite la propria area personale."
+        })
+    }
+
     render = (): JSX.Element => {
         const { attivato, loading } = this.state
 
-        return <Switch loading={loading} label={(attivato ? "Disattiva" : "Attiva") + " lo stage per la classe"} onChange={this.switchStage} checked={attivato} className="mb-2 float-right" />
+        return <div className="my-3 mr-2">
+            <Switch loading={loading} label={(attivato ? "Disattiva" : "Attiva") + " lo stage"} onChange={this.switchStage} checked={attivato} className="mr-2" />
+            <Button textBtn btnColor="orange" tooltip="Informazioni" onClick={this.infoStage}>
+                <QuestionCircleOutlineIcon />
+            </Button>
+        </div>
     }
 }

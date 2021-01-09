@@ -2,7 +2,6 @@ import React, { FormEvent } from "react"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { NotificationMsg } from "../../layout/NotificationMsg"
-import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IState{
     readonly nome: string
@@ -13,8 +12,6 @@ export interface IState{
 }
 
 export class AddDocente extends React.PureComponent<undefined, IState>{
-    readonly session = ComponentsPermissions.getLoginCoordinatore()
-
     constructor(props: undefined){
         super(props)
 
