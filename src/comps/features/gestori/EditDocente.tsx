@@ -42,7 +42,7 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
                 ...response.data,
                 docente: response.data
             })
-        }).catch(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
+        }).catch(() => goTo(ComponentsPaths.PATH_GESTORI_HOME))
     }
 
     changeNome = (nome: string) => this.setState({ nome })

@@ -1,16 +1,16 @@
-import { API_URL_REGISTRO_COORDINATORI } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_GESTORI } from "../commons/consts/costantiApi"
 import { ServerCall } from "./ServerCall"
 
 export class CoordinatoriService{
     static tryLogin(body: any){
-        return ServerCall.post(API_URL_REGISTRO_COORDINATORI + "/logincoordinatore", body)
+        return ServerCall.post(API_URL_REGISTRO_GESTORI + "/logincoordinatore", body)
     }
 
     static recuperoPassword(email: string){
-        return ServerCall.post(API_URL_REGISTRO_COORDINATORI + "/recuperocoordinatori", { email })
+        return ServerCall.post(API_URL_REGISTRO_GESTORI + "/recuperocoordinatori", { email })
     }
 
     static cambioPassword(body: any){
-        return ServerCall.post(API_URL_REGISTRO_COORDINATORI + "/cambiopassword", body)
+        return ServerCall.post(API_URL_REGISTRO_GESTORI + "/cambiopassword", body)
     }
 }

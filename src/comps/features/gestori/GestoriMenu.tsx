@@ -14,10 +14,10 @@ export interface IProps{
     readonly opened?: boolean
 }
 
-export class CoordinatoriMenu extends React.PureComponent<IProps>{
+export class GestoriMenu extends React.PureComponent<IProps>{
     destroySession = () => {
-        sessionStorage.removeItem("sessionCoordinatore")
-        ComponentsPermissions.checkPermissionCoordinatore()
+        sessionStorage.removeItem("sessionGestore")
+        ComponentsPermissions.checkPermissionGestore()
     }
 
     getMenuItemProps = (path: string) => {
@@ -35,23 +35,23 @@ export class CoordinatoriMenu extends React.PureComponent<IProps>{
         return <SideMenu onToggle={props.toggleMenu} opened={props.opened}>
             <LogoCorsoMenu />
 
-            <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_HOME)}>
+            <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_GESTORI_HOME)}>
                 <Icon iconKey="home-alt" className="mr-2" /> Home
             </MenuItem>
 
             <SubMenu text={<span>
                 <Icon iconKey="users-class" className="mr-2" /> Studenti
-            </span>} opened={this.isInPath(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI)}>
-                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI)}>Lista studenti</MenuItem>
-                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE)}>Aggiungi</MenuItem>
-                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI)}>Importa</MenuItem>
+            </span>} opened={this.isInPath(ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI)}>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI)}>Lista studenti</MenuItem>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_GESTORI_ADD_STUDENTE)}>Aggiungi</MenuItem>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_GESTORI_IMPORT_STUDENTI)}>Importa</MenuItem>
             </SubMenu>
 
             <SubMenu text={<span>
                 <Icon iconKey="chalkboard-teacher" className="mr-2" /> Docenti
-            </span>} opened={this.isInPath(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI)}>
-                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI)}>Lista docenti</MenuItem>
-                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE)}>Aggiungi</MenuItem>
+            </span>} opened={this.isInPath(ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI)}>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI)}>Lista docenti</MenuItem>
+                <MenuItem {...this.getMenuItemProps(ComponentsPaths.PATH_GESTORI_ADD_DOCENTE)}>Aggiungi</MenuItem>
             </SubMenu>
 
             <SubMenu text={<span>

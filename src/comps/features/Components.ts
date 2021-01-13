@@ -1,93 +1,93 @@
-import { ListaStudenti } from "./coordinatori/ListaStudenti"
+import { ListaStudenti } from "./gestori/ListaStudenti"
 import { TestLayout } from "../TestLayout"
 import { IComponentList } from "../../models/IComponent"
 import { ComponentsPaths } from "./ComponentsPaths"
 import { ComponentsPermissions } from "./ComponentsPermissions"
-import { LoginCoordinatore } from "./coordinatori/LoginCoordinatore"
-import { HomeCoordinatore } from "./coordinatori/HomeCoordinatore"
-import { AddStudente } from "./coordinatori/AddStudente"
-import { EditStudente } from "./coordinatori/EditStudente"
-import { ImportaStudenti } from "./coordinatori/ImportaStudenti"
-import { DettaglioStudente } from "./coordinatori/DettaglioStudente"
+import { LoginGestore } from "./gestori/LoginGestore"
+import { HomeGestore } from "./gestori/HomeGestore"
+import { AddStudente } from "./gestori/AddStudente"
+import { EditStudente } from "./gestori/EditStudente"
+import { ImportaStudenti } from "./gestori/ImportaStudenti"
+import { DettaglioStudente } from "./gestori/DettaglioStudente"
 import { goTo } from "../../commons/utility"
-import { AddDocente } from "./coordinatori/AddDocente"
-import { ListaDocenti } from "./coordinatori/ListaDocenti"
-import { EditDocente } from "./coordinatori/EditDocente"
-import { DettaglioDocente } from "./coordinatori/DettaglioDocente"
+import { AddDocente } from "./gestori/AddDocente"
+import { ListaDocenti } from "./gestori/ListaDocenti"
+import { EditDocente } from "./gestori/EditDocente"
+import { DettaglioDocente } from "./gestori/DettaglioDocente"
 import { ErrorPage } from "./ErrorPage"
 
 export const Components: IComponentList = {
-    [ComponentsPaths.PATH_COORDINATORI]: {
+    [ComponentsPaths.PATH_GESTORI]: {
         hideMenu: true,
-        permission: ComponentsPermissions.checkEmptyPathCoordinatore
+        permission: ComponentsPermissions.checkEmptyPathGestore
     },
-    [ComponentsPaths.PATH_COORDINATORI + "/"]: {
+    [ComponentsPaths.PATH_GESTORI + "/"]: {
         hideMenu: true,
-        permission: ComponentsPermissions.checkEmptyPathCoordinatore
+        permission: ComponentsPermissions.checkEmptyPathGestore
     },
-    [ComponentsPaths.PATH_COORDINATORI_LOGIN]: {
+    [ComponentsPaths.PATH_GESTORI_LOGIN]: {
         hideMenu: true,
-        Component: LoginCoordinatore,
-        permission: ComponentsPermissions.checkLoginCoordinatore
+        Component: LoginGestore,
+        permission: ComponentsPermissions.checkLoginGestore
     },
-    [ComponentsPaths.PATH_COORDINATORI_HOME]: {
-        Component: HomeCoordinatore,
+    [ComponentsPaths.PATH_GESTORI_HOME]: {
+        Component: HomeGestore,
         pageTitle: "Homepage",
-        permission: ComponentsPermissions.checkPermissionCoordinatore
+        permission: ComponentsPermissions.checkPermissionGestore
     },
-    [ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE]: {
+    [ComponentsPaths.PATH_GESTORI_ADD_STUDENTE]: {
         Component: AddStudente,
         pageTitle: "Nuovo studente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI
     },
-    [ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI]: {
+    [ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI]: {
         Component: ListaStudenti,
-        pageTitle: "Studenti del corso",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_HOME
+        pageTitle: "Tutti gli studenti",
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_HOME
     },
-    [ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI]: {
+    [ComponentsPaths.PATH_GESTORI_IMPORT_STUDENTI]: {
         Component: ImportaStudenti,
         pageTitle: "Importa studenti",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_ADD_STUDENTE
     },
-    [ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE]: {
+    [ComponentsPaths.PATH_GESTORI_DETAILS_STUDENTE]: {
         Component: DettaglioStudente,
         pageTitle: "Dettaglio studente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI
     },
-    [ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE]: {
+    [ComponentsPaths.PATH_GESTORI_EDIT_STUDENTE]: {
         Component: EditStudente,
         pageTitle: "Modifica studente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI
     },
-    [ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI]: {
+    [ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI]: {
         Component: ListaDocenti,
         pageTitle: "Tutti i docenti",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_HOME
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_HOME
     },
-    [ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE]: {
+    [ComponentsPaths.PATH_GESTORI_ADD_DOCENTE]: {
         Component: AddDocente,
         pageTitle: "Nuovo docente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI
     },
-    [ComponentsPaths.PATH_COORDINATORI_EDIT_DOCENTE]: {
+    [ComponentsPaths.PATH_GESTORI_EDIT_DOCENTE]: {
         Component: EditDocente,
         pageTitle: "Modifica docente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI
     },
-    [ComponentsPaths.PATH_COORDINATORI_DETAILS_DOCENTE]: {
+    [ComponentsPaths.PATH_GESTORI_DETAILS_DOCENTE]: {
         Component: DettaglioDocente,
         pageTitle: "Dettaglio docente",
-        permission: ComponentsPermissions.checkPermissionCoordinatore,
-        parentKey: ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI
+        permission: ComponentsPermissions.checkPermissionGestore,
+        parentKey: ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI
     },
     [ComponentsPaths.SITE_BASE + "layout"]: {
         Component: TestLayout,

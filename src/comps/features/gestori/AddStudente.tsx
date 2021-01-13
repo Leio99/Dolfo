@@ -60,7 +60,7 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
         setTimeout(() => this.setState({ loading: false }), 2000)
     }
 
-    goToImportCSV = () => goTo(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI)
+    goToImportCSV = () => goTo(ComponentsPaths.PATH_GESTORI_IMPORT_STUDENTI)
 
     render = (): JSX.Element => {
         const { loading } = this.state

@@ -1,6 +1,6 @@
 import React from "react"
 import { convertFromUTC, getDateTime, LoadingIconCentered } from "../../../commons/utility"
-import { PresenzeService } from "../../../services/PresenzeService"
+import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon } from "../../layout/Icon"
@@ -26,14 +26,14 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
     }
 
     componentDidMount = () => {
-        PresenzeService.getPresenzeStudente(this.props.idStudente).then(response => {
+        StudentiService.getPresenzeStudente(this.props.idStudente).then(response => {
 
             let presenze = response.data as any[]
 
             this.setState({
                 presenze: presenze.map(p => {
-                    p.ingresso = convertFromUTC(p.ingresso)
-                    p.uscita = getDateTime(p.uscita) === "00:00" ? "Non firmata" : convertFromUTC(p.uscita)
+                    p.oraEntrata = convertFromUTC(p.oraEntrata)
+                    p.oraUscita = getDateTime(p.oraUscita) === "00:00" ? "Non firmata" : convertFromUTC(p.oraUscita)
 
                     return p
                 })
@@ -44,7 +44,7 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
     savePresenza = (presenza: any) => {
         this.setState({
             presenze: this.state.presenze.map(p => {
-                if(p.idPresenza === presenza.idPresenza) return presenza
+                if(p.id === presenza.id) return presenza
 
                 return p
             })
@@ -65,8 +65,8 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
 
             <Table columns={[
                 { label: "Data", field: "data", canSearch: true, width: 150, align: "center", type: "date" },
-                { label: "Entrata", field: "ingresso", width: 200, align: "center" },
-                { label: "Uscita", field: "uscita", width: 200, align: "center" },
+                { label: "Entrata", field: "oraEntrata", width: 200, align: "center" },
+                { label: "Uscita", field: "oraUscita", width: 200, align: "center" },
                 { label: "Lezione", field: "lezione", tooltip: true, canSearch: true },
                 { label: "Azioni", field: "azioni", width: "20%", align: "center" },
             ]} data={

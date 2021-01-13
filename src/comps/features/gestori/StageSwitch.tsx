@@ -1,22 +1,23 @@
 import React from "react"
+import { EdizioniService } from "../../../services/EdizioniService"
 import { StudentiService } from "../../../services/StudentiService"
 import { Switch } from "../../form/Switch"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { QuestionCircleOutlineIcon } from "../../layout/Icon"
 import { NotificationMsg } from "../../layout/NotificationMsg"
+import { ComponentsPermissions } from "../ComponentsPermissions"
 
-export interface IProps{
-    readonly idCorso: number
-}
 export interface IState{
     readonly loading: boolean
     readonly attivato: boolean
 }
 
-export class StageSwitch extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
-        super(props)
+export class StageSwitch extends React.PureComponent<any, IState>{
+    readonly session = ComponentsPermissions.getLoginGestore()
+    
+    constructor(){
+        super(undefined)
 
         this.state = {
             loading: true,
@@ -25,9 +26,7 @@ export class StageSwitch extends React.PureComponent<IProps, IState>{
     }
 
     componentDidMount = () => {
-        const { idCorso } = this.props
-
-        StudentiService.getStatoStage(idCorso, 1).then(response => {
+        StudentiService.getStatoStage(this.session.idGestore).then(response => {
             let status = response.data as boolean
 
             this.setState({
@@ -43,22 +42,13 @@ export class StageSwitch extends React.PureComponent<IProps, IState>{
     switchStage = () => {
         this.toggleLoading()
 
-        StudentiService.cambiaStatoStage(1).then(response => {
-            let message = response.data
+        EdizioniService.cambiaStatoStage(this.session.idGestore).then(response => {
+            this.toggleLoading()
 
-            if(message === "success"){
-                this.toggleLoading()
-
-                this.setState({
-                    attivato: !this.state.attivato
-                }, () => NotificationMsg.showSuccess("Stage " + (this.state.attivato ? "attivato" : "disattivato") + "!"))
-            }else{
-                Dialog.infoDialog({
-                    type: "error",
-                    content: "C'è stato un errore. Riprova."
-                })
-            }
-        })
+            this.setState({
+                attivato: !this.state.attivato
+            }, () => NotificationMsg.showSuccess("Stage " + (this.state.attivato ? "attivato" : "disattivato") + "!"))
+        }).catch(this.toggleLoading)
     }
 
     infoStage = () => {

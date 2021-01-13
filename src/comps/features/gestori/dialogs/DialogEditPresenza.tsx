@@ -13,8 +13,8 @@ export interface IProps extends ComponentAsDialogProps{
 }
 export interface IState{
     readonly loading: boolean
-    readonly ingresso: string
-    readonly uscita: string
+    readonly oraEntrata: string
+    readonly oraUscita: string
 }
 
 export class EditPresenza extends React.PureComponent<IProps, IState>{
@@ -23,46 +23,33 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
 
         this.state = {
             loading: false,
-            ingresso: props.presenza.ingresso,
-            uscita: props.presenza.uscita
+            oraEntrata: props.presenza.oraEntrata,
+            oraUscita: props.presenza.oraUscita
         }
     }
 
     modificaPresenza = (e: FormEvent) => {
         e.preventDefault()
 
-        const { ingresso, uscita } = this.state,
+        const { oraEntrata, oraUscita } = this.state,
         { presenza, isDocente } = this.props,
-        idObj = isDocente ? { idDocente: presenza.idDocente } : { idStudente: presenza.idStudente },
         data = new Date()
 
         this.toggleLoading()
 
         PresenzeService.editPresenza(this.props.presenza.idPresenza, {
-            ...idObj,
-            idPresenza: presenza.idPresenza,
-            ingresso: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${ingresso}`),
-            uscita: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${uscita}`),
+            oraEntrata: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${oraEntrata}`),
+            oraUscita: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${oraUscita}`),
             idLezione: presenza.idLezione
         }, isDocente).then(response => {
-            let output = response.data
-
-            if(output.trim() === "success"){
-                const newPresenza = {
-                    ...presenza,
-                    ingresso,
-                    uscita
-                }
-
-                this.props.onSave(newPresenza)
-                this.props.close()
-            }else{
-                Dialog.openDialog({
-                    title: "Errore!",
-                    content: output,
-                    type: "error"
-                })
+            const newPresenza = {
+                ...presenza,
+                oraEntrata,
+                oraUscita
             }
+
+            this.props.onSave(newPresenza)
+            this.props.close()
 
             this.toggleLoading()
         }).catch(this.toggleLoading)
@@ -70,9 +57,9 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
 
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
-    editIngresso = (ingresso: string) => this.setState({ ingresso })
+    editIngresso = (oraEntrata: string) => this.setState({ oraEntrata })
 
-    editUscita = (uscita: string) => this.setState({ uscita })
+    editUscita = (oraUscita: string) => this.setState({ oraUscita })
 
     openDettagli = () => {
         const presenza = this.props.presenza
@@ -92,7 +79,7 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
     }
 
     render = (): JSX.Element => {
-        const { loading, ingresso, uscita } = this.state,
+        const { loading, oraEntrata, oraUscita } = this.state,
         { close } = this.props
 
         return <Dialog title={<span>
@@ -101,9 +88,9 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
             </Button> Modifica presenza
         </span>} visible hideFooter onClose={close}>
             <form onSubmit={this.modificaPresenza}>
-                <TimePicker defaultValue={ingresso} onChange={this.editIngresso} disabled={loading} label="Orario di ingresso" required />
+                <TimePicker defaultValue={oraEntrata} onChange={this.editIngresso} disabled={loading} label="Orario di ingresso" required />
 
-                <TimePicker defaultValue={uscita} onChange={this.editUscita} disabled={loading} label="Orario di uscita" required />
+                <TimePicker defaultValue={oraUscita} onChange={this.editUscita} disabled={loading} label="Orario di uscita" required />
 
                 <div className="text-right mt-3">
                     <Button type="submit" smallBtn loading={loading} btnColor="green">Salva presenza</Button>

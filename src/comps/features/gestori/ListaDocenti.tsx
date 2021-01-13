@@ -28,9 +28,9 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
     
     isInCorso = (doc: any) => doc.corsi.includes(1)
 
-    openDetail = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_DOCENTI + "/" + id)
+    openDetail = (id: number) => goTo(ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI + "/" + id)
     
-    openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_DOCENTE_BASE + "/" + id)
+    openModifica = (id: number) => goTo(ComponentsPaths.PATH_GESTORI_EDIT_DOCENTE_BASE + "/" + id)
 
     buildTable = (studenti: any[]) => {
         return <Table columns={[
@@ -67,7 +67,7 @@ export class ListaDocenti extends React.PureComponent<undefined, IState>{
             <Button type="popup" popupPosition="bottom" options={[
                 { text: <span>
                     <AddIcon color="var(--green)" /> Aggiungi
-                </span>, onClick: () => goTo(ComponentsPaths.PATH_COORDINATORI_ADD_DOCENTE) },
+                </span>, onClick: () => goTo(ComponentsPaths.PATH_GESTORI_ADD_DOCENTE) },
             ]} className="float-right">Gestione docenti</Button>
 
             <div className="clearfix mb-2"></div>

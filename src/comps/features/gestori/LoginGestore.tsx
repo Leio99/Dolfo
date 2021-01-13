@@ -1,6 +1,6 @@
 import React, { FormEvent } from "react"
 import { Cifratore } from "../../../commons/Cifratore"
-import { CoordinatoriService } from "../../../services/CoordinatoriService"
+import { GestoriService } from "../../../services/GestoriService"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
@@ -15,7 +15,7 @@ export interface IState{
     readonly loading: boolean
 }
 
-export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
+export class LoginGestore extends React.PureComponent<undefined, IState>{
     constructor(props: undefined){
         super(props)
 
@@ -56,27 +56,15 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
 
         this.toggleLoading()
 
-        CoordinatoriService.tryLogin({
+        GestoriService.tryLogin({
             username: adminName,
             password: cipher.encode(adminPassword)
         }).then(response => {
             this.toggleLoading()
-
-            const data = response.data
-            
-            if(typeof data === "string"){
-                Dialog.infoDialog({
-                    title: "Errore!",
-                    content: "Username o password errati!",
-                    type: "error"
-                })
-            }else{
-                data.password = cipher.encode(adminPassword)
-                sessionStorage.setItem("sessionCoordinatore", JSON.stringify(data))
-                ComponentsPermissions.checkLoginCoordinatore()
-                NotificationMsg.showSuccess("Login effettuato con successo!")
-            }
-        })
+            sessionStorage.setItem("sessionGestore", JSON.stringify(response.data))
+            ComponentsPermissions.checkLoginGestore()
+            NotificationMsg.showSuccess("Login effettuato con successo!")
+        }).catch(this.toggleLoading)
     }
 
     render = (): JSX.Element => {
@@ -84,7 +72,7 @@ export class LoginCoordinatore extends React.PureComponent<undefined, IState>{
 
         return <div>
             <form className="floating-centered p-3 rounded shadow bg-white col-10 col-md-5" onSubmit={this.tryLogin}>
-                <h2>Accesso coordinatori</h2>
+                <h2>Accesso gestori</h2>
 
                 <TextInput name="username" label="Username" onChange={this.changeName} disabled={loading} icon={{ iconKey: "user" }} required />
                 <TextInput name="password" type="password" label="Password" onChange={this.changePassword} togglePassword disabled={loading} required />

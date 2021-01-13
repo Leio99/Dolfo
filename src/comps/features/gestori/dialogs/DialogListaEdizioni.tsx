@@ -1,13 +1,14 @@
 import React from "react"
 import { LoadingIconCentered } from "../../../../commons/utility"
+import { EdizioniService } from "../../../../services/EdizioniService"
 import Button from "../../../layout/Button"
 import { ComponentAsDialogProps, Dialog } from "../../../layout/Dialog"
-import { AddIcon } from "../../../layout/Icon"
+import { AddIcon, EditIcon } from "../../../layout/Icon"
 import { Table } from "../../../layout/Table"
-import { DialogAddEdizione } from "./DialogAddEdizione"
+import { DialogAddEditEdizione } from "./DialogAddEditEdizione"
 
 export interface IProps extends ComponentAsDialogProps{
-    readonly idEnte: number
+    readonly idGestore: number
     readonly reloadEdizioni: (newList: any[]) => void
 }
 export interface IState{
@@ -26,19 +27,23 @@ export class DialogListaEdizioni extends React.PureComponent<IProps, IState>{
     reloadList = () => {
         this.setState({ listaEdizioni: null })        
 
-        setTimeout(() => this.setState({
-            listaEdizioni: [
-                { desc: "Edizione 1", id: 1 },
-                { desc: "Edizione 2", id: 2 }
-            ]
-        }), 2000)
+        EdizioniService.getByGestore(this.props.idGestore).then(response => {
+            this.setState({ listaEdizioni: response.data })
+        })
     }
 
     componentDidMount = this.reloadList
 
     openAddEdizione = () => {
-        Dialog.openDialogComponent(DialogAddEdizione, {
-            idEnte: this.props.idEnte,
+        Dialog.openDialogComponent(DialogAddEditEdizione, {
+            idGestore: this.props.idGestore,
+            reloadList: this.reloadList
+        })
+    }
+
+    openEditEdizione = (edizione: any) => {
+        Dialog.openDialogComponent(DialogAddEditEdizione, {
+            edizione,
             reloadList: this.reloadList
         })
     }
@@ -61,8 +66,17 @@ export class DialogListaEdizioni extends React.PureComponent<IProps, IState>{
             </div>
             {
                 !listaEdizioni ? <LoadingIconCentered /> : <Table columns={[
-                    { field: "desc", label: "Descrizione", canSearch: true, tooltip: true, width: "80%" }
-                ]} data={listaEdizioni} />
+                    { field: "descrizione", label: "Descrizione", canSearch: true, tooltip: true, width: "80%" },
+                    { field: "azioni", label: "Azioni", align: "center" },
+                ]} data={listaEdizioni.map(e => {
+                    let copy = {...e}
+
+                    copy.azioni = <Button circleBtn btnColor="orange" onClick={() => this.openEditEdizione(e)} tooltip="Modifica">
+                        <EditIcon />
+                    </Button>
+
+                    return copy
+                })} />
             }
         </Dialog>
     }

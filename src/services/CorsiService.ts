@@ -4,14 +4,14 @@ import { ServerCall } from "./ServerCall"
 
 export class CorsiService{
     static getCorsi(){
-        if(!ComponentsPermissions.getLoginCoordinatore(false))
+        if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
 		
         return ServerCall.get(API_URL_REGISTRO_CORSI)
     }
 
     static getCorso(idCorso: number){
-        if(!ComponentsPermissions.getLoginCoordinatore(false))
+        if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
 		
         return ServerCall.get(API_URL_REGISTRO_CORSI + "/" + idCorso)

@@ -32,20 +32,20 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
         const id = this.props.match.params.id
 
         if(isNaN(parseInt(id)))
-            goTo(ComponentsPaths.PATH_COORDINATORI_HOME)
+            goTo(ComponentsPaths.PATH_GESTORI_HOME)
 
         DocentiService.getDocente(id).then(response => {
             this.setState({
                 docente: response.data
             })
-        }).catch(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
+        }).catch(() => goTo(ComponentsPaths.PATH_GESTORI_HOME))
     }
 
     componentDidMount = this.loadDocente
 
     openModifica = () => {
         const dialog = Dialog.openDialog({
-            title: Components[ComponentsPaths.PATH_COORDINATORI_EDIT_DOCENTE].pageTitle,
+            title: Components[ComponentsPaths.PATH_GESTORI_EDIT_DOCENTE].pageTitle,
             content: <EditDocente {...this.props} onSave={() => {
                 dialog.close()
                 this.loadDocente()

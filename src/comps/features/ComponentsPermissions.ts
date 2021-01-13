@@ -2,29 +2,29 @@ import { goTo } from "../../commons/utility"
 import { ComponentsPaths } from "./ComponentsPaths"
 
 export class ComponentsPermissions{
-    static checkPermissionCoordinatore = () => {
-        const session = ComponentsPermissions.getLoginCoordinatore(false)
+    static checkPermissionGestore = () => {
+        const session = ComponentsPermissions.getLoginGestore(false)
 
-        if(!session) setTimeout(() => goTo(ComponentsPaths.PATH_COORDINATORI_LOGIN))
+        if(!session) setTimeout(() => goTo(ComponentsPaths.PATH_GESTORI_LOGIN))
     }
 
-    static checkLoginCoordinatore = () => {
-        const session = ComponentsPermissions.getLoginCoordinatore(false)
+    static checkLoginGestore = () => {
+        const session = ComponentsPermissions.getLoginGestore(false)
 
-        if(session) setTimeout(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
+        if(session) setTimeout(() => goTo(ComponentsPaths.PATH_GESTORI_HOME))
     }
 
-    static checkEmptyPathCoordinatore = () => {
-        const session = ComponentsPermissions.getLoginCoordinatore(false)
+    static checkEmptyPathGestore = () => {
+        const session = ComponentsPermissions.getLoginGestore(false)
 
-        if(session) setTimeout(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
-        else setTimeout(() => goTo(ComponentsPaths.PATH_COORDINATORI_LOGIN))
+        if(session) setTimeout(() => goTo(ComponentsPaths.PATH_GESTORI_HOME))
+        else setTimeout(() => goTo(ComponentsPaths.PATH_GESTORI_LOGIN))
     }
 
-    static getLoginCoordinatore = (nullable = true) => {
+    static getLoginGestore = (nullable = true) => {
         if(nullable)
-            return JSON.parse(sessionStorage.getItem("sessionCoordinatore")) || {}
+            return JSON.parse(sessionStorage.getItem("sessionGestore")) || {}
 
-        return JSON.parse(sessionStorage.getItem("sessionCoordinatore"))
+        return JSON.parse(sessionStorage.getItem("sessionGestore"))
     }
 }

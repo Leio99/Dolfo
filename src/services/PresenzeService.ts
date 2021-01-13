@@ -12,7 +12,7 @@ export class PresenzeService{
     }
 
     static editPresenza(id: number, body: any, isDocente: boolean){
-        const login = ComponentsPermissions.getLoginCoordinatore(),
+        const login = ComponentsPermissions.getLoginGestore(),
 		params = {
             authCoordinatore: {
                 idCoordinatore: login.idCoordinatore,
@@ -26,7 +26,7 @@ export class PresenzeService{
     }
 
     static getPresenzeDaConfermare(){
-        if(!ComponentsPermissions.getLoginCoordinatore(false))
+        if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
             
         return ServerCall.get("http://mygraphic.altervista.org/esame/?presenze")

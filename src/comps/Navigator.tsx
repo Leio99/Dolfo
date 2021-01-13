@@ -8,7 +8,7 @@ import { BreadCrumb } from "./layout/BreadCrumb"
 import { BreadCrumbItem } from "./layout/BreadCrumbItem"
 import { Components } from "./features/Components"
 import { IComponent } from "../models/IComponent"
-import { CoordinatoriMenu } from "./features/coordinatori/CoordinatoriMenu"
+import { GestoriMenu } from "./features/gestori/GestoriMenu"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 import { ComponentsPaths } from "./features/ComponentsPaths"
 import { Header } from "./layout/Header"
@@ -105,7 +105,7 @@ export class Navigator extends React.PureComponent<any, IState>{
                     }
                     
                     {
-                        currentPath.indexOf(ComponentsPaths.PATH_COORDINATORI) >= 0 && currentPath !== ComponentsPaths.PATH_COORDINATORI_LOGIN && <CoordinatoriMenu currentPath={currentPath} opened={openMenu} toggleMenu={this.toggleMenu} />
+                        currentPath.indexOf(ComponentsPaths.PATH_GESTORI) >= 0 && currentPath !== ComponentsPaths.PATH_GESTORI_LOGIN && <GestoriMenu currentPath={currentPath} opened={openMenu} toggleMenu={this.toggleMenu} />
                     }
 
                         <TransitionGroup>

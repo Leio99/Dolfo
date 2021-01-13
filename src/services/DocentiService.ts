@@ -4,21 +4,21 @@ import { ServerCall } from "./ServerCall"
 
 export class DocentiService{
     static getDocente(idDocente: string){
-        if(!ComponentsPermissions.getLoginCoordinatore(false))
+        if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
 		
         return ServerCall.get(API_URL_REGISTRO_DOCENTI + "/getdocentibyid/" + idDocente)
     }
 
     static getDocenti(){
-        if(!ComponentsPermissions.getLoginCoordinatore(false))
+        if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
 		
         return ServerCall.get(API_URL_REGISTRO_DOCENTI)
     }
 
     static editDocente(idDocente: string, body: any){
-        const login = ComponentsPermissions.getLoginCoordinatore(),
+        const login = ComponentsPermissions.getLoginGestore(),
         params = {
             authCoordinatore: {
                 idCoordinatore: login.idCoordinatore,

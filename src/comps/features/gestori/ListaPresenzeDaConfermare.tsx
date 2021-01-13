@@ -103,7 +103,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         else this.addToList(idPresenza)
     }
     openDettaglio = (id: number, docente = false) => {
-        const path = docente ? ComponentsPaths.PATH_COORDINATORI_DETAILS_DOCENTE : ComponentsPaths.PATH_COORDINATORI_DETAILS_STUDENTE,
+        const path = docente ? ComponentsPaths.PATH_GESTORI_DETAILS_DOCENTE : ComponentsPaths.PATH_GESTORI_DETAILS_STUDENTE,
         Component = Components[path]
 
         Dialog.openDialog({

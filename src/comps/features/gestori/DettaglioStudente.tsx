@@ -38,33 +38,31 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         const id = this.props.match.params.id
 
         if(isNaN(parseInt(id)))
-            goTo(ComponentsPaths.PATH_COORDINATORI_HOME)
+            goTo(ComponentsPaths.PATH_GESTORI_HOME)
 
         StudentiService.getStudente(id).then(response => {
             this.setState({
                 studente: response.data
-            })
+            }, this.loadTotali)
 
             StudentiService.getOreStudente(id).then(response => {
                 this.setState({
-                    oreTotali: response.data as number
+                    totPresenze: response.data as number
                 })
             })
-    
-            this.loadTotali()
-        }).catch(() => goTo(ComponentsPaths.PATH_COORDINATORI_HOME))
+        }).catch(() => goTo(ComponentsPaths.PATH_GESTORI_HOME))
     }
 
     componentDidMount = this.loadStudente
 
     loadTotali = () => {
         this.setState({
-            totPresenze: null
+            oreTotali: null
         })
 
-        StudentiService.getTotaleOre(this.props.match.params.id).then(response => {
+        StudentiService.getTotaleOre(this.state.studente.idEdizione).then(response => {
             this.setState({
-                totPresenze: response.data as number
+                oreTotali: response.data as number
             })
         })
     }
@@ -73,7 +71,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
     
     openModifica = () => {
         const dialog = Dialog.openDialog({
-            title: Components[ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE].pageTitle,
+            title: Components[ComponentsPaths.PATH_GESTORI_EDIT_STUDENTE].pageTitle,
             content: <EditStudente {...this.props} onSave={() => {
                 dialog.close()
                 this.loadStudente()
@@ -87,8 +85,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
     render = (): JSX.Element => {
         const { studente, totPresenze, oreTotali } = this.state,
         idStudente = this.props.match.params.id,
-        perc = studente?.frequenza != null ? Math.round(100 * totPresenze / oreTotali) : null,
-        color = perc >= 80 ? "green" : "red"
+        color = studente?.frequenza >= 80 ? "green" : "red"
 
         if(!studente) return <LoadingIconCentered />
 
@@ -117,13 +114,13 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
 
                 <Card title="Presenze totali (ore)" className="col-12 col-md mb-3">
                     {
-                        !isNaN(perc) ? <Progress circular percent={perc} circleWidth={80} className="mr-3" color={color} /> : <LoadingIcon spinning />
+                        <Progress circular percent={+parseFloat(studente.frequenza).toFixed(2)} circleWidth={80} className="mr-3" color={color} />
                     }
 
                     <div className="progress-label">
                         {
                             oreTotali != null && totPresenze != null ? <span>
-                                {totPresenze}/{oreTotali}
+                                {+totPresenze.toFixed(2)}/{+oreTotali.toFixed(2)}
                             </span> : <LoadingIcon spinning />
                         }
                     </div>

@@ -8,13 +8,16 @@ import { NotificationMsg } from "../../layout/NotificationMsg"
 import { StudentiService } from "../../../services/StudentiService"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { StageSwitch } from "./StageSwitch"
-import { goTo, LoadingIconCentered, notImplemented } from "../../../commons/utility"
+import { goTo, LoadingIconCentered } from "../../../commons/utility"
+import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IState{
     readonly studenti: any[]
     readonly checkList: any[]
 }
 export class ListaStudenti extends React.PureComponent<undefined, IState>{
+    readonly session = ComponentsPermissions.getLoginGestore()
+    
     constructor(props: undefined){
         super(props)
 
@@ -23,18 +26,21 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
             checkList: []
         }
     }
-
-    componentDidMount = () => {
-        StudentiService.getStudentiCorso(1).then(response => {
+    
+    loadStudenti = () => {
+        this.setState({ studenti: null })
+        StudentiService.getStudentiEdizione(this.session.idGestore).then(response => {
             this.setState({
                 studenti: response.data
             })
-        })
+        }).catch(() => this.setState({ studenti: [] }))
     }
 
-    toggleCheckAll = (anno: number) => {
+    componentDidMount = this.loadStudenti
+
+    toggleCheckAll = () => {
         const current = this.state.checkList,
-        checkList = current.find(s => s.annoFrequentazione === anno) ? current.filter(s => s.annoFrequentazione !== anno) : current.concat(this.state.studenti.filter(s => s.annoFrequentazione === anno && !s.promosso))
+        checkList = current.length ? [] : this.state.studenti.filter(s => !s.promosso)
 
         this.setState({ checkList })
     }
@@ -44,16 +50,16 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         let checkList
 
         if(list.includes(studente))
-            checkList = this.state.checkList.filter(s => s.idStudente !== studente.idStudente)
+            checkList = this.state.checkList.filter(s => s.id !== studente.id)
         else
             checkList = this.state.checkList.concat(studente) 
 
         this.setState({ checkList })
     }
 
-    openDetail = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_LISTA_STUDENTI + "/" + id)
+    openDetail = (id: number) => goTo(ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI + "/" + id)
     
-    openModifica = (id: number) => goTo(ComponentsPaths.PATH_COORDINATORI_EDIT_STUDENTE_BASE + "/" + id)
+    openModifica = (id: number) => goTo(ComponentsPaths.PATH_GESTORI_EDIT_STUDENTE_BASE + "/" + id)
 
     archiviaStudenti = (target: any | any[]) => {
         Dialog.openDialog({
@@ -76,7 +82,15 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                 <div>Si sta per archiviare uno studente (<strong>{target.nome} {target.cognome}</strong>).</div>
                 <div>I dati identificativi dello studente e le presenze verranno comunque mantenuti, ma lo studente non potrà più registrare nuove presenze e non potrà essere spostato nuovamente.</div>
             </div>,
-            onOk: notImplemented,
+            onOk: () => {
+                const idStudenti = Array.isArray(target) ? target.map(v => v.id) : [target.id],
+                loadingDialog = Dialog.loadingDialog()
+
+                StudentiService.archiviaStudenti({ idStudenti }).then(response => {
+                    loadingDialog.close()
+                    this.loadStudenti()
+                })
+            },
             okText: "Conferma",
             okType: "red",
             overflows: true,
@@ -88,14 +102,14 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
 
     buildTable = (studenti: any[]) => {
         const { checkList } = this.state
-        let checkedAll = true
+        let checkedAll = checkList.length > 0
 
         studenti.forEach(s => {
             if(checkList.indexOf(s) === -1 && !s.promosso) checkedAll = false
         })
 
         return <Table columns={[
-            { type: "check", checkTooltip: "Seleziona tutti", onCheckAll: () => this.toggleCheckAll(studenti[0].annoFrequentazione), checked: checkedAll, width: "5%", align: "center" },
+            { type: "check", checkTooltip: "Seleziona tutti", onCheckAll: this.toggleCheckAll, checked: checkedAll, width: "5%", align: "center" },
             { label: "Studente", field: "desStudente", canSearch: true, tooltip: true },
             { label: "Stato", field: "stato", width: "15%", align: "center" },
             { label: "Frequenza", field: "frequenza", width: "15%", align: "center", canSearch: true },
@@ -103,21 +117,21 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         ]} data={
             studenti.sort(s => s.promosso || s.ritirato ? 0 : -1).map(s => {
                 return {
-                    onDoubleClick: () => this.openDetail(s.idStudente),
+                    onDoubleClick: () => this.openDetail(s.id),
                     checked: checkList.includes(s),
                     onCheckChange: () => this.toggleCheck(s),
                     rowStyle: s.promosso ? { backgroundColor: "#f8f8f8" } : null,
                     desStudente: s.nome + " " + s.cognome,
                     hideCheck: s.promosso,
                     stato: !s.promosso ? <Icon iconKey="dot-circle" type="far" color="var(--blue)" tooltip="Attivo" large /> : <CheckIcon color="var(--green)" tooltip="Archiviato" large />,
-                    frequenza: (isNaN(s.frequenza) ? 0 : s.frequenza) + "%",
+                    frequenza: +parseFloat(s.frequenza).toFixed(2) + "%",
                     azioni: <div>
-                        <Button btnColor="blue" className="m-2" circleBtn onClick={() => this.openDetail(s.idStudente)} tooltip="Dettagli">
+                        <Button btnColor="blue" className="m-2" circleBtn onClick={() => this.openDetail(s.id)} tooltip="Dettagli">
                             <DetailIcon />
                         </Button>
                         
                         {
-                            !s.ritirato && !s.promosso && <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.idStudente)}>
+                            !s.ritirato && !s.promosso && <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.id)}>
                                 <EditIcon />
                             </Button>
                         }
@@ -140,27 +154,26 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     
     render = (): JSX.Element => {
         const { studenti } = this.state,
-        primoAnno = studenti?.filter(s => s.annoFrequentazione === 1),
         loadingIcon = <LoadingIconCentered />
 
         return <div>
             <Button type="popup" popupPosition="bottom" options={[
                 { text: <span>
                     <AddIcon color="var(--green)" /> Aggiungi
-                </span>, onClick: () => goTo(ComponentsPaths.PATH_COORDINATORI_ADD_STUDENTE) },
+                </span>, onClick: () => goTo(ComponentsPaths.PATH_GESTORI_ADD_STUDENTE) },
                 { text: <span>
                     <Icon iconKey="file-csv" color="var(--blue)" /> Importa da CSV
-                </span>, onClick: () =>  goTo(ComponentsPaths.PATH_COORDINATORI_IMPORT_STUDENTI) },
+                </span>, onClick: () =>  goTo(ComponentsPaths.PATH_GESTORI_IMPORT_STUDENTI) },
                 { text: <span>
                     <Icon iconKey="user-check" color="var(--red)" /> Archivia selezionati
                 </span>, onClick: this.promuoviStudenti }
             ]} className="float-right">Gestione studenti</Button>
 
-            <StageSwitch idCorso={1} />
+            <StageSwitch />
             
             <div className="clearfix"></div>
 
-            { !primoAnno ? loadingIcon : this.buildTable(primoAnno) }
+            { !studenti ? loadingIcon : this.buildTable(studenti) }
         </div>
     }
 }
