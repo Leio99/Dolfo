@@ -5,7 +5,11 @@ import Select from "../../form/Select"
 import { Option } from "../../form/Option"
 import { Uploader } from "../../form/Uploader"
 import { Table } from "../../layout/Table"
-import { capitalizeFirst } from "../../../commons/utility"
+import { capitalizeFirst, goTo, reverseDate } from "../../../commons/utility"
+import { StudentiService } from "../../../services/StudentiService"
+import { ComponentsPermissions } from "../ComponentsPermissions"
+import { NotificationMsg } from "../../layout/NotificationMsg"
+import { ComponentsPaths } from "../ComponentsPaths"
 
 const fields = [{
     label: "Nome",
@@ -42,6 +46,8 @@ export interface IState{
 }
 
 export class ImportaStudenti extends React.PureComponent<undefined, IState>{
+    readonly session = ComponentsPermissions.getLoginGestore()
+
     constructor(props: undefined){
         super(props)
 
@@ -70,14 +76,21 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
     showImportPreview = () => {
         const { rows, fields } = this.state,
         data = rows.map(r => {
-            const pieces = this.splitRow(r)
+            const pieces = this.splitRow(r),
+            datePieces = pieces[fields.dataNascita].split(/\/|-/),
+            sendDate = new Date()
+
+            sendDate.setDate(+datePieces[0])
+            sendDate.setMonth((+datePieces[1]) - 1)
+            sendDate.setFullYear(+datePieces[2])
 
             return {
                 nome: capitalizeFirst(pieces[fields.nome]),
                 cognome: capitalizeFirst(pieces[fields.cognome]),
                 cf: pieces[fields.cf],
                 email: pieces[fields.email],
-                dataNascita: pieces[fields.dataNascita]
+                dataNascita: reverseDate(sendDate),
+                formattedDate: pieces[fields.dataNascita]
             }
         })
 
@@ -90,12 +103,16 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
             onOk: () => {
                 const loading = Dialog.loadingDialog("Importazione...")
 
-                setTimeout(() => loading.close(), 2000)
+                StudentiService.addStudenti(this.session.idGestore, data).then(() => {
+                    loading.close()
+                    NotificationMsg.showSuccess("Studenti importati con successo!")
+                    goTo(ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI)
+                }).catch(() => loading.close())
             },
             content: <Table data={data} columns={[
                 { label: "Nome", field: "nome", tooltip: true },
                 { label: "Cognome", field: "cognome", tooltip: true },
-                { label: "Data di nascita", field: "dataNascita", align: "center" },
+                { label: "Data di nascita", field: "formattedDate", align: "center" },
                 { label: "Codice Fiscale", field: "cf" },
                 { label: "E-mail", field: "email", tooltip: true }
             ]} />

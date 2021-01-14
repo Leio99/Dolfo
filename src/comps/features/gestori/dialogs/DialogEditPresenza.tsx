@@ -55,6 +55,7 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
             this.props.onSave(newPresenza)
             this.props.close()
             this.toggleLoading()
+            NotificationMsg.showSuccess("Presenza modificata!")
         }).catch(this.toggleLoading)
     }
 

@@ -1,22 +1,26 @@
 import React, { FormEvent } from "react"
-import { goTo } from "../../../commons/utility"
+import { goTo, reverseDate } from "../../../commons/utility"
+import { StudentiService } from "../../../services/StudentiService"
 import DatePicker from "../../form/DatePicker"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { Icon } from "../../layout/Icon"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { ComponentsPaths } from "../ComponentsPaths"
+import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IState{
     readonly nome: string
     readonly cognome: string
     readonly email: string
-    readonly dataNascita: string
+    readonly dataNascita: Date
     readonly cf: string
     readonly loading: boolean
 }
 
 export class AddStudente extends React.PureComponent<undefined, IState>{
+    readonly session = ComponentsPermissions.getLoginGestore()
+
     constructor(props: undefined){
         super(props)
 
@@ -24,7 +28,7 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
             nome: "",
             cognome: "",
             email: "",
-            dataNascita: "",
+            dataNascita: null,
             cf: "",
             loading: false
         }
@@ -38,7 +42,9 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
     changeCF = (cf: string) => this.setState({ cf })
 
-    changeDataNascita = (dataNascita: string) => this.setState({ dataNascita })
+    changeDataNascita = (dataNascita: Date) => this.setState({ dataNascita })
+
+    toggleLoading = () => this.setState({ loading: !this.state.loading })
 
     creaStudente = (e: FormEvent) => {
         e.preventDefault()
@@ -49,15 +55,25 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
         sendEmail = email.trim(),
         sendCF = cf.trim()
 
-        if(sendNome === "" || sendCognome === "" || sendCF === "" || dataNascita === "" || sendEmail === "")
+        if(sendNome === "" || sendCognome === "" || sendCF === "" || !dataNascita || sendEmail === "")
             return NotificationMsg.showError("Riempire tutti i campi!")
 
         if(sendCF.length !== 16)
             return NotificationMsg.showError("Codice Fiscale non valido!")
 
-        this.setState({ loading: true })
+        this.toggleLoading()
 
-        setTimeout(() => this.setState({ loading: false }), 2000)
+        StudentiService.addStudenti(this.session.idGestore, [{
+            nome: sendNome,
+            cognome: sendCognome,
+            cf: sendCF,
+            dataNascita: reverseDate(dataNascita),
+            email: sendEmail
+        }]).then((response) => {
+            this.toggleLoading()
+            NotificationMsg.showSuccess("Studente creato con successo!")
+            goTo(ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI)
+        }).catch(this.toggleLoading)
     }
 
     goToImportCSV = () => goTo(ComponentsPaths.PATH_GESTORI_IMPORT_STUDENTI)

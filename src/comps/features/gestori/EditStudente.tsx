@@ -1,6 +1,6 @@
 import React, { FormEvent } from "react"
 import { RouteComponentProps } from "react-router-dom"
-import { goTo, LoadingIconCentered } from "../../../commons/utility"
+import { goTo, LoadingIconCentered, reverseDate } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import DatePicker from "../../form/DatePicker"
 import { TextInput } from "../../form/TextInput"
@@ -19,7 +19,7 @@ export interface IState{
     readonly cognome: string
     readonly email: string
     readonly cf: string
-    readonly dataNascita: string
+    readonly dataNascita: Date
     readonly loading: boolean
     readonly loadingForm: boolean
     readonly studente: any
@@ -34,7 +34,7 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
             cognome: "",
             email: "",
             cf: "",
-            dataNascita: "",
+            dataNascita: null,
             loading: true,
             loadingForm: false,
             studente: null
@@ -59,7 +59,7 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
 
     changeCF = (cf: string) => this.setState({ cf })
 
-    changeDataNascita = (dataNascita: string) => this.setState({ dataNascita })
+    changeDataNascita = (dataNascita: Date) => this.setState({ dataNascita }, () => console.log(dataNascita))
 
     editStudente = (e: FormEvent) => {
         e.preventDefault()
@@ -68,10 +68,9 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
         sendNome = nome.trim(),
         sendCognome = cognome.trim(),
         sendEmail = email.trim(),
-        sendCF = cf.trim(),
-        idStudente = this.props.match.params.id
+        sendCF = cf.trim()
 
-        if(sendNome === "" || sendCognome === "" || sendCF === "" || dataNascita === "" || sendEmail === "")
+        if(sendNome === "" || sendCognome === "" || sendCF === "" || !dataNascita || sendEmail === "")
             return NotificationMsg.showError("Riempire tutti i campi!")
 
         if(sendCF.length !== 16)
@@ -79,16 +78,12 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
 
         this.toggleLoading()
 
-        StudentiService.editStudente(idStudente, {
-            idStudente: parseInt(idStudente),
+        StudentiService.editStudente(studente.id, {
             nome: sendNome,
             cognome: sendCognome,
             email: sendEmail,
             cf: sendCF,
-            dataNascita: new Date(dataNascita),
-            promosso: studente.promosso,
-            ritirato: studente.ritirato,
-            idCorso: studente.idCorso
+            dataNascita: reverseDate(dataNascita)
         }).then(() => {
             this.toggleLoading()
             this.props.onSave && this.props.onSave()

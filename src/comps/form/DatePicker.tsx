@@ -83,7 +83,12 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear, blur = true) => {
-        let date = this.handleDate(day, month, year)
+        const date = this.handleDate(day, month, year),
+        sendDate = new Date()
+        sendDate.setDate(day)
+        sendDate.setMonth(month)
+        sendDate.setFullYear(year)
+        sendDate.setHours(0, 0, 0, 0)
 
         this.setState({
             showCalendar: false,
@@ -95,7 +100,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             currentYear: year
         })
 
-        this.props.onChange && this.props.onChange(date)
+        this.props.onChange && this.props.onChange(sendDate)
 
         blur && blurInput()
     }
@@ -176,7 +181,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             selectedMonth: currentMonth
         })
         
-        this.props.onChange && this.props.onChange("")
+        this.props.onChange && this.props.onChange(null)
     }
 
     chooseToday = () => this.selectDay(new Date().getDate(), new Date().getMonth(), new Date().getFullYear())

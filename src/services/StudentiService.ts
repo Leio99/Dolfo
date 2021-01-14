@@ -53,16 +53,11 @@ export class StudentiService{
         return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getTotaleOreStage/" + id)
     }
 
-    static editStudente(idStudente: string, body: any){
-        const login = ComponentsPermissions.getLoginGestore(),
-		params = {
-            authCoordinatore: {
-                idCoordinatore: login.idCoordinatore,
-                password: login.password
-            },
-            studente: body
-        }
+    static addStudenti(idGestore: number, body: any){
+        return ServerCall.post(API_URL_REGISTRO_STUDENTI + "/" + idGestore, body)
+    }
 
-        return ServerCall.put(API_URL_REGISTRO_STUDENTI + "/" + idStudente, params)
+    static editStudente(idStudente: number, body: any){
+        return ServerCall.put(API_URL_REGISTRO_STUDENTI + "/" + idStudente, body)
     }
 }

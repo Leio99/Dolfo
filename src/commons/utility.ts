@@ -4,25 +4,27 @@ import { LoadingIcon } from "../comps/layout/Icon"
 import { history } from "../comps/Navigator"
 import { IDataColumn } from "../comps/shared/models/IColumn"
 
-export const formatDate = (date: Date, monthString = false) => {
+export const formatDate = (date: Date, monthString = false): string => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
 
     return `${zeroBefore(date.getDate()) + month + date.getFullYear()}`
 }
 
-export const reverseDate = (date: Date) => `${date.getFullYear() + "-" + zeroBefore(date.getMonth() + 1) + "-" + zeroBefore(date.getDate())}`
+export const reverseDate = (date: Date): string => `${date.getFullYear() + "-" + zeroBefore(date.getMonth() + 1) + "-" + zeroBefore(date.getDate())}`
 
-export const reverseDateWithTime = (date: Date) => `${date.getFullYear() + "-" + zeroBefore(date.getMonth() + 1) + "-" + zeroBefore(date.getDate())} ${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
+export const reverseDateWithTime = (date: Date): string => `${date.getFullYear() + "-" + zeroBefore(date.getMonth() + 1) + "-" + zeroBefore(date.getDate())} ${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
 
-export const formatItalian = (date: string) => formatDate(new Date(date))
+export const formatItalian = (date: string): string => formatDate(new Date(date))
 
-export const formatWithMonth = (date: string) => formatDate(new Date(date), true)
+export const formatWithMonth = (date: string): string => formatDate(new Date(date), true)
 
 export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
 
-export const validateDate = (date: string) => isNaN(new Date(date).getTime())
+export const validateDate = (date: string): boolean => isNaN(new Date(date).getTime())
 
-export const formatNumber = (n: string|number) => {
+export const formatNumber = (n: string|number): string => {
+    if(n == null) return "0"
+
     let converted = typeof n === "number" ? parseFloat(n.toString()).toFixed(2) : parseFloat(n).toFixed(2)
 
     if(parseFloat(converted).toString().indexOf(".") === -1) converted = (+converted).toString()
@@ -30,7 +32,7 @@ export const formatNumber = (n: string|number) => {
     return converted.replace(/\B(?=(\d{3})+(?!\d))/g, ";").replace(".",",").replace(";",".")
 }
 
-export const decodeMonth = (month: number, short: boolean = false) => {
+export const decodeMonth = (month: number, short: boolean = false): string => {
     switch(month){
         case 0: return short ? "Gen" : "Gennaio"
         case 1: return short ? "Feb" : "Febbraio"
@@ -47,9 +49,9 @@ export const decodeMonth = (month: number, short: boolean = false) => {
     }
 }
 
-export const zeroBefore = (n: number) => n < 10 ? ("0" + n) : n.toString()
+export const zeroBefore = (n: number): string => n < 10 ? ("0" + n) : n.toString()
 
-export const getLastDay = (inputMonth?: number, inputYear?: number) => {
+export const getLastDay = (inputMonth?: number, inputYear?: number): number => {
     let date = new Date(),
     month = inputMonth >= 0 ? (inputMonth + 1) : (date.getMonth() + 1),
     year = inputYear >= 0 ? inputYear : date.getFullYear()
@@ -83,7 +85,7 @@ export const getCalendar = (month?: number, year?: number) => {
     descending = 42
 
     for(let i = 1; i < weekDay; i++){
-        let prevMonth = dateMonth === 0 ? 11 : dateMonth - 1,
+        const prevMonth = dateMonth === 0 ? 11 : dateMonth - 1,
         prevYear = dateMonth === 0 ? dateYear - 1 : dateYear
 
         cols.push({
@@ -112,12 +114,12 @@ export const getCalendar = (month?: number, year?: number) => {
         descending--
     }
 
-    let initLength = table[table.length-1].length - 1
+    const initLength = table[table.length-1].length - 1
 
     if(table[table.length-1].length < 7){
 
         for(let i = table[table.length-1].length; i < 7; i++){
-            let nextMonth = dateMonth === 11 ? 0 : dateMonth + 1,
+            const nextMonth = dateMonth === 11 ? 0 : dateMonth + 1,
             nextYear = dateMonth === 11 ? dateYear + 1 : dateYear
 
             table[table.length-1].push({
@@ -133,7 +135,7 @@ export const getCalendar = (month?: number, year?: number) => {
     }
 
     for(let i = descending; i >= 1; i--){
-        let nextMonth = dateMonth === 11 ? 0 : dateMonth + 1,
+        const nextMonth = dateMonth === 11 ? 0 : dateMonth + 1,
         nextYear = dateMonth === 11 ? dateYear + 1 : dateYear
 
         cols.push({
@@ -170,7 +172,7 @@ export const copyToClipBoard = (text: string) => {
     NotificationMsg.showInfo("Codice copiato negli appunti!")
 }
 
-export const capitalizeFirst = (name: string) => {
+export const capitalizeFirst = (name: string): string => {
     let splitStr = capitalizeQuote(name.toLowerCase()).split(" ")
 
     for (let i = 0; i < splitStr.length; i++) {
@@ -180,7 +182,7 @@ export const capitalizeFirst = (name: string) => {
     return splitStr.join(" ")
 }
 
-export const capitalizeQuote = (name: string) => {
+export const capitalizeQuote = (name: string): string => {
     let splitStr = name.toLowerCase().split("'")
 
     for (let i = 0; i < splitStr.length; i++) {
@@ -190,19 +192,19 @@ export const capitalizeQuote = (name: string) => {
     return splitStr.join("'")
 }
 
-export const convertFromUTC = (date: string) => {
+export const convertFromUTC = (date: string): string => {
     let localDate = new Date(date)
 
     return `${zeroBefore(localDate.getHours())}:${zeroBefore(localDate.getMinutes())}`
 }
 
-export const getDateTime = (date: string) => {
+export const getDateTime = (date: string): string => {
     const converted = new Date(date)
 
     return `${zeroBefore(converted.getHours())}:${zeroBefore(converted.getMinutes())}`
 }
 
-export const LoadingIconCentered = () => {
+export const LoadingIconCentered = (): JSX.Element => {
     return LoadingIcon({
         color: "var(--darkblue)",
         style: { fontSize: 50 },
@@ -211,14 +213,14 @@ export const LoadingIconCentered = () => {
     })
 }
 
-export const dateIsToday = (d: string) => {
+export const dateIsToday = (d: string): boolean => {
     const date = new Date(d),
     newDate = new Date()
 
     return date.getDate() === newDate.getDate() && date.getMonth() === newDate.getMonth()
 }
 
-export const getTime = (d: string) => {
+export const getTime = (d: string): string => {
     const date = new Date(d)
 
     return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`

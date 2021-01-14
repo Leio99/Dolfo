@@ -41,7 +41,7 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
         const { listaOre, oreTotali } = this.state
 
         return <Dialog overflows={!!listaOre} visible clickOutside onClose={this.props.close} title={<span>
-            Ore di stage segnate ({oreTotali === null ? <LoadingIcon spinning /> : formatNumber(oreTotali)})
+            Ore di stage segnate (totale: {oreTotali === null ? <LoadingIcon spinning /> : formatNumber(oreTotali)})
         </span>} width="70vw" hideFooter>
             {
                 listaOre ? <Table columns={[
