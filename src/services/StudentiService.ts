@@ -49,8 +49,8 @@ export class StudentiService{
         return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getOreStage/" + id)
     }
 
-    static getPresenzeStudente(idStudente: number){
-        return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getPresenze/" + idStudente)
+    static getTotaleOreStage(id: number){
+        return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getTotaleOreStage/" + id)
     }
 
     static editStudente(idStudente: string, body: any){

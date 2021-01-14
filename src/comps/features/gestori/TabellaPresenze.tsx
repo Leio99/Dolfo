@@ -1,6 +1,6 @@
 import React from "react"
-import { convertFromUTC, getDateTime, LoadingIconCentered } from "../../../commons/utility"
-import { StudentiService } from "../../../services/StudentiService"
+import { getDateTime, LoadingIconCentered } from "../../../commons/utility"
+import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { EditIcon } from "../../layout/Icon"
@@ -8,7 +8,8 @@ import { Table } from "../../layout/Table"
 import { EditPresenza } from "./dialogs/DialogEditPresenza"
 
 export interface IProps{
-    readonly idStudente: number
+    readonly targetId: number
+    readonly isDocente?: boolean
     reloadTotali: () => void
 }
 export interface IState{
@@ -26,16 +27,17 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
     }
 
     componentDidMount = () => {
-        StudentiService.getPresenzeStudente(this.props.idStudente).then(response => {
 
-            let presenze = response.data as any[]
+        PresenzeService.getPresenze(this.props.targetId, this.props.isDocente).then(response => {
+            const presenze = response.data as any[]
 
             this.setState({
                 presenze: presenze.map(p => {
-                    p.oraEntrata = convertFromUTC(p.oraEntrata)
-                    p.oraUscita = getDateTime(p.oraUscita) === "00:00" ? "Non firmata" : convertFromUTC(p.oraUscita)
+                    let newP = {...p}
+                    newP.oraEntrata = getDateTime(p.oraEntrata)
+                    newP.oraUscita = getDateTime(p.oraUscita)
 
-                    return p
+                    return newP
                 })
             })
         })
@@ -71,11 +73,13 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
                 { label: "Azioni", field: "azioni", width: "20%", align: "center" },
             ]} data={
                 presenze.map(p => {
-                    p.azioni = <Button tooltip="Modifica orari" circleBtn onClick={() => this.editPresenza(p)} btnColor="orange">
+                    let temp = {...p}
+                    temp.oraUscita = p.oraUscita === "00:00" ? "Non firmata" : p.oraUscita
+                    temp.azioni = <Button tooltip="Modifica orari" circleBtn onClick={() => this.editPresenza(p)} btnColor="orange">
                         <EditIcon />
                     </Button>
 
-                    return p
+                    return temp
                 })
             } />
         </div>

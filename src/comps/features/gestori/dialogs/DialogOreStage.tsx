@@ -1,7 +1,8 @@
 import React from "react"
-import { LoadingIconCentered } from "../../../../commons/utility"
+import { formatNumber, LoadingIconCentered } from "../../../../commons/utility"
 import { StudentiService } from "../../../../services/StudentiService"
 import { Dialog, ComponentAsDialogProps } from "../../../layout/Dialog"
+import { LoadingIcon } from "../../../layout/Icon"
 import { Table } from "../../../layout/Table"
 
 export interface IProps extends ComponentAsDialogProps{
@@ -9,6 +10,7 @@ export interface IProps extends ComponentAsDialogProps{
 }
 export interface IState{
     readonly listaOre: any[]
+    readonly oreTotali: number
 }
 
 export class DialogOreStage extends React.PureComponent<IProps, IState>{
@@ -16,7 +18,8 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
         super(props)
 
         this.state = {
-            listaOre: null
+            listaOre: null,
+            oreTotali: null
         }
     }
 
@@ -25,21 +28,34 @@ export class DialogOreStage extends React.PureComponent<IProps, IState>{
             this.setState({
                 listaOre: response.data
             })
-        })
+        }).catch(() => this.setState({ listaOre: [] }))
+
+        StudentiService.getTotaleOreStage(this.props.idStudente).then(response => {
+            this.setState({
+                oreTotali: response.data
+            })
+        }).catch(() => this.setState({ oreTotali: 0 }))
     }
 
     render = (): JSX.Element => {
-        const { listaOre } = this.state
+        const { listaOre, oreTotali } = this.state
 
-        return <Dialog overflows={!!listaOre} visible clickOutside onClose={this.props.close} title="Ore di stage segnate" width="70vw" hideFooter>
+        return <Dialog overflows={!!listaOre} visible clickOutside onClose={this.props.close} title={<span>
+            Ore di stage segnate ({oreTotali === null ? <LoadingIcon spinning /> : formatNumber(oreTotali)})
+        </span>} width="70vw" hideFooter>
             {
                 listaOre ? <Table columns={[
                     { label: "Data", field: "data", canSearch: true, align: "center", type: "date" },
-                    { label: "Descrizione", field: "argomento", width: "30%", tooltip: true },
+                    { label: "Descrizione", field: "descrizione", width: "30%", tooltip: true },
                     { label: "Ora inizio", field: "oraInizio", align: "center", type: "time" },
                     { label: "Ora fine", field: "oraFine", align: "center", type: "time" },
                     { label: "Ore svolte", field: "totaleRelativo", align: "center" },
-                ]} data={listaOre} exportable exportFormat={["csv"]} /> : <LoadingIconCentered />
+                ]} data={listaOre.map(o => {
+                    let temp = {...o}
+                    temp.totaleRelativo = formatNumber(o.totaleRelativo)
+
+                    return temp
+                })} exportable exportFormat={["csv"]} /> : <LoadingIconCentered />
             }
         </Dialog>
     }

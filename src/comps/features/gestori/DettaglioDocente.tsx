@@ -9,7 +9,7 @@ import { EditIcon, Icon } from "../../layout/Icon"
 import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { EditDocente } from "./EditDocente"
-import { TabellaPresenzeDocente } from "./TabellaPresenzeDocente"
+import { TabellaPresenze } from "./TabellaPresenze"
 import { CardActions } from "../../layout/CardActions"
 
 export interface IRouteParams{
@@ -79,7 +79,7 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
                 </Card>
             </div>
 
-            <TabellaPresenzeDocente idDocente={parseInt(idDocente)} refreshDocente={this.loadDocente} />
+            <TabellaPresenze targetId={parseInt(idDocente)} reloadTotali={this.loadDocente} isDocente />
         </div>
     }
 }

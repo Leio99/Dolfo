@@ -5,10 +5,14 @@ import { history } from "../comps/Navigator"
 import { IDataColumn } from "../comps/shared/models/IColumn"
 
 export const formatDate = (date: Date, monthString = false) => {
-    const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " "): ("-" + zeroBefore(date.getMonth() + 1) + "-")
+    const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
 
     return `${zeroBefore(date.getDate()) + month + date.getFullYear()}`
 }
+
+export const reverseDate = (date: Date) => `${date.getFullYear() + "-" + zeroBefore(date.getMonth() + 1) + "-" + zeroBefore(date.getDate())}`
+
+export const reverseDateWithTime = (date: Date) => `${date.getFullYear() + "-" + zeroBefore(date.getMonth() + 1) + "-" + zeroBefore(date.getDate())} ${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
 
 export const formatItalian = (date: string) => formatDate(new Date(date))
 
@@ -17,6 +21,14 @@ export const formatWithMonth = (date: string) => formatDate(new Date(date), true
 export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
 
 export const validateDate = (date: string) => isNaN(new Date(date).getTime())
+
+export const formatNumber = (n: string|number) => {
+    let converted = typeof n === "number" ? parseFloat(n.toString()).toFixed(2) : parseFloat(n).toFixed(2)
+
+    if(parseFloat(converted).toString().indexOf(".") === -1) converted = (+converted).toString()
+
+    return converted.replace(/\B(?=(\d{3})+(?!\d))/g, ";").replace(".",",").replace(";",".")
+}
 
 export const decodeMonth = (month: number, short: boolean = false) => {
     switch(month){
@@ -185,8 +197,7 @@ export const convertFromUTC = (date: string) => {
 }
 
 export const getDateTime = (date: string) => {
-    let clearDate = date.replace("Z", ""),
-    converted = new Date(clearDate)
+    const converted = new Date(date)
 
     return `${zeroBefore(converted.getHours())}:${zeroBefore(converted.getMinutes())}`
 }

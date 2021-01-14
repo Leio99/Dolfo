@@ -1,9 +1,11 @@
 import React from "react"
+import { formatNumber } from "../../commons/utility"
 import { BaseColors } from "./Button"
 import { LoadingIcon } from "./Icon"
 
 export interface IProps {
     readonly percent: number
+    readonly convertCommas?: boolean
     readonly circular?: boolean
     readonly color?: BaseColors
     readonly circleWidth?: number | string
@@ -18,21 +20,22 @@ export class Progress extends React.PureComponent<IProps>{
         const props = this.props,
         percent = props.percent < 0 ? 0 : props.percent > 100 ? 100 : props.percent,
         color = props.color || "darkblue",
-        width = props.circleWidth >= 0 ? props.circleWidth : 150
+        width = props.circleWidth >= 0 ? props.circleWidth : 150,
+        formattedPercent = props.convertCommas ? formatNumber(percent) : percent
 
         if(props.circular){
             return <svg viewBox="0 0 36 36" className={"dolfo-circular-progress" + (props.className ? (" " + props.className) : "")} style={{ width }}>
                 <path className="dolfo-progress-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 <path className={"dolfo-progress-circle line-" + color} strokeDasharray={percent + ", 100"} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 <text x="18" y="20.35" className="dolfo-progress-percentage">
-                    {props.customCircleText || (percent + "%")}
+                    {props.customCircleText || (formattedPercent + "%")}
                 </text>
             </svg>
         }
 
         return <div className={"dolfo-progress-line " + (props.className ? (" " + props.className) : "") + (props.loading ? " progress-loading" : "")}>
             <span className="percent-text">
-                {props.loading ? (props.loadingText || <LoadingIcon spinning />) : (props.percent + "%")}
+                {props.loading ? (props.loadingText || <LoadingIcon spinning />) : (formattedPercent + "%")}
             </span>
             <div className={"dolfo-progress-inner bar-" + color} style={{ width: percent + "%", animation: props.loading == null ? "expandBar 1s ease forwards" : "none" }}></div>
         </div>

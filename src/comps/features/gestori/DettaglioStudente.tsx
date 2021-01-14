@@ -1,6 +1,6 @@
 import React from "react"
 import { RouteComponentProps } from "react-router-dom"
-import { dateIsToday, formatWithMonth, goTo, LoadingIconCentered } from "../../../commons/utility"
+import { dateIsToday, formatNumber, formatWithMonth, goTo, LoadingIconCentered } from "../../../commons/utility"
 import { StudentiService } from "../../../services/StudentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
@@ -112,15 +112,15 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                     </CardActions>
                 </Card>
 
-                <Card title="Presenze totali (ore)" className="col-12 col-md mb-3">
+                <Card title="Presenze totali (escluso stage)" className="col-12 col-md mb-3">
                     {
-                        <Progress circular percent={+parseFloat(studente.frequenza).toFixed(2)} circleWidth={80} className="mr-3" color={color} />
+                        <Progress circular percent={studente.frequenza} circleWidth={80} className="mr-3" color={color} convertCommas />
                     }
 
                     <div className="progress-label">
                         {
                             oreTotali != null && totPresenze != null ? <span>
-                                {+totPresenze.toFixed(2)}/{+oreTotali.toFixed(2)}
+                                {formatNumber(totPresenze)}/{formatNumber(oreTotali)}
                             </span> : <LoadingIcon spinning />
                         }
                     </div>
@@ -133,7 +133,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                 </Card>
             </div>
 
-            <TabellaPresenze idStudente={parseInt(idStudente)} reloadTotali={this.loadTotali} />
+            <TabellaPresenze targetId={parseInt(idStudente)} reloadTotali={this.loadStudente} />
         </div>
     }
 }

@@ -1,15 +1,15 @@
 import React, { FormEvent } from "react"
-import { formatWithMonth } from "../../../../commons/utility"
+import { formatWithMonth, reverseDateWithTime } from "../../../../commons/utility"
 import { PresenzeService } from "../../../../services/PresenzeService"
 import TimePicker from "../../../form/TimePicker"
 import Button from "../../../layout/Button"
 import { ComponentAsDialogProps, Dialog } from "../../../layout/Dialog"
 import { QuestionCircleIcon } from "../../../layout/Icon"
+import { NotificationMsg } from "../../../layout/NotificationMsg"
 
 export interface IProps extends ComponentAsDialogProps{
     readonly presenza: any
     readonly onSave: (presenza: any) => void
-    readonly isDocente?: boolean
 }
 export interface IState{
     readonly loading: boolean
@@ -32,16 +32,20 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
         e.preventDefault()
 
         const { oraEntrata, oraUscita } = this.state,
-        { presenza, isDocente } = this.props,
-        data = new Date()
+        { presenza } = this.props,
+        data = new Date(),
+        newEntrata = new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${oraEntrata}:00:00`),
+        newUscita = new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${oraUscita}:00:00`)
+
+        if(newEntrata >= newUscita)
+            return NotificationMsg.showError("L'orario di entrata deve essere minore di quello di uscita")
 
         this.toggleLoading()
 
-        PresenzeService.editPresenza(this.props.presenza.idPresenza, {
-            oraEntrata: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${oraEntrata}`),
-            oraUscita: new Date(`${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()} ${oraUscita}`),
-            idLezione: presenza.idLezione
-        }, isDocente).then(response => {
+        PresenzeService.editPresenza(this.props.presenza.id, {
+            oraEntrata: reverseDateWithTime(newEntrata),
+            oraUscita: reverseDateWithTime(newUscita)
+        }).then(() => {
             const newPresenza = {
                 ...presenza,
                 oraEntrata,
@@ -50,7 +54,6 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
 
             this.props.onSave(newPresenza)
             this.props.close()
-
             this.toggleLoading()
         }).catch(this.toggleLoading)
     }
