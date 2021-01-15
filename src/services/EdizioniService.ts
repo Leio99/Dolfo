@@ -1,20 +1,21 @@
-import { API_URL_REGISTRO_EDIZIONI } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_EDIZIONI } from "./costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
+import { Edizione } from "../models/Edizione"
 
 export class EdizioniService{
     static getByGestore(idGestore: number){            
         return ServerCall.get(API_URL_REGISTRO_EDIZIONI + "/getByGestore/" + idGestore)
     }
 
-    static addEdizione(idGestore: number, body: any){
+    static addEdizione(idGestore: number, body: Edizione){
 		if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
 
         return ServerCall.post(API_URL_REGISTRO_EDIZIONI + "/addEdizione/" + idGestore, body)
     }
 
-    static editEdizione(idEdizione: number, body: any){
+    static editEdizione(idEdizione: number, body: Edizione){
 		if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
 

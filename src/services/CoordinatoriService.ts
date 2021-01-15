@@ -1,4 +1,4 @@
-import { API_URL_REGISTRO_GESTORI } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_GESTORI } from "./costantiApi"
 import { ServerCall } from "./ServerCall"
 
 export class CoordinatoriService{

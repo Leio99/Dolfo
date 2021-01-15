@@ -1,4 +1,6 @@
 import React from "react"
+import { objectsAreSame } from "../../../commons/utility"
+import { Edizione } from "../../../models/Edizione"
 import { EdizioniService } from "../../../services/EdizioniService"
 import { GestoriService } from "../../../services/GestoriService"
 import { Option } from "../../form/Option"
@@ -12,7 +14,7 @@ import { DialogListaEdizioni } from "./dialogs/DialogListaEdizioni"
 import { ListaPresenzeDaConfermare } from "./ListaPresenzeDaConfermare"
 
 export interface IState{
-    readonly listaEdizioni: any[]
+    readonly listaEdizioni: Edizione[]
     readonly defaultEdizione: number
 }
 
@@ -49,27 +51,15 @@ export class HomeGestore extends React.PureComponent<undefined, IState>{
         })
     }
 
-    objectsAreSame = (x: any, y: any) => {
-        let objectsAreSame = true
-        console.log(x, y)
-        for(const propertyName in x){
-           if(x[propertyName] !== y[propertyName]){
-              objectsAreSame = false
-              break
-           }
-        }
-
-        return objectsAreSame
-     }
-
     openGestisciEdizioni = () => {
         Dialog.openDialogComponent(DialogListaEdizioni, {
             idGestore: this.session.idGestore,
-            reloadEdizioni: (newList: any[]) => {
+            reloadEdizioni: (newList: Edizione[]) => {
                 const current = this.state.listaEdizioni
                 let areEqual = newList.length === current.length
+
                 areEqual && newList?.forEach((e, i) => {
-                    if(!this.objectsAreSame(e, current[i])) areEqual = false
+                    if(!objectsAreSame(e, current[i])) areEqual = false
                 })
                 
                 if(!areEqual) this.reloadEdizioni()

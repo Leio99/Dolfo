@@ -1,5 +1,6 @@
 import React, { FormEvent } from "react"
 import { EdizioniService } from "../../../../services/EdizioniService"
+import { Edizione } from "../../../../models/Edizione"
 import { TextInput } from "../../../form/TextInput"
 import Button from "../../../layout/Button"
 import { ComponentAsDialogProps, Dialog } from "../../../layout/Dialog"
@@ -8,7 +9,7 @@ import { NotificationMsg } from "../../../layout/NotificationMsg"
 export interface IProps extends ComponentAsDialogProps{
     readonly idGestore: number
     readonly reloadList: () => void
-    readonly edizione?: any
+    readonly edizione?: Edizione
 }
 export interface IState{
     readonly desc: string

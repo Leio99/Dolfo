@@ -1,4 +1,4 @@
-import { API_URL_REGISTRO_CORSI } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_CORSI } from "./costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
 

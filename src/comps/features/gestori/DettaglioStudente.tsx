@@ -13,12 +13,13 @@ import { ComponentsPaths } from "../ComponentsPaths"
 import { DialogOreStage } from "./dialogs/DialogOreStage"
 import { EditStudente } from "./EditStudente"
 import { TabellaPresenze } from "./TabellaPresenze"
+import { Studente } from "../../../models/Studente"
 
 export interface IRouteParams{
     readonly id: string
 }
 export interface IState{
-    readonly studente: any
+    readonly studente: Studente
     readonly totPresenze: number
     readonly oreTotali: number
 }

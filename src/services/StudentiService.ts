@@ -1,6 +1,7 @@
-import { API_URL_REGISTRO_STUDENTI } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_STUDENTI } from "./costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
+import { Studente } from "../models/Studente"
 
 export class StudentiService{
     static getStudentiEdizione(idGestore: number){
@@ -17,7 +18,7 @@ export class StudentiService{
 		return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getStageValue/" + idGestore)
     }
 
-    static archiviaStudenti(body: any){
+    static archiviaStudenti(body: number[]){
 		if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
 		
@@ -38,7 +39,7 @@ export class StudentiService{
         return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getOre/" + id)
     }
 
-    static getTotaleOre(idEdizione: string){
+    static getTotaleOre(idEdizione: number){
         if(!ComponentsPermissions.getLoginGestore(false))
             return ServerCall.emptyCallResult()
         
@@ -53,11 +54,11 @@ export class StudentiService{
         return ServerCall.get(API_URL_REGISTRO_STUDENTI + "/getTotaleOreStage/" + id)
     }
 
-    static addStudenti(idGestore: number, body: any){
+    static addStudenti(idGestore: number, body: Studente[]){
         return ServerCall.post(API_URL_REGISTRO_STUDENTI + "/" + idGestore, body)
     }
 
-    static editStudente(idStudente: number, body: any){
+    static editStudente(idStudente: number, body: Studente){
         return ServerCall.put(API_URL_REGISTRO_STUDENTI + "/" + idStudente, body)
     }
 }

@@ -1,5 +1,6 @@
 import React from "react"
 import { getDateTime, LoadingIconCentered } from "../../../commons/utility"
+import { Presenza } from "../../../models/Presenza"
 import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
@@ -13,7 +14,7 @@ export interface IProps{
     reloadTotali: () => void
 }
 export interface IState{
-    readonly presenze: any[]
+    readonly presenze: Presenza[]
 }
 
 export class TabellaPresenze extends React.PureComponent<IProps, IState>{
@@ -29,7 +30,7 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
     componentDidMount = () => {
 
         PresenzeService.getPresenze(this.props.targetId, this.props.isDocente).then(response => {
-            const presenze = response.data as any[]
+            const presenze = response.data as Presenza[]
 
             this.setState({
                 presenze: presenze.map(p => {
@@ -43,7 +44,7 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
         })
     }
 
-    savePresenza = (presenza: any) => {
+    savePresenza = (presenza: Presenza) => {
         this.setState({
             presenze: this.state.presenze.map(p => {
                 if(p.id === presenza.id) return presenza
@@ -55,7 +56,7 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
         this.props.reloadTotali()
     }
 
-    editPresenza = (presenza: any) => Dialog.openDialogComponent(EditPresenza, { presenza, onSave: this.savePresenza })
+    editPresenza = (presenza: Presenza) => Dialog.openDialogComponent(EditPresenza, { presenza, onSave: this.savePresenza })
 
     render = (): JSX.Element => {
         const { presenze } = this.state

@@ -1,6 +1,7 @@
 import React from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { goTo, LoadingIconCentered } from "../../../commons/utility"
+import { Docente } from "../../../models/Docente"
 import { DocentiService } from "../../../services/DocentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
@@ -16,7 +17,7 @@ export interface IRouteParams{
     readonly id: string
 }
 export interface IState{
-    readonly docente: any
+    readonly docente: Docente
 }
 
 export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IRouteParams>, IState>{

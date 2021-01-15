@@ -1,5 +1,5 @@
 import { NotificationMsg } from "../comps/layout/NotificationMsg"
-import { ICalendarDay } from "../models/ICalendarDay"
+import { ICalendarDay } from "../comps/shared/models/ICalendarDay"
 import { LoadingIcon } from "../comps/layout/Icon"
 import { history } from "../comps/Navigator"
 import { IDataColumn } from "../comps/shared/models/IColumn"
@@ -249,3 +249,16 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
 export const goTo = (path: string) => window.location.pathname !== path && history.push(path)
 
 export const notImplemented = () => NotificationMsg.show({ message: "Funzionalità da implementare", position: "top-right", type: "info" })
+
+export const objectsAreSame = (x: any, y: any) => {
+    let objectsAreSame = true
+    
+    for(const propertyName in x){
+       if(x[propertyName] !== y[propertyName]){
+          objectsAreSame = false
+          break
+       }
+    }
+
+    return objectsAreSame
+}

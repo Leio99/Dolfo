@@ -1,6 +1,7 @@
 import React, { FormEvent } from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { goTo, LoadingIconCentered, reverseDate } from "../../../commons/utility"
+import { Studente } from "../../../models/Studente"
 import { StudentiService } from "../../../services/StudentiService"
 import DatePicker from "../../form/DatePicker"
 import { TextInput } from "../../form/TextInput"
@@ -22,7 +23,7 @@ export interface IState{
     readonly dataNascita: Date
     readonly loading: boolean
     readonly loadingForm: boolean
-    readonly studente: any
+    readonly studente: Studente
 }
 
 export class EditStudente extends React.PureComponent<IProps, IState>{

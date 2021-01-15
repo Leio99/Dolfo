@@ -15,11 +15,6 @@ export interface IProps{
 }
 
 export class GestoriMenu extends React.PureComponent<IProps>{
-    destroySession = () => {
-        sessionStorage.removeItem("sessionGestore")
-        ComponentsPermissions.checkPermissionGestore()
-    }
-
     getMenuItemProps = (path: string) => {
         return {
             selected: this.props.currentPath === path,
@@ -65,7 +60,7 @@ export class GestoriMenu extends React.PureComponent<IProps>{
                 <Icon iconKey="book-reader" className="mr-2" /> Documentazione
             </MenuItem>
 
-            <MenuItem onClick={this.destroySession}>
+            <MenuItem onClick={ComponentsPermissions.destroySessionGestore}>
                 <Icon iconKey="power-off" className="mr-2" /> Esci
             </MenuItem>
         </SideMenu>

@@ -10,10 +10,11 @@ import { ComponentsPaths } from "../ComponentsPaths"
 import { StageSwitch } from "./StageSwitch"
 import { formatNumber, goTo, LoadingIconCentered } from "../../../commons/utility"
 import { ComponentsPermissions } from "../ComponentsPermissions"
+import { Studente } from "../../../models/Studente"
 
 export interface IState{
-    readonly studenti: any[]
-    readonly checkList: any[]
+    readonly studenti: Studente[]
+    readonly checkList: Studente[]
 }
 export class ListaStudenti extends React.PureComponent<undefined, IState>{
     readonly session = ComponentsPermissions.getLoginGestore()
@@ -45,7 +46,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         this.setState({ checkList })
     }
 
-    toggleCheck = (studente: any) => {
+    toggleCheck = (studente: Studente) => {
         const list = this.state.checkList
         let checkList
 
@@ -61,7 +62,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
     
     openModifica = (id: number) => goTo(ComponentsPaths.PATH_GESTORI_EDIT_STUDENTE_BASE + "/" + id)
 
-    archiviaStudenti = (target: any | any[]) => {
+    archiviaStudenti = (target: Studente | Studente[]) => {
         Dialog.openDialog({
             title: "Attenzione",
             icon: <WarningIconOutline color="var(--orange)" />, 
@@ -86,7 +87,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                 const idStudenti = Array.isArray(target) ? target.map(v => v.id) : [target.id],
                 loadingDialog = Dialog.loadingDialog()
 
-                StudentiService.archiviaStudenti({ idStudenti }).then(response => {
+                StudentiService.archiviaStudenti(idStudenti).then(() => {
                     loadingDialog.close()
                     this.loadStudenti()
                 })
@@ -100,7 +101,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         })
     }
 
-    buildTable = (studenti: any[]) => {
+    buildTable = (studenti: Studente[]) => {
         const { checkList } = this.state
         let checkedAll = checkList.length > 0
 
@@ -130,7 +131,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                         </Button>
                         
                         {
-                            !s.ritirato && !s.promosso && <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.id)}>
+                            <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.id)}>
                                 <EditIcon />
                             </Button>
                         }

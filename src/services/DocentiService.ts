@@ -1,6 +1,7 @@
-import { API_URL_REGISTRO_DOCENTI } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_DOCENTI } from "./costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
+import { Docente } from "../models/Docente"
 
 export class DocentiService{
     static getDocente(idDocente: string){
@@ -17,16 +18,7 @@ export class DocentiService{
         return ServerCall.get(API_URL_REGISTRO_DOCENTI)
     }
 
-    static editDocente(idDocente: string, body: any){
-        const login = ComponentsPermissions.getLoginGestore(),
-        params = {
-            authCoordinatore: {
-                idCoordinatore: login.idCoordinatore,
-                password: login.password
-            },
-            docente: body
-        }
-
-        return ServerCall.put(API_URL_REGISTRO_DOCENTI + "/" + idDocente, params)
+    static editDocente(idDocente: string, body: Docente){
+        return ServerCall.put(API_URL_REGISTRO_DOCENTI + "/" + idDocente, body)
     }
 }

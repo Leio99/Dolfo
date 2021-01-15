@@ -67,7 +67,7 @@ export class ImportaStudenti extends React.PureComponent<undefined, IState>{
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
     changeField = (field: string, position: number) => {
-        let fields = {...this.state.fields} as any
+        const fields = {...this.state.fields} as any
         fields[field] = position 
 
         this.setState({ fields })

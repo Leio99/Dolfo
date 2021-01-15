@@ -1,5 +1,6 @@
 import React from "react"
 import { LoadingIconCentered } from "../../../commons/utility"
+import { Presenza } from "../../../models/Presenza"
 import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
@@ -10,7 +11,7 @@ import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 
 export interface IState{
-    readonly listaPresenze: any[]
+    readonly listaPresenze: Presenza[]
     readonly selectedList: number[]
 }
 
@@ -120,10 +121,10 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
     checkUncheckAll = () => {
         const { selectedList, listaPresenze } = this.state
 
-        let newList
+        let newList: number[]
 
         if(selectedList.length === listaPresenze.length) newList = []
-        else newList = listaPresenze.map(p => p.idPresenza)
+        else newList = listaPresenze.map(p => p.id)
 
         this.setState({
             selectedList: newList
@@ -154,14 +155,14 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 { label: "Azioni", field: "azioni", align: "center" }
             ]} data={listaPresenze.map(p => {
                 let newP = {...p},
-                isSelected = selectedList.includes(newP.idPresenza)
+                isSelected = selectedList.includes(newP.id)
 
                 newP.rowStyle = isSelected ? { backgroundColor: "var(--hoverblue)" } : null
 
                 newP.onDoubleClick = () => this.checkUnCheck(newP.idPresenza)
                 newP.checked = isSelected
                 newP.onCheckChange = newP.onDoubleClick
-                newP.des = p.des + (p.tipo === "S" ? " (studente)" : " (docente)")
+                newP.des = p.lezione + (p.tipoUtente === "S" ? " (studente)" : " (docente)")
 
                 newP.azioni = <div>
                     <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="m-2">

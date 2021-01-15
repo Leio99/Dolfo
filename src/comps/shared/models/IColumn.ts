@@ -15,11 +15,11 @@ export interface IColumn{
 }
 
 export interface IDataColumn{
-    readonly onDoubleClick?: () => void
-    readonly rowStyle?: CSSProperties
-    readonly [key: string]: any
-    readonly onCheckChange?: (obj: any) => void
-    readonly checked?: boolean
-    readonly checkDisabled?: boolean
-    readonly hideCheck?: boolean
+    onDoubleClick?: () => void
+    rowStyle?: CSSProperties
+    onCheckChange?: (obj: any) => void
+    checked?: boolean
+    checkDisabled?: boolean
+    hideCheck?: boolean
+    [key: string]: any
 }

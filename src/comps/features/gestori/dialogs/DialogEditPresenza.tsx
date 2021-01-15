@@ -1,5 +1,6 @@
 import React, { FormEvent } from "react"
 import { formatWithMonth, reverseDateWithTime } from "../../../../commons/utility"
+import { Presenza } from "../../../../models/Presenza"
 import { PresenzeService } from "../../../../services/PresenzeService"
 import TimePicker from "../../../form/TimePicker"
 import Button from "../../../layout/Button"
@@ -8,8 +9,8 @@ import { QuestionCircleIcon } from "../../../layout/Icon"
 import { NotificationMsg } from "../../../layout/NotificationMsg"
 
 export interface IProps extends ComponentAsDialogProps{
-    readonly presenza: any
-    readonly onSave: (presenza: any) => void
+    readonly presenza: Presenza
+    readonly onSave: (presenza: Presenza) => void
 }
 export interface IState{
     readonly loading: boolean

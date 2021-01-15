@@ -1,6 +1,7 @@
 import React, { FormEvent } from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { goTo, LoadingIconCentered } from "../../../commons/utility"
+import { Docente } from "../../../models/Docente"
 import { DocentiService } from "../../../services/DocentiService"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
@@ -19,7 +20,7 @@ export interface IState{
     readonly email: string
     readonly cf: string
     readonly loadingForm: boolean
-    readonly docente: any
+    readonly docente: Docente
 }
 
 export class EditDocente extends React.PureComponent<IProps, IState>{
@@ -72,20 +73,20 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
 
         this.toggleLoading()
 
-        DocentiService.editDocente(docente.idDocente, {
-            idDocente: parseInt(this.props.match.params.id),
-            nome: sendNome,
-            cognome: sendCognome,
-            email: sendEmail,
-            cf: sendCF,
-            tenere: docente.corsi.map((c: number) => { return { idCorso: c, idDocente: docente.idDocente } }),
-            insegnare: docente.materie.map((m: number) => { return { idMateria: m, idDocente: docente.idDocente } }),
-            ritirato: docente.ritirato
-        }).then(() => {
-            this.toggleLoading()
-            this.props.onSave && this.props.onSave()
-            NotificationMsg.showSuccess("Docente modificato con successo!")
-        }).catch(this.toggleLoading)
+        // DocentiService.editDocente(docente.id, {
+        //     idDocente: parseInt(this.props.match.params.id),
+        //     nome: sendNome,
+        //     cognome: sendCognome,
+        //     email: sendEmail,
+        //     cf: sendCF,
+        //     tenere: docente.corsi.map((c: number) => { return { idCorso: c, idDocente: docente.idDocente } }),
+        //     insegnare: docente.materie.map((m: number) => { return { idMateria: m, idDocente: docente.idDocente } }),
+        //     ritirato: docente.ritirato
+        // }).then(() => {
+        //     this.toggleLoading()
+        //     this.props.onSave && this.props.onSave()
+        //     NotificationMsg.showSuccess("Docente modificato con successo!")
+        // }).catch(this.toggleLoading)
     }
 
     render = (): JSX.Element => {

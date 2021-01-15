@@ -4,9 +4,10 @@ import DatePicker from "../../../form/DatePicker"
 import Button from "../../../layout/Button"
 import { ComponentAsDialogProps, Dialog } from "../../../layout/Dialog"
 import { WarningIconOutline } from "../../../layout/Icon"
+import { Studente } from "../../../../models/Studente"
 
 export interface IProps extends ComponentAsDialogProps{
-    readonly studente: any
+    readonly studente: Studente
 }
 export interface IState{
     readonly dataRitiro: string

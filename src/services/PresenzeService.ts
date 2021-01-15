@@ -1,6 +1,7 @@
-import { API_URL_REGISTRO_PRESENZE } from "../commons/consts/costantiApi"
+import { API_URL_REGISTRO_PRESENZE } from "./costantiApi"
 import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
+import { Presenza } from "../models/Presenza"
 
 export class PresenzeService{
     static getPresenze(targetId: number, isDocente: boolean){
@@ -8,7 +9,7 @@ export class PresenzeService{
         return ServerCall.get(API_URL_REGISTRO_PRESENZE + "/getPresenze/" + tipo + "/" + targetId)
     }
 
-    static editPresenza(id: number, body: any){
+    static editPresenza(id: number, body: Presenza){
         return ServerCall.put(API_URL_REGISTRO_PRESENZE + "/editPresenza/" + id, body)
     }
 

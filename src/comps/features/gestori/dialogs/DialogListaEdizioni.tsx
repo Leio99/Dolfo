@@ -1,5 +1,6 @@
 import React from "react"
 import { LoadingIconCentered } from "../../../../commons/utility"
+import { Edizione } from "../../../../models/Edizione"
 import { EdizioniService } from "../../../../services/EdizioniService"
 import Button from "../../../layout/Button"
 import { ComponentAsDialogProps, Dialog } from "../../../layout/Dialog"
@@ -9,10 +10,10 @@ import { DialogAddEditEdizione } from "./DialogAddEditEdizione"
 
 export interface IProps extends ComponentAsDialogProps{
     readonly idGestore: number
-    readonly reloadEdizioni: (newList: any[]) => void
+    readonly reloadEdizioni: (newList: Edizione[]) => void
 }
 export interface IState{
-    readonly listaEdizioni: any[]
+    readonly listaEdizioni: Edizione[]
 }
 
 export class DialogListaEdizioni extends React.PureComponent<IProps, IState>{
@@ -41,7 +42,7 @@ export class DialogListaEdizioni extends React.PureComponent<IProps, IState>{
         })
     }
 
-    openEditEdizione = (edizione: any) => {
+    openEditEdizione = (edizione: Edizione) => {
         Dialog.openDialogComponent(DialogAddEditEdizione, {
             edizione,
             reloadList: this.reloadList

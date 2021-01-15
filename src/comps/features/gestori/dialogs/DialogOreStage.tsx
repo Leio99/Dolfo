@@ -1,5 +1,6 @@
 import React from "react"
 import { formatNumber, LoadingIconCentered } from "../../../../commons/utility"
+import { PresenzaStage } from "../../../../models/PresenzaStage"
 import { StudentiService } from "../../../../services/StudentiService"
 import { Dialog, ComponentAsDialogProps } from "../../../layout/Dialog"
 import { LoadingIcon } from "../../../layout/Icon"
@@ -9,7 +10,7 @@ export interface IProps extends ComponentAsDialogProps{
     readonly idStudente: number
 }
 export interface IState{
-    readonly listaOre: any[]
+    readonly listaOre: PresenzaStage[]
     readonly oreTotali: number
 }
 

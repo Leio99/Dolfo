@@ -69,7 +69,7 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
             cf: sendCF,
             dataNascita: reverseDate(dataNascita),
             email: sendEmail
-        }]).then((response) => {
+        }]).then(() => {
             this.toggleLoading()
             NotificationMsg.showSuccess("Studente creato con successo!")
             goTo(ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI)
