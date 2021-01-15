@@ -29,7 +29,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
     }
 
     loadPresenze = () => {
-        this.setState({ listaPresenze: null })
+        this.setState({ listaPresenze: null, selectedList: [] })
         PresenzeService.getPresenzeDaConfermare(this.session.idGestore).then(response => {
             this.setState({
                 listaPresenze: response.data
@@ -39,14 +39,15 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
 
     componentDidMount = this.loadPresenze
 
-    confermaPresenza = (idPresenza: number) => {
-        Dialog.yesNoDialog(null, "Vuoi confermare la presenza selezionata?", () => {
+    confermaPresenza = (target: number|number[]) => {
+        const title = Array.isArray(target) ? "Vuoi confermare le presenze selezionate?" : "Vuoi confermare la presenza selezionata?"
+
+        Dialog.yesNoDialog(null, title, () => {
             const loadingDialog = this.showLoadingDialog()
 
-            PresenzeService.confermaPresenza(idPresenza).then(() => {
+            PresenzeService.confermaPresenze(Array.isArray(target) ? target : [target]).then(() => {
                 loadingDialog.close()
                 this.loadPresenze()
-                this.removeFromList(idPresenza)
                 NotificationMsg.showSuccess("Presenza confermata!")
             }).catch(loadingDialog.close)
         })
@@ -58,20 +59,11 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
         if(!idPresenze.length)
             return NotificationMsg.showError("Seleziona almeno una presenza!")
 
-        Dialog.yesNoDialog(null, "Vuoi confermare le presenze selezionate?", () => {
-            const loadingDialog = this.showLoadingDialog()
-
-            PresenzeService.confermaPresenze(idPresenze).then(() => {
-                loadingDialog.close()
-                this.loadPresenze()
-                this.removeAllFromList(idPresenze)
-                NotificationMsg.showSuccess("Presenze confermate!")
-            }).catch(loadingDialog.close)
-        })
+        this.confermaPresenza(idPresenze)
     }
 
     rejectPresenza = (idPresenza: number) => {
-        Dialog.yesNoDialog(null, "Vuoi cancellare la presenza selezionata?", () => {
+        Dialog.yesNoDialog(null, "Vuoi rifiutare la presenza selezionata?", () => {
             const loadingDialog = this.showLoadingDialog()
 
             PresenzeService.rifiutaPresenza(idPresenza).then(() => {
@@ -176,11 +168,11 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 newP.oraUscita = getTime(p.oraUscita)
 
                 newP.azioni = <div>
-                    <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="m-2">
+                    <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.id)} tooltip="Conferma" className="m-2">
                         <CheckIcon />
                     </Button>
 
-                    <Button circleBtn btnColor="red" onClick={() => this.rejectPresenza(newP.idPresenza)} tooltip="Rifiuta" className="m-2">
+                    <Button circleBtn btnColor="red" onClick={() => this.rejectPresenza(newP.id)} tooltip="Rifiuta" className="m-2">
                         <DeleteIcon />
                     </Button>
 

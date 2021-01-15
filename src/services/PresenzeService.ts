@@ -16,15 +16,11 @@ export class PresenzeService{
         return ServerCall.get(API_URL_REGISTRO_PRESENZE + "/nonConfermate/" + idGestore)
     }
 
-    static confermaPresenza(idPresenza: number){
-        return ServerCall.put("http://mygraphic.altervista.org/esame/?presenze&conferma", { idPresenza })
-    }
-
     static confermaPresenze(idPresenze: number[]){
-        return ServerCall.put("http://mygraphic.altervista.org/esame/?presenze&confermaAll", { idPresenze })
+        return ServerCall.put(API_URL_REGISTRO_PRESENZE + "/conferma", idPresenze)
     }
 
     static rifiutaPresenza(idPresenza: number){
-        return ServerCall.put("http://mygraphic.altervista.org/esame/?presenze&rifiuta", { idPresenza })
+        return ServerCall.put(API_URL_REGISTRO_PRESENZE + "/rifiuta/" + idPresenza, {})
     }
 }
