@@ -1,5 +1,5 @@
 import React from "react"
-import { LoadingIconCentered } from "../../../commons/utility"
+import { getTime, LoadingIconCentered } from "../../../commons/utility"
 import { Presenza } from "../../../models/Presenza"
 import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
@@ -9,6 +9,7 @@ import { NotificationMsg } from "../../layout/NotificationMsg"
 import { Table } from "../../layout/Table"
 import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
+import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IState{
     readonly listaPresenze: Presenza[]
@@ -16,6 +17,8 @@ export interface IState{
 }
 
 export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
+    readonly session = ComponentsPermissions.getLoginGestore()
+
     constructor(props: undefined){
         super(props)
 
@@ -26,7 +29,8 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
     }
 
     loadPresenze = () => {
-        PresenzeService.getPresenzeDaConfermare().then(response => {
+        this.setState({ listaPresenze: null })
+        PresenzeService.getPresenzeDaConfermare(this.session.idGestore).then(response => {
             this.setState({
                 listaPresenze: response.data
             })
@@ -148,8 +152,8 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
             <Table columns={[
                 { type: "check", onCheckAll: this.checkUncheckAll, checked: selectedList.length === listaPresenze.length && selectedList.length > 0, checkTooltip: "Seleziona tutte", width: "5%", align: "center" },
                 { label: "Data", field: "data", align: "center", canSearch: true, type: "date" },
-                { label: "Entrata", field: "ingresso", align: "center" },
-                { label: "Uscita", field: "uscita", align: "center" },
+                { label: "Entrata", field: "oraEntrata", align: "center" },
+                { label: "Uscita", field: "oraUscita", align: "center" },
                 { label: "Studente/Docente", field: "des", tooltip: true, canSearch: true },
                 { label: "Lezione", field: "lezione", tooltip: true, width: "30%" },
                 { label: "Azioni", field: "azioni", align: "center" }
@@ -158,11 +162,18 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                 isSelected = selectedList.includes(newP.id)
 
                 newP.rowStyle = isSelected ? { backgroundColor: "var(--hoverblue)" } : null
-
-                newP.onDoubleClick = () => this.checkUnCheck(newP.idPresenza)
+                newP.onDoubleClick = () => this.checkUnCheck(newP.id)
                 newP.checked = isSelected
                 newP.onCheckChange = newP.onDoubleClick
-                newP.des = p.lezione + (p.tipoUtente === "S" ? " (studente)" : " (docente)")
+                
+                if(p.tipoUtente === "S"){
+                    newP.des = p.cognomeStudente + " " + p.nomeStudente + " (studente)"
+                }else{
+                    newP.des = p.cognomeDocente + " " + p.nomeDocente + " (docente)"
+                }
+
+                newP.oraEntrata = getTime(p.oraEntrata)
+                newP.oraUscita = getTime(p.oraUscita)
 
                 newP.azioni = <div>
                     <Button circleBtn btnColor="green" onClick={() => this.confermaPresenza(newP.idPresenza)} tooltip="Conferma" className="m-2">
@@ -173,7 +184,7 @@ export class ListaPresenzeDaConfermare extends React.PureComponent<any, IState>{
                         <DeleteIcon />
                     </Button>
 
-                    <Button circleBtn btnColor="blue" onClick={() => this.openDettaglio(newP.targetId, newP.tipo === "D")} tooltip={"Info " + (newP.tipo === "D" ? "docente" : "studente")} className="m-2">
+                    <Button circleBtn btnColor="blue" onClick={() => this.openDettaglio(newP.idUtente, newP.tipoUtente === "D")} tooltip={"Info " + (newP.tipoUtente === "D" ? "docente" : "studente")} className="m-2">
                         <Icon iconKey="user" />
                     </Button>
                 </div>

@@ -81,7 +81,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                 </Accordion>
             </div> : <div>
                 <div>Si sta per archiviare uno studente (<strong>{target.nome} {target.cognome}</strong>).</div>
-                <div>I dati identificativi dello studente e le presenze verranno comunque mantenuti, ma lo studente non potrà più registrare nuove presenze e non potrà essere spostato nuovamente.</div>
+                <div>I dati identificativi dello studente e le presenze verranno comunque mantenuti, ma lo studente non potrà più registrare nuove presenze.</div>
             </div>,
             onOk: () => {
                 const idStudenti = Array.isArray(target) ? target.map(v => v.id) : [target.id],
@@ -90,7 +90,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                 StudentiService.archiviaStudenti(idStudenti).then(() => {
                     loadingDialog.close()
                     this.loadStudenti()
-                })
+                }).catch(() => loadingDialog.close())
             },
             okText: "Conferma",
             okType: "red",
@@ -121,7 +121,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                     checked: checkList.includes(s),
                     onCheckChange: () => this.toggleCheck(s),
                     rowStyle: s.promosso ? { backgroundColor: "#f8f8f8" } : null,
-                    desStudente: s.nome + " " + s.cognome,
+                    desStudente: s.cognome + " " + s.nome,
                     hideCheck: s.promosso,
                     stato: !s.promosso ? <Icon iconKey="dot-circle" type="far" color="var(--blue)" tooltip="Attivo" large /> : <CheckIcon color="var(--green)" tooltip="Archiviato" large />,
                     frequenza: <span data-tooltip="(escluso stage)">{formatNumber(s.frequenza)}%</span>,
@@ -130,11 +130,9 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
                             <DetailIcon />
                         </Button>
                         
-                        {
-                            <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.id)}>
-                                <EditIcon />
-                            </Button>
-                        }
+                        <Button circleBtn btnColor="orange" className="m-2" tooltip="Modifica" onClick={() => this.openModifica(s.id)}>
+                            <EditIcon />
+                        </Button>
 
                         <Button circleBtn btnColor="red" className="m-2" tooltip="Archivia" onClick={() => this.archiviaStudenti(s)}>
                             <Icon iconKey="user-check" />

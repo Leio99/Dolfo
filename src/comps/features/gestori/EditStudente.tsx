@@ -101,16 +101,12 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
 
         return <form onSubmit={this.editStudente}>
             <div className="row">
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-6">
                     <TextInput name="nome" value={nome} icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loadingForm} required />
                 </div>
 
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-6">
                     <TextInput name="cognome" value={cognome} icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loadingForm} required />
-                </div>
-
-                <div className="col-12 col-md-4">
-                    <TextInput name="email" value={email} type="email" onChange={this.changeEmail} label="E-mail" disabled={loadingForm} required />
                 </div>
 
                 <div className="col-12 col-md-6">
@@ -119,6 +115,10 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
 
                 <div className="col-12 col-md-6">
                     <TextInput name="cf" value={cf} icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loadingForm} maxLength={16} required />
+                </div>
+
+                <div className="col-12">
+                    <TextInput name="email" value={email} type="email" onChange={this.changeEmail} label="E-mail" disabled={loadingForm} required />
                 </div>
             </div>
 

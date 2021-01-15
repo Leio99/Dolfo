@@ -83,16 +83,12 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
         return <form onSubmit={this.creaStudente}>
             <div className="row">
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-6">
                     <TextInput name="nome" icon={{ iconKey: "user" }} onChange={this.changeNome} label="Nome" disabled={loading} required />
                 </div>
 
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-6">
                     <TextInput name="cognome" icon={{ iconKey: "user" }} onChange={this.changeCognome} label="Cognome" disabled={loading} required />
-                </div>
-
-                <div className="col-12 col-md-4">
-                    <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loading} required />
                 </div>
 
                 <div className="col-12 col-md-6">
@@ -101,6 +97,10 @@ export class AddStudente extends React.PureComponent<undefined, IState>{
 
                 <div className="col-12 col-md-6">
                     <TextInput name="cf" icon={{ iconKey: "address-card" }} onChange={this.changeCF} label="Codice Fiscale" disabled={loading} maxLength={16} required />
+                </div>
+
+                <div className="col-12">
+                    <TextInput name="email" type="email" onChange={this.changeEmail} label="E-mail" disabled={loading} required />
                 </div>
             </div>
 

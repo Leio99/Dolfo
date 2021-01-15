@@ -28,24 +28,18 @@ export class DialogAddEditEdizione extends React.PureComponent<IProps, IState>{
 
     sendEdizione = (e: FormEvent) => {
         e.preventDefault()
-        const { desc } = this.state
+        const { desc } = this.state,
+        fn = this.props.edizione ? EdizioniService.editEdizione : EdizioniService.addEdizione
 
         if(desc.trim() === "")
             return NotificationMsg.showError("Inserire una descrizione!")
 
         this.toggleLoading()
 
-        if(this.props.edizione){
-            EdizioniService.editEdizione(this.props.edizione.id, { descrizione: desc }).then(() => {
-                this.props.reloadList()
-                this.props.close()
-            }).catch(this.toggleLoading)
-        }else{
-            EdizioniService.addEdizione(this.props.idGestore, { descrizione: desc }).then(() => {
-                this.props.reloadList()
-                this.props.close()
-            }).catch(this.toggleLoading)
-        }
+        fn(this.props.edizione.id, { descrizione: desc }).then(() => {
+            this.props.reloadList()
+            this.props.close()
+        }).catch(this.toggleLoading)
     }
 
     toggleLoading = () => this.setState({ loading: !this.state.loading })

@@ -65,7 +65,7 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
 
         return <div>
             <div className="row mx-0">
-                <Card title={docente.ritirato && "Ritirato"} className="col-12 col-sm-6 mb-3">
+                <Card title={docente.ritirato ? "Ritirato" : null} className="col-12 col-sm-6 mb-3">
                     <h2 className="text-uppercase mb-2 text-truncate">{docente.nome} {docente.cognome}</h2>
 
                     <div>

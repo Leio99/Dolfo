@@ -1,7 +1,11 @@
 import React, { FormEvent } from "react"
+import { goTo } from "../../../commons/utility"
+import { DocentiService } from "../../../services/DocentiService"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { NotificationMsg } from "../../layout/NotificationMsg"
+import { ComponentsPaths } from "../ComponentsPaths"
+import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IState{
     readonly nome: string
@@ -12,6 +16,8 @@ export interface IState{
 }
 
 export class AddDocente extends React.PureComponent<undefined, IState>{
+    readonly session = ComponentsPermissions.getLoginGestore()
+
     constructor(props: undefined){
         super(props)
 
@@ -47,10 +53,21 @@ export class AddDocente extends React.PureComponent<undefined, IState>{
         if(sendCF.length !== 16 && sendCF !== "")
             return NotificationMsg.showError("Codice Fiscale non valido!")
 
-        this.setState({ loadingForm: true })
+        this.toggleLoading()
 
-        setTimeout(() => this.setState({ loadingForm: false }), 2000)
+        DocentiService.addDocente(this.session.idEnte, [{
+            nome: sendNome,
+            cf: sendCF,
+            cognome: sendCognome,
+            email: sendEmail
+        }]).then(() => {
+            this.toggleLoading()
+            NotificationMsg.showSuccess("Docente creato con successo!")
+            goTo(ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI)
+        }).catch(this.toggleLoading)
     }
+
+    toggleLoading = () => this.setState({ loadingForm: !this.state.loadingForm })
 
     render = (): JSX.Element => {
         const { loadingForm } = this.state

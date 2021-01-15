@@ -1,5 +1,4 @@
 import { API_URL_REGISTRO_PRESENZE } from "./costantiApi"
-import { ComponentsPermissions } from "../comps/features/ComponentsPermissions"
 import { ServerCall } from "./ServerCall"
 import { Presenza } from "../models/Presenza"
 
@@ -13,11 +12,8 @@ export class PresenzeService{
         return ServerCall.put(API_URL_REGISTRO_PRESENZE + "/editPresenza/" + id, body)
     }
 
-    static getPresenzeDaConfermare(){
-        if(!ComponentsPermissions.getLoginGestore(false))
-            return ServerCall.emptyCallResult()
-            
-        return ServerCall.get("http://mygraphic.altervista.org/esame/?presenze")
+    static getPresenzeDaConfermare(idGestore: number){            
+        return ServerCall.get(API_URL_REGISTRO_PRESENZE + "/nonConfermate/" + idGestore)
     }
 
     static confermaPresenza(idPresenza: number){

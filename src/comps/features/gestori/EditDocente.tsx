@@ -73,20 +73,16 @@ export class EditDocente extends React.PureComponent<IProps, IState>{
 
         this.toggleLoading()
 
-        // DocentiService.editDocente(docente.id, {
-        //     idDocente: parseInt(this.props.match.params.id),
-        //     nome: sendNome,
-        //     cognome: sendCognome,
-        //     email: sendEmail,
-        //     cf: sendCF,
-        //     tenere: docente.corsi.map((c: number) => { return { idCorso: c, idDocente: docente.idDocente } }),
-        //     insegnare: docente.materie.map((m: number) => { return { idMateria: m, idDocente: docente.idDocente } }),
-        //     ritirato: docente.ritirato
-        // }).then(() => {
-        //     this.toggleLoading()
-        //     this.props.onSave && this.props.onSave()
-        //     NotificationMsg.showSuccess("Docente modificato con successo!")
-        // }).catch(this.toggleLoading)
+        DocentiService.editDocente(docente.id, {
+            nome: sendNome,
+            cognome: sendCognome,
+            email: sendEmail,
+            cf: sendCF,
+        }).then(() => {
+            this.toggleLoading()
+            this.props.onSave && this.props.onSave()
+            NotificationMsg.showSuccess("Docente modificato con successo!")
+        }).catch(this.toggleLoading)
     }
 
     render = (): JSX.Element => {

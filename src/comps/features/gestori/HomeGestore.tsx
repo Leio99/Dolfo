@@ -1,5 +1,5 @@
 import React from "react"
-import { objectsAreSame } from "../../../commons/utility"
+import { LoadingIconCentered, objectsAreSame } from "../../../commons/utility"
 import { Edizione } from "../../../models/Edizione"
 import { EdizioniService } from "../../../services/EdizioniService"
 import { GestoriService } from "../../../services/GestoriService"
@@ -91,7 +91,7 @@ export class HomeGestore extends React.PureComponent<undefined, IState>{
                 <div className="clearfix"></div>
             </Card>
 
-            <ListaPresenzeDaConfermare />
+            {!listaEdizioni || !defaultEdizione ? <LoadingIconCentered /> : <ListaPresenzeDaConfermare />}
         </div>
     }
 }
