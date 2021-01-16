@@ -1,17 +1,19 @@
 import React from "react"
-import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput } from "../../commons/utility"
+import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput, isValidDate } from "../../commons/utility"
 import { ICalendarDay } from "../shared/models/ICalendarDay"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
+import TimePicker from "./TimePicker"
 
 export type DateFormats = "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
 
 export interface IProps extends InputProps {
     readonly defaultValue?: Date
     readonly dateFormat?: DateFormats
+    readonly selectTime?: boolean
 }
 export interface IState {
     readonly date: string
@@ -24,6 +26,8 @@ export interface IState {
     readonly showCalendar: boolean
     readonly selectedMonth: number
     readonly selectedYear: number
+    readonly currentHour: number
+    readonly currentMinute: number
 }
 
 class DatePicker extends React.PureComponent<IProps, IState>{
@@ -31,9 +35,11 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         super(props)
 
         let date = props.defaultValue ? formatDate(props.defaultValue) : "",
-        currentDay = props.defaultValue ? props.defaultValue.getDate() : 0,
+        currentDay = props.defaultValue ? props.defaultValue.getDate() : new Date().getDate(),
         currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
         currentMonth = props.defaultValue ? props.defaultValue.getMonth() :  new Date().getMonth(),
+        currentHour = props.defaultValue ? props.defaultValue.getHours() :  new Date().getHours(),
+        currentMinute = props.defaultValue ? props.defaultValue.getMinutes() :  new Date().getMinutes(),
         currentDecade = parseInt(currentYear.toString().slice(0, -1) + "0")
 
         this.state = {
@@ -46,7 +52,9 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             currentYear: currentYear,
             currentMonth: currentMonth,
             selectedYear: currentYear,
-            selectedMonth: currentMonth
+            selectedMonth: currentMonth,
+            currentHour,
+            currentMinute
         }
     }
 
@@ -82,16 +90,19 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         })
     }
 
-    selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear, blur = true) => {
+    selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear, blur = true, showCalendar = false) => {
         const date = this.handleDate(day, month, year),
         sendDate = new Date()
         sendDate.setDate(day)
         sendDate.setMonth(month)
         sendDate.setFullYear(year)
-        sendDate.setHours(0, 0, 0, 0)
+        sendDate.setHours(this.props.selectTime ? this.state.currentHour : 0)
+        sendDate.setMinutes(this.props.selectTime ? this.state.currentMinute : 0)
+        sendDate.setSeconds(0)
+        sendDate.setMilliseconds(0)
 
         this.setState({
-            showCalendar: false,
+            showCalendar,
             date,
             selectedMonth: month,
             selectedYear: year,
@@ -165,9 +176,11 @@ class DatePicker extends React.PureComponent<IProps, IState>{
 
     resetDate = () => {
         let props = this.props,
-        currentDay = props.defaultValue ? props.defaultValue.getDate() : 0,
+        currentDay = props.defaultValue ? props.defaultValue.getDate() : 1,
         currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
         currentMonth = props.defaultValue ? props.defaultValue.getMonth() :  new Date().getMonth(),
+        currentHour = props.defaultValue ? props.defaultValue.getHours() :  new Date().getHours(),
+        currentMinute = props.defaultValue ? props.defaultValue.getMinutes() :  new Date().getMinutes(),
         currentDecade = parseInt(currentYear.toString().slice(0, -1) + "0")
 
         this.setState({ 
@@ -178,7 +191,9 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             currentYear: currentYear,
             currentMonth: currentMonth,
             selectedYear: currentYear,
-            selectedMonth: currentMonth
+            selectedMonth: currentMonth,
+            currentHour,
+            currentMinute
         })
         
         this.props.onChange && this.props.onChange(null)
@@ -195,25 +210,40 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         pieces = date.split("-"),
         day = parseInt(pieces[0]),
         month = parseInt(pieces[1]) - 1,
-        year =  parseInt(pieces[2])
+        year =  parseInt(pieces[2]),
+        d = `${year}-${month+1}-${day}`
 
-        if(date !== "" && pieces && pieces.length === 3 && !isNaN(day) && !isNaN(month) && !isNaN(year) && day > 0 && month >= 0)
+        console.log(d, isValidDate(d))
+
+        if(date !== "" && pieces && pieces.length === 3 && !isNaN(day) && !isNaN(month) && !isNaN(year) && day > 0 && month >= 0 && isValidDate(d))
             this.selectDay(day, month, year, false)
     }
 
+    changeTime = (time: string) => {
+        const pieces = time.split(":"),
+        currentHour = parseInt(pieces[0]),
+        currentMinute = parseInt(pieces[1])
+
+        this.setState({
+            currentHour,
+            currentMinute
+        }, () => this.selectDay(this.state.currentDay, this.state.currentMonth, this.state.currentYear, false, true))
+    }
+
     render = (): JSX.Element => {
-        const { date, showCalendar, selectingMonth, selectingYear, currentYear, currentMonth, currentDecade } = this.state,
+        const { date, showCalendar, selectingMonth, selectingYear, currentYear, currentMonth, currentDecade, currentHour, currentMinute } = this.state,
         props = this.props,
         monthCalendar = getCalendar(currentMonth, currentYear),
         icon = props.icon || {
             type: "far",
             iconKey: "calendar-day"
-        }
+        },
+        showDate = props.selectTime && date ? (date + " " + zeroBefore(currentHour) + ":" + zeroBefore(currentMinute)) : date
 
         return <InputWrapper style={props.wrapperStyle} onFocus={this.showCalendar} label={props.label} icon={icon} focusBool={showCalendar} value={date} resetFunction={this.resetDate} disabled={props.disabled} onKeyDown={this.handleTabKey} required={props.required}>
             <input
                 type="text"
-                value={date}
+                value={showDate}
                 required={props.required}
                 onChange={this.tryChangeDate}
                 onPaste={props.onPaste}
@@ -222,7 +252,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 onKeyUp={props.onKeyUp}
             />
             
-            <div className={"dolfo-calendar-container" + (showCalendar ? " show" : "")}>
+            <div className={"dolfo-calendar-container" + (showCalendar ? " show" : "") + (props.selectTime ? " time-picker" : "")}>
                 {
                     !selectingMonth && !selectingYear && <div className="dolfo-calendar">
                         <div className="dolfo-calendar-row">
@@ -275,6 +305,12 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                                 Oggi
                             </div>
                         </div>
+
+                        {
+                            props.selectTime && <div className="dolfo-calendar-time-picker">
+                                <TimePicker defaultValue={zeroBefore(currentHour) + ":" + zeroBefore(currentMinute)} onChange={this.changeTime} />
+                            </div>
+                        }
                     </div>
                 }
 

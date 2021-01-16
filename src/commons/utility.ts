@@ -20,7 +20,7 @@ export const formatWithMonth = (date: string): string => formatDate(new Date(dat
 
 export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
 
-export const validateDate = (date: string): boolean => isNaN(new Date(date).getTime())
+export const isValidDate = (date: string): boolean => !isNaN(new Date(date).getTime())
 
 export const formatNumber = (n: string|number): string => {
     if(n == null) return "0"

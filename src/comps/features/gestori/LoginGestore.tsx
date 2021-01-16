@@ -3,11 +3,8 @@ import { Cifratore } from "../../../commons/Cifratore"
 import { GestoriService } from "../../../services/GestoriService"
 import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
-import { Dialog } from "../../layout/Dialog"
-import { Icon } from "../../layout/Icon"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { ComponentsPermissions } from "../ComponentsPermissions"
-import { RecuperoPassword } from "./RecuperoPassword"
 
 export interface IState{
     readonly adminName: string
@@ -34,15 +31,6 @@ export class LoginGestore extends React.PureComponent<undefined, IState>{
 
     changePassword = (adminPassword: string) => this.setState({ adminPassword })
 
-    openForgot = () => {
-        const dialog = Dialog.openDialog({
-            title: "Recupero della password",
-            hideFooter: true,
-            icon: <Icon iconKey="key" type="far" />,
-            content: <RecuperoPassword close={() => dialog.close()} />
-        })
-    }
-
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
     tryLogin = (e: FormEvent) => {
@@ -50,9 +38,6 @@ export class LoginGestore extends React.PureComponent<undefined, IState>{
 
         const { adminName, adminPassword } = this.state,
         cipher = new Cifratore()
-
-        if(adminName.trim() === "" || adminPassword === "")
-            return NotificationMsg.showError("Riempire tutti i campi!")
 
         this.toggleLoading()
 
@@ -74,11 +59,10 @@ export class LoginGestore extends React.PureComponent<undefined, IState>{
             <form className="floating-centered p-3 rounded shadow bg-white col-10 col-md-5" onSubmit={this.tryLogin}>
                 <h2>Accesso gestori</h2>
 
-                <TextInput name="username" label="Username" onChange={this.changeName} disabled={loading} icon={{ iconKey: "user" }} required />
-                <TextInput name="password" type="password" label="Password" onChange={this.changePassword} togglePassword disabled={loading} required />
+                <TextInput name="username" label="Username" onChange={this.changeName} disabled={loading} icon={{ iconKey: "user" }} />
+                <TextInput name="password" type="password" label="Password" onChange={this.changePassword} togglePassword disabled={loading} />
 
                 <Button type="submit" fullSize bigBtn btnColor="green" className="text-uppercase mt-2" loading={loading}>Accedi</Button>
-                <Button onClick={this.openForgot} fullSize textBtn btnColor="darkblue" className="mt-2">Hai dimenticato la password?</Button>
             </form>
         </div>
     }

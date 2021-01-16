@@ -24,6 +24,14 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         }
     }
 
+    componentDidUpdate = (prevProps: IProps) => {
+        if(prevProps.defaultValue !== this.props.defaultValue){
+            this.setState({
+                value: this.props.defaultValue || (zeroBefore(new Date().getHours()) + ":" + zeroBefore(new Date().getMinutes()))
+            })
+        }
+    }
+
     changeTime = () => this.props.onChange && this.props.onChange(this.state.value)
 
     changeHour = (e: any) => {

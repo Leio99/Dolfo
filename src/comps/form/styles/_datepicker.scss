@@ -12,6 +12,32 @@
     width: 275px;
     display: none;
 
+    &.time-picker{
+        height: 380px;
+
+        .dolfo-calendar-time-picker{
+            margin-top: 0.5rem;
+
+            .dolfo-form-input .dolfo-input-wrapper{
+                padding: 0;
+                background-color: transparent !important;
+
+                .dolfo-input-icon{
+                    display: none
+                }
+
+                .dolfo-input-time{
+                    padding: 0.3rem;
+                    border: 1.5px solid $lightGrey;
+
+                    &:focus{
+                        border-color: $selectionBlue
+                    }
+                }
+            }
+        }
+    }
+
     .dolfo-calendar-row{
         display: flex;
         flex-direction: row;

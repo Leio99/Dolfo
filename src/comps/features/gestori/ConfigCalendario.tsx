@@ -79,6 +79,7 @@ export class ConfigCalendario extends React.PureComponent<any, IState>{
             title: "Configurazione del calendario",
             overflows: true,
             okText: "Ho capito",
+            clickOutside: true,
             content: <div>
                 <p>Questa schermata permette di configurare il calendario Google dal quale verranno prese le lezioni, che saranno poi registrate e potranno essere firmate da studenti e docenti.</p>
                 <p>Per prima cosa è necessario creare un calendario su <a href="https://calendar.google.com/" target="_blank" rel="noreferrer"> Google Calendar <DetailIcon /></a> e renderlo <strong>pubblico</strong>.</p>
