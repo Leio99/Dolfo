@@ -64,7 +64,7 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
         if(!presenze) return <LoadingIconCentered />
 
         return <div>
-            <h3>Presenze dello studente</h3>
+            <h3>Presenze firmate</h3>
 
             <Table columns={[
                 { label: "Data", field: "data", canSearch: true, width: 150, align: "center", type: "date" },
