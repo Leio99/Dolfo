@@ -15,8 +15,8 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     constructor(props: IProps) {
         super(props)
 
-        let children = this.getChildrenTabs(),
-        findCurrent = children.indexOf(children.find(child => child.props.isDefault))
+        const children = this.getChildrenTabs() as Tab[],
+        findCurrent = children.indexOf(children.find(child => child.props?.isDefault))
 
         this.state = {
             children,
@@ -35,7 +35,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
             this.setState({ children: this.getChildrenTabs() })
     }
 
-    getChildrenTabs = () => React.Children.map(this.props.children, (child: any) => child)
+    getChildrenTabs = () => React.Children.map(this.props.children, (child: any) => child).filter(t => !!t)
 
     changeSelection = (index: number) => {
         this.setState({

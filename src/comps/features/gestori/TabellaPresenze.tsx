@@ -1,5 +1,5 @@
 import React from "react"
-import { getDateTime, LoadingIconCentered } from "../../../commons/utility"
+import { getTime, LoadingIconCentered } from "../../../commons/utility"
 import { Presenza } from "../../../models/Presenza"
 import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
@@ -35,8 +35,8 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
             this.setState({
                 presenze: presenze.map(p => {
                     let newP = {...p}
-                    newP.oraEntrata = getDateTime(p.oraEntrata)
-                    newP.oraUscita = getDateTime(p.oraUscita)
+                    newP.oraEntrata = getTime(p.oraEntrata)
+                    newP.oraUscita = getTime(p.oraUscita)
 
                     return newP
                 })

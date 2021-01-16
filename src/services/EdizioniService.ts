@@ -22,4 +22,12 @@ export class EdizioniService{
     static cambiaStatoStage(idGestore: number){
         return ServerCall.put(API_URL_REGISTRO_EDIZIONI + "/switchStageValue/" + idGestore, {})
     }
+
+    static getIdCalendario(idGestore: number){
+        return ServerCall.get(API_URL_REGISTRO_EDIZIONI + "/getIdCalendario/" + idGestore)
+    }
+
+    static editIdCalendario(idGestore: number, body: { idCalendario: string }){
+        return ServerCall.put(API_URL_REGISTRO_EDIZIONI + "/editIdCalendario/" + idGestore, body)
+    }
 }

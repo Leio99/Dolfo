@@ -15,4 +15,6 @@ export class ComponentsPaths{
     static PATH_GESTORI_EDIT_DOCENTE_BASE = ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI + "/edit"
     static PATH_GESTORI_EDIT_DOCENTE = ComponentsPaths.PATH_GESTORI_EDIT_DOCENTE_BASE + "/:id"
     static PATH_GESTORI_DETAILS_DOCENTE = ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI + "/:id"
+    static PATH_GESTORI_FUNZIONI = ComponentsPaths.PATH_GESTORI + "/funzioni"
+    static PATH_GESTORI_CONFIG_CALENDAR = ComponentsPaths.PATH_GESTORI_FUNZIONI + "/calendario"
 }

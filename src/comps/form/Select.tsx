@@ -106,7 +106,7 @@ class Select extends React.PureComponent<IProps, IState>{
         this.resetSearch()
     }
 
-    getOptions = () => React.Children.map(this.props.children, (child: any) => child)
+    getOptions = () => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
     decodeValue = (value: any) => {
         if(this.props.multiple){

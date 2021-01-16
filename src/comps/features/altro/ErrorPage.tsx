@@ -1,10 +1,10 @@
 import React from "react"
-import { goTo } from "../../commons/utility"
-import Button from "../layout/Button"
-import { ErrorCircleIcon, Icon } from "../layout/Icon"
-import { ComponentsPaths } from "./ComponentsPaths"
-import { history } from "../Navigator"
-import { Dialog } from "../layout/Dialog"
+import { goTo } from "../../../commons/utility"
+import Button from "../../layout/Button"
+import { ErrorCircleIcon, Icon } from "../../layout/Icon"
+import { ComponentsPaths } from "../ComponentsPaths"
+import { history } from "../../Navigator"
+import { Dialog } from "../../layout/Dialog"
 
 export class ErrorPage extends React.Component{
 

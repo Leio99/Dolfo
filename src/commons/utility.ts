@@ -198,10 +198,10 @@ export const convertFromUTC = (date: string): string => {
     return `${zeroBefore(localDate.getHours())}:${zeroBefore(localDate.getMinutes())}`
 }
 
-export const getDateTime = (date: string): string => {
-    const converted = new Date(date)
+export const getTime = (d: string): string => {
+    const date = new Date(d)
 
-    return `${zeroBefore(converted.getHours())}:${zeroBefore(converted.getMinutes())}`
+    return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
 }
 
 export const LoadingIconCentered = (): JSX.Element => {
@@ -218,12 +218,6 @@ export const dateIsToday = (d: string): boolean => {
     newDate = new Date()
 
     return date.getDate() === newDate.getDate() && date.getMonth() === newDate.getMonth()
-}
-
-export const getTime = (d: string): string => {
-    const date = new Date(d)
-
-    return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
 }
 
 export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {

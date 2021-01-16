@@ -14,7 +14,8 @@ import { AddDocente } from "./gestori/AddDocente"
 import { ListaDocenti } from "./gestori/ListaDocenti"
 import { EditDocente } from "./gestori/EditDocente"
 import { DettaglioDocente } from "./gestori/DettaglioDocente"
-import { ErrorPage } from "./ErrorPage"
+import { ErrorPage } from "./altro/ErrorPage"
+import { ConfigCalendario } from "./gestori/ConfigCalendario"
 
 export const Components: IComponentList = {
     [ComponentsPaths.PATH_GESTORI]: {
@@ -96,6 +97,11 @@ export const Components: IComponentList = {
     [ComponentsPaths.SITE_BASE]: {
         pageTitle: "Layout di test",
         permission: () => goTo(ComponentsPaths.SITE_BASE + "layout")
+    },
+    [ComponentsPaths.PATH_GESTORI_CONFIG_CALENDAR]: {
+        pageTitle: "Calendario",
+        Component: ConfigCalendario,
+        parentKey: ComponentsPaths.PATH_GESTORI_HOME
     },
     [ComponentsPaths.ERROR_404_PATH]: {
         hideMenu: true,

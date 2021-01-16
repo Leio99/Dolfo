@@ -45,27 +45,66 @@ body{
         display: none
     }
 }
-.circle-mark{
-    width: 60px;
-    height: 60px;
-    border: 5px solid var(--green);
-    font-size: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--roundradius)
-}
 .menu-logo-block{
     text-align: center;
     cursor: pointer;
     padding: 2rem 0;
 
     img{
-        filter: drop-shadow(1.5px 0 0 #fff) drop-shadow(-0.7px 0 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 1.5px 0 #fff);
+        filter: drop-shadow(1.5px 0 0 $white) drop-shadow(-0.7px 0 0 $white) drop-shadow(0 -1px 0 $white) drop-shadow(0 1.5px 0 $white);
         height: 100px;
 
         &:hover{
-            filter: drop-shadow(1.5px 0 0.7px #fff) drop-shadow(-0.7px 0 0.7px #fff) drop-shadow(0 -1px 0.7px #fff) drop-shadow(0 1.5px 0.7px #fff)
+            filter: drop-shadow(1.5px 0 0.7px $white) drop-shadow(-0.7px 0 0.7px $white) drop-shadow(0 -1px 0.7px $white) drop-shadow(0 1.5px 0.7px $white)
+        }
+    }
+}
+table.calendario{
+    thead th, tbody td{
+        width: calc(100% / 7);
+        border-bottom: 0
+    }
+    
+    tbody td{
+        max-width: 0;
+
+        .content{
+            min-height: 100px;
+            width: 100%;
+            position: relative;
+
+            .icon-oggi{
+                transform: rotate(45deg);
+                position: absolute;
+                right: 0;
+                color: $green
+            }
+
+            .evento{
+                margin-top: 0.3rem;
+                background-color: $red;
+                color: $white;
+                border-radius: $roundRadius;
+                padding: 0.2rem 0.5rem;
+                font-size: 12px;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: darken($red, 10%)
+                }
+            }
+        }
+
+        &.external{
+            color: $grey;
+
+            .content .evento{
+                background-color: $disabled;
+
+                &:hover{
+                    background-color: darken($disabled, 15%)
+                }
+            }
         }
     }
 }

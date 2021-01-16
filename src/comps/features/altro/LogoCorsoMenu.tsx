@@ -1,5 +1,5 @@
 import React from "react"
-import { Dialog } from "../layout/Dialog"
+import { Dialog } from "../../layout/Dialog"
 
 export class LogoCorsoMenu extends React.Component{
     openInfoDialog = () => {
