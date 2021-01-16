@@ -45,18 +45,14 @@ body{
         display: none
     }
 }
-.menu-logo-block{
-    text-align: center;
+img.menu-logo{
+    margin-top: 2rem;
+    $color: rgba(0, 0, 0, 0.2);
+    width: 100%;
     cursor: pointer;
-    padding: 2rem 0;
 
-    img{
-        filter: drop-shadow(1.5px 0 0 $white) drop-shadow(-0.7px 0 0 $white) drop-shadow(0 -1px 0 $white) drop-shadow(0 1.5px 0 $white);
-        height: 100px;
-
-        &:hover{
-            filter: drop-shadow(1.5px 0 0.7px $white) drop-shadow(-0.7px 0 0.7px $white) drop-shadow(0 -1px 0.7px $white) drop-shadow(0 1.5px 0.7px $white)
-        }
+    &:hover{
+        filter: drop-shadow(1.5px 0 0.5px $color) drop-shadow(-0.7px 0 0.5px $color) drop-shadow(0 -1px 0.5px $color) drop-shadow(0 1.5px 0.5px $color);
     }
 }
 table.calendario{

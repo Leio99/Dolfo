@@ -1,6 +1,6 @@
 import React from "react"
 import { goTo } from "../../../commons/utility"
-import { LogoCorsoMenu } from "../altro/LogoCorsoMenu"
+import { Dialog } from "../../layout/Dialog"
 import { Icon } from "../../layout/Icon"
 import { MenuItem } from "../../layout/MenuItem"
 import { SideMenu } from "../../layout/SideMenu"
@@ -24,12 +24,35 @@ export class GestoriMenu extends React.PureComponent<IProps>{
 
     isInPath = (path: string) => this.props.currentPath.indexOf(path) >= 0
 
+    openInfoDialog = () => {
+        Dialog.openDialog({
+            type: "info",
+            title: "Informazioni",
+            clickOutside: true,
+            okType: "blue",
+            width: "400px",
+            content: <div>
+                <div>
+                    <strong>Versione:</strong> 1.0
+                </div>
+                <div>
+                    &copy; Copyright {new Date().getFullYear()} 
+                </div>
+                <div className="text-center mt-2">
+                    <Icon iconKey="font-awesome-flag" type="fab" tooltip="FontAwesome" color="#339af0" className="mx-1" large />
+                    <Icon iconKey="bootstrap" type="fab" tooltip="Bootstrap" color="#7952b3" className="mx-1" large />
+                    <Icon iconKey="google" type="fab" tooltip="Google API" className="mx-1" large />
+                </div>
+            </div>
+        })
+    }
+
     render = (): JSX.Element => {
         const props = this.props,
         Item = (props: { path: string, children: any }) => <MenuItem {...props} {...this.getMenuItemProps(props.path)} />
 
         return <SideMenu onToggle={props.toggleMenu} opened={props.opened}>
-            <LogoCorsoMenu />
+            <img src="/images/menu-logo.png" className="menu-logo" alt="menu-logo" onClick={this.openInfoDialog} /> 
 
             <Item path={ComponentsPaths.PATH_GESTORI_HOME}>
                 <Icon iconKey="home-alt" className="mr-2" /> Home
