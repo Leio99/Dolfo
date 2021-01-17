@@ -54,6 +54,7 @@ export class StageSwitch extends React.PureComponent<any, IState>{
     infoStage = () => {
         Dialog.openDialog({
             title: "Attiva/Disattiva lo stage",
+            okText: "Ho capito",
             width: "400px",
             hideCancel: true,
             okType: "blue",

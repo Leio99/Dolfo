@@ -6,7 +6,7 @@ import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
 import { CardActions } from "../../layout/CardActions"
 import { Dialog } from "../../layout/Dialog"
-import { EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
+import { DetailIcon, EditIcon, Icon, LoadingIcon } from "../../layout/Icon"
 import { Progress } from "../../layout/Progress"
 import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
@@ -18,14 +18,17 @@ import { Studente } from "../../../models/Studente"
 export interface IRouteParams{
     readonly id: string
 }
+export interface IProps extends RouteComponentProps<IRouteParams>{
+    readonly dialogClose?: () => void
+}
 export interface IState{
     readonly studente: Studente
     readonly totPresenze: number
     readonly oreTotali: number
 }
 
-export class DettaglioStudente extends React.PureComponent<RouteComponentProps<IRouteParams>, IState>{
-    constructor(props: RouteComponentProps<IRouteParams>){
+export class DettaglioStudente extends React.PureComponent<IProps, IState>{
+    constructor(props: IProps){
         super(props)
 
         this.state = {
@@ -83,6 +86,11 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
         })
     }
 
+    goToFullDetail = () => {
+        this.props.dialogClose()
+        goTo(ComponentsPaths.PATH_GESTORI_LISTA_STUDENTI + "/" + this.props.match.params.id)
+    }
+
     render = (): JSX.Element => {
         const { studente, totPresenze, oreTotali } = this.state,
         idStudente = this.props.match.params.id,
@@ -107,6 +115,12 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                     </div>
 
                     <CardActions className="text-right">
+                        {
+                            this.props.dialogClose ? <Button textBtn onClick={this.goToFullDetail} btnColor="black" tooltip="Vedi dettaglio completo" className="mr-3">
+                                <DetailIcon large />
+                            </Button> : null
+                        }
+
                         <Button textBtn onClick={this.openModifica} btnColor="orange" tooltip="Modifica">
                             <EditIcon large />
                         </Button>
@@ -134,7 +148,7 @@ export class DettaglioStudente extends React.PureComponent<RouteComponentProps<I
                 </Card>
             </div>
 
-            <TabellaPresenze targetId={parseInt(idStudente)} reloadTotali={this.loadStudente} />
+            <TabellaPresenze targetId={parseInt(idStudente)} reloadTotali={this.loadStudente} isDialog={!!this.props.dialogClose} />
         </div>
     }
 }

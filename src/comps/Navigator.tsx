@@ -71,10 +71,7 @@ export class Navigator extends React.PureComponent<any, IState>{
         })
     }
 
-    toggleMenu = () => this.setState({ openMenu: !this.state.openMenu }, () => {
-        this.props.setStudenti({ id: 1 })
-        console.log(this.props)
-    })
+    toggleMenu = () => this.setState({ openMenu: !this.state.openMenu })
 
     setErrorPage = () => {
         !this.state.currentComponent && this.setState({

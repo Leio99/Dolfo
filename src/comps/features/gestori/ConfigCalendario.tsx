@@ -115,7 +115,7 @@ export class ConfigCalendario extends React.PureComponent<any, IState>{
 
                     <div className="text-right mt-3">
                         <Button textBtn tooltip="Dove mi trovo?" onClick={this.openInfo} btnColor="orange">
-                            <QuestionCircleOutlineIcon color="var(--orange)" className="fa-2x" />
+                            <QuestionCircleOutlineIcon color="var(--orange)" large />
                         </Button>
                         <Button type="submit" className="ml-3" loading={loadingForm} disabled={loadingCalendario} btnColor="green">
                             Salva

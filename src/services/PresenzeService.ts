@@ -3,9 +3,9 @@ import { ServerCall } from "./ServerCall"
 import { Presenza } from "../models/Presenza"
 
 export class PresenzeService{
-    static getPresenze(targetId: number, isDocente: boolean){
+    static getPresenze(targetId: number, isDocente: boolean, page: number){
         const tipo = isDocente ? "D" : "S"
-        return ServerCall.get(API_URL_REGISTRO_PRESENZE + "/getPresenze/" + tipo + "/" + targetId)
+        return ServerCall.get(API_URL_REGISTRO_PRESENZE + "/getPresenze/" + tipo + "/" + targetId + "/" + page)
     }
 
     static editPresenza(id: number, body: Presenza){

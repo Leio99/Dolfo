@@ -1,14 +1,10 @@
-import React, { FormEvent } from "react"
-import { Cifratore } from "../../../commons/Cifratore"
+import React from "react"
 import { GestoriService } from "../../../services/GestoriService"
-import { TextInput } from "../../form/TextInput"
 import Button from "../../layout/Button"
 import { NotificationMsg } from "../../layout/NotificationMsg"
 import { ComponentsPermissions } from "../ComponentsPermissions"
 
 export interface IState{
-    readonly adminName: string
-    readonly adminPassword: string
     readonly loading: boolean
 }
 
@@ -17,8 +13,6 @@ export class LoginGestore extends React.PureComponent<undefined, IState>{
         super(props)
 
         this.state = {
-            adminName: "",
-            adminPassword: "",
             loading: false
         }
     }
@@ -27,24 +21,12 @@ export class LoginGestore extends React.PureComponent<undefined, IState>{
 
     componentWillUnmount = () => document.body.classList.remove("login")
 
-    changeName = (adminName: string) => this.setState({ adminName })
-
-    changePassword = (adminPassword: string) => this.setState({ adminPassword })
-
     toggleLoading = () => this.setState({ loading: !this.state.loading })
 
-    tryLogin = (e: FormEvent) => {
-        e.preventDefault()
-
-        const { adminName, adminPassword } = this.state,
-        cipher = new Cifratore()
-
+    tryLogin = () => {
         this.toggleLoading()
 
-        GestoriService.tryLogin({
-            username: adminName,
-            password: cipher.encode(adminPassword)
-        }).then(response => {
+        GestoriService.tryLogin(null).then(response => {
             this.toggleLoading()
             sessionStorage.setItem("sessionGestore", JSON.stringify(response.data))
             ComponentsPermissions.checkLoginGestore()
@@ -52,18 +34,21 @@ export class LoginGestore extends React.PureComponent<undefined, IState>{
         }).catch(this.toggleLoading)
     }
 
+    openSPID = () => {
+        const y = window.top.outerHeight / 2 + window.top.screenY - (500 / 2),
+        x = window.top.outerWidth / 2 + window.top.screenX - (500 / 2),
+        new_window = window.open("http://localhost:3000/layout", "", `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=500, height=500, top=${y}, left=${x}`);
+
+        (new_window as any).sendSPIDResponse = this.tryLogin
+    }
+
     render = (): JSX.Element => {
         const { loading } = this.state
 
-        return <div>
-            <form className="floating-centered p-3 rounded shadow bg-white col-10 col-md-5" onSubmit={this.tryLogin}>
-                <h2>Accesso gestori</h2>
+        return <div className="floating-centered p-3 rounded shadow bg-white col-10 col-md-5">
+            <h2>Accesso gestori</h2>
 
-                <TextInput name="username" label="Username" onChange={this.changeName} disabled={loading} icon={{ iconKey: "user" }} />
-                <TextInput name="password" type="password" label="Password" onChange={this.changePassword} togglePassword disabled={loading} />
-
-                <Button type="submit" fullSize bigBtn btnColor="green" className="text-uppercase mt-2" loading={loading}>Accedi</Button>
-            </form>
+            <Button fullSize bigBtn btnColor="blue" className="text-uppercase mt-2" loading={loading} onClick={this.openSPID}>Accedi con SPID</Button>
         </div>
     }
 }

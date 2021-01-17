@@ -154,7 +154,7 @@ export class ListaStudenti extends React.PureComponent<undefined, IState>{
         const { studenti } = this.state,
         loadingIcon = <LoadingIconCentered />
 
-        return <div>
+        return <div id="dettaglio-utente">
             <Button type="popup" popupPosition="bottom" options={[
                 { text: <span>
                     <AddIcon color="var(--green)" /> Aggiungi

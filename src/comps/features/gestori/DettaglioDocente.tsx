@@ -6,7 +6,7 @@ import { DocentiService } from "../../../services/DocentiService"
 import Button from "../../layout/Button"
 import { Card } from "../../layout/Card"
 import { Dialog } from "../../layout/Dialog"
-import { EditIcon, Icon } from "../../layout/Icon"
+import { DetailIcon, EditIcon, Icon } from "../../layout/Icon"
 import { Components } from "../Components"
 import { ComponentsPaths } from "../ComponentsPaths"
 import { EditDocente } from "./EditDocente"
@@ -16,12 +16,15 @@ import { CardActions } from "../../layout/CardActions"
 export interface IRouteParams{
     readonly id: string
 }
+export interface IProps extends RouteComponentProps<IRouteParams>{
+    readonly dialogClose?: () => void
+}
 export interface IState{
     readonly docente: Docente
 }
 
-export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IRouteParams>, IState>{
-    constructor(props: RouteComponentProps<IRouteParams>){
+export class DettaglioDocente extends React.PureComponent<IProps, IState>{
+    constructor(props: IProps){
         super(props)
 
         this.state = {
@@ -57,6 +60,11 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
         })
     }
 
+    goToFullDetail = () => {
+        this.props.dialogClose()
+        goTo(ComponentsPaths.PATH_GESTORI_LISTA_DOCENTI + "/" + this.props.match.params.id)
+    }
+
     render = (): JSX.Element => {
         const { docente } = this.state,
         idDocente = this.props.match.params.id
@@ -73,6 +81,12 @@ export class DettaglioDocente extends React.PureComponent<RouteComponentProps<IR
                     </div>
 
                     <CardActions className="text-right">
+                        {
+                            this.props.dialogClose ? <Button textBtn onClick={this.goToFullDetail} btnColor="black" tooltip="Vedi dettaglio completo" className="mr-3">
+                                <DetailIcon large />
+                            </Button> : null
+                        }
+                        
                         <Button textBtn onClick={this.openModifica} btnColor="orange" tooltip="Modifica">
                             <EditIcon large />
                         </Button>

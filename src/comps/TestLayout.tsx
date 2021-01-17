@@ -89,6 +89,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
         }), 2000)
     }
 
+    sendResp = () => {
+        (window as any).sendSPIDResponse && (window as any).sendSPIDResponse("Qualcosa successe")
+        window.close()
+    }
+
     render = () => {
         const {
             loading,
@@ -103,7 +108,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
         return <div style={{ marginTop: 15 }}>
             <Tabs>
                 <Tab title="Buttons" style={{ height: "80vh" }}>
-                    <Button btnColor="red" className="mr-2">Red</Button>
+                    <Button btnColor="red" className="mr-2" onClick={this.sendResp}>Red</Button>
                     <Button btnColor="blue" className="mr-2">Blue</Button>
                     <Button btnColor="darkblue" className="mr-2">Dark Blue</Button>
                     <Button btnColor="green" className="mr-2">Green</Button>
