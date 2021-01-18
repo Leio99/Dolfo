@@ -101,7 +101,8 @@ export const Components: IComponentList = {
     [ComponentsPaths.PATH_GESTORI_CONFIG_CALENDAR]: {
         pageTitle: "Calendario",
         Component: ConfigCalendario,
-        parentKey: ComponentsPaths.PATH_GESTORI_HOME
+        parentKey: ComponentsPaths.PATH_GESTORI_HOME,
+        permission: ComponentsPermissions.checkPermissionGestore
     },
     [ComponentsPaths.ERROR_404_PATH]: {
         hideMenu: true,
