@@ -94,7 +94,10 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
         if(!presenze) return <LoadingIconCentered />
 
         return <div>
-            <h3 className="mr-3">Presenze firmate</h3>
+            <h3 className="mr-3">
+                Presenze firmate
+                {this.props.isDialog && <span className="small-label">(visualizzare il dettaglio per la lista completa)</span>}
+            </h3>
             <span className="float-right">{presenze.length} su {totalSize} totali</span>
             <div className="clearfix"></div>
 

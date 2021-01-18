@@ -104,6 +104,11 @@ table.calendario{
         }
     }
 }
+.small-label{
+    font-size: 13px;
+    font-weight: normal;
+    margin-left: 5px
+}
 
 @keyframes slideLeft{
     0%{ opacity: 0; left: 300px }
