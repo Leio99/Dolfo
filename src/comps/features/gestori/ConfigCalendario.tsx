@@ -74,6 +74,8 @@ export class ConfigCalendario extends React.PureComponent<any, IState>{
         })
     }
 
+    openGoogleCalendar = () => window.open("https://calendar.google.com/")
+
     openInfo = () => {
         Dialog.openDialog({
             title: "Configurazione del calendario",
@@ -82,7 +84,7 @@ export class ConfigCalendario extends React.PureComponent<any, IState>{
             clickOutside: true,
             content: <div>
                 <p>Questa schermata permette di configurare il calendario Google dal quale verranno prese le lezioni, che saranno poi registrate e potranno essere firmate da studenti e docenti.</p>
-                <p>Per prima cosa è necessario creare un calendario su <a href="https://calendar.google.com/" target="_blank" rel="noreferrer"> Google Calendar <DetailIcon /></a> e renderlo <strong>pubblico</strong>.</p>
+                <p>Per prima cosa è necessario creare un calendario su <Button textBtn btnColor="blue" onClick={this.openGoogleCalendar}> Google Calendar <DetailIcon /></Button> e renderlo <strong>pubblico</strong>.</p>
                 <p>
                     <strong>Rendere pubblico il calendario</strong>
                     <div>Per rendere pubblico un calendario bisogna cliccare sulla rotellina (<Icon iconKey="cog" type="far" />) in alto a destra (<Button textBtn btnColor="blue" onClick={() => this.openScreen(1)}>immagine</Button>) e poi sull'opzione <strong>Impostazioni</strong> nel menu che appare.</div>
