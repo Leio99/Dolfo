@@ -5,7 +5,7 @@ import { PresenzeService } from "../../../services/PresenzeService"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { FullLoader } from "../../layout/FullLoader"
-import { EditIcon } from "../../layout/Icon"
+import { CheckIcon, EditIcon, Icon } from "../../layout/Icon"
 import { Table } from "../../layout/Table"
 import { EditPresenza } from "./dialogs/DialogEditPresenza"
 
@@ -103,11 +103,13 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
                 { label: "Entrata", field: "oraEntrata", width: 200, align: "center" },
                 { label: "Uscita", field: "oraUscita", width: 200, align: "center" },
                 { label: "Lezione", field: "lezione", tooltip: true, canSearch: true },
+                { label: "Stato", field: "stato", align: "center" },
                 { label: "Azioni", field: "azioni", width: "20%", align: "center" },
             ]} data={
                 presenze.map(p => {
                     let temp = {...p}
                     temp.oraUscita = p.oraUscita === "00:00" ? "Non firmata" : p.oraUscita
+                    temp.stato = p.confermata ? <CheckIcon color="var(--green)" tooltip="Accettata" large /> : p.rifiutata ? <Icon iconKey="ban" tooltip="Rifiutata" color="var(--red)" large /> : <Icon iconKey="clock" color="var(--grey)" tooltip="In esaminazione" large />
                     temp.azioni = <Button tooltip="Modifica orari" circleBtn onClick={() => this.editPresenza(p)} btnColor="orange">
                         <EditIcon />
                     </Button>

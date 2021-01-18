@@ -59,6 +59,8 @@ export class ConfigCalendario extends React.PureComponent<any, IState>{
                 originalId: idCalendario,
                 loadingForm: false
             })
+
+            NotificationMsg.showSuccess("Calendario salvato!")
         }).catch(this.toggleLoadForm)
     }
 

@@ -77,7 +77,7 @@ export class HomeGestore extends React.PureComponent<undefined, IState>{
                         <Icon iconKey="wrench" large />
                     </Button>
 
-                    <Select label="Cambia edizione" className="d-inline-block ml-3" defaultValue={defaultEdizione} loading={!listaEdizioni || !defaultEdizione} onChange={this.changeEdizione} wrapperStyle={{ width: "calc(100% - 40px)"}}>
+                    <Select label="Cambia edizione" className="d-inline-block ml-3" defaultValue={defaultEdizione} loading={!listaEdizioni || !defaultEdizione} onChange={this.changeEdizione} wrapperStyle={{ width: "calc(100% - 40px)" }} icon={{ iconKey: "list-alt" }}>
                         <Option label="Non selezionata" value={-1} />
 
                         {

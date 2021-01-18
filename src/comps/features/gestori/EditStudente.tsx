@@ -44,10 +44,13 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
 
     componentDidMount = () => {
         StudentiService.getStudente(this.props.match.params.id).then(response => {
+            const studente = response.data
+
             this.setState({
-                ...response.data,
+                ...studente,
+                dataNascita: new Date(response.data.dataNascita),
                 loading: false,
-                studente: response.data
+                studente
             })
         }).catch(() => goTo(ComponentsPaths.PATH_GESTORI_HOME))
     }
@@ -60,7 +63,7 @@ export class EditStudente extends React.PureComponent<IProps, IState>{
 
     changeCF = (cf: string) => this.setState({ cf })
 
-    changeDataNascita = (dataNascita: Date) => this.setState({ dataNascita }, () => console.log(dataNascita))
+    changeDataNascita = (dataNascita: Date) => this.setState({ dataNascita })
 
     editStudente = (e: FormEvent) => {
         e.preventDefault()

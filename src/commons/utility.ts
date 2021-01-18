@@ -20,7 +20,18 @@ export const formatWithMonth = (date: string): string => formatDate(new Date(dat
 
 export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
 
-export const isValidDate = (date: string): boolean => !isNaN(new Date(date).getTime())
+export const isValidDate = (d: number, m: number, y: number, h: number, i: number): boolean => m >= 0 && m < 12 && d > 0 && d <= daysInMonth(m, y) && h >= 0 && h < 60 && i >= 0 && i < 60 && y > 1900
+
+export const daysInMonth = (m: number, y: number) => {
+    switch (m) {
+        case 1: return (y % 4 === 0 && y % 100) || y % 400 === 0 ? 29 : 28
+        case 8:
+        case 3:
+        case 5:
+        case 10: return 30
+        default: return 31
+    }
+}
 
 export const formatNumber = (n: string|number): string => {
     if(n == null) return "0"

@@ -210,13 +210,16 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         pieces = date.split("-"),
         day = parseInt(pieces[0]),
         month = parseInt(pieces[1]) - 1,
-        year =  parseInt(pieces[2]),
-        d = `${year}-${month+1}-${day}`
+        year = this.props.selectTime ? parseInt(pieces[2].split(" ")[0]) : parseInt(pieces[2]),
+        hour = this.props.selectTime ? parseInt(date.split(" ")[1].split(":")[0]) : 0,
+        minute = this.props.selectTime ? parseInt(date.split(" ")[1].split(":")[1]) : 0
 
-        console.log(d, isValidDate(d))
-
-        if(date !== "" && pieces && pieces.length === 3 && !isNaN(day) && !isNaN(month) && !isNaN(year) && day > 0 && month >= 0 && isValidDate(d))
-            this.selectDay(day, month, year, false)
+        if(isValidDate(day, month, year, hour, minute)){
+            this.setState({
+                currentHour: hour,
+                currentMinute: minute
+            }, () => this.selectDay(day, month, year, false))
+        }
     }
 
     changeTime = (time: string) => {

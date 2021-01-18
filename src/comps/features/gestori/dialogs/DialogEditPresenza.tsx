@@ -76,8 +76,14 @@ export class EditPresenza extends React.PureComponent<IProps, IState>{
                 <p className="mb-1">
                     <strong>Data</strong>: {formatWithMonth(presenza.data)}
                 </p>
-                <p className="mb-0">
+                <p className="mb-1">
                     <strong>Lezione</strong>: {presenza.lezione}
+                </p>
+                <p className="mb-1">
+                    <strong>Accettata</strong>: {presenza.confermata ? "Sì" : "No"}
+                </p>
+                <p className="mb-0">
+                    <strong>Rifiutata</strong>: {presenza.rifiutata ? "Sì" : "No"}
                 </p>
             </div>
         })
