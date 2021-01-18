@@ -25,12 +25,10 @@ export class GestoriMenu extends React.PureComponent<IProps>{
     isInPath = (path: string) => this.props.currentPath.indexOf(path) >= 0
 
     openInfoDialog = () => {
-        Dialog.openDialog({
-            type: "info",
+        Dialog.infoDialog({
             title: "Informazioni",
             clickOutside: true,
             okType: "blue",
-            width: "400px",
             content: <div>
                 <div>
                     <strong>Versione:</strong> 1.0

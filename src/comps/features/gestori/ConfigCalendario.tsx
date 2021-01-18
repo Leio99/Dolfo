@@ -98,7 +98,7 @@ export class ConfigCalendario extends React.PureComponent<any, IState>{
                     </div>
                 </p>
             </div>,
-            hideCancel: true,
+            type: "warning",
             width: "700px",
             okType: "blue",
             icon: <QuestionCircleOutlineIcon color="var(--orange)" />
@@ -111,7 +111,7 @@ export class ConfigCalendario extends React.PureComponent<any, IState>{
         return <Tabs>
             <Tab title="Configurazione">
                 <form onSubmit={this.salvaConfig}>
-                    <TextInput icon={{ iconKey: "google", type: "fab" }} label="Id calendario Google"value={idCalendario} disabled={loadingForm || loadingCalendario} onChange={this.changeId} required />
+                    <TextInput icon={{ iconKey: "google", type: "fab" }} label="Id calendario Google"value={idCalendario} name="idCalendario" disabled={loadingForm || loadingCalendario} onChange={this.changeId} required />
 
                     <div className="text-right mt-3">
                         <Button textBtn tooltip="Dove mi trovo?" onClick={this.openInfo} btnColor="orange">

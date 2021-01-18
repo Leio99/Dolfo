@@ -61,14 +61,18 @@ export class TabellaPresenze extends React.PureComponent<IProps, IState>{
         })
     }
 
+    checkForPresences = () => {
+        if(this.state.nextPage && Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.state.presenze && !this.state.bigLoader)
+            this.setState({ page: this.state.page + 1 }, this.loadPresenze)
+    }
+
     componentDidMount = () => {
-        !this.props.isDialog && window.addEventListener("scroll", () => {
-            if(this.state.nextPage && Math.ceil(window.innerHeight + window.scrollY) >= document.body.offsetHeight && this.state.presenze && !this.state.bigLoader)
-                this.setState({ page: this.state.page + 1 }, this.loadPresenze)
-        })
+        !this.props.isDialog && window.addEventListener("scroll", this.checkForPresences)
 
         this.loadPresenze()
     }
+
+    componentWillUnmount = () => window.removeEventListener("scroll", this.checkForPresences)
 
     savePresenza = (presenza: Presenza) => {
         this.setState({

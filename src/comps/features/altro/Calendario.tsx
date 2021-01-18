@@ -29,10 +29,10 @@ export class Calendario extends React.PureComponent<IProps, IState>{
     componentDidMount = () => {        
         const start = () => {
             gapi.client.init({
-                "apiKey": GOOGLE_API_KEY
+                apiKey: GOOGLE_API_KEY
             }).then(() => {
                 return gapi.client.request({
-                    "path": `https://www.googleapis.com/calendar/v3/calendars/${this.props.idCalendario}/events?singleEvents=True&orderBy=startTime`
+                    path: `https://www.googleapis.com/calendar/v3/calendars/${this.props.idCalendario}/events?singleEvents=True&orderBy=startTime`
                 })
             }).then(response => {
                 const gEvents = response.result.items as GoogleCalendarEvent[],
@@ -88,7 +88,7 @@ export class Calendario extends React.PureComponent<IProps, IState>{
     infoEvento = (e: CalendarEvent, isPrev: boolean, isNext: boolean) => {
         Dialog.openDialog({
             width: "420px",
-            hideCancel: true,
+            type: "info",
             okType: "blue",
             icon: <Icon iconKey="calendar-day" type="far" />,
             title: "Lezione del " + formatWithMonth(e.date.toString()),

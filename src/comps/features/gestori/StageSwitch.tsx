@@ -56,7 +56,7 @@ export class StageSwitch extends React.PureComponent<any, IState>{
             title: "Attiva/Disattiva lo stage",
             okText: "Ho capito",
             width: "400px",
-            hideCancel: true,
+            type: "warning",
             okType: "blue",
             icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
             content: "Se attivata, quest'impostazione permette agli studenti di segnare le ore di stage svolte presso le aziende tramite la propria area personale."
