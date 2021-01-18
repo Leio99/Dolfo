@@ -1,6 +1,7 @@
 import React from "react"
 import { decodeMonth, formatWithMonth, getCalendar, getTime } from "../../../commons/utility"
 import { CalendarEvent, GoogleCalendarEvent } from "../../../models/CalendarEvent"
+import { GOOGLE_API_KEY } from "../../../services/costantiApi"
 import Button from "../../layout/Button"
 import { Dialog } from "../../layout/Dialog"
 import { Icon } from "../../layout/Icon"
@@ -28,7 +29,7 @@ export class Calendario extends React.PureComponent<IProps, IState>{
     componentDidMount = () => {        
         const start = () => {
             gapi.client.init({
-                "apiKey": "AIzaSyDNFiAeFUFT0B9GinyWk9DwcDkeNJoWO5s"
+                "apiKey": GOOGLE_API_KEY
             }).then(() => {
                 return gapi.client.request({
                     "path": `https://www.googleapis.com/calendar/v3/calendars/${this.props.idCalendario}/events?singleEvents=True&orderBy=startTime`

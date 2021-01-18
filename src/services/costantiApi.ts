@@ -1,12 +1,7 @@
 export const API_URL_REGISTRO = "http://localhost/apiRegistro"
-// export const API_URL_REGISTRO = "https://registrofitstic.azurewebsites.net/api"
+export const GOOGLE_API_KEY = "AIzaSyDNFiAeFUFT0B9GinyWk9DwcDkeNJoWO5s"
 export const API_URL_REGISTRO_STUDENTI = API_URL_REGISTRO + "/studenti"
-export const API_URL_REGISTRO_CORSI = API_URL_REGISTRO + "/corsi"
 export const API_URL_REGISTRO_PRESENZE = API_URL_REGISTRO + "/presenze"
-export const API_URL_REGISTRO_PRESENZE_DOCENTE = API_URL_REGISTRO + "/presenzedocente"
-export const API_URL_REGISTRO_MATERIE = API_URL_REGISTRO + "/materie"
 export const API_URL_REGISTRO_DOCENTI = API_URL_REGISTRO + "/docenti"
-export const API_URL_REGISTRO_COORDINATORI = API_URL_REGISTRO + "/coordinatori"
-
 export const API_URL_REGISTRO_GESTORI = API_URL_REGISTRO + "/gestori"
 export const API_URL_REGISTRO_EDIZIONI = API_URL_REGISTRO + "/edizioni"
