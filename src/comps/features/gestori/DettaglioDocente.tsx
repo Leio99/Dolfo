@@ -94,7 +94,7 @@ export class DettaglioDocente extends React.PureComponent<IProps, IState>{
                 </Card>
             </div>
 
-            <TabellaPresenze targetId={parseInt(idDocente)} reloadTotali={this.loadDocente} isDocente />
+            <TabellaPresenze targetId={parseInt(idDocente)} reloadTotali={this.loadDocente} isDocente isDialog={!!this.props.dialogClose} />
         </div>
     }
 }
