@@ -54,11 +54,11 @@ h6{
 ::-webkit-scrollbar{
     width: 7px;
     height: 7px;
-    background: #ccc
+    background: $grey
 }
 ::-webkit-scrollbar-thumb{
     border-radius: 10px;
-    background: #666
+    background: $dark
 }
 
 @keyframes spinIcon{
