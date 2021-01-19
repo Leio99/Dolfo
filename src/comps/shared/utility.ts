@@ -1,22 +1,11 @@
-import { NotificationMsg } from "../comps/layout/NotificationMsg"
-import { ICalendarDay } from "../comps/shared/models/ICalendarDay"
-import { LoadingIcon } from "../comps/layout/Icon"
-import { history } from "../comps/Navigator"
-import { IDataColumn } from "../comps/shared/models/IColumn"
+import { ICalendarDay } from "./models/ICalendarDay"
+import { IDataColumn } from "./models/IColumn"
 
 export const formatDate = (date: Date, monthString = false): string => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
 
     return `${zeroBefore(date.getDate()) + month + date.getFullYear()}`
 }
-
-export const reverseDate = (date: Date): string => `${date.getFullYear() + "-" + zeroBefore(date.getMonth() + 1) + "-" + zeroBefore(date.getDate())}`
-
-export const reverseDateWithTime = (date: Date): string => `${date.getFullYear() + "-" + zeroBefore(date.getMonth() + 1) + "-" + zeroBefore(date.getDate())} ${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
-
-export const formatItalian = (date: string): string => formatDate(new Date(date))
-
-export const formatWithMonth = (date: string): string => formatDate(new Date(date), true)
 
 export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
 
@@ -168,67 +157,10 @@ export const getCalendar = (month?: number, year?: number) => {
     return table
 }
 
-export const copyToClipBoard = (text: string) => {
-    const el = document.createElement("textarea")
-    el.value = text
-    el.style.opacity = "0"
-    el.style.width = "0"
-    el.style.height = "0"
-
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand("copy")
-    document.body.removeChild(el)
-
-    NotificationMsg.showInfo("Codice copiato negli appunti!")
-}
-
-export const capitalizeFirst = (name: string): string => {
-    let splitStr = capitalizeQuote(name.toLowerCase()).split(" ")
-
-    for (let i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1) 
-    }
-   
-    return splitStr.join(" ")
-}
-
-export const capitalizeQuote = (name: string): string => {
-    let splitStr = name.toLowerCase().split("'")
-
-    for (let i = 0; i < splitStr.length; i++) {
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1)
-    }
-   
-    return splitStr.join("'")
-}
-
-export const convertFromUTC = (date: string): string => {
-    let localDate = new Date(date)
-
-    return `${zeroBefore(localDate.getHours())}:${zeroBefore(localDate.getMinutes())}`
-}
-
 export const getTime = (d: string): string => {
     const date = new Date(d)
 
     return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
-}
-
-export const LoadingIconCentered = (): JSX.Element => {
-    return LoadingIcon({
-        color: "var(--darkblue)",
-        style: { fontSize: 50 },
-        spinning: true,
-        className: "d-block mx-auto"
-    })
-}
-
-export const dateIsToday = (d: string): boolean => {
-    const date = new Date(d),
-    newDate = new Date()
-
-    return date.getDate() === newDate.getDate() && date.getMonth() === newDate.getMonth()
 }
 
 export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
@@ -249,21 +181,4 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
 
     link.click()
     link.remove()
-}
-
-export const goTo = (path: string) => window.location.pathname !== path && history.push(path)
-
-export const notImplemented = () => NotificationMsg.show({ message: "Funzionalità da implementare", position: "top-right", type: "info" })
-
-export const objectsAreSame = (x: any, y: any) => {
-    let objectsAreSame = true
-    
-    for(const propertyName in x){
-       if(x[propertyName] !== y[propertyName]){
-          objectsAreSame = false
-          break
-       }
-    }
-
-    return objectsAreSame
 }

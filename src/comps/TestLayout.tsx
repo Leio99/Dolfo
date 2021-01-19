@@ -25,6 +25,7 @@ import { SubMenu } from "./layout/SubMenu"
 import { Stepper } from "./layout/Stepper"
 import { Step } from "./layout/Step"
 import { Uploader } from "./form/Uploader"
+import { initializeTooltips } from "./layout/Tooltip"
 
 export interface IState{
     readonly visibleDialog: boolean
@@ -36,8 +37,8 @@ export interface IState{
     readonly currentStep: number
 }
 export class TestLayout extends React.PureComponent<any, IState>{
-    constructor(props: never){
-        super(props)
+    constructor(){
+        super(undefined)
 
         this.state = {
             visibleDialog: false,
@@ -51,6 +52,8 @@ export class TestLayout extends React.PureComponent<any, IState>{
     }
 
     componentDidMount = () => {
+        initializeTooltips()
+        
         let percent = this.state.percent,
         interval = setInterval(() => {
             if(percent === 100)
@@ -89,11 +92,6 @@ export class TestLayout extends React.PureComponent<any, IState>{
         }), 2000)
     }
 
-    sendResp = () => {
-        (window as any).sendSPIDResponse && (window as any).sendSPIDResponse("Qualcosa successe")
-        window.close()
-    }
-
     render = () => {
         const {
             loading,
@@ -105,10 +103,10 @@ export class TestLayout extends React.PureComponent<any, IState>{
             currentStep
         } = this.state
 
-        return <div style={{ marginTop: 15 }}>
+        return <div style={{ marginTop: 15, padding: 50 }}>
             <Tabs>
                 <Tab title="Buttons" style={{ height: "80vh" }}>
-                    <Button btnColor="red" className="mr-2" onClick={this.sendResp}>Red</Button>
+                    <Button btnColor="red" className="mr-2">Red</Button>
                     <Button btnColor="blue" className="mr-2">Blue</Button>
                     <Button btnColor="darkblue" className="mr-2">Dark Blue</Button>
                     <Button btnColor="green" className="mr-2">Green</Button>
@@ -285,6 +283,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
                         <Tab title="Pickers">
                             <DatePicker label="Datepicker" />
+                            <DatePicker label="Date and time picker" selectTime />
                             <TimePicker label="Timepicker" />
                         </Tab>
 

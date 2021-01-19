@@ -1,5 +1,5 @@
 import React from "react"
-import { blurInput } from "../../commons/utility"
+import { blurInput } from "../shared/utility"
 import { InputProps } from "../shared/models/InputProps"
 import { CheckBox } from "./CheckBox"
 

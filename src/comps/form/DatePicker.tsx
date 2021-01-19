@@ -1,5 +1,5 @@
 import React from "react"
-import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput, isValidDate } from "../../commons/utility"
+import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput, isValidDate } from "../shared/utility"
 import { ICalendarDay } from "../shared/models/ICalendarDay"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"

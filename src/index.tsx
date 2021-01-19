@@ -1,13 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { Provider } from "react-redux"
 import * as serviceWorker from "./serviceWorker"
-import NavContainer from "./comps/Navigator"
+import { TestLayout } from "./comps/TestLayout"
 import "./index.scss"
-import { store } from "./commons/Redux"
 
-ReactDOM.render(<Provider store={store}>
-    <NavContainer />
-</Provider>, document.getElementById("root"))
+ReactDOM.render(<TestLayout />, document.getElementById("root"))
 
 serviceWorker.unregister()

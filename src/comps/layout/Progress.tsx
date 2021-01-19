@@ -1,5 +1,5 @@
 import React from "react"
-import { formatNumber } from "../../commons/utility"
+import { formatNumber } from "../shared/utility"
 import { BaseColors } from "./Button"
 import { LoadingIcon } from "./Icon"
 

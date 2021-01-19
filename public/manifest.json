@@ -1,19 +1,19 @@
 {
-  "short_name": "Registro FITSTIC",
-  "name": "Per gestire i corsi FITSTIC",
+  "short_name": "Dolfo",
+  "name": "Better components",
   "icons": [
     {
-      "src": "images/favicon.png",
+      "src": "favicon.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "images/favicon.png",
+      "src": "favicon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "images/favicon.png",
+      "src": "favicon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
