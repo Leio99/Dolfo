@@ -44,6 +44,7 @@
         color: #999;
         background: transparent;
         transition: color 0.2s ease;
+        vertical-align: inherit;
 
         &:hover{
             color: $dark
