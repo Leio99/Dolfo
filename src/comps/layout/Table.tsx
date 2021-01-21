@@ -1,5 +1,5 @@
 import React from "react"
-import { downloadCSV, formatDate, getTime } from "../shared/utility"
+import { downloadCSV, formatDate, getTime } from "../../commons/utility"
 import { CheckBox } from "../form/CheckBox"
 import { Constants } from "../shared/Constants"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
@@ -89,7 +89,16 @@ export class Table extends React.PureComponent<IProps, IState>{
     render = (): JSX.Element => {
         const props = this.props,
         { filter, activeFilterKey, activeFilter } = this.state,
-        data = activeFilterKey === "" ? props.data : props.data.filter(d => d[activeFilterKey].toLowerCase().indexOf(filter[activeFilterKey].toLowerCase()) >= 0)
+        ajdustData = props.data.map(d => {
+            let temp = {...d}
+
+            props.columns.forEach(c => {
+                temp[c.field] = this.getColumnDataType(c, d)
+            })
+
+            return temp
+        }),
+        data = activeFilterKey === "" ? ajdustData : ajdustData.filter(d => d[activeFilterKey].toLowerCase().indexOf(filter[activeFilterKey].toLowerCase()) >= 0)
  
         return <div className={"dolfo-table-content" + (props.className ? (" " + props.className) : "")}>
             <table className="dolfo-table">
@@ -131,7 +140,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                                 {
                                     props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip ? d[col.field] : null}>
                                         {
-                                            this.getColumnDataType(col, d)
+                                            d[col.field]
                                         }
                                     </td>)
                                 }
