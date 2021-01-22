@@ -57,7 +57,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
             }, () => {
                 Dialog.infoDialog({
                     type: "error",
-                    content: "Non è stato possibile recuperare gli eventi del calendario."
+                    content: Constants.CALENDAR_ERROR_UNABLE_TO_GET_EVENTS
                 })
             })
         }
