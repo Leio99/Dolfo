@@ -40,5 +40,6 @@ export const Constants = {
     WEEK_DAYS: ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"],
     MONTHS: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
     EVENT_DETAIL_TOOLTIP: "Dettagli",
-    CALENDAR_PIN_TODAY: "Oggi"
+    CALENDAR_PIN_TODAY: "Oggi",
+    CALENDAR_ERROR_UNABLE_TO_GET_EVENTS: "Non è stato possibile recuperare gli eventi del calendario."
 }
