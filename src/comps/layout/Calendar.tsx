@@ -137,7 +137,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
                                                 <div>{col.day}</div>
                                                 {
-                                                    events.map(e => <div className="event text-truncate" data-tooltip={Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
+                                                    events.map(e => <div className="event text-truncate" data-tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
                                                         {e.start} - {e.end} • {e.desc}
                                                     </div>)
                                                 }
