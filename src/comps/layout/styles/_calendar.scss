@@ -1,55 +1,75 @@
+.dolfo-g-calendar-content{
+    .month-title{
+        margin-bottom: 1rem;
 
-table.dolfo-g-calendar{
-    text-align: center;
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid $lightGrey;
+        .month-buttons{
+            float: right;
+            margin-left: 0.7rem;
 
-    thead th, tbody td{
-        width: calc(100% / 7);
-        border-bottom: 0;
-        border: 1px solid $lightGrey;
-        padding: 0.75rem
-    }
-    
-    tbody td{
-        max-width: 0;
-
-        .content{
-            min-height: 100px;
-            width: 100%;
-            position: relative;
-
-            .icon-today{
-                transform: rotate(45deg);
-                position: absolute;
-                right: 0;
-                color: $green
-            }
-
-            .event{
-                margin-top: 0.3rem;
-                background-color: $red;
-                color: $white;
-                border-radius: $roundRadius;
-                padding: 0.2rem 0.5rem;
-                font-size: 12px;
-                cursor: pointer;
-
-                &:hover{
-                    background-color: darken($red, 10%)
-                }
+            .month-button-next{
+                margin-left: 0.5rem
             }
         }
+    }
 
-        &.external{
-            color: $grey;
+    table.dolfo-g-calendar{
+        text-align: center;
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid $lightGrey;
 
-            .content .event{
-                background-color: $disabled;
+        thead th, tbody td{
+            width: calc(100% / 7);
+            border-bottom: 0;
+            border: 1px solid $lightGrey;
+            padding: 0.75rem
+        }
+        
+        tbody td{
+            max-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
 
-                &:hover{
-                    background-color: darken($disabled, 15%)
+            .content{
+                min-height: 100px;
+                width: 100%;
+                position: relative;
+
+                .icon-today{
+                    transform: rotate(45deg);
+                    position: absolute;
+                    right: 0;
+                    color: $green
+                }
+
+                .event{
+                    margin-top: 0.3rem;
+                    background-color: $red;
+                    color: $white;
+                    border-radius: $roundRadius;
+                    padding: 0.2rem 0.5rem;
+                    font-size: 12px;
+                    cursor: pointer;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+
+                    &:hover{
+                        background-color: darken($red, 10%)
+                    }
+                }
+            }
+
+            &.external{
+                color: $grey;
+
+                .content .event{
+                    background-color: $disabled;
+
+                    &:hover{
+                        background-color: darken($disabled, 15%)
+                    }
                 }
             }
         }
@@ -57,7 +77,7 @@ table.dolfo-g-calendar{
 }
 
 @media screen and (max-width: 800px){
-    table.dolfo-g-calendar th {
+    .dolfo-g-calendar-content table.dolfo-g-calendar th {
         font-size: 0;
 
         &:first-letter {
