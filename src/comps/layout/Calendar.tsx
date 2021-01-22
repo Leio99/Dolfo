@@ -93,13 +93,13 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         const { eventi, currentYear, currentMonth } = this.state,
         calendario = getCalendar(currentMonth, currentYear)
 
-        return <div>
-            <h3 className="mb-4">
-                <div className="float-right ml-3">
-                    <Button btnColor="black" tooltip={Constants.CALENDAR_PREVIOUS_MONTH} onClick={this.decreaseMonth}>
+        return <div className="dolfo-g-calendar-content">
+            <h3 className="month-title">
+                <div className="month-buttons">
+                    <Button btnColor="black" tooltip={Constants.CALENDAR_PREVIOUS_MONTH} className="month-button-prev" onClick={this.decreaseMonth}>
                         <Icon iconKey="chevron-left" type="far" large />
                     </Button>
-                    <Button btnColor="black" tooltip={Constants.CALENDAR_NEXT_MONTH} className="ml-2" onClick={this.increaseMonth}>
+                    <Button btnColor="black" tooltip={Constants.CALENDAR_NEXT_MONTH} className="month-button-next" onClick={this.increaseMonth}>
                         <Icon iconKey="chevron-right" type="far" large />
                     </Button>
                 </div>
@@ -131,13 +131,13 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                                         isPrev = col.prevMonth >= 0,
                                         isNext = col.nextMonth >= 0
 
-                                        return <td className={"text-truncate" + (isPrev || isNext ? " external" : "")}>
+                                        return <td className={isPrev || isNext ? "external" : null}>
                                             <div className="content">
                                                 {isToday && <Icon iconKey="map-pin" large tooltip={Constants.CALENDAR_PIN_TODAY} className="icon-today" />}
 
                                                 <div>{col.day}</div>
                                                 {
-                                                    events.map(e => <div className="event text-truncate" data-tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
+                                                    events.map(e => <div className="event" data-tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
                                                         {e.start} - {e.end} • {e.desc}
                                                     </div>)
                                                 }
