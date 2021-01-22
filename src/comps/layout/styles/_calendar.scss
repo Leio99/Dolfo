@@ -55,3 +55,13 @@ table.dolfo-g-calendar{
         }
     }
 }
+
+@media screen and (max-width: 800px){
+    table.dolfo-g-calendar th {
+        font-size: 0;
+
+        &:first-letter {
+            font-size: initial !important;
+        }
+    }
+}
