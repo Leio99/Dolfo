@@ -118,7 +118,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         },
         icon = data.icon || Dialog.getIcon(data.type)
 
-        document.getElementById("root").appendChild(popup);
+        document.body.appendChild(popup);
 
         (popup as any).close = () => {
             popup.remove()
@@ -133,7 +133,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         const popup = document.createElement("div"),
         Component = <Class close={() => popup.remove()} {...props} />
 
-        document.getElementById("root").appendChild(popup)
+        document.body.appendChild(popup)
 
         ReactDOM.render(Component, popup)
     }
