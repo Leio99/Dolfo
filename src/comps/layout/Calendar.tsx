@@ -28,7 +28,11 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         }
     }
     
-    componentDidMount = () => {        
+    componentDidMount = () => {
+        /*
+        * script script src="https://apis.google.com/js/api.js"></script>
+        * is required in your index.html
+        */
         const start = () => {
             gapi.client.init({
                 apiKey: this.props.apiKey
