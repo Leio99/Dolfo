@@ -34,5 +34,11 @@ export const Constants = {
     NAVIGATE_BREADCRUMB: "Naviga",
     EXPORT_CSV_TEXT: "Esporta CSV",
     EXPORT_PDF_TEXT: "Esporta PDF",
-    ORDER_COLUMNS: "Ordina per"
+    ORDER_COLUMNS: "Ordina per",
+    CALENDAR_PREVIOUS_MONTH: "Mese precedente",
+    CALENDAR_NEXT_MONTH: "Mese successivo",
+    WEEK_DAYS: ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"],
+    MONTHS: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+    EVENT_DETAIL_TOOLTIP: "Dettagli",
+    CALENDAR_PIN_TODAY: "Oggi"
 }
