@@ -43,6 +43,10 @@
                     color: $green
                 }
 
+                .day-number-container .day-number .week-day{
+                    display: none
+                }
+
                 .event{
                     margin-top: 0.3rem;
                     background-color: $red;
@@ -82,6 +86,110 @@
 
         &:first-letter {
             font-size: initial !important;
+        }
+    }
+}
+
+@media screen and (max-width: 600px){
+    .dolfo-g-calendar-content table.dolfo-g-calendar{
+        display: block;
+        border: 0;
+
+        thead, tbody tr td.emptys{
+            display: none
+        }
+
+        tbody, tbody tr, tbody tr td{
+            display: block;
+            width: 100%;
+            width: 100%;
+            max-width: 100%;
+            border: 0;
+            padding-left: 0;
+            padding-right: 0;
+
+            .external, .empty{
+                display: none
+            }
+        }
+
+        tbody tr td .content{
+            display: flex;
+            flex-direction: row;
+            min-height: auto;
+
+            .icon-today{
+                display: none;
+
+                & ~ .day-number-container .day-number{
+                    background-color: $green
+                }
+            }
+
+            .day-number-container{
+                width: 20%;
+                justify-content: center;
+                display: flex;
+
+                .day-number{
+                    padding: 0.5rem;
+                    border-radius: 0.7rem;
+                    background-color: $blue;
+                    color: $white;
+                    width: 65px;
+                    height: 65px;
+                    font-size: 23px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+
+                    .week-day{
+                        text-transform: uppercase;
+                        font-size: 70%
+                    }
+                }
+            }
+
+            .events-container{
+                width: 80%;
+                margin-left: 0.8rem;
+                display: flex;
+                flex-direction: column;
+                
+                .event{
+                    color: inherit;
+                    font-size: inherit;
+                    display: inline-flex;
+                    flex-direction: column-reverse;
+                    width: 100%;
+                    align-items: flex-start;
+                    font-size: 14px;
+                    border-radius: $smallRadius;
+                    background-color: transparent;
+                    
+                    &:first-child{
+                        margin-top: 0
+                    }
+
+                    &:hover{
+                        background-color: $lightGrey
+                    }
+
+                    .event-desc-separator{
+                        display: none
+                    }
+
+                    .event-desc{
+                        display: block;
+                        font-weight: bold;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        max-width: 100%
+                    }
+                }
+            }
         }
     }
 }
