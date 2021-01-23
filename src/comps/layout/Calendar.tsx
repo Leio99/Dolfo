@@ -128,23 +128,31 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                         calendario.map(row => {
                             return <tr>
                                 {
-                                    row.map(col => {
+                                    row.map((col, i) => {
                                         const events = eventi.filter(e => e.day === col.day && e.month === col.month && e.year === col.year),
                                         now = new Date(),
                                         isToday = col.day === now.getDate() && col.month === now.getMonth() && col.year === now.getFullYear(),
                                         isPrev = col.prevMonth >= 0,
                                         isNext = col.nextMonth >= 0
 
-                                        return <td className={isPrev || isNext ? "external" : null}>
+                                        return <td className={(isPrev || isNext ? "external" : "") + (!events.length ? " empty" : "")}>
                                             <div className="content">
                                                 {isToday && <Icon iconKey="map-pin" large tooltip={Constants.CALENDAR_PIN_TODAY} className="icon-today" />}
 
-                                                <div>{col.day}</div>
-                                                {
-                                                    events.map(e => <div className="event" data-tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
-                                                        {e.start} - {e.end} • {e.desc}
-                                                    </div>)
-                                                }
+                                                <div className="day-number-container">
+                                                    <div className="day-number">
+                                                        <div className="week-day">{Constants.WEEK_DAYS[i].substring(0, 3)}</div>
+                                                        {col.day}
+                                                    </div>
+                                                </div>
+
+                                                <div className="events-container">
+                                                    {
+                                                        events.map(e => <div className="event" data-tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
+                                                            {e.start} - {e.end} <span className="event-desc-separator">•</span> <span className="event-desc">{e.desc}</span>
+                                                        </div>)
+                                                    }
+                                                </div>
                                             </div>
                                         </td>
                                     })
