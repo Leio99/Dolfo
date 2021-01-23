@@ -41,5 +41,6 @@ export const Constants = {
     MONTHS: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
     EVENT_DETAIL_TOOLTIP: "Dettagli",
     CALENDAR_PIN_TODAY: "Oggi",
-    CALENDAR_ERROR_UNABLE_TO_GET_EVENTS: "Non è stato possibile recuperare gli eventi del calendario."
+    CALENDAR_ERROR_UNABLE_TO_GET_EVENTS: "Non è stato possibile recuperare gli eventi del calendario.",
+    MONTH_NO_EVENTS: "Non ci sono eventi per questo mese.",
 }
