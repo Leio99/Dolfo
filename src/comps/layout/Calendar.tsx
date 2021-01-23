@@ -95,7 +95,8 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
     render = (): JSX.Element => {
         const { eventi, currentYear, currentMonth } = this.state,
-        calendario = getCalendar(currentMonth, currentYear)
+        calendario = getCalendar(currentMonth, currentYear),
+        monthEvents = eventi.filter(e => e.month === currentMonth && e.year === currentYear)
 
         return <div className="dolfo-g-calendar-content">
             <h3 className="month-title">
@@ -109,6 +110,8 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                 </div>
                 {decodeMonth(currentMonth)} {currentYear}
             </h3>
+
+            {!monthEvents.length && <div className="no-month-events">{Constants.MONTH_NO_EVENTS}</div>}
 
             <table className="dolfo-g-calendar">
                 <thead>
