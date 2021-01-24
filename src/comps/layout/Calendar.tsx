@@ -12,7 +12,7 @@ export interface IProps{
     readonly onEventClick?: (e: CalendarEvent, isPrev: boolean, isNext: boolean) => void
 }
 export interface IState{
-    readonly eventi: CalendarEvent[]
+    readonly events: CalendarEvent[]
     readonly currentMonth: number
     readonly currentYear: number
 }
@@ -22,7 +22,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         super(props)
 
         this.state = {
-            eventi: [],
+            events: [],
             currentMonth: new Date().getMonth(),
             currentYear: new Date().getFullYear()
         }
@@ -42,22 +42,22 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                 })
             }).then(response => {
                 const gEvents = response.result.items as GoogleCalendarEvent[],
-                eventi = gEvents.map(e => {
-                    const start = new Date(e.start.dateTime),
-                    end = new Date(e.end.dateTime)
+                events = gEvents.map(e => {
+                    const start = new Date(e.start.dateTime || e.start.date),
+                    end = new Date(e.end.dateTime || e.start.date)
 
                     return {
                         day: start.getDate(),
                         month: start.getMonth(),
                         year: start.getFullYear(),
                         desc: e.summary,
-                        start: getTime(start.toString()),
-                        end: getTime(end.toString()),
+                        start: e.start.date ? null : getTime(start.toString()),
+                        end: e.end.date ? null : getTime(end.toString()),
                         date: start
                     }
                 })
 
-                this.setState({ eventi })
+                this.setState({ events })
             }, () => {
                 Dialog.infoDialog({
                     type: "error",
@@ -94,10 +94,11 @@ export class Calendar extends React.PureComponent<IProps, IState>{
     tryOpenEvent = (e: CalendarEvent, isPrev: boolean, isNext: boolean) => this.props.onEventClick && this.props.onEventClick(e, isPrev, isNext)
 
     render = (): JSX.Element => {
-        const { eventi, currentYear, currentMonth } = this.state,
+        const { events, currentYear, currentMonth } = this.state,
         calendario = getCalendar(currentMonth, currentYear),
-        monthEvents = eventi.filter(e => e.month === currentMonth && e.year === currentYear)
+        monthEvents = events.filter(e => e.month === currentMonth && e.year === currentYear)
 
+        console.log(events)
         return <div className="dolfo-g-calendar-content">
             <h3 className="month-title">
                 <div className="month-buttons">
@@ -132,13 +133,13 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                             return <tr>
                                 {
                                     row.map((col, i) => {
-                                        const events = eventi.filter(e => e.day === col.day && e.month === col.month && e.year === col.year),
+                                        const dEvents = events.filter(e => e.day === col.day && e.month === col.month && e.year === col.year),
                                         now = new Date(),
                                         isToday = col.day === now.getDate() && col.month === now.getMonth() && col.year === now.getFullYear(),
                                         isPrev = col.prevMonth >= 0,
                                         isNext = col.nextMonth >= 0
 
-                                        return <td className={(isPrev || isNext ? "external" : "") + (!events.length ? " empty" : "")}>
+                                        return <td className={(isPrev || isNext ? "external" : "") + (!dEvents.length ? " empty" : "")}>
                                             <div className="content">
                                                 {isToday && <Icon iconKey="map-pin" large tooltip={Constants.CALENDAR_PIN_TODAY} className="icon-today" />}
 
@@ -151,8 +152,10 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
                                                 <div className="events-container">
                                                     {
-                                                        events.map(e => <div className="event" data-tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
-                                                            {e.start} - {e.end} <span className="event-desc-separator">•</span> <span className="event-desc">{e.desc}</span>
+                                                        dEvents.map(e => <div className="event" data-tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
+                                                            {e.start && e.end && <span>{e.start} - {e.end}</span>} 
+                                                            {e.start && e.end && <span className="event-desc-separator"> • </span>}
+                                                            <span className="event-desc">{e.desc}</span>
                                                         </div>)
                                                     }
                                                 </div>
