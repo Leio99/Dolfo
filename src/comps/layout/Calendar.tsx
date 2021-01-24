@@ -98,7 +98,6 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         calendario = getCalendar(currentMonth, currentYear),
         monthEvents = events.filter(e => e.month === currentMonth && e.year === currentYear)
 
-        console.log(events)
         return <div className="dolfo-g-calendar-content">
             <h3 className="month-title">
                 <div className="month-buttons">
