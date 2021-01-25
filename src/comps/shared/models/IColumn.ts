@@ -6,6 +6,7 @@ export interface IColumn{
     readonly width?: number | string
     readonly align?: "left" | "right" | "center" | "justify"
     readonly canSearch?: boolean
+    readonly searchField?: string
     readonly tooltip?: boolean
     readonly type?: "date" | "time" | "check"
     readonly onCheckAll?: () => void
