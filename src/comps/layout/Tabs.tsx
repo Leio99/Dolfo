@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react"
+import { objectsAreSame } from "../../commons/utility"
 import { Tab } from "./Tab"
 
 export interface IProps {
@@ -15,24 +16,30 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     constructor(props: IProps) {
         super(props)
 
-        const children = this.getChildrenTabs() as Tab[],
-        findCurrent = children.indexOf(children.find(child => child.props?.isDefault))
-
         this.state = {
-            children,
-            currentTab: findCurrent >= 0 ? findCurrent : 0
+            children: this.getChildrenTabs() as Tab[],
+            currentTab: 0
         }
     }
 
+    loadTabs = () => {
+        const children = this.state.children,
+        findCurrent = children.indexOf(children.find(child => child.props?.isDefault))
+
+        this.setState({
+            currentTab: findCurrent >= 0 ? findCurrent : 0
+        }, this.handleBar)
+    }
+
     componentDidMount = () => {
-        this.handleBar()
+        this.loadTabs()
         window.addEventListener("load", this.handleBar)
         window.addEventListener("resize", this.handleBar)
     }
 
     componentDidUpdate = (prevProps: any) => {
-        if(prevProps.children !== this.props.children)
-            this.setState({ children: this.getChildrenTabs() })
+        if(prevProps.children !== this.props.children || !objectsAreSame(this.props, prevProps))
+            this.setState({ children: this.getChildrenTabs() }, this.loadTabs)
     }
 
     getChildrenTabs = () => React.Children.map(this.props.children, (child: any) => child).filter(t => !!t)
