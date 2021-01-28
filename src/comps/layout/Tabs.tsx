@@ -66,10 +66,12 @@ export class Tabs extends React.PureComponent<IProps, IState>{
 
     checkKey = (e: any, index: number) => {
         if(e.key.charCodeAt(0) === 32 || e.key.charCodeAt(0) === 69){
-            this.changeSelection(index)
             e.preventDefault()
+            this.changeSelection(index)
         }
     }
+
+    preventSpaceKey = (e: any) => e.key.charCodeAt(0) === 32 && e.preventDefault()
 
     render = (): JSX.Element => {
         const props = this.props,
@@ -82,7 +84,9 @@ export class Tabs extends React.PureComponent<IProps, IState>{
 
                 {
                     children.map((child, i) => {
-                        return <div className={"dolfo-tab-title" + (currentTab === i ? " current" : "")} onClick={() => this.changeSelection(i)} tabIndex={0} onKeyUp={(e) => this.checkKey(e, i)}>
+                        const disabled = child.props.disabled
+
+                        return <div className={"dolfo-tab-title" + (currentTab === i ? " current" : "") + (disabled ? " disabled" : "")} onClick={!disabled ? () => this.changeSelection(i) : null} tabIndex={!disabled ? 0 : null} onKeyUp={(e) => this.checkKey(e, i)} onKeyDown={this.preventSpaceKey}>
                             {child.props.title}
                         </div>
                     })
@@ -95,6 +99,9 @@ export class Tabs extends React.PureComponent<IProps, IState>{
                         const marginLeft = -(100 * currentTab) + "%",
                         style = i === 0 && !isVertical ? { ...child.props.style, marginLeft } : child.props.style
 
+                        if(child.props.disabled)
+                            return <Tab title={child.props.title} />
+                        
                         return <Tab {...child.props} selected={i === currentTab} style={style} />
                     })
                 }
