@@ -5,6 +5,7 @@ export interface IProps {
     readonly selected?: boolean
     readonly isDefault?: boolean
     readonly style?: CSSProperties
+    readonly disabled?: boolean
 }
 
 export class Tab extends React.PureComponent<IProps>{
