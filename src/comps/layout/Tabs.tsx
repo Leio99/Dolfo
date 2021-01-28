@@ -6,6 +6,7 @@ export interface IProps {
     readonly style?: CSSProperties
     readonly className?: string
     readonly vertical?: boolean
+    readonly onChangeTab?: (index: number) => void
 }
 export interface IState {
     readonly children: Tab[]
@@ -48,6 +49,8 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         this.setState({
             currentTab: index
         }, this.handleBar)
+
+        this.props.onChangeTab && this.props.onChangeTab(index)
     }
 
     handleBar = () => {
