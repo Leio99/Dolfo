@@ -24,6 +24,11 @@
             font-size: 12pt;
             text-align: center;
             color: darken($disabled, 25%);
+            
+            &.disabled{
+                opacity: 0.6;
+                pointer-events: none
+            }
 
             &.current{
                 color: $selectionBlue !important
