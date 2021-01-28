@@ -183,3 +183,16 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
     link.click()
     link.remove()
 }
+
+export const objectsAreSame = (x: any, y: any) => {
+    let objectsAreSame = true
+    
+    for(const propertyName in x){
+       if(x[propertyName] !== y[propertyName]){
+          objectsAreSame = false
+          break
+       }
+    }
+
+    return objectsAreSame
+
