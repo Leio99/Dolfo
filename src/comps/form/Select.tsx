@@ -148,7 +148,7 @@ class Select extends React.PureComponent<IProps, IState>{
             else newIndex = currentIndex + 1
             
             e.preventDefault()
-        }else if(e.key.charCodeAt(0) === 69){
+        }else if(e.key === "Enter" && options.length){
             const option = options[currentIndex] || options[0]
 
             if(this.props.multiple) this.changeMultiple(option.props.value, currentIndex)
