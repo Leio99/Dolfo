@@ -13,6 +13,7 @@ export interface IColumn{
     readonly checked?: boolean
     readonly checkTooltip?: string
     readonly exportable?: boolean
+    readonly exportField?: string
 }
 
 export interface IDataColumn{
