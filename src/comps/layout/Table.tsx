@@ -44,8 +44,8 @@ export class Table extends React.PureComponent<IProps, IState>{
 
     blurSearch = () => this.setState({ activeFilter: "" })
 
-    getColumnDataType = (col: IColumn, data: IDataColumn) => {
-        const d = data[col.field]
+    getColumnDataType = (col: IColumn, data: IDataColumn, exp = false) => {
+        const d = data[exp && col.exportField ? col.exportField : col.field]
 
         if(col.type === "check" && !data.hideCheck) return <CheckBox checked={data.checked} onChange={() => data.onCheckChange(data)} disabled={data.checkDisabled} />
         if(col.type === "date") return formatDate(new Date(d))
@@ -64,7 +64,6 @@ export class Table extends React.PureComponent<IProps, IState>{
             Object.keys(d).forEach(k => {
                 const find = columns.find(c => c.field === k)
 
-
                 if(find) obj[k] = d[k]
             })
 
@@ -73,7 +72,7 @@ export class Table extends React.PureComponent<IProps, IState>{
         orderedData = data.map(d => {
             let obj: any = {}
 
-            columns.forEach(c => obj[c.field] = this.getColumnDataType(c, d))
+            columns.forEach(c => obj[c.exportField ? c.exportField : c.field] = this.getColumnDataType(c, d, true))
 
             return obj
         })
