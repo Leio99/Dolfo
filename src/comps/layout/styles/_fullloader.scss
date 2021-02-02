@@ -13,5 +13,29 @@ body.dolfo-loader-showing{
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $white
+
+    .circle-loading, .circle-loading-inner{
+        width: 200px;
+        height: 200px;
+        border: 4px solid transparent;
+        border-top-color: $white;
+        border-radius: 100px;
+        padding: 1.2rem;
+        animation: spinLoader 1.5s linear infinite;
+        
+        &.circle-loading-inner{
+            width: 100%;
+            height: 100%;
+            animation: spinLoaderReverse 0.75s linear infinite
+        }
+    }
+}
+
+@keyframes spinLoader{
+    0%{ transform: rotate(0deg) }
+    100%{ transform: rotate(360deg) }
+}
+@keyframes spinLoaderReverse{
+    0%{ transform: rotate(0deg) }
+    100%{ transform: rotate(-360deg) }
 }
