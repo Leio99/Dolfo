@@ -1,6 +1,5 @@
 import React from "react"
 import ReactDOM from "react-dom";
-import { Icon } from "./Icon";
 
 export class FullLoader extends React.Component{
     static show = () => {
@@ -16,7 +15,9 @@ export class FullLoader extends React.Component{
         document.body.appendChild(loader)
 
         ReactDOM.render(<div className="dolfo-full-loader-inner">
-            <Icon iconKey="spinner-third" type="fal" className="dolfo-full-loader-icon fa-9x" spinning />
+            <div className="circle-loading">
+                <div className="circle-loading-inner"></div>
+            </div>
         </div>, loader)
 
         return loader as { close?: () => void }
