@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom";
 
 export class FullLoader extends React.Component{
-    static show = () => {
+    static show = (data?: { loadingText?: string, type?: "circle" | "balls" }) => {
         const loader = document.createElement("div");
 
         (loader as any).close = () => {
@@ -15,9 +15,15 @@ export class FullLoader extends React.Component{
         document.body.appendChild(loader)
 
         ReactDOM.render(<div className="dolfo-full-loader-inner">
-            <div className="circle-loading">
-                <div className="circle-loading-inner"></div>
-            </div>
+            {
+                data.type === "balls" ? <div className="balls-loading">
+                    <div className="ball-inner"></div>
+                </div> : <div className="circle-loading">
+                    <div className="circle-loading-inner"></div>
+                </div>
+            }
+
+            {data.loadingText && <span className="loading-text">{data.loadingText}</span>}
         </div>, loader)
 
         return loader as { close?: () => void }
