@@ -5,7 +5,7 @@ body.dolfo-loader-showing{
 .dolfo-full-loader{
     position: fixed;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
     top: 0;
     left: 0;
     bottom: 0;
@@ -29,6 +29,39 @@ body.dolfo-loader-showing{
             animation: spinLoaderReverse 0.75s linear infinite
         }
     }
+
+    .balls-loading{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70px;
+
+        .ball-inner, &:before, &:after{
+            width: 12px;
+            height: 0;
+            background-color: $white;
+            display: inline-block;
+            border-radius: $roundRadius;
+            margin: 0 0.5rem;
+            animation: ballLoader 1s ease infinite;
+        }
+
+        .ball-inner{
+            animation-delay: 0.5s
+        }
+
+        &:before, &:after{
+            content: ""
+        }
+    }
+
+    .loading-text{
+        margin-top: 1.3rem;
+        display: block;
+        color: $white;
+        text-align: center;
+        font-size: 25px
+    }
 }
 
 @keyframes spinLoader{
@@ -38,4 +71,8 @@ body.dolfo-loader-showing{
 @keyframes spinLoaderReverse{
     0%{ transform: rotate(0deg) }
     100%{ transform: rotate(-360deg) }
+}
+@keyframes ballLoader{
+    0%, 100%{ height: 12px }
+    50%{ height: 70px }
 }
