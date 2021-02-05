@@ -57,6 +57,7 @@
         border: 1px solid $selectionBlue;
         background-color: $white;
         border-radius: $smallRadius;
+        border-top-left-radius: 0;
         display: none;
         max-height: 200px;
         overflow: auto;
