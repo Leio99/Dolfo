@@ -40,10 +40,8 @@
         }
     }
 
-    &.opened{
-        .dolfo-accordion-header .accordion-caret{
-            transform: translateY(-50%) rotate(180deg)
-        }
+    &.opened > .dolfo-accordion-header .accordion-caret{
+        transform: translateY(-50%) rotate(180deg)
     }
 
     .dolfo-accordion-content{
