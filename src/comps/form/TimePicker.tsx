@@ -1,5 +1,5 @@
 import React from "react"
-import { zeroBefore } from "../shared/utility"
+import { zeroBefore } from "../../commons/utility"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
@@ -103,7 +103,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         hour = value.split(":")[0],
         minute = value.split(":")[1]
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled} style={props.wrapperStyle} required={props.required}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled} style={props.wrapperStyle} required={props.required} value={value}>
             <input
                 type="text"
                 className="dolfo-input-time"
