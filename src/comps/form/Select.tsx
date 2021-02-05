@@ -173,7 +173,7 @@ class Select extends React.PureComponent<IProps, IState>{
             <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
         </div>
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required} className={props.className}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required} className={props.className} value={value} selectedOption={currentSelection}>
             <span className="select-icon">
                 {props.loading ? <LoadingIcon spinning className="loading" /> : <Icon type="far" iconKey="chevron-down" />}
             </span>
@@ -185,7 +185,6 @@ class Select extends React.PureComponent<IProps, IState>{
                     required={props.required}
                     tabIndex={-1}
                     readOnly={props.readonly}
-                    placeholder={props.multiple && !value.length ? Constants.MULTI_SELECT_NO_SELECTION : ""}
                 />
 
                 <span>{this.decodeValue(value)}</span>
