@@ -298,7 +298,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Tab>
 
                         <Tab title="Uploader">
-                            <Uploader label="Simple uploader"/>
+                            <Uploader label="Simple uploader" />
                             <Uploader dropArea multiple />
                         </Tab>
                     </Tabs>
