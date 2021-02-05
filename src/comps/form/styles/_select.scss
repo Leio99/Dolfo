@@ -50,10 +50,11 @@
 
     .dolfo-select-options{
         position: absolute;
-        top: 0;
+        top: -4px;
         z-index: 2;
-        width: 100%;
-        border: 1px solid $grey;
+        width: calc(100% + 4px);
+        left: 0;
+        border: 1px solid $selectionBlue;
         background-color: $white;
         border-radius: $smallRadius;
         display: none;
@@ -65,7 +66,7 @@
         }
 
         .dolfo-option{
-            padding: calc(0.5rem - 1px) calc(0.8rem - 1px);
+            padding: calc(0.5rem + 3px) calc(0.8rem - 1px);
             cursor: pointer;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -106,10 +107,12 @@
 
             .reset-input{
                 right: 1.5rem;
-                top: 0.7rem
+                top: 1rem
             }
 
             .dolfo-select-search-input{
+                padding-top: calc(0.5rem + 3px) !important;
+                padding-bottom: calc(0.5rem + 3px) !important;
                 padding-right: 3.8rem !important;
                 padding-left: 2.5rem !important
             }
@@ -117,9 +120,9 @@
             .dolfo-select-search-icon{
                 right: auto;
                 left: 0.7rem;
-                top: 0.4rem;
+                top: 0.5rem;
                 transform: translateY(50%);
-                font-size: 12px;
+                font-size: 14px;
                 pointer-events: none
             }
         }
