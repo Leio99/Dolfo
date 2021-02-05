@@ -7,12 +7,12 @@ import { Constants } from "../shared/Constants"
 export type DialogType = "success" | "info" | "error" | "warning"
 
 export interface BaseProps{
-    title?: string | JSX.Element,
-    content?: string | JSX.Element,
-    onOk?: () => void,
-    width?: string,
-    okText?: string,
-    clickOutside?: boolean
+    readonly title?: string | JSX.Element,
+    readonly content?: string | JSX.Element,
+    readonly onOk?: () => void,
+    readonly width?: string,
+    readonly okText?: string,
+    readonly clickOutside?: boolean
 }
 
 export interface IProps extends BaseProps{
@@ -86,7 +86,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
             title: title || Constants.CONFIRM_TITLE,
             content: message,
             onOk: onYes,
-            okText: Constants.YESY_TEXT,
+            okText: Constants.YES_TEXT,
             clickOutside: true,
             cancelText: Constants.NO_TEXT,
             icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
