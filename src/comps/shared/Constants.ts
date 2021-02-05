@@ -10,7 +10,7 @@ export const Constants = {
     ERROR_TEXT: "Errore",
     SUCCESS_TEXT: "Complimenti",
     CONFIRM_TITLE: "Attenzione",
-    YESY_TEXT: "Sì",
+    YES_TEXT: "Sì",
     NO_TEXT: "No",
     LOADING_TEXT: "Caricamento...",
     SEARCH_PLACEHOLDER: "Cerca",
