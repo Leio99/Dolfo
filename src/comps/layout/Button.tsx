@@ -7,7 +7,7 @@ import onClickOutside from "react-onclickoutside"
 export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
 export type ButtonColors = BaseColors | "white"
 
-export interface IProps extends InputProps{
+export interface ButtonProps extends InputProps{
     readonly type?: "button" | "submit" | "popup"
     readonly fullSize?: boolean
     readonly smallBtn?: boolean
@@ -25,8 +25,8 @@ export interface IState{
     readonly openPopup: boolean
 }
 
-class Button extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+class Button extends React.PureComponent<ButtonProps, IState>{
+    constructor(props: ButtonProps){
         super(props)
 
         this.state = {
