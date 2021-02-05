@@ -57,14 +57,14 @@
 
     .dolfo-input-wrapper:hover{
         cursor: pointer;
-        background-color: $selectionBlue;
+        border-color: $selectionBlue;
 
         *{
             pointer-events: none
         }
 
-        .dolfo-input-icon{
-            color: $white
+        .dolfo-input-icon, .dolfo-input-content input{
+            color: $selectionBlue
         }
 
         .reset-input{
