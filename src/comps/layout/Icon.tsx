@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react"
 
 export interface BaseIconProps {
-    readonly type?: "fa" | "far" | "fal" | "fas" | "fab"
+    readonly type?: "fa" | "far" | "fal" | "fas" | "fab" | "fad"
     readonly iconKey: string
 }
 export interface DefaultIconProps{
