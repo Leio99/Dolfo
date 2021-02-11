@@ -1,0 +1,21 @@
+.dolfo-swiper-container{
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+
+    .dolfo-swipe{
+        flex: 0 0 100%;
+        background-color: $white;
+
+        &.detail-swipe{
+            transition: 0.3s ease;
+            margin-left: 0;
+            position: relative;
+            z-index: 1;
+
+            &.opened{
+                margin-left: -100%
+            }
+        }
+    }
+}
