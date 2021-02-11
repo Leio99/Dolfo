@@ -43,4 +43,5 @@ export const Constants = {
     CALENDAR_PIN_TODAY: "Oggi",
     CALENDAR_ERROR_UNABLE_TO_GET_EVENTS: "Non è stato possibile recuperare gli eventi del calendario.",
     MONTH_NO_EVENTS: "Non ci sono eventi per questo mese.",
+    SWIPE_ERROR_ONLY_ONE: "Devono esserci al due Swipes (master e detail)."
 }
