@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { objectsAreSame } from "../../commons/utility"
+import { objectsAreSame } from ../shared/utility"
 import { Tab } from "./Tab"
 
 export interface IProps {
