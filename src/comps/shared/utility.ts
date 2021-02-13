@@ -1,6 +1,6 @@
 import { ICalendarDay } from "./models/ICalendarDay"
 import { IDataColumn } from "./models/IColumn"
-import { Constants } from "../comps/shared/Constants"
+import { Constants } from "./Constants"
 
 export const formatDate = (date: Date, monthString = false): string => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
@@ -195,4 +195,4 @@ export const objectsAreSame = (x: any, y: any) => {
     }
 
     return objectsAreSame
-
+}
