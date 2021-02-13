@@ -103,7 +103,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         hour = value.split(":")[0],
         minute = value.split(":")[1]
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled} style={props.wrapperStyle} required={props.required} value={value}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled} style={props.wrapperStyle} required={props.required} value={value} className={props.className}>
             <input
                 type="text"
                 className="dolfo-input-time"
