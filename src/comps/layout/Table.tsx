@@ -103,7 +103,7 @@ export class Table extends React.PureComponent<IProps, IState>{
             <table className="dolfo-table">
 
                 {
-                    data.length > 0 && && props.exportable && <thead className="dolfo-table-actions">
+                    data.length > 0 && props.exportable && <thead className="dolfo-table-actions">
                         <tr>
                             <td colSpan={props.columns.length}>
                                 {
