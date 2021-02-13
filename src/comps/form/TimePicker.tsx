@@ -1,5 +1,5 @@
 import React from "react"
-import { zeroBefore } from "../../commons/utility"
+import { zeroBefore } from "../shared/utility"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
