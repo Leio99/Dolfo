@@ -1,47 +1,47 @@
-export const Constants = {
-    CANCEL_TEXT: "Annulla",
-    OK_TEXT: "Ok",
-    CONFIRM_TEXT: "Conferma",
-    BACK_TEXT: "Indietro",
-    FORWARD_TEXT: "Avanti",
-    INFO_TEXT: "Info",
-    CLOSE_TEXT: "Chiudi",
-    WARNING_TEXT: "Attenzione",
-    ERROR_TEXT: "Errore",
-    SUCCESS_TEXT: "Complimenti",
-    CONFIRM_TITLE: "Attenzione",
-    YES_TEXT: "Sì",
-    NO_TEXT: "No",
-    LOADING_TEXT: "Caricamento...",
-    SEARCH_PLACEHOLDER: "Cerca",
-    FILTER_TEXT: "Filtra",
-    RESET_INPUT_TEXT: "Pulisci",
-    SHOW_PASSWORD_TEXT: "Mostra",
-    HIDE_PASSWORD_TEXT: "Nascondi",
-    INCREASE_TEXT: "Aumenta",
-    DECREASE_TEXT: "Riduci",
-    PREV_TEXT: "Precedente",
-    NEXT_TEXT: "Successivo",
-    CHANGE_MONTH: "Cambia mese",
-    CHANGE_YEAR: "Cambia anno",
-    UPLOAD_FILE_LABEL: "Carica un file",
-    UPLOAD_FILE_DROP_LABEL: "Carica o trascina un file",
-    UPLOAD_FILE_ERROR_NOT_MULTIPLE: "Puoi caricare soltanto un file!",
-    SELECTED_FILES_LABEL: "File selezionati:",
-    UPLOAD_FILE_NOT_ACCEPTABLE: "Non puoi caricare questo tipo di file!",
-    MULTI_SELECT_NO_SELECTION: "Nessuna selezione",
-    REQUIRED_FIELD: "Obbligatorio",
-    NAVIGATE_BREADCRUMB: "Naviga",
-    EXPORT_CSV_TEXT: "Esporta CSV",
-    EXPORT_PDF_TEXT: "Esporta PDF",
-    ORDER_COLUMNS: "Ordina per",
-    CALENDAR_PREVIOUS_MONTH: "Mese precedente",
-    CALENDAR_NEXT_MONTH: "Mese successivo",
-    WEEK_DAYS: ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"],
-    MONTHS: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
-    EVENT_DETAIL_TOOLTIP: "Dettagli",
-    CALENDAR_PIN_TODAY: "Oggi",
-    CALENDAR_ERROR_UNABLE_TO_GET_EVENTS: "Non è stato possibile recuperare gli eventi del calendario.",
-    MONTH_NO_EVENTS: "Non ci sono eventi per questo mese.",
-    SWIPE_ERROR_ONLY_ONE: "Devono esserci al due Swipes (master e detail)."
+export class Constants {
+    static readonly CANCEL_TEXT = "Annulla"
+    static readonly OK_TEXT = "Ok"
+    static readonly CONFIRM_TEXT = "Conferma"
+    static readonly BACK_TEXT = "Indietro"
+    static readonly FORWARD_TEXT = "Avanti"
+    static readonly INFO_TEXT = "Info"
+    static readonly CLOSE_TEXT = "Chiudi"
+    static readonly WARNING_TEXT = "Attenzione"
+    static readonly ERROR_TEXT = "Errore"
+    static readonly SUCCESS_TEXT = "Complimenti"
+    static readonly CONFIRM_TITLE = "Attenzione"
+    static readonly YES_TEXT = "Sì"
+    static readonly NO_TEXT = "No"
+    static readonly LOADING_TEXT = "Caricamento..."
+    static readonly SEARCH_PLACEHOLDER = "Cerca"
+    static readonly FILTER_TEXT = "Filtra"
+    static readonly RESET_INPUT_TEXT = "Pulisci"
+    static readonly SHOW_PASSWORD_TEXT = "Mostra"
+    static readonly HIDE_PASSWORD_TEXT = "Nascondi"
+    static readonly INCREASE_TEXT = "Aumenta"
+    static readonly DECREASE_TEXT = "Riduci"
+    static readonly PREV_TEXT = "Precedente"
+    static readonly NEXT_TEXT = "Successivo"
+    static readonly CHANGE_MONTH = "Cambia mese"
+    static readonly CHANGE_YEAR = "Cambia anno"
+    static readonly UPLOAD_FILE_LABEL = "Carica un file"
+    static readonly UPLOAD_FILE_DROP_LABEL = "Carica o trascina un file"
+    static readonly UPLOAD_FILE_ERROR_NOT_MULTIPLE = "Puoi caricare soltanto un file!"
+    static readonly SELECTED_FILES_LABEL = "File selezionati:"
+    static readonly UPLOAD_FILE_NOT_ACCEPTABLE = "Non puoi caricare questo tipo di file!"
+    static readonly MULTI_SELECT_NO_SELECTION = "Nessuna selezione"
+    static readonly REQUIRED_FIELD = "Obbligatorio"
+    static readonly NAVIGATE_BREADCRUMB = "Naviga"
+    static readonly EXPORT_CSV_TEXT = "Esporta CSV"
+    static readonly EXPORT_PDF_TEXT = "Esporta PDF"
+    static readonly ORDER_COLUMNS = "Ordina per"
+    static readonly CALENDAR_PREVIOUS_MONTH = "Mese precedente"
+    static readonly CALENDAR_NEXT_MONTH = "Mese successivo"
+    static readonly WEEK_DAYS = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica"]
+    static readonly MONTHS = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"]
+    static readonly EVENT_DETAIL_TOOLTIP = "Dettagli"
+    static readonly CALENDAR_PIN_TODAY = "Oggi"
+    static readonly CALENDAR_ERROR_UNABLE_TO_GET_EVENTS = "Non è stato possibile recuperare gli eventi del calendario."
+    static readonly MONTH_NO_EVENTS = "Non ci sono eventi per questo mese."
+    static readonly SWIPE_ERROR_ONLY_ONE = "Devono esserci al due Swipes (master e detail)."
 }
