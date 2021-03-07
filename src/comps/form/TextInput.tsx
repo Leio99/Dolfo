@@ -83,7 +83,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
 
     checkRows = (e: any) => {
         if(this.props.expandTextarea){
-            let rows = e.target.value.split("\n").length,
+            const rows = e.target.value.split("\n").length,
             max = this.props.rows || MAX_ROWS
 
             this.setState({
