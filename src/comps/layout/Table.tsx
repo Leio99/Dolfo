@@ -120,7 +120,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                     <tr>
                         {
                             props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
-                                {col.type === "check" && <CheckBox tooltip={col.checkTooltip} checked={col.checked} onChange={col.onCheckAll} />}
+                                {col.type === "check" && <CheckBox tooltip={typeof col.checkTooltip === "string" ? col.checkTooltip : null} checked={col.checked} onChange={col.onCheckAll} />}
  
                                 {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" tooltip={Constants.FILTER_TEXT} onClick={() => this.changeActiveFiler(col.field)} />}
 
@@ -137,7 +137,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                         data.length ? data.map(d => {
                             return <tr style={d.rowStyle} onDoubleClick={d.onDoubleClick}>
                                 {
-                                    props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip ? d[col.field] : null}>
+                                    props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null}>
                                         {
                                             d[col.field]
                                         }
