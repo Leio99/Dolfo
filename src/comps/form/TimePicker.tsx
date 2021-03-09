@@ -1,5 +1,5 @@
 import React from "react"
-import { zeroBefore } from "../shared/utility"
+import { zeroBefore } from "../../commons/utility"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
@@ -8,6 +8,12 @@ import { Constants } from "../shared/Constants"
 
 export interface IProps extends InputProps{
     readonly defaultValue?: string
+    readonly onKeyUpHour?: (e: any) => void
+    readonly onKeyUpMinute?: (e: any) => void
+    readonly onKeyDownHour?: (e: any) => void
+    readonly onKeyDownMinute?: (e: any) => void
+    readonly onKeyPressHour?: (e: any) => void
+    readonly onKeyPressMinute?: (e: any) => void
 }
 export interface IState{
     readonly value: string
@@ -94,6 +100,24 @@ class TimePicker extends React.PureComponent<IProps, IState>{
 
     handleClickOutside = this.hideTime
 
+    keyDownHour = (e: any) => {
+        if(e.key === 'ArrowUp')
+            this.increaseHour()
+        else if(e.key === 'ArrowDown')
+            this.decreaseHour()
+        
+        this.props.onKeyDownHour && this.props.onKeyDownHour(e)
+    }
+
+    keyDownMinute = (e: any) => {
+        if(e.key === 'ArrowUp')
+            this.increaseMinute()
+        else if(e.key === 'ArrowDown')
+            this.decreaseMinute()
+
+        this.props.onKeyDownMinute && this.props.onKeyDownMinute(e)
+    }
+
     render = (): JSX.Element => {
         const props = this.props,
         { value, showTime } = this.state,
@@ -109,10 +133,9 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                 className="dolfo-input-time"
                 value={hour}
                 onChange={this.changeHour}
-                readOnly={props.readonly}
-                onKeyDown={props.onKeyDown}
-                onKeyPress={props.onKeyPress}
-                onKeyUp={props.onKeyUp}
+                onKeyDown={this.keyDownHour}
+                onKeyPress={props.onKeyPressHour}
+                onKeyUp={props.onKeyUpHour}
             />
 
             <input
@@ -120,9 +143,9 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                 className="dolfo-input-time"
                 value={minute}
                 onChange={this.changeMinute}
-                onKeyDown={props.onKeyDown}
-                onKeyPress={props.onKeyPress}
-                onKeyUp={props.onKeyUp}
+                onKeyDown={this.keyDownMinute}
+                onKeyPress={props.onKeyPressMinute}
+                onKeyUp={props.onKeyUpMinute}
             />
 
             <div className={"dolfo-time-container" + (showTime ? " show" : "")}>
