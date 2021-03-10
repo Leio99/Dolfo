@@ -53,14 +53,17 @@
 
     .dolfo-stepper-steps{
         display: flex;
-        overflow: hidden;
 
         .dolfo-step{
             flex: 0 0 100%;
             transition: 0.4s ease;
             position: relative;
-            height: 0;
-            opacity: 0;
+
+            &:not(.current){
+                overflow: hidden;
+                height: 0;
+                opacity: 0
+            }
 
             &.current{
                 height: auto;
