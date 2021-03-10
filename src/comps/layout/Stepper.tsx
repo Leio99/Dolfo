@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react"
+import ReactDOM from "react-dom"
 import { Icon } from "./Icon"
 import { Step } from "./Step"
 
@@ -10,6 +11,17 @@ export interface IProps{
 }
 
 export class Stepper extends React.PureComponent<IProps>{
+    componentDidUpdate = (prevProps: IProps) => {
+        if(prevProps.currentStep !== this.props.currentStep){
+            const node = ReactDOM.findDOMNode(this),
+            container = Array.from(node.childNodes).find((v: any) => v.classList.contains("dolfo-stepper-steps")) as HTMLElement
+
+            container.style.overflow = "hidden"
+
+            setTimeout(() => container.style.removeProperty("overflow"), 400)
+        }
+    }
+
     getChildrenStepsWithSeparators = () => {
         let children: any[] = []
 
