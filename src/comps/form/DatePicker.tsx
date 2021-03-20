@@ -1,5 +1,5 @@
 import React from "react"
-import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput, isValidDate } from "../shared/utility"
+import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput, isValidDate } from "../../commons/utility"
 import { ICalendarDay } from "../shared/models/ICalendarDay"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
@@ -14,6 +14,7 @@ export interface IProps extends InputProps {
     readonly defaultValue?: Date
     readonly dateFormat?: DateFormats
     readonly selectTime?: boolean
+    readonly showOnTop?: boolean
 }
 export interface IState {
     readonly date: string
@@ -255,7 +256,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 onKeyUp={props.onKeyUp}
             />
             
-            <div className={"dolfo-calendar-container" + (showCalendar ? " show" : "") + (props.selectTime ? " time-picker" : "")}>
+            <div className={"dolfo-calendar-container" + (props.showOnTop ? " top" : "") + (showCalendar ? " show" : "") + (props.selectTime ? " time-picker" : "")}>
                 {
                     !selectingMonth && !selectingYear && <div className="dolfo-calendar">
                         <div className="dolfo-calendar-row">
