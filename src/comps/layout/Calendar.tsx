@@ -1,5 +1,5 @@
 import React from "react"
-import { decodeMonth, getCalendar, getTime } from "../../commons/utility"
+import { decodeMonth, getCalendar, getTime } from "../shared/utility"
 import { CalendarEvent, GoogleCalendarEvent } from "../shared/models/CalendarEvent"
 import Button from "./Button"
 import { Dialog } from "./Dialog"

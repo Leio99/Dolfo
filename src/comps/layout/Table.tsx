@@ -1,5 +1,5 @@
 import React from "react"
-import { downloadCSV, formatDate, getTime } from "../../commons/utility"
+import { downloadCSV, formatDate, getTime } from "../shared/utility"
 import { CheckBox } from "../form/CheckBox"
 import { Constants } from "../shared/Constants"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
