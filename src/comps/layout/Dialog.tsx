@@ -172,7 +172,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "") + (props.top ? " place-top" : "") + (props.overflows ? " overflows" : "")}>
             <div className="dolfo-dialog-overlay" onClick={props.clickOutside ? this.onClose : null}></div>
 
-            <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width }}>
+            <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width || props.style?.width }}>
                 <div className="dolfo-dialog-header">
                     <Button textBtn onClick={this.onClose} className="dialog-close" tooltip={Constants.CLOSE_TEXT}>
                         <CloseIcon style={{ fontSize: 20 }} />
