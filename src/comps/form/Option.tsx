@@ -1,5 +1,5 @@
 import React from "react"
-import { blurInput } from "../shared/utility"
+import { blurInput } from "../../commons/utility"
 import { InputProps } from "../shared/models/InputProps"
 import { CheckBox } from "./CheckBox"
 
@@ -16,6 +16,8 @@ export interface IProps extends InputProps{
 
 export class Option extends React.PureComponent<IProps>{
     selectOption = () => {
+        if(this.props.disabled) return
+        
         this.props.onChange(this.props.value)
 
         !this.props.multiple && blurInput()
@@ -42,7 +44,7 @@ export class Option extends React.PureComponent<IProps>{
 
         return <div onClick={!props.unclickable ? this.selectOption : blurInput} className={"dolfo-option" + (props.selected ? " selected" : "") + (props.unclickable ? " unclick" : "") + (props.focused ? " focused" : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             {
-                (props.multiple && !props.unclickable) ? <CheckBox checked={props.selected} label={props.label} /> : props.label
+                (props.multiple && !props.unclickable) ? <CheckBox checked={props.selected} label={props.label} disabled={props.disabled} /> : props.label
             }
         </div>
     }
