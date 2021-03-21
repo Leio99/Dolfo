@@ -184,7 +184,7 @@ class Select extends React.PureComponent<IProps, IState>{
                     value={value}
                     required={props.required}
                     tabIndex={-1}
-                    readOnly={props.readonly}
+                    readOnly
                 />
 
                 <span>{this.decodeValue(value)}</span>
