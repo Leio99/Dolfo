@@ -136,6 +136,8 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         document.body.appendChild(popup)
 
         ReactDOM.render(Component, popup)
+        
+        return { close: () => popup.remove() }
     }
 
     static getIcon = (icon: string) => {
