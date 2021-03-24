@@ -179,13 +179,7 @@ class Select extends React.PureComponent<IProps, IState>{
             </span>
 
             <div className="dolfo-input-select">
-                <input
-                    type="text"
-                    value={value}
-                    required={props.required}
-                    tabIndex={-1}
-                    readOnly
-                />
+                <input type="text" value={value} tabIndex={-1} required={props.required} />
 
                 <span>{this.decodeValue(value)}</span>
             </div>
