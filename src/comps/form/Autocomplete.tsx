@@ -53,6 +53,8 @@ export abstract class Autocomplete<T, K> extends React.Component<IProps<T>, ISta
             data: [],
             currentSelection: null
         })
+
+        this.props.onChange && this.props.onChange(null)
     }
 
     changeSearch = (e: any) => {
@@ -87,6 +89,8 @@ export abstract class Autocomplete<T, K> extends React.Component<IProps<T>, ISta
             openSelect: false,
             searchKeys: this.getDes(item)
         })
+
+        this.props.onChange && this.props.onChange(item)
     }
 
     handleKeyDown = (e: KeyboardEvent) => {        
