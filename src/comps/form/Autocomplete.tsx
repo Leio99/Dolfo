@@ -11,6 +11,7 @@ export interface IProps<T>{
     readonly required?: boolean
     readonly className?: string
     readonly icon?: JSX.Element
+    readonly label?: string
 }
 export interface IState<T, K>{
     readonly data: T[]
@@ -131,7 +132,7 @@ export abstract class Autocomplete<T, K> extends React.Component<IProps<T>, ISta
 
         let input: HTMLInputElement
 
-        return <InputWrapper icon={null} label="Autocomplete" onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled} style={props.wrapperStyle} required={props.required} className={"dolfo-autocomplete" + (props.className ? " " + props.className : "")} onKeyDown={this.handleKeyDown} value={value} selectedOption={currentSelection}>
+        return <InputWrapper icon={null} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled} style={props.wrapperStyle} required={props.required} className={"dolfo-autocomplete" + (props.className ? " " + props.className : "")} onKeyDown={this.handleKeyDown} value={value} selectedOption={currentSelection}>
             <div className="dolfo-input-select">
                 <input
                     type="text"
