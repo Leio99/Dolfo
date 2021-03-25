@@ -1,6 +1,7 @@
 import React from "react"
 import { InputProps } from "../shared/models/InputProps"
 import { CheckIcon } from "../layout/Icon"
+import { Constants } from "../shared/Constants"
 
 export interface IProps extends InputProps{
     readonly checked?: boolean
@@ -53,7 +54,10 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
             <div className={"dolfo-checkbox-square" + (checked ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace} data-tooltip={props.tooltip}>
                 <CheckIcon />
             </div>
-            {props.label && <label className="dolfo-checkbox-label">{props.label}</label>}
+            {props.label && <label className="dolfo-checkbox-label">
+                {props.label}
+                {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>} 
+            </label>}
         </div>
     }
 }
