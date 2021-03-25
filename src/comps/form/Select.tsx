@@ -51,10 +51,9 @@ class Select extends React.PureComponent<IProps, IState>{
                 })
             }
 
-            const children = this.props.children as Option[]
             this.setState({
                 options,
-                value: hasValues ? value : (this.props.multiple ? [] : children ? children[0].props.value : null)
+                value: hasValues ? value : (this.props.multiple ? [] : null)
             })
 
             value !== this.state.value && this.props.onChange && this.props.onChange(value)
