@@ -1,7 +1,12 @@
 .dolfo-uploader{
-
+    position: relative;
+    
     input[type="file"]{
-        display: none
+        opacity: 0;
+        position: absolute;
+        pointer-events: none;
+        top: 25%;
+        left: 0
     }
 
     .dolfo-uploader-drop{
