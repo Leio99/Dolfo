@@ -33,19 +33,7 @@ export class RadioButton extends React.PureComponent<IProps, IState>{
         this.props.onChange && this.props.onChange(value)
     }
 
-    getOptions = (children = this.props.children): Option[] => {
-        let list: Option[] = [];
-
-        (children as Option[]).forEach(child => {
-            if(Array.isArray(child)){
-                list = list.concat(this.getOptions(child))
-            }else{
-                list.push(child)
-            }
-        })
-
-        return list
-    }
+    getOptions = (): Option[] =>  React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
     render = (): JSX.Element => {
         const props = this.props,
