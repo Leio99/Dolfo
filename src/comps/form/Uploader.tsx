@@ -128,7 +128,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         let input: HTMLInputElement
 
         return <div className="dolfo-uploader">
-            <input type="file" required={props.required} accept={props.accept} value={value} multiple={props.multiple} ref={r => input = r} onChange={() => this.onChange(input)} onClick={this.clickInput} />
+            <input type="file" accept={props.accept} value={value} multiple={props.multiple} ref={r => input = r} onChange={() => this.onChange(input)} onClick={this.clickInput} required={props.required} />
 
             {
                 !props.dropArea ? <InputWrapper onClick={() => input.click()} icon={icon} style={props.wrapperStyle} label={props.label || Constants.UPLOAD_FILE_LABEL} resetFunction={this.resetFiles} value={files ? this.getFilesNameSeparated() : ""} disabled={props.disabled} required={props.required} className={props.className}>
