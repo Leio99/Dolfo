@@ -30,7 +30,12 @@
         font-size: 13px;
         margin-bottom: 0;
         margin-left: 0.5rem;
-        cursor: pointer
+        cursor: pointer;
+
+        .dolfo-input-required{
+            color: $red;
+            font-weight: bold
+        }
     }
 
     .dolfo-checkbox-square{
