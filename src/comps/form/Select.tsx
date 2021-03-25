@@ -53,7 +53,7 @@ class Select extends React.PureComponent<IProps, IState>{
 
             this.setState({
                 options,
-                value: hasValues ? value : (this.props.multiple ? [] : null)
+                value: hasValues ? value : (this.props.multiple ? []  this.props.defaultValue)
             })
 
             value !== this.state.value && this.props.onChange && this.props.onChange(value)
