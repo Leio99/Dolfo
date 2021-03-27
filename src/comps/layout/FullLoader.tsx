@@ -1,5 +1,5 @@
 import React from "react"
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom"
 
 export class FullLoader extends React.Component{
     static show = (data?: { loadingText?: string, type?: "circle" | "balls" }) => {
