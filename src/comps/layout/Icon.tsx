@@ -1,17 +1,17 @@
 import React, { CSSProperties } from "react"
+import { TooltipProps } from "./Tooltip"
 
 export interface BaseIconProps {
     readonly type?: "fa" | "far" | "fal" | "fas" | "fab" | "fad"
     readonly iconKey: string
 }
-export interface DefaultIconProps{
+export interface DefaultIconProps extends TooltipProps{
     readonly className?: string
     readonly spinning?: boolean
     readonly style?: CSSProperties
     readonly onClick?: (e: any) => void
     readonly color?: string
     readonly large?: boolean
-    readonly tooltip?: string
     readonly notFW?: boolean
 }
 
@@ -27,9 +27,7 @@ export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
             (props.large ? " fa-lg" : "") +
             (props.className ? (" " + props.className) : "") + 
             (props.spinning ? " spin" : "")
-        } data-tooltip={props.tooltip}
-        style={{ ...props.style, color: props.color }}
-        onClick={props.onClick}></i>
+        } data-tooltip={props.tooltip} data-place={props.placeTooltip} style={{ ...props.style, color: props.color }} onClick={props.onClick}></i>
     }
 }
 
