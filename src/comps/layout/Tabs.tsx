@@ -44,7 +44,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         tab1.forEach((t, i) => {
             const t2 = tab2[i]
 
-            if(t.props.disabled !== t2.props.disabled || t.props.isDefault !== t2.props.isDefault || t.props.selected !== t2.props.selected)
+            if(t !== t2 || t.props.disabled !== t2.props.disabled || t.props.isDefault !== t2.props.isDefault || t.props.selected !== t2.props.selected)
                 areDifferent = true
         })
 
