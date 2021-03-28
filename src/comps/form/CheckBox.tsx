@@ -2,11 +2,11 @@ import React from "react"
 import { InputProps } from "../shared/models/InputProps"
 import { CheckIcon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
+import { TooltipProps } from "../layout/Tooltip"
 
-export interface IProps extends InputProps{
+export interface IProps extends InputProps, TooltipProps{
     readonly checked?: boolean
     readonly value?: any
-    readonly tooltip?: string
 }
 
 export class CheckBox extends React.PureComponent<IProps, IProps>{ 
@@ -51,7 +51,7 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
         return <div className={"dolfo-checkbox" + (props.className ? (" " + props.className) : "") + (props.disabled ? " disabled" : "")} style={props.style} onClick={this.onChange}>
             <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} />
 
-            <div className={"dolfo-checkbox-square" + (checked ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace} data-tooltip={props.tooltip}>
+            <div className={"dolfo-checkbox-square" + (checked ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace} data-tooltip={props.tooltip} data-place={props.placeTooltip}>
                 <CheckIcon />
             </div>
             {props.label && <label className="dolfo-checkbox-label">
