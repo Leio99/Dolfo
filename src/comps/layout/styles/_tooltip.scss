@@ -10,7 +10,7 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
     z-index: 151;
     width: fit-content;
     transform-origin: bottom;
-    animation: showTooltip 0.1s ease forwards;
+    animation: showTooltipTop 0.1s ease forwards;
     max-width: 350px;
 
     &:after{
@@ -23,9 +23,65 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
         top: 100%;
         transform: translateX(-50%)
     }
+
+    &.Left{
+        animation: showTooltipLeft 0.1s ease forwards;
+        transform-origin: right;
+
+        &:after{
+            top: 50.5%;
+            left: 100%;
+            border-left-color: $tooltipBg;
+            border-top-color: transparent;
+            transform: translateY(-50%)
+        }
+    }
+
+    &.Right{
+        animation: showTooltipRight 0.1s ease forwards;
+        transform-origin: left;
+
+        &:after{
+            top: 50.5%;
+            right: 100%;
+            left: auto;
+            border-right-color: $tooltipBg;
+            border-top-color: transparent;
+            transform: translateY(-50%)
+        }
+    }
+
+    &.Bottom{
+        animation: showTooltipBottom 0.1s ease forwards;
+        transform-origin: top;
+
+        &:after{
+            left: 50.5%;
+            bottom: 100%;
+            top: auto;
+            border-bottom-color: $tooltipBg;
+            border-top-color: transparent;
+            transform: translateX(-50%)
+        }
+    }
 }
 
-@keyframes showTooltip{
+@keyframes showTooltipTop{
     0%{ transform: translate(-50%, calc(-100% - 10px)) scale(0) }
     100%{ transform: translate(-50%, calc(-100% - 10px)) scale(1) }
+}
+
+@keyframes showTooltipBottom{
+    0%{ transform: translate(-50%, calc(100% + 15px)) scale(0) }
+    100%{ transform: translate(-50%, calc(100% + 15px)) scale(1) }
+}
+
+@keyframes showTooltipLeft{
+    0%{ transform: translate(-130%, calc(50% - 13px)) scale(0) }
+    100%{ transform: translate(-130%, calc(50% - 13px)) scale(1) }
+}
+
+@keyframes showTooltipRight{
+    0%{ transform: translate(25%, calc(50% - 13px)) scale(0) }
+    100%{ transform: translate(25%, calc(50% - 13px)) scale(1) }
 }
