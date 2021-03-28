@@ -1,3 +1,12 @@
+import { capitalizeFirstLetter } from "../../commons/utility"
+
+export type TooltipPlacement = "top" | "left" | "bottom" | "right"
+
+export interface TooltipProps{
+    readonly tooltip?: string
+    readonly placeTooltip?: TooltipPlacement
+}
+
 let tooltips: NodeListOf<Element>,
 toolTexts: string[] = []
 
@@ -12,7 +21,7 @@ export const initializeTooltips = () => {
     document.addEventListener("click", () => document.querySelector(".dolfo-tooltip")?.remove())
 }
 
-export const areDifferentTooltips = (newTips: NodeListOf<Element>) => {
+const areDifferentTooltips = (newTips: NodeListOf<Element>) => {
     if(!tooltips || !newTips || tooltips.length !== newTips.length) return true
 
     for(let i = 0; i < tooltips.length; i++){
@@ -25,15 +34,15 @@ export const areDifferentTooltips = (newTips: NodeListOf<Element>) => {
     }
 
     return false
-}
-
-export const checkTooltips = () => {
+},
+checkTooltips = () => {
     const elements = document.querySelectorAll("[data-tooltip]"),
     newTexts: string[] = []
 
     elements.forEach(tool => {
         const tooltip = document.createElement("div"),
-        content = tool.getAttribute("data-tooltip")
+        content = tool.getAttribute("data-tooltip"),
+        place = tool.getAttribute("data-place") || "top"
 
         newTexts.push(content);
 
@@ -50,6 +59,37 @@ export const checkTooltips = () => {
             tooltip.style.left = (bound.left + (bound.width / 2)) + "px"
 
             document.body.appendChild((tool as any).tooltip)
+
+            let checkPosition = true
+
+            tooltip.classList.add(capitalizeFirstLetter(place))
+
+            const copy = tooltip.cloneNode(true) as HTMLElement
+            copy.style.animation = "showTooltip" + capitalizeFirstLetter(place) + " 0s forwards"
+            copy.style.visibility = "hidden"
+            document.body.appendChild(copy)
+
+            if(isElementInViewport(copy))
+                checkPosition = false
+
+            copy.remove()
+
+            const dirs = ["Top", "Right", "Left", "Bottom"]
+
+            checkPosition && dirs.forEach(d => {
+                const copy = tooltip.cloneNode(true) as HTMLElement
+                copy.style.animation = "showTooltip" + d + " 0s forwards"
+                copy.style.visibility = "hidden"
+                document.body.appendChild(copy)
+
+                if(isElementInViewport(copy)){
+                    tooltip.setAttribute("class", "dolfo-tooltip")
+
+                    tooltip.classList.add(d)
+                }
+
+                copy.remove()
+            })
         })
 
         tool.addEventListener("mouseleave", () => (tool as any).tooltip.remove())
@@ -57,4 +97,14 @@ export const checkTooltips = () => {
 
     tooltips = elements
     toolTexts = newTexts
+},
+isElementInViewport = (el: Element) => {
+    const rect = el.getBoundingClientRect()
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    )
 }
