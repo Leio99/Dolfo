@@ -137,7 +137,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                         data.length ? data.map(d => {
                             return <tr style={d.rowStyle} onDoubleClick={d.onDoubleClick}>
                                 {
-                                    props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null}>
+                                    props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
                                         {
                                             d[col.field]
                                         }
