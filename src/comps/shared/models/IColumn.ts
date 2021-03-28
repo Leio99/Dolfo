@@ -1,4 +1,5 @@
 import { CSSProperties } from "react"
+import { TooltipPlacement } from "../../layout/Tooltip";
 
 export interface IColumn{
     readonly field?: string
@@ -8,6 +9,7 @@ export interface IColumn{
     readonly canSearch?: boolean
     readonly searchField?: string
     readonly tooltip?: boolean
+    readonly placeTooltip?: TooltipPlacement
     readonly type?: "date" | "time" | "check"
     readonly onCheckAll?: () => void
     readonly checked?: boolean
