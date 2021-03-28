@@ -4,7 +4,7 @@ import { InputProps } from "../shared/models/InputProps"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
 
-export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "white" | "darkblue"
+export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue"
 export type ButtonColors = BaseColors | "white"
 
 export interface ButtonProps extends InputProps{
