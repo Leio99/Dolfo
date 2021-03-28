@@ -3,11 +3,12 @@ import { BtnOptions } from "../shared/models/BtnOptions"
 import { InputProps } from "../shared/models/InputProps"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
+import { TooltipProps } from "./Tooltip"
 
 export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue"
 export type ButtonColors = BaseColors | "white"
 
-export interface ButtonProps extends InputProps{
+export interface ButtonProps extends InputProps, TooltipProps{
     readonly type?: "button" | "submit" | "popup"
     readonly fullSize?: boolean
     readonly smallBtn?: boolean
@@ -18,7 +19,6 @@ export interface ButtonProps extends InputProps{
     readonly btnColor?: ButtonColors
     readonly options?: BtnOptions[]
     readonly popupPosition?: "top" | "bottom"
-    readonly tooltip?: string
     readonly iconPopup?: boolean
 }
 export interface IState{
@@ -48,7 +48,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         if(btnType === "popup"){
             const popupDir = props.popupPosition || "bottom"
 
-            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "")} onClick={this.togglePopup} data-tooltip={props.tooltip}>
+            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "")} onClick={this.togglePopup} data-tooltip={props.tooltip} data-place={props.placeTooltip}>
                 <div className={"dolfo-popup-options" + (openPopup ? " show" : "") + (" pos-" + popupDir)}>
                     {
                         props.options?.map(opt => {
@@ -83,7 +83,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
             (props.textBtn ? " text-btn" : "") + 
             (props.circleBtn ? " circle-btn" : "") + 
             (props.bigBtn ? " big-button" : "")
-        } data-tooltip={props.tooltip} style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick}>
+        } data-tooltip={props.tooltip} data-place={props.placeTooltip} style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick}>
             {props.loading && <LoadingIcon spinning />} {props.circleBtn && props.loading ? null : props.children}
         </button>
     }
