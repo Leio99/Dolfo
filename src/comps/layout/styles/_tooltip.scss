@@ -72,16 +72,16 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
 }
 
 @keyframes showTooltipBottom{
-    0%{ transform: translate(-50%, calc(100% + 15px)) scale(0) }
-    100%{ transform: translate(-50%, calc(100% + 15px)) scale(1) }
+    0%{ transform: translate(-50%, calc(100% + 20px)) scale(0) }
+    100%{ transform: translate(-50%, calc(100% + 20px)) scale(1) }
 }
 
 @keyframes showTooltipLeft{
-    0%{ transform: translate(-130%, calc(50% - 13px)) scale(0) }
-    100%{ transform: translate(-130%, calc(50% - 13px)) scale(1) }
+    0%{ transform: translate(calc(-100% - 20px), calc(50% - 25px)) scale(0) }
+    100%{ transform: translate(calc(-100% - 20px), calc(50% - 25px)) scale(1) }
 }
 
 @keyframes showTooltipRight{
-    0%{ transform: translate(25%, calc(50% - 13px)) scale(0) }
-    100%{ transform: translate(25%, calc(50% - 13px)) scale(1) }
+    0%{ transform: translate(50%, calc(50% - 25px)) scale(0) }
+    100%{ transform: translate(50%, calc(50% - 25px)) scale(1) }
 }
