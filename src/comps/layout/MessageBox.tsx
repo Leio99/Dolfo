@@ -19,7 +19,7 @@ export class MessageBox{
                 {props.title && <h5 className="dolfo-message-box-title">{props.title}</h5>}
                 <div className="dolfo-message-box-content">{props.content}</div>
             </div>,
-            position: props.position || "top-right",
+            position: props.position || NotificationPosition.TOP_RIGHT,
             className: "dolfo-message-box",
             hideDelay: props.hideDelay,
 			onClose: props.onClose
