@@ -5,7 +5,12 @@ import { Constants } from "../shared/Constants"
 import { DialogType } from "./Dialog"
 import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 
-export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
+export enum NotificationPosition{
+    TOP_LEFT = "top-left",
+    TOP_RIGHT = "top-right",
+    BOTTOM_LEFT = "bottom-left",
+    BOTTOM_RIGHT = "bottom-right"
+}
 export type NotificationDelay = number | "never"
 
 export interface NotificationProps{
@@ -92,11 +97,11 @@ export class NotificationMsg{
             {props.icon || (props.type ? getIcon(props.type) : null)} {props.message}
         </div>, notification)
 
-        return notification as { close?: () => void }
+        return notification as Closable
     }
 
     static moveNotifications = () => {
-        ["bottom-left", "bottom-right", "top-left", "top-right", "centered-top", "centered-bottom"].forEach(dir => {
+        [NotificationPosition.BOTTOM_LEFT, NotificationPosition.BOTTOM_RIGHT, NotificationPosition.TOP_LEFT, NotificationPosition.TOP_RIGHT, "centered-top", "centered-bottom"].forEach(dir => {
             let nots = document.querySelectorAll(`.dolfo-notification.${dir}`),
             base = 0
 
