@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { Closable } from "../shared/utility"
 
 export class FullLoader extends React.Component{
     static show = (data?: { loadingText?: string, type?: "circle" | "balls" }) => {
@@ -26,6 +27,6 @@ export class FullLoader extends React.Component{
             {data?.loadingText && <span className="loading-text">{data.loadingText}</span>}
         </div>, loader)
 
-        return loader as { close?: () => void }
+        return loader as Closable
     }
 }
