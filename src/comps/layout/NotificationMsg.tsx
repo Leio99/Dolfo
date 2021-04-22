@@ -1,3 +1,4 @@
+import _ from "lodash"
 import React from "react"
 import { CSSProperties } from "react"
 import ReactDOM from "react-dom"
@@ -62,7 +63,7 @@ export class NotificationMsg{
     }
 
     static show = (data: string | NotificationProps) => {
-        const props = typeof data === "string" ? { message: data } : data,
+        const props = _.isString(data) ? { message: data } : data,
         notification = document.createElement("div"),
         getIcon = (type: string) => {
             if(type === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
