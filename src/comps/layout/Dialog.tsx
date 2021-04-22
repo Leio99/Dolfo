@@ -3,6 +3,7 @@ import ReactDOM from "react-dom"
 import Button, { ButtonColors } from "./Button"
 import { CheckCircleOutlineIcon, CloseIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, QuestionCircleOutlineIcon, WarningIconOutline } from "./Icon"
 import { Constants } from "../shared/Constants"
+import { Closable } from "../shared/utility"
 
 export type DialogType = "success" | "info" | "error" | "warning"
 
@@ -126,7 +127,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
 
         ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={data.customFooter} />, popup)
 
-        return popup as { close?: () => void }
+        return popup as Closable
     }
 
     static openDialogComponent = (Class: any, props?: any) => {
