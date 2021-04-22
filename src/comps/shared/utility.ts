@@ -24,7 +24,7 @@ export const daysInMonth = (m: number, y: number) => {
     }
 }
 
-export const formatNumber = (n: string|number): string => {
+export const formatNumber = (n: string | number): string => {
     if(n == null) return "0"
 
     let converted = _.isNumber(n) ? parseFloat(n.toString()).toFixed(2) : parseFloat(n).toFixed(2)
