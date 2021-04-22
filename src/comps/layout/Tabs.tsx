@@ -37,24 +37,11 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         window.addEventListener("load", this.handleBar)
         window.addEventListener("resize", this.handleBar)
     }
-
-    differentDefault = (tab1: Tab[], tab2: Tab[]) => {
-        let areDifferent = false
-
-        tab1.forEach((t, i) => {
-            const t2 = tab2[i]
-
-            if(t !== t2 || t.props.disabled !== t2.props.disabled || t.props.isDefault !== t2.props.isDefault || t.props.selected !== t2.props.selected)
-                areDifferent = true
-        })
-
-        return areDifferent
-    }
-
+    
     componentDidUpdate = (prevProps: any) => {
         if(prevProps.children !== this.props.children || !objectsAreSame(this.props, prevProps)){
             this.setState({ children: this.getChildrenTabs() }, () => {
-                if(this.differentDefault(this.props.children as Tab[], prevProps.children as Tab[]))
+                if(!objectsAreSame(this.props.children as Tab[], prevProps.children as Tab[]))
                     this.loadTabs()
             })
         }
