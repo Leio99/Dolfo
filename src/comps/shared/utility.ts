@@ -184,5 +184,3 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
     link.click()
     link.remove()
 }
-
-export const capitalizeFirstLetter = (s: string) => s[0].toUpperCase() + s.substring(1, s.length)
