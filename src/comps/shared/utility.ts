@@ -184,3 +184,7 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
     link.click()
     link.remove()
 }
+
+export interface Closable{
+    close?: () => void
+}
