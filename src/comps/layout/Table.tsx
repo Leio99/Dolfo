@@ -1,3 +1,4 @@
+import _ from "lodash"
 import React from "react"
 import { downloadCSV, formatDate, getTime } from "../shared/utility"
 import { CheckBox } from "../form/CheckBox"
@@ -120,7 +121,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                     <tr>
                         {
                             props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
-                                {col.type === "check" && <CheckBox tooltip={typeof col.checkTooltip === "string" ? col.checkTooltip : null} checked={col.checked} onChange={col.onCheckAll} />}
+                                {col.type === "check" && <CheckBox tooltip={_.isString(col.checkTooltip) ? col.checkTooltip : null} checked={col.checked} onChange={col.onCheckAll} />}
  
                                 {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" tooltip={Constants.FILTER_TEXT} onClick={() => this.changeActiveFiler(col.field)} />}
 
