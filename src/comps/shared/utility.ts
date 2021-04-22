@@ -1,6 +1,7 @@
 import { ICalendarDay } from "./models/ICalendarDay"
 import { IDataColumn } from "./models/IColumn"
 import { Constants } from "./Constants"
+import _ from "lodash"
 
 export const formatDate = (date: Date, monthString = false): string => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
@@ -26,7 +27,7 @@ export const daysInMonth = (m: number, y: number) => {
 export const formatNumber = (n: string|number): string => {
     if(n == null) return "0"
 
-    let converted = typeof n === "number" ? parseFloat(n.toString()).toFixed(2) : parseFloat(n).toFixed(2)
+    let converted = _.isNumber(n) ? parseFloat(n.toString()).toFixed(2) : parseFloat(n).toFixed(2)
 
     if(parseFloat(converted).toString().indexOf(".") === -1) converted = (+converted).toString()
 
