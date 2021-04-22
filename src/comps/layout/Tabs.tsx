@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react"
-import { objectsAreSame } from "../shared/utility"
 import { Tab } from "./Tab"
+import _ from "lodash"
 
 export interface IProps {
     readonly style?: CSSProperties
@@ -39,9 +39,9 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     }
     
     componentDidUpdate = (prevProps: any) => {
-        if(prevProps.children !== this.props.children || !objectsAreSame(this.props, prevProps)){
+        if(prevProps.children !== this.props.children || !_.isEqual(this.props, prevProps)){
             this.setState({ children: this.getChildrenTabs() }, () => {
-                if(!objectsAreSame(this.props.children as Tab[], prevProps.children as Tab[]))
+                if(!_.isEqual(this.props.children as Tab[], prevProps.children as Tab[]))
                     this.loadTabs()
             })
         }
