@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from "../../commons/utility"
+import _ from "lodash"
 
 export type TooltipPlacement = "top" | "left" | "bottom" | "right"
 
@@ -62,10 +62,10 @@ checkTooltips = () => {
 
             let checkPosition = true
 
-            tooltip.classList.add(capitalizeFirstLetter(place))
+            tooltip.classList.add(_.capitalize(place))
 
             const copy = tooltip.cloneNode(true) as HTMLElement
-            copy.style.animation = "showTooltip" + capitalizeFirstLetter(place) + " 0s forwards"
+            copy.style.animation = "showTooltip" + _.capitalize(place) + " 0s forwards"
             copy.style.visibility = "hidden"
             document.body.appendChild(copy)
 
