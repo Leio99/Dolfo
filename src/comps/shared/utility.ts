@@ -185,17 +185,4 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
     link.remove()
 }
 
-export const objectsAreSame = (x: any, y: any) => {
-    let objectsAreSame = true
-    
-    for(const propertyName in x){
-       if(x[propertyName] !== y[propertyName]){
-          objectsAreSame = false
-          break
-       }
-    }
-
-    return objectsAreSame
-}
-
 export const capitalizeFirstLetter = (s: string) => s[0].toUpperCase() + s.substring(1, s.length)
