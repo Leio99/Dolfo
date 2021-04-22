@@ -1,3 +1,4 @@
+import _ from "lodash"
 import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
 import { Icon } from "./Icon"
@@ -47,7 +48,7 @@ export class Stepper extends React.PureComponent<IProps>{
             <div className="dolfo-stepper-header">
                 {
                     stepsSeparated.map((child: { step: Step, index: number } | string) => {
-                        if(typeof child === "string") return <div className="dolfo-step-separator"></div>
+                        if(_.isString(child)) return <div className="dolfo-step-separator"></div>
 
                         return <div className={"dolfo-stepper-step-title" + (currentStep === child.index ? " current" : "")}>
                             <div className="dolfo-stepper-step-circle">
