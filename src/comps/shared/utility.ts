@@ -53,30 +53,8 @@ export const decodeMonth = (month: number, short: boolean = false): string => {
 
 export const zeroBefore = (n: number): string => n < 10 ? ("0" + n) : n.toString()
 
-export const getLastDay = (inputMonth?: number, inputYear?: number): number => {
-    let date = new Date(),
-    month = inputMonth >= 0 ? (inputMonth + 1) : (date.getMonth() + 1),
-    year = inputYear >= 0 ? inputYear : date.getFullYear()
-
-    switch(month){
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12: return 31
-        
-        case 2:
-            if(year % 4 === 0 || year % 100 === 0 || year % 400 === 0) return 29
-            return 28
-        
-        default: return 30
-    }
-}
-
 export const getCalendar = (month?: number, year?: number) => {
-    let days = getLastDay(month, year),
+    let days = daysInMonth(month, year),
     table = [],
     cols: ICalendarDay[] = [],
     today = new Date(),
@@ -91,7 +69,7 @@ export const getCalendar = (month?: number, year?: number) => {
         prevYear = dateMonth === 0 ? dateYear - 1 : dateYear
 
         cols.push({
-            day: getLastDay(prevMonth, prevYear) - (weekDay - i - 1),
+            day: daysInMonth(prevMonth, prevYear) - (weekDay - i - 1),
             month: prevMonth,
             year: prevYear,
             prevMonth,
