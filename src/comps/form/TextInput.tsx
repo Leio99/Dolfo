@@ -16,7 +16,6 @@ export interface IProps extends InputProps{
     readonly maxLength?: number
     readonly value?: string
     readonly max?: number
-    readonly autoFocus?: boolean
     readonly min?: number
 }
 export interface IState{
