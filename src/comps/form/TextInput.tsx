@@ -16,6 +16,7 @@ export interface IProps extends InputProps{
     readonly maxLength?: number
     readonly value?: string
     readonly max?: number
+    readonly autoFocus?: boolean
     readonly min?: number
 }
 export interface IState{
@@ -132,6 +133,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                 props.type !== "textarea" ? <input
                     type={inputType}
                     name={props.name}
+                    autoFocus={props.autoFocus}
                     onChange={this.onChange}
                     disabled={props.disabled}
                     placeholder={props.placeHolder}
@@ -157,6 +159,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     minLength={props.minLength}
                     className={props.className}
                     readOnly={props.readonly}
+                    autoFocus={props.autoFocus}
                     rows={props.expandTextarea ? rows : props.rows}
                     onKeyUp={props.onKeyUp}
                     onKeyDown={props.onKeyDown}
