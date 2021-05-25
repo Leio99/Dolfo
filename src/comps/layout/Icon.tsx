@@ -31,75 +31,50 @@ export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
     }
 }
 
-export const DeleteIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="fa" iconKey="trash-alt" />
-}
-export const CheckIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="check" />
-}
-export const CheckCircleIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="check-circle" />
-}
-export const CheckCircleOutlineIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="check-circle" />
-}
-export const QuestionIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="question" />
-}
-export const QuestionCircleIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="question-circle" />
-}
-export const QuestionCircleOutlineIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="question-circle" />
-}
-export const ErrorIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="exclamation" />
-}
-export const ErrorCircleIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="exclamation-circle" />
-}
-export const ErrorCircleOutlineIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="exclamation-circle" />
-}
-export const InfoIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="info" />
-}
-export const InfoCircleIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="info-circle" />
-}
-export const InfoCircleOutlineIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="info-circle" />
-}
-export const LoadingIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="fal" iconKey="spinner-third" />
-}
-export const CloseIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="times" />
-}
-export const CloseCircleIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="fa" iconKey="times-circle" />
-}
-export const WarningIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="exclamation-triangle" />
-}
-export const WarningIconOutline = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="exclamation-triangle" />
-}
-export const SearchIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="search" />
-}
-export const DetailIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="external-link" />
-}
-export const EditIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="pen" />
-}
-export const AddIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="plus" />
-}
-export const MinusIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} type="far" iconKey="minus" />
-}
-export const ReloadIcon = (props: DefaultIconProps) => {
-    return <Icon {...props} iconKey="sync" />
-}
+export const DeleteIcon = (props: DefaultIconProps) => <Icon {...props} type="fa" iconKey="trash-alt" />
+
+export const CheckIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="check" />
+
+export const CheckCircleIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="check-circle" />
+
+export const CheckCircleOutlineIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="check-circle" />
+
+export const QuestionIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="question" />
+
+export const QuestionCircleIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="question-circle" />
+
+export const QuestionCircleOutlineIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="question-circle" />
+
+export const ErrorIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="exclamation" />
+
+export const ErrorCircleIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="exclamation-circle" />
+
+export const ErrorCircleOutlineIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="exclamation-circle" />
+
+export const InfoIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="info" />
+
+export const InfoCircleIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="info-circle" />
+
+export const InfoCircleOutlineIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="info-circle" />
+
+export const LoadingIcon = (props: DefaultIconProps) => <Icon {...props} type="fal" iconKey="spinner-third" />
+
+export const CloseIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="times" />
+
+export const CloseCircleIcon = (props: DefaultIconProps) => <Icon {...props} type="fa" iconKey="times-circle" />
+
+export const WarningIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="exclamation-triangle" />
+
+export const WarningIconOutline = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="exclamation-triangle" />
+
+export const SearchIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="search" />
+
+export const DetailIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="external-link" />
+
+export const EditIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="pen" />
+
+export const AddIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="plus" />
+
+export const MinusIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="minus" />
+
+export const ReloadIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="sync" />
