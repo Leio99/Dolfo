@@ -9,6 +9,7 @@ export interface InputProps{
     readonly required?: boolean
     readonly className?: string
     readonly disabled?: boolean
+    readonly autoFocus?: boolean
     readonly readonly?: boolean
     readonly icon?: BaseIconProps
     readonly onChange?: (value: any) => void
