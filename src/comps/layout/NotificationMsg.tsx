@@ -1,18 +1,7 @@
-import _ from "lodash"
-import React from "react"
-import { CSSProperties } from "react"
-import ReactDOM from "react-dom"
-import { Constants } from "../shared/Constants"
-import { Closable } from "../shared/utility"
-import { DialogType } from "./Dialog"
+Type } from "./Dialog"
 import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 
-export enum NotificationPosition{
-    TOP_LEFT = "top-left",
-    TOP_RIGHT = "top-right",
-    BOTTOM_LEFT = "bottom-left",
-    BOTTOM_RIGHT = "bottom-right"
-}
+export type NotificationPosition ="top-left" | "top-right" | "bottom-left" | "bottom-right"
 export type NotificationDelay = number | "never"
 
 export interface NotificationProps{
@@ -103,7 +92,7 @@ export class NotificationMsg{
     }
 
     static moveNotifications = () => {
-        [NotificationPosition.BOTTOM_LEFT, NotificationPosition.BOTTOM_RIGHT, NotificationPosition.TOP_LEFT, NotificationPosition.TOP_RIGHT, "centered-top", "centered-bottom"].forEach(dir => {
+        ["bottom-left", "bottom-right", "top-left", "top-right", "centered-top", "centered-bottom"].forEach(dir => {
             let nots = document.querySelectorAll(`.dolfo-notification.${dir}`),
             base = 0
 
