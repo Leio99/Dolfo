@@ -4,7 +4,7 @@
         position: relative;
         flex-grow: 1;
 
-        input{
+        input:not(.dolfo-select-search-input){
             pointer-events: none;
             color: transparent !important;
             width: 100%;
@@ -20,6 +20,41 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap
+        }
+    }
+    
+    .dolfo-select-search-content{
+        display: none
+    }
+
+    &.focused .dolfo-select-search-content{
+        background-color: $white;
+        position: absolute;
+        display: block;
+        top: -3px;
+        left: 0;
+        right: 0;
+        z-index: 1;
+
+        .reset-input{
+            right: 1.5rem;
+            top: 1rem
+        }
+
+        .dolfo-select-search-input{
+            padding-top: calc(0.5rem + 3px) !important;
+            padding-bottom: calc(0.5rem + 3px) !important;
+            padding-right: 3.8rem !important;
+            padding-left: 2.5rem !important
+        }
+
+        .dolfo-select-search-icon{
+            right: auto;
+            left: 0.7rem;
+            top: 0.5rem;
+            transform: translateY(50%);
+            font-size: 14px;
+            pointer-events: none
         }
     }
 
@@ -50,17 +85,17 @@
 
     .dolfo-select-options{
         position: absolute;
-        top: -4px;
+        top: 100%;
         z-index: 2;
-        width: calc(100% + 4px);
-        left: 0;
-        border: 1px solid $selectionBlue;
-        background-color: $white;
-        border-radius: $smallRadius;
-        border-top-left-radius: 0;
+        width: calc(100% + 55px);
+        left: -51px;
+        border: 1px solid #0997ff;
+        background-color: #fff;
+        border-radius: 0 0 0.25rem 0.25rem;
         display: none;
         max-height: 200px;
         overflow: auto;
+        border-top: 0;
 
         &.show{
             display: block
@@ -96,35 +131,6 @@
 
             .dolfo-option.selected:not(:hover){
                 background-color: initial
-            }
-        }
-
-        .dolfo-select-search-content{
-            background-color: $white;
-            position: sticky;
-            position: -webkit-sticky;
-            top: 0;
-            z-index: 1;
-
-            .reset-input{
-                right: 1.5rem;
-                top: 1rem
-            }
-
-            .dolfo-select-search-input{
-                padding-top: calc(0.5rem + 3px) !important;
-                padding-bottom: calc(0.5rem + 3px) !important;
-                padding-right: 3.8rem !important;
-                padding-left: 2.5rem !important
-            }
-
-            .dolfo-select-search-icon{
-                right: auto;
-                left: 0.7rem;
-                top: 0.5rem;
-                transform: translateY(50%);
-                font-size: 14px;
-                pointer-events: none
             }
         }
     }
