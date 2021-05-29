@@ -5,6 +5,7 @@ import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 import onClickOutside from "react-onclickoutside"
 import { Constants } from "../shared/Constants"
+import _ from "lodash"
 
 interface IProps extends InputProps{
     readonly defaultValue?: any
@@ -67,6 +68,8 @@ class Select extends React.PureComponent<IProps, IState>{
     }
 
     changeOption = (value: any) => {
+        if(_.isEqual(this.state.value, value)) return
+
         this.setState({
             value,
             openSelect: this.props.multiple ? true : false
