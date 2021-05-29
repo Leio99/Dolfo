@@ -6,13 +6,13 @@ import { Option } from "./Option"
 import onClickOutside from "react-onclickoutside"
 import { Constants } from "../shared/Constants"
 
-export interface IProps extends InputProps{
+interface IProps extends InputProps{
     readonly defaultValue?: any
     readonly multiple?: boolean
     readonly canSearch?: boolean
     readonly loading?: boolean
 }
-export interface IState{
+interface IState{
     readonly value: any
     readonly openSelect: boolean
     readonly options: Option[]
@@ -53,7 +53,7 @@ class Select extends React.PureComponent<IProps, IState>{
 
             this.setState({
                 options,
-                value: hasValues ? value : (this.props.multiple ? []  this.props.defaultValue)
+                value: hasValues ? value : (this.props.multiple ? [] : this.props.defaultValue)
             })
 
             value !== this.state.value && this.props.onChange && this.props.onChange(value)
@@ -179,24 +179,24 @@ class Select extends React.PureComponent<IProps, IState>{
                 <input type="text" value={value} tabIndex={-1} required={props.required} autoFocus={props.autoFocus} />
 
                 <span>{this.decodeValue(value)}</span>
+
+                {props.canSearch && searchInput}
             </div>
 
             {
-                props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
-                    {props.canSearch && searchInput}
+                options && options.length ? (props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
                     {
-                        options?.map((option, i) => {
+                        options.map((option, i) => {
                             return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={(val) => this.changeMultiple(val, i)} multiple />
                         })
                     }
                 </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>
-                    {props.canSearch && searchInput}
                     {
-                        options?.map((option, i) => {
+                        options.map((option, i) => {
                             return <Option {...option.props} selected={option.props.value === value} focused={i === currentSelection} onChange={this.changeOption} />
                         })
                     }
-                </div>
+                </div>) : null
             }
         </InputWrapper>
     }
