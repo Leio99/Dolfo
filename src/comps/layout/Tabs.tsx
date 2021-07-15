@@ -2,13 +2,13 @@ import React, { CSSProperties } from "react"
 import { Tab } from "./Tab"
 import _ from "lodash"
 
-export interface IProps {
+interface IProps {
     readonly style?: CSSProperties
     readonly className?: string
     readonly vertical?: boolean
     readonly onChangeTab?: (index: number) => void
 }
-export interface IState {
+interface IState {
     readonly children: Tab[]
     readonly currentTab: number
 }
@@ -37,9 +37,9 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         window.addEventListener("load", this.handleBar)
         window.addEventListener("resize", this.handleBar)
     }
-    
+
     componentDidUpdate = (prevProps: any) => {
-        if(prevProps.children !== this.props.children || !_.isEqual(this.props, prevProps)){
+        if(!_.isEqual(prevProps.children, this.props.children) || !_.isEqual(this.props, prevProps)){
             this.setState({ children: this.getChildrenTabs() }, () => {
                 if(!_.isEqual(this.props.children as Tab[], prevProps.children as Tab[]))
                     this.loadTabs()
