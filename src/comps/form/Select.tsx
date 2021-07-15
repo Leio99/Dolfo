@@ -35,7 +35,7 @@ class Select extends React.PureComponent<IProps, IState>{
     }
 
     componentDidUpdate = (prevProps: any) => {
-        if(prevProps.children !== this.props.children){
+        if(!_.isEqual(prevProps.children, this.props.children)){
             let value = this.state.value,
             hasValues = false,
             options = this.getOptions()
@@ -44,23 +44,18 @@ class Select extends React.PureComponent<IProps, IState>{
                 let find = options?.find(opt => opt.props.value === value)
 
                 if(find) hasValues = true
-            }else{
-                options?.forEach(opt => {
-                    value.forEach((v: any) => {
-                        if(v === opt.props.value) hasValues = true
-                    })
-                })
-            }
+            }else
+                options?.forEach(opt => hasValues = value.some((v: any) => v === opt.props.value))
 
             this.setState({
                 options,
                 value: hasValues ? value : (this.props.multiple ? [] : this.props.defaultValue)
             })
 
-            value !== this.state.value && this.props.onChange && this.props.onChange(value)
+            !_.isEqual(value, this.state.value) && this.props.onChange && this.props.onChange(value)
         }
         
-        if(prevProps.defaultValue !== this.props.defaultValue){
+        if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue)){
             this.setState({
                 value: this.props.defaultValue
             })
