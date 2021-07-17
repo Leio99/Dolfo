@@ -55,7 +55,7 @@ class Select extends React.PureComponent<IProps, IState>{
             !_.isEqual(value, this.state.value) && this.props.onChange && this.props.onChange(value)
         }
         
-        if(_.isEqual(prevProps.defaultValue, this.props.defaultValue)){
+        if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue)){
             this.setState({
                 value: this.props.defaultValue
             })
