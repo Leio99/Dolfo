@@ -41,11 +41,11 @@ class Select extends React.PureComponent<IProps, IState>{
             options = this.getOptions()
 
             if(!this.props.multiple){
-                let find = options?.find(opt => opt.props.value === value)
+                let find = options?.find(opt => _.isEqual(value, opt.props.value))
 
                 if(find) hasValues = true
             }else
-                options?.forEach(opt => hasValues = value.some((v: any) => v === opt.props.value))
+                options?.forEach(opt => hasValues = value.some((v: any) => _.isEqual(v, opt.props.value)))
 
             this.setState({
                 options,
@@ -55,7 +55,7 @@ class Select extends React.PureComponent<IProps, IState>{
             !_.isEqual(value, this.state.value) && this.props.onChange && this.props.onChange(value)
         }
         
-        if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue)){
+        if(_.isEqual(prevProps.defaultValue, this.props.defaultValue)){
             this.setState({
                 value: this.props.defaultValue
             })
@@ -79,7 +79,7 @@ class Select extends React.PureComponent<IProps, IState>{
         let newList = [...this.state.value]
 
         if(this.state.value.includes(value))
-            newList = this.state.value.filter((v: any) => v !== value)
+            newList = this.state.value.filter((v: any) => !_.isEqual(v, value))
         else
             newList.splice(index, 0, value)
 
@@ -106,13 +106,13 @@ class Select extends React.PureComponent<IProps, IState>{
     decodeValue = (value: any) => {
         if(this.props.multiple){
             let list = this.state.value.map((v: any) => {
-                return this.state.options?.find(option => option.props.value === v)?.props.label
+                return this.state.options?.find(option => _.isEqual(v, option.props.value))?.props.label
             }).filter((v: any) => v)
 
             return list.join(", ")
         }
 
-        return this.state.options?.find(option => option.props.value === value)?.props.label
+        return this.state.options?.find(option => _.isEqual(value, option.props.value))?.props.label
     }
 
     handleClickOutside = this.onBlur
