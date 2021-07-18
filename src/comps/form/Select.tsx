@@ -1,11 +1,4 @@
-import React from "react"
-import { InputProps } from "../shared/models/InputProps"
-import { CloseIcon, Icon, LoadingIcon, SearchIcon } from "../layout/Icon"
-import { InputWrapper } from "./InputWrapper"
-import { Option } from "./Option"
-import onClickOutside from "react-onclickoutside"
-import { Constants } from "../shared/Constants"
-import _ from "lodash"
+
 
 interface IProps extends InputProps{
     readonly defaultValue?: any
@@ -40,12 +33,16 @@ class Select extends React.PureComponent<IProps, IState>{
             hasValues = false,
             options = this.getOptions()
 
-            if(!this.props.multiple){
-                let find = options?.find(opt => _.isEqual(value, opt.props.value))
-
-                if(find) hasValues = true
-            }else
-                options?.forEach(opt => hasValues = value.some((v: any) => _.isEqual(v, opt.props.value)))
+            if(!this.props.multiple)
+                hasValues = options?.some(opt => _.isEqual(value, opt.props.value))
+            else{
+                options?.forEach(opt => {
+                    value.forEach((v: any) => {
+                        if(_.isEqual(v, opt.props.value))
+                            hasValues = true
+                    })
+                })
+            }
 
             this.setState({
                 options,
@@ -76,12 +73,13 @@ class Select extends React.PureComponent<IProps, IState>{
     }
 
     changeMultiple = (value: any, index: number) => {
-        let newList = [...this.state.value]
+        const options = this.getOptions().map(v => v.props.value)
+        let newList: any[] = []
 
         if(this.state.value.includes(value))
             newList = this.state.value.filter((v: any) => !_.isEqual(v, value))
         else
-            newList.splice(index, 0, value)
+            newList = options.filter(v => this.state.value.includes(v) || _.isEqual(v, value))
 
         this.setState({ value: newList })
 
@@ -105,9 +103,7 @@ class Select extends React.PureComponent<IProps, IState>{
 
     decodeValue = (value: any) => {
         if(this.props.multiple){
-            let list = this.state.value.map((v: any) => {
-                return this.state.options?.find(option => _.isEqual(v, option.props.value))?.props.label
-            }).filter((v: any) => v)
+            let list = this.state.value.map((v: any) => this.state.options?.find(option => _.isEqual(v, option.props.value))?.props.label).filter((v: any) => v)
 
             return list.join(", ")
         }
@@ -185,13 +181,13 @@ class Select extends React.PureComponent<IProps, IState>{
                 options && options.length ? (props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
                     {
                         options.map((option, i) => {
-                            return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={(val) => this.changeMultiple(val, i)} multiple />
+                            return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={val => this.changeMultiple(val, i)} multiple />
                         })
                     }
                 </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>
                     {
                         options.map((option, i) => {
-                            return <Option {...option.props} selected={option.props.value === value} focused={i === currentSelection} onChange={this.changeOption} />
+                            return <Option {...option.props} selected={_.isEqual(option.props.value, value)} focused={i === currentSelection} onChange={this.changeOption} />
                         })
                     }
                 </div>) : null
