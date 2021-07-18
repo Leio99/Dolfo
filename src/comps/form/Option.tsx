@@ -3,11 +3,10 @@ import { InputProps } from "../shared/models/InputProps"
 import { blurInput } from "../shared/utility"
 import { CheckBox } from "./CheckBox"
 
-export interface IProps extends InputProps{
+interface IProps extends InputProps{
     readonly value: any
     readonly label: string
     readonly selected?: boolean
-    readonly unclickable?: boolean
     readonly multiple?: boolean
     readonly isRadio?: boolean
     readonly controlName?: string
@@ -42,9 +41,9 @@ export class Option extends React.PureComponent<IProps>{
             </div>
         }
 
-        return <div onClick={!props.unclickable ? this.selectOption : blurInput} className={"dolfo-option" + (props.selected ? " selected" : "") + (props.unclickable ? " unclick" : "") + (props.focused ? " focused" : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
+        return <div onClick={this.selectOption} className={"dolfo-option" + (props.selected ? " selected" : "") + (props.focused ? " focused" : "") + (props.className ? (" " + props.className) : "") + (!props.multiple && props.disabled ? " disabled" : "")} style={props.style}>
             {
-                (props.multiple && !props.unclickable) ? <CheckBox checked={props.selected} label={props.label} disabled={props.disabled} /> : props.label
+                props.multiple ? <CheckBox checked={props.selected} label={props.label} disabled={props.disabled} /> : props.label
             }
         </div>
     }
