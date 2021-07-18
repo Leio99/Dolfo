@@ -109,8 +109,13 @@
             white-space: nowrap;
             padding-right: 2rem;
 
-            &:not(.unclick):hover, &.selected{
+            &:hover, &.selected{
                 background-color: $lightGrey
+            }
+
+            &.disabled{
+                pointer-events: none;
+                opacity: 0.6
             }
 
             &.focused{
