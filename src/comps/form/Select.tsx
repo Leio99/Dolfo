@@ -35,14 +35,8 @@ class Select extends React.PureComponent<IProps, IState>{
 
             if(!this.props.multiple)
                 hasValues = options?.some(opt => _.isEqual(value, opt.props.value))
-            else{
-                options?.forEach(opt => {
-                    value.forEach((v: any) => {
-                        if(_.isEqual(v, opt.props.value))
-                            hasValues = true
-                    })
-                })
-            }
+            else
+                hasValues = options?.some(opt => value.some((v: any) => _.isEqual(v, opt.props.value)))
 
             this.setState({
                 options,
