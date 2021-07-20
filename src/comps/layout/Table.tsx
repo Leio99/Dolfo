@@ -7,20 +7,22 @@ import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import Button from "./Button"
 import { Icon } from "./Icon"
 
-export interface IProps{
+interface IProps{
     readonly columns: IColumn[],
     readonly data: IDataColumn[]
     readonly className?: string
     readonly exportable?: boolean
     readonly exportFormat?: ("csv")[]
 }
-export interface IState{
+interface IState{
     readonly filter: { [x: string]: string }
     readonly activeFilterKey: string
     readonly activeFilter: string
 }
 
 export class Table extends React.PureComponent<IProps, IState>{
+    isPressingCheckbox = false
+
     constructor(props: IProps){
         super(props)
 
@@ -48,11 +50,25 @@ export class Table extends React.PureComponent<IProps, IState>{
     getColumnDataType = (col: IColumn, data: IDataColumn, exp = false) => {
         const d = data[exp && col.exportField ? col.exportField : col.field]
 
-        if(col.type === "check" && !data.hideCheck) return <CheckBox checked={data.checked} onChange={() => data.onCheckChange(data)} disabled={data.checkDisabled} />
+        if(col.type === "check" && !data.hideCheck){
+            return <CheckBox checked={data.checked} onChange={() => {
+                this.isPressingCheckbox = true
+                data.onCheckChange(data)
+
+                setTimeout(() => this.isPressingCheckbox = false, 100)
+            }} disabled={data.checkDisabled} />
+        }
+
         if(col.type === "date") return formatDate(new Date(d))
         if(col.type === "time") return getTime(d)
 
         return d
+    }
+
+    onDoubleClick = (data: IDataColumn) => {
+        if(this.isPressingCheckbox) return
+
+        data.onDoubleClick && data.onDoubleClick()
     }
 
     getExportData = () => {
@@ -92,9 +108,7 @@ export class Table extends React.PureComponent<IProps, IState>{
         ajdustData = props.data.map(d => {
             let temp = {...d}
 
-            props.columns.forEach(c => {
-                temp[c.field] = this.getColumnDataType(c, d)
-            })
+            props.columns.forEach(c => temp[c.field] = this.getColumnDataType(c, d))
 
             return temp
         }),
@@ -136,7 +150,7 @@ export class Table extends React.PureComponent<IProps, IState>{
                 <tbody>
                     {
                         data.length ? data.map(d => {
-                            return <tr style={d.rowStyle} onDoubleClick={d.onDoubleClick}>
+                            return <tr style={d.rowStyle} onDoubleClick={() => this.onDoubleClick(d)}>
                                 {
                                     props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
                                         {
