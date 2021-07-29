@@ -33,8 +33,8 @@ export class InputWrapper extends React.PureComponent<IProps>{
             </label>}
             
             <div className={"dolfo-input-wrapper" + (props.focusBool ? " focused" : "")} onClick={props.forceFocus}>
-                { (props.value && props.value.length && props.resetFunction) ? <CloseIcon className="reset-input" onClick={props.resetFunction} tooltip={Constants.RESET_INPUT_TEXT} /> : null }
-
+                {(props.value && props.value.length && props.resetFunction) ? <CloseIcon className="reset-input" onClick={props.resetFunction} tooltip={Constants.RESET_INPUT_TEXT} /> : null}
+                
                 <div className="dolfo-input-icon">
                     <Icon {...props.icon} />
                 </div>
