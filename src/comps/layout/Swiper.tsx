@@ -3,7 +3,7 @@ import { Constants } from "../shared/Constants"
 import Button from "./Button"
 import { Icon } from "./Icon"
 
-export interface IProps{
+interface IProps{
     readonly opened?: boolean
 }
 
@@ -39,7 +39,7 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
     }
 }
 
-export interface SwipeProps{
+interface SwipeProps{
     readonly detail?: boolean
     readonly opened?: boolean
     readonly onGoBack?: () => void
