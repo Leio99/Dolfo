@@ -7,7 +7,7 @@ import { Closable } from "../shared/utility"
 
 export type DialogType = "success" | "info" | "error" | "warning"
 
-export interface BaseProps{
+interface BaseProps{
     readonly title?: string | JSX.Element,
     readonly content?: string | JSX.Element,
     readonly onOk?: () => void,
@@ -16,7 +16,7 @@ export interface BaseProps{
     readonly clickOutside?: boolean
 }
 
-export interface IProps extends BaseProps{
+interface IProps extends BaseProps{
     readonly onClose?: () => void
     readonly visible?: boolean
     readonly okBtnClass?: string
