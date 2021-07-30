@@ -8,7 +8,7 @@ import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import TimePicker from "./TimePicker"
 
-export type DateFormats = "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
+type DateFormats = "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
 
 export interface IProps extends InputProps {
     readonly defaultValue?: Date
