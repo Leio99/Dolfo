@@ -4,7 +4,7 @@ import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, 
 export type NotificationPosition ="top-left" | "top-right" | "bottom-left" | "bottom-right"
 export type NotificationDelay = number | "never"
 
-export interface NotificationProps{
+interface NotificationProps{
     readonly type?: DialogType | "loading"
     readonly icon?: JSX.Element
     readonly message: string | JSX.Element
