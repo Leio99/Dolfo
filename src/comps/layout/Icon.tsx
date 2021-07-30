@@ -5,7 +5,7 @@ export interface BaseIconProps {
     readonly type?: "fa" | "far" | "fal" | "fas" | "fab" | "fad"
     readonly iconKey: string
 }
-export interface DefaultIconProps extends TooltipProps{
+interface DefaultIconProps extends TooltipProps{
     readonly className?: string
     readonly spinning?: boolean
     readonly style?: CSSProperties
