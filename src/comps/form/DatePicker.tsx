@@ -7,6 +7,7 @@ import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import TimePicker from "./TimePicker"
+import _ from "lodash"
 
 type DateFormats = "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
 
@@ -35,15 +36,18 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     constructor(props: IProps) {
         super(props)
 
-        let date = props.defaultValue ? formatDate(props.defaultValue) : "",
-        currentDay = props.defaultValue ? props.defaultValue.getDate() : new Date().getDate(),
-        currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
-        currentMonth = props.defaultValue ? props.defaultValue.getMonth() :  new Date().getMonth(),
-        currentHour = props.defaultValue ? props.defaultValue.getHours() :  new Date().getHours(),
-        currentMinute = props.defaultValue ? props.defaultValue.getMinutes() :  new Date().getMinutes(),
-        currentDecade = parseInt(currentYear.toString().slice(0, -1) + "0")
+        this.composeDateFromDefault(props.defaultValue)
+    }
 
-        this.state = {
+    composeDateFromDefault = (defaultValue: Date) => {
+        const date = defaultValue ? formatDate(defaultValue) : "",
+        currentDay = defaultValue ? defaultValue.getDate() : new Date().getDate(),
+        currentYear = defaultValue ? defaultValue.getFullYear() : new Date().getFullYear(),
+        currentMonth = defaultValue ? defaultValue.getMonth() :  new Date().getMonth(),
+        currentHour = defaultValue ? defaultValue.getHours() :  new Date().getHours(),
+        currentMinute = defaultValue ? defaultValue.getMinutes() :  new Date().getMinutes(),
+        currentDecade = parseInt(currentYear.toString().slice(0, -1) + "0"),
+        newState = {
             date,
             showCalendar: false,
             selectingMonth: false,
@@ -57,6 +61,13 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             currentHour,
             currentMinute
         }
+
+        !this.state ? this.state = newState : this.setState(newState)
+    }
+
+    componentDidUpdate = (prevProps: IProps) => {
+        if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
+            this.composeDateFromDefault(this.props.defaultValue)
     }
 
     nextMonth = () => {
