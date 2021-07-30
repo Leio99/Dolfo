@@ -1,10 +1,10 @@
 import React, { CSSProperties } from "react"
 
-export interface IProps{
+interface IProps{
     readonly className?: string
     readonly style?: CSSProperties
 }
-export interface CardProps extends IProps{
+interface CardProps extends IProps{
     readonly title?: string | JSX.Element
 }
 
