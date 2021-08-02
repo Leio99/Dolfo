@@ -148,7 +148,7 @@ class Select extends React.PureComponent<IProps, IState>{
     render = (): JSX.Element => {
         const props = this.props,
         { value, openSelect, options, searchValue, currentSelection } = this.state,
-        icon = props.icon || { iconKey: "hand-pointer" }
+        icon = props.icon || { iconKey: "hand-pointer", type: "far" }
 
         let input: HTMLInputElement,
         searchInput = <div className="dolfo-select-search-content">
