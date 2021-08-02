@@ -122,7 +122,8 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         const props = this.props,
         { value, showTime } = this.state,
         icon = props.icon || {
-            iconKey: "clock"
+            iconKey: "clock",
+            type: "far"
         },
         hour = value.split(":")[0],
         minute = value.split(":")[1]
