@@ -124,7 +124,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
     render = (): JSX.Element => {
         const props = this.props,
         { files, value } = this.state,
-        icon = props.icon || { iconKey: "file-upload" }
+        icon = props.icon || { iconKey: "file-upload", type: "far" }
         let input: HTMLInputElement
 
         return <div className="dolfo-uploader">
