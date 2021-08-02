@@ -24,8 +24,8 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     }
 
     loadTabs = () => {
-        const children = this.state.children,
-        findCurrent = children.indexOf(children.find(child => child.props?.isDefault))
+        const { children, currentTab } = this.state,
+        findCurrent = currentTab || children.indexOf(children.find(child => child.props?.isDefault))
 
         this.setState({
             currentTab: findCurrent >= 0 ? findCurrent : 0
@@ -39,9 +39,14 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     }
 
     componentDidUpdate = (prevProps: any) => {
-        if(!_.isEqual(prevProps.children, this.props.children) || !_.isEqual(this.props, prevProps)){
+        if(!_.isEqual(prevProps.children, this.props.children)){
             this.setState({ children: this.getChildrenTabs() }, () => {
-                if(!_.isEqual(this.props.children as Tab[], prevProps.children as Tab[]))
+                const prevFiltered = prevProps.children.filter((v: Tab) => !!v),
+                prevDefault = prevFiltered.indexOf(prevFiltered.find((child: Tab) => child?.props?.isDefault)),
+                newChildren = (this.props.children as any[]).filter((v: Tab) => !!v),
+                newDefault = newChildren.indexOf(newChildren.find((child: Tab) => child?.props?.isDefault))
+
+                if(prevDefault !== newDefault)
                     this.loadTabs()
             })
         }
