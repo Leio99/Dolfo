@@ -62,6 +62,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             currentMinute
         }
 
+        // eslint-disable-next-line
         !this.state ? this.state = newState : this.setState(newState)
     }
 
