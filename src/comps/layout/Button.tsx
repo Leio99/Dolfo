@@ -21,7 +21,7 @@ export interface ButtonProps extends InputProps, TooltipProps{
     readonly popupPosition?: "top" | "bottom"
     readonly iconPopup?: boolean
 }
-export interface IState{
+interface IState{
     readonly openPopup: boolean
 }
 
@@ -53,7 +53,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
                     {
                         props.options?.map(opt => {
                             if(!opt.hiddenIf)
-                                return <div className="dolfo-popup-option" onClick={opt.onClick}>
+                                return <div className={"dolfo-popup-option" + (opt.disabled ? " disabled" : "")} onClick={!opt.disabled ? opt.onClick : (e: any) => e.stopPropagation()}>
                                     {opt.text}
                                 </div>
 
