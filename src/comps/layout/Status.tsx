@@ -1,9 +1,9 @@
 import React from "react"
 import { DialogType } from "./Dialog"
-import { CheckIcon, ErrorCircleIcon, InfoCircleIcon, WarningIcon } from "./Icon"
+import { CheckIcon, ErrorCircleIcon, Icon, InfoCircleIcon, WarningIcon } from "./Icon"
 
 interface IProps{
-    readonly type: DialogType
+    readonly type: DialogType | "pending"
     readonly hideIcon?: boolean
     readonly tooltip?: string
 }
@@ -15,7 +15,8 @@ export class Status extends React.Component<IProps>{
             success: <CheckIcon color="var(--green)" />,
             error: <ErrorCircleIcon color="var(--red)" />,
             info: <InfoCircleIcon color="var(--darkblue)" />,
-            warning: <WarningIcon color="var(--orange)" />
+            warning: <WarningIcon color="var(--orange)" />,
+            pending: <Icon iconKey="clock" color="var(--dark)" />
         }
 
         return <div className={"dolfo-status" + (props.type ? (" " + props.type) : "")} data-tooltip={props.tooltip}>
