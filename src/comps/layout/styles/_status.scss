@@ -1,0 +1,22 @@
+.dolfo-status{
+    padding: 0.2rem 1rem;
+    border-radius: $roundRadius;
+    display: inline-block;
+
+    &.success{
+        background-color: lighten($green, 47%);
+        color: $green
+    }
+    &.error{
+        background-color: lighten($red, 42%);
+        color: $red
+    }
+    &.info{
+        background-color: lighten($darkBlue, 47%);
+        color: $darkBlue
+    }
+    &.warning{
+        background-color: lighten($orange, 47%);
+        color: $orange
+    }
+}
