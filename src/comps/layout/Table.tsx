@@ -150,7 +150,15 @@ export class Table extends React.PureComponent<IProps, IState>{
                 <tbody>
                     {
                         data.length ? data.map(d => {
-                            return <tr style={d.rowStyle} onDoubleClick={() => this.onDoubleClick(d)}>
+                            const rowStyle = d.checked ? {
+                                backgroundColor: "var(--hoverblue)",
+                                color: "var(--darkblue)"
+                            } : null
+
+                            return <tr style={{
+                                ...rowStyle,
+                                ...d.rowStyle
+                            }} onDoubleClick={() => this.onDoubleClick(d)}>
                                 {
                                     props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
                                         {
