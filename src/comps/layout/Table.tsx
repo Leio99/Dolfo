@@ -141,7 +141,7 @@ export class Table extends React.PureComponent<IProps, IState>{
 
                                 {col.label}
 
-                                {col.canSearch && activeFilter === col.field && <input type="text" value={filter[col.searchField || col.field]} onChange={(e) => this.changeFilter(col.searchField || col.field, e.target.value)} className="dolfo-column-search-input" onBlur={this.blurSearch} autoFocus placeholder={Constants.SEARCH_PLACEHOLDER} />}
+                                {col.canSearch && activeFilter === col.field && <input type="text" value={filter[col.searchField || col.field]} onChange={e => this.changeFilter(col.searchField || col.field, e.target.value)} className="dolfo-column-search-input" onBlur={this.blurSearch} autoFocus placeholder={Constants.SEARCH_PLACEHOLDER} />}
                             </th>)
                         }
                     </tr>
