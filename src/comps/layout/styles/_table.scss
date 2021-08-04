@@ -3,13 +3,66 @@
     word-break: initial;
 
     .dolfo-table{
-        width: 100%;
-        border-collapse: collapse;
-        background-color: $white;
+        $borderRule: 1px solid $grey;
 
-        tr{
+        width: 100%;
+        background-color: $white;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 0;
+        
+        tbody tr, thead tr{
             background-color: $white;
-            border-bottom: 1px solid $grey;
+
+            &:first-child{
+                th{
+                    border-top: $borderRule;
+                    border-bottom: $borderRule        
+                }
+
+                th:first-child{
+                    border-top-left-radius: $smallRadius;
+                    border-left: $borderRule
+                }
+
+                th:last-child{
+                    border-top-right-radius: $smallRadius;
+                    border-right: $borderRule
+                }
+            }
+
+            &:last-child{
+                td{
+                    border-bottom: $borderRule;
+
+                    &:first-child{
+                        border-bottom-left-radius: $smallRadius;
+                        border-left: $borderRule
+                    }
+    
+                    &:last-child{
+                        border-bottom-right-radius: $smallRadius;
+                        border-right: $borderRule
+                    }
+                }
+            }
+
+            &:not(:first-child):not(:last-child){
+                td:first-child{
+                    border-left: $borderRule
+                }
+
+                td:last-child{
+                    border-right: $borderRule
+                }
+            }
+
+            td, th{
+                border: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
 
             td.dolfo-table-noresults{
                 text-align: center
@@ -20,6 +73,16 @@
             &:hover{
                 cursor: pointer;
                 background-color: lighten($lightGrey, 2%)
+            }
+
+            &:first-child td{
+                &:first-child{
+                    border-left: $borderRule
+                }
+
+                &:last-child{
+                    border-right: $borderRule
+                }
             }
         }
 
@@ -47,7 +110,8 @@
                 position: absolute;
                 left: 0;
                 right: 0;
-                top: 0.5rem;
+                top: 50%;
+                transform: translateY(-50%);
                 width: 100%;
                 outline: none;
                 border: 1px solid $selectionBlue;
@@ -62,6 +126,7 @@
             padding-left: 0;
             padding-right: 0;
             text-align: right;
+            border: 0 !important;
 
             .dolfo-button{
                 margin-left: 0.5rem
