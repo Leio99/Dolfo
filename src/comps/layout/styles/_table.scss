@@ -108,17 +108,17 @@
 
             .dolfo-column-search-input{
                 position: absolute;
-                left: 0;
-                right: 0;
+                left: 10px;
+                right: 10px;
                 top: 50%;
                 transform: translateY(-50%);
-                width: 100%;
+                width: calc(100% - 20px);
                 outline: none;
                 border: 1px solid $selectionBlue;
-                border-radius: $roundRadius;
-                padding: 1rem;
+                border-radius: $smallRadius;
+                padding: 1.2rem 1rem;
                 background-color: $white;
-                height: 27px
+                height: 30px
             }
         }
 
