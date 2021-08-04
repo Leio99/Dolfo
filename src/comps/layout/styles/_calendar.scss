@@ -23,66 +23,104 @@
     }
 
     table.dolfo-g-calendar{
+        $borderRule: 1px solid $lightGrey;
+
         text-align: center;
         width: 100%;
-        border-collapse: collapse;
-        border: 1px solid $lightGrey;
+        border-collapse: separate;
+        border-spacing: 0;
 
-        thead th, tbody td{
-            width: calc(100% / 7);
-            border-bottom: 0;
-            border: 1px solid $lightGrey;
-            padding: 0.75rem
-        }
-        
-        tbody td{
-            max-width: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        thead tr, tbody tr{
+            th, td{
+                width: calc(100% / 7);
+                border-bottom: 0;
+                padding: 0.75rem;
+                border-bottom: $borderRule;
 
-            .content{
-                min-height: 100px;
-                width: 100%;
-                position: relative;
-
-                .icon-today{
-                    transform: rotate(45deg);
-                    position: absolute;
-                    right: 0;
-                    color: $green
+                &:not(th){
+                    border-left: $borderRule
                 }
-
-                .day-number-container .day-number .week-day{
-                    display: none
-                }
-
-                .event{
-                    margin-top: 0.3rem;
-                    background-color: $red;
-                    color: $white;
-                    border-radius: $roundRadius;
-                    padding: 0.2rem 0.5rem;
-                    font-size: 12px;
-                    cursor: pointer;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-
-                    &:hover{
-                        background-color: darken($red, 10%)
+                
+                &:not(td){
+                    border-top: $borderRule;
+                    
+                    &:first-child{
+                        border-top-left-radius: $smallRadius;
+                        border-left: $borderRule
+                    }
+    
+                    &:last-child{
+                        border-top-right-radius: $smallRadius;
+                        border-right: $borderRule
                     }
                 }
             }
+        }
+        
+        tbody tr{
+            &:last-child{
+                td:first-child{
+                    border-bottom-left-radius: $smallRadius
+                }
 
-            &.external{
-                color: $grey;
+                td:last-child{
+                    border-bottom-right-radius: $smallRadius
+                }
+            }
 
-                .content .event{
-                    background-color: $disabled;
+            td{
+                max-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
 
-                    &:hover{
-                        background-color: darken($disabled, 15%)
+                &:last-child{
+                    border-right: $borderRule
+                }
+
+                .content{
+                    min-height: 100px;
+                    width: 100%;
+                    position: relative;
+
+                    .icon-today{
+                        transform: rotate(45deg);
+                        position: absolute;
+                        right: 0;
+                        color: $green
+                    }
+
+                    .day-number-container .day-number .week-day{
+                        display: none
+                    }
+
+                    .event{
+                        margin-top: 0.3rem;
+                        background-color: $red;
+                        color: $white;
+                        border-radius: $roundRadius;
+                        padding: 0.2rem 0.5rem;
+                        font-size: 12px;
+                        cursor: pointer;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+
+                        &:hover{
+                            background-color: darken($red, 10%)
+                        }
+                    }
+                }
+
+                &.external{
+                    color: $grey;
+
+                    .content .event{
+                        background-color: $disabled;
+
+                        &:hover{
+                            background-color: darken($disabled, 15%)
+                        }
                     }
                 }
             }
