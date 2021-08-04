@@ -7,16 +7,24 @@
         background-color: lighten($green, 47%);
         color: $green
     }
+
     &.error{
         background-color: lighten($red, 42%);
         color: $red
     }
+
     &.info{
         background-color: lighten($darkBlue, 47%);
         color: $darkBlue
     }
+
     &.warning{
         background-color: lighten($orange, 47%);
         color: $orange
+    }
+
+    &.pending{
+        background-color: lighten($dark, 55%);
+        color: $dark
     }
 }
