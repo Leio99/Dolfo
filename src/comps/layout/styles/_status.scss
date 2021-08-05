@@ -24,7 +24,7 @@
     }
 
     &.pending{
-        background-color: lighten($dark, 60%);
+        background-color: $lightGrey
         color: $dark
     }
 }
