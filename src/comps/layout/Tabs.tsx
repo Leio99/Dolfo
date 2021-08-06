@@ -41,9 +41,9 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     componentDidUpdate = (prevProps: any) => {
         if(!_.isEqual(prevProps.children, this.props.children)){
             this.setState({ children: this.getChildrenTabs() }, () => {
-                const prevFiltered = prevProps.children.filter((v: Tab) => !!v),
+                const prevFiltered = this.getChildrenTabs(prevProps).filter((v: Tab) => !!v),
                 prevDefault = prevFiltered.indexOf(prevFiltered.find((child: Tab) => child?.props?.isDefault)),
-                newChildren = (this.props.children as any[]).filter((v: Tab) => !!v),
+                newChildren = this.getChildrenTabs().filter((v: Tab) => !!v),
                 newDefault = newChildren.indexOf(newChildren.find((child: Tab) => child?.props?.isDefault))
 
                 if(prevDefault !== newDefault)
@@ -52,7 +52,12 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         }
     }
 
-    getChildrenTabs = () => React.Children.map(this.props.children, (child: any) => child).filter(t => !!t)
+    getChildrenTabs = (props = this.props) => {
+        if(!_.isArray(props.children))
+            return [props.children]
+        else
+            return React.Children.map(props.children, (child: any) => child).filter(t => !!t)
+    }
 
     changeSelection = (index: number) => {
         this.setState({
