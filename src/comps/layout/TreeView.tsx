@@ -14,6 +14,7 @@ interface IState{
     readonly list: any[]
     readonly autoOpen?: boolean
     readonly [x: string]: any
+    readonly showExpandAll?: boolean
 }
 
 interface InternalState{
@@ -68,7 +69,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         this.setState({ level })
     }
 
-    toggleAllNodes = (node: TreeNode, index: number) => {
+    toggleAllNode = (node: TreeNode, index: number) => {
         const { level } = this.state,
         nodeLevel = level[index]
         let newNodeLevel: (string | number)[] = []
@@ -130,16 +131,16 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         { level, showActions } = this.state,
         isOpened = level[originalIndex]?.includes(this.retrieveNodeId(node))
 
-        return <tr onDoubleClick={() => this.onDoubleClick && this.onDoubleClick(node)}>
+        return <tr key={this.retrieveNodeId(node)} onDoubleClick={() => this.onDoubleClick && this.onDoubleClick(node)}>
             <td>
-                <span style={{ paddingLeft: (10 * subNode) + (hasChildren ? 0 : subNode === 0 ? 0 : 20) }}></span>
+                <span style={{ paddingLeft: (25 * subNode) + (hasChildren ? 0 : subNode === 0 ? 0 : 25) }}></span>
                 {
                     hasChildren ? <Button btnColor="black" textBtn onClick={() => this.toggleNode(node, originalIndex)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
                         <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="mr-2" />
                     </Button> : null
                 }
 
-                <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} textBtn onClick={() => this.toggleAllNodes(node, originalIndex)} tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODES : hasChildren ? Constants.TREE_EXPAND_ALL_NODES : null}>
+                <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} textBtn onClick={() => this.toggleAllNode(node, originalIndex)} tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
                     <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="mr-2" large />
                 </Button> {this.getLabel(node)}
             </td>
@@ -158,16 +159,42 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
             allList = [this.retrieveNodeId(node)]
 
             this.renderNode(node, i, [], 0, true, allList, true)
-            console.warn(allList)
+            
             return allList
         })
     }
 
+    toggleAllNodes = () => {
+        const { list, level } = this.state
+
+        list.forEach((l, i) => {
+            if(!level[i].length)
+                this.toggleAllNode({ type: "root", data: l }, i)
+        })
+    }
+
+    collapseAllNodes = () => this.setState({ level: this.state.list.map(() => []) })
+
     renderTree = (): JSX.Element => {
-        const { list, showActions } = this.state
+        const { list, showActions, showExpandAll } = this.state
 
         return <div className="dolfo-table-content">
             <table className="dolfo-table">
+                {
+                    showExpandAll && <thead className="dolfo-table-actions">
+                        <tr>
+                            <td colSpan={showActions ? 2 : 1}>
+                                <Button btnColor="white" tooltip={Constants.TREE_EXPAND_ALL_NODES} onClick={this.toggleAllNodes} className="mr-2">
+                                    <Icon iconKey="expand-alt" />
+                                </Button>
+                                <Button btnColor="white" tooltip={Constants.TREE_COLLAPSE_ALL_NODES} onClick={this.collapseAllNodes}>
+                                    <Icon iconKey="compress-alt" />
+                                </Button>
+                            </td>
+                        </tr>
+                    </thead>
+                }
+
                 <thead>
                     <tr>
                         <th style={{ width: "85%" }}>Descrizione</th>
