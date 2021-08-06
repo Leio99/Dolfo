@@ -3,6 +3,7 @@ import Button from "./layout/Button"
 import { CloseCircleIcon, DeleteIcon, EditIcon, Icon, LoadingIcon } from "./layout/Icon"
 import { TreeNode, TreeView } from "./layout/TreeView"
 import axios from "axios"
+import { NotificationMsg } from "./layout/NotificationMsg"
 
 export class TestTree extends TreeView{
     constructor(){
@@ -12,7 +13,14 @@ export class TestTree extends TreeView{
         })
     }
 
-    componentDidMount = () => axios.get("http://localhost:5000/programmi").then(r => this.setState({ list: r.data }))
+    componentDidMount = () => {
+        axios.get("http://localhost:5000/programmi")
+        .then(r => this.setState({ list: r.data }))
+        .catch(() => {
+            NotificationMsg.showError("Unable to load tree!")
+            this.setState({ list: [] })
+        })
+    }
 
     getData = (node: TreeNode) => {
         const arr: TreeNode[] = []

@@ -194,8 +194,8 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
                 <thead>
                     <tr>
-                        <th style={{ width: "85%" }}>Descrizione</th>
-                        {showActions && <th>Azioni</th>}
+                        <th style={{ width: "85%" }}>{Constants.TREE_TABLE_DESCRIPTION_LABEL}</th>
+                        {showActions && <th>{Constants.TREE_TABLE_ACTIONS_LABEL}</th>}
                     </tr>
                 </thead>
 
