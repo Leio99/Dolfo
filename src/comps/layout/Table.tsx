@@ -168,7 +168,9 @@ export class Table extends React.PureComponent<IProps, IState>{
                                 }
                             </tr>
                         }) : <tr>
-                            <td className="dolfo-table-noresults" colSpan={props.columns.length}>Nessun risultato</td>
+                            <td className="dolfo-table-noresults" colSpan={props.columns.length}>
+                                {Constants.TABLE_NO_RESULTS}
+                            </td>
                         </tr>
                     }
                 </tbody>
