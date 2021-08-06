@@ -147,7 +147,7 @@ export abstract class TreeView<S, P = any> extends React.PureComponent<P, Intern
     renderTree = (): JSX.Element => {
         const { list, showActions } = this.state
 
-        return <div className="dolfo-table-content m-5 tree-content">
+        return <div className="dolfo-table-content">
             <table className="dolfo-table">
                 <thead>
                     <tr>
