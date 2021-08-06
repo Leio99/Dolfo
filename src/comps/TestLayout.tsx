@@ -27,6 +27,7 @@ import { Step } from "./layout/Step"
 import { Uploader } from "./form/Uploader"
 import { initializeTooltips } from "./layout/Tooltip"
 import { TestTree } from "./TestTree"
+import { Status } from "./layout/Status"
 
 export interface IState{
     readonly visibleDialog: boolean
@@ -106,7 +107,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
 
         return <div style={{ marginTop: 15, padding: 50 }}>
             <Tabs>
-                <Tab title="Buttons" style={{ height: "80vh" }}>
+                <Tab title={<span>
+                    <Icon iconKey="mouse-pointer" /> Buttons
+                </span>} style={{ height: "80vh" }}>
                     <Button btnColor="red" className="mr-2">Red</Button>
                     <Button btnColor="blue" className="mr-2">Blue</Button>
                     <Button btnColor="darkblue" className="mr-2">Dark Blue</Button>
@@ -155,7 +158,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Button>
                 </Tab>
 
-                <Tab title="Notifications">
+                <Tab title={<span>
+                    <Icon iconKey="bell" /> Notifications
+                </span>}>
                     <Button onClick={() => {
                         NotificationMsg.show("Top center!")
                     }} btnColor="green" smallBtn className="mr-2">
@@ -240,7 +245,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Button>
                 </Tab>
 
-                <Tab title="Forms">
+                <Tab title={<span>
+                    <Icon iconKey="keyboard" /> Forms
+                </span>}>
                     <Tabs vertical>
                         <Tab title="Text inputs">
                             <TextInput label="Simple" />
@@ -305,7 +312,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Tabs>
                 </Tab>
 
-                <Tab title="Dialog">
+                <Tab title={<span>
+                    <Icon iconKey="window-alt" /> Dialogs
+                </span>}>
                     <Button btnColor="black" onClick={() => {
                         Dialog.openDialog({
                             title: "Simple dialog",
@@ -409,7 +418,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     }} btnColor="darkblue" className="mr-2">Long content dialog</Button>
                 </Tab>
 
-                <Tab title="Accordion">
+                <Tab title={<span>
+                    <Icon iconKey="arrows-alt-v" /> Accordion
+                </span>}>
                     <Accordion title="First" opened={checkedSwitch}>
                         Hello, I am the first accordion
                         <Accordion title="First" opened={checkedSwitch}>
@@ -424,13 +435,17 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Accordion>
                 </Tab>
 
-                <Tab title="Progress">
+                <Tab title={<span>
+                    <Icon iconKey="spinner" /> Progress
+                </span>}>
                     <Progress percent={60} color="red" />
                     <Progress percent={percent} color="darkblue" loading={percent !== 100} loadingText="Loading..." />
                     <Progress percent={80} circular color="orange" />
                 </Tab>
 
-                <Tab title="Slideshow">
+                <Tab title={<span>
+                    <Icon iconKey="film" /> Slideshow
+                </span>}>
                     <SlideShow automatic>
                         <Slide imageUrl="https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero.jpg"></Slide>
                         <Slide>
@@ -443,22 +458,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </SlideShow>
                 </Tab>
 
-                <Tab title="Other">
-                    <Button onClick={() => {
-                        MessageBox.show({
-                            title: "Message",
-                            content: "A message can be placed at: top-left, top-right, bottom-left, bottom-right. It disappears after 4 seconds (you can change the delay, obv), or it can be closed by the X icon on the top-right corner.",
-                            hideDelay: 4000
-                        })
-                    }} btnColor="green" smallBtn className="mr-2">
-                        Message
-                    </Button>
-                    <Button onClick={this.toggleMenu} btnColor="red" smallBtn className="mr-2">
-                        Menu
-                    </Button>
-                </Tab>
-
-                <Tab title="Stepper">
+                <Tab title={<span>
+                    <Icon iconKey="shoe-prints" /> Stepper
+                </span>}>
                     <Stepper currentStep={currentStep}>
                         <Step title="First step" loading={loading}>
                             Step 1
@@ -480,8 +482,40 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </Step>
                     </Stepper>
                 </Tab>
-                <Tab isDefault title="Tree view">
+                <Tab title={<span>
+                    <Icon iconKey="sitemap" /> Tree view
+                </span>}>
                     <TestTree />
+                </Tab>
+                <Tab title={<span>
+                    <Icon iconKey="tags" /> Status tags
+                </span>}>
+                    <Status type="success" style={{ marginRight: 10 }}>Success</Status>
+                    <Status type="error" style={{ marginRight: 10 }}>Error</Status>
+                    <Status type="warning" style={{ marginRight: 10 }}>Warning</Status>
+                    <Status type="info" style={{ marginRight: 10 }}>Info</Status>
+                    <Status type="pending" style={{ marginRight: 10 }}>Pending</Status>
+                    <Status type="success" hideIcon style={{ marginRight: 10 }}>
+                        <Icon iconKey="briefcase" /> Custom icon
+                    </Status>
+                    <Status type="error" hideIcon style={{ marginRight: 10 }}>Red without icon</Status>
+                </Tab>
+
+                <Tab title={<span>
+                    <Icon iconKey="coins" /> Other
+                </span>}>
+                    <Button onClick={() => {
+                        MessageBox.show({
+                            title: "Message",
+                            content: "A message can be placed at: top-left, top-right, bottom-left, bottom-right. It disappears after 4 seconds (you can change the delay, obv), or it can be closed by the X icon on the top-right corner.",
+                            hideDelay: 4000
+                        })
+                    }} btnColor="green" smallBtn className="mr-2">
+                        Message
+                    </Button>
+                    <Button onClick={this.toggleMenu} btnColor="red" smallBtn className="mr-2">
+                        Menu
+                    </Button>
                 </Tab>
             </Tabs>
             
