@@ -1,6 +1,33 @@
 .dolfo-table-content{
     overflow: auto;
     word-break: initial;
+    $rowHover: lighten($lightGrey, 2%);
+
+    &.tree-content{
+        tbody > tr:hover{
+            cursor: default;
+    
+            tr{
+                background-color: $rowHover
+            }
+        }
+    
+        tbody tr > * td{
+            padding-bottom: 0 !important
+        }
+    
+        td ul, td ul li{
+            margin-bottom: 0;
+            list-style: none;
+    
+            tr{
+                td{
+                    border-radius: 0 !important;
+                    border: 0 !important
+                }
+            }
+        }
+    }
 
     .dolfo-table{
         $borderRule: 1px solid $grey;
@@ -72,7 +99,7 @@
         tbody tr{
             &:hover{
                 cursor: pointer;
-                background-color: lighten($lightGrey, 2%)
+                background-color: $rowHover
             }
 
             &:first-child td{
