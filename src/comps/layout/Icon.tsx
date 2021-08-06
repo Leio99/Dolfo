@@ -31,7 +31,7 @@ export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
     }
 }
 
-export const DeleteIcon = (props: DefaultIconProps) => <Icon {...props} type="fa" iconKey="trash-alt" />
+export const DeleteIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="trash-alt" />
 
 export const CheckIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="check" />
 
@@ -61,7 +61,7 @@ export const LoadingIcon = (props: DefaultIconProps) => <Icon {...props} type="f
 
 export const CloseIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="times" />
 
-export const CloseCircleIcon = (props: DefaultIconProps) => <Icon {...props} type="fa" iconKey="times-circle" />
+export const CloseCircleIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="times-circle" />
 
 export const WarningIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="exclamation-triangle" />
 
@@ -69,9 +69,9 @@ export const WarningIconOutline = (props: DefaultIconProps) => <Icon {...props} 
 
 export const SearchIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="search" />
 
-export const DetailIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="external-link" />
+export const DetailIcon = (props: DefaultIconProps) => <Icon {...props} type="far" iconKey="external-link" />
 
-export const EditIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="pen" />
+export const EditIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="pen" type="far" />
 
 export const AddIcon = (props: DefaultIconProps) => <Icon {...props} iconKey="plus" />
 
