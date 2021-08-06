@@ -114,12 +114,13 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
         if(hasChildren && this.getChildren(node)){
             this.getData(node).forEach(data => {
-                const newList = idList.concat(this.retrieveNodeId(data))
+                const newList = idList.concat(this.retrieveNodeId(data)),
+                doAutoExpand = autoExpand && this.hasChildren(data)
 
-                if(autoExpand && this.hasChildren(data))
+                if(doAutoExpand)
                     idList.push(this.retrieveNodeId(data))
                 
-                this.renderNode(data, originalIndex, treeList, subNode + 1, isOpened, newList, autoExpand)
+                this.renderNode(data, originalIndex, treeList, subNode + 1, isOpened, doAutoExpand ? idList : newList, autoExpand)
             })
         }
     }
@@ -156,7 +157,10 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
     autoExpandAll = (list: any[] = this.state.list) => {
         return list.map((l, i) => {
             const node = { type: "root", data: l },
-            allList = [this.retrieveNodeId(node)]
+            allList: string[] = []
+
+            if(this.hasChildren(node))
+                allList.push(this.retrieveNodeId(node))
 
             this.renderNode(node, i, [], 0, true, allList, true)
             
@@ -164,14 +168,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         })
     }
 
-    toggleAllNodes = () => {
-        const { list, level } = this.state
-
-        list.forEach((l, i) => {
-            if(!level[i].length)
-                this.toggleAllNode({ type: "root", data: l }, i)
-        })
-    }
+    toggleAllNodes = () => this.setState({ level: this.autoExpandAll() })
 
     collapseAllNodes = () => this.setState({ level: this.state.list.map(() => []) })
 

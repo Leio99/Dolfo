@@ -154,7 +154,7 @@ export abstract class Autocomplete<T, K> extends React.Component<IProps<T>, ISta
                 </div>
 
                 {
-                    data.length ? data.map(option => <Option label={this.getDes(option)} value={this.getKey(option)} onChange={() => this.selectOption(option)} selected={this.getKey(option) === selectedKey} />) : <div className="autocomplete-no-results">{timeout ? Constants.LOADING_TEXT : Constants.NO_RESULT_TEXT}</div>
+                    data.length ? data.map(option => <Option label={this.getDes(option)} value={this.getKey(option)} onChange={() => this.selectOption(option)} selected={this.getKey(option) === selectedKey} />) : <div className="autocomplete-no-results">{timeout ? Constants.LOADING_TEXT : Constants.TABLE_NO_RESULTS}</div>
                 }
             </div>
         </InputWrapper>

@@ -26,6 +26,7 @@ import { Stepper } from "./layout/Stepper"
 import { Step } from "./layout/Step"
 import { Uploader } from "./form/Uploader"
 import { initializeTooltips } from "./layout/Tooltip"
+import { TestTree } from "./TestTree"
 
 export interface IState{
     readonly visibleDialog: boolean
@@ -478,6 +479,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             Step 4
                         </Step>
                     </Stepper>
+                </Tab>
+                <Tab isDefault title="Tree view">
+                    <TestTree />
                 </Tab>
             </Tabs>
             

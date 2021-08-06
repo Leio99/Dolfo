@@ -1,4 +1,10 @@
-Type } from "./Dialog"
+import _ from "lodash"
+import React from "react"
+import { CSSProperties } from "react"
+import ReactDOM from "react-dom"
+import { Constants } from "../shared/Constants"
+import { Closable } from "../shared/utility"
+import { DialogType } from "./Dialog"
 import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 
 export type NotificationPosition ="top-left" | "top-right" | "bottom-left" | "bottom-right"
