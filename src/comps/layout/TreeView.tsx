@@ -13,8 +13,8 @@ export interface TreeNode{
 interface IState{
     readonly list: any[]
     readonly autoOpen?: boolean
-    readonly [x: string]: any
     readonly showExpandAll?: boolean
+    readonly [x: string]: any
 }
 
 interface InternalState{
