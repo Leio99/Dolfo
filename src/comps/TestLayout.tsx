@@ -490,15 +490,15 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 <Tab title={<span>
                     <Icon iconKey="tags" /> Status tags
                 </span>}>
-                    <Status type="success" style={{ marginRight: 10 }}>Success</Status>
-                    <Status type="error" style={{ marginRight: 10 }}>Error</Status>
-                    <Status type="warning" style={{ marginRight: 10 }}>Warning</Status>
-                    <Status type="info" style={{ marginRight: 10 }}>Info</Status>
-                    <Status type="pending" style={{ marginRight: 10 }}>Pending</Status>
-                    <Status type="success" hideIcon style={{ marginRight: 10 }}>
+                    <Status type="success" className="mr-2">Success</Status>
+                    <Status type="error" className="mr-2">Error</Status>
+                    <Status type="warning" className="mr-2">Warning</Status>
+                    <Status type="info" className="mr-2">Info</Status>
+                    <Status type="pending" className="mr-2">Pending</Status>
+                    <Status type="success" hideIcon className="mr-2">
                         <Icon iconKey="briefcase" /> Custom icon
                     </Status>
-                    <Status type="error" hideIcon style={{ marginRight: 10 }}>Red without icon</Status>
+                    <Status type="error" hideIcon className="mr-2">Red without icon</Status>
                 </Tab>
 
                 <Tab title={<span>
