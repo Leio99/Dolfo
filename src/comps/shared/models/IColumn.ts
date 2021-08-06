@@ -1,5 +1,5 @@
 import { CSSProperties } from "react"
-import { TooltipPlacement } from "../../layout/Tooltip";
+import { TooltipPlacement } from "../../layout/Tooltip"
 
 export interface IColumn{
     readonly field?: string
