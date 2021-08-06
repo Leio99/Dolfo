@@ -44,5 +44,11 @@ export class Constants {
     static readonly CALENDAR_ERROR_UNABLE_TO_GET_EVENTS = "Non è stato possibile recuperare gli eventi del calendario."
     static readonly MONTH_NO_EVENTS = "Non ci sono eventi per questo mese."
     static readonly SWIPE_ERROR_ONLY_ONE = "Devono esserci al due Swipes (master e detail)."
-    static readonly NO_RESULT_TEXT = "Nessun risultato."
+    static readonly TREE_EXPAND_ALL_NODES = "Espandi nodo"
+    static readonly TREE_COLLAPSE_ALL_NODES = "Espandi nodo"
+    static readonly TREE_OPEN_NODE = "Apri nodo"
+    static readonly TREE_CLOSE_NODE = "Chiudi nodo"
+    static readonly TREE_TABLE_DESCRIPTION_LABEL = "Descrizione"
+    static readonly TREE_TABLE_ACTIONS_LABEL = "Azioni"
+    static readonly TABLE_NO_RESULTS = "Nessun risultato"
 }
