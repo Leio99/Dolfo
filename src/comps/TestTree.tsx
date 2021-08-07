@@ -35,12 +35,18 @@ export class TestTree extends TreeView{
                 arr.push({ type: "luoghi", data: node.data.luoghi })
             if(node.data.conduttori?.length)
                 arr.push({ type: "conduttori", data: node.data.conduttori })
+            if(node.data.concorrenti?.length)
+                arr.push({ type: "anni", data: node.data.concorrenti })
         }else if(node.type === "comici")
             node.data.forEach((c: any) => arr.push({ type: "comico", data: c }))
         else if(node.type === "luoghi")
             node.data.forEach((d: any) => arr.push({ type: "luogo", data: d }))
         else if(node.type === "conduttori")
             node.data.forEach((d: any) => arr.push({ type: "conduttore", data: d }))
+        else if(node.type === "anni")
+            node.data.forEach((d: any) => arr.push({ type: "anno", data: d }))
+        else if(node.type === "anno")
+            node.data.concorrenti.forEach((d: any) => arr.push({ type: "concorrente", data: d }))
         else if(node.type === "comico")
             node.data.composizione.forEach((c: any) => arr.push({ type: "componente", data: c }))
 
@@ -54,6 +60,9 @@ export class TestTree extends TreeView{
         if(node.type === "luogo" || node.type === "conduttore") return node.data.nome
         if(node.type === "componente") return node.data.nominativo
         if(node.type === "conduttori") return "Conduttori"
+        if(node.type === "anni") return "Concorrenti"
+        if(node.type === "anno") return node.data.anno
+        if(node.type === "concorrente") return node.data.nome
 
         return node.data.nominativo
     }
@@ -65,8 +74,11 @@ export class TestTree extends TreeView{
         if(node.type === "comico")
             return node.data.composizione && node.data.composizione.length
 
-        if(node.type === "comici" || node.type === "luoghi" || node.type === "composizione" || node.type === "comico" || node.type === "conduttori")
+        if(node.type === "comici" || node.type === "luoghi" || node.type === "composizione" || node.type === "comico" || node.type === "conduttori" || node.type === "anni")
             return node.data.length
+
+        if(node.type === "anno")
+            return node.data.concorrenti.length
 
         return false
     }
@@ -122,6 +134,10 @@ export class TestTree extends TreeView{
     }
 
     getActions = (node: TreeNode) => {
+        if(node.type === "concorrente") return <Button textBtn onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")} tooltip="Apri Wikipedia" btnColor="black">
+            <Icon iconKey="wikipedia-w" type="fab" large />
+        </Button>
+
         if(node.type === "comico") return <>
             {
                 !node.data.composizione && <Button textBtn btnColor="darkblue" tooltip="Dati" className="mr-3" onClick={() => this.openDettaglioComico(node.data)}>
