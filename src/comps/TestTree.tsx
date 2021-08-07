@@ -188,7 +188,5 @@ export class TestTree extends TreeView{
                 <Icon iconKey="calendar-day" type="far" /> Prossimamente
             </Status>
         }
-
-        return <React.Fragment data-id="porcoschifo">Ciaone</React.Fragment>
     }
 }
