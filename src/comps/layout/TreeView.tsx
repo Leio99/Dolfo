@@ -67,14 +67,17 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         this.setState({ level })
     }
 
-    toggleAllNode = (node: TreeNode, index: number) => {
+    toggleAllNode = (node: TreeNode, index: number, subNode: number) => {
         const { level } = this.state,
         nodeLevel = level[index]
         let newNodeLevel: (string | number)[] = []
 
-        if(nodeLevel.includes(this.retrieveNodeId(node)))
-            newNodeLevel = nodeLevel.filter(s => s !== this.retrieveNodeId(node))
-        else{
+        if(nodeLevel.includes(this.retrieveNodeId(node))){
+            if(subNode === 0)
+                newNodeLevel = []
+            else
+                newNodeLevel = nodeLevel.filter(s => s !== this.retrieveNodeId(node))
+        }else{
             const list: (string | number)[] = nodeLevel
 
             this.getNodeKeys(node, list)
@@ -139,7 +142,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                     </Button> : null
                 }
 
-                <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} textBtn onClick={() => this.toggleAllNode(node, originalIndex)} tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
+                <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} textBtn onClick={() => this.toggleAllNode(node, originalIndex, subNode)} tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
                     <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="mr-2" large />
                 </Button> {this.getLabel(node)}
             </td>
