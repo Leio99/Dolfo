@@ -12,7 +12,8 @@ export class TestTree extends TreeView{
     constructor(){
         super({
             list: null,
-            showExpandAll: true
+            showExpandAll: true,
+            descColumn: "Programmi TV"
         })
     }
 

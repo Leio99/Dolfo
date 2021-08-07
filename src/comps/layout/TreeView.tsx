@@ -14,6 +14,7 @@ interface IState{
     readonly list: any[]
     readonly autoOpen?: boolean
     readonly showExpandAll?: boolean
+    readonly descColumn?: string
     readonly [x: string]: any
 }
 
@@ -174,7 +175,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
     collapseAllNodes = () => this.setState({ level: this.state.list.map(() => []) })
 
     renderTree = (): JSX.Element => {
-        const { list, showActions, showExpandAll } = this.state
+        const { list, showActions, showExpandAll, descColumn } = this.state
 
         return <div className="dolfo-table-content">
             <table className="dolfo-table">
@@ -195,7 +196,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
                 <thead>
                     <tr>
-                        <th style={{ width: "85%" }}>{Constants.TREE_TABLE_DESCRIPTION_LABEL}</th>
+                        <th style={{ width: "85%" }}>{descColumn || Constants.TREE_TABLE_DESCRIPTION_LABEL}</th>
                         {showActions && <th>{Constants.TREE_TABLE_ACTIONS_LABEL}</th>}
                     </tr>
                 </thead>
