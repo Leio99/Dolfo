@@ -1,19 +1,22 @@
 import React from "react"
 import Button from "./layout/Button"
-import { CloseCircleIcon, CloseIcon, DeleteIcon, EditIcon, Icon, LoadingIcon } from "./layout/Icon"
+import { CheckIcon, CloseCircleIcon, CloseIcon, DeleteIcon, EditIcon, Icon, LoadingIcon } from "./layout/Icon"
 import { TreeNode, TreeView } from "./layout/TreeView"
 import axios from "axios"
 import { NotificationMsg } from "./layout/NotificationMsg"
 import { Dialog } from "./layout/Dialog"
 import { Status } from "./layout/Status"
 import { formatDate } from "./shared/utility"
+import { IColumn } from "./shared/models/IColumn"
 
 export class TestTree extends TreeView{
     constructor(){
         super({
             list: null,
             showExpandAll: true,
-            descColumn: "Programmi TV"
+            addColumn: [
+                { align: "center", label: "Gruppo comico", field: "isGruppo" }
+            ]
         })
     }
 
@@ -177,5 +180,10 @@ export class TestTree extends TreeView{
         </div>
 
         return this.renderTree()
+    }
+
+    getColumnData = (col: IColumn, node: TreeNode) => {
+        if(node.type === "comico" && this.hasChildren(node) && col.field === "isGruppo")
+            return <CheckIcon tooltip="Sì" color="var(--green)" large />
     }
 }

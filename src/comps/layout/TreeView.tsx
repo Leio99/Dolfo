@@ -1,6 +1,7 @@
 import _ from "lodash"
 import React from "react"
 import { Constants } from "../shared/Constants"
+import { IColumn } from "../shared/models/IColumn"
 import Button from "./Button"
 import { Icon } from "./Icon"
 
@@ -15,6 +16,7 @@ interface IState{
     readonly autoOpen?: boolean
     readonly showExpandAll?: boolean
     readonly descColumn?: string
+    readonly addColumn?: IColumn[]
     readonly [x: string]: any
 }
 
@@ -51,6 +53,8 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
     protected getActions = (node: TreeNode): JSX.Element => null
 
     protected onDoubleClick: (node: TreeNode) => void
+
+    protected getColumnData = (column: IColumn, node: TreeNode): JSX.Element => null 
 
     toggleNode = (node: TreeNode, index: number) => {
         if(!this.hasChildren(node)) return
@@ -131,7 +135,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     getRender = (node: TreeNode, originalIndex: number, subNode = 0) => {
         const hasChildren = this.hasChildren(node),
-        { level, showActions } = this.state,
+        { level, showActions, addColumn } = this.state,
         isOpened = level[originalIndex]?.includes(this.retrieveNodeId(node))
 
         return <tr key={this.retrieveNodeId(node)} onDoubleClick={() => this.onDoubleClick && this.onDoubleClick(node)}>
@@ -147,6 +151,12 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                     <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="mr-2" large />
                 </Button> {this.getLabel(node)}
             </td>
+
+            {
+                addColumn && addColumn.map(c => <td style={{ textAlign: c.align}}>
+                    {this.getColumnData(c, node)}
+                </td>)
+            }
 
             {
                 this.getActions(node) ? <td>
@@ -175,14 +185,15 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
     collapseAllNodes = () => this.setState({ level: this.state.list.map(() => []) })
 
     renderTree = (): JSX.Element => {
-        const { list, showActions, showExpandAll, descColumn } = this.state
+        const { list, showActions, showExpandAll, descColumn, addColumn } = this.state,
+        baseSpan = addColumn?.length || 0
 
         return <div className="dolfo-table-content">
             <table className="dolfo-table">
                 {
                     showExpandAll && <thead className="dolfo-table-actions">
                         <tr>
-                            <td colSpan={showActions ? 2 : 1}>
+                            <td colSpan={showActions ? baseSpan + 2 : baseSpan + 1}>
                                 <Button btnColor="white" tooltip={Constants.TREE_EXPAND_ALL_NODES} onClick={this.toggleAllNodes} className="mr-2">
                                     <Icon iconKey="expand-alt" />
                                 </Button>
@@ -196,8 +207,11 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
                 <thead>
                     <tr>
-                        <th style={{ width: "85%" }}>{descColumn || Constants.TREE_TABLE_DESCRIPTION_LABEL}</th>
-                        {showActions && <th>{Constants.TREE_TABLE_ACTIONS_LABEL}</th>}
+                        <th>{descColumn || Constants.TREE_TABLE_DESCRIPTION_LABEL}</th>
+                        {addColumn && addColumn.map(c => <th style={{ width: c.width }}>
+                            {c.label}
+                        </th>)}
+                        {showActions && <th style={{ width: "20%" }}>{Constants.TREE_TABLE_ACTIONS_LABEL}</th>}
                     </tr>
                 </thead>
 
@@ -211,7 +225,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
                             return treeList
                         }) : <tr>
-                            <td className="dolfo-table-noresults">
+                            <td className="dolfo-table-noresults" colSpan={baseSpan + 1}>
                                 {Constants.TABLE_NO_RESULTS}
                             </td>
                         </tr>
