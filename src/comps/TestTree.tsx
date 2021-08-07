@@ -63,14 +63,6 @@ export class TestTree extends TreeView{
         return false
     }
 
-    getChildren = (node: TreeNode) => {
-        if(node.type === "root") return node.data.comici
-        if(node.type === "comici") return node.data.length
-        if(node.type === "luoghi") return node.data.length
-
-        return []
-    }
-
     getNodeId = (node: TreeNode) => JSON.stringify(node)
 
     getActions = (node: TreeNode) => {

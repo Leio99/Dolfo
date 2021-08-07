@@ -45,8 +45,6 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     abstract hasChildren: (node: TreeNode) => boolean
 
-    abstract getChildren: (node: TreeNode) => any[]
-
     abstract getNodeId: (node: TreeNode) => string | number
 
     protected getActions = (node: TreeNode): JSX.Element => null
@@ -112,7 +110,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         if(this.getActions(node))
             this.setState({ showActions: true })
 
-        if(hasChildren && this.getChildren(node)){
+        if(hasChildren){
             this.getData(node).forEach(data => {
                 const newList = idList.concat(this.retrieveNodeId(data)),
                 doAutoExpand = autoExpand && this.hasChildren(data)
