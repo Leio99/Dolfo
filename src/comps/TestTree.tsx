@@ -1,6 +1,6 @@
 import React from "react"
 import Button from "./layout/Button"
-import { CheckIcon, CloseCircleIcon, CloseIcon, DeleteIcon, EditIcon, Icon, LoadingIcon } from "./layout/Icon"
+import { CloseCircleIcon, CloseIcon, DeleteIcon, EditIcon, Icon, LoadingIcon } from "./layout/Icon"
 import { TreeNode, TreeView } from "./layout/TreeView"
 import axios from "axios"
 import { NotificationMsg } from "./layout/NotificationMsg"
@@ -15,7 +15,7 @@ export class TestTree extends TreeView{
             list: null,
             showExpandAll: true,
             addColumn: [
-                { align: "center", label: "Gruppo comico", field: "isGruppo" }
+                { align: "center", label: "Stato", field: "status" }
             ]
         })
     }
@@ -182,8 +182,13 @@ export class TestTree extends TreeView{
         return this.renderTree()
     }
 
-    getColumnData = (col: IColumn, node: TreeNode) => {
-        if(node.type === "comico" && this.hasChildren(node) && col.field === "isGruppo")
-            return <CheckIcon tooltip="Sì" color="var(--green)" large />
+    getColumnData = (col: IColumn, node: TreeNode): JSX.Element => {
+        if(node.type === "root" && this.hasChildren(node) && col.field === "status"){
+            return <Status type="info" hideIcon>
+                <Icon iconKey="calendar-day" type="far" /> Prossimamente
+            </Status>
+        }
+
+        return <React.Fragment data-id="porcoschifo">Ciaone</React.Fragment>
     }
 }
