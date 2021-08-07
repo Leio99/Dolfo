@@ -28,6 +28,7 @@ import { Uploader } from "./form/Uploader"
 import { initializeTooltips } from "./layout/Tooltip"
 import { TestTree } from "./TestTree"
 import { Status } from "./layout/Status"
+import { Table } from "./layout/Table"
 
 export interface IState{
     readonly visibleDialog: boolean
@@ -483,9 +484,29 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Stepper>
                 </Tab>
                 <Tab title={<span>
-                    <Icon iconKey="sitemap" /> Tree view
+                    <Icon iconKey="database" /> Data
                 </span>}>
-                    <TestTree />
+                    <Tabs vertical>
+                        <Tab title={<span>
+                            <Icon iconKey="table" /> Table
+                        </span>}>
+                            <Table columns={[
+                                { field: "name", label: "Name" },
+                                { field: "surname", label: "Surname" },
+                                { field: "age", label: "Age", align: "right" },
+                                { field: "birth", label: "Date of birth", type: "date", align: "center" },
+                            ]} data={[
+                                { name: "Jack", surname: "Douglas", age: 41, birth: "1980-5-18", onDoubleClick: () => alert("You clicked me!") },
+                                { name: "Andre", surname: "Robinson", age: 34, birth: "1987-2-22", rowStyle: { color: "blue" } },
+                                { name: "Paul", surname: "Amesty", age: 50, birth: "1971-4-1" }
+                            ]} />
+                        </Tab>
+                        <Tab title={<span>
+                            <Icon iconKey="sitemap" /> Tree view
+                        </span>}>
+                            <TestTree />
+                        </Tab>
+                    </Tabs>
                 </Tab>
                 <Tab title={<span>
                     <Icon iconKey="tags" /> Status tags

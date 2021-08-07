@@ -17,7 +17,7 @@
             &:first-child{
                 th{
                     border-top: $borderRule;
-                    border-bottom: $borderRule        
+                    border-bottom: $borderRule     
                 }
 
                 th:first-child{
@@ -61,7 +61,8 @@
                 border: 0;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap
+                white-space: nowrap;
+                text-align: left
             }
 
             td.dolfo-table-noresults{
