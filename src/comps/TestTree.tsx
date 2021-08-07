@@ -57,12 +57,11 @@ export class TestTree extends TreeView{
         if(node.type === "root") return node.data.title
         if(node.type === "comici") return "Comici"
         if(node.type === "luoghi") return "Canali"
-        if(node.type === "luogo" || node.type === "conduttore") return node.data.nome
+        if(node.type === "luogo" || node.type === "conduttore" || node.type === "concorrente") return node.data.nome
         if(node.type === "componente") return node.data.nominativo
         if(node.type === "conduttori") return "Conduttori"
         if(node.type === "anni") return "Concorrenti"
         if(node.type === "anno") return node.data.anno
-        if(node.type === "concorrente") return node.data.nome
 
         return node.data.nominativo
     }
@@ -134,7 +133,7 @@ export class TestTree extends TreeView{
     }
 
     getActions = (node: TreeNode) => {
-        if(node.type === "concorrente") return <Button textBtn onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")} tooltip="Apri Wikipedia" btnColor="black">
+        if(node.type === "concorrente" || node.type === "conduttore") return <Button textBtn onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")} tooltip="Apri Wikipedia" btnColor="black">
             <Icon iconKey="wikipedia-w" type="fab" large />
         </Button>
 
