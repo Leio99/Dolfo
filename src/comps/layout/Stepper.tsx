@@ -1,10 +1,9 @@
 import _ from "lodash"
 import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
-import { Icon } from "./Icon"
-import { Step } from "./Step"
+import { BaseIconProps, Icon, LoadingIcon } from "./Icon"
 
-export interface IProps{
+interface IProps{
     readonly currentStep?: number
     readonly className?: string
     readonly style?: CSSProperties
@@ -74,6 +73,27 @@ export class Stepper extends React.PureComponent<IProps>{
                     })
                 }
             </div>
+        </div>
+    }
+}
+
+interface StepProps{
+    readonly title?: string
+    readonly icon?: BaseIconProps
+    readonly style?: CSSProperties
+    readonly loading?: boolean
+}
+
+export class Step extends React.PureComponent<StepProps>{
+    render = (): JSX.Element => {
+        const props = this.props
+
+        return <div className={"dolfo-step-content" + (props.loading ? " loading" : "")} style={props.style}>
+            {props.loading && <div className="dolfo-step-loading">
+                <LoadingIcon spinning style={{ fontSize: 50 }} />    
+            </div>}
+
+            {props.children}
         </div>
     }
 }

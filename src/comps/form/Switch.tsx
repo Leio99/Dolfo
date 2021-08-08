@@ -3,7 +3,7 @@ import { InputProps } from "../shared/models/InputProps"
 import { LoadingIcon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 
-export interface IProps extends InputProps{
+interface IProps extends InputProps{
     readonly value?: any
     readonly checked?: boolean
     readonly loading?: boolean

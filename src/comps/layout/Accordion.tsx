@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react"
 import { Icon } from "./Icon"
 
-export interface IProps{
+interface IProps{
 	readonly title: string | JSX.Element
 	readonly opened?: boolean
 	readonly wrapperStyle?: CSSProperties
@@ -10,7 +10,7 @@ export interface IProps{
 	readonly wrapperClassName?: string
 	readonly disabled?: boolean
 }
-export interface IState{
+interface IState{
 	readonly opened: boolean
 }
 

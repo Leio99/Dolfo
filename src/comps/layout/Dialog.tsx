@@ -33,10 +33,10 @@ interface IProps extends BaseProps{
     readonly hideFooter?: boolean
     readonly overflows?: boolean
 }
-export interface IState{
+interface IState{
     readonly visible: boolean
 }
-export interface DialogProps extends IProps{
+interface DialogProps extends IProps{
     readonly type?: DialogType
     readonly icon?: JSX.Element
 }

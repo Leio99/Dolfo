@@ -6,12 +6,12 @@ import { Dialog } from "./Dialog"
 import { Icon } from "./Icon"
 import { Constants } from "../shared/Constants"
 
-export interface IProps{
+interface IProps{
     readonly calendarId: string
     readonly apiKey: string
     readonly onEventClick?: (e: CalendarEvent, isPrev: boolean, isNext: boolean) => void
 }
-export interface IState{
+interface IState{
     readonly events: CalendarEvent[]
     readonly currentMonth: number
     readonly currentYear: number

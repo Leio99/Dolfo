@@ -11,26 +11,21 @@ import { CheckIcon, CloseIcon } from "./layout/Icon"
 import { NotificationMsg } from "./layout/NotificationMsg"
 import { MessageBox } from "./layout/MessageBox"
 import { Switch } from "./form/Switch"
-import { Tab } from "./layout/Tab"
-import { Tabs } from "./layout/Tabs"
+import { Tabs, Tab } from "./layout/Tabs"
 import { Accordion } from "./layout/Accordion"
 import { Progress } from "./layout/Progress"
-import { SlideShow } from "./layout/SlideShow"
-import { Slide } from "./layout/Slide"
+import { SlideShow, Slide } from "./layout/SlideShow"
 import DatePicker from "./form/DatePicker"
 import { Icon } from "./layout/Icon"
-import { SideMenu } from "./layout/SideMenu"
-import { MenuItem } from "./layout/MenuItem"
-import { SubMenu } from "./layout/SubMenu"
-import { Stepper } from "./layout/Stepper"
-import { Step } from "./layout/Step"
+import { SideMenu, MenuItem, SubMenu } from "./layout/SideMenu"
+import { Stepper, Step } from "./layout/Stepper"
 import { Uploader } from "./form/Uploader"
 import { initializeTooltips } from "./layout/Tooltip"
 import { TestTree } from "./TestTree"
 import { Status } from "./layout/Status"
 import { Table } from "./layout/Table"
 
-export interface IState{
+interface IState{
     readonly visibleDialog: boolean
     readonly loading: boolean
     readonly checked: boolean

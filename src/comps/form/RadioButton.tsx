@@ -3,11 +3,11 @@ import { Constants } from "../shared/Constants"
 import { InputProps } from "../shared/models/InputProps"
 import { Option } from "./Option"
 
-export interface IProps extends InputProps{
+interface IProps extends InputProps{
     readonly controlName: string
     readonly defaultValue?: any
 }
-export interface IState{
+interface IState{
     readonly value: any
 }
 

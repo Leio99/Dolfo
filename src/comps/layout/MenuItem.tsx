@@ -1,6 +1,6 @@
 import React from "react"
 
-export interface IProps{
+interface IProps{
     readonly onClick?: () => void
     readonly selected?: boolean
 }

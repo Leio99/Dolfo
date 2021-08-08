@@ -3,7 +3,7 @@ import { formatNumber } from "../shared/utility"
 import { BaseColors } from "./Button"
 import { LoadingIcon } from "./Icon"
 
-export interface IProps {
+interface IProps {
     readonly percent: number
     readonly convertCommas?: boolean
     readonly circular?: boolean

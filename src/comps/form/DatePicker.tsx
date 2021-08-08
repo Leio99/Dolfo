@@ -11,13 +11,13 @@ import _ from "lodash"
 
 type DateFormats = "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
 
-export interface IProps extends InputProps {
+interface IProps extends InputProps {
     readonly defaultValue?: Date
     readonly dateFormat?: DateFormats
     readonly selectTime?: boolean
     readonly showOnTop?: boolean
 }
-export interface IState {
+interface IState {
     readonly date: string
     readonly selectingYear: boolean
     readonly selectingMonth: boolean

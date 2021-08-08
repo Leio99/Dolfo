@@ -4,12 +4,12 @@ import { Constants } from "../shared/Constants"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 
-export interface IProps extends InputProps{
+interface IProps extends InputProps{
     readonly multiple?: boolean
     readonly accept?: string
     readonly dropArea?: boolean
 }
-export interface IState{
+interface IState{
     readonly files: FileList
     readonly value: string
     readonly showingMsg: boolean

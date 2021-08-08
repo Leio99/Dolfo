@@ -6,7 +6,7 @@ import { Constants } from "../shared/Constants"
 
 type InputTypes = "textarea" | "password" | "email" | "number"
 
-export interface IProps extends InputProps{
+interface IProps extends InputProps{
     readonly type?: InputTypes
     readonly expandTextarea?: boolean
     readonly rows?: number
@@ -18,7 +18,7 @@ export interface IProps extends InputProps{
     readonly max?: number
     readonly min?: number
 }
-export interface IState{
+interface IState{
     readonly focused: boolean
     readonly rows: number
     readonly value: string

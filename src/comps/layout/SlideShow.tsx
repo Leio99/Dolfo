@@ -1,12 +1,11 @@
 import React, { CSSProperties } from "react"
 import { Icon } from "./Icon"
-import { Slide } from "./Slide"
 
-export interface IProps{
+interface IProps{
     readonly style?: CSSProperties
     readonly automatic?: boolean
 }
-export interface IState{
+interface IState{
     readonly slides: Slide[]
     readonly currentSlide: number
     readonly isHover?: boolean
@@ -97,6 +96,22 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
                     })
                 }
             </div>
+        </div>
+    }
+}
+
+interface SlideProps{
+    readonly selected?: boolean
+    readonly imageUrl?: string
+    readonly style?: CSSProperties
+}
+
+export class Slide extends React.PureComponent<SlideProps>{
+    render = (): JSX.Element => {
+        const props = this.props
+
+        return <div className="dolfo-slide" style={props.style}>
+            {this.props.children}
         </div>
     }
 }

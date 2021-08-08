@@ -1,12 +1,12 @@
 import React from "react"
 import { Icon } from "./Icon"
 
-export interface IProps{
+interface IProps{
     readonly opened?: boolean
     readonly text: string | JSX.Element
     readonly onClick?:() => void
 }
-export interface IState{
+interface IState{
     readonly opened: boolean
 }
 

@@ -2,12 +2,15 @@ import React from "react"
 import { Constants } from "../shared/Constants"
 import { ButtonColors } from "./Button"
 
-export interface IProps{
+export { SubMenu } from "./SubMenu"
+export { MenuItem } from "./MenuItem"
+
+interface IProps{
     readonly opened?: boolean
     readonly onToggle?: () => void
     readonly menuColor?: ButtonColors
 }
-export interface IState{
+interface IState{
     readonly opened: boolean
 }
 

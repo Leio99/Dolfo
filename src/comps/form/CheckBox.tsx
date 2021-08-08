@@ -4,7 +4,7 @@ import { CheckIcon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import { TooltipProps } from "../layout/Tooltip"
 
-export interface IProps extends InputProps, TooltipProps{
+interface IProps extends InputProps, TooltipProps{
     readonly checked?: boolean
     readonly value?: any
 }

@@ -6,7 +6,7 @@ import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import { zeroBefore } from "../shared/utility"
 
-export interface IProps extends InputProps{
+interface IProps extends InputProps{
     readonly defaultValue?: string
     readonly onKeyUpHour?: (e: any) => void
     readonly onKeyUpMinute?: (e: any) => void
@@ -15,7 +15,7 @@ export interface IProps extends InputProps{
     readonly onKeyPressHour?: (e: any) => void
     readonly onKeyPressMinute?: (e: any) => void
 }
-export interface IState{
+interface IState{
     readonly value: string
     readonly showTime: boolean
 }

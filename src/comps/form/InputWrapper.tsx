@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react"
 import { CloseIcon, Icon, BaseIconProps } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 
-export interface IProps{
+interface IProps{
     readonly label?: JSX.Element | string
     readonly style?: CSSProperties
     readonly icon: BaseIconProps
