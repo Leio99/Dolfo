@@ -35,6 +35,7 @@ interface IState{
     readonly showMenu: boolean
     readonly currentStep: number
 }
+
 export class TestLayout extends React.PureComponent<any, IState>{
     constructor(){
         super(undefined)
