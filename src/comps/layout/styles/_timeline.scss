@@ -101,7 +101,11 @@
         flex-direction: column;
 
         &.left{
-            flex-direction: column-reverse;
+            flex-direction: column-reverse
+        }
+
+        &:first-child .dolfo-timeline-sign{
+            display: none
         }
 
         .dolfo-timeline-item, .dolfo-timeline-sign {
