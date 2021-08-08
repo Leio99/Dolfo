@@ -518,7 +518,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     <Status type="error" hideIcon className="mr-2">Red without icon</Status>
                 </Tab>
 
-                <Tab isDefault title={<span>
+                <Tab title={<span>
                     <Icon iconKey="code-branch" /> Timeline
                 </span>}>
                     <Timeline>
