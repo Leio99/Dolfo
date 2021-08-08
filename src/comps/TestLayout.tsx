@@ -24,6 +24,7 @@ import { initializeTooltips } from "./layout/Tooltip"
 import { TestTree } from "./TestTree"
 import { Status } from "./layout/Status"
 import { Table } from "./layout/Table"
+import { Timeline, TimelineItem } from "./layout/Timeline"
 
 interface IState{
     readonly visibleDialog: boolean
@@ -515,6 +516,27 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         <Icon iconKey="briefcase" /> Custom icon
                     </Status>
                     <Status type="error" hideIcon className="mr-2">Red without icon</Status>
+                </Tab>
+
+                <Tab isDefault title={<span>
+                    <Icon iconKey="code-branch" /> Timeline
+                </span>}>
+                    <Timeline>
+                        <TimelineItem>
+                            <h2>Our birth</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, sapiente quod corrupti illo voluptates tempora cumque animi necessitatibus praesentium, eveniet ipsam laboriosam a veritatis ex eum alias! Laboriosam, neque voluptatum.
+                            </p>
+                        </TimelineItem>
+                        <TimelineItem position="right" pinColor="var(--orange)">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium nobis odio totam velit voluptatum! Repudiandae perspiciatis laboriosam quisquam. Nulla voluptates amet excepturi similique sit voluptatum qui? Atque eaque deleniti autem.</TimelineItem>
+                        <TimelineItem position="right" pinColor="var(--red)">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium nobis odio totam velit voluptatum! Repudiandae perspiciatis laboriosam quisquam. Nulla voluptates amet excepturi similique sit voluptatum qui? Atque eaque deleniti autem.</TimelineItem>
+                        <TimelineItem position="left" pinColor="var(--green)">
+                            <h2>Early development</h2>
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium nobis odio totam velit voluptatum! Repudiandae perspiciatis laboriosam quisquam. Nulla voluptates amet excepturi similique sit voluptatum qui? Atque eaque deleniti autem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, ipsum harum sunt libero facilis quod! Consequatur illum, ducimus ex, ad aperiam, eligendi deserunt ea minus nihil corporis cum nisi dignissimos. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad, iste. Minus minima placeat qui, doloribus animi iure suscipit dolorum. Nulla, sint expedita. Numquam hic consectetur fugiat soluta! Totam, et rem.
+                            </p>
+                        </TimelineItem>
+                    </Timeline>
                 </Tab>
 
                 <Tab title={<span>
