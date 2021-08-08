@@ -15,6 +15,7 @@ interface IProps extends InputProps{
     readonly onKeyPressHour?: (e: any) => void
     readonly onKeyPressMinute?: (e: any) => void
 }
+
 interface IState{
     readonly value: string
     readonly showTime: boolean

@@ -7,9 +7,18 @@ interface IProps {
     readonly vertical?: boolean
     readonly onChangeTab?: (index: number) => void
 }
+
 interface IState {
     readonly children: Tab[]
     readonly currentTab: number
+}
+
+interface TabProps{
+    readonly title: string | JSX.Element
+    readonly selected?: boolean
+    readonly isDefault?: boolean
+    readonly style?: CSSProperties
+    readonly disabled?: boolean
 }
 
 export class Tabs extends React.PureComponent<IProps, IState>{
@@ -131,14 +140,6 @@ export class Tabs extends React.PureComponent<IProps, IState>{
             </div>
         </div>
     }
-}
-
-interface TabProps{
-    readonly title: string | JSX.Element
-    readonly selected?: boolean
-    readonly isDefault?: boolean
-    readonly style?: CSSProperties
-    readonly disabled?: boolean
 }
 
 export class Tab extends React.PureComponent<TabProps>{

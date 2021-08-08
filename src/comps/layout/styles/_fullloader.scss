@@ -68,10 +68,12 @@ body.dolfo-loader-showing{
     0%{ transform: rotate(0deg) }
     100%{ transform: rotate(360deg) }
 }
+
 @keyframes spinLoaderReverse{
     0%{ transform: rotate(0deg) }
     100%{ transform: rotate(-360deg) }
 }
+
 @keyframes ballLoader{
     0%, 100%{ height: 12px }
     50%{ height: 70px }

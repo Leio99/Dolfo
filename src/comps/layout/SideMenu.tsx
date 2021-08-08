@@ -10,6 +10,7 @@ interface IProps{
     readonly onToggle?: () => void
     readonly menuColor?: ButtonColors
 }
+
 interface IState{
     readonly opened: boolean
 }

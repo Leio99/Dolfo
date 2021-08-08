@@ -10,6 +10,13 @@ interface IProps{
     readonly vertical?: boolean
 }
 
+interface StepProps{
+    readonly title?: string
+    readonly icon?: BaseIconProps
+    readonly style?: CSSProperties
+    readonly loading?: boolean
+}
+
 export class Stepper extends React.PureComponent<IProps>{
     componentDidUpdate = (prevProps: IProps) => {
         if(prevProps.currentStep !== this.props.currentStep){
@@ -75,13 +82,6 @@ export class Stepper extends React.PureComponent<IProps>{
             </div>
         </div>
     }
-}
-
-interface StepProps{
-    readonly title?: string
-    readonly icon?: BaseIconProps
-    readonly style?: CSSProperties
-    readonly loading?: boolean
 }
 
 export class Step extends React.PureComponent<StepProps>{

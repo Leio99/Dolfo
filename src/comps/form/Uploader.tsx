@@ -9,6 +9,7 @@ interface IProps extends InputProps{
     readonly accept?: string
     readonly dropArea?: boolean
 }
+
 interface IState{
     readonly files: FileList
     readonly value: string

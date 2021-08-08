@@ -6,6 +6,7 @@ interface IProps{
     readonly text: string | JSX.Element
     readonly onClick?:() => void
 }
+
 interface IState{
     readonly opened: boolean
 }

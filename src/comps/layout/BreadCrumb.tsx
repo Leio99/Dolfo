@@ -7,6 +7,11 @@ interface IProps{
     readonly className?: string
 }
 
+interface BredcrumbItemProps{
+    readonly onClick?: () => void
+    readonly isNotLast?: boolean
+}
+
 export class BreadCrumb extends React.PureComponent<IProps>{
     getOptions = () => {
         return React.Children.map(this.props.children, (child: any) => {
@@ -28,11 +33,6 @@ export class BreadCrumb extends React.PureComponent<IProps>{
             }
         </div>
     }
-}
-
-interface BredcrumbItemProps{
-    readonly onClick?: () => void
-    readonly isNotLast?: boolean
 }
 
 export class BreadCrumbItem extends React.PureComponent<BredcrumbItemProps>{

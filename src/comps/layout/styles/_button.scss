@@ -222,14 +222,17 @@
     0%{ transform: scaleY(0) translateY(calc(-100% + 10px)) }
     100%{ transform: scaleY(1) translateY(calc(-100% + 10px)) }
 }
+
 @keyframes showDown{
     0%{ transform: scaleY(0) translateY(calc(100% - 10px)) }
     100%{ transform: scaleY(1) translateY(calc(100% - 10px)) }
 }
+
 @keyframes showScale{
     0%{ transform: scale(0) translateY(100%) }
     100%{ transform: scale(1) translateY(100%) }
 }
+
 @keyframes showScaleUp{
     0%{ transform: scale(0) translateY(-100%) }
     100%{ transform: scale(1) translateY(-100%) }

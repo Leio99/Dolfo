@@ -7,6 +7,10 @@ import { Closable } from "../shared/utility"
 
 export type DialogType = "success" | "info" | "error" | "warning"
 
+export interface ComponentAsDialogProps{
+    readonly close: () => void
+}
+
 interface BaseProps{
     readonly title?: string | JSX.Element,
     readonly content?: string | JSX.Element,
@@ -33,15 +37,14 @@ interface IProps extends BaseProps{
     readonly hideFooter?: boolean
     readonly overflows?: boolean
 }
+
 interface IState{
     readonly visible: boolean
 }
+
 interface DialogProps extends IProps{
     readonly type?: DialogType
     readonly icon?: JSX.Element
-}
-export interface ComponentAsDialogProps{
-    readonly close: () => void
 }
 
 export class Dialog extends React.PureComponent<IProps, IState>{

@@ -20,6 +20,7 @@ interface IProps{
     readonly onKeyDown?: (e: any) => void
     readonly onClick?: () => void
 }
+
 export class InputWrapper extends React.PureComponent<IProps>{
     render = (): JSX.Element => {
         const props = this.props

@@ -13,6 +13,7 @@ interface IProps extends InputProps{
     readonly canSearch?: boolean
     readonly loading?: boolean
 }
+
 interface IState{
     readonly value: any
     readonly openSelect: boolean
@@ -196,4 +197,5 @@ class Select extends React.PureComponent<IProps, IState>{
         </InputWrapper>
     }
 }
+
 export default onClickOutside(Select)

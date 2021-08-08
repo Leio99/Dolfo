@@ -28,7 +28,7 @@ $colors: (
 
 :root{
   @each $key, $color in $colors {
-   --#{$key}: #{$color}
+    --#{$key}: #{$color}
   }
 
   --dark: #{$dark};
@@ -43,6 +43,6 @@ $colors: (
     @return $black;
   }
   @else{
-    @return $white;
+    @return $white
   }
 }

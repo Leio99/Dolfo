@@ -18,6 +18,7 @@ interface IProps extends InputProps{
     readonly max?: number
     readonly min?: number
 }
+
 interface IState{
     readonly focused: boolean
     readonly rows: number

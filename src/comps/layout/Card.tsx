@@ -4,6 +4,7 @@ interface IProps{
     readonly className?: string
     readonly style?: CSSProperties
 }
+
 interface CardProps extends IProps{
     readonly title?: string | JSX.Element
 }

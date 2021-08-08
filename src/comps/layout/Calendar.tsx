@@ -11,6 +11,7 @@ interface IProps{
     readonly apiKey: string
     readonly onEventClick?: (e: CalendarEvent, isPrev: boolean, isNext: boolean) => void
 }
+
 interface IState{
     readonly events: CalendarEvent[]
     readonly currentMonth: number

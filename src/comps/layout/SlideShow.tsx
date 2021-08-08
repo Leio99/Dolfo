@@ -5,10 +5,17 @@ interface IProps{
     readonly style?: CSSProperties
     readonly automatic?: boolean
 }
+
 interface IState{
     readonly slides: Slide[]
     readonly currentSlide: number
     readonly isHover?: boolean
+}
+
+interface SlideProps{
+    readonly selected?: boolean
+    readonly imageUrl?: string
+    readonly style?: CSSProperties
 }
 
 export class SlideShow extends React.PureComponent<IProps, IState>{
@@ -98,12 +105,6 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
             </div>
         </div>
     }
-}
-
-interface SlideProps{
-    readonly selected?: boolean
-    readonly imageUrl?: string
-    readonly style?: CSSProperties
 }
 
 export class Slide extends React.PureComponent<SlideProps>{
