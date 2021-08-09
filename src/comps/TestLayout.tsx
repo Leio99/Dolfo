@@ -110,7 +110,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
         return <div style={{ marginTop: 15, padding: 50 }}>
             <Tabs>
                 <Tab title={<span>
-                    <Icon iconKey="mouse-pointer" /> Buttons
+                    <Icon iconKey="mouse-pointer" type="far" /> Buttons
                 </span>} style={{ height: "80vh" }}>
                     <Button btnColor="red" className="mr-2">Red</Button>
                     <Button btnColor="blue" className="mr-2">Blue</Button>
@@ -161,7 +161,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="bell" /> Notifications
+                    <Icon iconKey="bell" type="far" /> Notifications
                 </span>}>
                     <Button onClick={() => {
                         NotificationMsg.show("Top center!")
@@ -248,7 +248,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="keyboard" /> Forms
+                    <Icon iconKey="keyboard" type="far" /> Forms
                 </span>}>
                     <Tabs vertical>
                         <Tab title="Text inputs">
@@ -315,7 +315,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="window-alt" /> Dialogs
+                    <Icon iconKey="window-alt" type="far" /> Dialogs
                 </span>}>
                     <Button btnColor="black" onClick={() => {
                         Dialog.openDialog({
@@ -421,7 +421,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="arrows-alt-v" /> Accordion
+                    <Icon iconKey="arrows-alt-v" type="far" /> Accordion
                 </span>}>
                     <Accordion title="First" opened={checkedSwitch}>
                         Hello, I am the first accordion
@@ -438,7 +438,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="spinner" /> Progress
+                    <Icon iconKey="spinner" type="far" /> Progress
                 </span>}>
                     <Progress percent={60} color="red" />
                     <Progress percent={percent} color="darkblue" loading={percent !== 100} loadingText="Loading..." />
@@ -446,7 +446,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="film" /> Slideshow
+                    <Icon iconKey="film" type="far" /> Slideshow
                 </span>}>
                     <SlideShow automatic>
                         <Slide imageUrl="https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero.jpg"></Slide>
@@ -461,7 +461,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="shoe-prints" /> Stepper
+                    <Icon iconKey="shoe-prints" type="far" /> Stepper
                 </span>}>
                     <Stepper currentStep={currentStep}>
                         <Step title="First step" loading={loading}>
@@ -485,11 +485,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Stepper>
                 </Tab>
                 <Tab title={<span>
-                    <Icon iconKey="database" /> Data
+                    <Icon iconKey="database" type="far" /> Data
                 </span>}>
                     <Tabs vertical>
                         <Tab title={<span>
-                            <Icon iconKey="table" /> Table
+                            <Icon iconKey="table" type="far" /> Table
                         </span>}>
                             <Table columns={[
                                 { field: "name", label: "Name" },
@@ -503,19 +503,19 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             ]} />
                         </Tab>
                         <Tab title={<span>
-                            <Icon iconKey="sitemap" /> Tree view
+                            <Icon iconKey="sitemap" type="far" /> Tree view
                         </span>}>
                             <TestTree />
                         </Tab>
                         <Tab title={<span>
-                            <Icon iconKey="window-restore" /> Master-Detail
+                            <Icon iconKey="window-restore" type="far" /> Master-Detail
                         </span>}>
                             <TestMD />
                         </Tab>
                     </Tabs>
                 </Tab>
                 <Tab title={<span>
-                    <Icon iconKey="tags" /> Status tags
+                    <Icon iconKey="tags" type="far" /> Status tags
                 </span>}>
                     <Status type="success" className="mr-2">Success</Status>
                     <Status type="error" className="mr-2">Error</Status>
@@ -529,7 +529,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="code-branch" /> Timeline
+                    <Icon iconKey="code-branch" type="far" /> Timeline
                 </span>}>
                     <Timeline>
                         <TimelineItem>
@@ -550,7 +550,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 </Tab>
 
                 <Tab title={<span>
-                    <Icon iconKey="coins" /> Other
+                    <Icon iconKey="coins" type="far" /> Other
                 </span>}>
                     <BreadCrumb style={{ marginBottom: 20 }}>
                         <BreadCrumbItem onClick={() => alert("Navigate")}>Home</BreadCrumbItem>
@@ -588,11 +588,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
             
             <SideMenu opened={showMenu} onToggle={this.toggleMenu}>
                 <MenuItem>
-                    <Icon iconKey="home" /> I'm just a simple item
+                    <Icon iconKey="home" type="far" /> I'm just a simple item
                 </MenuItem>
 
                 <SubMenu text={<span>
-                    <Icon iconKey="mouse" /> Some items
+                    <Icon iconKey="mouse" type="far" /> Some items
                 </span>}>
                     <MenuItem>Sub item</MenuItem>
                     <MenuItem>Sub item 2</MenuItem>
