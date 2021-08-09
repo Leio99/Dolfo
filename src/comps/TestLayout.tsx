@@ -505,6 +505,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         </span>}>
                             <TestTree />
                         </Tab>
+                        <Tab title={<span>
+                            <Icon iconKey="window-restore" /> Master-Detail
+                        </span>}>
+                            <TestMD />
+                        </Tab>
                     </Tabs>
                 </Tab>
                 <Tab title={<span>
@@ -540,12 +545,6 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             </p>
                         </TimelineItem>
                     </Timeline>
-                </Tab>
-
-                <Tab title={<span>
-                    <Icon iconKey="window-restore" /> Master-Detail
-                </span>}>
-                    <TestMD />
                 </Tab>
 
                 <Tab title={<span>
