@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react"
+import { Constants } from "../shared/Constants"
 import { Icon } from "./Icon"
 
 interface IProps{
@@ -64,7 +65,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		{ opened } = this.state
 		
 		return <div className={"dolfo-accordion" + (opened ? " opened" : "") + (props.wrapperClassName ? (" " + props.wrapperClassName) : "") + (props.disabled ? " disabled" : "")} style={props.wrapperStyle}>
-			<div className="dolfo-accordion-header" onClick={this.toggleAccordion}>
+			<div className="dolfo-accordion-header" onClick={this.toggleAccordion} data-tooltip={opened ? Constants.ACCORDION_COLLAPSE : Constants.ACCORDION_EXPAND}>
 				<Icon iconKey="chevron-down" className="accordion-caret" />
 				
 				<span className="accordion-title">{props.title}</span>

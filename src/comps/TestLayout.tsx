@@ -25,6 +25,8 @@ import { TestTree } from "./TestTree"
 import { Status } from "./layout/Status"
 import { Table } from "./layout/Table"
 import { Timeline, TimelineItem } from "./layout/Timeline"
+import { TestMD } from "./TestMD"
+import { Card, CardActions } from "./layout/Card"
 
 interface IState{
     readonly visibleDialog: boolean
@@ -540,9 +542,26 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Timeline>
                 </Tab>
 
+                <Tab isDefault title="Master-Detail">
+                    <TestMD />
+                </Tab>
+
                 <Tab title={<span>
                     <Icon iconKey="coins" /> Other
                 </span>}>
+                    <Card title="Card with title">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quae illo vitae incidunt aperiam ea doloribus, praesentium odit ex saepe porro tenetur culpa tempora ad, iure unde eveniet sed exercitationem?
+                    </Card>
+                    <Card style={{ marginBottom: 20 }}>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam eum corrupti vel sit minima facilis laboriosam quisquam esse. Soluta quas ipsam quia dicta blanditiis ipsum debitis accusamus facere. Officia, adipisci!
+
+                        <CardActions style={{ marginTop: 10 }}>
+                            <Button btnColor="blue" textBtn tooltip="Some action here">
+                                <Icon iconKey="mouse-pointer" large />
+                            </Button>
+                        </CardActions>
+                    </Card>
+
                     <Button onClick={() => {
                         MessageBox.show({
                             title: "Message",

@@ -1,0 +1,42 @@
+.dolfo-master-detail{
+    .dolfo-detail{
+        animation: showMD 0.3s ease forwards;
+
+        .dolfo-detail-content{
+            padding-left: 6.7rem
+        }
+
+        .dolfo-detail-header{
+            margin-bottom: 1rem;
+
+            h2{
+                display: inline-block;
+                vertical-align: middle
+            }
+
+            .dolfo-detail-separator{
+                width: 3rem;
+                position: relative;
+                display: inline-flex;
+                vertical-align: middle;
+                height: 70px;
+                justify-content: center;
+
+                &:before{
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 1px;
+                    top: 10px;
+                    bottom: 10px;
+                    background-color: darken($lightGrey, 5%);
+                }
+            }
+        }
+    }
+}
+
+@keyframes showMD{
+    0%{ opacity: 0 }
+    100%{ opacity: 1 }
+}

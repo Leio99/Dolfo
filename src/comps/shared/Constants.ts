@@ -53,4 +53,6 @@ export class Constants {
     static readonly TREE_TABLE_DESCRIPTION_LABEL = "Descrizione"
     static readonly TREE_TABLE_ACTIONS_LABEL = "Azioni"
     static readonly TABLE_NO_RESULTS = "Nessun risultato"
+    static readonly ACCORDION_EXPAND = "Espandi"
+    static readonly ACCORDION_COLLAPSE = "Collassa"
 }

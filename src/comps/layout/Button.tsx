@@ -1,6 +1,5 @@
-import React from "react"
+import React, { CSSProperties } from "react"
 import { BtnOptions } from "../shared/models/BtnOptions"
-import { InputProps } from "../shared/models/InputProps"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
 import { TooltipProps } from "./Tooltip"
@@ -8,7 +7,7 @@ import { TooltipProps } from "./Tooltip"
 export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue"
 export type ButtonColors = BaseColors | "white"
 
-export interface ButtonProps extends InputProps, TooltipProps{
+export interface ButtonProps extends TooltipProps{
     readonly type?: "button" | "submit" | "popup"
     readonly fullSize?: boolean
     readonly smallBtn?: boolean
@@ -20,6 +19,10 @@ export interface ButtonProps extends InputProps, TooltipProps{
     readonly options?: BtnOptions[]
     readonly popupPosition?: "top" | "bottom"
     readonly iconPopup?: boolean
+    readonly className?: string
+    readonly style?: CSSProperties
+    readonly disabled?: boolean
+    readonly onClick?: (e: any) => void
 }
 
 interface IState{
