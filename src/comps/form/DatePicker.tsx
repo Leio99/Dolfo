@@ -167,7 +167,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     isToday = (day: ICalendarDay): boolean => {
-        let date = new Date()
+        const date = new Date()
 
         return day.day === date.getDate() && day.month === date.getMonth() && day.year === date.getFullYear()
     }
@@ -188,7 +188,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     resetDate = (): void => {
-        let props = this.props,
+        const props = this.props,
         currentDay = props.defaultValue ? props.defaultValue.getDate() : 1,
         currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
         currentMonth = props.defaultValue ? props.defaultValue.getMonth() :  new Date().getMonth(),
@@ -368,7 +368,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                                 return <div className="dolfo-calendar-row">
                                     {
                                         tris.map(n => {
-                                            let year = currentDecade + n
+                                            const year = currentDecade + n
 
                                             return <div className={"dolfo-calendar-cell select" + (currentYear === year ? " selected" : "") + (n === -1 || n === 10 ? " ext-year" : "")} onClick={() => this.selectYear(currentDecade + n)}>
                                                 <span>{year}</span>

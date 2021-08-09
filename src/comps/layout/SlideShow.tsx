@@ -51,8 +51,8 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
     getSlides = (): Slide[] => React.Children.map(this.props.children, (child: any) => child)
 
     nextSlide = (): void => {
-        let length = this.state.slides.length,
-        newCurrent = this.state.currentSlide + 1
+        const length = this.state.slides.length
+        let newCurrent = this.state.currentSlide + 1
 
         if(newCurrent >= length) newCurrent = 0
 
@@ -60,8 +60,8 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
     }
 
     prevSlide = (): void => {
-        let length = this.state.slides.length,
-        newCurrent = this.state.currentSlide - 1
+        const length = this.state.slides.length
+        let newCurrent = this.state.currentSlide - 1
 
         if(newCurrent < 0) newCurrent = length - 1
 
@@ -86,7 +86,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
             <div className="dolfo-slides">
                 {
                     slides.map((slide, i) => {
-                        let style: CSSProperties = i === 0 ? { marginLeft } : {}
+                        const style: CSSProperties = i === 0 ? { marginLeft } : {}
 
                         if(slide.props.imageUrl)
                             style.backgroundImage = slide.props.imageUrl ? `url('${slide.props.imageUrl}')` : ""

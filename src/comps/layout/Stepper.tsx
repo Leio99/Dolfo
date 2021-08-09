@@ -3,6 +3,8 @@ import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
 import { BaseIconProps, Icon, LoadingIcon } from "./Icon"
 
+type InternalStep = { step: Step, index: number } | string
+
 interface IProps{
     readonly currentStep?: number
     readonly className?: string
@@ -29,8 +31,8 @@ export class Stepper extends React.PureComponent<IProps>{
         }
     }
 
-    getChildrenStepsWithSeparators = (): any[] => {
-        let children: any[] = []
+    getChildrenStepsWithSeparators = (): InternalStep[] => {
+        const children: InternalStep[] = []
 
         React.Children.forEach(this.props.children, (child: any, i: number) => {
             if(i > 0) children.push("")
@@ -53,7 +55,7 @@ export class Stepper extends React.PureComponent<IProps>{
         return <div className={"dolfo-stepper" + (props.vertical ? " vertical" : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             <div className="dolfo-stepper-header">
                 {
-                    stepsSeparated.map((child: { step: Step, index: number } | string) => {
+                    stepsSeparated.map(child => {
                         if(_.isString(child)) return <div className="dolfo-step-separator"></div>
 
                         return <div className={"dolfo-stepper-step-title" + (currentStep === child.index ? " current" : "")}>

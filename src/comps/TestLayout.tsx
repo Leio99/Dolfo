@@ -57,12 +57,13 @@ export class TestLayout extends React.PureComponent<any, IState>{
     componentDidMount = (): void => {
         initializeTooltips()
         
-        let percent = this.state.percent,
-        interval = setInterval(() => {
+        let percent = this.state.percent
+
+        const interval = setInterval(() => {
             if(percent === 100)
                 clearInterval(interval)
             else{
-                percent += 1
+                percent++
 
                 this.setState({ percent: percent })
             }
@@ -208,7 +209,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         Bottom center
                     </Button>
                     <Button onClick={() => {
-                        let not = NotificationMsg.showLoading("Loading...")
+                        const not = NotificationMsg.showLoading("Loading...")
 
                         setTimeout(() => {
                             not.close()
@@ -380,7 +381,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     }} btnColor="darkblue" className="mr-2">Close on mask click</Button>
 
                     <Button onClick={() => {
-                        let dialog = Dialog.loadingDialog("Caricamento...")
+                        const dialog = Dialog.loadingDialog("Caricamento...")
 
                         setTimeout(() => dialog.close(), 2000)
                     }} btnColor="darkblue" className="mr-2">Loading dialog</Button>
@@ -409,11 +410,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
                         Dialog.openDialog({
                             overflows: true,
                             title: "My content is long",
-                            content: <div>
+                            content: <>
                                 {
                                     [1,2,3,4,5,6].map(_ => <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>)
                                 }
-                            </div>,
+                            </>,
                             width: "500px"
                         })
                     }} btnColor="darkblue" className="mr-2">Long content dialog</Button>

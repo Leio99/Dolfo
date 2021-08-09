@@ -99,8 +99,8 @@ export class NotificationMsg{
 
     static moveNotifications = (): void => {
         ["bottom-left", "bottom-right", "top-left", "top-right", "centered-top", "centered-bottom"].forEach(dir => {
-            let nots = document.querySelectorAll(`.dolfo-notification.${dir}`),
-            base = 0
+            const nots = document.querySelectorAll(`.dolfo-notification.${dir}`)
+            let base = 0
 
             Array.from(nots).filter((_: any, i: number) => i < nots.length).reverse().forEach((not: any) => {
                 if(dir.indexOf("bottom") !== -1)

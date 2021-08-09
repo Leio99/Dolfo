@@ -101,7 +101,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
     }
 
     getFilesNameSeparated = (): string => {
-        let names: string[] = []
+        const names: string[] = []
 
         for(let i = 0; i < this.state.files.length; i++)
             names.push(this.state.files[i].name)

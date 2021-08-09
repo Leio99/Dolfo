@@ -62,7 +62,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
     toggleNode = (node: TreeNode, index: string): void => {
         if(!this.hasChildren(node)) return
 
-        let level: TreeLevel = {
+        const level: TreeLevel = {
             ...this.state.level,
             [index] : !this.state.level[index]
         }
@@ -71,7 +71,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
     }
 
     toggleAllNode = (node: TreeNode, index: string): void => {
-        let newLevel: TreeLevel = {}
+        const newLevel: TreeLevel = {}
 
         this.getNodeKeys(node, newLevel, index, !this.state.level[index])
 

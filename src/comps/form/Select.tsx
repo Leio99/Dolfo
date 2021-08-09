@@ -37,9 +37,9 @@ class Select extends React.PureComponent<IProps, IState>{
 
     componentDidUpdate = (prevProps: any): void => {
         if(!_.isEqual(prevProps.children, this.props.children)){
-            let value = this.state.value,
-            hasValues = false,
+            const value = this.state.value,
             options = this.getOptions()
+            let hasValues = false
 
             if(!this.props.multiple)
                 hasValues = options?.some(opt => _.isEqual(value, opt.props.value))
@@ -105,7 +105,7 @@ class Select extends React.PureComponent<IProps, IState>{
 
     decodeValue = (value: any): any => {
         if(this.props.multiple){
-            let list = this.state.value.map((v: any) => this.state.options?.find(option => _.isEqual(v, option.props.value))?.props.label).filter((v: any) => v)
+            const list = this.state.value.map((v: any) => this.state.options?.find(option => _.isEqual(v, option.props.value))?.props.label).filter((v: any) => v)
 
             return list.join(", ")
         }
@@ -154,11 +154,10 @@ class Select extends React.PureComponent<IProps, IState>{
     }
 
     render = (): JSX.Element => {
+        let input: HTMLInputElement
         const props = this.props,
         { value, openSelect, options, searchValue, currentSelection } = this.state,
-        icon = props.icon || { iconKey: "hand-pointer", type: "far" }
-
-        let input: HTMLInputElement,
+        icon = props.icon || { iconKey: "hand-pointer", type: "far" },
         searchInput = <div className="dolfo-select-search-content">
             <SearchIcon className="dolfo-select-search-icon" />
             {searchValue.length ? <CloseIcon className="reset-input" onClick={this.resetSearch} tooltip={Constants.RESET_INPUT_TEXT} /> : null}

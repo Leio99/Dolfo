@@ -60,8 +60,6 @@ checkTooltips = (): void => {
 
             document.body.appendChild((tool as any).tooltip)
 
-            let checkPosition = true
-
             tooltip.classList.add(_.capitalize(place))
 
             const copy = tooltip.cloneNode(true) as HTMLElement
@@ -69,12 +67,10 @@ checkTooltips = (): void => {
             copy.style.visibility = "hidden"
             document.body.appendChild(copy)
 
-            if(isElementInViewport(copy))
-                checkPosition = false
+            const checkPosition = !isElementInViewport(copy),
+            dirs = ["Top", "Right", "Left", "Bottom"]
 
             copy.remove()
-
-            const dirs = ["Top", "Right", "Left", "Bottom"]
 
             checkPosition && dirs.forEach(d => {
                 const copy = tooltip.cloneNode(true) as HTMLElement
