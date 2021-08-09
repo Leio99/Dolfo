@@ -1,9 +1,9 @@
-import _ from "lodash"
 import React from "react"
 import { Constants } from "../shared/Constants"
 import { IColumn } from "../shared/models/IColumn"
 import Button from "./Button"
 import { Icon } from "./Icon"
+import _ from "lodash"
 
 export interface TreeNode{
     readonly type: string
@@ -57,14 +57,16 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     protected getColumnData = (column: IColumn, node: TreeNode): JSX.Element => null 
 
-    toggleNode = (node: TreeNode, index: number, subNode: number) => {
+    toggleNode = (node: TreeNode, index: number) => {
         if(!this.hasChildren(node)) return
 
         const level = this.state.level.map((s, i) => {
             if(i === index){
-                if(s.includes(this.retrieveNodeId(node))) return s.filter(a => a !== this.retrieveNodeId(node))
+                const nodeId = this.retrieveNodeId(node)
 
-                return s.concat(this.retrieveNodeId(node))
+                if(s.includes(nodeId)) return s.filter(a => a !== nodeId)
+
+                return s.concat(nodeId)
             }
 
             return s
@@ -75,15 +77,19 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     toggleAllNode = (node: TreeNode, index: number, subNode: number) => {
         const { level } = this.state,
-        nodeLevel = level[index]
+        nodeLevel = level[index],
+        nodeId = this.retrieveNodeId(node)
         let newNodeLevel: (string | number)[] = []
 
-        if(nodeLevel.includes(this.retrieveNodeId(node))){
-            newNodeLevel = nodeLevel.filter((_, i) => i < subNode)
+        if(nodeLevel.includes(nodeId)){
+            if(subNode === 0)
+                newNodeLevel = []
+            else
+                newNodeLevel = nodeLevel.filter(a => a !== nodeId)
         }else{
             const list: (string | number)[] = nodeLevel
 
-            this.getNodeKeys(node, list, subNode)
+            this.getNodeKeys(node, list, subNode, index)
 
             newNodeLevel = list
         }
@@ -97,11 +103,13 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         this.setState({ level: newLevel })
     }
 
-    getNodeKeys = (node: TreeNode, list: (string | number)[], subNode: number) => {
-        while(this.hasChildren(node) && !list.includes(this.retrieveNodeId(node))){
-            list.splice(subNode, 0, (this.retrieveNodeId(node)))
+    getNodeKeys = (node: TreeNode, list: (string | number)[], subNode: number, index: number) => {
+        const nodeId = this.retrieveNodeId(node)
 
-            this.getData(node).forEach(n => this.getNodeKeys(n, list, subNode + 1))
+        while(this.hasChildren(node) && !list.includes(nodeId)){
+            list.push(nodeId)
+
+            this.getData(node).forEach(n => this.getNodeKeys(n, list, subNode + 1, index))
         }
     }
 
@@ -118,11 +126,12 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
         if(hasChildren){
             this.getData(node).forEach(data => {
-                const newList = idList.concat(this.retrieveNodeId(data)),
+                const nodeId = this.retrieveNodeId(data),
+                newList = idList.concat(nodeId),
                 doAutoExpand = autoExpand && this.hasChildren(data)
 
                 if(doAutoExpand)
-                    idList.push(this.retrieveNodeId(data))
+                    idList.push(nodeId)
                 
                 this.renderNode(data, originalIndex, treeList, subNode + 1, isOpened, doAutoExpand ? idList : newList, autoExpand)
             })
@@ -131,16 +140,17 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     retrieveNodeId = (node: TreeNode) => "tree_node-" + node.type + "_" + this.getNodeId(node)
 
-    getRender = (node: TreeNode, originalIndex: number, subNode = 0) => {
+    getRender = (node: TreeNode, originalIndex: number, subNode: number) => {
         const hasChildren = this.hasChildren(node),
         { level, showActions, addColumn } = this.state,
-        isOpened = level[originalIndex]?.includes(this.retrieveNodeId(node))
+        nodeId = this.retrieveNodeId(node),
+        isOpened = level[originalIndex]?.includes(nodeId)
 
-        return <tr key={this.retrieveNodeId(node)} onDoubleClick={() => this.onDoubleClick && this.onDoubleClick(node)}>
+        return <tr key={nodeId} onDoubleClick={() => this.onDoubleClick && this.onDoubleClick(node)}>
             <td>
                 <span style={{ paddingLeft: (25 * subNode) + (hasChildren ? 0 : subNode === 0 ? 0 : 25) }}></span>
                 {
-                    hasChildren ? <Button btnColor="black" textBtn onClick={() => this.toggleNode(node, originalIndex, subNode)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
+                    hasChildren ? <Button btnColor="black" textBtn onClick={() => this.toggleNode(node, originalIndex)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
                         <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="mr-2" />
                     </Button> : null
                 }
@@ -167,7 +177,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
     autoExpandAll = (list: any[] = this.state.list) => {
         return list.map((l, i) => {
             const node = { type: "root", data: l },
-            allList: string[] = []
+            allList: (string | number)[] = []
 
             if(this.hasChildren(node))
                 allList.push(this.retrieveNodeId(node))
