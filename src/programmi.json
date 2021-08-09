@@ -112,71 +112,6 @@
         "title": "Tale e quale show",
         "concorrenti": [
             {
-                "anno": 2015,
-                "concorrenti": [
-                    {
-                        "anno": 2015,
-                        "nome": "Max Giusti",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Massimo Lopez",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Walter Nudo",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Sergio Friscia",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Francesco Cicchella",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Savino Zaba",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Bianca Guaccero",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Laura Freddi",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Elena Di Cioccio",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Karima",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Giulia Luzi",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2015,
-                        "nome": "Cosima Coppola",
-                        "idProgramma": "3"
-                    }
-                ]
-            },
-            {
                 "anno": 2014,
                 "concorrenti": [
                     {
@@ -237,6 +172,71 @@
                     {
                         "anno": 2014,
                         "nome": "Serena Rossi",
+                        "idProgramma": "3"
+                    }
+                ]
+            },
+            {
+                "anno": 2015,
+                "concorrenti": [
+                    {
+                        "anno": 2015,
+                        "nome": "Max Giusti",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Massimo Lopez",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Walter Nudo",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Sergio Friscia",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Francesco Cicchella",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Savino Zaba",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Bianca Guaccero",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Laura Freddi",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Elena Di Cioccio",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Karima",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Giulia Luzi",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2015,
+                        "nome": "Cosima Coppola",
                         "idProgramma": "3"
                     }
                 ]
