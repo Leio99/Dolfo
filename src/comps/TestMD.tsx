@@ -3,6 +3,7 @@ import axios from "axios"
 import { MasterDetail } from "./layout/MasterDetail"
 import { Card } from "./layout/Card"
 import { Status } from "./layout/Status"
+import { LoadingIcon } from "./layout/Icon"
 
 const json = require("../studenti.json")
 
@@ -15,7 +16,7 @@ export class TestMD extends React.Component<{}, IState>{
         super({})
 
         this.state = {
-            list: []
+            list: null
         }
     }
 
@@ -35,6 +36,10 @@ export class TestMD extends React.Component<{}, IState>{
 
     render = (): JSX.Element => {
         const { list } = this.state
+
+        if(!list) return <div style={{ textAlign: "center", fontSize: 50 }}>
+            <LoadingIcon color="var(--darkblue)" spinning />
+        </div>
 
         return <MasterDetail columns={[
             { field: "cognome", label: "Cognome" },
