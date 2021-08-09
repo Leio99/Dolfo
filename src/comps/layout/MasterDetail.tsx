@@ -48,7 +48,7 @@ export class MasterDetail extends React.Component<IProps, IState>{
                     return tmp
                 })} /> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
-                        <Button btnColor="white" bigBtn circleBtn onClick={() => this.setState({ selectedItem: null })} tooltip={Constants.BACK_TO_LIST}>
+                        <Button btnColor="white" circleBtn onClick={() => this.setState({ selectedItem: null })} tooltip={Constants.BACK_TO_LIST}>
                             <Icon iconKey="arrow-left" type="far" />
                         </Button>
                         <div className="dolfo-detail-separator"></div>
