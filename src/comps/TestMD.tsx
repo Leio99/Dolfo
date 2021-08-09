@@ -4,6 +4,8 @@ import { MasterDetail } from "./layout/MasterDetail"
 import { Card } from "./layout/Card"
 import { Status } from "./layout/Status"
 
+const json = require("../studenti.json")
+
 interface IState{
     readonly list: any[]
 }
@@ -18,7 +20,9 @@ export class TestMD extends React.Component<{}, IState>{
     }
 
     componentDidMount = () => {
-        axios.get("http://localhost:5000/students/?tutorId=1").then(r => this.setState({ list: r.data }))
+        axios.get("http://localhost:5000/students/?tutorId=1")
+        .then(r => this.setState({ list: r.data }))
+        .catch(() => this.setState({ list: json }))
     }
 
     getDetailTitle = (item: any) => <span>
