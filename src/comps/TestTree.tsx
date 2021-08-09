@@ -9,6 +9,8 @@ import { Status } from "./layout/Status"
 import { formatDate } from "./shared/utility"
 import { IColumn } from "./shared/models/IColumn"
 
+const json = require("../programmi.json")
+
 export class TestTree extends TreeView{
     constructor(){
         super({
@@ -23,10 +25,7 @@ export class TestTree extends TreeView{
     componentDidMount = () => {
         axios.get("http://localhost:5000/programmi")
         .then(r => this.setState({ list: r.data }))
-        .catch(() => {
-            NotificationMsg.showError("Unable to load tree!")
-            this.setState({ list: [] })
-        })
+        .catch(() => this.setState({ list: json }))
     }
 
     getData = (node: TreeNode) => {
