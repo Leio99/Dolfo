@@ -18,7 +18,7 @@ interface StepProps{
 }
 
 export class Stepper extends React.PureComponent<IProps>{
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.currentStep !== this.props.currentStep){
             const node = ReactDOM.findDOMNode(this),
             container = Array.from(node.childNodes).find((v: any) => v.classList.contains("dolfo-stepper-steps")) as HTMLElement
@@ -29,7 +29,7 @@ export class Stepper extends React.PureComponent<IProps>{
         }
     }
 
-    getChildrenStepsWithSeparators = () => {
+    getChildrenStepsWithSeparators = (): any[] => {
         let children: any[] = []
 
         React.Children.forEach(this.props.children, (child: any, i: number) => {
@@ -41,7 +41,7 @@ export class Stepper extends React.PureComponent<IProps>{
         return children
     }
 
-    getChildrenSteps = () => React.Children.map(this.props.children, (child: any) => child)
+    getChildrenSteps = (): Step[] => React.Children.map(this.props.children, (child: any) => child)
 
     render = (): JSX.Element => {
         const props = this.props,

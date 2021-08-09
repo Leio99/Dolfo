@@ -40,7 +40,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps): void => {
         let value = this.state.value,
         inputType = this.state.inputType
 
@@ -52,15 +52,15 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         this.setState({ value, inputType })
     }
 
-    toggleInputType = () => this.setState({ inputType: this.state.inputType === "password" ? "text" : "password" })
+    toggleInputType = (): void => this.setState({ inputType: this.state.inputType === "password" ? "text" : "password" })
 
-    onBlur = () => this.setState({ focused: false })
+    onBlur = (): void => this.setState({ focused: false })
 
-    onFocus = () => this.setState({ focused: true })
+    onFocus = (): void => this.setState({ focused: true })
 
-    onChange = (e: any) => {
+    onChange = (e: any): void => {
         if(this.props.type === "number"){
-            let number =  Number(e.target.value)
+            const number =  Number(e.target.value)
 
             if(isNaN(number) || number > this.props.max || number < this.props.min) return
         }
@@ -73,7 +73,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         })
     }
     
-    resetInput = () => {
+    resetInput = (): void => {
         this.props.onChange && this.onChange({ target: { value: "" }})
 
         this.setState({
@@ -82,7 +82,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         })
     }
 
-    checkRows = (e: any) => {
+    checkRows = (e: any): void => {
         if(this.props.expandTextarea){
             const rows = e.target.value.split("\n").length,
             max = this.props.rows || MAX_ROWS
@@ -95,7 +95,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         this.props.onKeyUp && this.props.onKeyUp(e)
     }
 
-    getDefaultIcon = () => {
+    getDefaultIcon = (): string => {
         const props = this.props
 
         if(props.type === "password") return "lock"
@@ -105,9 +105,9 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         return "pen"
     }
 
-    increaseValue = () => this.onChange({ target: { value: Number(this.state.value) + 1 }})
+    increaseValue = (): void => this.onChange({ target: { value: Number(this.state.value) + 1 }})
 
-    decreaseValue = () => this.onChange({ target: { value: Number(this.state.value) - 1 }})
+    decreaseValue = (): void => this.onChange({ target: { value: Number(this.state.value) - 1 }})
 
     render = (): JSX.Element => {
         const props = this.props,

@@ -24,7 +24,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.opened !== this.props.opened){
             this.setState({
                 opened: this.props.opened
@@ -32,7 +32,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
         }
     }
 
-    toggleMenu = () => {
+    toggleMenu = (): void => {
         this.setState({ opened: !this.state.opened })
 
         this.props.onToggle && this.props.onToggle()

@@ -13,7 +13,7 @@ interface BredcrumbItemProps{
 }
 
 export class BreadCrumb extends React.PureComponent<IProps>{
-    getOptions = () => {
+    getOptions = (): BreadCrumbItem[] => {
         return React.Children.map(this.props.children, (child: any) => {
             if(child.type === BreadCrumbItem) return child
         })
@@ -26,7 +26,7 @@ export class BreadCrumb extends React.PureComponent<IProps>{
         return <div className={"dolfo-breadcrumb" + (props.className ? (" " + props.className) : "")} style={props.style}>
             {
                 options.map((opt, i) => {
-                    return <BreadCrumbItem {...opt.props} isNotLast={options[i + 1]} isFirst={i === 0}>
+                    return <BreadCrumbItem {...opt.props} isNotLast={!!options[i + 1]}>
                         {opt.props.children}
                     </BreadCrumbItem>
                 })

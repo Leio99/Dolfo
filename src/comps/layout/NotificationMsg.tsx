@@ -7,7 +7,7 @@ import { Closable } from "../shared/utility"
 import { DialogType } from "./Dialog"
 import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 
-export type NotificationPosition ="top-left" | "top-right" | "bottom-left" | "bottom-right"
+export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
 export type NotificationDelay = number | "never"
 
 interface NotificationProps{
@@ -23,42 +23,42 @@ interface NotificationProps{
 }
 
 export class NotificationMsg{
-    static showError = (message: string | JSX.Element) => {
+    static showError = (message: string | JSX.Element): Closable => {
         return NotificationMsg.show({
             message,
             type: "error"
         })
     }
 
-    static showInfo = (message: string | JSX.Element) => {
+    static showInfo = (message: string | JSX.Element): Closable => {
         return NotificationMsg.show({
             message,
             type: "info"
         })
     }
 
-    static showSuccess = (message: string | JSX.Element) => {
+    static showSuccess = (message: string | JSX.Element): Closable => {
         return NotificationMsg.show({
             message,
             type: "success"
         })
     }
 
-    static showLoading = (message?: string | JSX.Element) => {
+    static showLoading = (message?: string | JSX.Element): Closable => {
         return NotificationMsg.show({
             message: message || Constants.LOADING_TEXT,
             type: "loading"
         })
     }
 
-    static showWarning = (message: string | JSX.Element) => {
+    static showWarning = (message: string | JSX.Element): Closable => {
         return NotificationMsg.show({
             message,
             type: "warning"
         })
     }
 
-    static show = (data: string | NotificationProps) => {
+    static show = (data: string | NotificationProps): Closable => {
         const props = _.isString(data) ? { message: data } : data,
         notification = document.createElement("div"),
         getIcon = (type: string) => {
@@ -97,7 +97,7 @@ export class NotificationMsg{
         return notification as Closable
     }
 
-    static moveNotifications = () => {
+    static moveNotifications = (): void => {
         ["bottom-left", "bottom-right", "top-left", "top-right", "centered-top", "centered-bottom"].forEach(dir => {
             let nots = document.querySelectorAll(`.dolfo-notification.${dir}`),
             base = 0

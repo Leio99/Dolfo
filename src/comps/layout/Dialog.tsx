@@ -56,7 +56,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         }
     }
 
-    static infoDialog = (data: BaseProps & DialogProps) => {
+    static infoDialog = (data: BaseProps & DialogProps): Closable => {
         let title = data.title || Constants.INFO_TEXT,
         okType: DialogProps["okType"] = "blue"
 
@@ -85,7 +85,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         })
     }
 
-    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: () => void) => {
+    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: () => void): Closable => {
         return Dialog.openDialog({
             title: title || Constants.CONFIRM_TITLE,
             content: message,
@@ -98,7 +98,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         })
     }
 
-    static loadingDialog = (loadingText: string | JSX.Element = Constants.LOADING_TEXT) => {
+    static loadingDialog = (loadingText: string | JSX.Element = Constants.LOADING_TEXT): Closable => {
         return Dialog.openDialog({
             title: "",
             content: <div>
@@ -110,7 +110,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         })
     }
 
-    static openDialog = (data: DialogProps) => {
+    static openDialog = (data: DialogProps): Closable => {
         const popup = document.createElement("div"),
         onCloseFunction = (props: IProps) => {
             popup.remove()
@@ -133,7 +133,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         return popup as Closable
     }
 
-    static openDialogComponent = (Class: any, props?: any) => {
+    static openDialogComponent = (Class: any, props?: any): Closable => {
         const popup = document.createElement("div"),
         Component = <Class close={() => popup.remove()} {...props} />
 
@@ -144,7 +144,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         return { close: () => popup.remove() }
     }
 
-    static getIcon = (icon: string) => {
+    static getIcon = (icon: string): JSX.Element => {
         if(icon === "success") return <CheckCircleOutlineIcon color="var(--green)" />
         if(icon === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
         if(icon === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
@@ -153,19 +153,19 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         return null
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate = (): void => {
         this.setState({
             visible: this.props.visible != null ? this.props.visible : this.props.autoLoad ? true : false
         })
     }
 
-    onClose = () => {
+    onClose = (): void => {
         this.setState({ visible: false })
 
         this.props.onClose && this.props.onClose()
     }
 
-    onOk = () => {
+    onOk = (): void => {
         this.props.autoLoad && this.setState({ visible: false })
 
         this.props.onOk && this.props.onOk()

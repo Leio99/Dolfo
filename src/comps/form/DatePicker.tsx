@@ -37,10 +37,10 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     constructor(props: IProps) {
         super(props)
 
-        this.composeDateFromDefault(props.defaultValue)
+        this.state = this.composeDateFromDefault(props.defaultValue)
     }
 
-    composeDateFromDefault = (defaultValue: Date) => {
+    composeDateFromDefault = (defaultValue: Date): IState => {
         const date = defaultValue ? formatDate(defaultValue) : "",
         currentDay = defaultValue ? defaultValue.getDate() : new Date().getDate(),
         currentYear = defaultValue ? defaultValue.getFullYear() : new Date().getFullYear(),
@@ -63,24 +63,23 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             currentMinute
         }
 
-        // eslint-disable-next-line
-        !this.state ? this.state = newState : this.setState(newState)
+        return newState
     }
 
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps): void => {
         if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
-            this.composeDateFromDefault(this.props.defaultValue)
+            this.setState(this.composeDateFromDefault(this.props.defaultValue))
     }
 
-    nextMonth = () => {
+    nextMonth = (): void => {
         let newMonth,
         newYear = this.state.currentYear
 
         if (this.state.currentMonth === 11) {
             newMonth = 0
             newYear += 1
-        }
-        else newMonth = this.state.currentMonth + 1
+        }else
+            newMonth = this.state.currentMonth + 1
 
         this.setState({
             currentYear: newYear,
@@ -88,15 +87,15 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         })
     }
 
-    prevMonth = () => {
+    prevMonth = (): void => {
         let newMonth,
         newYear = this.state.currentYear
 
         if (this.state.currentMonth === 0) {
             newMonth = 11
             newYear -= 1
-        }
-        else newMonth = this.state.currentMonth - 1
+        }else
+            newMonth = this.state.currentMonth - 1
 
         this.setState({
             currentYear: newYear,
@@ -104,7 +103,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         })
     }
 
-    selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear, blur = true, showCalendar = false) => {
+    selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear, blur = true, showCalendar = false): void => {
         const date = this.handleDate(day, month, year),
         sendDate = new Date()
         sendDate.setDate(day)
@@ -130,7 +129,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         blur && blurInput()
     }
 
-    handleDate = (day: number, month: number, year: number) => {
+    handleDate = (day: number, month: number, year: number): string => {
         const dateFormat = this.props.dateFormat || "dd-mm-YYYY"
 
         if(dateFormat === "dd-mm-YYYY")
@@ -149,38 +148,38 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             return year + "-" + zeroBefore(month + 1) + "-" + zeroBefore(day)
     }
 
-    showCalendar = () => this.setState({ showCalendar: true })
+    showCalendar = (): void => this.setState({ showCalendar: true })
 
-    hideCalendar = () => this.setState({ showCalendar: false })
+    hideCalendar = (): void => this.setState({ showCalendar: false })
 
-    changeMonth = () => this.setState({ selectingMonth: true })
+    changeMonth = (): void => this.setState({ selectingMonth: true })
 
-    changeYear = () => this.setState({ selectingYear: true })
+    changeYear = (): void => this.setState({ selectingYear: true })
 
-    prevDecade = () => this.setState({ currentDecade: this.state.currentDecade - 10 })
+    prevDecade = (): void => this.setState({ currentDecade: this.state.currentDecade - 10 })
 
-    nextDecade = () => this.setState({ currentDecade: this.state.currentDecade + 10 })
+    nextDecade = (): void => this.setState({ currentDecade: this.state.currentDecade + 10 })
 
-    isCurrentDay = (day: ICalendarDay) => {
+    isCurrentDay = (day: ICalendarDay): boolean => {
         const { currentDay, selectedMonth, selectedYear } = this.state
 
         return day.day === currentDay && day.month === selectedMonth && day.year === selectedYear
     }
 
-    isToday = (day: ICalendarDay) => {
+    isToday = (day: ICalendarDay): boolean => {
         let date = new Date()
 
         return day.day === date.getDate() && day.month === date.getMonth() && day.year === date.getFullYear()
     }
 
-    selectMonth = (month: number) => {
+    selectMonth = (month: number): void => {
         this.setState({
             selectingMonth: false,
             currentMonth: month
         })
     }
 
-    selectYear = (year: number) => {
+    selectYear = (year: number): void => {
         this.setState({
             selectingYear: false,
             currentYear: year,
@@ -188,7 +187,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         })
     }
 
-    resetDate = () => {
+    resetDate = (): void => {
         let props = this.props,
         currentDay = props.defaultValue ? props.defaultValue.getDate() : 1,
         currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
@@ -213,13 +212,13 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         this.props.onChange && this.props.onChange(null)
     }
 
-    chooseToday = () => this.selectDay(new Date().getDate(), new Date().getMonth(), new Date().getFullYear())
+    chooseToday = (): void => this.selectDay(new Date().getDate(), new Date().getMonth(), new Date().getFullYear())
 
-    handleClickOutside = this.hideCalendar
+    handleClickOutside: () => void = this.hideCalendar
 
-    handleTabKey = (e: KeyboardEvent) => e.key.charCodeAt(0) === 84 && this.hideCalendar()
+    handleTabKey = (e: KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideCalendar()
 
-    tryChangeDate = (e: any) => {
+    tryChangeDate = (e: any): void => {
         const date = e.target.value.trim(),
         pieces = date.split("-"),
         day = parseInt(pieces[0]),
@@ -236,7 +235,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         }
     }
 
-    changeTime = (time: string) => {
+    changeTime = (time: string): void => {
         const pieces = time.split(":"),
         currentHour = parseInt(pieces[0]),
         currentMinute = parseInt(pieces[1])

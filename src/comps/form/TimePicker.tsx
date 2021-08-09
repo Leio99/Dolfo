@@ -31,7 +31,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps) : void=> {
         if(prevProps.defaultValue !== this.props.defaultValue){
             this.setState({
                 value: this.props.defaultValue || (zeroBefore(new Date().getHours()) + ":" + zeroBefore(new Date().getMinutes()))
@@ -39,31 +39,29 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         }
     }
 
-    changeTime = () => this.props.onChange && this.props.onChange(this.state.value)
+    changeTime = (): void => this.props.onChange && this.props.onChange(this.state.value)
 
-    changeHour = (e: any) => {
-        let value = parseInt(e.target.value),
-        time = this.state.value
+    changeHour = (e: any): void => {
+        const value = parseInt(e.target.value)
+        let time = this.state.value
 
-        if(!isNaN(value) && value >= 0 && value <= 23){
+        if(!isNaN(value) && value >= 0 && value <= 23)
             time = zeroBefore(value) + ":" + time.split(":")[1]
-        }
 
         this.setState({ value: time }, this.changeTime)
     }
 
-    changeMinute = (e: any) => {
-        let value = parseInt(e.target.value),
-        time = this.state.value
+    changeMinute = (e: any): void => {
+        const value = parseInt(e.target.value)
+        let time = this.state.value
 
-        if(!isNaN(value) && value >= 0 && value <= 59){
+        if(!isNaN(value) && value >= 0 && value <= 59)
             time = time.split(":")[0] + ":" + zeroBefore(value)
-        }
 
         this.setState({ value: time }, this.changeTime)
     }
 
-    increaseHour = () => {
+    increaseHour = (): void => {
         let hour = parseInt(this.state.value.split(":")[0]) + 1
 
         if(hour > 23) hour = 0
@@ -71,7 +69,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         this.changeHour({ target: { value: hour }})
     }
 
-    decreaseHour = () => {
+    decreaseHour = (): void => {
         let hour = parseInt(this.state.value.split(":")[0]) - 1
 
         if(hour < 0) hour = 23
@@ -79,7 +77,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         this.changeHour({ target: { value: hour }})
     }
 
-    increaseMinute = () => {
+    increaseMinute = (): void => {
         let minute = parseInt(this.state.value.split(":")[1]) + 1
 
         if(minute > 59) minute = 0
@@ -87,7 +85,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         this.changeMinute({ target: { value: minute }})
     }
 
-    decreaseMinute = () => {
+    decreaseMinute = (): void => {
         let minute = parseInt(this.state.value.split(":")[1]) - 1
 
         if(minute < 0) minute = 59
@@ -95,13 +93,13 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         this.changeMinute({ target: { value: minute }})
     }
 
-    showTime = () => this.setState({ showTime: true })
+    showTime = (): void => this.setState({ showTime: true })
 
-    hideTime = () => this.setState({ showTime: false })
+    hideTime = (): void => this.setState({ showTime: false })
 
-    handleClickOutside = this.hideTime
+    handleClickOutside: () => void = this.hideTime
 
-    keyDownHour = (e: any) => {
+    keyDownHour = (e: any): void => {
         if(e.key === 'ArrowUp')
             this.increaseHour()
         else if(e.key === 'ArrowDown')
@@ -110,7 +108,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         this.props.onKeyDownHour && this.props.onKeyDownHour(e)
     }
 
-    keyDownMinute = (e: any) => {
+    keyDownMinute = (e: any): void => {
         if(e.key === 'ArrowUp')
             this.increaseMinute()
         else if(e.key === 'ArrowDown')

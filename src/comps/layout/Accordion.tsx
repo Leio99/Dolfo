@@ -26,15 +26,15 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		}
 	}
 	
-	componentDidMount = () => {
+	componentDidMount = (): void => {
 		this.handleAccordions()
 
 		window.addEventListener("resize", this.handleAccordions)
 	}
 
-	componentWillUnmount = () => window.removeEventListener("resize", this.handleAccordions)
+	componentWillUnmount = (): void => window.removeEventListener("resize", this.handleAccordions)
     
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.opened !== this.props.opened){
             this.setState({
 				opened: this.props.opened || false
@@ -42,9 +42,9 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		}
 	}
 	
-	toggleAccordion = () => this.setState({ opened: !this.state.opened }, this.handleAccordions)
+	toggleAccordion = (): void => this.setState({ opened: !this.state.opened }, this.handleAccordions)
 
-	handleAccordions = () => {
+	handleAccordions = (): void => {
 		const accordion = ReactDOM.findDOMNode(this) as HTMLElement,
 		content = accordion.children[1] as HTMLElement,
 		isOpened = accordion.classList.contains("opened")

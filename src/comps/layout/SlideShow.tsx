@@ -22,25 +22,25 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
     constructor(props: IProps){
         super(props)
 
-        let slides = this.getSlides(),
-        currentSlide = slides.find(s => s.props.selected) || 0
+        const slides = this.getSlides(),
+        currentSlide = slides.find(s => s.props.selected)
 
         this.state = {
             slides,
-            currentSlide,
+            currentSlide: slides.indexOf(currentSlide),
             isHover: false
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = (): void => {
         this.props.automatic && setInterval(() => {
             if(!this.state.isHover) this.nextSlide()
         }, 2500)
     }
 
-    toggleHover = () => this.setState({ isHover: !this.state.isHover })
+    toggleHover = (): void => this.setState({ isHover: !this.state.isHover })
 
-    compontentDidUpdate = (prevProps: any) => {
+    compontentDidUpdate = (prevProps: any): void => {
         if(prevProps.children !== this.props.children){
             this.setState({
                 slides: this.getSlides()
@@ -48,9 +48,9 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
         }
     }
 
-    getSlides = () => React.Children.map(this.props.children, (child: any) => child)
+    getSlides = (): Slide[] => React.Children.map(this.props.children, (child: any) => child)
 
-    nextSlide = () => {
+    nextSlide = (): void => {
         let length = this.state.slides.length,
         newCurrent = this.state.currentSlide + 1
 
@@ -59,7 +59,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
         this.setState({ currentSlide: newCurrent })
     }
 
-    prevSlide = () => {
+    prevSlide = (): void => {
         let length = this.state.slides.length,
         newCurrent = this.state.currentSlide - 1
 
@@ -68,7 +68,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
         this.setState({ currentSlide: newCurrent })
     }
 
-    changeSlide = (currentSlide: number) => this.setState({ currentSlide })
+    changeSlide = (currentSlide: number): void => this.setState({ currentSlide })
 
     render = (): JSX.Element => {
         const props = this.props,

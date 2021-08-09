@@ -38,11 +38,11 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         }
     }
 
-    togglePopup = () => this.setState({ openPopup: !this.state.openPopup })
+    togglePopup = (): void => this.setState({ openPopup: !this.state.openPopup })
 
-    closePopup = () => this.setState({ openPopup: false })
+    closePopup = (): void => this.setState({ openPopup: false })
 
-    handleClickOutside = () => this.props.type === "popup" && this.props.options && this.closePopup()
+    handleClickOutside = (): void => this.props.type === "popup" && this.props.options && this.closePopup()
 
     render = (): JSX.Element => {
         const props = this.props,

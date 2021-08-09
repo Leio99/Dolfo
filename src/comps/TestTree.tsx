@@ -22,13 +22,13 @@ export class TestTree extends TreeView{
         })
     }
 
-    componentDidMount = () => {
+    componentDidMount = (): void => {
         axios.get("http://localhost:5000/programmi")
         .then(r => this.setState({ list: r.data }))
         .catch(() => this.setState({ list: json }))
     }
 
-    getData = (node: TreeNode) => {
+    getData = (node: TreeNode): TreeNode[] => {
         const arr: TreeNode[] = []
 
         if(node.type === "root"){
@@ -56,7 +56,7 @@ export class TestTree extends TreeView{
         return arr
     }
 
-    getLabel = (node: TreeNode) => {
+    getLabel = (node: TreeNode): string | JSX.Element => {
         if(node.type === "root") return node.data.title
         if(node.type === "comici") return "Comici"
         if(node.type === "luoghi") return "Canali"
@@ -69,7 +69,7 @@ export class TestTree extends TreeView{
         return node.data.nominativo
     }
 
-    hasChildren = (node: TreeNode) => {
+    hasChildren = (node: TreeNode): boolean => {
         if(node.type === "root")
             return node.data.comici?.length || node.data.luoghi?.length || node.data.conduttori?.length
 
@@ -85,7 +85,7 @@ export class TestTree extends TreeView{
         return false
     }
 
-    openDettaglioComico = (comico: any) => {
+    openDettaglioComico = (comico: any): void => {
         Dialog.infoDialog({
             title: "Dettaglio comico",
             clickOutside: true,
@@ -106,7 +106,7 @@ export class TestTree extends TreeView{
         })
     }
 
-    openDettaglioCanale = (canale: any) => {
+    openDettaglioCanale = (canale: any): void => {
         const loading = Dialog.loadingDialog()
 
         axios.get("https://guidatv-api.herokuapp.com/getChannelsList?api_key=e1fwxMBsQKaOmq5X5Pf0cy")
@@ -133,7 +133,7 @@ export class TestTree extends TreeView{
         .finally(loading.close)
     }
 
-    getActions = (node: TreeNode) => {
+    getActions = (node: TreeNode): JSX.Element => {
         if(node.type === "concorrente" || node.type === "conduttore") return <Button textBtn onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")} tooltip="Apri Wikipedia" btnColor="black">
             <Icon iconKey="wikipedia-w" type="fab" large />
         </Button>
@@ -169,7 +169,7 @@ export class TestTree extends TreeView{
         </>
     }
 
-    render = () => {
+    render = (): JSX.Element => {
         const { list } = this.state
 
         if(!list) return <div style={{ textAlign: "center", fontSize: 50 }}>

@@ -29,7 +29,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         }
     }
     
-    componentDidMount = () => {
+    componentDidMount = (): void => {
         /*
         * script script src="https://apis.google.com/js/api.js"></script>
         * is required in your index.html
@@ -70,7 +70,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         gapi.load("client", start)
     }
 
-    increaseMonth = () => {
+    increaseMonth = (): void => {
         const { currentMonth, currentYear } = this.state,
         newMonth = currentMonth === 11 ? 0 : currentMonth + 1,
         newYear = currentMonth === 11 ? currentYear + 1 : currentYear
@@ -81,7 +81,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         })
     }
 
-    decreaseMonth = () => {
+    decreaseMonth = (): void => {
         const { currentMonth, currentYear } = this.state,
         newMonth = currentMonth === 0 ? 11 : currentMonth - 1,
         newYear = currentMonth === 0 ? currentYear - 1 : currentYear
@@ -92,7 +92,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         })
     }
 
-    tryOpenEvent = (e: CalendarEvent, isPrev: boolean, isNext: boolean) => this.props.onEventClick && this.props.onEventClick(e, isPrev, isNext)
+    tryOpenEvent = (e: CalendarEvent, isPrev: boolean, isNext: boolean): void => this.props.onEventClick && this.props.onEventClick(e, isPrev, isNext)
 
     render = (): JSX.Element => {
         const { events, currentYear, currentMonth } = this.state,

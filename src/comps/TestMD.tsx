@@ -12,21 +12,21 @@ interface IState{
 }
 
 export class TestMD extends React.Component<{}, IState>{
-    constructor(){
-        super({})
+    constructor(props: {}){
+        super(props)
 
         this.state = {
             list: null
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = (): void => {
         axios.get("http://localhost:5000/students/?tutorId=1")
         .then(r => this.setState({ list: r.data }))
         .catch(() => this.setState({ list: json }))
     }
 
-    getDetailTitle = (item: any) => <span>
+    getDetailTitle = (item: any): JSX.Element => <span>
         {item.cognome} {item.nome} <Status type="info" style={{
             fontSize: "initial",
             fontWeight: "normal",

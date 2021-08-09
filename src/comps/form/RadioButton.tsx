@@ -21,7 +21,7 @@ export class RadioButton extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.defaultValue !== this.props.defaultValue){
             this.setState({
                 value: this.props.defaultValue
@@ -29,7 +29,7 @@ export class RadioButton extends React.PureComponent<IProps, IState>{
         }
     }
 
-    changeValue = (value: any) => {
+    changeValue = (value: any): void => {
         this.setState({ value })
         this.props.onChange && this.props.onChange(value)
     }

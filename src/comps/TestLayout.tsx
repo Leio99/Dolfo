@@ -27,6 +27,7 @@ import { Table } from "./layout/Table"
 import { Timeline, TimelineItem } from "./layout/Timeline"
 import { TestMD } from "./TestMD"
 import { Card, CardActions } from "./layout/Card"
+import { BreadCrumb, BreadCrumbItem } from "./layout/BreadCrumb"
 
 interface IState{
     readonly visibleDialog: boolean
@@ -53,7 +54,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = (): void => {
         initializeTooltips()
         
         let percent = this.state.percent,
@@ -68,9 +69,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
         }, 100)
     }
 
-    toggleDialog = () => this.setState({ visibleDialog: !this.state.visibleDialog })
+    toggleDialog = (): void => this.setState({ visibleDialog: !this.state.visibleDialog })
 
-    toggleSwitch = () => {
+    toggleSwitch = (): void => {
         this.setState({
             checkedSwitch: !this.state.checkedSwitch,
             loading: true
@@ -79,11 +80,11 @@ export class TestLayout extends React.PureComponent<any, IState>{
         setTimeout(() => this.setState({ loading: false }), 2000)
     }
 
-    check = () => this.setState({ checked: !this.state.checked })
+    check = (): void => this.setState({ checked: !this.state.checked })
 
-    toggleMenu = () => this.setState({ showMenu: !this.state.showMenu })
+    toggleMenu = (): void => this.setState({ showMenu: !this.state.showMenu })
 
-    nextStep = () => {
+    nextStep = (): void => {
         this.setState({
             loading: true
         })
@@ -94,7 +95,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
         }), 2000)
     }
 
-    render = () => {
+    render = (): JSX.Element => {
         const {
             loading,
             checkedSwitch,
@@ -550,6 +551,12 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 <Tab title={<span>
                     <Icon iconKey="coins" /> Other
                 </span>}>
+                    <BreadCrumb style={{ marginBottom: 20 }}>
+                        <BreadCrumbItem onClick={() => alert("Navigate")}>Home</BreadCrumbItem>
+                        <BreadCrumbItem onClick={() => alert("Navigate")}>Second</BreadCrumbItem>
+                        <BreadCrumbItem>Third</BreadCrumbItem>
+                    </BreadCrumb>
+
                     <Card title="Card with title">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quae illo vitae incidunt aperiam ea doloribus, praesentium odit ex saepe porro tenetur culpa tempora ad, iure unde eveniet sed exercitationem?
                     </Card>

@@ -35,7 +35,7 @@ class Select extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: any) => {
+    componentDidUpdate = (prevProps: any): void => {
         if(!_.isEqual(prevProps.children, this.props.children)){
             let value = this.state.value,
             hasValues = false,
@@ -61,7 +61,7 @@ class Select extends React.PureComponent<IProps, IState>{
         }
     }
 
-    changeOption = (value: any) => {
+    changeOption = (value: any): void => {
         if(_.isEqual(this.state.value, value)) return
 
         this.setState({
@@ -74,7 +74,7 @@ class Select extends React.PureComponent<IProps, IState>{
         this.props.onChange && this.props.onChange(value)
     }
 
-    changeMultiple = (value: any, index: number) => {
+    changeMultiple = (value: any): void => {
         const options = this.getOptions().map(v => v.props.value)
         let newList: any[] = []
 
@@ -90,9 +90,9 @@ class Select extends React.PureComponent<IProps, IState>{
         this.props.onChange && this.props.onChange(newList)
     }
 
-    onFocus = (ref: HTMLInputElement) => this.setState({ openSelect: true }, () => ref?.focus({ preventScroll: true }))
+    onFocus = (ref: HTMLInputElement): void => this.setState({ openSelect: true }, () => ref?.focus({ preventScroll: true }))
 
-    onBlur = () => {
+    onBlur = (): void => {
         this.setState({
             openSelect: false,
             currentSelection: -1
@@ -101,9 +101,9 @@ class Select extends React.PureComponent<IProps, IState>{
         this.resetSearch()
     }
 
-    getOptions = () => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
+    getOptions = (): Option[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
-    decodeValue = (value: any) => {
+    decodeValue = (value: any): any => {
         if(this.props.multiple){
             let list = this.state.value.map((v: any) => this.state.options?.find(option => _.isEqual(v, option.props.value))?.props.label).filter((v: any) => v)
 
@@ -113,18 +113,18 @@ class Select extends React.PureComponent<IProps, IState>{
         return this.state.options?.find(option => _.isEqual(value, option.props.value))?.props.label
     }
 
-    handleClickOutside = this.onBlur
+    handleClickOutside: () => void = this.onBlur
 
-    changeSearch = (e: any) => {
+    changeSearch = (e: any): void => {
         this.setState({
             searchValue: e.target.value,
             options: this.getOptions()?.filter(opt => opt.props.label?.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
         })
     }
 
-    resetSearch = () => this.changeSearch({ target: { value: "" }})
+    resetSearch = (): void => this.changeSearch({ target: { value: "" }})
 
-    handleKeyDown = (e: KeyboardEvent) => {        
+    handleKeyDown = (e: KeyboardEvent): void => {        
         const options = this.state.options,
         currentSelection = this.state.currentSelection,
         currentIndex = currentSelection === -1 ? -1 : options.indexOf(options.find((_, i) => i === currentSelection))
@@ -144,7 +144,7 @@ class Select extends React.PureComponent<IProps, IState>{
         }else if(e.key === "Enter" && options.length){
             const option = options[currentIndex] || options[0]
 
-            if(this.props.multiple) this.changeMultiple(option.props.value, currentIndex)
+            if(this.props.multiple) this.changeMultiple(option.props.value)
             else this.changeOption(option.props.value)
             
             e.preventDefault()
@@ -183,7 +183,7 @@ class Select extends React.PureComponent<IProps, IState>{
                 options && options.length ? (props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
                     {
                         options.map((option, i) => {
-                            return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={val => this.changeMultiple(val, i)} multiple />
+                            return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={val => this.changeMultiple(val)} multiple />
                         })
                     }
                 </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>

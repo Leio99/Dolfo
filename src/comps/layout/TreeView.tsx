@@ -45,11 +45,11 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
             this.setState({ level: this.state.autoOpen ? this.autoExpandAll() : {} })
     }
 
-    componentDidUpdate = this.onUpdate
+    componentDidUpdate: (props: P, state: IState) => void = this.onUpdate
 
     abstract getData: (node: TreeNode) => TreeNode[]
 
-    abstract getLabel: (node: TreeNode) => string
+    abstract getLabel: (node: TreeNode) => string | JSX.Element
 
     abstract hasChildren: (node: TreeNode) => boolean
 

@@ -14,7 +14,7 @@ interface IProps extends InputProps{
 }
 
 export class Option extends React.PureComponent<IProps>{
-    selectOption = () => {
+    selectOption = (): void => {
         if(this.props.disabled) return
         
         this.props.onChange(this.props.value)
@@ -22,7 +22,7 @@ export class Option extends React.PureComponent<IProps>{
         !this.props.multiple && blurInput()
     }
 
-    checkSpace = (e: any) => {
+    checkSpace = (e: any): void => {
         if(e.key.charCodeAt(0) === 32){
             this.selectOption()
             e.preventDefault()

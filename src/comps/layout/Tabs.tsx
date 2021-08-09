@@ -31,7 +31,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         }
     }
 
-    loadTabs = () => {
+    loadTabs = (): void => {
         const { children, currentTab } = this.state,
         findCurrent = currentTab || children.indexOf(children.find(child => child.props?.isDefault))
 
@@ -40,13 +40,15 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         }, this.handleBar)
     }
 
-    componentDidMount = () => {
+    componentDidMount = (): void => {
         this.loadTabs()
-        window.addEventListener("load", this.handleBar)
         window.addEventListener("resize", this.handleBar)
+        window.addEventListener("load", this.handleBar)
     }
 
-    componentDidUpdate = (prevProps: any) => {
+    componentWillUnmount = (): void => window.removeEventListener("resize", this.handleBar)
+
+    componentDidUpdate = (prevProps: any): void => {
         if(!_.isEqual(prevProps.children, this.props.children)){
             this.setState({ children: this.getChildrenTabs() }, () => {
                 const prevFiltered = this.getChildrenTabs(prevProps).filter((v: Tab) => !!v),
@@ -60,14 +62,14 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         }
     }
 
-    getChildrenTabs = (props = this.props) => {
+    getChildrenTabs = (props = this.props): Tab[] => {
         if(!_.isArray(props.children))
-            return [props.children]
+            return [props.children as Tab]
         else
             return React.Children.map(props.children, (child: any) => child).filter(t => !!t)
     }
 
-    changeSelection = (index: number) => {
+    changeSelection = (index: number): void => {
         this.setState({
             currentTab: index
         }, this.handleBar)
@@ -75,7 +77,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         this.props.onChangeTab && this.props.onChangeTab(index)
     }
 
-    handleBar = () => {
+    handleBar = (): void => {
         const tabs = document.querySelectorAll(".dolfo-tabs")
 
         tabs.forEach(tab => {
@@ -96,14 +98,14 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         })
     }
 
-    checkKey = (e: any, index: number) => {
+    checkKey = (e: any, index: number): void => {
         if(e.key.charCodeAt(0) === 32 || e.key === "Enter"){
             e.preventDefault()
             this.changeSelection(index)
         }
     }
 
-    preventSpaceKey = (e: any) => e.key.charCodeAt(0) === 32 && e.preventDefault()
+    preventSpaceKey = (e: any): void => e.key.charCodeAt(0) === 32 && e.preventDefault()
 
     render = (): JSX.Element => {
         const props = this.props,

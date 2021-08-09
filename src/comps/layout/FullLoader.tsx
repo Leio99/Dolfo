@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import { Closable } from "../shared/utility"
 
 export class FullLoader extends React.Component{
-    static show = (data?: { loadingText?: string, type?: "circle" | "balls" }) => {
+    static show = (data?: { loadingText?: string, type?: "circle" | "balls" }): Closable => {
         const loader = document.createElement("div");
 
         (loader as any).close = () => {

@@ -34,9 +34,11 @@ export class Table extends React.PureComponent<IProps, IState>{
         }
     }
 
-    changeFilter = (key: string, value: string) => {
-        let filter = { ...this.state.filter }
-        filter[key] = value
+    changeFilter = (key: string, value: string): void => {
+        const filter = {
+            ...this.state.filter,
+            [key]: value
+        }
 
         this.setState({
             filter,
@@ -44,11 +46,11 @@ export class Table extends React.PureComponent<IProps, IState>{
         })
     }
 
-    changeActiveFiler = (key: string) => this.setState({ activeFilter: key })
+    changeActiveFiler = (key: string): void => this.setState({ activeFilter: key })
 
-    blurSearch = () => this.setState({ activeFilter: "" })
+    blurSearch = (): void => this.setState({ activeFilter: "" })
 
-    getColumnDataType = (col: IColumn, data: IDataColumn, exp = false) => {
+    getColumnDataType = (col: IColumn, data: IDataColumn, exp = false): any => {
         const d = data[exp && col.exportField ? col.exportField : col.field]
 
         if(col.type === "check" && !data.hideCheck){
@@ -66,13 +68,13 @@ export class Table extends React.PureComponent<IProps, IState>{
         return d
     }
 
-    onDoubleClick = (data: IDataColumn) => {
+    onDoubleClick = (data: IDataColumn): void => {
         if(this.isPressingCheckbox) return
 
         data.onDoubleClick && data.onDoubleClick()
     }
 
-    getExportData = () => {
+    getExportData = (): any => {
         const exportAll = this.props.columns.filter(d => d.exportable).length === 0,
         columns = exportAll ? this.props.columns : this.props.columns.filter(c => c.exportable && c.type !== "check"),
         header = columns.map(c => c.label),
@@ -98,7 +100,7 @@ export class Table extends React.PureComponent<IProps, IState>{
         return { data: orderedData, header, columns }
     }
 
-    exportCSV = () => {
+    exportCSV = (): void => {
         const exportData = this.getExportData()
         downloadCSV(exportData.data, exportData.header)
     }

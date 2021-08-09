@@ -18,7 +18,7 @@ export class Switch extends React.PureComponent<IProps, IProps>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.checked !== this.props.checked){
             this.setState({
                 checked: this.props.checked
@@ -26,7 +26,7 @@ export class Switch extends React.PureComponent<IProps, IProps>{
         }
     }
 
-    onChange = () => {
+    onChange = (): void => {
         if(this.props.disabled) return
         
         !this.props.onChange && this.setState({
@@ -36,7 +36,7 @@ export class Switch extends React.PureComponent<IProps, IProps>{
         this.props.onChange && this.props.onChange(this.props.value)
     }
 
-    checkSpace = (e: any) => {
+    checkSpace = (e: any): void => {
         if(e.key.charCodeAt(0) === 32){
             e.preventDefault()
             

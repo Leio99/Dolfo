@@ -27,7 +27,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         }
     }
 
-    onChange = (input: HTMLInputElement) => {
+    onChange = (input: HTMLInputElement): void => {
         this.setState({
             files: input.files,
             value: input.value
@@ -36,7 +36,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         input.files && input.value && this.props.onChange && this.props.onChange(input.files)
     }
 
-    onDragEnter = (e: any) => {
+    onDragEnter = (e: any): void => {
         e.preventDefault()
         e.target.classList.add("dragging")
 
@@ -51,16 +51,16 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         }
     }
 
-    toggleShowing = () => this.setState({ showingMsg: !this.state.showingMsg })
+    toggleShowing = (): void => this.setState({ showingMsg: !this.state.showingMsg })
 
-    onDragOver = (e: any) => {
+    onDragOver = (e: any): void => {
         e.stopPropagation()
         e.preventDefault()
     }
 
-    onDragLeave = (e: any) => e.target.classList.remove("dragging")
+    onDragLeave = (e: any): void => e.target.classList.remove("dragging")
 
-    onDrop = (e: any, input: HTMLInputElement) => {
+    onDrop = (e: any, input: HTMLInputElement): void => {
         e.preventDefault()
 
         const files = e.dataTransfer.files,
@@ -100,7 +100,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         input.files && input.value && this.props.onChange && this.props.onChange(input.files)
     }
 
-    getFilesNameSeparated = () => {
+    getFilesNameSeparated = (): string => {
         let names: string[] = []
 
         for(let i = 0; i < this.state.files.length; i++)
@@ -109,15 +109,16 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         return names.join(", ")
     }
 
-    resetFiles = (e: Event) => {
+    resetFiles = (e: Event): void => {
         e.stopPropagation()
+
         this.setState({
             files: null,
             value: ""
         })
     }
 
-    clickInput = (e: any) => {
+    clickInput = (e: any): void => {
         this.setState({ value: "" })
         e.target.value = null
     }
