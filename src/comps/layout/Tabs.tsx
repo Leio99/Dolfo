@@ -62,12 +62,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         }
     }
 
-    getChildrenTabs = (props = this.props): Tab[] => {
-        if(!_.isArray(props.children))
-            return [props.children as Tab]
-        else
-            return React.Children.map(props.children, (child: any) => child).filter(t => !!t)
-    }
+    getChildrenTabs = (props = this.props): Tab[] => React.Children.map(props.children, (child: any) => child).filter(t => !!t)
 
     changeSelection = (index: number): void => {
         this.setState({
