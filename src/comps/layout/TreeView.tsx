@@ -209,7 +209,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                 <thead>
                     <tr>
                         <th>{descColumn || Constants.TREE_TABLE_DESCRIPTION_LABEL}</th>
-                        {addColumn && addColumn.map(c => <th style={{ width: c.width }}>
+                        {addColumn && addColumn.map(c => <th style={{ width: c.width, textAlign: c.align }}>
                             {c.label}
                         </th>)}
                         {showActions && <th style={{ width: "20%" }}>{Constants.TREE_TABLE_ACTIONS_LABEL}</th>}
