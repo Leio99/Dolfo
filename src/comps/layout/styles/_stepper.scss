@@ -6,7 +6,7 @@
         margin-bottom: 1rem;
 
         .dolfo-step-separator{
-            background-color: $grey;
+            background-color: $selectionBlue;
             height: 1px;
             flex: 1
         }
@@ -28,8 +28,9 @@
 
             .dolfo-stepper-step-circle{
                 display: inline-flex;
-                background-color: $lightGrey;
-                color: $dark;
+                background-color: $selectionBlue;
+                opacity: 0.5;
+                color: $white;
                 align-items: center;
                 justify-content: center;
                 width: 35px;
@@ -43,7 +44,17 @@
             }
 
             &.current{
+                & ~ .dolfo-step-separator{
+                    background-color: $grey
+                }
+
+                & ~ .dolfo-stepper-step-title .dolfo-stepper-step-circle{
+                    color: $dark;
+                    background-color: $lightGrey
+                }
+
                 .dolfo-stepper-step-circle{
+                    opacity: 1;
                     background-color: $selectionBlue;
                     color: $white
                 }
