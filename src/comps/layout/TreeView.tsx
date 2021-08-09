@@ -11,6 +11,10 @@ export interface TreeNode{
     readonly onDoubleClick?: (node: TreeNode) => void
 }
 
+type TreeLevel = {
+    [x: string]: boolean
+}
+
 interface IState{
     readonly list: any[]
     readonly autoOpen?: boolean
@@ -21,9 +25,7 @@ interface IState{
 }
 
 interface InternalState{
-    readonly level: {
-        [x: string]: boolean
-    }
+    readonly level: TreeLevel
     readonly showActions: boolean
 }
 
@@ -38,7 +40,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         }
     }
 
-    onUpdate = (__: P, prevState: IState) => {
+    onUpdate = (__: P, prevState: IState): void => {
         if(!_.isEqual(prevState.list, this.state.list))
             this.setState({ level: this.state.autoOpen ? this.autoExpandAll() : {} })
     }
@@ -57,10 +59,10 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     protected getColumnData = (column: IColumn, node: TreeNode): JSX.Element => null 
 
-    toggleNode = (node: TreeNode, index: string) => {
+    toggleNode = (node: TreeNode, index: string): void => {
         if(!this.hasChildren(node)) return
 
-        let level = {
+        let level: TreeLevel = {
             ...this.state.level,
             [index] : !this.state.level[index]
         }
@@ -68,25 +70,27 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         this.setState({ level })
     }
 
-    toggleAllNode = (node: TreeNode, index: string) => {
-        let newLevel = {}
+    toggleAllNode = (node: TreeNode, index: string): void => {
+        let newLevel: TreeLevel = {}
 
         this.getNodeKeys(node, newLevel, index, !this.state.level[index])
 
-        this.setState({ level: {
-            ...this.state.level,
-            ...newLevel
-        } })
+        this.setState({
+            level: {
+                ...this.state.level,
+                ...newLevel
+            }
+        })
     }
 
-    getNodeKeys = (node: TreeNode, newLevel: { [x: string]: boolean }, index: string, prevOpened: boolean) => {
+    getNodeKeys = (node: TreeNode, newLevel: TreeLevel, index: string, prevOpened: boolean): void => {
         newLevel[index] = prevOpened
 
         if(this.hasChildren(node))
             this.getData(node).forEach((n, i) => this.getNodeKeys(n, newLevel, index + "-" + i, prevOpened))
     }
 
-    renderNode = (node: TreeNode, treeList: JSX.Element[], id: string, prevOpened: boolean, autoExpand: string[] = null) => {
+    renderNode = (node: TreeNode, treeList: JSX.Element[], id: string, prevOpened: boolean, autoExpand: string[] = null): void => {
         const hasChildren = this.hasChildren(node),
         { level } = this.state,
         isOpened = level[id]
@@ -109,7 +113,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         }
     }
 
-    getRender = (node: TreeNode, index: string, prevOpened: boolean) => {
+    getRender = (node: TreeNode, index: string, prevOpened: boolean): JSX.Element => {
         const hasChildren = this.hasChildren(node),
         { level, showActions, addColumn } = this.state,
         isOpened = level[index] && prevOpened && hasChildren,
@@ -143,8 +147,8 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         </tr>
     }
 
-    autoExpandAll = (list: any[] = this.state.list) => {
-        let obj: { [x: string]: boolean } = {}
+    autoExpandAll = (list: any[] = this.state.list): TreeLevel => {
+        let obj: TreeLevel = {}
 
         list.forEach((l, i) => {
             const node = { type: "root", data: l },
@@ -161,9 +165,9 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         return obj
     }
 
-    toggleAllNodes = () => this.setState({ level: this.autoExpandAll() })
+    toggleAllNodes = (): void => this.setState({ level: this.autoExpandAll() })
 
-    collapseAllNodes = () => this.setState({ level: {} })
+    collapseAllNodes = (): void => this.setState({ level: {} })
 
     renderTree = (): JSX.Element => {
         const { list, showActions, showExpandAll, descColumn, addColumn } = this.state,
