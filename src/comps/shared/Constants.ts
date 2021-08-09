@@ -3,6 +3,8 @@ export class Constants {
     static readonly OK_TEXT = "Ok"
     static readonly CONFIRM_TEXT = "Conferma"
     static readonly BACK_TEXT = "Indietro"
+    static readonly BACK_TO_LIST = "Indietro"
+    static readonly OPEN_DETAIL = "Dettaglio"
     static readonly FORWARD_TEXT = "Avanti"
     static readonly INFO_TEXT = "Info"
     static readonly CLOSE_TEXT = "Chiudi"

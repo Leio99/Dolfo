@@ -542,7 +542,9 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Timeline>
                 </Tab>
 
-                <Tab isDefault title="Master-Detail">
+                <Tab title={<span>
+                    <Icon iconKey="window-restore" /> Master-Detail
+                </span>}>
                     <TestMD />
                 </Tab>
 
