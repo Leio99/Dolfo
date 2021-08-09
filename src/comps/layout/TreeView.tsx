@@ -57,7 +57,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     protected getColumnData = (column: IColumn, node: TreeNode): JSX.Element => null 
 
-    toggleNode = (node: TreeNode, index: number) => {
+    toggleNode = (node: TreeNode, index: number, subNode: number) => {
         if(!this.hasChildren(node)) return
 
         const level = this.state.level.map((s, i) => {
@@ -79,14 +79,11 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         let newNodeLevel: (string | number)[] = []
 
         if(nodeLevel.includes(this.retrieveNodeId(node))){
-            if(subNode === 0)
-                newNodeLevel = []
-            else
-                newNodeLevel = nodeLevel.filter(s => s !== this.retrieveNodeId(node))
+            newNodeLevel = nodeLevel.filter((_, i) => i < subNode)
         }else{
             const list: (string | number)[] = nodeLevel
 
-            this.getNodeKeys(node, list)
+            this.getNodeKeys(node, list, subNode)
 
             newNodeLevel = list
         }
@@ -100,11 +97,11 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         this.setState({ level: newLevel })
     }
 
-    getNodeKeys = (node: TreeNode, list: (string | number)[]) => {
+    getNodeKeys = (node: TreeNode, list: (string | number)[], subNode: number) => {
         while(this.hasChildren(node) && !list.includes(this.retrieveNodeId(node))){
-            list.push(this.retrieveNodeId(node))
+            list.splice(subNode, 0, (this.retrieveNodeId(node)))
 
-            this.getData(node).forEach(n => this.getNodeKeys(n, list))
+            this.getData(node).forEach(n => this.getNodeKeys(n, list, subNode + 1))
         }
     }
 
@@ -143,7 +140,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
             <td>
                 <span style={{ paddingLeft: (25 * subNode) + (hasChildren ? 0 : subNode === 0 ? 0 : 25) }}></span>
                 {
-                    hasChildren ? <Button btnColor="black" textBtn onClick={() => this.toggleNode(node, originalIndex)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
+                    hasChildren ? <Button btnColor="black" textBtn onClick={() => this.toggleNode(node, originalIndex, subNode)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
                         <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="mr-2" />
                     </Button> : null
                 }
