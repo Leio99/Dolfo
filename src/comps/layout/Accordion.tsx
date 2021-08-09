@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react"
+import ReactDOM from "react-dom"
 import { Constants } from "../shared/Constants"
 import { Icon } from "./Icon"
 
@@ -30,6 +31,8 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 
 		window.addEventListener("resize", this.handleAccordions)
 	}
+
+	componentWillUnmount = () => window.removeEventListener("resize", this.handleAccordions)
     
     componentDidUpdate = (prevProps: IProps) => {
         if(prevProps.opened !== this.props.opened){
@@ -42,22 +45,22 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 	toggleAccordion = () => this.setState({ opened: !this.state.opened }, this.handleAccordions)
 
 	handleAccordions = () => {
-		const accordions = document.querySelectorAll(".dolfo-accordion"),
-		resizeAccordion = (acc: HTMLElement) => {
-			const content = acc.children[1] as HTMLElement,
-			isOpened = acc.classList.contains("opened")
+		const accordion = ReactDOM.findDOMNode(this) as HTMLElement,
+		content = accordion.children[1] as HTMLElement,
+		isOpened = accordion.classList.contains("opened")
 
-			content.style.maxHeight = isOpened ? content.scrollHeight + "px" : "0"
+		if(!isOpened){
+			content.style.maxHeight = content.scrollHeight + "px"
+			content.classList.add("closing")
+			setTimeout(() => content.classList.remove("closing"))
 		}
-		
-		accordions.forEach(acc => {
-			const parentAccordion = acc.closest(".dolfo-accordion")
 
-			resizeAccordion(acc as HTMLElement)
+		setTimeout(() => content.style.maxHeight = isOpened ? content.scrollHeight + "px" : "0")
 
-			if(parentAccordion)
-				setTimeout(() => resizeAccordion(parentAccordion as HTMLElement), 200)
-		})
+		setTimeout(() => {
+			if(isOpened) 
+				content.style.maxHeight = "100%"
+		}, 200)
 	}
 	
 	render = (): JSX.Element => {

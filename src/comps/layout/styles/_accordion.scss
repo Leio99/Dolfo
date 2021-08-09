@@ -47,7 +47,10 @@
     .dolfo-accordion-content{
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.2s ease-out;
+        
+        &:not(.closing){
+            transition: max-height 0.2s ease-out
+        }
 
         .dolfo-accordion-inner{
             padding: 0.7rem
