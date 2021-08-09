@@ -85,8 +85,6 @@ export class TestTree extends TreeView{
         return false
     }
 
-    getNodeId = (node: TreeNode) => JSON.stringify(node)
-
     openDettaglioComico = (comico: any) => {
         Dialog.infoDialog({
             title: "Dettaglio comico",
