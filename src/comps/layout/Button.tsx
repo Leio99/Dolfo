@@ -38,11 +38,11 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         }
     }
 
-    togglePopup = (): void => this.setState({ openPopup: !this.state.openPopup })
+    togglePopup = () => !this.props.disabled && this.setState({ openPopup: !this.state.openPopup })
 
-    closePopup = (): void => this.setState({ openPopup: false })
+    closePopup = () => this.setState({ openPopup: false })
 
-    handleClickOutside = (): void => this.props.type === "popup" && this.props.options && this.closePopup()
+    handleClickOutside = () => this.props.type === "popup" && this.props.options && this.closePopup()
 
     render = (): JSX.Element => {
         const props = this.props,
@@ -52,12 +52,12 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         if(btnType === "popup"){
             const popupDir = props.popupPosition || "bottom"
 
-            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "")} onClick={this.togglePopup} data-tooltip={props.tooltip} data-place={props.placeTooltip}>
+            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "") + (props.disabled ? " disabled" : "")} onClick={this.togglePopup} data-tooltip={props.tooltip} data-place={props.placeTooltip}>
                 <div className={"dolfo-popup-options" + (openPopup ? " show" : "") + (" pos-" + popupDir)}>
                     {
                         props.options?.map(opt => {
                             if(!opt.hiddenIf)
-                                return <div className={"dolfo-popup-option" + (opt.disabled ? " disabled" : "")} onClick={!opt.disabled ? opt.onClick : (e: any) => e.stopPropagation()}>
+                                return <div className={"dolfo-popup-option" + (opt.disabled ? " disabled" : "")} onClick={!opt.disabled && !props.disabled ? opt.onClick : (e: any) => e.stopPropagation()}>
                                     {opt.text}
                                 </div>
 
