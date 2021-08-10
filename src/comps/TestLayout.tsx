@@ -503,7 +503,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             ]} />
                         </Tab>
                         <Tab title={<span>
-                            <Icon iconKey="sitemap" type="far" /> Tree view
+                            <Icon iconKey="folder-tree" type="far" /> Tree view
                         </span>}>
                             <TestTree />
                         </Tab>
