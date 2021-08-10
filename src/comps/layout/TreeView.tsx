@@ -179,11 +179,11 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                     showExpandAll && <thead className="dolfo-table-actions">
                         <tr>
                             <td colSpan={showActions ? baseSpan + 2 : baseSpan + 1}>
-                                <Button btnColor="white" tooltip={Constants.TREE_EXPAND_ALL_NODES} onClick={this.toggleAllNodes} className="mr-2">
-                                    <Icon iconKey="expand-alt" />
+                                <Button btnColor="white" tooltip={Constants.TREE_EXPAND_ALL_NODES} onClick={this.toggleAllNodes}>
+                                    <Icon iconKey="folder-plus" type="far" />
                                 </Button>
                                 <Button btnColor="white" tooltip={Constants.TREE_COLLAPSE_ALL_NODES} onClick={this.collapseAllNodes}>
-                                    <Icon iconKey="compress-alt" />
+                                    <Icon iconKey="folder-minus" type="far" />
                                 </Button>
                             </td>
                         </tr>

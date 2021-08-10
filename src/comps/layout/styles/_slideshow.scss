@@ -13,7 +13,7 @@
         cursor: pointer;
         top: 50%;
         transform: translateY(-50%);
-        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 
         &:hover{
             color: $grey
@@ -59,7 +59,7 @@
             border-radius: $roundRadius;
             display: inline-block;
             margin: 0 0.5rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.32);
             transition: 0.2s ease;
 
             &:hover{
@@ -67,7 +67,8 @@
             }
 
             &.selected{
-                background-color: $dark
+                box-shadow: 0 0 0 4px $hoverBlue;
+                background-color: $selectionBlue
             }
         }
     }

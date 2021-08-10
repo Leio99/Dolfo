@@ -27,7 +27,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
 
         this.state = {
             slides,
-            currentSlide: slides.indexOf(currentSlide),
+            currentSlide: !currentSlide ? 0 : slides.indexOf(currentSlide),
             isHover: false
         }
     }
@@ -77,10 +77,10 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
 
         return <div className="dolfo-slideshow" style={props.style} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <div className="dolfo-prev-slide" onClick={this.prevSlide}>
-                <Icon type="far" iconKey="chevron-left" />
+                <Icon type="fal" iconKey="chevron-left" />
             </div>
             <div className="dolfo-next-slide" onClick={this.nextSlide}>
-                <Icon type="far" iconKey="chevron-right" />
+                <Icon type="fal" iconKey="chevron-right" />
             </div>
 
             <div className="dolfo-slides">
