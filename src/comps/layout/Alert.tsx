@@ -9,6 +9,8 @@ interface IProps{
     readonly type?: DialogType
     readonly style?: CSSProperties
     readonly className?: string
+    readonly onClose?: () => void
+    readonly closable?: boolean
 }
 
 export class Alert extends React.Component<IProps>{
@@ -29,7 +31,10 @@ export class Alert extends React.Component<IProps>{
         }
     }
 
-    closeAlert = (): void => ReactDOM.findDOMNode(this).remove()
+    closeAlert = (): void => {
+        ReactDOM.findDOMNode(this).remove()
+        this.props.onClose && this.props.onClose()
+    }
 
     render = (): JSX.Element => {
         const { props } = this
@@ -37,9 +42,11 @@ export class Alert extends React.Component<IProps>{
         return <div className={"dolfo-alert" + (props.type ? (" " + props.type) : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             <div className="dolfo-alert-content">{props.children}</div>
             
-            <Button textBtn btnColor={this.getBtnColor()} className="dolfo-alert-close" onClick={this.closeAlert} tooltip={Constants.CLOSE_TEXT}>
-                <CloseIcon large />
-            </Button>
+            {
+                props.closable && <Button textBtn btnColor={this.getBtnColor()} className="dolfo-alert-close" onClick={this.closeAlert} tooltip={Constants.CLOSE_TEXT}>
+                    <CloseIcon large />
+                </Button>
+            }
         </div>
     }
 }

@@ -553,18 +553,18 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 <Tab title={<span>
                     <Icon iconKey="bullhorn" type="far" /> Alerts
                 </span>}>
-                    <Alert>
+                    <Alert closable>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.
                     </Alert>
-                    <Alert type="success" className="mt-2">
+                    <Alert closable type="success" className="mt-2">
                         <strong>
                             <CheckCircleIcon /> You did it!
                         </strong>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</p>
                     </Alert>
-                    <Alert type="error" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
-                    <Alert type="warning" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
-                    <Alert type="info" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
+                    <Alert closable type="error" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
+                    <Alert closable type="warning" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
+                    <Alert closable type="info" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
                 </Tab>
 
                 <Tab title={<span>
