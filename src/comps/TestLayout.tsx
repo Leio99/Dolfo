@@ -550,7 +550,7 @@ export class TestLayout extends React.PureComponent<any, IState>{
                     </Timeline>
                 </Tab>
 
-                <Tab isDefault title={<span>
+                <Tab title={<span>
                     <Icon iconKey="bullhorn" type="far" /> Alerts
                 </span>}>
                     <Alert>
