@@ -44,11 +44,13 @@
                 "composizione": [
                     {
                         "idComico": "1",
-                        "nominativo": "Luca Peracino"
+                        "nominativo": "Luca Peracino",
+                        "attivo": true
                     },
                     {
                         "idComico": "1",
-                        "nominativo": "Andrea Pisani"
+                        "nominativo": "Andrea Pisani",
+                        "attivo": true
                     }
                 ]
             },
@@ -59,15 +61,18 @@
                 "composizione": [
                     {
                         "idComico": "2",
-                        "nominativo": "Stefano Manca"
+                        "nominativo": "Stefano Manca",
+                        "attivo": true
                     },
                     {
                         "idComico": "2",
-                        "nominativo": "Michele Manca"
+                        "nominativo": "Michele Manca",
+                        "attivo": true
                     },
                     {
                         "idComico": "2",
-                        "nominativo": "Roberto Fara"
+                        "nominativo": "Roberto Fara",
+                        "attivo": false
                     }
                 ]
             },
@@ -111,71 +116,6 @@
         "id": "3",
         "title": "Tale e quale show",
         "concorrenti": [
-            {
-                "anno": 2014,
-                "concorrenti": [
-                    {
-                        "anno": 2014,
-                        "nome": "Luca Barbareschi",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Matteo Becucci",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Alessandro Greco",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Pino Insegno",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Gianni Nazzaro",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Valerio Scanu",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Michela Andreozzi",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Raffaella Fico",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Rita Forte",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Roberta Giarrusso",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Veronica Maya",
-                        "idProgramma": "3"
-                    },
-                    {
-                        "anno": 2014,
-                        "nome": "Serena Rossi",
-                        "idProgramma": "3"
-                    }
-                ]
-            },
             {
                 "anno": 2015,
                 "concorrenti": [
@@ -237,6 +177,71 @@
                     {
                         "anno": 2015,
                         "nome": "Cosima Coppola",
+                        "idProgramma": "3"
+                    }
+                ]
+            },
+            {
+                "anno": 2014,
+                "concorrenti": [
+                    {
+                        "anno": 2014,
+                        "nome": "Luca Barbareschi",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Matteo Becucci",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Alessandro Greco",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Pino Insegno",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Gianni Nazzaro",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Valerio Scanu",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Michela Andreozzi",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Raffaella Fico",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Rita Forte",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Roberta Giarrusso",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Veronica Maya",
+                        "idProgramma": "3"
+                    },
+                    {
+                        "anno": 2014,
+                        "nome": "Serena Rossi",
                         "idProgramma": "3"
                     }
                 ]
