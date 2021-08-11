@@ -79,7 +79,8 @@
             {
                 "idProgramma": "1",
                 "nominativo": "Angelo Pintus",
-                "id": "3"
+                "id": "3",
+                "attivo": true
             }
         ]
     },
