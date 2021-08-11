@@ -24,6 +24,11 @@ export class MasterDetail extends React.Component<IProps, IState>{
             selectedItem: null
         }
     }
+    
+    resetSelection = () => {
+        this.setState({ selectedItem: null })
+        this.props.onOpenDetail && this.props.onOpenDetail(null)
+    }
 
     render = (): JSX.Element => {
         const { columns, data, onOpenDetail, children, getDetailTitle } = this.props,
@@ -48,7 +53,7 @@ export class MasterDetail extends React.Component<IProps, IState>{
                     return tmp
                 })} /> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
-                        <Button btnColor="white" circleBtn onClick={() => this.setState({ selectedItem: null })} tooltip={Constants.BACK_TO_LIST}>
+                        <Button btnColor="white" circleBtn onClick={this.resetSelection} tooltip={Constants.BACK_TO_LIST}>
                             <Icon iconKey="arrow-left" type="far" />
                         </Button>
                         <div className="dolfo-detail-separator"></div>
