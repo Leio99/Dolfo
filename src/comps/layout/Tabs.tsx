@@ -103,7 +103,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     preventSpaceKey = (e: any): void => e.key.charCodeAt(0) === 32 && e.preventDefault()
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { children, currentTab } = this.state,
         isVertical = props.vertical
 
@@ -141,7 +141,7 @@ export class Tabs extends React.PureComponent<IProps, IState>{
 
 export class Tab extends React.PureComponent<TabProps>{
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         return <div className={"dolfo-tab-content" + (props.selected ? " current" : "")} style={props.style}>
             {props.children}

@@ -46,7 +46,7 @@ export class Stepper extends React.PureComponent<IProps>{
     getChildrenSteps = (): Step[] => React.Children.map(this.props.children, (child: any) => child)
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         steps = this.getChildrenSteps(),
         stepsSeparated = this.getChildrenStepsWithSeparators(),
         currentStep = props.currentStep >= 0 ? props.currentStep : 0,
@@ -88,7 +88,7 @@ export class Stepper extends React.PureComponent<IProps>{
 
 export class Step extends React.PureComponent<StepProps>{
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         return <div className={"dolfo-step-content" + (props.loading ? " loading" : "")} style={props.style}>
             {props.loading && <div className="dolfo-step-loading">

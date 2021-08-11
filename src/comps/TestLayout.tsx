@@ -7,7 +7,7 @@ import { TextInput } from "./form/TextInput"
 import TimePicker from "./form/TimePicker"
 import Button from "./layout/Button"
 import { Dialog } from "./layout/Dialog"
-import { CheckIcon, CloseIcon } from "./layout/Icon"
+import { CheckCircleIcon, CheckIcon, CloseIcon } from "./layout/Icon"
 import { NotificationMsg } from "./layout/NotificationMsg"
 import { MessageBox } from "./layout/MessageBox"
 import { Switch } from "./form/Switch"
@@ -28,6 +28,7 @@ import { Timeline, TimelineItem } from "./layout/Timeline"
 import { TestMD } from "./TestMD"
 import { Card, CardActions } from "./layout/Card"
 import { BreadCrumb, BreadCrumbItem } from "./layout/BreadCrumb"
+import { Alert } from "./layout/Alert"
 
 interface IState{
     readonly visibleDialog: boolean
@@ -547,6 +548,23 @@ export class TestLayout extends React.PureComponent<any, IState>{
                             </p>
                         </TimelineItem>
                     </Timeline>
+                </Tab>
+
+                <Tab isDefault title={<span>
+                    <Icon iconKey="bullhorn" type="far" /> Alerts
+                </span>}>
+                    <Alert>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.
+                    </Alert>
+                    <Alert type="success" className="mt-2">
+                        <strong>
+                            <CheckCircleIcon /> You did it!
+                        </strong>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</p>
+                    </Alert>
+                    <Alert type="error" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
+                    <Alert type="warning" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
+                    <Alert type="info" className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, suscipit velit. Libero delectus nam illo et assumenda recusandae laboriosam quibusdam officiis consectetur! Quisquam voluptatibus veniam, officiis blanditiis at beatae ut.</Alert>
                 </Tab>
 
                 <Tab title={<span>

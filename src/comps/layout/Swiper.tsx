@@ -49,7 +49,7 @@ interface SwipeProps{
 
 export class Swipe extends React.PureComponent<SwipeProps>{
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         return <div className={"dolfo-swipe" + (props.detail ? (" detail-swipe" + (props.opened ? " opened" : "")) : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             {props.detail && <div className="dolfo-swipe-header">

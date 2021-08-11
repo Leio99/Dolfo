@@ -106,7 +106,7 @@ export class Table extends React.PureComponent<IProps, IState>{
     }
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { filter, activeFilterKey, activeFilter } = this.state,
         ajdustData = props.data.map(d => {
             let temp = {...d}

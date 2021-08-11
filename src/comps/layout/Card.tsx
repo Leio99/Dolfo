@@ -11,7 +11,7 @@ interface CardProps extends IProps{
 
 export class Card extends React.PureComponent<CardProps>{
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         return <div className={"dolfo-card" + (props.className ? (" " + props.className) : "")} style={props.style}>
             {props.title && <div className="dolfo-card-title">{props.title}</div>}
@@ -22,7 +22,7 @@ export class Card extends React.PureComponent<CardProps>{
 
 export class CardActions extends React.PureComponent<IProps>{
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         return <div className="dolfo-card-actions-inner">
             <br />

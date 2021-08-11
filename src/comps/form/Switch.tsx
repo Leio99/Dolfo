@@ -46,7 +46,7 @@ export class Switch extends React.PureComponent<IProps, IProps>{
     }
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { checked } = this.state
 
         return <div className={"dolfo-input-switch" + ((props.disabled || props.loading) ? " disabled" : "") + (props.className ? (" " + props.className) : "")} onClick={this.onChange} style={props.wrapperStyle}>

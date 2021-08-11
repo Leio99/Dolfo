@@ -188,7 +188,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     resetDate = (): void => {
-        const props = this.props,
+        const { props } = this,
         currentDay = props.defaultValue ? props.defaultValue.getDate() : 1,
         currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
         currentMonth = props.defaultValue ? props.defaultValue.getMonth() :  new Date().getMonth(),

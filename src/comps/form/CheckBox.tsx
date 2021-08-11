@@ -45,7 +45,7 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
     }
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { checked } = this.state
 
         return <div className={"dolfo-checkbox" + (props.className ? (" " + props.className) : "") + (props.disabled ? " disabled" : "")} style={props.style} onClick={this.onChange}>

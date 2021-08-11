@@ -39,7 +39,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
     }
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { opened } = this.state
 
         return <div className={"dolfo-side-menu dolfo-side-menu-"+ (props.menuColor || "blue") + (opened ? " opened": "")}>

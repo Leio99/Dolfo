@@ -1,0 +1,29 @@
+.dolfo-alert{
+    padding: 0.7rem;
+    border-radius: $smallRadius;
+    background-color: $lightGrey;
+    color: $dark;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    &.success{
+        background-color: lighten($green, 47%);
+        color: $green
+    }
+
+    &.error{
+        background-color: lighten($red, 42%);
+        color: $red
+    }
+
+    &.info{
+        background-color: lighten($darkBlue, 47%);
+        color: $darkBlue
+    }
+
+    &.warning{
+        background-color: lighten($orange, 42%);
+        color: $orange
+    }
+}

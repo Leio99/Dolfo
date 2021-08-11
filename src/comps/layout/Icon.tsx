@@ -18,7 +18,7 @@ interface DefaultIconProps extends TooltipProps{
 
 export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         return <i className={"dolfo-icon " + 
             (props.type || "fa") +

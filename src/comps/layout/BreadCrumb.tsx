@@ -37,7 +37,7 @@ export class BreadCrumb extends React.PureComponent<IProps>{
 
 export class BreadCrumbItem extends React.PureComponent<BredcrumbItemProps>{
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         return <div className="dolfo-breadcrumb-item">
             <div className={"dolfo-breadcrumb-item-inner" + (props.onClick ? " clickable" : "")} onClick={props.onClick} data-tooltip={props.onClick && Constants.NAVIGATE_BREADCRUMB}>

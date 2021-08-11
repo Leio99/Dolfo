@@ -30,7 +30,7 @@ export class Option extends React.PureComponent<IProps>{
     }
 
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         if(props.isRadio){
             return <div className={"dolfo-input-radio" + (props.className ? (" " + props.className) : "")} style={props.style} onClick={this.selectOption}>

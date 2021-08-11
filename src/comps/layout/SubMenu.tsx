@@ -35,7 +35,7 @@ export class SubMenu extends React.PureComponent<IProps, IState>{
     }
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { opened } = this.state
 
         return <div className={"dolfo-submenu" + (opened ? " opened" : "")}>

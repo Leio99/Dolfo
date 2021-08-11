@@ -64,7 +64,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 	}
 	
 	render = (): JSX.Element => {
-		const props = this.props,
+		const { props } = this,
 		{ opened } = this.state
 		
 		return <div className={"dolfo-accordion" + (opened ? " opened" : "") + (props.wrapperClassName ? (" " + props.wrapperClassName) : "") + (props.disabled ? " disabled" : "")} style={props.wrapperStyle}>

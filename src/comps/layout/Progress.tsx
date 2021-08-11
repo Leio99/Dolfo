@@ -17,7 +17,7 @@ interface IProps {
 
 export class Progress extends React.PureComponent<IProps>{
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         percent = props.percent < 0 ? 0 : props.percent > 100 ? 100 : props.percent,
         color = props.color || "darkblue",
         width = props.circleWidth >= 0 ? props.circleWidth : 150,

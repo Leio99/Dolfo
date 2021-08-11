@@ -96,7 +96,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     }
 
     getDefaultIcon = (): string => {
-        const props = this.props
+        const { props } = this
 
         if(props.type === "password") return "lock"
         if(props.type === "email") return "envelope"
@@ -110,7 +110,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     decreaseValue = (): void => this.onChange({ target: { value: Number(this.state.value) - 1 }})
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { focused, rows, value, inputType } = this.state,
         icon = props.icon || {
             iconKey: this.getDefaultIcon(),

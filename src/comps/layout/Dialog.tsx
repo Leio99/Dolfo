@@ -172,7 +172,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
     }
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { visible } = this.state
 
         return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "") + (props.top ? " place-top" : "") + (props.overflows ? " overflows" : "")}>

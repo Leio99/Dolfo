@@ -71,7 +71,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
     changeSlide = (currentSlide: number): void => this.setState({ currentSlide })
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         { slides, currentSlide } = this.state,
         marginLeft = (-currentSlide * 100) + "%"
 
@@ -109,7 +109,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
 
 export class Slide extends React.PureComponent<SlideProps>{
     render = (): JSX.Element => {
-        const props = this.props
+        const { props } = this
 
         return <div className="dolfo-slide" style={props.style}>
             {this.props.children}

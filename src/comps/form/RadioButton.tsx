@@ -37,7 +37,7 @@ export class RadioButton extends React.PureComponent<IProps, IState>{
     getOptions = (): Option[] =>  React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         options = this.getOptions(),
         { value } = this.state
 

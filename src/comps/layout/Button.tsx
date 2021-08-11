@@ -45,7 +45,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
     handleClickOutside = () => this.props.type === "popup" && this.props.options && this.closePopup()
 
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         btnType = props.type === "popup" && props.options ? "popup" : (props.type || "button"),
         { openPopup } = this.state
 

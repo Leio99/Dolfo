@@ -14,7 +14,7 @@ interface IProps{
 
 export class Header extends React.PureComponent<IProps>{
     render = (): JSX.Element => {
-        const props = this.props,
+        const { props } = this,
         icon = props.menuTogglerIcon || { type: "far", iconKey: "bars" }
 
         return <div className={"dolfo-header dolfo-header-" + (props.menuColor || "blue") + (props.className ? (" " + props.className) : "")} style={props.style}>
