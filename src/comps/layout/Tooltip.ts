@@ -44,6 +44,9 @@ checkTooltips = (): void => {
         content = tool.getAttribute("data-tooltip"),
         place = tool.getAttribute("data-place") || "top"
 
+        if(!content?.trim())
+            return
+
         newTexts.push(content);
 
         (tool as any).tooltip?.remove();
