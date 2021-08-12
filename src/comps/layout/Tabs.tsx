@@ -15,7 +15,6 @@ interface IState {
 
 interface TabProps{
     readonly title: string | JSX.Element
-    readonly selected?: boolean
     readonly isDefault?: boolean
     readonly style?: CSSProperties
     readonly disabled?: boolean
@@ -129,9 +128,11 @@ export class Tabs extends React.PureComponent<IProps, IState>{
                         style = i === 0 && !isVertical ? { ...child.props.style, marginLeft } : child.props.style
 
                         if(child.props.disabled)
-                            return <Tab title={child.props.title} />
+                            return <></>
                         
-                        return <Tab {...child.props} selected={i === currentTab} style={style} />
+                        return <div className={"dolfo-tab-content" + (i === currentTab ? " current" : "")} style={style}>
+                            {child.props.children}
+                        </div>
                     })
                 }
             </div>
@@ -140,11 +141,5 @@ export class Tabs extends React.PureComponent<IProps, IState>{
 }
 
 export class Tab extends React.PureComponent<TabProps>{
-    render = (): JSX.Element => {
-        const { props } = this
-
-        return <div className={"dolfo-tab-content" + (props.selected ? " current" : "")} style={props.style}>
-            {props.children}
-        </div>
-    }
+    render = (): JSX.Element => <></>
 }
