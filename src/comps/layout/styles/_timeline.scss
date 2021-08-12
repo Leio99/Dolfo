@@ -1,5 +1,12 @@
 .dolfo-timeline .dolfo-timeline-item-row{
     $lightBg: lighten($lightGrey, 2.5%);
+
+    &.hide-empty .dolfo-timeline-item{
+        $calc: calc(100% - 30px);
+
+        flex: 0 0 $calc;
+        max-width: $calc
+    }
     
     display: flex;
     flex-direction: row;
