@@ -29,6 +29,7 @@ import { TestMD } from "./TestMD"
 import { Card, CardActions } from "./layout/Card"
 import { BreadCrumb, BreadCrumbItem } from "./layout/BreadCrumb"
 import { Alert } from "./layout/Alert"
+import { Avatar } from "./layout/Avatar"
 
 interface IState{
     readonly visibleDialog: boolean
@@ -570,37 +571,79 @@ export class TestLayout extends React.PureComponent<any, IState>{
                 <Tab title={<span>
                     <Icon iconKey="coins" type="far" /> Other
                 </span>}>
-                    <BreadCrumb style={{ marginBottom: 20 }}>
-                        <BreadCrumbItem onClick={() => alert("Navigate")}>Home</BreadCrumbItem>
-                        <BreadCrumbItem onClick={() => alert("Navigate")}>Second</BreadCrumbItem>
-                        <BreadCrumbItem>Third</BreadCrumbItem>
-                    </BreadCrumb>
+                    <Tabs vertical> 
+                        <Tab title={<span>
+                            <Icon iconKey="chevron-double-right" type="far" /> Breadcrumb
+                        </span>}>
+                            <BreadCrumb style={{ marginBottom: 20 }}>
+                                <BreadCrumbItem onClick={() => alert("Navigate")}>Home</BreadCrumbItem>
+                                <BreadCrumbItem onClick={() => alert("Navigate")}>Second</BreadCrumbItem>
+                                <BreadCrumbItem>Third</BreadCrumbItem>
+                            </BreadCrumb>
+                            
+                            <BreadCrumb style={{ marginBottom: 20 }}>
+                                <BreadCrumbItem onClick={() => alert("Navigate")}>
+                                    <Icon iconKey="home-alt" type="far" /> Home
+                                </BreadCrumbItem>
+                                <BreadCrumbItem onClick={() => alert("Navigate")}>Second</BreadCrumbItem>
+                                <BreadCrumbItem>Third</BreadCrumbItem>
+                            </BreadCrumb>
+                        </Tab>
 
-                    <Card title="Card with title">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quae illo vitae incidunt aperiam ea doloribus, praesentium odit ex saepe porro tenetur culpa tempora ad, iure unde eveniet sed exercitationem?
-                    </Card>
-                    <Card style={{ marginBottom: 20 }}>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam eum corrupti vel sit minima facilis laboriosam quisquam esse. Soluta quas ipsam quia dicta blanditiis ipsum debitis accusamus facere. Officia, adipisci!
+                        <Tab title={<span>
+                            <Icon iconKey="user-circle" type="far" /> Avatar
+                        </span>}>
+                            <div>
+                                <Avatar imageSource="https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg" tooltip="I'm an avatar" size="small" />
+                            </div>
+                            <div>
+                                <Avatar imageSource="https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg" />
+                            </div>
+                            <div>
+                                <Avatar imageSource="https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg" size="large" />
+                            </div>
+                            <div>
+                                <Avatar imageSource="https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg" size="xl" />
+                            </div>
+                        </Tab>
 
-                        <CardActions style={{ marginTop: 10 }}>
-                            <Button btnColor="blue" textBtn tooltip="Some action here">
-                                <Icon iconKey="mouse-pointer" large />
+                        <Tab title={<span>
+                            <Icon iconKey="address-card" type="far" /> Card
+                        </span>}>
+                            <Card title="Card with title" style={{ textAlign: "justify" }}>
+                                <Avatar imageSource="https://demos.telerik.com/kendo-ui/content/web/Customers/GOURL.jpg" style={{ float: "left", marginRight: 15 }} />
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quae illo vitae incidunt aperiam ea doloribus, praesentium odit ex saepe porro tenetur culpa tempora ad, iure unde eveniet sed exercitationem? Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde facilis sed quam reprehenderit, accusantium itaque non corporis facere totam error vel, consequatur omnis animi officia earum mollitia tempora quisquam est! Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut exercitationem corporis, ut odit magni distinctio voluptatum perferendis similique sequi modi hic sint enim totam fugit vero laudantium assumenda? Optio, quae?
+                                <div style={{ clear: "both" }}></div>
+                            </Card>
+                            <Card style={{ marginBottom: 20 }}>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam eum corrupti vel sit minima facilis laboriosam quisquam esse. Soluta quas ipsam quia dicta blanditiis ipsum debitis accusamus facere. Officia, adipisci!
+
+                                <CardActions style={{ marginTop: 10 }}>
+                                    <Button btnColor="blue" textBtn tooltip="Some action here">
+                                        <Icon iconKey="mouse-pointer" large />
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        </Tab>
+
+                        
+                        <Tab title={<span>
+                            <Icon iconKey="infinity" type="far" /> Various
+                        </span>}>
+                            <Button onClick={() => {
+                                MessageBox.show({
+                                    title: "Message",
+                                    content: "A message can be placed at: top-left, top-right, bottom-left, bottom-right. Most props you can pass me are the same as Notifications, but I can also have a title and can be closed manually.",
+                                    hideDelay: 4000
+                                })
+                            }} btnColor="green" smallBtn className="mr-2">
+                                Click to show message
                             </Button>
-                        </CardActions>
-                    </Card>
-
-                    <Button onClick={() => {
-                        MessageBox.show({
-                            title: "Message",
-                            content: "A message can be placed at: top-left, top-right, bottom-left, bottom-right. It disappears after 4 seconds (you can change the delay, obv), or it can be closed by the X icon on the top-right corner.",
-                            hideDelay: 4000
-                        })
-                    }} btnColor="green" smallBtn className="mr-2">
-                        Message
-                    </Button>
-                    <Button onClick={this.toggleMenu} btnColor="red" smallBtn className="mr-2">
-                        Menu
-                    </Button>
+                            <Button onClick={this.toggleMenu} btnColor="red" smallBtn className="mr-2">
+                                Click to toggle menu
+                            </Button>
+                        </Tab>
+                    </Tabs>
                 </Tab>
             </Tabs>
             

@@ -14,8 +14,6 @@ export class Timeline extends React.Component{
         const options = this.getOptions(),
         hideAll = options.every(o => !o.props.position || o.props.position === (options[0].props.position || "left"))
 
-        console.warn(hideAll)
-
         return <div className="dolfo-timeline">
             {options.map(o => <TimelineItem {...o.props} hideEmptySpace={hideAll} />)}
         </div>
