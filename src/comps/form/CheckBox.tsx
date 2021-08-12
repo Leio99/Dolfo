@@ -6,7 +6,6 @@ import { TooltipProps } from "../layout/Tooltip"
 
 interface IProps extends InputProps, TooltipProps{
     readonly checked?: boolean
-    readonly value?: any
 }
 
 export class CheckBox extends React.PureComponent<IProps, IProps>{ 
@@ -31,9 +30,7 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
         
         !this.props.onChange && this.setState({
             checked: !this.state.checked
-        })
-
-        this.props.onChange && this.props.onChange(this.props.value)
+        }, () => this.props.onChange && this.props.onChange(this.state.checked))
     }
 
     checkSpace = (e: any): void => {

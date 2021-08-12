@@ -10,7 +10,7 @@ export interface IColumn{
     readonly searchField?: string
     readonly tooltip?: boolean
     readonly placeTooltip?: TooltipPlacement
-    readonly type?: "date" | "time" | "check"
+    readonly type?: "date" | "time" | "check" | "boolean"
     readonly onCheckAll?: () => void
     readonly checked?: boolean
     readonly checkTooltip?: string

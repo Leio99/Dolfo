@@ -1,5 +1,5 @@
 import React from "react"
-import { getCalendar, decodeMonth, zeroBefore, formatDate, blurInput, isValidDate } from "../shared/utility"
+import { getCalendar, decodeMonth, zeroBefore, blurInput, isValidDate } from "../shared/utility"
 import { ICalendarDay } from "../shared/models/ICalendarDay"
 import { InputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
@@ -9,7 +9,7 @@ import { Constants } from "../shared/Constants"
 import TimePicker from "./TimePicker"
 import _ from "lodash"
 
-type DateFormats = "dd-mm-YYYY" | "mm-dd-YYYY" | "YYYY-mm-dd" | "d-m-YYYY" | "m-d-YYYY"
+type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
 
 interface IProps extends InputProps {
     readonly defaultValue?: Date
@@ -41,7 +41,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     composeDateFromDefault = (defaultValue: Date): IState => {
-        const date = defaultValue ? formatDate(defaultValue) : "",
+        const date = defaultValue ? this.handleDate(defaultValue.getDate(), defaultValue.getMonth(), defaultValue.getFullYear()) : "",
         currentDay = defaultValue ? defaultValue.getDate() : new Date().getDate(),
         currentYear = defaultValue ? defaultValue.getFullYear() : new Date().getFullYear(),
         currentMonth = defaultValue ? defaultValue.getMonth() :  new Date().getMonth(),
@@ -130,22 +130,22 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     handleDate = (day: number, month: number, year: number): string => {
-        const dateFormat = this.props.dateFormat || "dd-mm-YYYY"
+        const dateFormat = this.props.dateFormat
 
-        if(dateFormat === "dd-mm-YYYY")
-            return zeroBefore(day) + "-" + zeroBefore(month + 1) + "-" + year
-
-        if(dateFormat === "d-m-YYYY")
-            return day + "-" + (month + 1) + "-" + year
-
-        if(dateFormat === "mm-dd-YYYY")
-            return zeroBefore(month + 1) + "-" + zeroBefore(day) + "-" + year
-
-        if(dateFormat === "m-d-YYYY")
-            return (month + 1) + "-" + day + "-" + year
-
-        if(dateFormat === "YYYY-mm-dd")
-            return year + "-" + zeroBefore(month + 1) + "-" + zeroBefore(day)
+        switch(dateFormat){
+            case "d-m-YYYY":
+                return day + "-" + (month + 1) + "-" + year
+            case "mm-dd-YYYY":
+                return zeroBefore(month + 1) + "-" + zeroBefore(day) + "-" + year
+            case "m-d-YYYY":
+                return (month + 1) + "-" + day + "-" + year
+            case "YYYY-mm-dd":
+                return year + "-" + zeroBefore(month + 1) + "-" + zeroBefore(day)
+            case "YYYY-m-d":
+                return year + "-" + (month + 1) + "-" + day
+            default:
+                return zeroBefore(day) + "-" + zeroBefore(month + 1) + "-" + year
+        }
     }
 
     showCalendar = (): void => this.setState({ showCalendar: true })
@@ -188,19 +188,17 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     resetDate = (): void => {
-        const { props } = this,
-        currentDay = props.defaultValue ? props.defaultValue.getDate() : 1,
-        currentYear = props.defaultValue ? props.defaultValue.getFullYear() : new Date().getFullYear(),
-        currentMonth = props.defaultValue ? props.defaultValue.getMonth() :  new Date().getMonth(),
-        currentHour = props.defaultValue ? props.defaultValue.getHours() :  new Date().getHours(),
-        currentMinute = props.defaultValue ? props.defaultValue.getMinutes() :  new Date().getMinutes(),
+        const currentYear = new Date().getFullYear(),
+        currentMonth = new Date().getMonth(),
+        currentHour = new Date().getHours(),
+        currentMinute = new Date().getMinutes(),
         currentDecade = parseInt(currentYear.toString().slice(0, -1) + "0")
 
         this.setState({ 
             date: "",
             currentDecade,
             showCalendar: true,
-            currentDay,
+            currentDay: null,
             currentYear: currentYear,
             currentMonth: currentMonth,
             selectedYear: currentYear,

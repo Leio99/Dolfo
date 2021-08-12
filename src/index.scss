@@ -1,1 +1,83 @@
-@import "comps/shared/styles/dolfo"
+@import "comps/shared/styles/dolfo";
+
+.page-content{
+    display: flex;
+    height: 100vh;
+
+    .navigation-menu{
+        flex: 0 0 200px;
+        max-width: 200px;
+        overflow: auto;
+        background-color: $white;
+        padding: 0.5rem 1rem;
+        border-right: 1px solid $grey;
+
+        .navigation-menu-title{
+            font-weight: bold
+        }
+
+        .navigation-menu-item{
+            cursor: pointer;
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: $roundRadius;
+            color: $dark;
+            margin: 0.5rem 0;
+            transition: 0.2s ease;
+
+            &:hover{
+                background-color: darken($lightGrey, 5%);
+            }
+
+            &.selected{
+                background-color: $hoverBlue;
+                color: $darkBlue
+            }
+        }
+    }
+
+    .body-content{
+        $calc: calc(100% - 200px);
+        flex: 0 0 $calc;
+        max-width: $calc;
+        padding: 2rem;
+        overflow: auto;
+
+        .page-title{
+            border-bottom: 1px solid $grey;
+            padding-bottom: 1rem
+        }
+    }
+}
+
+.component-preview{
+    border: 3.5px solid $lightGrey;
+    border-radius: $smallRadius;
+    background-color: $lightGrey;
+    margin-bottom: 1rem;
+
+    h6{
+        margin: 0.5rem 0.3rem;
+        color: $dark
+    }
+
+    .component-showing{
+        padding: 1rem;
+        background-color: $white;
+        border-radius: $smallRadius;
+
+        &.code{
+            font-family: monospace;
+            white-space: pre
+        }
+    }
+
+    .component-buttons{
+        padding: 0.5rem;
+        text-align: right
+    }
+}
+
+.usage, .when-to-use, .apis{
+    margin-bottom: 1rem
+}

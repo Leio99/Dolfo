@@ -59,10 +59,9 @@
 
             td, th{
                 border: 0;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                text-align: left
+                white-space: pre-wrap;
+                text-align: left;
+                max-width: 20%
             }
 
             td.dolfo-table-noresults{

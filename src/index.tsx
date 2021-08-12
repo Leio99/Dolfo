@@ -1,9 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import * as serviceWorker from "./serviceWorker"
-import { TestLayout } from "./comps/TestLayout"
 import "./index.scss"
+import { MenuContent } from "./comps/MenuContent"
 
-ReactDOM.render(<TestLayout />, document.getElementById("root"))
+ReactDOM.render(<MenuContent />, document.getElementById("root"))
 
 serviceWorker.unregister()

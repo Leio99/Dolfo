@@ -5,7 +5,7 @@ import { CheckBox } from "../form/CheckBox"
 import { Constants } from "../shared/Constants"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import Button from "./Button"
-import { Icon } from "./Icon"
+import { CheckIcon, CloseIcon, Icon } from "./Icon"
 
 interface IProps{
     readonly columns: IColumn[],
@@ -62,8 +62,12 @@ export class Table extends React.PureComponent<IProps, IState>{
             }} disabled={data.checkDisabled} />
         }
 
-        if(col.type === "date") return formatDate(new Date(d))
-        if(col.type === "time") return getTime(d)
+        if(col.type === "date")
+            return formatDate(new Date(d))
+        if(col.type === "time")
+            return getTime(d)
+        if(col.type === "boolean")
+            return d ? (exp ? Constants.YES_TEXT : <CheckIcon />) : (exp ? Constants.NO_TEXT : <CloseIcon />)
 
         return d
     }
