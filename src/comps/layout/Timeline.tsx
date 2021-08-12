@@ -4,7 +4,6 @@ interface TimelineItemProps{
     readonly position?: "left" | "right"
     readonly style?: CSSProperties
     readonly pinColor?: string
-    readonly hideEmptySpace?: boolean
 }
 
 export class Timeline extends React.Component{
@@ -15,26 +14,24 @@ export class Timeline extends React.Component{
         hideAll = options.every(o => !o.props.position || o.props.position === (options[0].props.position || "left"))
 
         return <div className="dolfo-timeline">
-            {options.map(o => <TimelineItem {...o.props} hideEmptySpace={hideAll} />)}
+            {options.map(o => {
+                const item = <div className="dolfo-timeline-item" style={o.props.style}>
+                    {o.props.children}
+                </div>
+                return <div className={"dolfo-timeline-item-row " + (o.props.position || "left") + (hideAll ? " hide-empty" : "")}>
+                    {
+                        o.props.position !== "right" ? item : !hideAll ? <div className="dolfo-timeline-empty"></div> : null
+                    }
+                    <div className="dolfo-timeline-sign" style={{ color: o.props.pinColor }}></div>
+                    {
+                        o.props.position === "right" ? item : !hideAll ? <div className="dolfo-timeline-empty"></div> : null
+                    }
+                </div>
+            })}
         </div>
     }
 }
 
 export class TimelineItem extends React.Component<TimelineItemProps>{
-    render = (): JSX.Element => {
-        const { props } = this,
-        item = <div className="dolfo-timeline-item" style={props.style}>
-            {props.children}
-        </div>
-
-        return <div className={"dolfo-timeline-item-row " + (props.position || "left") + (props.hideEmptySpace ? " hide-empty" : "")}>
-            {
-                props.position !== "right" ? item : !props.hideEmptySpace ? <div className="dolfo-timeline-empty"></div> : null
-            }
-            <div className="dolfo-timeline-sign" style={{ color: props.pinColor }}></div>
-            {
-                props.position === "right" ? item : !props.hideEmptySpace ? <div className="dolfo-timeline-empty"></div> : null
-            }
-        </div>
-    }
+    render = (): JSX.Element => <></>
 }

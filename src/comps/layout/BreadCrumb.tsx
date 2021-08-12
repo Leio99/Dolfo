@@ -9,7 +9,6 @@ interface IProps{
 
 interface BredcrumbItemProps{
     readonly onClick?: () => void
-    readonly isNotLast?: boolean
 }
 
 export class BreadCrumb extends React.PureComponent<IProps>{
@@ -26,9 +25,15 @@ export class BreadCrumb extends React.PureComponent<IProps>{
         return <div className={"dolfo-breadcrumb" + (props.className ? (" " + props.className) : "")} style={props.style}>
             {
                 options.map((opt, i) => {
-                    return <BreadCrumbItem {...opt.props} isNotLast={!!options[i + 1]}>
-                        {opt.props.children}
-                    </BreadCrumbItem>
+                    return <div className="dolfo-breadcrumb-item">
+                        <div className={"dolfo-breadcrumb-item-inner" + (opt.props.onClick ? " clickable" : "")} onClick={opt.props.onClick} data-tooltip={opt.props.onClick && Constants.NAVIGATE_BREADCRUMB}>
+                            {opt.props.children}
+                        </div>
+            
+                        {!!options[i + 1] && <div className="dolfo-breadcrumb-arrow">
+                            <Icon iconKey="chevron-right" type="fal" />    
+                        </div>}
+                    </div>
                 })
             }
         </div>
@@ -36,17 +41,5 @@ export class BreadCrumb extends React.PureComponent<IProps>{
 }
 
 export class BreadCrumbItem extends React.PureComponent<BredcrumbItemProps>{
-    render = (): JSX.Element => {
-        const { props } = this
-
-        return <div className="dolfo-breadcrumb-item">
-            <div className={"dolfo-breadcrumb-item-inner" + (props.onClick ? " clickable" : "")} onClick={props.onClick} data-tooltip={props.onClick && Constants.NAVIGATE_BREADCRUMB}>
-                {props.children}
-            </div>
-
-            {props.isNotLast && <div className="dolfo-breadcrumb-arrow">
-                <Icon iconKey="chevron-right" type="fal" />    
-            </div>}
-        </div>
-    }
+    render = (): JSX.Element => <></>
 }
