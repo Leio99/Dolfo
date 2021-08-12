@@ -13,13 +13,14 @@ export class WhenToUse extends React.Component{
 
 interface ApisProps{
     readonly title?: string
+    readonly id?: string
     readonly data: IDataColumn[]
     readonly addTooltip?: boolean
 }
 
 export class Apis extends React.Component<ApisProps>{
     render = (): JSX.Element => {
-        const { data, addTooltip, title } = this.props,
+        const { data, addTooltip, title, id } = this.props,
         columns: IColumn[] = [
             { field: "name", label: "Name"},
             { field: "desc", label: "Description", align: "justify" },
@@ -29,7 +30,7 @@ export class Apis extends React.Component<ApisProps>{
             { field: "fnParams", label: "Function parameters" }
         ]
 
-        return <div className="apis">
+        return <div className="apis" id={id}>
             <h3>{title || "APIs"}</h3>
             <Table columns={columns} data={addTooltip ? data.concat([
                 {

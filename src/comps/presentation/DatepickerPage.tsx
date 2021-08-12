@@ -88,7 +88,9 @@ export class DatepickerPage extends React.Component{
                 desc: "Custom icon to show.",
                 type: "BaseIconProps",
                 required: false,
-                default: "null (shows calendar icon)"
+                default: "null (shows calendar icon)",
+                onDoubleClick: () => document.querySelector(".body-content").scrollTo(0, document.getElementById("iconProps").getBoundingClientRect().top),
+                rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {
                 name: "className",
@@ -174,7 +176,7 @@ export class DatepickerPage extends React.Component{
             },
         ]} />
 
-        <Apis title="BaseIconProps" data={[
+        <Apis id="iconProps" title="BaseIconProps" data={[
             {
                 name: "iconKey",
                 desc: "The key of the icon.",
