@@ -20,6 +20,8 @@ import { MasterdetailPage } from "./MasterdetailPage"
 import { TablePage } from "./TablePage"
 import { SidemenuPage } from "./SidemenuPage"
 import { MessageboxPage } from "./MessageboxPage"
+import { NotificationPage } from "./NotificationPage"
+import { ProgressPage } from "./ProgressPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage },
@@ -43,8 +45,8 @@ export const MenuItems = [
     { link: "layout/masterdetail", children: "Master-Detail", section: "layout", component: MasterdetailPage },
     { link: "layout/sidemenu", children: "Side menu", section: "layout", component: SidemenuPage },
     { link: "layout/messages", children: "Message box", section: "layout", component: MessageboxPage },
-    { link: "layout/notifications", children: "Notifications", section: "layout", component: null },
-    { link: "layout/progress", children: "Progress", section: "layout", component: null },
+    { link: "layout/notifications", children: "Notifications", section: "layout", component: NotificationPage },
+    { link: "layout/progress", children: "Progress", section: "layout", component: ProgressPage },
     { link: "layout/slideshow", children: "Slideshow", section: "layout", component: null },
     { link: "layout/status", children: "Status tags", section: "layout", component: null },
     { link: "layout/stepper", children: "Stepper", section: "layout", component: null },

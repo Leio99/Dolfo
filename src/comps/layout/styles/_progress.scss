@@ -33,6 +33,15 @@
     background-color: $lightGrey;
     position: relative;
     margin-top: 25px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15);
+
+    &.medium{
+        height: 20px
+    }
+
+    &.large{
+        height: 30px
+    }
 
     .percent-text{
         position: absolute;

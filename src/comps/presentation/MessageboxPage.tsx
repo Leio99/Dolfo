@@ -62,7 +62,7 @@ export class MessageboxPage extends React.Component{
             code={'<Button btnColor="blue" size="small" onClick={() => MessageBox.show({\n\ttitle: "Hi there!",\n\tcontent: "I won\'t close automatically. Click the close X",\n\thideDelay: "never"\n})} style={{ marginRight: 5 }}>Never closes</Button>\n\n<Button btnColor="blue" size="small" onClick={() => MessageBox.show({\n\ttitle: "Hi there!",\n\tcontent: "I close after one second, watch out!",\n\thideDelay: 1000\n})}>Closes after 1 second</Button>'}
         />
 
-        <p className="notes">Note: <span>the messagebox function returns a <strong>Closable</strong> object. You can put your message inside a variable and call <em>message.close()</em></span></p>
+        <p className="notes">Note: <span>the messagebox function returns a <strong>Closable</strong> object. You can put your message inside a variable and call <em>message.close()</em> to close it.</span></p>
 
         <Apis title="Function properties" data={[
             {

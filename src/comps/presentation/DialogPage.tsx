@@ -268,7 +268,7 @@ export class DialogPage extends React.Component<any, {
 
         <div className="apis">
             <h3>Useful functions (accessible via <em>Dialog.functionName(params)</em>)</h3>
-            <p className="notes">Note: <span>all these functions return a <strong>Closable</strong> object. You can put your dialog inside a variable and call <em>dialog.close()</em></span></p>
+            <p className="notes">Note: <span>all these functions return a <strong>Closable</strong> object. You can put your dialog inside a variable and call <em>dialog.close()</em> to close it.</span></p>
             <Table columns={[
                 { field: "name", label: "Name" },
                 { field: "desc", label: "Description" },
@@ -283,35 +283,17 @@ export class DialogPage extends React.Component<any, {
                 {
                     name: "infoDialog",
                     desc: "Shows info dialog.",
-                    params: <>
-                        Normal dialog properties (object, required) plus:
-                        <ul>
-                            <li>type: dialog type (success, info, warning, error), not required</li>
-                            <li>icon: additional icon near the title (JSX), not required</li>
-                        </ul>
-                    </>
+                    params: <DialogProperties />
                 },
                 {
                     name: "openDialog",
                     desc: "Shows generic dialog.",
-                    params: <>
-                        Normal dialog properties (object, required) plus:
-                        <ul>
-                            <li>type: dialog type (success, info, warning, error), not required</li>
-                            <li>icon: additional icon near the title (JSX), not required</li>
-                        </ul>
-                    </>
+                    params: <DialogProperties />
                 },
                 {
                     name: "openDialogComponent",
                     desc: "Shows a dialog component from another module.",
-                    params: <>
-                        Normal dialog properties (object, required) plus:
-                        <ul>
-                            <li>type: dialog type (success, info, warning, error), not required</li>
-                            <li>icon: additional icon near the title (JSX), not required</li>
-                        </ul>
-                    </>,
+                    params: <DialogProperties />,
                     other: <>
                         The component opened gets an additional prop passed in: close (function). You can also pass custom props to it. <Button type="text" btnColor="darkblue" onClick={() => Dialog.openDialogComponent(Example)} style={{ verticalAlign: "top" }}>Click here to open example</Button>
                     </>
@@ -342,4 +324,33 @@ class Example extends React.Component<ComponentAsDialogProps>{
             </Tab>
         </Tabs>
     </Dialog>
+}
+
+class DialogProperties extends React.Component{
+    render = (): JSX.Element => <>
+        Normal dialog properties (object, required) plus:
+
+        <Table style={{ marginTop: 10 }} columns={[
+            { field: "name", label: "Name" },
+            { field: "desc", label: "Description" },
+            { field: "type", label: "Type" },
+            { field: "required", label: "Required", type: "boolean", align: "center" },
+            { field: "default", label: "Default" },
+        ]} data={[
+            {
+                name: "type",
+                desc: "Defines the dialog type.",
+                required: false,
+                type: "string (success, info, warning, error)",
+                default: "null"
+            },
+            {
+                name: "icon",
+                desc: "Additional icon near the title.",
+                required: false,
+                type: "JSX",
+                default: "null"
+            }
+        ]} />
+    </>
 }

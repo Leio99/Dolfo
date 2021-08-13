@@ -4,6 +4,7 @@ import { Router } from "react-router"
 import { MenuItems } from "./presentation/Menu"
 import { Route, Switch } from "react-router-dom"
 import { initializeTooltips } from "./layout/Tooltip"
+import ReactDOM from "react-dom"
 
 const homepage = require("../../package.json").homepage
 
@@ -11,7 +12,17 @@ export const hashHistory = createBrowserHistory()
 
 export class MenuContent extends React.Component{
 
-    componentDidMount = initializeTooltips
+    componentDidMount = () => {
+        initializeTooltips()
+
+        if(window.location.pathname !== homepage){
+            const nav = (ReactDOM.findDOMNode(this) as Element).querySelector(".navigation-menu"),
+            selected = nav.querySelector(".navigation-menu-item.selected"),
+            top = selected.getBoundingClientRect().top - 10
+
+            nav.scrollTo(0, top)
+        }
+    }
     
     getMenuProps = (link: string) => {
         return {

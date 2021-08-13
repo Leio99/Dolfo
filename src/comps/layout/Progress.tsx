@@ -8,6 +8,7 @@ interface IProps {
     readonly convertCommas?: boolean
     readonly circular?: boolean
     readonly color?: BaseColors
+    readonly barSize?: "small" | "medium" | "large"
     readonly circleWidth?: number | string
     readonly loading?: boolean
     readonly loadingText?: string | JSX.Element
@@ -25,7 +26,17 @@ export class Progress extends React.PureComponent<IProps>{
 
         if(props.circular){
             return <svg viewBox="0 0 36 36" className={"dolfo-circular-progress" + (props.className ? (" " + props.className) : "")} style={{ width, height: width }}>
-                <path className="dolfo-progress-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                <defs>
+                    <filter id="inset-shadow">
+                        <feFlood flood-color="rgba(0, 0, 0, 0.15)"/>
+                        <feComposite operator="out" in2="SourceGraphic"/>
+                        <feGaussianBlur stdDeviation="2"/>
+                        <feComposite operator="atop" in2="SourceGraphic"/>
+                    </filter>
+                </defs>
+            
+                <path filter="url(#inset-shadow)" className="dolfo-progress-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                
                 <path className={"dolfo-progress-circle line-" + color} strokeDasharray={percent + ", 100"} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 <text x="18" y="20.35" className="dolfo-progress-percentage">
                     {props.customCircleText || (formattedPercent + "%")}
@@ -33,7 +44,7 @@ export class Progress extends React.PureComponent<IProps>{
             </svg>
         }
 
-        return <div className={"dolfo-progress-line " + (props.className ? (" " + props.className) : "") + (props.loading ? " progress-loading" : "")}>
+        return <div className={"dolfo-progress-line " + (props.className ? (" " + props.className) : "") + (props.loading ? " progress-loading" : "") + " " + (props.barSize || "small")}>
             <span className="percent-text">
                 {props.loading ? (props.loadingText || <LoadingIcon spinning />) : (formattedPercent + "%")}
             </span>

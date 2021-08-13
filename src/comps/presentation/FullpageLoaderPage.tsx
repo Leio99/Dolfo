@@ -38,7 +38,7 @@ export class FullpageLoaderPage extends React.Component{
             code={'<Button btnColor="blue" size="small" onClick={() => {\n\tconst loader = FullLoader.show({ type: "balls", loadingText: "The website is loading..." })\n\n\tsetTimeout(loader.close, 1000)\n}}>Click to show</Button>'}
         />
 
-        <p className="notes">Note: <span>the full loader function returns a <strong>Closable</strong> object. You can put your loader inside a variable and call <em>loader.close()</em></span></p>
+        <p className="notes">Note: <span>the full loader function returns a <strong>Closable</strong> object. You can put your loader inside a variable and call <em>loader.close()</em> to close it.</span></p>
 
         <Apis title="Function properties" data={[
             {
