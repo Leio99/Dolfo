@@ -27,12 +27,12 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 	}
 	
 	componentDidMount = (): void => {
-		this.handleAccordions()
+		this.handleAccordions(true)
 
-		window.addEventListener("resize", this.handleAccordions)
+		window.addEventListener("resize", () => this.handleAccordions())
 	}
 
-	componentWillUnmount = (): void => window.removeEventListener("resize", this.handleAccordions)
+	componentWillUnmount = (): void => window.removeEventListener("resize", () => this.handleAccordions())
     
     componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.opened !== this.props.opened){
@@ -44,10 +44,11 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 	
 	toggleAccordion = (): void => this.setState({ opened: !this.state.opened }, this.handleAccordions)
 
-	handleAccordions = (): void => {
+	handleAccordions = (load = false): void => {
 		const accordion = ReactDOM.findDOMNode(this) as HTMLElement,
 		content = accordion.children[1] as HTMLElement,
-		isOpened = accordion.classList.contains("opened")
+		isOpened = accordion.classList.contains("opened"),
+		fn = () => content.style.maxHeight = isOpened ? content.scrollHeight + "px" : "0"
 
 		if(!isOpened){
 			content.style.maxHeight = content.scrollHeight + "px"
@@ -55,7 +56,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 			setTimeout(() => content.classList.remove("closing"))
 		}
 
-		setTimeout(() => content.style.maxHeight = isOpened ? content.scrollHeight + "px" : "0")
+		load ? fn() : setTimeout(fn)
 
 		setTimeout(() => {
 			if(isOpened) 
