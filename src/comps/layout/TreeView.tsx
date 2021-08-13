@@ -123,12 +123,12 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
             <td>
                 <span style={{ paddingLeft: (25 * subNode) + (hasChildren ? 0 : subNode === 0 ? 0 : 25) }}></span>
                 {
-                    hasChildren ? <Button btnColor="black" textBtn onClick={() => this.toggleNode(node, index)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
+                    hasChildren ? <Button btnColor="black" type="text" onClick={() => this.toggleNode(node, index)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
                         <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="mr-2" />
                     </Button> : null
                 }
 
-                <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} textBtn onClick={() => this.toggleAllNode(node, index)} tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
+                <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} type="text" onClick={() => this.toggleAllNode(node, index)} tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
                     <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="mr-2" large />
                 </Button> {this.getLabel(node)}
             </td>

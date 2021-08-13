@@ -1,6 +1,6 @@
 import React from "react"
 import DatePicker from "../form/DatePicker"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class DatepickerPage extends React.Component{
     render = (): JSX.Element => <>
@@ -77,8 +77,8 @@ export class DatepickerPage extends React.Component{
                 default: "null"
             },
             {
-                name: "style",
-                desc: "Additional styles to apply to the datepicker.",
+                name: "wrapperStyle",
+                desc: "Additional styles to apply to the input wrapper.",
                 type: "CSSProperties",
                 required: false,
                 default: "null"
@@ -89,7 +89,7 @@ export class DatepickerPage extends React.Component{
                 type: "BaseIconProps",
                 required: false,
                 default: "null (shows calendar icon)",
-                onDoubleClick: () => document.querySelector(".body-content").scrollTo(0, document.getElementById("iconProps").getBoundingClientRect().top),
+                onDoubleClick: () => window.location.href = "#iconProps",
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {
@@ -173,23 +173,9 @@ export class DatepickerPage extends React.Component{
                 required: false,
                 default: "null",
                 fnParams: "Event"
-            },
-        ]} />
-
-        <Apis id="iconProps" title="BaseIconProps" data={[
-            {
-                name: "iconKey",
-                desc: "The key of the icon.",
-                type: "string (FontAwesome icon key)",
-                required: true
-            },
-            {
-                name: "type",
-                desc: "The type of the FontAwesome icon.",
-                type: "string (fa, far, fal, fad, fas, fab)",
-                default: "fa",
-                required: false
             }
         ]} />
+
+        <IconApis />
     </>
 }

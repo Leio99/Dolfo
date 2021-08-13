@@ -45,7 +45,7 @@ export class MasterDetail extends React.Component<IProps, IState>{
                             this.setState({ selectedItem: v })
                             onOpenDetail && onOpenDetail(v)
                         },
-                        actions: <Button onClick={() => tmp.onDoubleClick()} btnColor="darkblue" textBtn tooltip={Constants.OPEN_DETAIL}>
+                        actions: <Button onClick={() => tmp.onDoubleClick()} btnColor="darkblue" type="text" tooltip={Constants.OPEN_DETAIL}>
                             <DetailIcon large />
                         </Button>
                     }

@@ -4,7 +4,6 @@ import { LoadingIcon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 
 interface IProps extends InputProps{
-    readonly value?: any
     readonly checked?: boolean
     readonly loading?: boolean
 }
@@ -31,9 +30,7 @@ export class Switch extends React.PureComponent<IProps, IProps>{
         
         !this.props.onChange && this.setState({
             checked: !this.state.checked
-        })
-
-        this.props.onChange && this.props.onChange(this.props.value)
+        }, () => this.props.onChange && this.props.onChange(this.state.checked))
     }
 
     checkSpace = (e: any): void => {

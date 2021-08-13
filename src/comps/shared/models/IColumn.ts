@@ -1,29 +1,27 @@
 import { CSSProperties } from "react"
-import { TooltipPlacement } from "../../layout/Tooltip"
+import { TooltipProps } from "../../layout/Tooltip"
 
-export interface IColumn{
+export interface IColumn extends TooltipProps<boolean>{
     readonly field?: string
     readonly label?: string
     readonly width?: number | string
     readonly align?: "left" | "right" | "center" | "justify"
     readonly canSearch?: boolean
     readonly searchField?: string
-    readonly tooltip?: boolean
-    readonly placeTooltip?: TooltipPlacement
     readonly type?: "date" | "time" | "check" | "boolean"
-    readonly onCheckAll?: () => void
     readonly checked?: boolean
     readonly checkTooltip?: string
     readonly exportable?: boolean
     readonly exportField?: string
+    readonly onCheckAll?: () => void
 }
 
 export interface IDataColumn{
-    onDoubleClick?: () => void
+    [key: string]: any
     rowStyle?: CSSProperties
-    onCheckChange?: (obj: any) => void
     checked?: boolean
     checkDisabled?: boolean
     hideCheck?: boolean
-    [key: string]: any
+    onCheckChange?: () => void
+    onDoubleClick?: () => void
 }

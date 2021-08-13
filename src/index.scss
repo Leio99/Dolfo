@@ -1,5 +1,8 @@
 @import "comps/shared/styles/dolfo";
 
+ul{
+    margin-top: 0
+}
 .page-content{
     display: flex;
     height: 100vh;
@@ -64,12 +67,7 @@
     .component-showing{
         padding: 1rem;
         background-color: $white;
-        border-radius: $smallRadius;
-
-        &.code{
-            font-family: monospace;
-            white-space: pre
-        }
+        border-radius: $smallRadius
     }
 
     .component-buttons{
@@ -80,4 +78,25 @@
 
 .usage, .when-to-use, .apis{
     margin-bottom: 1rem
+}
+
+.notes{
+    margin-bottom: 15px;
+    font-size: small
+}
+
+code, .code{
+    font-family: monospace;
+    white-space: pre-wrap;
+
+    &:not(.code){
+        background-color: $lightGrey;
+        padding: 1rem;
+        display: block;
+        border-radius: $smallRadius;
+
+        &:first-child{
+            margin-bottom: 0.6rem
+        }
+    }
 }

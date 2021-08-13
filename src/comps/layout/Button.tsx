@@ -8,11 +8,8 @@ export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" 
 export type ButtonColors = BaseColors | "white"
 
 export interface ButtonProps extends TooltipProps{
-    readonly type?: "button" | "submit" | "popup"
-    readonly fullSize?: boolean
-    readonly smallBtn?: boolean
-    readonly textBtn?: boolean
-    readonly bigBtn?: boolean
+    readonly type?: "button" | "submit" | "popup" | "text"
+    readonly size?: "full" | "small" | "big"
     readonly loading?: boolean
     readonly circleBtn?: boolean
     readonly btnColor?: ButtonColors
@@ -52,17 +49,12 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         if(btnType === "popup"){
             const popupDir = props.popupPosition || "bottom"
 
-            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "") + (props.disabled ? " disabled" : "")} onClick={this.togglePopup} data-tooltip={props.tooltip} data-place={props.placeTooltip}>
+            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "") + (props.disabled ? " disabled" : "")} onClick={this.togglePopup} data-tooltip={props.tooltip} data-place={props.placeTooltip} style={props.style}>
                 <div className={"dolfo-popup-options" + (openPopup ? " show" : "") + (" pos-" + popupDir)}>
                     {
-                        props.options?.map(opt => {
-                            if(!opt.hiddenIf)
-                                return <div className={"dolfo-popup-option" + (opt.disabled ? " disabled" : "")} onClick={!opt.disabled && !props.disabled ? opt.onClick : (e: any) => e.stopPropagation()}>
-                                    {opt.text}
-                                </div>
-
-                            return null
-                        })
+                        props.options?.map(opt => <div className={"dolfo-popup-option" + (opt.disabled ? " disabled" : "")} onClick={!opt.disabled && !props.disabled ? opt.onClick : (e: any) => e.stopPropagation()}>
+                            {opt.text}
+                        </div>)
                     }
                 </div>
 
@@ -78,15 +70,15 @@ class Button extends React.PureComponent<ButtonProps, IState>{
             </div>
         }
 
-        return <button type={btnType} className={
+        return <button type={btnType === "text" ? "button" : btnType} className={
             "dolfo-button" + 
             (props.btnColor ? (" btn-" + props.btnColor) : "") +
             (props.className ? " " + props.className : "") +
-            (props.fullSize ? " full-size" : "") + 
-            (props.smallBtn ? " small-button" : "") + 
-            (props.textBtn ? " text-btn" : "") + 
+            (props.size === "full" ? " full-size" : "") + 
+            (props.size === "small" ? " small-button" : "") + 
+            (props.type === "text" ? " text-btn" : "") + 
             (props.circleBtn ? " circle-btn" : "") + 
-            (props.bigBtn ? " big-button" : "")
+            (props.size === "big" ? " big-button" : "")
         } data-tooltip={props.tooltip} data-place={props.placeTooltip} style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick}>
             {props.loading && <LoadingIcon spinning />} {props.circleBtn && props.loading ? null : props.children}
         </button>

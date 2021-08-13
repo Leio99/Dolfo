@@ -134,36 +134,36 @@ export class TestTree extends TreeView{
     }
 
     getActions = (node: TreeNode): JSX.Element => {
-        if(node.type === "concorrente" || node.type === "conduttore") return <Button textBtn onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")} tooltip="Apri Wikipedia" btnColor="black">
+        if(node.type === "concorrente" || node.type === "conduttore") return <Button type="text" onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")} tooltip="Apri Wikipedia" btnColor="black">
             <Icon iconKey="wikipedia-w" type="fab" large />
         </Button>
 
         if(node.type === "comico") return <>
             {
-                !node.data.composizione && <Button textBtn btnColor="darkblue" tooltip="Dati" className="mr-3" onClick={() => this.openDettaglioComico(node.data)}>
+                !node.data.composizione && <Button type="text" btnColor="darkblue" tooltip="Dati" className="mr-3" onClick={() => this.openDettaglioComico(node.data)}>
                     <Icon iconKey="id-card" type="far" large />
                 </Button>
             }
 
-            <Button textBtn btnColor="red" tooltip={this.hasChildren(node) ? "Elimina gruppo" : "Elimina comico"}>
+            <Button type="text" btnColor="red" tooltip={this.hasChildren(node) ? "Elimina gruppo" : "Elimina comico"}>
                 <DeleteIcon large />
             </Button>
         </>
 
-        if(node.type === "luogo") return <Button textBtn btnColor="darkblue" tooltip="Dettagli" onClick={() => this.openDettaglioCanale(node.data)}>
+        if(node.type === "luogo") return <Button type="text" btnColor="darkblue" tooltip="Dettagli" onClick={() => this.openDettaglioCanale(node.data)}>
             <Icon iconKey="tv" type="far" large />
         </Button>
 
         if(node.type === "componente") return <>
-            <Button textBtn btnColor="darkblue" tooltip="Dati" className="mr-3" onClick={() => this.openDettaglioComico(node.data)}>
+            <Button type="text" btnColor="darkblue" tooltip="Dati" className="mr-3" onClick={() => this.openDettaglioComico(node.data)}>
                 <Icon iconKey="id-card" type="far" large />
             </Button>
 
-            <Button textBtn btnColor="orange" tooltip="Modifica" className="mr-3">
+            <Button type="text" btnColor="orange" tooltip="Modifica" className="mr-3">
                 <EditIcon large />
             </Button>
 
-            <Button textBtn btnColor="red" tooltip="Rimuovi dal gruppo">
+            <Button type="text" btnColor="red" tooltip="Rimuovi dal gruppo">
                 <CloseCircleIcon large />
             </Button>
         </>

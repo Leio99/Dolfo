@@ -7,9 +7,9 @@ interface IProps{
 	readonly title: string | JSX.Element
 	readonly opened?: boolean
 	readonly wrapperStyle?: CSSProperties
+	readonly wrapperClassName?: string
 	readonly style?: CSSProperties
 	readonly className?: string
-	readonly wrapperClassName?: string
 	readonly disabled?: boolean
 }
 

@@ -19,7 +19,7 @@ export class Header extends React.PureComponent<IProps>{
 
         return <div className={"dolfo-header dolfo-header-" + (props.menuColor || "blue") + (props.className ? (" " + props.className) : "")} style={props.style}>
             {
-                props.menuTogglerFn && <Button circleBtn bigBtn onClick={this.props.menuTogglerFn} btnColor={props.menuColor || "blue"} className="dolfo-menu-button" style={props.menuTogglerStyle}>
+                props.menuTogglerFn && <Button circleBtn size="big" onClick={this.props.menuTogglerFn} btnColor={props.menuColor || "blue"} className="dolfo-menu-button" style={props.menuTogglerStyle}>
                     <Icon {...icon} />
                 </Button>
             }

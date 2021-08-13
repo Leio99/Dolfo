@@ -11,7 +11,6 @@ interface IProps extends InputProps{
     readonly expandTextarea?: boolean
     readonly rows?: number
     readonly togglePassword?: boolean
-    readonly placeHolder?: string
     readonly minLength?: number
     readonly maxLength?: number
     readonly value?: string
@@ -54,9 +53,9 @@ export class TextInput extends React.PureComponent<IProps, IState>{
 
     toggleInputType = (): void => this.setState({ inputType: this.state.inputType === "password" ? "text" : "password" })
 
-    onBlur = (): void => this.setState({ focused: false })
+    onBlur = (e: any): void => this.setState({ focused: false },  () => this.props.onBlur && this.props.onBlur(e))
 
-    onFocus = (): void => this.setState({ focused: true })
+    onFocus = (e: any): void => this.setState({ focused: true }, () => this.props.onFocus && this.props.onFocus(e))
 
     onChange = (e: any): void => {
         if(this.props.type === "number"){
@@ -137,9 +136,8 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     autoFocus={props.autoFocus}
                     onChange={this.onChange}
                     disabled={props.disabled}
-                    placeholder={props.placeHolder}
-                    maxLength={props.maxLength}
-                    minLength={props.minLength}
+                    maxLength={props.type !== 'number' && props.maxLength}
+                    minLength={props.type !== 'number' && props.minLength}
                     value={value}
                     readOnly={props.readonly}
                     ref={r => input = r}
@@ -155,7 +153,6 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     name={props.name}
                     onChange={this.onChange}
                     disabled={props.disabled}
-                    placeholder={props.placeHolder}
                     maxLength={props.maxLength}
                     minLength={props.minLength}
                     className={props.className}

@@ -2,8 +2,8 @@ import _ from "lodash"
 
 export type TooltipPlacement = "top" | "left" | "bottom" | "right"
 
-export interface TooltipProps{
-    readonly tooltip?: string
+export interface TooltipProps<TooltipType = string>{
+    readonly tooltip?: TooltipType
     readonly placeTooltip?: TooltipPlacement
 }
 

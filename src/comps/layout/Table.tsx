@@ -1,5 +1,5 @@
 import _ from "lodash"
-import React from "react"
+import React, { CSSProperties } from "react"
 import { downloadCSV, formatDate, getTime } from "../shared/utility"
 import { CheckBox } from "../form/CheckBox"
 import { Constants } from "../shared/Constants"
@@ -13,6 +13,7 @@ interface IProps{
     readonly className?: string
     readonly exportable?: boolean
     readonly exportFormat?: ("csv")[]
+    readonly style?: CSSProperties
 }
 
 interface IState{
@@ -56,7 +57,7 @@ export class Table extends React.PureComponent<IProps, IState>{
         if(col.type === "check" && !data.hideCheck){
             return <CheckBox checked={data.checked} onChange={() => {
                 this.isPressingCheckbox = true
-                data.onCheckChange(data)
+                data.onCheckChange && data.onCheckChange()
 
                 setTimeout(() => this.isPressingCheckbox = false, 100)
             }} disabled={data.checkDisabled} />
@@ -67,7 +68,7 @@ export class Table extends React.PureComponent<IProps, IState>{
         if(col.type === "time")
             return getTime(d)
         if(col.type === "boolean")
-            return d ? (exp ? Constants.YES_TEXT : <CheckIcon />) : (exp ? Constants.NO_TEXT : <CloseIcon />)
+            return d ? (exp ? Constants.YES_TEXT : <CheckIcon tooltip={Constants.YES_TEXT} />) : (exp ? Constants.NO_TEXT : <CloseIcon tooltip={Constants.NO_TEXT} />)
 
         return d
     }
@@ -122,14 +123,14 @@ export class Table extends React.PureComponent<IProps, IState>{
         data = activeFilterKey === "" ? ajdustData : ajdustData.filter(d => d[activeFilterKey].toLowerCase().indexOf(filter[activeFilterKey].toLowerCase()) >= 0)
  
         return <div className={"dolfo-table-content" + (props.className ? (" " + props.className) : "")}>
-            <table className="dolfo-table">
+            <table className="dolfo-table" style={props.style}>
 
                 {
                     data.length > 0 && props.exportable && <thead className="dolfo-table-actions">
                         <tr>
                             <td colSpan={props.columns.length}>
                                 {
-                                    props.exportable && (!props.exportFormat || props.exportFormat.includes("csv")) && <Button textBtn btnColor="green" tooltip={Constants.EXPORT_CSV_TEXT} onClick={this.exportCSV}>
+                                    props.exportable && (!props.exportFormat || props.exportFormat.includes("csv")) && <Button type="text" btnColor="green" tooltip={Constants.EXPORT_CSV_TEXT} onClick={this.exportCSV}>
                                         <Icon iconKey="file-csv" className="fa-2x" />
                                     </Button>
                                 }
@@ -146,7 +147,7 @@ export class Table extends React.PureComponent<IProps, IState>{
  
                                 {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" tooltip={Constants.FILTER_TEXT} onClick={() => this.changeActiveFiler(col.field)} />}
 
-                                {col.label}
+                                {col.type !== "check" && col.label}
 
                                 {col.canSearch && activeFilter === col.field && <input type="text" value={filter[col.searchField || col.field]} onChange={e => this.changeFilter(col.searchField || col.field, e.target.value)} className="dolfo-column-search-input" onBlur={this.blurSearch} autoFocus placeholder={Constants.SEARCH_PLACEHOLDER} />}
                             </th>)

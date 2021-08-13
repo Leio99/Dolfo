@@ -1,7 +1,7 @@
 import React from "react"
 import { Option } from "../form/Option"
 import { RadioButton } from "../form/RadioButton"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { ResultCode, WhenToUse, Usage, Apis, OptionApis } from "./Layouts"
 
 export class RadiobuttonPage extends React.Component{
     render = (): JSX.Element => <>
@@ -31,11 +31,19 @@ export class RadiobuttonPage extends React.Component{
                 name: "Element children",
                 desc: "The radio buttons to put inside the RadioButton wrapper.",
                 type: "Option",
-                required: true
+                required: true,
+                onDoubleClick: () => window.location.href = "#optionProps",
+                rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {
                 name: "controlName",
                 desc: "The control name to reference the radio buttons.",
+                type: "string",
+                required: true
+            },
+            {
+                name: "defaultValue",
+                desc: "The default value of the radio button (must be the same value of one of the options inside).",
                 type: "string",
                 required: true
             },
@@ -77,19 +85,6 @@ export class RadiobuttonPage extends React.Component{
             }
         ]} />
 
-        <Apis title="Option properties" data={[
-            {
-                name: "value",
-                desc: "The value of the option.",
-                type: "any",
-                required: true
-            },
-            {
-                name: "label",
-                desc: "The label of the option.",
-                type: "string",
-                required: true
-            }
-        ]} />
+        <OptionApis />
     </>
 }

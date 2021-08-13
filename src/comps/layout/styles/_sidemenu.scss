@@ -33,6 +33,24 @@ $menuWidth: 350px;
         }
     }
 
+    &.dolfo-side-menu-white{
+        color: darken($grey, 20%);
+
+        .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
+            &.selected{
+                color: darken($grey, 40%) !important
+            }
+
+            &:hover{
+                color: darken($grey, 25%) !important
+            }
+        }
+
+        .dolfo-submenu.opened > .dolfo-submenu-title{
+            color: darken($grey, 40%) !important
+        }
+    }
+
     .dolfo-side-menu-close{
         display: none
     }

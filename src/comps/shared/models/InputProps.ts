@@ -19,4 +19,6 @@ export interface InputProps{
     readonly onPaste?: (e: any) => void
     readonly onCopy?: (e: any) => void
     readonly onClick?: (e: any) => void
+    readonly onFocus?: (e: any) => void
+    readonly onBlur?: (e: any) => void
 }

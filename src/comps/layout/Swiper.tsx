@@ -53,7 +53,7 @@ export class Swipe extends React.PureComponent<SwipeProps>{
 
         return <div className={"dolfo-swipe" + (props.detail ? (" detail-swipe" + (props.opened ? " opened" : "")) : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             {props.detail && <div className="dolfo-swipe-header">
-                <Button textBtn btnColor="grey" onClick={props.onGoBack}>
+                <Button type="text" btnColor="grey" onClick={props.onGoBack}>
                     <Icon iconKey="chevron-left" /> {Constants.BACK_TEXT}
                 </Button>  
             </div>}

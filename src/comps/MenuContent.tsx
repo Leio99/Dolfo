@@ -5,9 +5,12 @@ import { MenuItems } from "./presentation/Menu"
 import { Route, Switch } from "react-router-dom"
 import { initializeTooltips } from "./layout/Tooltip"
 
+const homepage = require("../../package.json").homepage
+
 export const hashHistory = createBrowserHistory()
 
 export class MenuContent extends React.Component{
+
     componentDidMount = initializeTooltips
     
     getMenuProps = (link: string) => {
@@ -20,7 +23,7 @@ export class MenuContent extends React.Component{
     render = (): JSX.Element => <Router history={hashHistory}>
         <Route render={({ location }) => <div className="page-content">
             <div className="navigation-menu">
-                <MenuItem link="/">Getting started</MenuItem>
+                <MenuItem link="">Getting started</MenuItem>
 
                 <div className="navigation-menu-title">Form</div>
                 {
@@ -35,7 +38,7 @@ export class MenuContent extends React.Component{
 
             <div className="body-content">
                 <Switch location={location}>
-                    <Route exact path="/">
+                    <Route exact path={homepage}>
                         <h2 className="page-title">Getting started</h2>
                         <p>This is a simple website to show the <strong>Dolfo components</strong>, developed by me.</p>
                         <p>Use the side menu to navigate.</p>
@@ -53,7 +56,7 @@ export class MenuContent extends React.Component{
                         MenuItems.map(m => {
                             const Component = m.component
 
-                            return <Route exact path={m.link}>
+                            return <Route exact path={homepage + m.link}>
                                 <h2 className="page-title">{m.children}</h2>
                                 <Component />
                             </Route>
@@ -66,16 +69,18 @@ export class MenuContent extends React.Component{
 }
 
 export class MenuItem extends React.Component<{ readonly link: string }>{
-    clickItem = () => {
-        hashHistory.push(this.props.link)
+    static clickItem = (link: string) => {
+        hashHistory.push(homepage + link)
         document.querySelector(".body-content").scrollTo(0, 0)
     }
 
+    static findLink = (childrenTitle: string) => MenuItems.find(m => m.children === childrenTitle).link
+
     render = () => {
         const { link, children } = this.props,
-        selected = link === hashHistory.location.pathname
+        selected = (homepage + link) === hashHistory.location.pathname
 
-        return <div className={"navigation-menu-item" + (selected ? " selected" : "")} onClick={this.clickItem}>
+        return <div className={"navigation-menu-item" + (selected ? " selected" : "")} onClick={() => MenuItem.clickItem(link)}>
             {children}
         </div>
     }

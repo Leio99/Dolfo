@@ -56,7 +56,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         }
     }
 
-    static infoDialog = (data: BaseProps & DialogProps): Closable => {
+    static infoDialog = (data: DialogProps): Closable => {
         let title = data.title || Constants.INFO_TEXT,
         okType: DialogProps["okType"] = "blue"
 
@@ -144,7 +144,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         return { close: () => popup.remove() }
     }
 
-    static getIcon = (icon: string): JSX.Element => {
+    private static getIcon = (icon: string): JSX.Element => {
         if(icon === "success") return <CheckCircleOutlineIcon color="var(--green)" />
         if(icon === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
         if(icon === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
@@ -180,7 +180,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
 
             <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width || props.style?.width }}>
                 <div className="dolfo-dialog-header">
-                    <Button textBtn onClick={this.onClose} className="dialog-close" tooltip={Constants.CLOSE_TEXT}>
+                    <Button type="text" onClick={this.onClose} className="dialog-close" tooltip={Constants.CLOSE_TEXT}>
                         <CloseIcon style={{ fontSize: 20 }} />
                     </Button>
 
@@ -195,12 +195,12 @@ export class Dialog extends React.PureComponent<IProps, IState>{
                     !props.hideFooter ? (props.customFooter ? <div className="dolfo-dialog-footer">
                             {props.customFooter}
                         </div> : <div className="dolfo-dialog-footer">
-                            <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} smallBtn btnColor={props.okType || "darkblue"}>
+                            <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} size="small" btnColor={props.okType || "darkblue"}>
                                 {props.okText || Constants.OK_TEXT}
                             </Button>
 
                             {
-                                !props.hideCancel && <Button onClick={this.onClose} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} smallBtn textBtn btnColor={props.cancelType || "red"}>
+                                !props.hideCancel && <Button onClick={this.onClose} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} size="small" type="text" btnColor={props.cancelType || "red"}>
                                     {props.cancelText || Constants.CANCEL_TEXT}
                                 </Button>
                             }

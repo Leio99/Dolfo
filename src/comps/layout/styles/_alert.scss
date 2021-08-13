@@ -1,4 +1,5 @@
 .dolfo-alert{
+    $calc: calc(100% - 20px);
     padding: 0.7rem;
     border-radius: $smallRadius;
     background-color: $lightGrey;
@@ -6,6 +7,11 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+
+    .dolfo-alert-content{
+        flex: 0 0 $calc;
+        max-width: $calc
+    }
 
     &.success{
         background-color: lighten($green, 47%);

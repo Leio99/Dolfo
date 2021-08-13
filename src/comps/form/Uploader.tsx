@@ -64,13 +64,13 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         e.preventDefault()
 
         const files = e.dataTransfer.files,
-        accepts = this.props.accept
+        { accept } = this.props
 
         let notAcceptable = false
 
-        if(accepts && accepts !== "" && accepts !== "all"){
+        if(accept && accept !== "" && accept !== "all"){
             for(let i = 0; i < files.length; i++){
-                const loop = accepts.split(",")
+                const loop = accept.split(",")
                 
                 for(let i2 = 0; i2 < loop.length; i2++){
                     const ext = loop[i2].trim()

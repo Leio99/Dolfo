@@ -87,7 +87,7 @@ export class CheckboxPage extends React.Component{
                 required: false,
                 default: "null",
                 fnParams: "Checkbox value (boolean)"
-            },
+            }
         ]} addTooltip />
     </>
 }
