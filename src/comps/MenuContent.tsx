@@ -58,7 +58,7 @@ export class MenuContent extends React.Component{
 
                             return <Route exact path={homepage + m.link}>
                                 <h2 className="page-title">{m.children}</h2>
-                                <Component />
+                                {m.component ? <Component /> : "Docs to do."}
                             </Route>
                         })
                     }
