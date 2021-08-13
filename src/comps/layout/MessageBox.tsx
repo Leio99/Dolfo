@@ -16,7 +16,10 @@ export class MessageBox{
     static show = (props: MessageProps): Closable => {
         const message = NotificationMsg.show({
             message: <div className="dolfo-message-box-inner">
-                <CloseIcon className="dolfo-message-close" onClick={() => message.close()} tooltip={Constants.CLOSE_TEXT} />
+                <CloseIcon className="dolfo-message-close" onClick={() => {
+                    message.close()
+                    props.onClose && props.onClose()
+                }} tooltip={Constants.CLOSE_TEXT} />
                 {props.title && <h5 className="dolfo-message-box-title">{props.title}</h5>}
                 <div className="dolfo-message-box-content">{props.content}</div>
             </div>,

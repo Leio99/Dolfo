@@ -19,6 +19,7 @@ import { IconPage } from "./IconPage"
 import { MasterdetailPage } from "./MasterdetailPage"
 import { TablePage } from "./TablePage"
 import { SidemenuPage } from "./SidemenuPage"
+import { MessageboxPage } from "./MessageboxPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage },
@@ -39,9 +40,9 @@ export const MenuItems = [
     { link: "layout/fullpageloader", children: "Fullpage loader", section: "layout", component: FullpageLoaderPage },
     { link: "layout/header", children: "Header", section: "layout", component: HeaderPage },
     { link: "layout/icons", children: "Icon", section: "layout", component: IconPage },
-    { link: "layout/masterdetail", children: "Master-Detail layout", section: "layout", component: MasterdetailPage },
+    { link: "layout/masterdetail", children: "Master-Detail", section: "layout", component: MasterdetailPage },
     { link: "layout/sidemenu", children: "Side menu", section: "layout", component: SidemenuPage },
-    { link: "layout/messages", children: "Message box", section: "layout", component: null },
+    { link: "layout/messages", children: "Message box", section: "layout", component: MessageboxPage },
     { link: "layout/notifications", children: "Notifications", section: "layout", component: null },
     { link: "layout/progress", children: "Progress", section: "layout", component: null },
     { link: "layout/slideshow", children: "Slideshow", section: "layout", component: null },
