@@ -100,3 +100,20 @@ code, .code{
         }
     }
 }
+
+.footer{
+    text-align: center;
+    opacity: 0.5    ;
+    transition: opacity 0.3s ease;
+
+    &:hover{
+        opacity: 1
+    }
+
+    span{
+        vertical-align: super;
+        font-size: 80%;
+        font-family: monospace;
+        font-weight: bolder
+    }
+}

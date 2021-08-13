@@ -63,6 +63,8 @@ export class MenuContent extends React.Component{
                         })
                     }
                 </Switch>
+
+                <div className="footer">Created by Leonardo Grandolfo <span>IT</span> &copy; {new Date().getFullYear()}</div>
             </div>
         </div>} />
     </Router>
