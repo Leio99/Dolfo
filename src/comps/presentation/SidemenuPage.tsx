@@ -110,7 +110,8 @@ export class SidemenuPage extends React.Component<any, {
                 desc: "Function triggered when closing the menu.",
                 type: "function",
                 required: false,
-                default: "None"
+                default: "null",
+                fnParams: "None"
             }
         ]} />
 
@@ -127,7 +128,8 @@ export class SidemenuPage extends React.Component<any, {
                 desc: "Function triggered when clicking the menu item.",
                 type: "function",
                 required: false,
-                default: "None"
+                default: "null",
+                fnParams: "None"
             }
         ]} />
 
@@ -150,7 +152,8 @@ export class SidemenuPage extends React.Component<any, {
                 desc: "Function triggered when clicking the sub-menu.",
                 type: "function",
                 required: false,
-                default: "None"
+                default: "null",
+                fnParams: "None"
             }
         ]} />
     </>

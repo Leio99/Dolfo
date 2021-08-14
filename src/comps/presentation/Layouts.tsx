@@ -27,9 +27,11 @@ export class Apis extends React.Component<ApisProps>{
             { field: "desc", label: "Description", align: "justify" },
             { field: "type", label: "Type", width: "15%" },
             { field: "required", label: "Required", type: "boolean", align: "center", width: "15%" },
-            { field: "default", label: "Default", align: "center" },
-            { field: "fnParams", label: "Function parameters" }
+            { field: "default", label: "Default", align: "center" }
         ]
+
+        if(data.some(d => d.fnParams))
+            columns.push({ field: "fnParams", label: "Function parameters" })
 
         return <div className="apis" id={id}>
             <h3>{title || "APIs"}</h3>
@@ -248,7 +250,8 @@ export class ColumnApis extends React.Component{
                 desc: "Function triggered when checking/unchecking.",
                 type: "function",
                 required: false,
-                default: "None"
+                default: "null",
+                fnParams: "None"
             }
         ]} />
 
@@ -288,14 +291,16 @@ export class ColumnApis extends React.Component{
                 desc: "Function triggered when the checkbox is checked/unchecked by the user.",
                 type: "function",
                 required: false,
-                default: "None"
+                default: "null",
+                fnParams: "None"
             },
             {
                 name: "onDoubleClick",
                 desc: "Function triggered when double clicking a row.",
                 type: "function",
                 required: false,
-                default: "None"
+                default: "null",
+                fnParams: "None"
             }
         ]} />
     </>

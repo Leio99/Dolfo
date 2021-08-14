@@ -32,7 +32,14 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
         return <div className="dolfo-swiper-container">
             {
                 swipes.map((s, i) => {
-                    return <Swipe opened={opened} detail={i === 1} {...s.props} />
+                    return <div className={"dolfo-swipe" + (i === 1 ? (" detail-swipe" + (opened ? " opened" : "")) : "") + (s.props.className ? (" " + s.props.className) : "")} style={s.props.style}>
+                        {i === 1 && <div className="dolfo-swipe-header">
+                            <Button type="text" btnColor="grey" onClick={s.props.onGoBack}>
+                                <Icon iconKey="chevron-left" /> {Constants.BACK_TEXT}
+                            </Button>  
+                        </div>}
+                        {s.props.children}
+                    </div>
                 })
             }
         </div>
@@ -40,24 +47,11 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
 }
 
 interface SwipeProps{
-    readonly detail?: boolean
-    readonly opened?: boolean
-    readonly onGoBack?: () => void
     readonly style?: CSSProperties
     readonly className?: string
+    readonly onGoBack?: () => void
 }
 
 export class Swipe extends React.PureComponent<SwipeProps>{
-    render = (): JSX.Element => {
-        const { props } = this
-
-        return <div className={"dolfo-swipe" + (props.detail ? (" detail-swipe" + (props.opened ? " opened" : "")) : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
-            {props.detail && <div className="dolfo-swipe-header">
-                <Button type="text" btnColor="grey" onClick={props.onGoBack}>
-                    <Icon iconKey="chevron-left" /> {Constants.BACK_TEXT}
-                </Button>  
-            </div>}
-            {this.props.children}
-        </div>
-    }
+    render = (): JSX.Element => <></>
 }

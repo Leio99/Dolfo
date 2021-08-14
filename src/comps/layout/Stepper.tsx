@@ -6,7 +6,7 @@ import { BaseIconProps, Icon, LoadingIcon } from "./Icon"
 type InternalStep = { step: Step, index: number } | string
 
 interface IProps{
-    readonly currentStep?: number
+    readonly currentStep: number
     readonly className?: string
     readonly style?: CSSProperties
     readonly vertical?: boolean

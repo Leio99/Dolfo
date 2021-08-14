@@ -23,6 +23,9 @@ import { MessageboxPage } from "./MessageboxPage"
 import { NotificationPage } from "./NotificationPage"
 import { ProgressPage } from "./ProgressPage"
 import { SlideshowPage } from "./SlideshowPage"
+import { StatustagsPage } from "./StatustagsPage"
+import { StepperPage } from "./StepperPage"
+import { SwiperPage } from "./SwiperPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage },
@@ -49,9 +52,9 @@ export const MenuItems = [
     { link: "layout/notifications", children: "Notifications", section: "layout", component: NotificationPage },
     { link: "layout/progress", children: "Progress", section: "layout", component: ProgressPage },
     { link: "layout/slideshow", children: "Slideshow", section: "layout", component: SlideshowPage },
-    { link: "layout/status", children: "Status tags", section: "layout", component: null },
-    { link: "layout/stepper", children: "Stepper", section: "layout", component: null },
-    { link: "layout/swiper", children: "Swiper", section: "layout", component: null },
+    { link: "layout/status", children: "Status tags", section: "layout", component: StatustagsPage },
+    { link: "layout/stepper", children: "Stepper", section: "layout", component: StepperPage },
+    { link: "layout/swiper", children: "Swiper", section: "layout", component: SwiperPage },
     { link: "layout/table", children: "Table", section: "layout", component: TablePage },
     { link: "layout/tabs", children: "Tabs", section: "layout", component: null },
     { link: "layout/timeline", children: "Timeline", section: "layout", component: null },
