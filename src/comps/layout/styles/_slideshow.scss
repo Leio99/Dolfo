@@ -1,10 +1,11 @@
 .dolfo-slideshow{
     width: 100%;
-    display: block;
+    display: flex;
     overflow: hidden;
     min-height: 400px;
     height: 100%;
     position: relative;
+    border-radius: $smallRadius;
 
     .dolfo-prev-slide, .dolfo-next-slide{
         position: absolute;
@@ -34,13 +35,14 @@
 
     .dolfo-slides{
         display: flex;
-        height: 100%;
 
         .dolfo-slide{
             flex: 0 0 100%;
             max-width: 100%;
             transition: margin-left 0.8s cubic-bezier(0.88, -0.01, 0.07, 1);
-            padding: 2rem
+            padding: 2rem 8rem 3.5rem;
+            background-size: cover;
+            background-repeat: no-repeat
         }
     }
 

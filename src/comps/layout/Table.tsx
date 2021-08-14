@@ -163,12 +163,9 @@ export class Table extends React.PureComponent<IProps, IState>{
                                 color: "var(--darkblue)"
                             } : null
 
-                            return <tr style={{
-                                ...rowStyle,
-                                ...d.rowStyle
-                            }} onDoubleClick={() => this.onDoubleClick(d)}>
+                            return <tr onDoubleClick={() => this.onDoubleClick(d)}>
                                 {
-                                    props.columns.map(col => <td style={{ textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
+                                    props.columns.map(col => <td style={{ ...rowStyle, ...d.rowStyle, textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
                                         {
                                             d[col.field]
                                         }

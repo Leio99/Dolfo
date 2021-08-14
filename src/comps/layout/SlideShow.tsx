@@ -6,16 +6,16 @@ interface IProps{
     readonly automatic?: boolean
 }
 
-interface IState{
-    readonly slides: Slide[]
-    readonly currentSlide: number
-    readonly isHover?: boolean
-}
-
 interface SlideProps{
     readonly selected?: boolean
     readonly imageUrl?: string
     readonly style?: CSSProperties
+}
+
+interface IState{
+    readonly slides: Slide[]
+    readonly currentSlide: number
+    readonly isHover?: boolean
 }
 
 export class SlideShow extends React.PureComponent<IProps, IState>{
@@ -86,10 +86,10 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
             <div className="dolfo-slides">
                 {
                     slides.map((slide, i) => {
-                        const style: CSSProperties = i === 0 ? { marginLeft } : {}
+                        const style = i === 0 ? { ...slide.props.style, marginLeft } : ({ ...slide.props.style } || {})
 
                         if(slide.props.imageUrl)
-                            style.backgroundImage = slide.props.imageUrl ? `url('${slide.props.imageUrl}')` : ""
+                            style.backgroundImage = `url('${slide.props.imageUrl}')`
 
                         return <Slide {...slide.props} style={style} />
                     })

@@ -67,8 +67,8 @@ export class MasterdetailPage extends React.Component<{}, IState>{
         }
     }
 
-    getDetailTitle = (item: any): JSX.Element => <span>
-        {item.cognome} {item.nome} <Status type="info" style={{
+    getDetailTitle = ({ nome, cognome }: any): JSX.Element => <span>
+        {cognome} {nome} <Status type="info" style={{
             fontSize: "initial",
             fontWeight: "normal",
             verticalAlign: "super"

@@ -22,6 +22,7 @@ import { SidemenuPage } from "./SidemenuPage"
 import { MessageboxPage } from "./MessageboxPage"
 import { NotificationPage } from "./NotificationPage"
 import { ProgressPage } from "./ProgressPage"
+import { SlideshowPage } from "./SlideshowPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage },
@@ -47,7 +48,7 @@ export const MenuItems = [
     { link: "layout/messages", children: "Message box", section: "layout", component: MessageboxPage },
     { link: "layout/notifications", children: "Notifications", section: "layout", component: NotificationPage },
     { link: "layout/progress", children: "Progress", section: "layout", component: ProgressPage },
-    { link: "layout/slideshow", children: "Slideshow", section: "layout", component: null },
+    { link: "layout/slideshow", children: "Slideshow", section: "layout", component: SlideshowPage },
     { link: "layout/status", children: "Status tags", section: "layout", component: null },
     { link: "layout/stepper", children: "Stepper", section: "layout", component: null },
     { link: "layout/swiper", children: "Swiper", section: "layout", component: null },
