@@ -151,7 +151,7 @@ export class OptionApis extends React.Component{
     ]} />
 }
 
-export class ColumnApis extends React.Component{
+export class ColumnApis extends React.Component<{ readonly hideData?: boolean }>{
     render = (): JSX.Element => <>
         <Apis id="columnProps" title="Column properties" data={[
             {
@@ -255,53 +255,55 @@ export class ColumnApis extends React.Component{
             }
         ]} />
 
-        <p className="notes">Note: the field names defined in the columns, should be the same object keys of data columns.</p>
+        {!this.props.hideData && <>
+            <p className="notes">Note: the field names defined in the columns, should be the same object keys of data columns.</p>
 
-        <Apis id="dataColumnProps" title="Column data properties (your data array + custom properties as defined below)" data={[
-            {
-                name: "checked",
-                desc: "Determines whether the checkbox is checked for the current row.",
-                type: "CSSProperties",
-                required: false,
-                default: "null"
-            },
-            {
-                name: "checkDisabled",
-                desc: "Determines whether the checkbox is disabled for the current row.",
-                type: "CSSProperties",
-                required: false,
-                default: "null"
-            },
-            {
-                name: "hideCheck",
-                desc: "Determines whether the checkbox should not appear inside the current row.",
-                type: "CSSProperties",
-                required: false,
-                default: "null"
-            },
-            {
-                name: "rowStyle",
-                desc: "Additional style to apply to the row.",
-                type: "CSSProperties",
-                required: false,
-                default: "null"
-            },
-            {
-                name: "onCheckChange",
-                desc: "Function triggered when the checkbox is checked/unchecked by the user.",
-                type: "function",
-                required: false,
-                default: "null",
-                fnParams: "None"
-            },
-            {
-                name: "onDoubleClick",
-                desc: "Function triggered when double clicking a row.",
-                type: "function",
-                required: false,
-                default: "null",
-                fnParams: "None"
-            }
-        ]} />
+            <Apis id="dataColumnProps" title="Column data properties (your data array + custom properties as defined below)" data={[
+                {
+                    name: "checked",
+                    desc: "Determines whether the checkbox is checked for the current row.",
+                    type: "CSSProperties",
+                    required: false,
+                    default: "null"
+                },
+                {
+                    name: "checkDisabled",
+                    desc: "Determines whether the checkbox is disabled for the current row.",
+                    type: "CSSProperties",
+                    required: false,
+                    default: "null"
+                },
+                {
+                    name: "hideCheck",
+                    desc: "Determines whether the checkbox should not appear inside the current row.",
+                    type: "CSSProperties",
+                    required: false,
+                    default: "null"
+                },
+                {
+                    name: "rowStyle",
+                    desc: "Additional style to apply to the row.",
+                    type: "CSSProperties",
+                    required: false,
+                    default: "null"
+                },
+                {
+                    name: "onCheckChange",
+                    desc: "Function triggered when the checkbox is checked/unchecked by the user.",
+                    type: "function",
+                    required: false,
+                    default: "null",
+                    fnParams: "None"
+                },
+                {
+                    name: "onDoubleClick",
+                    desc: "Function triggered when double clicking a row.",
+                    type: "function",
+                    required: false,
+                    default: "null",
+                    fnParams: "None"
+                }
+            ]} />
+        </>}
     </>
 }

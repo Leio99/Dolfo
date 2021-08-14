@@ -8,7 +8,7 @@ import { Dialog } from "../layout/Dialog"
 import { Status } from "../layout/Status"
 import { formatDate } from "../shared/utility"
 import { IColumn } from "../shared/models/IColumn"
-import { WhenToUse, Usage, ResultCode } from "./Layouts"
+import { WhenToUse, Usage, ResultCode, Apis, ColumnApis } from "./Layouts"
 import { TreeExample } from "./Examples"
 
 export class TreeviewPage extends TreeView{
@@ -444,6 +444,49 @@ export class TreeviewPage extends TreeView{
             />
 
             <p className="notes">Note: to render a tree view, your component must extend the <em>TreeView</em> class and implement the abstract methods inherited. See the code example for more.</p>
+
+            <Apis title="Initial state" data={[
+                {
+                    name: "list",
+                    desc: "The data source of the tree.",
+                    required: true,
+                    type: "Array"
+                },
+                {
+                    name: "autoOpen",
+                    desc: "Determines whether the tree should by opened by default or not.",
+                    required: false,
+                    type: "boolean",
+                    default: "false"
+                },
+                {
+                    name: "showExpandAll",
+                    desc: "If true, shows the 'Expand all' and 'Collapse all' buttons on top of the table.",
+                    required: false,
+                    type: "boolean",
+                    default: "false"
+                },
+                {
+                    name: "descColumn",
+                    desc: "Custom label for the description column.",
+                    required: false,
+                    type: "boolean",
+                    default: "false"
+                },
+                {
+                    name: "addColumn",
+                    desc: "Adds custom columns to the table (function 'getColumnData' must be implemented).",
+                    required: false,
+                    type: "Array of IColumn",
+                    default: "null",
+                    onDoubleClick: () => window.location.href = "#columnProps",
+                    rowStyle: { backgroundColor: "var(--hoverblue)" }
+                }
+            ]} />
+
+            <p className="notes">Note: the state can also contain custom variables that you can use inside your component.</p>
+
+            <ColumnApis hideData />
         </>
     }
 

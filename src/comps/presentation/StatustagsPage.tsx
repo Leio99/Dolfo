@@ -74,6 +74,6 @@ export class StatustagsPage extends React.Component{
                 required: false,
                 default: "null"
             }
-        ]} />
+        ]} addTooltip />
     </>
 }
