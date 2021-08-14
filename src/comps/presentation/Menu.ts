@@ -26,6 +26,7 @@ import { SlideshowPage } from "./SlideshowPage"
 import { StatustagsPage } from "./StatustagsPage"
 import { StepperPage } from "./StepperPage"
 import { SwiperPage } from "./SwiperPage"
+import { TreeviewPage } from "./TreeviewPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage },
@@ -59,5 +60,5 @@ export const MenuItems = [
     { link: "layout/tabs", children: "Tabs", section: "layout", component: null },
     { link: "layout/timeline", children: "Timeline", section: "layout", component: null },
     { link: "layout/tooltips", children: "Tooltips", section: "layout", component: null },
-    { link: "layout/tree", children: "Tree view", section: "layout" }
+    { link: "layout/tree", children: "Tree view", section: "layout", component: TreeviewPage }
 ]

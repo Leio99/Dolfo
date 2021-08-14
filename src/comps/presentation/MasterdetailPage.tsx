@@ -3,7 +3,7 @@ import { MasterDetail } from "../layout/MasterDetail"
 import { Card } from "../layout/Card"
 import { Status } from "../layout/Status"
 import { Apis, ColumnApis, ResultCode, Usage, WhenToUse } from "./Layouts"
-import { MDContent } from "./MDExample"
+import { MDExample } from "./Examples"
 
 interface IState{
     readonly list: any[]
@@ -93,7 +93,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis nesciunt quae ratione nobis animi qui placeat fugiat quibusdam, perspiciatis sit illo quas amet velit reprehenderit omnis quod cumque earum esse?
                     </Card>
                 </MasterDetail>}
-                code={MDContent}
+                code={MDExample}
             />
 
             <Apis data={[
