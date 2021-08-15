@@ -1,5 +1,6 @@
 import React from "react"
 import { Calendar } from "../layout/Calendar"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class CalendarPage extends React.Component{
@@ -36,7 +37,7 @@ export class CalendarPage extends React.Component{
                 required: false,
                 default: "null",
                 fnParams: "CalendarEvent (CalendarEvent), isPreviousMonth (boolean), isNextMonth (boolean)",
-                onDoubleClick: () => window.location.href = "#calEventProps",
+                onDoubleClick: () => goToApiBlock("#calEventProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             }
         ]} />

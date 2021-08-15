@@ -1,6 +1,7 @@
 import React from "react"
 import { Option } from "../form/Option"
 import { RadioButton } from "../form/RadioButton"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, OptionApis } from "./Layouts"
 
 export class RadiobuttonPage extends React.Component{
@@ -32,7 +33,7 @@ export class RadiobuttonPage extends React.Component{
                 desc: "The radio buttons to put inside the RadioButton wrapper.",
                 type: "Option",
                 required: true,
-                onDoubleClick: () => window.location.href = "#optionProps",
+                onDoubleClick: () => goToApiBlock("#optionProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

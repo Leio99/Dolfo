@@ -1,5 +1,6 @@
 import React from "react"
 import { Uploader } from "../form/Uploader"
+import { goToApiBlock } from "../MenuContent"
 import { Constants } from "../shared/Constants"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
@@ -57,7 +58,7 @@ export class UploaderPage extends React.Component{
                 type: "BaseIconProps",
                 required: false,
                 default: "null (shows upload icon)",
-                onDoubleClick: () => window.location.href = "#iconProps",
+                onDoubleClick: () => goToApiBlock("#iconProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

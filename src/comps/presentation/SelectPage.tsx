@@ -1,6 +1,7 @@
 import React from "react"
 import { Option } from "../form/Option"
 import Select from "../form/Select"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, OptionApis, IconApis } from "./Layouts"
 
 export class SelectPage extends React.Component{
@@ -98,7 +99,7 @@ export class SelectPage extends React.Component{
                 desc: "The options to put inside the Combobox wrapper.",
                 type: "Option",
                 required: true,
-                onDoubleClick: () => window.location.href = "#optionProps",
+                onDoubleClick: () => goToApiBlock("#optionProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {
@@ -121,7 +122,7 @@ export class SelectPage extends React.Component{
                 type: "BaseIconProps",
                 required: false,
                 default: "null (shows hand pointer icon)",
-                onDoubleClick: () => window.location.href = "#iconProps",
+                onDoubleClick: () => goToApiBlock("#iconProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

@@ -1,5 +1,6 @@
 import React from "react"
 import DatePicker from "../form/DatePicker"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class DatepickerPage extends React.Component{
@@ -89,7 +90,7 @@ export class DatepickerPage extends React.Component{
                 type: "BaseIconProps",
                 required: false,
                 default: "null (shows calendar icon)",
-                onDoubleClick: () => window.location.href = "#iconProps",
+                onDoubleClick: () => goToApiBlock("#iconProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

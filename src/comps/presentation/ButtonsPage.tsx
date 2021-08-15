@@ -1,6 +1,7 @@
 import React from "react"
 import Button from "../layout/Button"
 import { Icon } from "../layout/Icon"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class ButtonsPage extends React.Component{
@@ -129,7 +130,7 @@ export class ButtonsPage extends React.Component{
                 type: "Button option",
                 required: false,
                 default: "false",
-                onDoubleClick: () => window.location.href = "#btnOptionProps",
+                onDoubleClick: () => goToApiBlock("#btnOptionProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

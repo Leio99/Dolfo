@@ -1,6 +1,7 @@
 import React from "react"
 import Button from "../layout/Button"
 import { Swipe, Swiper } from "../layout/Swiper"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class SwiperPage extends React.Component<any, {
@@ -39,7 +40,7 @@ export class SwiperPage extends React.Component<any, {
                 desc: "The swiper screens (must be 2).",
                 type: "Swipe",
                 required: true,
-                onDoubleClick: () => window.location.href = "#swipeProps",
+                onDoubleClick: () => goToApiBlock("#swipeProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

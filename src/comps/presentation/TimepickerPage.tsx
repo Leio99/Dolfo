@@ -1,5 +1,6 @@
 import React from "react"
 import TimePicker from "../form/TimePicker"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class TimepickerPage extends React.Component{
@@ -44,7 +45,7 @@ export class TimepickerPage extends React.Component{
                 type: "BaseIconProps",
                 required: false,
                 default: "null (shows clock icon)",
-                onDoubleClick: () => window.location.href = "#iconProps",
+                onDoubleClick: () => goToApiBlock("#iconProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

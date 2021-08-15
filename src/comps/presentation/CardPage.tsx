@@ -2,6 +2,7 @@ import React from "react"
 import Button from "../layout/Button"
 import { Card, CardActions } from "../layout/Card"
 import { Icon } from "../layout/Icon"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class CardPage extends React.Component{
@@ -63,7 +64,7 @@ export class CardPage extends React.Component{
                 type: "string",
                 required: false,
                 default: "null (no actions)",
-                onDoubleClick: () => window.location.href = "#cardActionProps",
+                onDoubleClick: () => goToApiBlock("#cardActionProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             }
         ]} />

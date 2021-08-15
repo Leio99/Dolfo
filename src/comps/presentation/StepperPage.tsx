@@ -1,6 +1,7 @@
 import React from "react"
 import Button from "../layout/Button"
 import { Step, Stepper } from "../layout/Stepper"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class StepperPage extends React.Component<any, {
@@ -75,7 +76,7 @@ export class StepperPage extends React.Component<any, {
                 desc: "The single steps.",
                 type: "Step",
                 required: true,
-                onDoubleClick: () => window.location.href = "#stepProps",
+                onDoubleClick: () => goToApiBlock("#stepProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {
@@ -114,7 +115,7 @@ export class StepperPage extends React.Component<any, {
                 type: "Icon",
                 required: false,
                 default: "null",
-                onDoubleClick: () => window.location.href = "#iconProps",
+                onDoubleClick: () => goToApiBlock("#iconProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

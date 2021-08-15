@@ -1,5 +1,6 @@
 import React from "react"
 import { Timeline, TimelineItem } from "../layout/Timeline"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class TimelinePage extends React.Component{
@@ -58,7 +59,7 @@ export class TimelinePage extends React.Component{
                 desc: "The single timeline items.",
                 type: "TimelineItem",
                 required: true,
-                onDoubleClick: () => window.location.href = "#timelineItemProps",
+                onDoubleClick: () => goToApiBlock("#timelineItemProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             }
         ]} />

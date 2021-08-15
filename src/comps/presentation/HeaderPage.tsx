@@ -1,5 +1,6 @@
 import React from "react"
 import { Header } from "../layout/Header"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class HeaderPage extends React.Component{
@@ -61,7 +62,7 @@ export class HeaderPage extends React.Component{
                 type: "Icon",
                 required: false,
                 default: "null (shows menu hamburger)",
-                onDoubleClick: () => window.location.href = "#iconProps",
+                onDoubleClick: () => goToApiBlock("#iconProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

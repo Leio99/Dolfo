@@ -8,12 +8,23 @@ import ReactDOM from "react-dom"
 import Button from "./layout/Button"
 import { Icon } from "./layout/Icon"
 
-const homepage = require("../../package.json").homepage
+const homepage = require("../../package.json").homepage,
+hashHistory = createBrowserHistory()
 
-export const hashHistory = createBrowserHistory()
+export const goToApiBlock = (selector: string) => {
+    const element = document.querySelector(selector) as HTMLElement
+
+    document.querySelector(".body-content").scrollTo({
+        top: element.offsetTop - 10,
+        behavior: "smooth"
+    })
+
+    element.classList.add("api-animate")
+
+    setTimeout(() => element.classList.remove("api-animate"), 500)
+}
 
 export class MenuContent extends React.Component{
-
     componentDidMount = () => {
         initializeTooltips()
 

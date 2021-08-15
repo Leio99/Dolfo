@@ -9,6 +9,7 @@ import { formatDate } from "../shared/utility"
 import { IColumn } from "../shared/models/IColumn"
 import { WhenToUse, Usage, ResultCode, Apis, ColumnApis } from "./Layouts"
 import { TreeExample } from "./Examples"
+import { goToApiBlock } from "../MenuContent"
 
 export class TreeviewPage extends TreeView{
     constructor(){
@@ -479,7 +480,7 @@ export class TreeviewPage extends TreeView{
                     required: false,
                     type: "Array of IColumn",
                     default: "null",
-                    onDoubleClick: () => window.location.href = "#columnProps",
+                    onDoubleClick: () => goToApiBlock("#columnProps"),
                     rowStyle: { backgroundColor: "var(--hoverblue)" }
                 }
             ]} />

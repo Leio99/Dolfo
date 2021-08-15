@@ -1,5 +1,6 @@
 import React from "react"
 import { TextInput } from "../form/TextInput"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class TextinputPage extends React.Component{
@@ -88,7 +89,7 @@ export class TextinputPage extends React.Component{
                 type: "BaseIconProps",
                 required: false,
                 default: "null (shows default icon depending on type)",
-                onDoubleClick: () => window.location.href = "#iconProps",
+                onDoubleClick: () => goToApiBlock("#iconProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

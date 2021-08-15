@@ -1,5 +1,6 @@
 import React from "react"
 import { Slide, SlideShow } from "../layout/SlideShow"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class SlideshowPage extends React.Component{
@@ -31,7 +32,7 @@ export class SlideshowPage extends React.Component{
                 desc: "The single slides to show.",
                 type: "Slide",
                 required: true,
-                onDoubleClick: () => window.location.href = "#slideProps",
+                onDoubleClick: () => goToApiBlock("#slideProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

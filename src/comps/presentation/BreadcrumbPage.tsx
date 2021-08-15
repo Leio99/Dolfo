@@ -1,5 +1,6 @@
 import React from "react"
 import { BreadCrumb, BreadCrumbItem } from "../layout/BreadCrumb"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class BreadcrumbPage extends React.Component{
@@ -31,7 +32,7 @@ export class BreadcrumbPage extends React.Component{
                 desc: "The breadcrumb items.",
                 type: "BreadCrumbItem",
                 required: true,
-                onDoubleClick: () => window.location.href = "#bcItemProps",
+                onDoubleClick: () => goToApiBlock("#bcItemProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

@@ -2,6 +2,7 @@ import React from "react"
 import { Apis, ColumnApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 import { Table } from "../layout/Table"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
+import { goToApiBlock } from "../MenuContent"
 
 export class TablePage extends React.Component{
     readonly cols: IColumn[] = [
@@ -48,7 +49,7 @@ export class TablePage extends React.Component{
                     desc: "Defines the grid columns.",
                     type: "Array of IColumn",
                     required: true,
-                    onDoubleClick: () => window.location.href = "#columnProps",
+                    onDoubleClick: () => goToApiBlock("#columnProps"),
                     rowStyle: { backgroundColor: "var(--hoverblue)" }
                 },
                 {
@@ -56,7 +57,7 @@ export class TablePage extends React.Component{
                     desc: "Defines the grid datasource.",
                     type: "Array of IDataColumn",
                     required: true,
-                    onDoubleClick: () => window.location.href = "#dataColumnProps",
+                    onDoubleClick: () => goToApiBlock("#dataColumnProps"),
                     rowStyle: { backgroundColor: "var(--hoverblue)" }
                 },
                 {

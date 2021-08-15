@@ -1,6 +1,7 @@
 import React from "react"
 import { Icon } from "../layout/Icon"
 import { Tab, Tabs } from "../layout/Tabs"
+import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class TabsPage extends React.Component{
@@ -53,7 +54,7 @@ export class TabsPage extends React.Component{
                 desc: "The single tabs.",
                 type: "Tab",
                 required: true,
-                onDoubleClick: () => window.location.href = "#tabProps",
+                onDoubleClick: () => goToApiBlock("#tabProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {

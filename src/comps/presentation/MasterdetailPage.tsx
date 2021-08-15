@@ -4,6 +4,7 @@ import { Card } from "../layout/Card"
 import { Status } from "../layout/Status"
 import { Apis, ColumnApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 import { MDExample } from "./Examples"
+import { goToApiBlock } from "../MenuContent"
 
 interface IState{
     readonly list: any[]
@@ -102,7 +103,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     desc: "Defines the grid columns.",
                     type: "Array of IColumn",
                     required: true,
-                    onDoubleClick: () => window.location.href = "#columnProps",
+                    onDoubleClick: () => goToApiBlock("#columnProps"),
                     rowStyle: { backgroundColor: "var(--hoverblue)" }
                 },
                 {
@@ -110,7 +111,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     desc: "Defines the grid datasource.",
                     type: "Array of IDataColumn",
                     required: true,
-                    onDoubleClick: () => window.location.href = "#dataColumnProps",
+                    onDoubleClick: () => goToApiBlock("#dataColumnProps"),
                     rowStyle: { backgroundColor: "var(--hoverblue)" }
                 },
                 {
