@@ -67,6 +67,8 @@ export class MenuContent extends React.Component{
                             <li>FontAwesome PRO</li>
                             <li>React onClickOutside</li>
                             <li>Google gapi</li>
+                            <li>Lodash library</li>
+                            <li>SASS</li>
                         </ul>
                     </Route>
 
