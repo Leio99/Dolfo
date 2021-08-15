@@ -16,7 +16,7 @@ export class SidemenuPage extends React.Component<any, {
 
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a side menu.</WhenToUse>
-        <Usage notes="Side menu can also be closed by clicking outside it." />
+        <Usage notes="side menu can also be closed by clicking outside it." />
 
         <ResultCode
             title="Simple menu"
