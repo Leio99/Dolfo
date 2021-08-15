@@ -5,6 +5,8 @@ import Button from "./Button"
 import { Dialog } from "./Dialog"
 import { Icon } from "./Icon"
 import { Constants } from "../shared/Constants"
+import Select from "../form/Select"
+import { Option } from "../form/Option"
 
 interface IProps{
     readonly calendarId: string
@@ -30,10 +32,6 @@ export class Calendar extends React.PureComponent<IProps, IState>{
     }
     
     componentDidMount = (): void => {
-        /*
-        * script script src="https://apis.google.com/js/api.js"></script>
-        * is required in your index.html
-        */
         const start = () => {
             gapi.client.init({
                 apiKey: this.props.apiKey
@@ -43,18 +41,52 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                 })
             }).then(response => {
                 const gEvents = response.result.items as GoogleCalendarEvent[],
-                events = gEvents.map(e => {
+                events: CalendarEvent[] = []
+                
+                gEvents.forEach(e => {
                     const start = new Date(e.start.dateTime || e.start.date),
                     end = new Date(e.end.dateTime || e.start.date)
 
-                    return {
-                        day: start.getDate(),
-                        month: start.getMonth(),
-                        year: start.getFullYear(),
-                        desc: e.summary,
-                        start: e.start.date ? null : getTime(start.toString()),
-                        end: e.end.date ? null : getTime(end.toString()),
-                        date: start
+                    let isDifferentDay = start.getDay() !== end.getDay()
+
+                    if(isDifferentDay){
+                        const copy = new Date(start)
+                        
+                        events.push({
+                            day: start.getDate(),
+                            month: start.getMonth(),
+                            year: start.getFullYear(),
+                            desc: e.summary,
+                            start: null,
+                            end: null,
+                            date: start
+                        })
+
+                        while(isDifferentDay){
+                            copy.setDate(copy.getDate() + 1)
+
+                            events.push({
+                                day: copy.getDate(),
+                                month: copy.getMonth(),
+                                year: copy.getFullYear(),
+                                desc: e.summary,
+                                start: null,
+                                end: null,
+                                date: copy
+                            })
+
+                            isDifferentDay = copy.getDate() !== end.getDate()
+                        }
+                    }else{
+                        events.push({
+                            day: start.getDate(),
+                            month: start.getMonth(),
+                            year: start.getFullYear(),
+                            desc: e.summary,
+                            start: e.start.date ? null : getTime(start.toString()),
+                            end: e.end.date ? null : getTime(end.toString()),
+                            date: start
+                        })
                     }
                 })
 
@@ -94,6 +126,55 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
     tryOpenEvent = (e: CalendarEvent, isPrev: boolean, isNext: boolean): void => this.props.onEventClick && this.props.onEventClick(e, isPrev, isNext)
 
+    openDateChange = () => {
+        let selMonth: number,
+        selYear: number
+
+        const { currentYear, currentMonth } = this.state,
+        years = Array.from(Array(new Date().getFullYear() - 1999).keys()).map((_, i) => new Date().getFullYear() - i),
+        dialog = Dialog.openDialog({
+            title: Constants.CALENDAR_CHANGE_DATE,
+            width: "300px",
+            clickOutside: true,
+            content: <>
+                <Select icon={{ iconKey: "calendar", type: "far" }} canSearch defaultValue={currentMonth} onChange={v => selMonth = v}>
+                    {
+                        Constants.MONTHS.map((m, i) => <Option value={i} label={m} />)
+                    }
+                </Select>
+
+                <Select icon={{ iconKey: "calendar-check", type: "far" }} canSearch defaultValue={currentYear} onChange={v => selYear = v}>
+                    {
+                        years.map(y => <Option value={y} label={y.toString()} />)
+                    }
+                </Select>
+            </>,
+            customFooter: [
+                <Button type="text" tooltip={Constants.CALENDAR_SELECT_CURRENT} style={{ float: "left" }} size="big" btnColor="green" onClick={() => {
+                    const d = new Date()
+
+                    this.setState({
+                        currentMonth: d.getMonth(),
+                        currentYear: d.getFullYear()
+                    }, dialog.close)
+                }}>
+                    <Icon iconKey="calendar-alt" type="far" />
+                </Button>,
+                <Button size="small" btnColor="blue" onClick={() => {
+                    this.setState({
+                        currentMonth: selMonth ?? currentMonth,
+                        currentYear: selYear ?? currentYear
+                    }, dialog.close)
+                }}>
+                    {Constants.CALENDAR_SET_TEXT}
+                </Button>,
+                <Button type="text" btnColor="red" onClick={() => dialog.close()}>
+                    {Constants.CANCEL_TEXT}
+                </Button>
+            ]
+        })
+    }
+
     render = (): JSX.Element => {
         const { events, currentYear, currentMonth } = this.state,
         calendario = getCalendar(currentMonth, currentYear),
@@ -102,14 +183,17 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         return <div className="dolfo-g-calendar-content">
             <h3 className="month-title">
                 <div className="month-buttons">
-                    <Button btnColor="black" tooltip={Constants.CALENDAR_PREVIOUS_MONTH} className="month-button-prev" onClick={this.decreaseMonth}>
+                    <Button btnColor="white" size="big" tooltip={Constants.CALENDAR_PREVIOUS_MONTH} className="month-button-prev" onClick={this.decreaseMonth}>
                         <Icon iconKey="chevron-left" type="far" large />
                     </Button>
-                    <Button btnColor="black" tooltip={Constants.CALENDAR_NEXT_MONTH} className="month-button-next" onClick={this.increaseMonth}>
+                    <Button btnColor="white" size="big" tooltip={Constants.CALENDAR_NEXT_MONTH} className="month-button-next" onClick={this.increaseMonth}>
                         <Icon iconKey="chevron-right" type="far" large />
                     </Button>
                 </div>
-                {decodeMonth(currentMonth)} {currentYear}
+
+                <Button btnColor="white" size="big" tooltip={Constants.CALENDAR_CHANGE} onClick={this.openDateChange}>
+                    {decodeMonth(currentMonth)} {currentYear}
+                </Button>
             </h3>
 
             {!monthEvents.length && <div className="no-month-events">{Constants.MONTH_NO_EVENTS}</div>}

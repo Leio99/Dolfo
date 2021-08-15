@@ -61,6 +61,13 @@ export class MenuContent extends React.Component{
                                 <li>The APIs the component can take</li>
                             </ul>
                         </p>
+
+                        <h3 className="page-title">External dependencies</h3>
+                        <ul>
+                            <li>FontAwesome PRO</li>
+                            <li>React onClickOutside</li>
+                            <li>Google gapi</li>
+                        </ul>
                     </Route>
 
                     {

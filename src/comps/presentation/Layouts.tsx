@@ -26,10 +26,11 @@ export class Apis extends React.Component<ApisProps>{
             { field: "name", label: "Name"},
             { field: "desc", label: "Description", align: "justify" },
             { field: "type", label: "Type", width: "15%" },
-            { field: "required", label: "Required", type: "boolean", align: "center", width: "15%" },
-            { field: "default", label: "Default", align: "center" }
+            { field: "required", label: "Required", type: "boolean", align: "center", width: "15%" }
         ]
 
+        if(data.some(d => d.default))
+            columns.push({ field: "default", label: "Default", align: "center" })
         if(data.some(d => d.fnParams))
             columns.push({ field: "fnParams", label: "Function parameters" })
 
@@ -90,7 +91,7 @@ export class ResultCode extends React.Component<ResultCodeProps, ResultCodeState
             </div>
 
             <div className="component-buttons">
-                <Button type="text" onClick={this.showPreview} className="mr-2" tooltip="Show preview">
+                <Button type="text" onClick={this.showPreview} style={{ marginRight: "0.5rem" }} tooltip="Show preview">
                     <Icon iconKey="window" type="far" color={!isCode && "var(--dark)"} large />
                 </Button>
                 <Button type="text" onClick={this.showCode} tooltip="Show code">

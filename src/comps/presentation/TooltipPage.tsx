@@ -5,7 +5,7 @@ import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 export class TooltipPage extends React.Component{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to add some information tooltip.</WhenToUse>
-        <Usage notes={<>To use tooltips, your root component must call the <em>initializeTooltips()</em> function to start using them.</>} />
+        <Usage notes={<>Your root component must call the <em>initializeTooltips()</em> function when mounting to start using tooltips.</>} />
 
         <ResultCode
             title="Simple tooltip"

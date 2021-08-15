@@ -124,12 +124,12 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                 <span style={{ paddingLeft: (25 * subNode) + (hasChildren ? 0 : subNode === 0 ? 0 : 25) }}></span>
                 {
                     hasChildren ? <Button btnColor="black" type="text" onClick={() => this.toggleNode(node, index)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
-                        <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="mr-2" />
+                        <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="tree-view-angle" />
                     </Button> : null
                 }
 
                 <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} type="text" onClick={() => this.toggleAllNode(node, index)} tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
-                    <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="mr-2" large />
+                    <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="tree-view-folder" large />
                 </Button> {this.getLabel(node)}
             </td>
 

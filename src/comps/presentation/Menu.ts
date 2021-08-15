@@ -30,6 +30,7 @@ import { TreeviewPage } from "./TreeviewPage"
 import { TooltipPage } from "./TooltipPage"
 import { TabsPage } from "./TabsPage"
 import { TimelinePage } from "./TimelinePage"
+import { CalendarPage } from "./CalendarPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage },
@@ -45,6 +46,7 @@ export const MenuItems = [
     { link: "layout/avatar", children: "Avatar", section: "layout", component: AvatarPage },
     { link: "layout/breadcrumb", children: "Breadcrumb", section: "layout", component: BreadcrumbPage },
     { link: "layout/buttons", children: "Buttons", section: "layout", component: ButtonsPage },
+    { link: "layout/calendar", children: "Calendar", section: "layout", component: CalendarPage },
     { link: "layout/card", children: "Card", section: "layout", component: CardPage },
     { link: "layout/dialog", children: "Dialog", section: "layout", component: DialogPage },
     { link: "layout/fullpageloader", children: "Fullpage loader", section: "layout", component: FullpageLoaderPage },

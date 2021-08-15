@@ -431,7 +431,7 @@ export const TreeExample = `export class TreeviewPage extends TreeView{
                     </span>}
                 </Status>
 
-                <div className="mt-2">
+                <div style={{ marginTop: "0.5rem" }}>
                     <strong>Nominativo</strong>: {comico.nominativo}
                 </div>
                 <div>
@@ -444,9 +444,10 @@ export const TreeExample = `export class TreeviewPage extends TreeView{
     openDettaglioCanale = (canale: any): void => {
         const loading = Dialog.loadingDialog()
 
-        axios.get("https://guidatv-api.herokuapp.com/getChannelsList?api_key=e1fwxMBsQKaOmq5X5Pf0cy")
-        .then(resp => {
-            const channel = resp.data.data.find((c: any) => c.id === canale.id)
+        fetch("https://guidatv-api.herokuapp.com/getChannelsList?api_key=e1fwxMBsQKaOmq5X5Pf0cy")
+        .then(response => response.json())
+        .then(response => {
+            const channel = response.data.find((c: any) => c.id === canale.id)
 
             Dialog.infoDialog({
                 title: "Dettaglio canale",
@@ -475,7 +476,7 @@ export const TreeExample = `export class TreeviewPage extends TreeView{
 
         if(node.type === "comico") return <>
             {
-                !node.data.composizione && <Button type="text" btnColor="darkblue" tooltip="Dati" className="mr-3" onClick={() => this.openDettaglioComico(node.data)}>
+                !node.data.composizione && <Button type="text" btnColor="darkblue" tooltip="Dati" style={{ marginRight: "1rem" }} onClick={() => this.openDettaglioComico(node.data)}>
                     <Icon iconKey="id-card" type="far" large />
                 </Button>
             }
@@ -490,11 +491,11 @@ export const TreeExample = `export class TreeviewPage extends TreeView{
         </Button>
 
         if(node.type === "componente") return <>
-            <Button type="text" btnColor="darkblue" tooltip="Dati" className="mr-3" onClick={() => this.openDettaglioComico(node.data)}>
+            <Button type="text" btnColor="darkblue" tooltip="Dati" style={{ marginRight: "1rem" }} onClick={() => this.openDettaglioComico(node.data)}>
                 <Icon iconKey="id-card" type="far" large />
             </Button>
 
-            <Button type="text" btnColor="orange" tooltip="Modifica" className="mr-3">
+            <Button type="text" btnColor="orange" tooltip="Modifica" style={{ marginRight: "1rem" }}>
                 <EditIcon large />
             </Button>
 

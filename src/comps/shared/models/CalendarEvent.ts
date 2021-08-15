@@ -1,12 +1,12 @@
 export interface GoogleCalendarEvent{
     readonly summary: string
     readonly end: {
-        dateTime?: string,
-        date?: string
+        readonly dateTime?: string
+        readonly date?: string
     }
     readonly start: {
-        dateTime?: string,
-        date?: string
+        readonly dateTime?: string
+        readonly date?: string
     }
 }
 
