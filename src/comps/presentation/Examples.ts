@@ -81,9 +81,8 @@ export class MasterDetailExample extends React.Component<{}, IState>{
             </Card>
         </MasterDetail>
     }
-}`
-
-export const TreeExample = `export class TreeviewPage extends TreeView{
+}`,
+TreeExample = `export class TreeviewPage extends TreeView{
     constructor(){
         super({
             list: [
