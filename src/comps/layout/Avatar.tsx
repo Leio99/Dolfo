@@ -1,6 +1,6 @@
 import React from "react"
-import { CSSProperties } from "react";
-import { TooltipProps } from "./Tooltip";
+import { CSSProperties } from "react"
+import { TooltipProps } from "./Tooltip"
 
 interface IProps extends TooltipProps{
     readonly className?: string

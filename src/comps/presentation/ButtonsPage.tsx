@@ -162,7 +162,7 @@ export class ButtonsPage extends React.Component{
             },
             {
                 name: "onClick",
-                desc: "Function triggered when the clicking the button (not triggered if popup button; see options).",
+                desc: "Function triggered when the clicking the button (not triggered if type is 'popup').",
                 type: "function",
                 required: false,
                 default: "null",
