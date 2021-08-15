@@ -2,8 +2,8 @@ import React, { CSSProperties } from "react"
 
 interface TimelineItemProps{
     readonly position?: "left" | "right"
-    readonly style?: CSSProperties
     readonly pinColor?: string
+    readonly style?: CSSProperties
 }
 
 export class Timeline extends React.Component{
@@ -18,6 +18,7 @@ export class Timeline extends React.Component{
                 const item = <div className="dolfo-timeline-item" style={o.props.style}>
                     {o.props.children}
                 </div>
+                
                 return <div className={"dolfo-timeline-item-row " + (o.props.position || "left") + (hideAll ? " hide-empty" : "")}>
                     {
                         o.props.position !== "right" ? item : !hideAll ? <div className="dolfo-timeline-empty"></div> : null

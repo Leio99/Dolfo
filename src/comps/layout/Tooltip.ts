@@ -83,7 +83,6 @@ checkTooltips = (): void => {
 
                 if(isElementInViewport(copy)){
                     tooltip.setAttribute("class", "dolfo-tooltip")
-
                     tooltip.classList.add(d)
                 }
 

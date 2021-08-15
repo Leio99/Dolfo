@@ -27,6 +27,9 @@ import { StatustagsPage } from "./StatustagsPage"
 import { StepperPage } from "./StepperPage"
 import { SwiperPage } from "./SwiperPage"
 import { TreeviewPage } from "./TreeviewPage"
+import { TooltipPage } from "./TooltipPage"
+import { TabsPage } from "./TabsPage"
+import { TimelinePage } from "./TimelinePage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage },
@@ -57,8 +60,8 @@ export const MenuItems = [
     { link: "layout/stepper", children: "Stepper", section: "layout", component: StepperPage },
     { link: "layout/swiper", children: "Swiper", section: "layout", component: SwiperPage },
     { link: "layout/table", children: "Table", section: "layout", component: TablePage },
-    { link: "layout/tabs", children: "Tabs", section: "layout", component: null },
-    { link: "layout/timeline", children: "Timeline", section: "layout", component: null },
-    { link: "layout/tooltips", children: "Tooltips", section: "layout", component: null },
+    { link: "layout/tabs", children: "Tabs", section: "layout", component: TabsPage },
+    { link: "layout/timeline", children: "Timeline", section: "layout", component: TimelinePage },
+    { link: "layout/tooltips", children: "Tooltips", section: "layout", component: TooltipPage },
     { link: "layout/tree", children: "Tree view", section: "layout", component: TreeviewPage }
 ]
