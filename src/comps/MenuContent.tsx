@@ -36,13 +36,6 @@ export class MenuContent extends React.Component{
             nav.scrollTo(0, top)
         }
     }
-    
-    getMenuProps = (link: string) => {
-        return {
-            onClick: () => hashHistory.push(link),
-
-        }
-    }
 
     toggleSideMenu = () => document.querySelector(".navigation-menu").classList.toggle("show")
 
@@ -124,7 +117,7 @@ export class MenuItem extends React.Component<{ readonly link: string }>{
 
     render = () => {
         const { link, children } = this.props,
-        selected = (homepage + link) === hashHistory.location.pathname
+        selected = homepage + link === hashHistory.location.pathname
 
         return <div className={"navigation-menu-item" + (selected ? " selected" : "")} onClick={() => MenuItem.clickItem(link)}>
             {children}
