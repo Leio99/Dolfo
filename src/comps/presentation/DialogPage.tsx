@@ -293,7 +293,24 @@ export class DialogPage extends React.Component<any, {
                 {
                     name: "openDialogComponent",
                     desc: "Shows a dialog component from another module.",
-                    params: <DialogProperties />,
+                    params: <Table style={{ marginTop: 10 }} columns={[
+                        { field: "desc", label: "Description" },
+                        { field: "type", label: "Type" },
+                        { field: "required", label: "Required", type: "boolean", align: "center" },
+                        { field: "default", label: "Default" },
+                    ]} data={[
+                        {
+                            desc: "The dialog class to be opened.",
+                            required: true,
+                            type: "class"
+                        },
+                        {
+                            desc: "Additional props to pass to the component.",
+                            required: false,
+                            type: "Object",
+                            default: "null"
+                        }
+                    ]} />,
                     other: <>
                         The component opened gets an additional prop passed in: close (function). You can also pass custom props to it. <Button type="text" btnColor="darkblue" onClick={() => Dialog.openDialogComponent(Example)} style={{ verticalAlign: "top" }}>Click here to open example</Button>
                     </>
