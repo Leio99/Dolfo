@@ -127,10 +127,6 @@
             flex-direction: column-reverse
         }
 
-        &:first-child .dolfo-timeline-sign{
-            display: none
-        }
-
         .dolfo-timeline-item, .dolfo-timeline-sign {
             flex: 0 0 100% !important;
             max-width: 100% !important;
