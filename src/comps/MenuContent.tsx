@@ -106,6 +106,7 @@ export class MenuItem extends React.Component<{ readonly link: string }>{
     static clickItem = (link: string) => {
         hashHistory.push(homepage + link)
         document.querySelector(".body-content").scrollTo(0, 0)
+        document.querySelector(".navigation-menu").classList.remove("show")
     }
 
     static findLink = (childrenTitle: string) => MenuItems.find(m => m.children === childrenTitle).link

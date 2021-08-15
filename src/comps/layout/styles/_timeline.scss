@@ -132,8 +132,8 @@
         }
 
         .dolfo-timeline-item, .dolfo-timeline-sign {
-            flex: 0 0 100%;
-            max-width: 100%;
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
 
             &.dolfo-timeline-sign{
                 padding: 2rem 0
