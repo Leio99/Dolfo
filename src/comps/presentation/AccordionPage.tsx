@@ -25,6 +25,25 @@ export class AccordionPage extends React.Component{
             code={'<Accordion disabled title="Open me">I am some hidden content</Accordion>'}
         />
 
+        <ResultCode
+            title="Nested accordions"
+            result={<Accordion title="Open me">
+                Here are some internal accordions
+
+                <Accordion title="Second">
+                    Hi there!
+
+                    <Accordion title="Third">
+                        I am down here!
+                    </Accordion>
+                    <Accordion title="Forth">
+                        Number 4
+                    </Accordion>
+                </Accordion>
+            </Accordion>}
+            code={'<Accordion title="Open me">\n\tHere are some internal accordions\n\n\t<Accordion title="Second">\n\t\tHi there!\n\n\t\t<Accordion title="Third">\n\t\t\tI am down here!\n\t\t</Accordion>\n\t\t<Accordion title="Forth">\n\t\t\tNumber 4\n\t\t</Accordion>\n\t</Accordion>\n</Accordion>'}
+        />
+
         <Apis data={[
             {
                 name: "title",
