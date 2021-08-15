@@ -5,6 +5,8 @@ import { MenuItems } from "./presentation/Menu"
 import { Route, Switch } from "react-router-dom"
 import { initializeTooltips } from "./layout/Tooltip"
 import ReactDOM from "react-dom"
+import Button from "./layout/Button"
+import { Icon } from "./layout/Icon"
 
 const homepage = require("../../package.json").homepage
 
@@ -31,63 +33,73 @@ export class MenuContent extends React.Component{
         }
     }
 
-    render = (): JSX.Element => <Router history={hashHistory}>
-        <Route render={({ location }) => <div className="page-content">
-            <div className="navigation-menu">
-                <MenuItem link="">Getting started</MenuItem>
+    toggleSideMenu = () => document.querySelector(".navigation-menu").classList.toggle("show")
 
-                <div className="navigation-menu-title">Form</div>
-                {
-                    MenuItems.filter(m => m.section === "form").map(m => <MenuItem {...m} />)
-                }
+    render = (): JSX.Element => {
+        const menuBtn = <Button circleBtn size="big" btnColor="white" onClick={this.toggleSideMenu} className="menu-toggler">
+            <Icon iconKey="bars" type="far" />
+        </Button>
 
-                <div className="navigation-menu-title">Layout</div>
-                {
-                    MenuItems.filter(m => m.section === "layout").map(m => <MenuItem {...m} />)
-                }
-            </div>
+        return <Router history={hashHistory}>
+            <Route render={({ location }) => <div className="page-content">
+                <div className="navigation-menu">
+                    {menuBtn} <h4 style={{ display: "inline" }}>Dolfo</h4>
 
-            <div className="body-content">
-                <Switch location={location}>
-                    <Route exact path={homepage}>
-                        <h2 className="page-title">Getting started</h2>
-                        <p>This is a simple website to show the <strong>Dolfo components</strong>, developed by me.</p>
-                        <p>Use the side menu to navigate.</p>
-                        <p>In each page, you will find:
-                            <ul>
-                                <li>What the component is used for</li>
-                                <li>How to use it</li>
-                                <li>Its appearance</li>
-                                <li>The APIs the component can take</li>
-                            </ul>
-                        </p>
+                    <MenuItem link="">Getting started</MenuItem>
 
-                        <h3 className="page-title">External dependencies</h3>
-                        <ul>
-                            <li>FontAwesome PRO</li>
-                            <li>React onClickOutside</li>
-                            <li>Google gapi</li>
-                            <li>Lodash library</li>
-                            <li>SASS</li>
-                        </ul>
-                    </Route>
-
+                    <div className="navigation-menu-title">Form</div>
                     {
-                        MenuItems.map(m => {
-                            const Component = m.component
-
-                            return <Route exact path={homepage + m.link}>
-                                <h2 className="page-title">{m.children}</h2>
-                                {m.component ? <Component /> : "Docs to do."}
-                            </Route>
-                        })
+                        MenuItems.filter(m => m.section === "form").map(m => <MenuItem {...m} />)
                     }
-                </Switch>
 
-                <div className="footer">Created by Leonardo Grandolfo <span>IT</span> &copy; {new Date().getFullYear()}</div>
-            </div>
-        </div>} />
-    </Router>
+                    <div className="navigation-menu-title">Layout</div>
+                    {
+                        MenuItems.filter(m => m.section === "layout").map(m => <MenuItem {...m} />)
+                    }
+                </div>
+
+                <div className="body-content">
+                    <Switch location={location}>
+                        <Route exact path={homepage}>
+                            <h2 className="page-title">{menuBtn} Getting started</h2>
+                            <p>This is a simple website to show the <strong>Dolfo components</strong>, developed by me.</p>
+                            <p>Use the side menu to navigate.</p>
+                            <p>In each page, you will find:
+                                <ul>
+                                    <li>What the component is used for</li>
+                                    <li>How to use it</li>
+                                    <li>Its appearance</li>
+                                    <li>The APIs the component can take</li>
+                                </ul>
+                            </p>
+
+                            <h3 className="page-title">External dependencies</h3>
+                            <ul>
+                                <li>FontAwesome PRO</li>
+                                <li>React onClickOutside</li>
+                                <li>Google gapi</li>
+                                <li>Lodash library</li>
+                                <li>SASS</li>
+                            </ul>
+                        </Route>
+
+                        {
+                            MenuItems.map(m => {
+                                const Component = m.component
+
+                                return <Route exact path={homepage + m.link}>
+                                    <h2 className="page-title">{menuBtn} {m.children}</h2>
+                                    {m.component ? <Component /> : "Docs to do."}
+                                </Route>
+                            })
+                        }
+                    </Switch>
+
+                    <div className="footer">Created by Leonardo Grandolfo <span>IT</span> &copy; {new Date().getFullYear()}</div>
+                </div>
+            </div>} />
+        </Router>
+    }
 }
 
 export class MenuItem extends React.Component<{ readonly link: string }>{

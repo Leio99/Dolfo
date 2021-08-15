@@ -1,5 +1,7 @@
 @import "comps/shared/styles/dolfo";
 
+$menuWidth: 200px;
+
 ul{
     margin-top: 0
 }
@@ -8,12 +10,13 @@ ul{
     height: 100vh;
 
     .navigation-menu{
-        flex: 0 0 200px;
-        max-width: 200px;
+        flex: 0 0 $menuWidth;
+        max-width: $menuWidth;
         overflow: auto;
         background-color: $white;
         padding: 0.5rem 1rem;
         border-right: 1px solid $grey;
+        transition: margin-left 0.2s ease-out;
 
         .navigation-menu-title{
             font-weight: bold
@@ -40,9 +43,7 @@ ul{
     }
 
     .body-content{
-        $calc: calc(100% - 200px);
-        flex: 0 0 $calc;
-        max-width: $calc;
+        flex-grow: 1;
         padding: 2rem;
         overflow: auto;
 
@@ -115,5 +116,34 @@ code, .code{
         font-size: 80%;
         font-family: monospace;
         font-weight: bolder
+    }
+}
+
+button.dolfo-button.menu-toggler{
+    display: none !important;
+    vertical-align: baseline
+}
+
+@media screen and (max-width: 800px){
+    button.dolfo-button.menu-toggler{
+        display: inline-block !important
+    }
+
+    .navigation-menu{
+        $width: $menuWidth + 50px;
+
+        flex: 0 0 $width !important;
+        max-width: $width !important;
+        margin-left: -$width;
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: $width !important
+    }
+
+    .navigation-menu.show{
+        margin-left: 0
     }
 }
