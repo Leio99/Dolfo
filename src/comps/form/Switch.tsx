@@ -1,9 +1,9 @@
 import React from "react"
-import { InputProps } from "../shared/models/InputProps"
+import { ExtendedInputProps } from "../shared/models/InputProps"
 import { LoadingIcon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 
-interface IProps extends InputProps{
+interface IProps extends ExtendedInputProps{
     readonly checked?: boolean
     readonly loading?: boolean
 }

@@ -20,7 +20,7 @@ export class AccordionPage extends React.Component{
         />
 
         <ResultCode
-            title="Disableddisabled"
+            title="Disabled"
             result={<Accordion disabled title="Open me">I am some hidden content</Accordion>}
             code={'<Accordion disabled title="Open me">I am some hidden content</Accordion>'}
         />

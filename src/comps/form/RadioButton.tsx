@@ -1,9 +1,9 @@
 import React from "react"
 import { Constants } from "../shared/Constants"
-import { InputProps } from "../shared/models/InputProps"
+import { BaseInputProps } from "../shared/models/InputProps"
 import { Option } from "./Option"
 
-interface IProps extends InputProps{
+interface IProps extends BaseInputProps{
     readonly controlName: string
     readonly defaultValue?: any
 }

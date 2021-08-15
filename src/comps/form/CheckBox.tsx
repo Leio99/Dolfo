@@ -1,10 +1,10 @@
 import React from "react"
-import { InputProps } from "../shared/models/InputProps"
+import { BaseInputProps } from "../shared/models/InputProps"
 import { CheckIcon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import { TooltipProps } from "../layout/Tooltip"
 
-interface IProps extends InputProps, TooltipProps{
+interface IProps extends BaseInputProps, TooltipProps{
     readonly checked?: boolean
 }
 

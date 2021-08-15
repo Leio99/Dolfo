@@ -22,7 +22,7 @@ export class BreadcrumbPage extends React.Component{
                 <BreadCrumbItem onClick={() => alert("Go back home")}>Home</BreadCrumbItem>
                 <BreadCrumbItem>Sub page</BreadCrumbItem>
             </BreadCrumb>}
-            code={'<BreadCrumb>\n\t<BreadCrumbItem>Home</BreadCrumbItem>\n\t<BreadCrumbItem>Sub page</BreadCrumbItem>\n</BreadCrumb>'}
+            code={'<BreadCrumb>\n\t<BreadCrumbItem onClick={() => alert("Go back home")}>Home</BreadCrumbItem>\n\t<BreadCrumbItem>Sub page</BreadCrumbItem>\n</BreadCrumb>'}
         />
 
         <Apis data={[

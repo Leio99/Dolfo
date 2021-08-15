@@ -1,7 +1,7 @@
 import React from "react"
 import { getCalendar, decodeMonth, zeroBefore, blurInput, isValidDate } from "../shared/utility"
 import { ICalendarDay } from "../shared/models/ICalendarDay"
-import { InputProps } from "../shared/models/InputProps"
+import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
@@ -11,7 +11,7 @@ import _ from "lodash"
 
 type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
 
-interface IProps extends InputProps {
+interface IProps extends ExtendedInputProps{
     readonly defaultValue?: Date
     readonly dateFormat?: DateFormats
     readonly selectTime?: boolean

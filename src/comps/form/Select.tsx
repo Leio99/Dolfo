@@ -1,5 +1,5 @@
 import React from "react"
-import { InputProps } from "../shared/models/InputProps"
+import { ExtendedInputProps } from "../shared/models/InputProps"
 import { CloseIcon, Icon, LoadingIcon, SearchIcon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
@@ -7,7 +7,7 @@ import onClickOutside from "react-onclickoutside"
 import { Constants } from "../shared/Constants"
 import _ from "lodash"
 
-interface IProps extends InputProps{
+interface IProps extends ExtendedInputProps{
     readonly defaultValue?: any
     readonly multiple?: boolean
     readonly canSearch?: boolean

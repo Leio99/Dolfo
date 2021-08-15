@@ -1,9 +1,9 @@
 import React from "react"
-import { InputProps } from "../shared/models/InputProps"
+import { BaseInputProps } from "../shared/models/InputProps"
 import { blurInput } from "../shared/utility"
 import { CheckBox } from "./CheckBox"
 
-interface IProps extends InputProps{
+interface IProps extends BaseInputProps{
     readonly value: any
     readonly label: string
     readonly selected?: boolean

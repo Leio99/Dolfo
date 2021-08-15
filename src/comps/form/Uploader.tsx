@@ -1,10 +1,10 @@
 import React from "react"
 import { NotificationMsg } from "../layout/NotificationMsg"
 import { Constants } from "../shared/Constants"
-import { InputProps } from "../shared/models/InputProps"
+import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 
-interface IProps extends InputProps{
+interface IProps extends ExtendedInputProps{
     readonly multiple?: boolean
     readonly accept?: string
     readonly dropArea?: boolean

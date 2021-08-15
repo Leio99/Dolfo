@@ -1,12 +1,12 @@
 import React from "react"
-import { InputProps } from "../shared/models/InputProps"
+import { FullInputProps } from "../shared/models/InputProps"
 import { Icon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Constants } from "../shared/Constants"
 
 type InputTypes = "textarea" | "password" | "email" | "number"
 
-interface IProps extends InputProps{
+interface IProps extends FullInputProps{
     readonly type?: InputTypes
     readonly expandTextarea?: boolean
     readonly rows?: number

@@ -44,6 +44,12 @@ export class UploaderPage extends React.Component{
             code={'<Uploader dropArea />'}
         />
 
+        <ResultCode
+            title="Drop file area disabled"
+            result={<Uploader dropArea disabled />}
+            code={'<Uploader dropArea disabled />'}
+        />
+
         <Apis data={[
             {
                 name: "icon",

@@ -1,12 +1,12 @@
 import React from "react"
-import { InputProps } from "../shared/models/InputProps"
+import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import { zeroBefore } from "../shared/utility"
 
-interface IProps extends InputProps{
+interface IProps extends ExtendedInputProps{
     readonly defaultValue?: string
     readonly onKeyUpHour?: (e: any) => void
     readonly onKeyUpMinute?: (e: any) => void
