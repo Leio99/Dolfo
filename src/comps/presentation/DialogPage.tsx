@@ -5,6 +5,7 @@ import { DetailIcon, Icon } from "../layout/Icon"
 import { Table } from "../layout/Table"
 import { Tab, Tabs } from "../layout/Tabs"
 import { MenuItem } from "../MenuContent"
+import { copyToClipBoard } from "../shared/utility"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class DialogPage extends React.Component<any, {
@@ -320,27 +321,44 @@ export class DialogPage extends React.Component<any, {
     </>
 }
 
-class Example extends React.Component<ComponentAsDialogProps>{
-    render = (): JSX.Element => <Dialog width="70vw" onClose={this.props.close} clickOutside visible hideFooter title="External dialog component example" overflows top>
-        <Tabs>
-            <Tab title="Example 1">
-                <code style={{ wordBreak: "break-word" }}>
-                    {`export class Parent extends React.Component {\n\tshowDialog = () => Dialog.openDialogComponent(Children)\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`}
-                </code>
-                <code style={{ wordBreak: "break-word" }}>
-                    {`export class Children extends React.Component<ComponentAsDialogProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tThis is my content\n\t</Dialog>\n}`}
-                </code>
-            </Tab>
-            <Tab title="With custom props">
-                <code style={{ wordBreak: "break-word" }}>
-                    {`export class Parent extends React.Component {\n\tshowDialog = () => Dialog.openDialogComponent(Children, {\n\t\tfirstName: "Jack",\n\t\tlastName: "Nicholson"\n\t})\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`}
-                </code>
-                <code style={{ wordBreak: "break-word" }}>
-                    {`interface ChildrenProps extends ComponentAsDialogProps{\n\treadonly firstName: string\n\treadonly lastName: string\n}\n\nexport class Children extends React.Component<ChildrenProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tMy name is {this.props.firstName} {this.props.lastName}\n\t</Dialog>\n}`}
-                </code>
-            </Tab>
-        </Tabs>
-    </Dialog>
+class Example extends React.Component<ComponentAsDialogProps, { readonly current: number }>{
+    constructor(props: ComponentAsDialogProps){
+        super(props)
+
+        this.state = {
+            current: 0
+        }
+    }
+
+    render = (): JSX.Element => {
+        const codes = [`export class Parent extends React.Component {\n\tshowDialog = () => Dialog.openDialogComponent(Children)\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`, `export class Children extends React.Component<ComponentAsDialogProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tThis is my content\n\t</Dialog>\n}`, `export class Parent extends React.Component {\n\tshowDialog = () => Dialog.openDialogComponent(Children, {\n\t\tfirstName: "Jack",\n\t\tlastName: "Nicholson"\n\t})\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`, `interface ChildrenProps extends ComponentAsDialogProps{\n\treadonly firstName: string\n\treadonly lastName: string\n}\n\nexport class Children extends React.Component<ChildrenProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tMy name is {this.props.firstName} {this.props.lastName}\n\t</Dialog>\n}`],
+        { current } = this.state
+
+        return <Dialog width="70vw" onClose={this.props.close} clickOutside visible title="External dialog component example" overflows top customFooter={[
+            <Button type="text" onClick={() => copyToClipBoard(codes[current === 0 ? 0 : 2] + "\n\n" +  codes[current === 0 ? 1 : 3])} style={{ marginRight: "0.5rem" }} tooltip="Copy code">
+                <Icon iconKey="copy" type="far" large />
+            </Button>
+        ]}>
+            <Tabs onChangeTab={current => this.setState({ current })}>
+                <Tab title="Example 1">
+                    <code style={{ wordBreak: "break-word" }}>
+                        {codes[0]}
+                    </code>
+                    <code style={{ wordBreak: "break-word" }}>
+                        {codes[1]}
+                    </code>
+                </Tab>
+                <Tab title="With custom props">
+                    <code style={{ wordBreak: "break-word" }}>
+                        {codes[2]}
+                    </code>
+                    <code style={{ wordBreak: "break-word" }}>
+                        {codes[3]}
+                    </code>
+                </Tab>
+            </Tabs>
+        </Dialog>
+    }
 }
 
 class DialogProperties extends React.Component{

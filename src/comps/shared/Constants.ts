@@ -61,4 +61,5 @@ export class Constants {
     static readonly TABLE_NO_RESULTS = "Nessun risultato"
     static readonly ACCORDION_EXPAND = "Espandi"
     static readonly ACCORDION_COLLAPSE = "Collassa"
+    static readonly COPIED_TO_CLIPBOARD = "Copiato negli appunti!"
 }

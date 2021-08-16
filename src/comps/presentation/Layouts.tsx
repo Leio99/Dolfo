@@ -4,6 +4,7 @@ import { Icon, DetailIcon } from "../layout/Icon"
 import { Table } from "../layout/Table"
 import { MenuItem } from "../MenuContent"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
+import { copyToClipBoard } from "../shared/utility"
 
 export class WhenToUse extends React.Component{
     render = (): JSX.Element => <div className="when-to-use">
@@ -91,6 +92,10 @@ export class ResultCode extends React.Component<ResultCodeProps, ResultCodeState
             </div>
 
             <div className="component-buttons">
+                {isCode && <Button type="text" onClick={() => copyToClipBoard(code)} style={{ marginRight: "0.5rem" }} tooltip="Copy code">
+                    <Icon iconKey="copy" type="far" large />
+                </Button>}
+
                 <Button type="text" onClick={this.showPreview} style={{ marginRight: "0.5rem" }} tooltip="Show preview">
                     <Icon iconKey="window" type="far" color={!isCode && "var(--dark)"} large />
                 </Button>

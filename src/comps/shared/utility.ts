@@ -2,6 +2,7 @@ import { ICalendarDay } from "./models/ICalendarDay"
 import { IDataColumn } from "./models/IColumn"
 import { Constants } from "./Constants"
 import _ from "lodash"
+import { NotificationMsg } from "../layout/NotificationMsg"
 
 export const formatDate = (date: Date, monthString = false): string => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
@@ -161,6 +162,21 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
 
     link.click()
     link.remove()
+}
+
+export const copyToClipBoard = (text: string): void => {
+    const el = document.createElement("textarea")
+    el.value = text
+    el.style.opacity = "0"
+    el.style.width = "0"
+    el.style.height = "0"
+
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand("copy")
+    document.body.removeChild(el)
+
+    NotificationMsg.showInfo(Constants.COPIED_TO_CLIPBOARD)
 }
 
 export interface Closable{

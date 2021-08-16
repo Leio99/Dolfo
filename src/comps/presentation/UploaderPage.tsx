@@ -70,7 +70,7 @@ export class UploaderPage extends React.Component{
             },
             {
                 name: "dropArea",
-                desc: "Shows a drag and drop area.",
+                desc: "Shows a drag and drop area (the component can also have some children, in this case).",
                 type: "boolean",
                 required: false,
                 default: "false"
