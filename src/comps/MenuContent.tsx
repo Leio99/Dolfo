@@ -68,14 +68,13 @@ export class MenuContent extends React.Component{
                             <h2 className="page-title">{menuBtn} Getting started</h2>
                             <p>This is a simple website to show the <strong>Dolfo components</strong>, developed by me.</p>
                             <p>Use the side menu to navigate.</p>
-                            <p>In each page, you will find:
-                                <ul>
-                                    <li>What the component is used for</li>
-                                    <li>How to use it</li>
-                                    <li>Its appearance</li>
-                                    <li>The APIs the component can take</li>
-                                </ul>
-                            </p>
+                            In each page, you will find:
+                            <ul>
+                                <li>What the component is used for</li>
+                                <li>How to use it</li>
+                                <li>Its appearance</li>
+                                <li>The APIs the component can take</li>
+                            </ul>
 
                             <h3 className="page-title">External dependencies</h3>
                             <ul>

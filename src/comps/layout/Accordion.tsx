@@ -29,10 +29,10 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 	componentDidMount = (): void => {
 		this.handleAccordions(true)
 
-		window.addEventListener("resize", () => this.handleAccordions())
+		window.addEventListener("resize", this.internalHandler)
 	}
 
-	componentWillUnmount = (): void => window.removeEventListener("resize", () => this.handleAccordions())
+	componentWillUnmount = (): void => window.removeEventListener("resize", this.internalHandler)
     
     componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.opened !== this.props.opened){
@@ -63,6 +63,8 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 				content.style.maxHeight = "100%"
 		}, 200)
 	}
+
+	internalHandler = () => this.handleAccordions()
 	
 	render = (): JSX.Element => {
 		const { props } = this,
