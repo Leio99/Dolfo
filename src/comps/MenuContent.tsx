@@ -33,23 +33,23 @@ export class MenuContent extends React.Component{
             selected = nav.querySelector(".navigation-menu-item.selected"),
             top = selected.getBoundingClientRect().top - 10
 
-            nav.scrollTo(0, top)
+            setTimeout(() => nav.scrollTo(0, top))
         }
     }
 
     toggleSideMenu = () => document.querySelector(".navigation-menu").classList.toggle("show")
 
     render = (): JSX.Element => {
-        const menuBtn = <Button circleBtn size="big" btnColor="white" onClick={this.toggleSideMenu} className="menu-toggler">
+        const menuBtn = (color: "darkblue" | "white") => <Button circleBtn size="big" btnColor={color} onClick={this.toggleSideMenu} className="menu-toggler">
             <Icon iconKey="bars" type="far" />
         </Button>
 
         return <Router history={hashHistory}>
             <Route render={({ location }) => <div className="page-content">
                 <div className="navigation-menu">
-                    {menuBtn} <h4 style={{ display: "inline" }}>Dolfo</h4>
+                    {menuBtn("darkblue")} <h4 style={{ display: "inline" }}>Dolfo</h4>
 
-                    <MenuItem link="">Getting started</MenuItem>
+                    <MenuItem link="" icon="info-square">Getting started</MenuItem>
 
                     <div className="navigation-menu-title">Form</div>
                     {
@@ -65,7 +65,7 @@ export class MenuContent extends React.Component{
                 <div className="body-content">
                     <Switch location={location}>
                         <Route exact path={homepage}>
-                            <h2 className="page-title">{menuBtn} Getting started</h2>
+                            <h2 className="page-title">{menuBtn("white")} Getting started</h2>
                             <p>This is a simple website to show the <strong>Dolfo components</strong>, developed by me.</p>
                             <p>Use the side menu to navigate.</p>
                             In each page, you will find:
@@ -91,7 +91,7 @@ export class MenuContent extends React.Component{
                                 const Component = m.component
 
                                 return <Route exact path={homepage + m.link}>
-                                    <h2 className="page-title">{menuBtn} {m.children}</h2>
+                                    <h2 className="page-title">{menuBtn("white")} {m.children}</h2>
                                     {m.component ? <Component /> : "Docs to do."}
                                 </Route>
                             })
@@ -105,7 +105,7 @@ export class MenuContent extends React.Component{
     }
 }
 
-export class MenuItem extends React.Component<{ readonly link: string }>{
+export class MenuItem extends React.Component<{ readonly link: string, readonly icon: string }>{
     static clickItem = (link: string) => {
         hashHistory.push(homepage + link)
         document.querySelector(".body-content").scrollTo(0, 0)
@@ -115,11 +115,13 @@ export class MenuItem extends React.Component<{ readonly link: string }>{
     static findLink = (childrenTitle: string) => MenuItems.find(m => m.children === childrenTitle).link
 
     render = () => {
-        const { link, children } = this.props,
+        const { link, children, icon } = this.props,
         selected = homepage + link === hashHistory.location.pathname
 
         return <div className={"navigation-menu-item" + (selected ? " selected" : "")} onClick={() => MenuItem.clickItem(link)}>
-            {children}
+            <b></b>
+            <b></b>
+            <Icon type="far" iconKey={icon} large /> {children}
         </div>
     }
 }
