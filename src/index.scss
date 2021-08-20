@@ -16,6 +16,7 @@ ul{
         scroll-behavior: smooth;
         overflow: auto;
         scrollbar-width: none;
+        -ms-overflow-style: none;
         height: 100vh;
         padding: 0.5rem 1rem;
         padding-right: 0;
