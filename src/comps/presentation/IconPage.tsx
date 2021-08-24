@@ -32,7 +32,7 @@ export class IconPage extends React.Component{
         />
 
         <ResultCode
-            title="Spinningspinning"
+            title="Spinning"
             result={<Icon spinning iconKey="spinner-third" />}
             code={'<Icon spinning iconKey="spinner-third" />'}
         />
