@@ -127,7 +127,7 @@ export class ButtonsPage extends React.Component{
             {
                 name: "options",
                 desc: "If type is 'popup', defines the button options (required if type 'popup').",
-                type: "Button option",
+                type: "Array of Button options",
                 required: false,
                 default: "false",
                 onDoubleClick: () => goToApiBlock("#btnOptionProps"),
