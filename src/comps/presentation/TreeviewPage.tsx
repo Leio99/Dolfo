@@ -455,7 +455,7 @@ export class TreeviewPage extends TreeView{
                 },
                 {
                     name: "autoOpen",
-                    desc: "Determines whether the tree should by opened by default or not.",
+                    desc: "Determines whether the tree should be opened by default or not.",
                     required: false,
                     type: "boolean",
                     default: "false"

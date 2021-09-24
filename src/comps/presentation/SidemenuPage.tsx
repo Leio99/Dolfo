@@ -49,7 +49,7 @@ export class SidemenuPage extends React.Component<any, {
         />
 
         <ResultCode
-            title="Simple menu"
+            title="Colors"
             result={<>
                 <Button btnColor="blue" size="small" onClick={() => this.toggle("red")} style={{ marginRight: 5 }}>Red</Button>
                 <Button btnColor="blue" size="small" onClick={() => this.toggle("green")} style={{ marginRight: 5 }}>Green</Button>
