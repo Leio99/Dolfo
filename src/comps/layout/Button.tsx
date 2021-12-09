@@ -3,6 +3,7 @@ import { BtnOptions } from "../shared/models/BtnOptions"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
 import { TooltipProps } from "./Tooltip"
+import { MenuContext } from "./MenuContext"
 
 export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue"
 export type ButtonColors = BaseColors | "white"
@@ -35,7 +36,22 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         }
     }
 
-    togglePopup = () => !this.props.disabled && this.setState({ openPopup: !this.state.openPopup })
+    togglePopup = (e: any) => {
+        if(this.props.disabled)
+            return
+
+        if(!this.props.iconPopup)
+            this.setState({ openPopup: !this.state.openPopup })
+        else if(this.props.options){
+            MenuContext.renderMenu(e, this.props.options.map(o => {
+                return {
+                    label: o.text,
+                    onClick: o.onClick,
+                    disabled: o.disabled
+                }
+            }))
+        }
+    }
 
     closePopup = () => this.setState({ openPopup: false })
 

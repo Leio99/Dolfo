@@ -169,48 +169,6 @@
         }
     }
 
-    &.icon-popup{
-        .dolfo-popup-options{
-            width: max-content;
-            border-radius: $smallRadius;
-            animation: showScale 0.15s ease forwards;
-            transform-origin: center left;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-            border: 0;
-            z-index: 2;
-
-            &.show{
-                transform: scale(1) translateY(calc(100% - 5px))
-            }
-
-            &:not(.pos-bottom){
-                animation-name: showScaleUp;
-                margin-bottom: 5px
-            }
-
-            &.pos-bottom{
-                margin-top: 15px
-            }
-
-            .dolfo-popup-option{
-                &:first-child{
-                    padding-top: 0.5rem
-                }
-                &:last-child{
-                    padding-bottom: 0.5rem
-                }
-            }
-        }
-
-        .dolfo-button:hover{
-            background-color: $lightGrey
-        }
-
-        .dolfo-button:active{
-            background-color: $grey
-        }
-    }
-
     .dolfo-button{
         padding: 0;
 

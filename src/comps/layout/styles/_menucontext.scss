@@ -1,0 +1,48 @@
+.context-menu{
+    position: fixed;
+    border-radius: $smallRadius;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    background-color: $white;
+    animation: scaleMenu 0.2s ease forwards;
+    animation-delay: 0.01s;
+    opacity: 0;
+    transform-origin: top left;
+
+    &.overflow-right.overflow-bottom{
+        transform-origin: bottom right
+    }
+
+    &.overflow-right{
+        transform-origin: top right
+    }
+
+    &.overflow-bottom{
+        transform-origin: bottom left
+    }
+
+    .context-item{
+        padding: 0.3rem 0.6rem;
+        cursor: pointer;
+
+        &.disabled{
+            opacity: 0.7;
+            cursor: not-allowed
+        }
+        
+        &:not(.disabled){
+            &:hover{
+                background-color: $lightGrey
+            }
+
+            &:active{
+                background-color: $grey
+            }
+        }
+    }
+}
+
+@keyframes scaleMenu{
+    0%{ transform: scale(0); opacity: 1 }
+    100%{ transform: scale(1); opacity: 1 }
+}

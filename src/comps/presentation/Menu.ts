@@ -31,6 +31,7 @@ import { TooltipPage } from "./TooltipPage"
 import { TabsPage } from "./TabsPage"
 import { TimelinePage } from "./TimelinePage"
 import { CalendarPage } from "./CalendarPage"
+import { ContextMenuPage } from "./ContextmenuPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
@@ -48,6 +49,7 @@ export const MenuItems = [
     { link: "layout/buttons", children: "Buttons", section: "layout", component: ButtonsPage, icon: "mouse" },
     { link: "layout/calendar", children: "Calendar", section: "layout", component: CalendarPage, icon: "calendar-alt" },
     { link: "layout/card", children: "Card", section: "layout", component: CardPage, icon: "id-card" },
+    { link: "layout/contextmenu", children: "Context menu", section: "layout", component: ContextMenuPage, icon: "caret-square-down" },
     { link: "layout/dialog", children: "Dialog", section: "layout", component: DialogPage, icon: "window" },
     { link: "layout/fullpageloader", children: "Fullpage loader", section: "layout", component: FullpageLoaderPage, icon: "spinner" },
     { link: "layout/header", children: "Header", section: "layout", component: HeaderPage, icon: "heading" },
