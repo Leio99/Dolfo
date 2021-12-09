@@ -511,4 +511,20 @@ TreeExample = `export class TreeviewPage extends TreeView{
             </Status>
         }
     }
+}`,
+ContextMenuExample = `export class ContextExample extends React.Component{
+    openContextMenu = (e: any) => {
+        MenuContext.renderMenu(e, [{
+            label: "I am the first option",
+            onClick: () => alert("AAAAAAAA")
+        }, {
+            label: <span>Disabled</span>,
+            disabled: true,
+            onClick: () => {}
+        }])
+    }
+
+    render = () => <Button circleBtn size="small" tooltip="Click to open" btnColor="white" onClick={this.openContextMenu}>
+        <Icon iconKey="ellipsis-v" />
+    </Button>
 }`

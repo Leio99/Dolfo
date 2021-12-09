@@ -3,66 +3,89 @@ import Button from "../layout/Button"
 import { Icon } from "../layout/Icon"
 import { MenuContext } from "../layout/MenuContext"
 import { goToApiBlock } from "../MenuContent"
+import { ContextMenuExample } from "./Examples"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class ContextMenuPage extends React.Component{
     openContextMenu = (e: any) => {
-        MenuContext.renderMenu(e, this.getMenu())
-    }
-
-    getMenu = () => {
-        return [{
+        MenuContext.renderMenu(e, [{
             label: "I am the first option",
             onClick: () => alert("AAAAAAAA")
         }, {
             label: <span>Disabled</span>,
             disabled: true,
             onClick: () => {}
-        }]
+        }])
     }
 
     render = (): JSX.Element => <>
         <WhenToUse>When you want to open a custom menu by clicking on a button.</WhenToUse>
-        <Usage />
+        <Usage notes={<>this component can only be rendered by calling a function (<em>MenuContext.renderMenu(params)</em>)</>} />
 
         <ResultCode
             title="Example"
             result={<Button circleBtn size="small" tooltip="Click to open" btnColor="white" onClick={this.openContextMenu}>
                 <Icon iconKey="ellipsis-v" />
             </Button>}
-            code={'<Card>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>'}
+            code={ContextMenuExample}
         />
 
-        <Apis data={[
+        <Apis title="Function properties" data={[
             {
-                name: "title",
-                desc: "The title of the card.",
-                type: "string or JSX",
-                required: false,
-                default: "null (title not shown)"
+                name: "event",
+                desc: "The event that triggered the opening of the menu.",
+                type: "Event",
+                required: true
             },
             {
-                name: "style",
-                desc: "Additional card style.",
-                type: "CSSProperties",
-                required: false,
-                default: "null"
-            },
-            {
-                name: "className",
-                desc: "Additional card className.",
-                type: "string",
-                required: false,
-                default: "null"
-            },
-            {
-                name: "Card actions children",
-                desc: "Actions placed at the bottom of the card.",
-                type: "string",
-                required: false,
-                default: "null (no actions)",
-                onDoubleClick: () => goToApiBlock("#cardActionProps"),
+                name: "options",
+                desc: "The options to show.",
+                type: "array of options",
+                required: true,
+                onDoubleClick: () => goToApiBlock("#optionProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
+            },
+            {
+                name: "additionalProps",
+                desc: "Additional properties.",
+                type: "boolean",
+                required: false,
+                onDoubleClick: () => goToApiBlock("#additionalProps"),
+                rowStyle: { backgroundColor: "var(--hoverblue)" }
+            }
+        ]} />
+
+        <Apis title="Option properties" id="optionProps" data={[
+            {
+                name: "label",
+                desc: "The label of the option.",
+                type: "string or jSX",
+                required: true
+            },
+            {
+                name: "onClick",
+                desc: "Function triggered when clicking the option.",
+                type: "function",
+                required: true,
+                default: "circle",
+                fnParams: "Event, the HTML of the clicked option."
+            },
+            {
+                name: "disabled",
+                desc: "Determines whether the option is.",
+                type: "boolean",
+                required: false,
+                default: "false"
+            }
+        ]} />
+
+        <Apis title="Additional properties" id="additionalProps" data={[
+            {
+                name: "closeAfterClickItem",
+                desc: "Determines whether the context menu should close after clicking an option.",
+                type: "boolean",
+                required: false,
+                default: "true"
             }
         ]} />
     </>
