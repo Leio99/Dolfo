@@ -1,7 +1,7 @@
 import _ from "lodash"
 import ReactDOM from "react-dom"
 
-export interface MenuContextOption{
+export interface ContextMenuOption{
     readonly label: string | JSX.Element
     readonly onClick: (e: any, clickedItem: HTMLElement) => void
     readonly disabled?: boolean
@@ -11,35 +11,44 @@ interface AdditionalMenuProps{
     readonly closeAfterClickItem: boolean
 }
 
-interface MenuItemElement extends HTMLElement{
-    readonly relativeButton: HTMLElement
+interface MenuItemElement extends HTMLDivElement{
+    relativeButton: HTMLElement
 }
 
-export class MenuContext{
-    static renderMenu = (event: Event, options: MenuContextOption[], additionalProps: AdditionalMenuProps = {
+export class ContextMenu{
+    static renderMenu = (event: Event, options: ContextMenuOption[], additionalProps: AdditionalMenuProps = {
         closeAfterClickItem: true
     })  => {
         window.onclick = () => {
-            const context = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
+            const contexts = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
     
-            if(context && context.length)
-                context.forEach(c => c.remove())
+            if(contexts && contexts.length)
+                contexts.forEach(c => c.remove())
         }
 
         window.onresize = () => {
-            const context = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
+            const contexts = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
     
-            if(context && context.length)
-                context.forEach(c => MenuContext.positionContext(c))
+            if(contexts && contexts.length)
+                contexts.forEach(c => ContextMenu.positionContext(c))
         }
+
+        document.querySelectorAll('*').forEach(elem => {
+            elem.addEventListener('scroll', () => {
+                const contexts = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
+    
+                if(contexts && contexts.length)
+                    contexts.forEach(c => ContextMenu.positionContext(c))
+            })
+        })
 
         event.stopPropagation()
 
         document.body.click()
 
-        const context = document.createElement("div") as any
+        const context = document.createElement("div") as MenuItemElement
         context.classList.add("context-menu")
-        context.relativeButton = event.target
+        context.relativeButton = event.target as HTMLElement
 
         options.forEach(item => {
             const htmlItem = document.createElement("div")
@@ -71,7 +80,7 @@ export class MenuContext{
 
         document.body.appendChild(context)
 
-        MenuContext.positionContext(context)   
+        ContextMenu.positionContext(context)   
     }
 
     static positionContext = (context: MenuItemElement) => {

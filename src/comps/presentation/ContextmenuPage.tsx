@@ -1,15 +1,15 @@
 import React from "react"
 import Button from "../layout/Button"
 import { Icon } from "../layout/Icon"
-import { MenuContext } from "../layout/MenuContext"
+import { ContextMenu } from "../layout/ContextMenu"
 import { goToApiBlock } from "../MenuContent"
 import { ContextMenuExample } from "./Examples"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class ContextMenuPage extends React.Component{
     openContextMenu = (e: any) => {
-        MenuContext.renderMenu(e, [{
-            label: "I am the first option",
+        ContextMenu.renderMenu(e, [{
+            label: <span>Option <Icon iconKey="star" type="far" /></span>,
             onClick: () => alert("AAAAAAAA")
         }, {
             label: <span>Disabled</span>,
@@ -20,7 +20,7 @@ export class ContextMenuPage extends React.Component{
 
     render = (): JSX.Element => <>
         <WhenToUse>When you want to open a custom menu by clicking on a button.</WhenToUse>
-        <Usage notes={<>this component can only be rendered by calling a function (<em>MenuContext.renderMenu(params)</em>)</>} />
+        <Usage notes={<>this component can only be rendered by calling a function (<em>ContextMenu.renderMenu(params)</em>)</>} />
 
         <ResultCode
             title="Example"
