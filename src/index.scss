@@ -49,7 +49,7 @@ ul{
           
           &.selected{
             background-color: $white;
-            color: black;
+            color: $black;
             border-radius: $roundRadius 0 0 $roundRadius
           }
           
