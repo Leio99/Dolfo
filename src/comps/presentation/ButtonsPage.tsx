@@ -142,7 +142,7 @@ export class ButtonsPage extends React.Component{
             },
             {
                 name: "iconPopup",
-                desc: "If type is 'popup', shows a small button with free-position popup.",
+                desc: "If type is 'popup', shows a small button with a context menu popup.",
                 type: "boolean",
                 required: false,
                 default: "false"
