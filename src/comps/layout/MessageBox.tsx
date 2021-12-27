@@ -1,6 +1,6 @@
 import React from "react"
 import { Constants } from "../shared/Constants"
-import { Closable } from "../shared/utility"
+import { Closable } from "../shared/models/Closable"
 import { CloseIcon } from "./Icon"
 import { NotificationDelay, NotificationMsg, NotificationPosition } from "./NotificationMsg"
 

@@ -1,0 +1,285 @@
+html.dark-theme{
+    body{
+        background-color: $dark;
+        color: $white
+    }
+
+    .dolfo-checkbox .dolfo-checkbox-square:not(.checked){
+        background-color: $darkThemeDark;
+
+        *{
+            color: $darkThemeDark !important
+        }
+    }
+
+    .dolfo-calendar-container{
+        background-color: $dark;
+
+        .dolfo-calendar .dolfo-calendar-cell.today, .dolfo-calendar .dolfo-calendar-cell-h.today, .dolfo-calendar-cell.select.selected span{
+            background-color: rgba($hoverRed, 0.7)
+        }
+
+        .dolfo-calendar-cell:not(.select):hover, .dolfo-calendar-cell-h.select-month:hover, .dolfo-calendar-cell-h.next-month:hover, .dolfo-calendar-cell-h.prev-month:hover, .dolfo-calendar-cell-h.select-year:hover, .dolfo-calendar-cell.selected:not(.select), .dolfo-calendar-cell.select:hover span{
+            background-color: rgba($hoverBlue, 0.7) !important;
+        }
+    }
+
+    .dolfo-form-input .dolfo-input-wrapper{
+        &, .dolfo-input-content input[type="text"], input[type="password"], input[type="email"], textarea{
+            background-color: $dark;
+            color: $white;
+
+            :-webkit-autofill, :-webkit-autofill:hover, :-webkit-autofill:focus, :-webkit-autofill:active{
+                box-shadow: 0 0 0px 1000px $dark inset !important;
+                -webkit-text-fill-color: $white
+            }
+        }
+
+        .dolfo-input-icon{
+            color: $white
+        }
+
+        &.focused .dolfo-input-icon{
+            color: $selectionBlue
+        }
+
+        .select-icon .loading{
+            color: $darkThemeSelectionBlue
+        }
+    }
+
+    .dolfo-form-input{
+        .reset-input, .toggle-password, .dolfo-select-search-icon, &.input-number .dolfo-input-number-btns .increase, &.input-number .dolfo-input-number-btns .decrease{
+            color: $lightGrey;
+
+            &:hover{
+                color: $white
+            }
+        }
+    }
+
+    .dolfo-input-radio .dolfo-radio-circle{
+        &, &.checked{
+            background-color: $darkThemeDark
+        }
+    }
+
+    .dolfo-select-options{
+        background-color: $dark;
+        color: $white
+    }
+
+    .dolfo-select-options .dolfo-option:hover, .dolfo-select-options .dolfo-option.selected, .dolfo-input-wrapper.focused .dolfo-select-search-content{
+        background-color: darken($dark, 10%)
+    }
+
+    .dolfo-input-switch{
+        .dolfo-switch:not(.checked){
+            background-color: $darkThemeDark
+        }
+
+        .dolfo-switch-dot.loading{
+            color: $darkThemeDarkActive
+        }
+    }
+
+    .dolfo-time-container{
+        background-color: $dark;
+
+        .dolfo-picker-table .dolfo-picker-row:first-child .dolfo-picker-cell:hover, .dolfo-picker-table .dolfo-picker-row:last-child .dolfo-picker-cell:hover{
+            background-color: rgba($hoverBlue, 0.7) !important;
+        }
+    }
+
+    .dolfo-uploader{
+        .dolfo-input-wrapper:hover .dolfo-input-icon, .dolfo-input-wrapper:hover .dolfo-input-content input{
+            color: $selectionBlue
+        }
+
+        .dolfo-uploader-drop{
+            background-color: $darkThemeDark;
+            
+            &:not(:hover){
+                color: $lightGrey
+            }
+    
+            &:hover, &.dragging{
+                color: $selectionBlue;
+                background-color: lighten($hoverBlue, 25%)
+            }
+        }
+    }
+
+    .dolfo-accordion{
+        box-shadow: inset 0 0 0 1px darken($darkThemeDark, 7%);
+        background-color: darken($darkThemeDark, 7%);
+
+        .dolfo-accordion-header{
+            background-color: $darkThemeDarkHover;
+            color: $lightGrey;
+
+            &:hover{
+                color: $white
+            }
+        }
+    }
+
+    .dolfo-card{
+        background-color: $dark;
+
+        .dolfo-card-title{
+            color: $white
+        }
+    }
+
+    .context-menu{
+        background-color: $darkThemeDark;
+
+        .context-item:not(.disabled){
+            &:hover{
+                background-color: $darkThemeDarkHover;
+            }
+
+            &:active{
+                background-color: $darkThemeDarkActive;
+            }
+        }
+    }
+
+    .dolfo-dialog .dolfo-dialog-inner{
+        background-color: $darkThemeDark;
+    }
+    
+    .dolfo-message-box{
+        background-color: $darkThemeDark;
+        color: $white
+    }
+    
+    .dolfo-notification{
+        background-color: $darkThemeDarkHover;
+        color: $white
+    }
+    
+    .dolfo-progress-line{
+        background-color: $darkThemeDark
+    }
+
+    .dolfo-circular-progress {  
+        .dolfo-progress-circle-bg{
+            stroke: $darkThemeDark
+        }
+    }
+
+    .dolfo-swiper-container .dolfo-swipe{
+        background-color: $darkThemeDark
+    }
+
+    .dolfo-table-content{
+    
+        .dolfo-table{
+            $borderRule: 1px solid $grey;
+            
+            > tbody > tr, > thead > tr{
+                background-color: $dark;
+
+                > td, > th{
+                    background-color: $dark
+                }
+            }
+
+            > tbody > tr{
+                &:hover{
+                    > td{
+                        background-color: $darkThemeDark
+                    }
+                }
+            }
+
+            > thead > tr > th .dolfo-column-search-input{
+                background-color: $darkThemeDark;
+                color: $white
+            }
+        }
+    }
+
+    .tree-view-angle{
+        color: $lightGrey;
+
+        &:hover{
+            color: darken($lightGrey, 8%)
+        }
+
+        &:active{
+            color: darken($lightGrey, 18%)
+        }
+    }
+
+    .dolfo-tabs{
+        .dolfo-tabs-links{    
+            .dolfo-tabs-underline{
+                background-color: $darkThemeSelectionBlue;
+            }
+
+            .dolfo-tab-title{
+                color: $lightGrey;
+                
+                &.current{
+                    color: $darkThemeSelectionBlue !important
+                }
+
+                &:focus, &:hover{
+                    color: darken($darkThemeSelectionBlue, 15%)
+                }
+            }
+        }
+    }
+
+    .dolfo-timeline{        
+        .dolfo-timeline-item-row{
+            .dolfo-timeline-empty.dolfo-timeline-item:before, .dolfo-timeline-item.dolfo-timeline-item:before{
+                background-color: $darkThemeDark
+            }
+
+            .dolfo-timeline-sign:before{
+                background-color: $darkThemeDarkHover
+            }
+
+            .dolfo-timeline-sign:after{
+                box-shadow: 0 0 0 2px $darkThemeDarkHover;
+                background-color: $dark;
+            }
+
+            &.left .dolfo-timeline-item:after{
+                border-left-color: $darkThemeDark;
+                border-right-color: transparent !important
+            }
+
+            .dolfo-timeline-empty.dolfo-timeline-item:after, .dolfo-timeline-item.dolfo-timeline-item:after{
+                border-right-color: $darkThemeDark
+            }
+        }
+    }
+
+    .dolfo-button{
+        &.btn-white:not(.text-btn){
+            background-color: $darkThemeDark;
+            color: $white;
+    
+            &:hover{
+                background-color: $darkThemeDarkHover;
+            }
+    
+            &:active{
+                background-color: $darkThemeDarkActive;
+            }
+        }
+    }
+
+    ::-webkit-scrollbar{
+        background: $darkThemeDark
+    }
+
+    ::-webkit-scrollbar-thumb{
+        background: $darkThemeDarkActive
+    }
+}

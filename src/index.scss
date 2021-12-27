@@ -226,3 +226,36 @@ button.dolfo-button.menu-toggler{
         box-shadow: 5px 0 10px $white
     }
 }
+
+html.dark-theme{
+    .page-content{
+        .navigation-menu .navigation-menu-item.selected{
+            color: $white;
+    
+            &, b{
+                background-color: $dark
+            }
+        }
+
+        .component-preview{
+            background-color: $darkThemeDark;
+            border-color: $darkThemeDark;
+
+            h6{
+                color: $white
+            }
+
+            .component-showing{
+                background-color: lighten($darkThemeDark, 30%)
+            }
+
+            .component-buttons button{
+                color: $lightGrey;
+
+                &:hover{
+                    color: $white
+                }
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@ import React from "react"
 import { CSSProperties } from "react"
 import ReactDOM from "react-dom"
 import { Constants } from "../shared/Constants"
-import { Closable } from "../shared/utility"
+import { Closable } from "../shared/models/Closable"
 import { DialogType } from "./Dialog"
 import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 

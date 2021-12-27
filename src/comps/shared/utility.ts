@@ -3,6 +3,8 @@ import { IDataColumn } from "./models/IColumn"
 import { Constants } from "./Constants"
 import _ from "lodash"
 import { NotificationMsg } from "../layout/NotificationMsg"
+import ReactDOM from "react-dom"
+import { Icon } from "../layout/Icon"
 
 export const formatDate = (date: Date, monthString = false): string => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
@@ -179,6 +181,17 @@ export const copyToClipBoard = (text: string): void => {
     NotificationMsg.showInfo(Constants.COPIED_TO_CLIPBOARD)
 }
 
-export interface Closable{
-    close?: () => void
+export const toggleDarkTheme = (icon: Icon) => {
+    const isDark = isDarkTheme() ? "0" : "1",
+    iconHtml = ReactDOM.findDOMNode(icon) as HTMLElement
+
+    document.querySelector("html").classList.toggle("dark-theme")
+    localStorage.setItem("darkTheme", isDark)
+
+    iconHtml.classList.toggle("fa-moon")
+    iconHtml.classList.toggle("fa-sun")
 }
+
+export const isDarkTheme = () => localStorage.getItem("darkTheme") === "1"
+
+export const checkDarkTheme = () => isDarkTheme() && document.querySelector("html").classList.add("dark-theme")

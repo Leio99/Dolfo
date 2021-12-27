@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { Closable } from "../shared/utility"
+import { Closable } from "../shared/models/Closable"
 
 export class FullLoader extends React.Component{
     static show = (data?: { loadingText?: string, type?: "circle" | "balls" }): Closable => {

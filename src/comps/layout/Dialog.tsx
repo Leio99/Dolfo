@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import Button, { ButtonColors } from "./Button"
 import { CheckCircleOutlineIcon, CloseIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, QuestionCircleOutlineIcon, WarningIconOutline } from "./Icon"
 import { Constants } from "../shared/Constants"
-import { Closable } from "../shared/utility"
+import { Closable } from "../shared/models/Closable"
 
 export type DialogType = "success" | "info" | "error" | "warning"
 

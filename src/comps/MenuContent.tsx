@@ -3,10 +3,10 @@ import { createBrowserHistory } from "history"
 import { Router } from "react-router"
 import { MenuItems } from "./presentation/Menu"
 import { Route, Switch } from "react-router-dom"
-import { initializeTooltips } from "./layout/Tooltip"
 import ReactDOM from "react-dom"
 import Button from "./layout/Button"
 import { Icon } from "./layout/Icon"
+import { isDarkTheme, toggleDarkTheme } from "./shared/utility"
 
 const homepage = require("../../package.json").homepage,
 hashHistory = createBrowserHistory()
@@ -26,8 +26,6 @@ export const goToApiBlock = (selector: string) => {
 
 export class MenuContent extends React.Component{
     componentDidMount = () => {
-        initializeTooltips()
-
         if(window.location.pathname !== homepage){
             const nav = (ReactDOM.findDOMNode(this) as Element).querySelector(".navigation-menu"),
             selected = nav.querySelector(".navigation-menu-item.selected"),
@@ -43,6 +41,8 @@ export class MenuContent extends React.Component{
         const menuBtn = (color: "darkblue" | "white") => <Button circleBtn size="big" btnColor={color} onClick={this.toggleSideMenu} className="menu-toggler">
             <Icon iconKey="bars" type="far" />
         </Button>
+
+        let icon: Icon
 
         return <Router history={hashHistory}>
             <Route render={({ location }) => <div className="page-content">
@@ -60,6 +60,10 @@ export class MenuContent extends React.Component{
                     {
                         MenuItems.filter(m => m.section === "layout").map(m => <MenuItem {...m} />)
                     }
+
+                    <Button btnColor="darkblue" onClick={() => toggleDarkTheme(icon)} style={{ borderRadius: 20 }}>
+                        <Icon ref={r => icon = r} iconKey={isDarkTheme() ? "sun" : "moon"} /> Toggle dark theme
+                    </Button>
                 </div>
 
                 <div className="body-content">

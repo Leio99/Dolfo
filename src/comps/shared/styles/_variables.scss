@@ -15,6 +15,11 @@ $grey: #ccc;
 $lightGrey: #eee;
 $black: #000;
 
+$darkThemeDark: darken($dark, 5%);
+$darkThemeDarkHover: darken($dark, 15%);
+$darkThemeDarkActive: darken($dark, 25%);
+$darkThemeSelectionBlue: lighten($selectionBlue, 20%);
+
 $colors: (
   "red": $red,
   "blue": $blue,
