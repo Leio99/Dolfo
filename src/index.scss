@@ -225,6 +225,10 @@ button.dolfo-button.menu-toggler{
         margin-left: 0;
         box-shadow: 5px 0 10px $white
     }
+	
+	html.dark-theme .navigation-menu.show{
+        box-shadow: 5px 0 10px $dark
+	}
 }
 
 html.dark-theme{
