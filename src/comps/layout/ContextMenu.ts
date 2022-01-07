@@ -83,7 +83,7 @@ export class ContextMenu{
         ContextMenu.positionContext(context)   
     }
 
-    static positionContext = (context: MenuItemElement) => {
+    private static positionContext = (context: MenuItemElement) => {
         const menuPos = context.getBoundingClientRect(),
         position = context.relativeButton.getBoundingClientRect(),
         width = menuPos.width,
