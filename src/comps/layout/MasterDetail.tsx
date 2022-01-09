@@ -8,6 +8,7 @@ import { Table } from "./Table"
 interface IProps{
     readonly columns: IColumn[]
     readonly data: IDataColumn[]
+    readonly actions?: (dataItem: IDataColumn) => JSX.Element
     readonly getDetailTitle: (item: any) => string | JSX.Element
     readonly onOpenDetail?: (item: any) => void
 }
@@ -31,13 +32,13 @@ export class MasterDetail extends React.Component<IProps, IState>{
     }
 
     render = (): JSX.Element => {
-        const { columns, data, onOpenDetail, children, getDetailTitle } = this.props,
+        const { columns, data, onOpenDetail, children, getDetailTitle, actions } = this.props,
         { selectedItem } = this.state
 
         return <div className="dolfo-master-detail">
             {
                 !selectedItem ? <Table columns={
-                    columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL })
+                    columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center" })
                 } data={data.map(v => {
                     const tmp: IDataColumn = {
                         ...v,
@@ -45,9 +46,13 @@ export class MasterDetail extends React.Component<IProps, IState>{
                             this.setState({ selectedItem: v })
                             onOpenDetail && onOpenDetail(v)
                         },
-                        actions: <Button onClick={() => tmp.onDoubleClick()} btnColor="darkblue" type="text" tooltip={Constants.OPEN_DETAIL}>
-                            <DetailIcon large />
-                        </Button>
+                        actions: <>
+                            <Button onClick={() => tmp.onDoubleClick()} btnColor="blue" type="text" tooltip={Constants.OPEN_DETAIL}>
+                                <DetailIcon large />
+                            </Button>
+
+                            {actions && actions(v)}
+                        </>
                     }
 
                     return tmp

@@ -273,6 +273,18 @@ html.dark-theme{
                 background-color: $darkThemeDarkActive;
             }
         }
+        
+        &.btn-black.text-btn{
+            color: $white;
+    
+            &:hover{
+                color: $lightGrey
+            }
+    
+            &:active{
+                color: $grey
+            }
+        }
     }
 
     ::-webkit-scrollbar{
