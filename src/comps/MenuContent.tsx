@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom"
 import ReactDOM from "react-dom"
 import Button from "./layout/Button"
 import { Icon } from "./layout/Icon"
+import { Switch as InputSwitch } from "./form/Switch"
 import { isDarkTheme, toggleDarkTheme } from "./shared/utility"
 
 const homepage = require("../../package.json").homepage,
@@ -24,7 +25,15 @@ export const goToApiBlock = (selector: string) => {
     setTimeout(() => element.classList.remove("api-animate"), 500)
 }
 
-export class MenuContent extends React.Component{
+export class MenuContent extends React.Component<unknown, { readonly darkTheme: boolean }>{
+    constructor(props: unknown){
+        super(props)
+
+        this.state = {
+            darkTheme: isDarkTheme()
+        }
+    }
+
     componentDidMount = () => {
         if(window.location.pathname !== homepage){
             const nav = (ReactDOM.findDOMNode(this) as Element).querySelector(".navigation-menu"),
@@ -37,16 +46,22 @@ export class MenuContent extends React.Component{
 
     toggleSideMenu = () => document.querySelector(".navigation-menu").classList.toggle("show")
 
+    toggleDarkMode = () => this.setState({ darkTheme: !this.state.darkTheme }, toggleDarkTheme)
+
     render = (): JSX.Element => {
         const menuBtn = (color: "darkblue" | "white") => <Button circleBtn size="big" btnColor={color} onClick={this.toggleSideMenu} className="menu-toggler">
             <Icon iconKey="bars" type="far" />
-        </Button>
+        </Button>,
+        { darkTheme } = this.state
 
-        let icon: Icon
 
         return <Router history={hashHistory}>
             <Route render={({ location }) => <div className="page-content">
                 <div className="navigation-menu">
+                    <div style={{ float: "right", color: "var(--white)", marginRight: 10 }} data-tooltip="Toggle dark mode">
+                        <InputSwitch checked={darkTheme} label={<Icon iconKey="moon" />} onChange={this.toggleDarkMode} />
+                    </div>
+
                     {menuBtn("darkblue")} <h4 style={{ display: "inline" }}>Dolfo</h4>
 
                     <MenuItem link="" icon="info-square">Getting started</MenuItem>
@@ -60,10 +75,6 @@ export class MenuContent extends React.Component{
                     {
                         MenuItems.filter(m => m.section === "layout").map(m => <MenuItem {...m} />)
                     }
-
-                    <Button btnColor="darkblue" onClick={() => toggleDarkTheme(icon)} style={{ borderRadius: 20 }}>
-                        <Icon ref={r => icon = r} iconKey={isDarkTheme() ? "sun" : "moon"} /> Toggle dark theme
-                    </Button>
                 </div>
 
                 <div className="body-content">

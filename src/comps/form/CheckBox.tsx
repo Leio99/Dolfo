@@ -28,7 +28,7 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
     onChange = (): void => {
         if(this.props.disabled) return
         
-        !this.props.onChange && this.setState({
+        this.setState({
             checked: !this.state.checked
         }, () => this.props.onChange && this.props.onChange(this.state.checked))
     }
