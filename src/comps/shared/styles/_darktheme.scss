@@ -59,7 +59,7 @@ html.dark-theme{
     }
 
     .dolfo-input-radio .dolfo-radio-circle{
-        &, &.checked{
+        &:not(.checked){
             background-color: $darkThemeDark
         }
     }

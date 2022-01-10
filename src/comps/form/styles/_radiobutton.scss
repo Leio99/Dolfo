@@ -69,18 +69,25 @@
             }
 
             &.checked{
-                background-color: $white;
-                border-color: $selectionBlue;
+                background-color: $selectionBlue;
+                border-color: $white;
                 animation: expandShadow 1s ease;
+                display: inline-flex;
+                align-items: center;
+
+                i.dolfo-icon{
+                    font-size: 8px
+                }
 
                 &:after{
                     content: "";
                     display: block;
                     position: absolute;
-                    width: 7pt;
-                    height: 7pt;
-                    transform: scale(0);
-                    animation: radio 0.2s ease forwards;
+                    top: 2px;
+                    right: 2px;
+                    left: 2px;
+                    bottom: 2px;
+                    animation: radio 0.4s ease forwards;
                     border-radius: $roundRadius;
                     z-index: 1;
                     background-color: $selectionBlue
@@ -91,7 +98,7 @@
 }
 
 @keyframes radio{
-    100%{ transform: scale(1) }
+    100%{ left: 100% }
 }
 @keyframes expandShadow{
     0%{ box-shadow: 0 0 0 3px $hoverBlue }

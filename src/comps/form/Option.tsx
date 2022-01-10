@@ -1,4 +1,5 @@
 import React from "react"
+import { Icon } from "../layout/Icon"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { blurInput } from "../shared/utility"
 import { CheckBox } from "./CheckBox"
@@ -36,7 +37,9 @@ export class Option extends React.PureComponent<IProps>{
             return <div className={"dolfo-input-radio" + (props.className ? (" " + props.className) : "")} style={props.style} onClick={this.selectOption}>
                 <input type="radio" required={props.required} checked={props.selected} tabIndex={-1} name={props.controlName} />
 
-                <div className={"dolfo-radio-circle" + (props.selected ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace}></div>
+                <div className={"dolfo-radio-circle" + (props.selected ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace}>
+                    {props.selected && <Icon iconKey="check" />}
+                </div>
                 {props.label && <label className="dolfo-radio-label">{props.label}</label>}
             </div>
         }
