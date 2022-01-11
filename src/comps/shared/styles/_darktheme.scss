@@ -24,6 +24,18 @@ html.dark-theme{
         }
     }
 
+    .dolfo-g-calendar-content table.dolfo-g-calendar tbody tr td.external .content .event{
+        background-color: $darkThemeDark;
+
+        &:hover{
+            background-color: $darkThemeDarkHover
+        }
+
+        &:active{
+            background-color: $darkThemeDarkActive
+        }
+    }
+
     .dolfo-form-input .dolfo-input-wrapper{
         &, .dolfo-input-content input[type="text"], input[type="password"], input[type="email"], textarea{
             background-color: $dark;
