@@ -27,7 +27,7 @@ class Select extends React.PureComponent<IProps, IState>{
         super(props)
 
         this.state = {
-            value: props.defaultValue || (props.multiple ? [] : null),
+            value: props.defaultValue ?? (props.multiple ? [] : null),
             openSelect: false,
             options: this.getOptions(),
             searchValue: "",
