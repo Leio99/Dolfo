@@ -2,7 +2,7 @@
     position: fixed;
     border-radius: $smallRadius;
     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
-    z-index: 2;
+    z-index: 999;
     background-color: $white;
     animation: scaleMenu 0.2s ease forwards;
     animation-delay: 0.01s;
