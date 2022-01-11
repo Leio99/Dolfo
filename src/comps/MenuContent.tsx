@@ -9,7 +9,7 @@ import { Icon } from "./layout/Icon"
 import { Switch as InputSwitch } from "./form/Switch"
 import { isDarkTheme, toggleDarkTheme } from "./shared/utility"
 
-const homepage = require("../../package.json").homepage,
+const homepage = process.env.PUBLIC_URL + "/",
 hashHistory = createBrowserHistory()
 
 export const goToApiBlock = (selector: string) => {
