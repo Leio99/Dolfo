@@ -119,6 +119,8 @@ export class Uploader extends React.PureComponent<IProps, IState>{
     }
 
     clickInput = (e: any): void => {
+        if(this.props.disabled) return
+        
         this.setState({ value: "" })
         e.target.value = null
     }

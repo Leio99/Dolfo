@@ -39,7 +39,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         }
     }
 
-    changeTime = (): void => this.props.onChange && this.props.onChange(this.state.value)
+    changeTime = (): void => !this.props.disabled && this.props.onChange && this.props.onChange(this.state.value)
 
     changeHour = (e: any): void => {
         const value = parseInt(e.target.value)

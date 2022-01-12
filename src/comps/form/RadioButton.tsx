@@ -30,6 +30,8 @@ export class RadioButton extends React.PureComponent<IProps, IState>{
     }
 
     changeValue = (value: any): void => {
+        if(this.props.disabled) return
+        
         this.setState({ value })
         this.props.onChange && this.props.onChange(value)
     }

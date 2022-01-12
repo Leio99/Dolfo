@@ -104,6 +104,8 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear, blur = true, showCalendar = false): void => {
+        if(this.props.disabled) return
+        
         const date = this.handleDate(day, month, year),
         sendDate = new Date()
         sendDate.setDate(day)
@@ -188,6 +190,8 @@ class DatePicker extends React.PureComponent<IProps, IState>{
     }
 
     resetDate = (): void => {
+        if(this.props.disabled) return
+
         const currentYear = new Date().getFullYear(),
         currentMonth = new Date().getMonth(),
         currentHour = new Date().getHours(),

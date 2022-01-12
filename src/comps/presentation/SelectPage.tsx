@@ -133,6 +133,13 @@ export class SelectPage extends React.Component{
                 default: "false"
             },
             {
+                name: "defaultValue",
+                desc: "The default value of the select (must be the same value of one of the options inside or a list of them).",
+                type: "any",
+                required: false,
+                default: "null"
+            },
+            {
                 name: "disabled",
                 desc: "Determines whether the combobox is disabled or not.",
                 type: "boolean",

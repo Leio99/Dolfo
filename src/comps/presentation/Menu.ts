@@ -32,12 +32,14 @@ import { TabsPage } from "./TabsPage"
 import { TimelinePage } from "./TimelinePage"
 import { CalendarPage } from "./CalendarPage"
 import { ContextMenuPage } from "./ContextmenuPage"
+import { SelectablelistPage } from "./SelectablelistPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
     { link: "form/datepicker", children: "Date picker", section: "form", component: DatepickerPage, icon: "calendar-day" },
     { link: "form/radio", children: "Radio button", section: "form", component: RadiobuttonPage, icon: "dot-circle" },
     { link: "form/select", children: "Select", section: "form", component: SelectPage, icon: "hand-pointer" },
+    { link: "form/selectablelist", children: "Selectable list", section: "form", component: SelectablelistPage, icon: "list" },
     { link: "form/switch", children: "Switch", section: "form", component: SwitchPage, icon: "toggle-on" },
     { link: "form/textinputs", children: "Text input", section: "form", component: TextinputPage, icon: "keyboard" },
     { link: "form/timepicker", children: "Time picker", section: "form", component: TimepickerPage, icon: "clock" },

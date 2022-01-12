@@ -1,0 +1,83 @@
+.dolfo-selectable-list{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    position: relative;
+
+    input{
+        position: absolute;
+        pointer-events: none;
+        opacity: 0
+    }
+
+    &.disabled, .dolfo-selectable-option.disabled{
+        opacity: 0.6;
+        pointer-events: none
+    }
+    
+    label.dolfo-selectable-list-label{
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        flex: 0 0 100%;
+
+        .dolfo-input-required{
+            color: $red
+        }
+    }
+
+    .dolfo-selectable-option{
+        $calc: calc(33.33% - (1rem / 3));
+        flex: 0 0 $calc;
+        background-color: $lightGrey;
+        color: $black;
+        border: 1px solid $grey;
+        border-radius: $smallRadius;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+
+        .dolfo-checkbox{
+            margin-right: 0.6rem
+        }
+
+        h5{
+            margin-bottom: 0;
+            display: inline-block;
+            vertical-align: middle
+        }
+
+        small{
+            color: $dark;
+            display: block
+        }
+
+        &.selected{
+            background-color: $selectionBlue;
+            color: $white;
+            border-color: darken($selectionBlue, 10%);
+
+            small{
+                color: $lightGrey
+            }
+
+            .dolfo-checkbox .dolfo-checkbox-square{
+                border-color: $white;
+                
+                &, &:after{
+                    background-color: darken($selectionBlue, 10%)
+                }
+            }
+        }
+        
+        &:not(.disabled){
+            cursor: pointer
+        }
+
+        &.middle{
+            margin-left: 0.5rem;
+            margin-right: 0.5rem
+        }
+    }
+}

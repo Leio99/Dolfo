@@ -45,7 +45,7 @@ export class RadiobuttonPage extends React.Component{
             {
                 name: "defaultValue",
                 desc: "The default value of the radio button (must be the same value of one of the options inside).",
-                type: "string",
+                type: "any",
                 required: true
             },
             {

@@ -299,6 +299,19 @@ html.dark-theme{
         }
     }
 
+    .dolfo-selectable-list .dolfo-selectable-option{
+        color: $white;
+
+        &:not(.selected){
+            background-color: $darkThemeDark;
+            border-color: $darkThemeDarkActive;
+
+            small{
+                color: $lightGrey
+            }
+        }
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }

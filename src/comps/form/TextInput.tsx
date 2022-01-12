@@ -58,6 +58,8 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     onFocus = (e: any): void => this.setState({ focused: true }, () => this.props.onFocus && this.props.onFocus(e))
 
     onChange = (e: any): void => {
+        if(this.props.disabled) return
+
         if(this.props.type === "number"){
             const number =  Number(e.target.value)
 
@@ -73,6 +75,8 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     }
     
     resetInput = (): void => {
+        if(this.props.disabled) return
+        
         this.props.onChange && this.onChange({ target: { value: "" }})
 
         this.setState({
