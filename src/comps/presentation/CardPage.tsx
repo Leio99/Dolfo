@@ -23,6 +23,12 @@ export class CardPage extends React.Component{
         />
 
         <ResultCode
+            title="Tab layout"
+            result={<Card title="I have tab layout" tabLayout>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>}
+            code={'<Card title="I have tab layout" tabLayout>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>'}
+        />
+
+        <ResultCode
             title="Actions"
             result={<Card title="I have actions">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.
@@ -57,6 +63,13 @@ export class CardPage extends React.Component{
                 type: "string",
                 required: false,
                 default: "null"
+            },
+            {
+                name: "tabLayout",
+                desc: "Determines if the card should be tab-styled.",
+                type: "boolean",
+                required: false,
+                default: "false"
             },
             {
                 name: "Card actions children",

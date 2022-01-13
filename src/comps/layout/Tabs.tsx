@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react"
 import _ from "lodash"
+import ReactDOM from "react-dom"
 
 interface IProps {
     readonly style?: CSSProperties
@@ -72,24 +73,20 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     }
 
     handleBar = (): void => {
-        const tabs = document.querySelectorAll(".dolfo-tabs")
+        const { vertical } = this.props,
+        tab = ReactDOM.findDOMNode(this) as HTMLElement,
+        header = tab.querySelector(".dolfo-tabs-links"),
+        titles = header.querySelectorAll(".dolfo-tab-title"),
+        bar = header.querySelector(".dolfo-tabs-underline") as HTMLElement,
+        current = Array.from(titles).find(t => t.classList.contains("current")) as HTMLElement
 
-        tabs.forEach(tab => {
-            const header = tab.querySelector(".dolfo-tabs-links"),
-            isVertical = tab.classList.contains("vertical")
-
-            const titles = header.querySelectorAll(".dolfo-tab-title"),
-            bar = header.querySelector(".dolfo-tabs-underline") as HTMLElement,
-            current = Array.from(titles).find(t => t.classList.contains("current")) as HTMLElement
-
-            if(isVertical){
-                bar.style.marginTop = current.offsetTop + "px"
-                bar.style.height = current.clientHeight + "px"
-            }else{
-                bar.style.marginLeft = current.offsetLeft + "px"
-                bar.style.width = current.clientWidth + "px"
-            }
-        })
+        if(vertical){
+            bar.style.marginTop = current.offsetTop + "px"
+            bar.style.height = current.clientHeight + "px"
+        }else{
+            bar.style.marginLeft = current.offsetLeft + "px"
+            bar.style.width = current.clientWidth + "px"
+        }
     }
 
     checkKey = (e: any, index: number): void => {

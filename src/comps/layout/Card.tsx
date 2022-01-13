@@ -1,11 +1,12 @@
 import React, { CSSProperties } from "react"
 
-interface IProps{
+interface CardActionsProps{
     readonly className?: string
     readonly style?: CSSProperties
+    readonly tabLayout?: boolean
 }
 
-interface CardProps extends IProps{
+interface CardProps extends CardActionsProps{
     readonly title?: string | JSX.Element
 }
 
@@ -13,14 +14,14 @@ export class Card extends React.PureComponent<CardProps>{
     render = (): JSX.Element => {
         const { props } = this
 
-        return <div className={"dolfo-card" + (props.className ? (" " + props.className) : "")} style={props.style}>
+        return <div className={"dolfo-card" + (props.tabLayout ? " tab-layout" : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             {props.title && <div className="dolfo-card-title">{props.title}</div>}
             {props.children}
         </div>
     }
 }
 
-export class CardActions extends React.PureComponent<IProps>{
+export class CardActions extends React.PureComponent<CardActionsProps>{
     render = (): JSX.Element => {
         const { props } = this
 
