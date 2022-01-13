@@ -39,7 +39,7 @@ export const MenuItems = [
     { link: "form/datepicker", children: "Date picker", section: "form", component: DatepickerPage, icon: "calendar-day" },
     { link: "form/radio", children: "Radio button", section: "form", component: RadiobuttonPage, icon: "dot-circle" },
     { link: "form/select", children: "Select", section: "form", component: SelectPage, icon: "hand-pointer" },
-    { link: "form/selectablelist", children: "Selectable list", section: "form", component: SelectablelistPage, icon: "list" },
+    { link: "form/selectablelist", children: "Selectable list", section: "form", component: SelectablelistPage, icon: "tasks" },
     { link: "form/switch", children: "Switch", section: "form", component: SwitchPage, icon: "toggle-on" },
     { link: "form/textinputs", children: "Text input", section: "form", component: TextinputPage, icon: "keyboard" },
     { link: "form/timepicker", children: "Time picker", section: "form", component: TimepickerPage, icon: "clock" },
