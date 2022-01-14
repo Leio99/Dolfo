@@ -4,10 +4,15 @@ import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import Button from "./Button"
 import { DetailIcon, Icon } from "./Icon"
 import { Table } from "./Table"
+import { CardTable } from "./CardTable"
+
+type MDLayout = "card" | "grid"
 
 interface IProps{
     readonly columns: IColumn[]
     readonly data: IDataColumn[]
+    readonly getTitle: (dataItem: IDataColumn) => string | JSX.Element
+    readonly layoutType?: MDLayout
     readonly actions?: (dataItem: IDataColumn) => JSX.Element
     readonly getDetailTitle: (item: any) => string | JSX.Element
     readonly onOpenDetail?: (item: any) => void
@@ -15,6 +20,7 @@ interface IProps{
 
 interface IState{
     readonly selectedItem: any
+    readonly layoutType: MDLayout
 }
 
 export class MasterDetail extends React.Component<IProps, IState>{
@@ -22,8 +28,14 @@ export class MasterDetail extends React.Component<IProps, IState>{
         super(props)
 
         this.state = {
-            selectedItem: null
+            selectedItem: null,
+            layoutType: props.layoutType || "grid"
         }
+    }
+
+    componentDidUpdate = (prevProps: IProps) => {
+        if(this.props.layoutType !== prevProps.layoutType)
+            this.setState({ layoutType: this.props.layoutType })
     }
     
     resetSelection = () => {
@@ -31,32 +43,45 @@ export class MasterDetail extends React.Component<IProps, IState>{
         this.props.onOpenDetail && this.props.onOpenDetail(null)
     }
 
+    toggleLayout = () => this.setState({ layoutType: this.state.layoutType === "grid" ? "card" : "grid" })
+
     render = (): JSX.Element => {
-        const { columns, data, onOpenDetail, children, getDetailTitle, actions } = this.props,
-        { selectedItem } = this.state
+        const { columns, data, onOpenDetail, children, getDetailTitle, actions, layoutType, getTitle } = this.props,
+        { selectedItem, layoutType: stateLayout } = this.state,
+        cols = columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center" }),
+        colData = data.map(v => {
+            const tmp: IDataColumn = {
+                ...v,
+                onDoubleClick: () => {
+                    this.setState({ selectedItem: v })
+                    onOpenDetail && onOpenDetail(v)
+                },
+                actions: <>
+                    <Button onClick={() => tmp.onDoubleClick()} btnColor="blue" type="text" tooltip={Constants.OPEN_DETAIL}>
+                        <DetailIcon large />
+                    </Button>
+
+                    {actions && actions(v)}
+                </>
+            }
+
+            return tmp
+        })
 
         return <div className="dolfo-master-detail">
             {
-                !selectedItem ? <Table columns={
-                    columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center" })
-                } data={data.map(v => {
-                    const tmp: IDataColumn = {
-                        ...v,
-                        onDoubleClick: () => {
-                            this.setState({ selectedItem: v })
-                            onOpenDetail && onOpenDetail(v)
-                        },
-                        actions: <>
-                            <Button onClick={() => tmp.onDoubleClick()} btnColor="blue" type="text" tooltip={Constants.OPEN_DETAIL}>
-                                <DetailIcon large />
-                            </Button>
-
-                            {actions && actions(v)}
-                        </>
+                !selectedItem ? <div className="master-detail-results">
+                    {
+                        !layoutType && (stateLayout === "grid" ? <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_CARD_LAYOUT}>
+                            <Icon iconKey="credit-card-blank" />  
+                        </Button> : <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_GRID_LAYOUT}>
+                            <Icon iconKey="table" />  
+                        </Button>)
                     }
-
-                    return tmp
-                })} /> : <div className="dolfo-detail">
+                    {
+                        stateLayout === "grid" ? <Table columns={cols} data={colData} /> : <CardTable getTitle={getTitle} columns={cols} data={colData} />
+                    }
+                </div> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
                         <Button btnColor="white" circleBtn onClick={this.resetSelection} tooltip={Constants.BACK_TO_LIST}>
                             <Icon iconKey="arrow-left" type="far" />

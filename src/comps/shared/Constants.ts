@@ -62,4 +62,6 @@ export class Constants {
     static readonly ACCORDION_EXPAND = "Espandi"
     static readonly ACCORDION_COLLAPSE = "Collassa"
     static readonly COPIED_TO_CLIPBOARD = "Copiato negli appunti!"
+    static readonly SWITCH_TO_CARD_LAYOUT = "Mostra come scheda"
+    static readonly SWITCH_TO_GRID_LAYOUT = "Mostra come griglia"
 }

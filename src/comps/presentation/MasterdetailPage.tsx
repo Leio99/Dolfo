@@ -68,8 +68,10 @@ export class MasterdetailPage extends React.Component<{}, IState>{
         }
     }
 
+    getTitle = ({ nome, cognome }: any) => cognome + " " + nome
+
     getDetailTitle = ({ nome, cognome }: any): JSX.Element => <span>
-        {cognome} {nome} <Status type="info" style={{
+        {this.getTitle({ nome, cognome })} <Status type="info" style={{
             fontSize: "initial",
             fontWeight: "normal",
             verticalAlign: "super"
@@ -85,11 +87,11 @@ export class MasterdetailPage extends React.Component<{}, IState>{
             
             <ResultCode
                 title="Example"
-                result={<MasterDetail columns={[
+                result={<MasterDetail layoutType="card" columns={[
                     { field: "cognome", label: "Cognome" },
                     { field: "nome", label: "Nome" },
                     { field: "dataNascita", label: "Data di nascita", type: "date", align: "center" },
-                ]} data={list} getDetailTitle={this.getDetailTitle}>
+                ]} data={list} getDetailTitle={this.getDetailTitle} getTitle={this.getTitle}>
                     <Card title="Informazioni anagrafiche">
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis nesciunt quae ratione nobis animi qui placeat fugiat quibusdam, perspiciatis sit illo quas amet velit reprehenderit omnis quod cumque earum esse?
                     </Card>
