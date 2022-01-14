@@ -36,6 +36,19 @@ export class TabsPage extends React.Component{
         />
 
         <ResultCode
+            title="Tab-styled"
+            result={<Tabs tabStyle>
+                <Tab title="I am the first tab">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, officiis qui ut ipsam, voluptatum eius in saepe consequatur consectetur fugit perspiciatis ad doloribus placeat accusantium, omnis numquam cupiditate illo obcaecati!
+                </Tab>
+                <Tab title={<><Icon iconKey="home-alt" /> I have an icon</>}>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, commodi voluptates neque ad aspernatur at iste aut, vitae ab, eveniet quos. Adipisci, eligendi. Quisquam commodi voluptatem aperiam, aut aliquid nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. In molestiae, vero voluptates ex inventore quam autem id amet expedita corporis ipsum dolorum laboriosam eum necessitatibus aperiam illum corrupti et neque?
+                </Tab>
+            </Tabs>}
+            code={'<Tabs tabStyle>\n\t<Tab title="I am the first tab">\n\t\tLorem ipsum dolor sit amet consectetur adipisicing elit. Quam, officiis qui ut ipsam, voluptatum eius in saepe consequatur consectetur fugit perspiciatis ad doloribus placeat accusantium, omnis numquam cupiditate illo obcaecati!\n\t</Tab>\n\t<Tab title={<><Icon iconKey="home-alt" /> I have an icon</>}>\n\t\tLorem ipsum dolor sit amet consectetur adipisicing elit. Modi, commodi voluptates neque ad aspernatur at iste aut, vitae ab, eveniet quos. Adipisci, eligendi. Quisquam commodi voluptatem aperiam, aut aliquid nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. In molestiae, vero voluptates ex inventore quam autem id amet expedita corporis ipsum dolorum laboriosam eum necessitatibus aperiam illum corrupti et neque?\n\t</Tab>\n</Tabs>'}
+        />
+
+        <ResultCode
             title="Disabled"
             result={<Tabs>
                 <Tab title="I am the first tab">

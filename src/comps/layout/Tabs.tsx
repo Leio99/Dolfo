@@ -2,10 +2,11 @@ import React, { CSSProperties } from "react"
 import _ from "lodash"
 import ReactDOM from "react-dom"
 
-interface IProps {
+interface TabsProps {
     readonly style?: CSSProperties
     readonly className?: string
     readonly vertical?: boolean
+    readonly tabStyle?: boolean
     readonly onChangeTab?: (index: number) => void
 }
 
@@ -21,8 +22,8 @@ interface TabProps{
     readonly disabled?: boolean
 }
 
-export class Tabs extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps) {
+export class Tabs extends React.PureComponent<TabsProps, IState>{
+    constructor(props: TabsProps) {
         super(props)
 
         this.state = {
@@ -73,6 +74,8 @@ export class Tabs extends React.PureComponent<IProps, IState>{
     }
 
     handleBar = (): void => {
+        if(this.props.tabStyle && !this.props.vertical) return
+
         const { vertical } = this.props,
         tab = ReactDOM.findDOMNode(this) as HTMLElement,
         header = tab.querySelector(".dolfo-tabs-links"),
@@ -103,9 +106,9 @@ export class Tabs extends React.PureComponent<IProps, IState>{
         { children, currentTab } = this.state,
         isVertical = props.vertical
 
-        return <div className={"dolfo-tabs" + (props.className ? (" " + props.className) : "") + (isVertical ? " vertical" : "")} style={props.style}>
+        return <div className={"dolfo-tabs" + (props.tabStyle ? " tab-layout" : "") + (props.className ? (" " + props.className) : "") + (isVertical ? " vertical" : "")} style={props.style}>
             <div className="dolfo-tabs-links">
-                <div className="dolfo-tabs-underline"></div>
+                {(!props.tabStyle || props.vertical) && <div className="dolfo-tabs-underline"></div>}
 
                 {
                     children.map((child, i) => {

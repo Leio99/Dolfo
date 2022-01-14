@@ -23,7 +23,7 @@
     }
 
     table.dolfo-g-calendar{
-        $borderRule: 1px solid $lightGrey;
+        $borderRule: 1px solid $grey;
 
         text-align: center;
         width: 100%;
@@ -151,6 +151,10 @@
 
             thead, tbody tr td.emptys{
                 display: none
+            }
+
+            tbody tr td:not(th){
+                border-left: 0
             }
 
             tbody, tbody tr, tbody tr td{

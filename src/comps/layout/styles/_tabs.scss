@@ -100,4 +100,51 @@
             }
         }
     }
+
+    &.tab-layout{
+        .dolfo-tabs-links{
+            margin-bottom: 0;
+            padding-bottom: 0;
+            overflow: initial;
+            margin-left: 1.5rem;
+
+            .dolfo-tab-title{
+                margin-right: 0.5rem;
+                border-radius: 10px 10px 0 0;
+                position: relative;
+                border: 1px solid transparent;
+                border-bottom: 0;
+    
+                &.current{
+                    border-color: $grey;
+                    box-shadow: inset 0 -3px 0 $white;
+        
+                    &:before{
+                        content: "";
+                        display: block;
+                        bottom: -1px;
+                        height: 2px;
+                        background-color: $white;
+                        left: 0;
+                        right: 0;
+                        position: absolute
+                    }
+                }
+
+                &:not(.disabled):not(.current):hover{
+                    background-color: lighten($lightGrey, 2%)
+                }
+            }
+        }
+
+        .dolfo-tabs-list{
+            border: 1px solid $grey;
+            padding: 1rem;
+            border-radius: 10px;
+
+            .dolfo-tab-content{
+                transition: none
+            }
+        }
+    }
 }
