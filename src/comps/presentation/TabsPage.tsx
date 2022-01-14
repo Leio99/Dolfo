@@ -78,6 +78,13 @@ export class TabsPage extends React.Component{
                 default: "false"
             },
             {
+                name: "tabStyle",
+                desc: "Changes the tabs style.",
+                type: "boolean",
+                required: false,
+                default: "false"
+            },
+            {
                 name: "style",
                 desc: "Additional style for the tabs wrapper.",
                 type: "CSSProperties",
