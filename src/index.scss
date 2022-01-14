@@ -250,7 +250,7 @@ html.dark-theme{
             }
 
             .component-showing{
-                background-color: lighten($darkThemeDark, 30%)
+                background-color: $dark
             }
 
             .component-buttons button{

@@ -27,7 +27,8 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     "email": "leonardo.grandolfo99@gmail.com",
                     "promosso": "0",
                     "codice": "18099",
-                    "password": "password123"
+                    "password": "password123",
+                    "stato": <Status type="info">Attivo</Status>
                 },
                 {
                     "nome": "Sgorbio",
@@ -38,7 +39,8 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     "idEdizione": "1",
                     "id": "b69f50fa-f30a-4d22-b39d-0c69a716a906",
                     "frequenza": "0",
-                    "promosso": "0"
+                    "promosso": "0",
+                    "stato": <Status type="info">Attivo</Status>
                 },
                 {
                     "nome": "Adriano",
@@ -50,7 +52,8 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     "id": "49e39e09-5e2f-466f-9889-ade1bfd0846b",
                     "frequenza": "0",
                     "promosso": "0",
-                    "archiviato": "1"
+                    "archiviato": "1",
+                    "stato": <Status type="info">Attivo</Status>
                 },
                 {
                     "nome": "Carlo",
@@ -62,7 +65,8 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     "id": "c56963a6-4cd1-4797-9998-ff2db571bc37",
                     "frequenza": "0",
                     "promosso": "0",
-                    "archiviato": "1"
+                    "archiviato": "1",
+                    "stato": <Status type="info">Attivo</Status>
                 }
             ]
         }
@@ -87,10 +91,11 @@ export class MasterdetailPage extends React.Component<{}, IState>{
             
             <ResultCode
                 title="Example"
-                result={<MasterDetail layoutType="card" columns={[
+                result={<MasterDetail columns={[
                     { field: "cognome", label: "Cognome" },
                     { field: "nome", label: "Nome" },
                     { field: "dataNascita", label: "Data di nascita", type: "date", align: "center" },
+                    { field: "stato", label: "Stato", align: "center" }
                 ]} data={list} getDetailTitle={this.getDetailTitle} getTitle={this.getTitle}>
                     <Card title="Informazioni anagrafiche">
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis nesciunt quae ratione nobis animi qui placeat fugiat quibusdam, perspiciatis sit illo quas amet velit reprehenderit omnis quod cumque earum esse?
@@ -117,8 +122,23 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     rowStyle: { backgroundColor: "var(--hoverblue)" }
                 },
                 {
+                    name: "layoutType",
+                    desc: "Defines the type of layout. If not passed, shows a button to allow viewmode toggling.",
+                    type: "string (card or grid)",
+                    required: false,
+                    default: "grid"
+                },
+                {
                     name: "getDetailTitle",
                     desc: "Function to determine the title of the detail page.",
+                    type: "function (must return string or JSX)",
+                    required: true,
+                    default: "null",
+                    fnParams: "The selected item in the grid (any)"
+                },
+                {
+                    name: "getTitle",
+                    desc: "Function to determine the title of the card (when shown).",
                     type: "function (must return string or JSX)",
                     required: true,
                     default: "null",
