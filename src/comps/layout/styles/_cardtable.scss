@@ -4,9 +4,16 @@
     flex-direction: row;
     
     .dolfo-card{
-        flex: 0 0 calc(33.33% - (1rem / 3));
-        margin-bottom: 0.5rem;
+        --cardSize: 2rem;
+        $halfSize: calc(var(--cardSize) / 2);
+        flex: 0 0 calc(33.33% - (var(--cardSize) / 3));
+        margin-bottom: $halfSize;
         cursor: pointer;
+        
+        &.middle{
+            margin-left: $halfSize;
+            margin-right: $halfSize
+        }
         
         &.middle{
             margin-left: 0.5rem;
