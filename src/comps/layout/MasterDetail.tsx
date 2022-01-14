@@ -1,18 +1,11 @@
 import React from "react"
 import { Constants } from "../shared/Constants"
-import { IColumn, IDataColumn } from "../shared/models/IColumn"
+import { IDataColumn } from "../shared/models/IColumn"
 import Button from "./Button"
 import { DetailIcon, Icon } from "./Icon"
-import { Table } from "./Table"
-import { CardTable } from "./CardTable"
+import { ResultsView, ResultViewProps, ViewType } from "./ResultsView"
 
-type MDLayout = "card" | "grid"
-
-interface IProps{
-    readonly columns: IColumn[]
-    readonly data: IDataColumn[]
-    readonly getTitle: (dataItem: IDataColumn) => string | JSX.Element
-    readonly layoutType?: MDLayout
+interface IProps extends ResultViewProps{
     readonly actions?: (dataItem: IDataColumn) => JSX.Element
     readonly getDetailTitle: (item: any) => string | JSX.Element
     readonly onOpenDetail?: (item: any) => void
@@ -20,7 +13,7 @@ interface IProps{
 
 interface IState{
     readonly selectedItem: any
-    readonly layoutType: MDLayout
+    readonly layoutType: ViewType
 }
 
 export class MasterDetail extends React.Component<IProps, IState>{
@@ -43,11 +36,11 @@ export class MasterDetail extends React.Component<IProps, IState>{
         this.props.onOpenDetail && this.props.onOpenDetail(null)
     }
 
-    toggleLayout = () => this.setState({ layoutType: this.state.layoutType === "grid" ? "card" : "grid" })
+    toggleViewMode = (layoutType: ViewType) => this.setState({ layoutType }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(layoutType))
 
     render = (): JSX.Element => {
-        const { columns, data, onOpenDetail, children, getDetailTitle, actions, layoutType, getTitle } = this.props,
-        { selectedItem, layoutType: stateLayout } = this.state,
+        const { columns, data, onOpenDetail, children, getDetailTitle, actions, getTitle } = this.props,
+        { selectedItem, layoutType } = this.state,
         cols = columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center" }),
         colData = data.map(v => {
             const tmp: IDataColumn = {
@@ -71,18 +64,7 @@ export class MasterDetail extends React.Component<IProps, IState>{
         return <div className="dolfo-master-detail">
             {
                 !selectedItem ? <div className="master-detail-results">
-                    {
-                        !layoutType && <div className="master-detail-toggler">
-                            {stateLayout === "grid" ? <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_CARD_LAYOUT}>
-                                <Icon iconKey="credit-card-blank" />  
-                            </Button> : <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_GRID_LAYOUT}>
-                                <Icon iconKey="table" />  
-                            </Button>}
-                        </div>
-                    }
-                    {
-                        stateLayout === "grid" ? <Table columns={cols} data={colData} /> : <CardTable getTitle={getTitle} columns={cols} data={colData} />
-                    }
+                    <ResultsView data={colData} columns={cols} getTitle={getTitle} onToggleViewMode={this.toggleViewMode} layoutType={layoutType} />
                 </div> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
                         <Button btnColor="white" circleBtn onClick={this.resetSelection} tooltip={Constants.BACK_TO_LIST}>
