@@ -149,6 +149,16 @@ html.dark-theme{
         }
     }
 
+    .dolfo-card-table-content .dolfo-card:hover{
+        &, .dolfo-card-title{
+            background-color: $darkThemeDark;
+
+            &.dolfo-card-title{
+                box-shadow: inset 0 -3px 0 $darkThemeDark
+            }
+        }
+    }
+
     .context-menu{
         background-color: $darkThemeDark;
 

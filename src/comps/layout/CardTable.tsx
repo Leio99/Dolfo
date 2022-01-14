@@ -2,7 +2,7 @@ import React from "react"
 import { Constants } from "../shared/Constants"
 import { ResultsManager } from "./ResultsManager"
 import { IDataColumn } from "../shared/models/IColumn"
-import { Card } from "./Card"
+import { Card, CardActions } from "./Card"
 
 interface IProps{
     readonly getTitle: (item: IDataColumn) => string | JSX.Element
@@ -30,14 +30,15 @@ export class CardTable extends ResultsManager<IProps>{
 
                     return <Card className={addClass} tabLayout title={props.getTitle(d)} onDoubleClick={() => this.onDoubleClick(d)}>
                         {
-                            props.columns.map(col => <div style={{ ...rowStyle, ...d.rowStyle, textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
-                                {
-                                    d[col.field]
-                                }
+                            props.columns.map(col => <div style={{ ...rowStyle, ...d.rowStyle }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
+                                {col.field !== "actions" ? <div className="key-value">
+                                    <strong>{col.label}</strong>
+                                    <div>{d[col.field]}</div>
+                                </div> : <CardActions>{d[col.field]}</CardActions>}
                             </div>)
                         }
                     </Card>
-                }) : <div className="dolfo-table-noresults">
+                }) : <div className="dolfo-card-table-noresults">
                     {Constants.TABLE_NO_RESULTS}
                 </div>
             }

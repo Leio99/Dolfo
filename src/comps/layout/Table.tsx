@@ -63,9 +63,7 @@ export class Table extends ResultsManager{
                             return <tr onDoubleClick={() => this.onDoubleClick(d)}>
                                 {
                                     props.columns.map(col => <td style={{ ...rowStyle, ...d.rowStyle, textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
-                                        {
-                                            d[col.field]
-                                        }
+                                        {d[col.field]}
                                     </td>)
                                 }
                             </tr>

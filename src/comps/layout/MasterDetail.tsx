@@ -72,11 +72,13 @@ export class MasterDetail extends React.Component<IProps, IState>{
             {
                 !selectedItem ? <div className="master-detail-results">
                     {
-                        !layoutType && (stateLayout === "grid" ? <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_CARD_LAYOUT}>
-                            <Icon iconKey="credit-card-blank" />  
-                        </Button> : <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_GRID_LAYOUT}>
-                            <Icon iconKey="table" />  
-                        </Button>)
+                        !layoutType && <div className="master-detail-toggler">
+                            {stateLayout === "grid" ? <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_CARD_LAYOUT}>
+                                <Icon iconKey="credit-card-blank" />  
+                            </Button> : <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_GRID_LAYOUT}>
+                                <Icon iconKey="table" />  
+                            </Button>}
+                        </div>
                     }
                     {
                         stateLayout === "grid" ? <Table columns={cols} data={colData} /> : <CardTable getTitle={getTitle} columns={cols} data={colData} />
