@@ -4,12 +4,14 @@
     flex-direction: row;
     
     .dolfo-card{
-        --cardSize: 2rem;
-        $halfSize: calc(var(--cardSize) / 2);
-        flex: 0 0 calc(33.33% - (var(--cardSize) / 3));
-        margin-bottom: $halfSize;
+        $halfSize: 1rem;
+        flex: 0 0 calc(33.33% - (2rem / 3));
         cursor: pointer;
         
+        &:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){
+            margin-top: 2.5rem + $halfSize
+        }
+
         &.middle{
             margin-left: $halfSize;
             margin-right: $halfSize
@@ -52,9 +54,14 @@
     }
 }
 
+.results-view-toggler{
+    margin-bottom: 0.5rem
+}
+
 @media screen and (max-width: 750px){
     .dolfo-card-table-content .dolfo-card{
         flex: 0 0 100%;
+        margin-bottom: 1rem;
 
         &.middle{
             margin-left: 0;
