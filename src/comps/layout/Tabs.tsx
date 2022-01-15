@@ -121,7 +121,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
                 }
             </div>
 
-            <div className="dolfo-tabs-list">
+            <div className={"dolfo-tabs-list" + (currentTab === 0 && props.tabStyle ? " tl-angle" : "")}>
                 {
                     children.map((child, i) => {
                         const marginLeft = -(100 * currentTab) + "%",
