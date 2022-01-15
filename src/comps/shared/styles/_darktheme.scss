@@ -260,17 +260,23 @@ html.dark-theme{
             }
         }
 
-        &.tab-layout .dolfo-tabs-links .dolfo-tab-title{
-            &.current{
-                box-shadow: inset 0 -3px 0 $dark;
+        &.tab-layout{
+            .dolfo-tabs-links .dolfo-tab-title{
+                &.current{
+                    box-shadow: inset 0 -3px 0 $dark;
+        
+                    &:before{
+                        background-color: $dark
+                    }
+                }
     
-                &:before{
-                    background-color: $dark
+                &:not(.disabled):not(.current):hover{
+                    background-color: $darkThemeDark
                 }
             }
 
-            &:not(.disabled):not(.current):hover{
-                background-color: $darkThemeDark
+            .dolfo-tabs-list{
+                background-color: $dark
             }
         }
     }
