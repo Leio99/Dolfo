@@ -1,12 +1,12 @@
 import _ from "lodash"
 import React from "react"
-import { CheckBox } from "../form/CheckBox"
-import { Constants } from "../shared/Constants"
-import Button from "./Button"
-import { Icon } from "./Icon"
-import { ResultsManager } from "./ResultsManager"
+import { CheckBox } from "../../form/CheckBox"
+import { Constants } from "../../shared/Constants"
+import Button from "../Button"
+import { Icon } from "../Icon"
+import { BaseResultsManager } from "./BaseResultsManager"
 
-export class Table extends ResultsManager{
+export class Table extends BaseResultsManager{
     render = (): JSX.Element => {
         const { props } = this,
         { filter, activeFilterKey, activeFilter } = this.state,
@@ -56,14 +56,15 @@ export class Table extends ResultsManager{
                     {
                         data.length ? data.map(d => {
                             const rowStyle = d.checked ? {
-                                backgroundColor: "var(--hoverblue)",
-                                color: "var(--darkblue)"
+                                backgroundColor: "var(--hoverblue)"
                             } : null
 
                             return <tr onDoubleClick={() => this.onDoubleClick(d)}>
                                 {
                                     props.columns.map(col => <td style={{ ...rowStyle, ...d.rowStyle, textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
-                                        {d[col.field]}
+                                        {
+                                            d[col.field]
+                                        }
                                     </td>)
                                 }
                             </tr>

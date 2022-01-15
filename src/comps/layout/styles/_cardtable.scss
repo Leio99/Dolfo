@@ -17,13 +17,15 @@
             margin-right: $halfSize
         }
 
-        &:hover{
+        &:hover:not(.selected){
             &, .dolfo-card-title{
-                background-color: lighten($lightGrey, 2%);
+                background-color: lighten($lightGrey, 2%)
+            }
+        }
 
-                &.dolfo-card-title{
-                    box-shadow: inset 0 -3px 0 lighten($lightGrey, 2%)
-                }
+        &.selected{
+            &, .dolfo-card-title{
+                background-color: #deebf7
             }
         }
 

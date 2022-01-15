@@ -1,7 +1,7 @@
 import React from "react"
 import Button from "../layout/Button"
 import { NotificationMsg } from "../layout/NotificationMsg"
-import { Table } from "../layout/Table"
+import { Table } from "../layout/table/Table"
 import { Constants } from "../shared/Constants"
 import { ResultCode, WhenToUse, Usage } from "./Layouts"
 

@@ -1,8 +1,8 @@
 import React from "react"
-import { Constants } from "../shared/Constants"
-import { IDataColumn } from "../shared/models/IColumn"
-import Button from "./Button"
-import { DetailIcon, Icon } from "./Icon"
+import { Constants } from "../../shared/Constants"
+import { IDataColumn } from "../../shared/models/IColumn"
+import Button from "../Button"
+import { DetailIcon, Icon } from "../Icon"
 import { ResultsView, ResultViewProps, ViewType } from "./ResultsView"
 
 interface IProps extends ResultViewProps{
@@ -39,9 +39,9 @@ export class MasterDetail extends React.Component<IProps, IState>{
     toggleViewMode = (layoutType: ViewType) => this.setState({ layoutType }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(layoutType))
 
     render = (): JSX.Element => {
-        const { columns, data, onOpenDetail, children, getDetailTitle, actions, getTitle } = this.props,
+        const { columns, data, onOpenDetail, children, getDetailTitle, actions, getTitle, className, exportFormat, exportable, style } = this.props,
         { selectedItem, layoutType } = this.state,
-        cols = columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center" }),
+        cols = columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center", exportable: false }),
         colData = data.map(v => {
             const tmp: IDataColumn = {
                 ...v,
@@ -64,7 +64,7 @@ export class MasterDetail extends React.Component<IProps, IState>{
         return <div className="dolfo-master-detail">
             {
                 !selectedItem ? <div className="master-detail-results">
-                    <ResultsView data={colData} columns={cols} getTitle={getTitle} onToggleViewMode={this.toggleViewMode} layoutType={layoutType} />
+                    <ResultsView data={colData} columns={cols} getTitle={getTitle} onToggleViewMode={this.toggleViewMode} layoutType={layoutType} className={className} style={style} exportFormat={exportFormat} exportable={exportable} />
                 </div> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
                         <Button btnColor="white" circleBtn onClick={this.resetSelection} tooltip={Constants.BACK_TO_LIST}>

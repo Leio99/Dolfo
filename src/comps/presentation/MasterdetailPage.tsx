@@ -1,10 +1,10 @@
 import React from "react"
-import { MasterDetail } from "../layout/MasterDetail"
 import { Card } from "../layout/Card"
 import { Status } from "../layout/Status"
 import { Apis, ColumnApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 import { MDExample } from "./Examples"
 import { goToApiBlock } from "../MenuContent"
+import { MasterDetail } from "../layout/table/MasterDetail"
 
 interface IState{
     readonly list: any[]
@@ -40,6 +40,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     "id": "b69f50fa-f30a-4d22-b39d-0c69a716a906",
                     "frequenza": "0",
                     "promosso": "0",
+                    checked: true,
                     "stato": <Status type="info">Attivo</Status>
                 },
                 {
@@ -92,6 +93,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
             <ResultCode
                 title="Example"
                 result={<MasterDetail columns={[
+                    { field: "check", label: "", type: "check", checkTooltip: "Seleziona tutti", checked: true },
                     { field: "cognome", label: "Cognome" },
                     { field: "nome", label: "Nome" },
                     { field: "dataNascita", label: "Data di nascita", type: "date", align: "center" },

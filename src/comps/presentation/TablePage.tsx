@@ -1,6 +1,6 @@
 import React from "react"
 import { Apis, ColumnApis, ResultCode, Usage, WhenToUse } from "./Layouts"
-import { Table } from "../layout/Table"
+import { Table } from "../layout/table/Table"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import { goToApiBlock } from "../MenuContent"
 

@@ -1,7 +1,7 @@
 import React from "react"
 import Button from "../layout/Button"
 import { CloseCircleIcon, CloseIcon, DeleteIcon, EditIcon, Icon } from "../layout/Icon"
-import { TreeNode, TreeView } from "../layout/TreeView"
+import { TreeNode, TreeView } from "../layout/table/TreeView"
 import { NotificationMsg } from "../layout/NotificationMsg"
 import { Dialog } from "../layout/Dialog"
 import { Status } from "../layout/Status"

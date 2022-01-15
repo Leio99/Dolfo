@@ -1,7 +1,7 @@
 import React from "react"
 import Button from "../layout/Button"
 import { Icon, DetailIcon } from "../layout/Icon"
-import { Table } from "../layout/Table"
+import { Table } from "../layout/table/Table"
 import { MenuItem } from "../MenuContent"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import { copyToClipBoard } from "../shared/utility"
