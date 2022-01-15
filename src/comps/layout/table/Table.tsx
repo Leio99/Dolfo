@@ -9,15 +9,8 @@ import { BaseResultsManager } from "./BaseResultsManager"
 export class Table extends BaseResultsManager{
     render = (): JSX.Element => {
         const { props } = this,
-        { filter, activeFilterKey, activeFilter } = this.state,
-        ajdustData = props.data.map(d => {
-            let temp = {...d}
-
-            props.columns.forEach(c => temp[c.field] = this.getColumnDataType(c, d))
-
-            return temp
-        }),
-        data = activeFilterKey === "" ? ajdustData : ajdustData.filter(d => d[activeFilterKey].toLowerCase().indexOf(filter[activeFilterKey].toLowerCase()) >= 0)
+        { filter, activeFilter } = this.state,
+        data = this.getFilteredData()
  
         return <div className={"dolfo-table-content" + (props.className ? (" " + props.className) : "")}>
             <table className="dolfo-table" style={props.style}>

@@ -11,13 +11,7 @@ export interface CardTableProps{
 export class CardTable extends BaseResultsManager<CardTableProps>{
     render = (): JSX.Element => {
         const { props } = this,
-        data = props.data.map(d => {
-            let temp = {...d}
-
-            props.columns.forEach(c => temp[c.field] = this.getColumnDataType(c, d))
-
-            return temp
-        })
+        data = this.getFilteredData()
  
         return <div className={"dolfo-card-table-content" + (props.className ? (" " + props.className) : "")}>
             {

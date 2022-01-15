@@ -42,4 +42,17 @@ export abstract class BaseResultsManager<P = {}> extends BaseExportableManager<R
     changeActiveFiler = (key: string): void => this.setState({ activeFilter: key })
 
     blurSearch = (): void => this.setState({ activeFilter: "" })
+
+    getFilteredData = () => {
+        const { filter, activeFilterKey } = this.state,
+        ajdustData = this.props.data.map(d => {
+            let temp = {...d}
+
+            this.props.columns.forEach(c => temp[c.field] = this.getColumnDataType(c, d))
+
+            return temp
+        })
+
+        return activeFilterKey === "" ? ajdustData : ajdustData.filter(d => d[activeFilterKey].toLowerCase().indexOf(filter[activeFilterKey].toLowerCase()) >= 0)
+    }
 }
