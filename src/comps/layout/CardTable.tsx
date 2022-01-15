@@ -4,11 +4,11 @@ import { ResultsManager } from "./ResultsManager"
 import { IDataColumn } from "../shared/models/IColumn"
 import { Card, CardActions } from "./Card"
 
-interface IProps{
-    readonly getTitle: (item: IDataColumn) => string | JSX.Element
+export interface CardTableProps{
+    readonly getTitle?: (item: IDataColumn) => string | JSX.Element
 }
 
-export class CardTable extends ResultsManager<IProps>{
+export class CardTable extends ResultsManager<CardTableProps>{
     render = (): JSX.Element => {
         const { props } = this,
         data = props.data.map(d => {
@@ -28,9 +28,9 @@ export class CardTable extends ResultsManager<IProps>{
                     } : null,
                     addClass = (i - 1) % 3 === 0 ? " middle" : ""
 
-                    return <Card className={addClass} tabLayout title={props.getTitle(d)} onDoubleClick={() => this.onDoubleClick(d)}>
+                    return <Card className={addClass} tabLayout title={props.getTitle ? props.getTitle(d) : null} onDoubleClick={() => this.onDoubleClick(d)}>
                         {
-                            props.columns.map(col => <div style={{ ...rowStyle, ...d.rowStyle }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
+                            props.columns.map(col => !col.hideCard && <div style={{ ...rowStyle, ...d.rowStyle }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
                                 {col.field !== "actions" ? <div className="key-value">
                                     <strong>{col.label}</strong>
                                     <div>{d[col.field]}</div>

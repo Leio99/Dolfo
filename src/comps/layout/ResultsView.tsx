@@ -2,16 +2,15 @@ import React from "react"
 import { Constants } from "../shared/Constants"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import Button from "./Button"
-import { CardTable } from "./CardTable"
+import { CardTable, CardTableProps } from "./CardTable"
 import { Icon } from "./Icon"
 import { Table } from "./Table"
 
 export type ViewType = "grid" | "card"
 
-export interface ResultViewProps{
+export interface ResultViewProps extends CardTableProps{
     readonly columns: IColumn[]
     readonly data: IDataColumn[]
-    readonly getTitle: (dataItem: IDataColumn) => string | JSX.Element
     readonly layoutType?: ViewType
     readonly hideToggleButton?: boolean
     readonly onToggleViewMode?: (viewMode: ViewType) => void
@@ -47,7 +46,7 @@ export class ResultsView extends React.Component<ResultViewProps, IState>{
 
         return <>
             {
-                !hideToggleButton && <div className="master-detail-toggler">
+                !hideToggleButton && <div className="results-view-toggler">
                     {stateLayout === "grid" ? <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_CARD_LAYOUT}>
                         <Icon iconKey="credit-card-blank" />  
                     </Button> : <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout} tooltip={Constants.SWITCH_TO_GRID_LAYOUT}>

@@ -4,7 +4,10 @@
     border: 1px solid $grey;
     position: relative;
     background-color: $white;
-    margin-top: 0.7rem;
+    
+    &:not(.no-title){
+        margin-top: 0.7rem
+    }
 
     &:not(.tab-layout) .dolfo-card-title{
         position: absolute;
@@ -19,8 +22,12 @@
     }
 
     &.tab-layout{
-        border-radius: 0 10px 10px 10px;
-        margin-top: 2.5rem;
+        border-radius: 10px;
+        
+        &:not(.no-title){
+            border-radius: 0 10px 10px 10px;
+            margin-top: 2.5rem
+        }
 
         .dolfo-card-title{
             position: absolute;

@@ -13,6 +13,7 @@ export interface IColumn extends TooltipProps<boolean>{
     readonly checkTooltip?: string
     readonly exportable?: boolean
     readonly exportField?: string
+    readonly hideCard?: boolean
     readonly onCheckAll?: () => void
 }
 

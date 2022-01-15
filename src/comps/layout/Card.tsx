@@ -15,7 +15,7 @@ export class Card extends React.PureComponent<CardProps>{
     render = (): JSX.Element => {
         const { props } = this
 
-        return <div className={"dolfo-card" + (props.tabLayout ? " tab-layout" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onDoubleClick={props.onDoubleClick}>
+        return <div className={"dolfo-card" + (props.tabLayout ? " tab-layout" : "") + (!props.title ? " no-title" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onDoubleClick={props.onDoubleClick}>
             {props.title && <div className="dolfo-card-title">{props.title}</div>}
             {props.children}
         </div>
