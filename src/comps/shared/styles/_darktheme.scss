@@ -195,6 +195,10 @@ html.dark-theme{
         .dolfo-progress-circle-bg{
             stroke: $darkThemeDark
         }
+
+        .dolfo-progress-percentage{
+            fill: $white
+        }
     }
 
     .dolfo-swiper-container .dolfo-swipe{
