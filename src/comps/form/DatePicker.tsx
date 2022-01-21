@@ -264,6 +264,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 value={showDate}
                 autoFocus={props.autoFocus}
                 required={props.required}
+                disabled={props.disabled}
                 onChange={this.tryChangeDate}
                 onPaste={props.onPaste}
                 onKeyDown={props.onKeyDown}

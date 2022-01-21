@@ -132,6 +132,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                 type="text"
                 className="dolfo-input-time"
                 value={hour}
+                disabled={props.disabled}
                 autoFocus={props.autoFocus}
                 onChange={this.changeHour}
                 onKeyDown={this.keyDownHour}
@@ -143,6 +144,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                 type="text"
                 className="dolfo-input-time"
                 value={minute}
+                disabled={props.disabled}
                 onChange={this.changeMinute}
                 onKeyDown={this.keyDownMinute}
                 onKeyPress={props.onKeyPressMinute}
