@@ -44,3 +44,9 @@
     0%{ opacity: 0 }
     100%{ opacity: 1 }
 }
+
+@media screen and (max-width: 700px){
+    .dolfo-master-detail .dolfo-detail .dolfo-detail-content{
+        padding-left: 0
+    }
+}
