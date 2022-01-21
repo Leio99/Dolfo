@@ -33,6 +33,7 @@ import { TimelinePage } from "./TimelinePage"
 import { CalendarPage } from "./CalendarPage"
 import { ContextMenuPage } from "./ContextmenuPage"
 import { SelectablelistPage } from "./SelectablelistPage"
+import { DropdownPage } from "./DropdownPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
@@ -48,11 +49,12 @@ export const MenuItems = [
     { link: "layout/alerts", children: "Alerts", section: "layout", component: AlertPage, icon: "comment-alt-exclamation" },
     { link: "layout/avatar", children: "Avatar", section: "layout", component: AvatarPage, icon: "user-circle" },
     { link: "layout/breadcrumb", children: "Breadcrumb", section: "layout", component: BreadcrumbPage, icon: "location-arrow" },
-    { link: "layout/buttons", children: "Buttons", section: "layout", component: ButtonsPage, icon: "mouse" },
+    { link: "layout/buttons", children: "Button", section: "layout", component: ButtonsPage, icon: "mouse" },
     { link: "layout/calendar", children: "Calendar", section: "layout", component: CalendarPage, icon: "calendar-alt" },
     { link: "layout/card", children: "Card", section: "layout", component: CardPage, icon: "id-card" },
-    { link: "layout/contextmenu", children: "Context menu", section: "layout", component: ContextMenuPage, icon: "caret-square-down" },
+    { link: "layout/contextmenu", children: "Context menu", section: "layout", component: ContextMenuPage, icon: "comment-dots" },
     { link: "layout/dialog", children: "Dialog", section: "layout", component: DialogPage, icon: "window" },
+    { link: "layout/dropdown", children: "Dropdown", section: "layout", component: DropdownPage, icon: "caret-square-down" },
     { link: "layout/fullpageloader", children: "Fullpage loader", section: "layout", component: FullpageLoaderPage, icon: "spinner" },
     { link: "layout/header", children: "Header", section: "layout", component: HeaderPage, icon: "heading" },
     { link: "layout/icons", children: "Icon", section: "layout", component: IconPage, icon: "icons" },

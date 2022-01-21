@@ -1,0 +1,63 @@
+.dolfo-dropdown{
+    $padding: 0.4rem 1rem;
+
+    position: relative;
+    list-style-type: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+
+    &.disabled{
+        opacity: 0.6
+    }
+
+    &:not(.disabled):hover{
+        $bs: 0 10px 10px rgba(0, 0, 0, 0.2);
+
+        box-shadow: $bs;
+
+        .dolfo-dropdown-label, .dropdown-items-container{
+            background-color: $white;
+            color: $black;
+    
+            &.dolfo-dropdown-label .dropdown-icon{
+                transform: rotate(180deg)
+            }
+
+            &.dropdown-items-container{
+                box-shadow: $bs
+            }
+        }
+    }
+
+    .dolfo-dropdown-label{
+        padding: $padding;
+        border-radius: $smallRadius $smallRadius 0 0;
+
+        .dropdown-icon{
+            transition: transform 0.2s ease
+        }
+    }
+
+    .dropdown-items-container{
+        position: absolute;
+        overflow: hidden;
+        right: 0;
+        left: 0;
+        border-radius: 0 0 $smallRadius $smallRadius;
+
+        .dolfo-dropdown-item{
+            padding: $padding;
+
+            &:not(.disabled):hover{
+                background-color: $lightGrey
+            }
+
+            &.disabled{
+                opacity: 0.6;
+                cursor: not-allowed
+            }
+        }
+    }
+}
