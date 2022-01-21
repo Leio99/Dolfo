@@ -67,17 +67,8 @@
             
             &.dolfo-dialog-header{
                 .dialog-close{
-                    transform: translateY(25%);
-                    float: right;
-                    color: #ddd;
-
-                    &:hover{
-                        color: $disabled
-                    }
-
-                    &:active{
-                        color: $dark
-                    }
+                    transform: translateY(10%);
+                    float: right
                 }
 
                 .dolfo-dialog-title{
