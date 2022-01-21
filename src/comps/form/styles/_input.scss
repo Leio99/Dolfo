@@ -24,7 +24,11 @@
         }
 
         .dolfo-input-required{
-            color: $red
+            color: $red;
+            font-size: 15px;
+            vertical-align: top;
+            position: relative;
+            top: -3px
         }
 
         > span{
