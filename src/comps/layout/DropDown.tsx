@@ -25,13 +25,13 @@ export class DropDown extends React.Component<IProps, IState>{
         }
     }
 
-    close = () => this.setState({ opened: false })
+    close = (): void => this.setState({ opened: false })
     
-    open = () => !this.props.disabled && this.setState({ opened: true })
+    open = (): void => !this.props.disabled && this.setState({ opened: true })
 
     getItems = (): DropDownItem[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
-    clickItem = (e: any, item: DropDownItem) => {
+    clickItem = (e: any, item: DropDownItem): void => {
         if(item.props.disabled) return
 
         if(item.props.onClick)

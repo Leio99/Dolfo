@@ -26,17 +26,17 @@ export class MasterDetail extends React.Component<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps) => {
+    componentDidUpdate = (prevProps: IProps): void => {
         if(this.props.layoutType !== prevProps.layoutType)
             this.setState({ layoutType: this.props.layoutType })
     }
     
-    resetSelection = () => {
+    resetSelection = (): void => {
         this.setState({ selectedItem: null })
         this.props.onOpenDetail && this.props.onOpenDetail(null)
     }
 
-    toggleViewMode = (layoutType: ViewType) => this.setState({ layoutType }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(layoutType))
+    toggleViewMode = (layoutType: ViewType): void => this.setState({ layoutType }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(layoutType))
 
     render = (): JSX.Element => {
         const { columns, data, onOpenDetail, children, getDetailTitle, actions, getTitle, className, exportFormat, exportable, style } = this.props,

@@ -1,4 +1,5 @@
 import { CSSProperties } from "react"
+import { IDataColumn } from "../../shared/models/IColumn"
 import { BaseExportableManager, BaseResultsData } from "./BaseExportableManager"
 
 export interface ResultsManagerProps extends BaseResultsData{
@@ -43,7 +44,7 @@ export abstract class BaseResultsManager<P = {}> extends BaseExportableManager<R
 
     blurSearch = (): void => this.setState({ activeFilter: "" })
 
-    getFilteredData = () => {
+    getFilteredData = (): IDataColumn[] => {
         const { filter, activeFilterKey } = this.state,
         ajdustData = this.props.data.map(d => {
             let temp = {...d}

@@ -31,12 +31,12 @@ export class ResultsView extends BaseExportableManager<ResultViewProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: ResultViewProps) => {
+    componentDidUpdate = (prevProps: ResultViewProps): void => {
         if(this.props.layoutType !== prevProps.layoutType)
             this.setState({ layoutType: this.props.layoutType })
     }
 
-    toggleLayout = () => {
+    toggleLayout = (): void => {
         this.setState({
             layoutType: this.state.layoutType === "grid" ? "card" : "grid"
         }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(this.state.layoutType))
