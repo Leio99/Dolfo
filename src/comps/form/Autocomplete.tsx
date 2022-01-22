@@ -7,6 +7,10 @@ import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 
+interface IProps<K> extends ExtendedInputProps{
+    readonly defaultValue?: K
+}
+
 interface IState<E, K>{
     readonly loading: boolean
     readonly list: E[]
@@ -17,11 +21,11 @@ interface IState<E, K>{
     readonly showOptions: boolean
 }
 
-export abstract class Autocomplete<E, K> extends React.Component<ExtendedInputProps, IState<E, K>>{
+export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps<K> & P, IState<E, K>>{
     private readonly TIMING = 500
     private typing: NodeJS.Timeout
 
-    constructor(props: ExtendedInputProps){
+    constructor(props: IProps<K> & P){
         super(props)
 
         this.state = {
@@ -41,7 +45,9 @@ export abstract class Autocomplete<E, K> extends React.Component<ExtendedInputPr
 
     abstract getKey: (item: E) => K
 
-    componentDidMount = () => {
+    abstract getSingle: (key: K) => Promise<E> | E
+
+    componentDidMount = (): void => {
         window.addEventListener("click", e => {
             const element = e.target as Node,
             node = ReactDOM.findDOMNode(this)
@@ -49,9 +55,22 @@ export abstract class Autocomplete<E, K> extends React.Component<ExtendedInputPr
             if(!node.contains(element))
                 this.onBlur()
         })
+
+        if(this.props.defaultValue != null)
+            this.fetchDefaultValue()
     }
 
-    toggleLoading = () => this.setState({ loading: !this.state.loading })
+    componentDidUpdate = (prevProps: IProps<K> & P): void => {
+        if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
+            this.fetchDefaultValue()
+    }
+
+    fetchDefaultValue = (): void => {
+        this.toggleLoading()
+        Promise.resolve(this.getSingle(this.props.defaultValue)).then(r => this.selectOption(r)).finally(this.toggleLoading)
+    }
+
+    toggleLoading = (): void => this.setState({ loading: !this.state.loading })
 
     onBlur = (): void => this.setState({ focused: false, showOptions: false })
 
@@ -77,6 +96,9 @@ export abstract class Autocomplete<E, K> extends React.Component<ExtendedInputPr
         clearTimeout(this.typing)
 
         this.typing = setTimeout(() => {
+            if(!this.state.filter?.trim())
+                return
+
             const dataSource = this.getSource(this.state.filter)
 
             if(_.isArray(dataSource))
@@ -106,7 +128,7 @@ export abstract class Autocomplete<E, K> extends React.Component<ExtendedInputPr
     render = (): JSX.Element => {
         const { loading, list, filter, focused, showOptions, selectedKey } = this.state,
         { props } = this,
-        icon = props.icon || { iconKey: "keyboard" }
+        icon = props.icon || { iconKey: "keyboard", type: "far" }
         let input: HTMLInputElement
 
         return <InputWrapper icon={icon} label={props.label} forceFocus={() => input.focus()} focusBool={focused} isFocusable disabled={props.disabled} resetFunction={this.reset} style={props.wrapperStyle} required={props.required} className={props.className} value={filter} selectedOption={selectedKey}>

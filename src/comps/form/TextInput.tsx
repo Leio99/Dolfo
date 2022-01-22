@@ -117,7 +117,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         { focused, rows, value, inputType } = this.state,
         icon = props.icon || {
             iconKey: this.getDefaultIcon(),
-	    type: "far"
+	        type: "far"
         }
         let input: HTMLInputElement | HTMLTextAreaElement
 
