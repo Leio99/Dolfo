@@ -63,6 +63,20 @@ export class DropdownPage extends React.Component{
                 type: "boolean",
                 required: false,
                 default: "false"
+            },
+            {
+                name: "className",
+                desc: "Additional className to apply to the dropdown.",
+                type: "string",
+                required: false,
+                default: "null"
+            },
+            {
+                name: "style",
+                desc: "Additional styles to apply to the dropdown.",
+                type: "CSSProperties",
+                required: false,
+                default: "null"
             }
         ]} />
 
@@ -81,6 +95,20 @@ export class DropdownPage extends React.Component{
                 required: false,
                 default: "null",
                 fnParams: "None"
+            },
+            {
+                name: "className",
+                desc: "Additional className to apply to the dropdown item.",
+                type: "string",
+                required: false,
+                default: "null"
+            },
+            {
+                name: "style",
+                desc: "Additional styles to apply to the dropdown item.",
+                type: "CSSProperties",
+                required: false,
+                default: "null"
             }
         ]} />
     </>

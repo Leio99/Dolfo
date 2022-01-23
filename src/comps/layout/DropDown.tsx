@@ -1,15 +1,19 @@
-import React from "react"
+import React, { CSSProperties } from "react"
 import { Icon } from "./Icon"
 
 interface IProps{
     readonly label: string | JSX.Element
     readonly preventCloseOnClick?: boolean
     readonly disabled?: boolean
+    readonly className?: string
+    readonly style?: CSSProperties
 }
 
 interface DropDownItemProps{
     readonly disabled?: boolean
     readonly onClick?: (e: any) => void
+    readonly className?: string
+    readonly style?: CSSProperties
 }
 
 interface IState{
@@ -25,13 +29,13 @@ export class DropDown extends React.Component<IProps, IState>{
         }
     }
 
-    close = (): void => this.setState({ opened: false })
+    close = () => this.setState({ opened: false })
     
-    open = (): void => !this.props.disabled && this.setState({ opened: true })
+    open = () => !this.props.disabled && this.setState({ opened: true })
 
     getItems = (): DropDownItem[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
-    clickItem = (e: any, item: DropDownItem): void => {
+    clickItem = (e: any, item: DropDownItem) => {
         if(item.props.disabled) return
 
         if(item.props.onClick)
@@ -46,7 +50,7 @@ export class DropDown extends React.Component<IProps, IState>{
         { opened } = this.state,
         items = this.getItems()
 
-        return <ul className={"dolfo-dropdown" + (props.disabled ? " disabled" : "")} onMouseEnter={this.open} onMouseLeave={this.close}>
+        return <ul className={"dolfo-dropdown" + (props.disabled ? " disabled" : "") + (props.className ? " " + props.className : "")} onMouseEnter={this.open} onMouseLeave={this.close} style={props.style}>
             <li className="dolfo-dropdown-label">
                 {props.label} <Icon iconKey="caret-down" className="dropdown-icon" />
             </li>
@@ -54,7 +58,7 @@ export class DropDown extends React.Component<IProps, IState>{
             {
                 opened && <div className="dropdown-items-container">
                     {
-                        items.map(i => <div className={"dolfo-dropdown-item" + (i.props.disabled ? " disabled" : "")} onClick={e => this.clickItem(e, i)}>{i.props.children}</div>)
+                        items.map(i => <div className={"dolfo-dropdown-item" + (i.props.disabled ? " disabled" : "") + (i.props.className ? " " + i.props.className : "")} onClick={e => this.clickItem(e, i)} style={i.props.style}>{i.props.children}</div>)
                     }
                 </div>
             }
