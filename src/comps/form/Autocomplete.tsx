@@ -48,13 +48,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     abstract getSingle: (key: K) => Promise<E> | E
 
     componentDidMount = (): void => {
-        window.addEventListener("click", e => {
-            const element = e.target as Node,
-            node = ReactDOM.findDOMNode(this)
-
-            if(!node.contains(element))
-                this.onBlur()
-        })
+        window.addEventListener("click", this.clickOutside)
 
         if(this.props.defaultValue != null)
             this.fetchDefaultValue()
@@ -63,6 +57,16 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     componentDidUpdate = (prevProps: IProps<K> & P): void => {
         if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
             this.fetchDefaultValue()
+    }
+
+    componentWillUnmount = (): void => window.removeEventListener("click", this.clickOutside)
+
+    clickOutside = (e: MouseEvent): void => {
+        const element = e.target as Node,
+        node = ReactDOM.findDOMNode(this)
+
+        if(!node.contains(element))
+            this.onBlur()
     }
 
     fetchDefaultValue = (): void => {
