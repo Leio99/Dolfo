@@ -65,8 +65,12 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         const element = e.target as Node,
         node = ReactDOM.findDOMNode(this)
 
-        if(!node.contains(element))
+        if(!node.contains(element)){
             this.onBlur()
+
+            if(!this.state.selectedItem)
+                this.reset()
+        }
     }
 
     fetchDefaultValue = (): void => {
@@ -99,6 +103,13 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
 
         clearTimeout(this.typing)
 
+        if(this.state.selectedItem){
+            this.setState({
+                selectedItem: null,
+                selectedKey: null
+            })
+        }
+
         this.typing = setTimeout(() => {
             if(!this.state.filter?.trim())
                 return
@@ -125,6 +136,8 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         this.setState({
             focused: false,
             showOptions: false,
+            selectedItem: null,
+            selectedKey: null,
             filter: ""
         })
     }
