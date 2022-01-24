@@ -19,10 +19,26 @@ interface IState<E, K>{
     readonly filter: string
     readonly focused: boolean
     readonly showOptions: boolean
+    readonly focusedIndex: number
 }
 
 export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps<K> & P, IState<E, K>>{
     private readonly TIMING = 500
+    private readonly EXCLUDED_KEYS = [
+        "Alt", 
+        "Control", 
+        "Tab", 
+        "Enter", 
+        "ArrowUp", 
+        "ArrowDown", 
+        "ArrowLeft", 
+        "ArrowRight", 
+        "Shift", 
+        "CapsLock", 
+        "ContextMenu", 
+        "Meta", 
+        "Escape"
+    ]
     private typing: NodeJS.Timeout
 
     constructor(props: IProps<K> & P){
@@ -35,7 +51,8 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             selectedKey: null,
             filter: "",
             focused: false,
-            showOptions: false
+            showOptions: false,
+            focusedIndex: -1
         }
     }
 
@@ -80,7 +97,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
 
     toggleLoading = (): void => this.setState({ loading: !this.state.loading })
 
-    onBlur = (): void => this.setState({ focused: false, showOptions: false })
+    onBlur = (): void => this.setState({ focused: false, showOptions: false, focusedIndex: null })
 
     onFocus = (): void => this.setState({ focused: true })
 
@@ -101,9 +118,14 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     onKeyUp = (e: any): void => {
         this.props.onKeyUp && this.props.onKeyUp(e)
 
+        if(this.EXCLUDED_KEYS.includes(e.key))
+            return
+
         clearTimeout(this.typing)
 
-        if(this.state.selectedItem){
+        const { selectedItem, filter } = this.state
+
+        if(selectedItem){
             this.setState({
                 selectedItem: null,
                 selectedKey: null
@@ -111,25 +133,53 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         }
 
         this.typing = setTimeout(() => {
-            if(!this.state.filter?.trim())
+            if(!filter?.trim())
                 return
 
-            const dataSource = this.getSource(this.state.filter)
+            this.toggleLoading()
 
-            if(_.isArray(dataSource))
-                this.setState({ list: dataSource })
-            else{
-                this.toggleLoading()
+            Promise.resolve(this.getSource(filter)).then(list => {
+                this.setState({ list, showOptions: true })
 
-                dataSource.then(list => this.setState({ list, showOptions: true })).finally(this.toggleLoading)
-            }
+                if(list.length === 1)
+                    this.selectOption(list[0])
+            }).finally(this.toggleLoading)
         }, this.TIMING)
     }
 
     onKeyDown = (e: any): void => {
         this.props.onKeyDown && this.props.onKeyDown(e)
 
-        clearTimeout(this.typing)
+        if(this.EXCLUDED_KEYS.includes(e.key) && e.key !== "Enter" && e.key !== "ArrowUp" && e.key !== "ArrowDown")
+            return
+
+        const { focusedIndex, list, showOptions } = this.state
+
+        if(e.key === "Enter" && focusedIndex >= 0){
+            e.preventDefault()
+            this.selectOption(list.find((_, i) => i === focusedIndex))
+            this.setState({ focusedIndex: -1 })
+        }else if(e.key === "ArrowUp" && showOptions){
+            let newIndex: number
+
+            if(focusedIndex === 0) newIndex = list.length - 1
+            else if(focusedIndex === -1) newIndex = 0
+            else newIndex = focusedIndex - 1
+
+            this.setState({ focusedIndex: newIndex })
+            
+            e.preventDefault()
+        }else if(e.key === "ArrowDown" && showOptions){
+            let newIndex: number
+
+            if(focusedIndex === list.length - 1 || focusedIndex === -1) newIndex = 0
+            else newIndex = focusedIndex + 1
+
+            this.setState({ focusedIndex: newIndex })
+            
+            e.preventDefault()
+        }else
+            clearTimeout(this.typing)
     }
 
     reset = () => {
@@ -143,7 +193,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     }
 
     render = (): JSX.Element => {
-        const { loading, list, filter, focused, showOptions, selectedKey } = this.state,
+        const { loading, list, filter, focused, showOptions, selectedKey, focusedIndex } = this.state,
         { props } = this,
         icon = props.icon || { iconKey: "keyboard", type: "far" }
         let input: HTMLInputElement
@@ -169,9 +219,9 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
                     <LoadingIcon spinning /> {Constants.LOADING_TEXT}
                 </div> : showOptions && list.length > 0 ? <div className="dolfo-select-options show">
                     {
-                        list.map(option => {
+                        list.map((option, i) => {
                             const key = this.getKey(option)
-                            return <Option selected={selectedKey === key} label={this.getDescription(option)} onChange={() => this.selectOption(option)} value={key} />
+                            return <Option selected={selectedKey === key} label={this.getDescription(option)} onChange={() => this.selectOption(option)} value={key} focused={focusedIndex === i} />
                         })
                     }
                 </div> : focused && <div className="dolfo-select-options show dolfo-autocomplete-text">
