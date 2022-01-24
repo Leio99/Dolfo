@@ -22,8 +22,12 @@
             background-color: $white;
             color: $black;
     
-            &.dolfo-dropdown-label .dropdown-icon{
-                transform: rotate(180deg)
+            &.dolfo-dropdown-label{
+                z-index: 2;
+                
+                .dropdown-icon{
+                    transform: rotate(180deg)
+                }
             }
 
             &.dropdown-items-container{
@@ -36,7 +40,6 @@
         padding: $padding;
         border-radius: $smallRadius $smallRadius 0 0;
         position: relative;
-        z-index: 2;
 
         .dropdown-icon{
             transition: transform 0.2s ease
