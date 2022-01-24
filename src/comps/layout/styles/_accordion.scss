@@ -57,17 +57,3 @@
         }
     }
 }
-
-* > .dolfo-accordion:not(:only-child):first-child{
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-
-    .dolfo-accordion-content{
-        border-bottom: 1px solid darken($lightGrey, 5%) !important
-    }
-
-    ~ .dolfo-accordion{
-        border-top-right-radius: 0;
-        border-top-left-radius: 0
-    }
-}
