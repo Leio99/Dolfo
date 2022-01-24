@@ -155,7 +155,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
 
         const { focusedIndex, list, showOptions } = this.state
 
-        if(e.key === "Enter" && focusedIndex >= 0){
+        if(e.key === "Enter" && focusedIndex !== null && focusedIndex >= 0){
             e.preventDefault()
             this.selectOption(list.find((_, i) => i === focusedIndex))
             this.setState({ focusedIndex: -1 })
