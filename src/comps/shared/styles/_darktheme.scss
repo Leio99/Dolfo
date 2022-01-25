@@ -360,6 +360,51 @@ html.dark-theme{
         }
     }
 
+    .dolfo-popover{
+        background-color: $dark;
+        border-color: $darkThemeDark;
+
+        &:not(.pos-right):not(.pos-top):not(.pos-bottom){
+            &:before{
+                border-left-color: $dark
+            }
+            
+            &:after{
+                border-left-color: $darkThemeDark
+            }
+        }
+
+        &.pos-right{
+            &:before{
+                border-right-color: $dark
+            }
+    
+            &:after{
+                border-right-color: $darkThemeDark
+            }
+        }
+
+        &.pos-bottom{
+            &:before{
+                border-bottom-color: $dark
+            }
+    
+            &:after{
+                border-bottom-color: $darkThemeDark
+            }
+        }
+    
+        &.pos-top{
+            &:before{
+                border-top-color: $dark
+            }
+    
+            &:after{
+                border-top-color: $darkThemeDark
+            }
+        }
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }

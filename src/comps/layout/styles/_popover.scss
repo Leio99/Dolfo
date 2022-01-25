@@ -1,0 +1,74 @@
+.dolfo-popover{
+    position: fixed;
+    border: 1px solid $grey;
+    border-radius: $smallRadius;
+    padding: 1rem;
+    z-index: 5;
+    background-color: $white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    &:before, &:after{
+        content: "";
+        display: block;
+        border: 8px solid transparent;
+        border-left-color: $white;
+        position: absolute;
+        top: 50%;
+        right: -16px;
+        transform: translateY(-50%)
+    }
+
+    &:after{
+        border-left-width: 9px;
+        border-left-color: $grey;
+        right: -18px;
+        z-index: -10
+    }
+
+    &.pos-right{
+        &:before, &:after{
+            border-right-color: $white;
+            right: auto;
+            border-left-color: transparent;
+            left: -16px
+        }
+
+        &:after{
+            border-right-color: $grey;
+            left: -18px
+        }
+    }
+
+    &.pos-bottom{
+        &:before, &:after{
+            border-bottom-color: $white;
+            right: 50%;
+            border-left-color: transparent;
+            top: -16px;
+            transform: translateX(50%)
+        }
+
+        &:after{
+            border-bottom-color: $grey;
+            top: -17px;
+            right: calc(50% + 0.5px)
+        }
+    }
+
+    &.pos-top{
+        &:before, &:after{
+            border-top-color: $white;
+            right: 50%;
+            border-left-color: transparent;
+            bottom: -16px;
+            top: auto;
+            transform: translateX(50%)
+        }
+
+        &:after{
+            border-top-color: $grey;
+            bottom: -17px;
+            right: calc(50% + 0.5px)
+        }
+    }
+}
