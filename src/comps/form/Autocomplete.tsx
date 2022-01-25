@@ -7,8 +7,8 @@ import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 
-interface IProps<K> extends ExtendedInputProps{
-    readonly defaultValue?: K
+interface IProps<E> extends ExtendedInputProps{
+    readonly defaultValue?: E
 }
 
 interface IState<E, K>{
@@ -22,7 +22,7 @@ interface IState<E, K>{
     readonly focusedIndex: number
 }
 
-export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps<K> & P, IState<E, K>>{
+export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps<E> & P, IState<E, K>>{
     private readonly TIMING = 500
     private readonly EXCLUDED_KEYS = [
         "Alt", 
@@ -41,7 +41,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     ]
     private typing: NodeJS.Timeout
 
-    constructor(props: IProps<K> & P){
+    constructor(props: IProps<E> & P){
         super(props)
 
         this.state = {
@@ -62,7 +62,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
 
     abstract getKey: (item: E) => K
 
-    abstract getSingle: (key: K) => Promise<E> | E
+    abstract getSingle: (key: E) => Promise<E> | E
 
     componentDidMount = (): void => {
         window.addEventListener("click", this.clickOutside)
@@ -71,7 +71,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             this.fetchDefaultValue()
     }
 
-    componentDidUpdate = (prevProps: IProps<K> & P): void => {
+    componentDidUpdate = (prevProps: IProps<E> & P): void => {
         if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
             this.fetchDefaultValue()
     }
