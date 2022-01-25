@@ -1,3 +1,4 @@
+import _ from "lodash"
 import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
 import { TooltipPlacement } from "./Tooltip"
@@ -20,7 +21,7 @@ export class Popover extends React.Component<IProps>{
     componentDidMount = () => {
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
         { content, openOnOver, style, className } = this.props,
-        popover = document.createElement("div"),
+        popover = document.createElement("div") as PopoverElement,
         event = openOnOver ? "mouseenter" : "click"
 
         popover.classList.add("dolfo-popover")
@@ -33,14 +34,16 @@ export class Popover extends React.Component<IProps>{
             })
         }
 
-        (popover as PopoverElement).relativeElement = node
+        popover.relativeElement = node
 
         node.addEventListener(event, () => {
             ReactDOM.render(<>{content}</>, popover)
 
             document.body.appendChild(popover)
 
-            this.positionPopover(popover as PopoverElement)
+            this.positionPopover(popover)
+
+            popover.addEventListener("DOMSubtreeModified", () => this.positionPopover(popover))
         })
 
         popover.addEventListener("mouseenter", () => this.onPopoverOrNode = true)
@@ -52,6 +55,10 @@ export class Popover extends React.Component<IProps>{
         node.addEventListener("mouseleave", () => this.onPopoverOrNode = false)
 
         window.addEventListener(openOnOver ? "mousemove" : event, () => !this.onPopoverOrNode && popover.remove())
+
+        window.addEventListener("resize", () => this.positionPopover(popover))
+
+        window.addEventListener("scroll", () => this.positionPopover(popover))
     }
 
     private positionPopover = (popover: PopoverElement) => {
@@ -78,7 +85,7 @@ export class Popover extends React.Component<IProps>{
         }
     }
 
-    render = () => this.props.children
+    render = () => _.isString(this.props.children) ? <span>{this.props.children}</span> : this.props.children
 
     public static forceRemoveAll = () => {
         const popovers = document.querySelectorAll(".dolfo-popover")
