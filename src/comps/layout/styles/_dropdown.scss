@@ -6,7 +6,6 @@
     display: inline-block;
     margin: 0;
     padding: 0;
-    cursor: pointer;
     max-width: 250px;
 
     &.disabled{
@@ -38,6 +37,7 @@
 
     .dolfo-dropdown-label{
         padding: $padding;
+        cursor: default;
         border-radius: $smallRadius $smallRadius 0 0;
         position: relative;
 
@@ -59,7 +59,8 @@
             text-overflow: ellipsis;
             white-space: nowrap;
 
-            &:not(.disabled):hover{
+            &:not(.disabled):not(.static):hover{
+                cursor: pointer;
                 background-color: $lightGrey
             }
 
