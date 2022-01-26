@@ -1,9 +1,14 @@
 .dolfo-accordion{
     background-color: $white;
-    overflow: hidden;
     max-width: 100%;
     border-radius: $smallRadius;
     box-shadow: inset 0 0 0 1px $lightGrey;
+
+    &:not(.opened){
+        &, .dolfo-accordion-content{
+            overflow: hidden
+        }
+    }
 
     &.disabled{
         opacity: 0.6;
@@ -46,7 +51,6 @@
 
     .dolfo-accordion-content{
         max-height: 0;
-        overflow: hidden;
         
         &:not(.closing){
             transition: max-height 0.2s ease-out
