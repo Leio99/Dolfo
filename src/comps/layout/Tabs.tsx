@@ -50,6 +50,8 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
     componentWillUnmount = (): void => window.removeEventListener("resize", this.handleBar)
 
     componentDidUpdate = (prevProps: any): void => {
+        this.handleBar()
+        
         if(!_.isEqual(prevProps.children, this.props.children)){
             this.setState({ children: this.getChildrenTabs() }, () => {
                 const prevFiltered = this.getChildrenTabs(prevProps).filter((v: Tab) => !!v),
