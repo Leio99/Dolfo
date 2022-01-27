@@ -11,6 +11,7 @@ interface IProps{
 	readonly style?: CSSProperties
 	readonly className?: string
 	readonly disabled?: boolean
+	readonly onToggle?: (opened: boolean) => void
 }
 
 interface IState{
@@ -42,25 +43,32 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		}
 	}
 	
-	toggleAccordion = (): void => this.setState({ opened: !this.state.opened }, this.handleAccordions)
+	toggleAccordion = (): void => this.setState({ opened: !this.state.opened }, () => {
+		this.handleAccordions()
+		
+		this.props.onToggle && this.props.onToggle(this.state.opened)
+	})
 
 	handleAccordions = (load = false): void => {
 		const accordion = ReactDOM.findDOMNode(this) as HTMLElement,
 		content = accordion.children[1] as HTMLElement,
-		isOpened = accordion.classList.contains("opened"),
-		fn = () => content.style.maxHeight = isOpened ? content.scrollHeight + "px" : "0"
+		{ opened } = this.state,
+		fn = () => content.style.maxHeight = opened ? content.scrollHeight + "px" : "0"
 
-		if(!isOpened){
+		if(!opened){
 			content.style.maxHeight = content.scrollHeight + "px"
 			content.classList.add("closing")
 			setTimeout(() => content.classList.remove("closing"))
+			accordion.style.overflow = "hidden"
 		}
 
 		load ? fn() : setTimeout(fn)
 
 		setTimeout(() => {
-			if(isOpened) 
+			if(opened){
 				content.style.maxHeight = "100%"
+				accordion.style.overflow = "unset"
+			}
 		}, 200)
 	}
 
