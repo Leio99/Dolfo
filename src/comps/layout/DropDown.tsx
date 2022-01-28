@@ -74,7 +74,7 @@ export class DropDown extends React.Component<IProps, IState>{
     getItems = (): DropDownItem[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
     clickItem = (e: any, item: DropDownItem) => {
-        if(item.props.disabled) return
+        if(item.props.disabled || item.props.static) return
 
         if(item.props.onClick)
             item.props.onClick(e)
