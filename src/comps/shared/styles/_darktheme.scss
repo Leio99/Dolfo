@@ -405,6 +405,17 @@ html.dark-theme{
         }
     }
 
+    .dolfo-dropdown:not(.disabled):hover{
+        .dolfo-dropdown-label, .dropdown-items-container, .dropdown-items-container:before{
+            background-color: $dark;
+            color: $white
+        }
+
+        .dropdown-items-container .dolfo-dropdown-item:not(.disabled):not(.static):hover{
+            background-color: $darkThemeDarkHover
+        }
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }
