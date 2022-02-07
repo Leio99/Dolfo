@@ -132,7 +132,7 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                 </Button>}
             </div>
             <div className="dolfo-transfer-to">
-                {props.rightListTitle && <label>{props.rightListTitle} ({selected.length})</label>}
+                {props.rightListTitle && <label>{props.rightListTitle} ({selectedKeys.length})</label>}
 
                 <div className="transfer-content">
                     {props.canFilter && <div className="filter">
