@@ -102,9 +102,9 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                 </div>}
                 <div className="dolfo-transfer-list-items">
                     {
-                        unselected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
+                        unselected.length ? unselected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
                             {props.getLabel(item)}
-                        </div>)
+                        </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
                     }
                 </div>
             </div>
@@ -132,9 +132,9 @@ export class TransferList extends React.Component<TransferListProps, IState>{
 
                 <div className="dolfo-transfer-list-items">
                     {
-                        selected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
+                        selected.length ? selected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
                             {props.getLabel(item)}
-                        </div>)
+                        </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
                     }
                 </div>
             </div>

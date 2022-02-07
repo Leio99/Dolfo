@@ -67,4 +67,5 @@ export class Constants {
     static readonly TRANSFER_FILTER_TEXT = "Filtra lista"
     static readonly TRANSFER_TEXT = "Sposta"
     static readonly TRANSFER_ALL_TEXT = "Sposta tutti"
+    static readonly TRANSFER_NO_ITEMS = "Nessun elemento"
 }
