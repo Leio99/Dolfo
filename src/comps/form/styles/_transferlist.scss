@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-height: 200px;
     min-height: 100px;
     
     label.dolfo-transfer-list-label{
@@ -32,6 +31,8 @@
 
     .dolfo-transfer-from, .dolfo-transfer-to{
         flex: 0 0 calc(50% - 50px);
+        display: flex;
+        flex-direction: column;
 
         > label{
             margin-bottom: 0.5rem;
@@ -44,7 +45,7 @@
         .transfer-content{
             height: 100%;
             background-color: $white;
-            border: 1px solid $lightGrey;
+            border: 1px solid $grey;
             border-radius: $smallRadius;
             overflow: hidden;
             display: flex;
@@ -52,7 +53,7 @@
 
             .filter{
                 padding: 0.5rem;
-                border-bottom: 1px solid $lightGrey;
+                border-bottom: 1px solid $grey;
 
                 input{
                     cursor: text;
@@ -86,6 +87,7 @@
 
             .dolfo-transfer-list-items{
                 overflow: auto;
+                max-height: 200px;
 
                 .dolfo-transfer-item{
                     padding: 0.3rem 1rem;
