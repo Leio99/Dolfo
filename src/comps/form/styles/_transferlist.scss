@@ -44,6 +44,8 @@
             border-bottom: 1px solid $lightGrey;
 
             input{
+                cursor: text;
+                display: block;
                 outline: none;
                 border-radius: $smallRadius;
                 width: 100%;
@@ -56,6 +58,17 @@
 
                 &:focus{
                     border-color: $selectionBlue
+                }
+
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover, 
+                &:-webkit-autofill:focus, 
+                &:-webkit-autofill:active{
+                    box-shadow: 0 0 0px 1000px $white inset
+                }
+
+                &::-ms-reveal, &::-ms-clear {
+                    display: none
                 }
             }
         }
