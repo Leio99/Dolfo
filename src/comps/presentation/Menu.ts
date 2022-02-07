@@ -34,6 +34,7 @@ import { CalendarPage } from "./CalendarPage"
 import { ContextMenuPage } from "./ContextmenuPage"
 import { SelectablelistPage } from "./SelectablelistPage"
 import { DropdownPage } from "./DropdownPage"
+import { TransferlistPage } from "./TransferlistPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
@@ -44,6 +45,7 @@ export const MenuItems = [
     { link: "form/switch", children: "Switch", section: "form", component: SwitchPage, icon: "toggle-on" },
     { link: "form/textinputs", children: "Text input", section: "form", component: TextinputPage, icon: "keyboard" },
     { link: "form/timepicker", children: "Time picker", section: "form", component: TimepickerPage, icon: "clock" },
+    { link: "form/transferlist", children: "Transfer list", section: "form", component: TransferlistPage, icon: "exchange" },
     { link: "form/uploader", children: "Uploader", section: "form", component: UploaderPage, icon: "arrow-to-top" },
     { link: "layout/accordion", children: "Accordion", section: "layout", component: AccordionPage, icon: "compress" },
     { link: "layout/alerts", children: "Alerts", section: "layout", component: AlertPage, icon: "comment-alt-exclamation" },

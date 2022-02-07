@@ -64,4 +64,7 @@ export class Constants {
     static readonly COPIED_TO_CLIPBOARD = "Copiato negli appunti!"
     static readonly SWITCH_TO_CARD_LAYOUT = "Mostra come scheda"
     static readonly SWITCH_TO_GRID_LAYOUT = "Mostra come griglia"
+    static readonly TRANSFER_FILTER_TEXT = "Filtra lista"
+    static readonly TRANSFER_TEXT = "Sposta"
+    static readonly TRANSFER_ALL_TEXT = "Sposta tutti"
 }

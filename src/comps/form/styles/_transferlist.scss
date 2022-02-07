@@ -1,0 +1,89 @@
+.dolfo-transfer-list{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: 200px;
+    min-height: 100px;
+    
+    label.dolfo-transfer-list-label{
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        flex: 0 0 100%;
+
+        .dolfo-input-required{
+            color: $red
+        }
+    }
+
+    &.disabled{
+        pointer-events: none;
+        opacity: 0.6
+    }
+
+    > input{
+        position: absolute;
+        pointer-events: none;
+        opacity: 0
+    }
+
+    .dolfo-transfer-from, .dolfo-transfer-to{
+        background-color: $white;
+        flex: 0 0 calc(50% - 50px);
+        border: 1px solid $lightGrey;
+        border-radius: $smallRadius;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        .filter{
+            padding: 0.5rem;
+            border-bottom: 1px solid $lightGrey;
+
+            input{
+                outline: none;
+                border-radius: $smallRadius;
+                width: 100%;
+                padding: 0.5rem 0.7rem;
+                font-size: inherit;
+                font-family: inherit;
+                font-style: inherit;
+                border: 1px solid $grey;
+                color: $black;
+
+                &:focus{
+                    border-color: $selectionBlue
+                }
+            }
+        }
+
+        .dolfo-transfer-list-items{
+            overflow: auto;
+
+            .dolfo-transfer-item{
+                padding: 0.3rem 1rem;
+                cursor: pointer;
+
+                &.focused{
+                    background-color: $selectionBlue;
+                    color: $white
+                }
+            }
+        }
+    }
+
+    .dolfo-transfer-buttons{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 100px;
+
+        >:not(:last-child){
+            margin-bottom: 0.5rem
+        }
+    }
+}

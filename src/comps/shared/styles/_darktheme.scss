@@ -416,6 +416,26 @@ html.dark-theme{
         }
     }
 
+    .dolfo-transfer-list{
+        .dolfo-transfer-from, .dolfo-transfer-to{
+            background-color: $darkThemeDark;
+            border-color: $disabled;
+
+            .filter{
+                border-bottom-color: $disabled;
+
+                input{
+                    background-color: $darkThemeDark;
+                    color: $white;
+                    
+                    &:not(:focus){
+                        border-color: $disabled
+                    }
+                }
+            }
+        }
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }
