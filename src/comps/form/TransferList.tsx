@@ -12,6 +12,8 @@ export interface TransferListProps extends BaseInputProps{
     readonly defaultValue?: any[]
     readonly canFilter?: boolean
     readonly allowTransferAll?: boolean
+    readonly leftListTitle?: string
+    readonly rightListTitle?: string
 }
 
 interface IState{
@@ -97,15 +99,19 @@ export class TransferList extends React.Component<TransferListProps, IState>{
             <input value={selectedKeys.join(", ")} required={props.required} />
 
             <div className="dolfo-transfer-from">
-                {props.canFilter && <div className="filter">
-                    <input type="text" onChange={this.changeFilterLeft} placeholder={Constants.TRANSFER_FILTER_TEXT} />
-                </div>}
-                <div className="dolfo-transfer-list-items">
-                    {
-                        unselected.length ? unselected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
-                            {props.getLabel(item)}
-                        </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
-                    }
+                {props.leftListTitle && <label>{props.leftListTitle} ({unselected.length})</label>}
+                
+                <div className="transfer-content">
+                    {props.canFilter && <div className="filter">
+                        <input type="text" onChange={this.changeFilterLeft} placeholder={Constants.TRANSFER_FILTER_TEXT} />
+                    </div>}
+                    <div className="dolfo-transfer-list-items">
+                        {
+                            unselected.length ? unselected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
+                                {props.getLabel(item)}
+                            </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
+                        }
+                    </div>
                 </div>
             </div>
             <div className="dolfo-transfer-buttons">
@@ -126,16 +132,20 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                 </Button>}
             </div>
             <div className="dolfo-transfer-to">
-                {props.canFilter && <div className="filter">
-                    <input type="text" onChange={this.changeFilterRight} placeholder={Constants.TRANSFER_FILTER_TEXT} />
-                </div>}
+                {props.rightListTitle && <label>{props.rightListTitle} ({selected.length})</label>}
 
-                <div className="dolfo-transfer-list-items">
-                    {
-                        selected.length ? selected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
-                            {props.getLabel(item)}
-                        </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
-                    }
+                <div className="transfer-content">
+                    {props.canFilter && <div className="filter">
+                        <input type="text" onChange={this.changeFilterRight} placeholder={Constants.TRANSFER_FILTER_TEXT} />
+                    </div>}
+
+                    <div className="dolfo-transfer-list-items">
+                        {
+                            selected.length ? selected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
+                                {props.getLabel(item)}
+                            </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

@@ -57,6 +57,16 @@ export class TransferlistPage extends React.Component{
             code={'<TransferList list={[\n\t{ id: 1, label: "Option 1" },\n\t{ id: 2, label: "Option 2" },\n\t{ id: 3, label: "Option 3" }\n]} getLabel={v => v.label} getKey={v => v.id} allowTransferAll />'}
         />
 
+        <ResultCode
+            title="Titles"
+            result={<TransferList list={[
+                { id: 1, label: "Option 1" },
+                { id: 2, label: "Option 2" },
+                { id: 3, label: "Option 3" }
+            ]} getLabel={v => v.label} getKey={v => v.id} leftListTitle="Options" rightListTitle="Selected" />}
+            code={'<TransferList list={[\n\t{ id: 1, label: "Option 1" },\n\t{ id: 2, label: "Option 2" },\n\t{ id: 3, label: "Option 3" }\n]} getLabel={v => v.label} getKey={v => v.id} leftListTitle="Options" rightListTitle="Selected" />'}
+        />
+
         <Apis data={[
             {
                 name: "list",
@@ -83,6 +93,20 @@ export class TransferlistPage extends React.Component{
                 desc: "Determines whether the lists are filtrable or not.",
                 type: "boolean",
                 default: "false",
+                required: false
+            },
+            {
+                name: "leftListTitle",
+                desc: "The title of the source list.",
+                type: "string",
+                default: "null",
+                required: false
+            },
+            {
+                name: "rightListTitle",
+                desc: "The title of the selected items list.",
+                type: "string",
+                default: "null",
                 required: false
             },
             {

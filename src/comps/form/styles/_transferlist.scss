@@ -31,64 +31,76 @@
     }
 
     .dolfo-transfer-from, .dolfo-transfer-to{
-        background-color: $white;
         flex: 0 0 calc(50% - 50px);
-        border: 1px solid $lightGrey;
-        border-radius: $smallRadius;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
 
-        .filter{
-            padding: 0.5rem;
-            border-bottom: 1px solid $lightGrey;
-
-            input{
-                cursor: text;
-                display: block;
-                outline: none;
-                border-radius: $smallRadius;
-                width: 100%;
-                padding: 0.5rem 0.7rem;
-                font-size: inherit;
-                font-family: inherit;
-                font-style: inherit;
-                border: 1px solid $grey;
-                color: $black;
-
-                &:focus{
-                    border-color: $selectionBlue
-                }
-
-                &:-webkit-autofill,
-                &:-webkit-autofill:hover, 
-                &:-webkit-autofill:focus, 
-                &:-webkit-autofill:active{
-                    box-shadow: 0 0 0px 1000px $white inset
-                }
-
-                &::-ms-reveal, &::-ms-clear {
-                    display: none
-                }
-            }
+        > label{
+            margin-bottom: 0.5rem;
+            display: block;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 12px
         }
+        
+        .transfer-content{
+            height: 100%;
+            background-color: $white;
+            border: 1px solid $lightGrey;
+            border-radius: $smallRadius;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
 
-        .dolfo-transfer-list-items{
-            overflow: auto;
+            .filter{
+                padding: 0.5rem;
+                border-bottom: 1px solid $lightGrey;
 
-            .dolfo-transfer-item{
-                padding: 0.3rem 1rem;
-                cursor: pointer;
+                input{
+                    cursor: text;
+                    display: block;
+                    outline: none;
+                    border-radius: $smallRadius;
+                    width: 100%;
+                    padding: 0.5rem 0.7rem;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-style: inherit;
+                    border: 1px solid $grey;
+                    color: $black;
 
-                &.focused{
-                    background-color: $selectionBlue;
-                    color: $white
+                    &:focus{
+                        border-color: $selectionBlue
+                    }
+
+                    &:-webkit-autofill,
+                    &:-webkit-autofill:hover, 
+                    &:-webkit-autofill:focus, 
+                    &:-webkit-autofill:active{
+                        box-shadow: 0 0 0px 1000px $white inset
+                    }
+
+                    &::-ms-reveal, &::-ms-clear {
+                        display: none
+                    }
                 }
             }
 
-            .dolfo-transfer-no-items{
-                text-align: center;
-                padding: 0.5rem
+            .dolfo-transfer-list-items{
+                overflow: auto;
+
+                .dolfo-transfer-item{
+                    padding: 0.3rem 1rem;
+                    cursor: pointer;
+
+                    &.focused{
+                        background-color: $selectionBlue;
+                        color: $white
+                    }
+                }
+
+                .dolfo-transfer-no-items{
+                    text-align: center;
+                    padding: 0.5rem
+                }
             }
         }
     }
