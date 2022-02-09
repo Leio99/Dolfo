@@ -26,7 +26,7 @@ export class InputWrapper extends React.PureComponent<IProps>{
         const { props } = this
 
         return <div className={"dolfo-form-input" + (props.disabled ? " disabled" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onFocus={props.onFocus} tabIndex={props.isFocusable ? 0 : -1} onBlur={props.onBlur} onKeyDown={props.onKeyDown} onClick={props.onClick}>
-            {props.label && <label className={"dolfo-input-label" + (props.focusBool || (props.value != null && props.value !== "") || props.selectedOption ? " dirty" : "")}>
+            {props.label && <label className={"dolfo-input-label" + (props.focusBool || props.value || props.selectedOption ? " dirty" : "")}>
                 <span>
                     {props.label}
                     {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>}  

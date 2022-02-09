@@ -26,9 +26,9 @@ export abstract class BaseExportableManager<P = any, S = any> extends React.Comp
         }
 
         if(col.type === "date")
-            return formatDate(new Date(d))
+            return d ? formatDate(new Date(d)) : ""
         if(col.type === "time")
-            return getTime(d)
+            return d ? getTime(d) : ""
         if(col.type === "boolean")
             return d ? (exp ? Constants.YES_TEXT : <CheckIcon tooltip={Constants.YES_TEXT} />) : (exp ? Constants.NO_TEXT : <CloseIcon tooltip={Constants.NO_TEXT} />)
 
