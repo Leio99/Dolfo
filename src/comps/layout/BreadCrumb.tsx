@@ -7,7 +7,7 @@ interface IProps{
     readonly className?: string
 }
 
-interface BredcrumbItemProps{
+export interface BreadcrumbItemProps{
     readonly onClick?: () => void
 }
 
@@ -40,6 +40,6 @@ export class BreadCrumb extends React.PureComponent<IProps>{
     }
 }
 
-export class BreadCrumbItem extends React.PureComponent<BredcrumbItemProps>{
+export class BreadCrumbItem extends React.PureComponent<BreadcrumbItemProps>{
     render = (): JSX.Element => <></>
 }
