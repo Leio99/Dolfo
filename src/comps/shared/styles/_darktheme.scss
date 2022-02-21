@@ -438,6 +438,30 @@ html.dark-theme{
         }
     }
 
+    .dolfo-breadcrumb.arrow-style .dolfo-breadcrumb-item-inner{
+        background-color: $darkThemeDark;
+        
+        &.clickable{
+            color: $white;
+
+            &:after{
+                border-left-color: $darkThemeDark
+            }
+
+            &:hover{
+                background-color: $darkThemeDarkHover;
+
+                &:after{
+                    border-left-color: $darkThemeDarkHover
+                }
+            }
+        }
+
+        &:not(.clickable){
+            background-color: lighten($dark, 5%)
+        }
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }

@@ -18,6 +18,15 @@ export class BreadcrumbPage extends React.Component{
         />
 
         <ResultCode
+            title="Arrow style"
+            result={<BreadCrumb arrowStyle>
+                <BreadCrumbItem>Home</BreadCrumbItem>
+                <BreadCrumbItem>Sub page</BreadCrumbItem>
+            </BreadCrumb>}
+            code={'<BreadCrumb arrowStyle>\n\t<BreadCrumbItem>Home</BreadCrumbItem>\n\t<BreadCrumbItem>Sub page</BreadCrumbItem>\n</BreadCrumb>'}
+        />
+
+        <ResultCode
             title="Clickable items"
             result={<BreadCrumb>
                 <BreadCrumbItem onClick={() => alert("Go back home")}>Home</BreadCrumbItem>
@@ -34,6 +43,12 @@ export class BreadcrumbPage extends React.Component{
                 required: true,
                 onDoubleClick: () => goToApiBlock("#bcItemProps"),
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
+            },
+            {
+                name: "arrowStyle",
+                desc: "Changes the breadcrumb style to arrow-style.",
+                type: "boolean",
+                required: false
             },
             {
                 name: "style",

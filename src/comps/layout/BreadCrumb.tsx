@@ -5,6 +5,7 @@ import { Icon } from "./Icon"
 interface IProps{
     readonly style?: CSSProperties,
     readonly className?: string
+    readonly arrowStyle?: boolean
 }
 
 export interface BreadcrumbItemProps{
@@ -22,7 +23,7 @@ export class BreadCrumb extends React.PureComponent<IProps>{
         const options = this.getOptions(),
         props = this.props
 
-        return <div className={"dolfo-breadcrumb" + (props.className ? (" " + props.className) : "")} style={props.style}>
+        return <div className={"dolfo-breadcrumb" + (props.className ? (" " + props.className) : "") + (props.arrowStyle ? " arrow-style" : "")} style={props.style}>
             {
                 options.map((opt, i) => {
                     return <div className="dolfo-breadcrumb-item">

@@ -22,6 +22,59 @@
             }
         }
     }
+
+    &.arrow-style{
+        border-radius: $smallRadius;
+        display: inline-block;
+        overflow: hidden;
+
+        .dolfo-breadcrumb-item{
+            .dolfo-breadcrumb-item-inner{
+                background-color: darken($lightGrey, 5%);
+                padding: 0.5rem;
+                position: relative;
+
+                &:not(.clickable){
+                    background-color: $lightGrey
+                }
+
+                &.clickable{
+                    color: $dark;
+
+                    &:hover{
+                        background-color: darken($disabled, 15%);
+                        color: $white;
+    
+                        &:after{
+                            border-left-color: darken($disabled, 15%)
+                        }
+                    }
+                }
+            }
+
+            &:not(:first-child) .dolfo-breadcrumb-item-inner{
+                padding-left: 2rem
+            }
+
+            &:not(.last-child) .dolfo-breadcrumb-item-inner:after{
+                position: absolute;
+                content: "";
+                display: block;
+                bottom: 0;
+                left: 100%;
+                z-index: 1;
+                width: 40px;
+                border: 20px solid transparent;
+                top: 50%;
+                transform: translateY(-50%);
+                border-left-color: darken($lightGrey, 5%)
+            }
+
+            .dolfo-breadcrumb-arrow{
+                display: none
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 700px){
