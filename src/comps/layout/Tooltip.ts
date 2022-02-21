@@ -56,6 +56,11 @@ checkTooltips = (): void => {
         tooltip.innerHTML = content
 
         tool.addEventListener("mouseenter", () => {
+            const title = tool.getAttribute("data-tooltip")
+
+            if(!title)
+                return
+                
             const bound = tool.getBoundingClientRect()
             
             tooltip.style.top = bound.top + "px"
