@@ -44,12 +44,17 @@
                     &:hover{
                         background-color: darken($disabled, 15%);
                         color: $white;
-    
+
                         &:after{
                             border-left-color: darken($disabled, 15%)
                         }
                     }
                 }
+            }
+
+            &:not(:last-child) .dolfo-breadcrumb-item-inner:not(.clickable){
+                background-color: darken($lightGrey, 5%);
+                color: $dark
             }
 
             &:not(:first-child) .dolfo-breadcrumb-item-inner{
