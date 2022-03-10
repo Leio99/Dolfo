@@ -43,7 +43,7 @@ export class Alert extends React.Component<IProps>{
             <div className="dolfo-alert-content">{props.children}</div>
             
             {
-                props.closable && <Button type="text" btnColor={this.getBtnColor()} className="dolfo-alert-close" onClick={this.closeAlert} tooltip={Constants.CLOSE_TEXT}>
+                props.closable && <Button type="text" btnColor={this.getBtnColor()} onClick={this.closeAlert} tooltip={Constants.CLOSE_TEXT}>
                     <CloseIcon large />
                 </Button>
             }
