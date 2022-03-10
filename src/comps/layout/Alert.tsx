@@ -11,9 +11,12 @@ interface IProps{
     readonly className?: string
     readonly onClose?: () => void
     readonly closable?: boolean
+    readonly customAction?: JSX.Element
 }
 
 export class Alert extends React.Component<IProps>{
+    private isComponentMounted = true
+
     getBtnColor = (): ButtonColors => {
         const { type } = this.props
 
@@ -32,20 +35,23 @@ export class Alert extends React.Component<IProps>{
     }
 
     closeAlert = (): void => {
-        ReactDOM.findDOMNode(this).remove()
         this.props.onClose && this.props.onClose()
+
+        setTimeout(() => this.isComponentMounted && ReactDOM.findDOMNode(this).remove())
     }
+
+    componentWillUnmount = () => this.isComponentMounted = false
 
     render = (): JSX.Element => {
         const { props } = this
 
         return <div className={"dolfo-alert" + (props.type ? (" " + props.type) : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             <div className="dolfo-alert-content">{props.children}</div>
-            
+
             {
-                props.closable && <Button type="text" btnColor={this.getBtnColor()} onClick={this.closeAlert} tooltip={Constants.CLOSE_TEXT}>
+                props.customAction || (props.closable && <Button type="text" btnColor={this.getBtnColor()} onClick={this.closeAlert} tooltip={Constants.CLOSE_TEXT}>
                     <CloseIcon large />
-                </Button>
+                </Button>)
             }
         </div>
     }

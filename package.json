@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^9.5.0",
+    "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^7.2.1",
     "@types/gapi": "0.0.39",
-    "@types/jest": "^24.9.1",
+    "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.178",
     "@types/node": "^12.20.46",
     "@types/react": "^16.14.23",
@@ -17,7 +17,7 @@
     "react-dom": "^16.13.1",
     "react-onclickoutside": "^6.12.1",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "^4.0.1",
+    "react-scripts": "^5.0.0",
     "sass-loader": "^12.6.0",
     "typescript": "^3.7.5"
   },
