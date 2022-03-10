@@ -30,6 +30,6 @@
 
     &.warning{
         background-color: lighten($orange, 42%);
-        color: $orange
+        color: darken($orange, 7%)
     }
 }
