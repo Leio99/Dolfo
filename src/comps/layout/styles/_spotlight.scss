@@ -1,0 +1,65 @@
+.dolfo-spotlight{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .dolfo-spotlight-overlay{
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.2)
+    }
+    
+    .dolfo-spotlight-inner{
+        max-height: 100%;
+        background-color: $white;
+        border-radius: $smallRadius;
+        position: relative;
+        z-index: 2;
+        width: 600px;
+
+        .dolfo-spotlight-filter{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+
+            .dolfo-spotlight-icon, .dolfo-spotlight-input{
+                padding: 0.6rem 1rem
+            }
+
+            .dolfo-spotlight-icon{
+                flex-grow: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center
+            }
+
+            .dolfo-spotlight-input{
+                flex-grow: 1;
+                padding-left: 0;
+
+                input{
+                    width: 100%;
+                    font-size: inherit;
+                    font-weight: inherit;
+                    font-family: inherit;
+                    padding: 0.5rem;
+                    outline: none
+                }
+            }
+        }
+    }
+
+    &:not(.show){
+        display: none
+    }
+}

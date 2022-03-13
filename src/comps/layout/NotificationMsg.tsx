@@ -86,7 +86,7 @@ export class NotificationMsg{
         
         document.body.appendChild(notification);
 
-        (notification as any).close = closeFunc
+        (notification as Closable).close = closeFunc
 
         setTimeout(NotificationMsg.moveNotifications)
         
