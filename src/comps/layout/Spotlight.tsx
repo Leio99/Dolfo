@@ -1,14 +1,13 @@
 import React from "react"
+import { TextInput } from "../form/TextInput"
 import { Constants } from "../shared/Constants"
-import { SearchIcon } from "./Icon"
 
-interface IProps<T = any>{
-    readonly data: T[]
-    readonly renderItem: (item: T) => string | JSX.Element
+interface IProps{
+    readonly data: any[]
+    readonly renderItem: (item: any) => string | JSX.Element
     readonly loading?: boolean
-    readonly placeHolder?: string
     readonly onChangeFilter?: (value: string) => void
-    readonly onClickItem?: (item: T) => void
+    readonly onClickItem?: (item: any) => void
     readonly onClose?: () => void
     readonly visible?: boolean
 }
@@ -35,21 +34,24 @@ export class Spotlight extends React.Component<IProps, IState>{
             this.setState({ visible: this.props.visible })
     }
 
-    changeFilter = (e: any): void => {
-        const filter = e.target.value
+    changeFilter = (filter: string): void => {
+        this.setState({ filter })
 
-        this.setState({ filter }, () => this.props.onChangeFilter && this.props.onChangeFilter(filter))
+        if(this.props.onChangeFilter)
+            this.props.onChangeFilter(filter)
     }
 
     onClose = () => {
-        this.setState({ visible: false })
+        this.setState({ visible: false, filter: "", focusedIndex: -1 })
 
         if(this.props.onClose)
             this.props.onClose()
+        if(this.props.onChangeFilter)
+            this.props.onChangeFilter("")
     }
 
     handleKeyDown = (e: any) => {
-        const { data, onClickItem } = this.props,
+        const { data } = this.props,
         { focusedIndex } = this.state
         let newIndex: number
 
@@ -70,35 +72,41 @@ export class Spotlight extends React.Component<IProps, IState>{
         }else if(e.key === "Enter"){
             const option = data[focusedIndex] || data[0]
 
-            if(onClickItem)
-                onClickItem(option)
+            this.clickItem(option)
             
             e.preventDefault()
         }
+
+        if(newIndex != null)
+            this.setState({ focusedIndex: newIndex })
+    }
+
+    clickItem = (item: any) => {
+        this.onClose()
+
+        if(this.props.onClickItem)
+            this.props.onClickItem(item)
     }
 
     render = (): JSX.Element => {
         const { props, state } = this,
-        { visible, filter } = state
+        { visible, focusedIndex, filter } = state
 
         return <div className={"dolfo-spotlight" + (visible ? " show" : "")}>
             <div className="dolfo-spotlight-overlay" onClick={this.onClose}></div>
 
             <div className="dolfo-spotlight-inner">
-                <div className="dolfo-spotlight-filter">
-                    <div className="dolfo-spotlight-icon">
-                        <SearchIcon large />    
-                    </div>       
+                <div className="dolfo-spotlight-filter">  
                     <div className="dolfo-spotlight-input">
-                        <input type="text" placeholder={props.placeHolder || Constants.FILTER_TEXT} onChange={this.changeFilter} value={filter} onKeyDown={this.handleKeyDown} />
+                        <TextInput onChange={this.changeFilter} value={filter} onKeyDown={this.handleKeyDown} icon={{ iconKey: "search" }} />
                     </div>         
                 </div>
 
                 <div className="dolfo-spotlight-data">
                     {
-                        props.data && props.data.length ? <>
-                        
-                        </> : <div className="dolfo-spotlight-nodata">{Constants.TABLE_NO_RESULTS}</div>
+                        props.data && props.data.length ? props.data.map((d, i) => <div className={"dolfo-spotlight-item" + (focusedIndex === i ? " focused" : "")} onClick={() => this.clickItem(d)}>
+                            {props.renderItem(d)}
+                        </div>): <div className="dolfo-spotlight-nodata">{Constants.TABLE_NO_RESULTS}</div>
                     }    
                 </div>
             </div>

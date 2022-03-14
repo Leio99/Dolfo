@@ -5,8 +5,9 @@
     right: 0;
     bottom: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    z-index: 1;
 
     .dolfo-spotlight-overlay{
         position: absolute;
@@ -32,34 +33,54 @@
             justify-content: center;
             flex-direction: row;
 
-            .dolfo-spotlight-icon, .dolfo-spotlight-input{
-                padding: 0.6rem 1rem
-            }
-
-            .dolfo-spotlight-icon{
-                flex-grow: auto;
-                display: flex;
-                align-items: center;
-                justify-content: center
+            .dolfo-spotlight-input{
+                padding: 0.6rem
             }
 
             .dolfo-spotlight-input{
                 flex-grow: 1;
-                padding-left: 0;
 
-                input{
-                    width: 100%;
-                    font-size: inherit;
-                    font-weight: inherit;
-                    font-family: inherit;
-                    padding: 0.5rem;
-                    outline: none
+                .dolfo-form-input{
+                    margin: 0
                 }
             }
         }
+
+        .dolfo-spotlight-data{
+            padding: 0.6rem;
+            padding-top: 0;
+        
+            .dolfo-spotlight-item{
+                cursor: pointer;
+                border-radius: $smallRadius;
+                padding: 0.3rem 1rem;
+                word-wrap: break-word;
+            
+                &:hover, &.focused{
+                    background-color: $lightGrey
+                }
+
+                &:not(:last-child){
+                    margin-top: 0.6rem
+                }
+            }
+
+            .dolfo-spotlight-nodata{
+                text-align: center
+            }
+        }
+    }
+
+    &.show .dolfo-spotlight-inner{
+        animation: spotSlide 0.5s ease forwards
     }
 
     &:not(.show){
         display: none
     }
+}
+
+@keyframes spotSlide{
+    0%{ top: 200px; opacity: 0 }
+    100%{ top: 100px; opacity: 1 }
 }

@@ -35,6 +35,7 @@ import { ContextMenuPage } from "./ContextmenuPage"
 import { SelectablelistPage } from "./SelectablelistPage"
 import { DropdownPage } from "./DropdownPage"
 import { TransferlistPage } from "./TransferlistPage"
+import { SpotlightPage } from "./SpotlightPage"
 
 export const MenuItems = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
@@ -66,6 +67,7 @@ export const MenuItems = [
     { link: "layout/progress", children: "Progress", section: "layout", component: ProgressPage, icon: "tasks-alt" },
     { link: "layout/sidemenu", children: "Side menu", section: "layout", component: SidemenuPage, icon: "bars" },
     { link: "layout/slideshow", children: "Slideshow", section: "layout", component: SlideshowPage, icon: "images" },
+    { link: "layout/spotlight", children: "Spotlight", section: "layout", component: SpotlightPage, icon: "file-search" },
     { link: "layout/status", children: "Status tags", section: "layout", component: StatustagsPage, icon: "tags" },
     { link: "layout/stepper", children: "Stepper", section: "layout", component: StepperPage, icon: "shoe-prints" },
     { link: "layout/swiper", children: "Swiper", section: "layout", component: SwiperPage, icon: "sliders-h" },

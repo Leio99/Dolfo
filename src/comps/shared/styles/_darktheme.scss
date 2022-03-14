@@ -473,6 +473,25 @@ html.dark-theme{
         }
     }
 
+    .dolfo-spotlight{
+        .dolfo-spotlight-overlay{
+            background-color: rgba(255, 255, 255, 0.15)
+        }
+
+        .dolfo-spotlight-inner{
+            background-color: $dark;
+
+            .dolfo-spotlight-data{
+                padding: 0.6rem;
+                padding-top: 0;
+            
+                .dolfo-spotlight-item:hover, .dolfo-spotlight-item.focused{
+                    background-color: $darkThemeDarkHover
+                }
+            }
+        }
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }
