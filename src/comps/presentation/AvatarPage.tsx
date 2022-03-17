@@ -1,6 +1,7 @@
 import React from "react"
 import { Avatar } from "../layout/Avatar"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import avatarImage from "./images/avatarImage.png"
 
 export class AvatarPage extends React.Component{
     render = (): JSX.Element => <>
@@ -9,7 +10,7 @@ export class AvatarPage extends React.Component{
 
         <ResultCode
             title="Simple avatar"
-            result={<Avatar imageSource="../avatar.png" />}
+            result={<Avatar imageSource={avatarImage} />}
             code={'<Avatar imageSource="../avatar" />'}
         />
 
@@ -17,19 +18,19 @@ export class AvatarPage extends React.Component{
             title="Sizes"
             result={<>
                 <div>
-                    <Avatar imageSource="../avatar.png" size="small" />
+                    <Avatar imageSource={avatarImage} size="small" />
                 </div>
                 <div>
-                    <Avatar imageSource="../avatar.png" size="medium" />
+                    <Avatar imageSource={avatarImage} size="medium" />
                 </div>
                 <div>
-                    <Avatar imageSource="../avatar.png" size="large" />
+                    <Avatar imageSource={avatarImage} size="large" />
                 </div>
                 <div>
-                    <Avatar imageSource="../avatar.png" size="xl" />
+                    <Avatar imageSource={avatarImage} size="xl" />
                 </div>
             </>}
-            code={'<Avatar imageSource="../avatar.png" size="small" />\n<Avatar imageSource="../avatar.png" size="medium" />\n<Avatar imageSource="../avatar.png" size="large" />\n<Avatar imageSource="../avatar.png" size="xl" />'}
+            code={'<Avatar imageSource={avatarImage} size="small" />\n<Avatar imageSource={avatarImage} size="medium" />\n<Avatar imageSource={avatarImage} size="large" />\n<Avatar imageSource={avatarImage} size="xl" />'}
         />
 
         <Apis data={[
