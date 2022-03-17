@@ -20,12 +20,14 @@
     }
     
     .dolfo-spotlight-inner{
-        max-height: 100%;
         background-color: $white;
         border-radius: $smallRadius;
         position: relative;
         z-index: 2;
         width: 600px;
+        max-height: calc(100% - 200px);
+        display: flex;
+        flex-direction: column;
 
         .dolfo-spotlight-filter{
             display: flex;
@@ -47,14 +49,17 @@
         }
 
         .dolfo-spotlight-data{
+            overflow: auto;
             padding: 0.6rem;
             padding-top: 0;
+            max-height: 100%;
         
             .dolfo-spotlight-item{
                 cursor: pointer;
                 border-radius: $smallRadius;
                 padding: 0.3rem 1rem;
                 word-wrap: break-word;
+                border: 1px solid $grey;
             
                 &:hover, &.focused{
                     background-color: $lightGrey
@@ -65,7 +70,7 @@
                 }
             }
 
-            .dolfo-spotlight-nodata{
+            .dolfo-spotlight-nodata, .dolfo-spotlight-loading{
                 text-align: center
             }
         }

@@ -5,12 +5,67 @@ import { SpotExample } from "./Examples"
 import { ResultCode, WhenToUse, Apis } from "./Layouts"
 
 export class SpotlightPage extends React.Component<unknown, { readonly visible: boolean, readonly data: any[] }>{
-    private readonly DATA: { name: string, surname: string }[] = [
-        { name: "Jules", surname: "Cesar" },
-        { name: "Andrew", surname: "Garfield" },
-        { name: "Tom", surname: "Holland" },
-        { name: "Tobey", surname: "Maguire" }
-    ]
+    private readonly DATA: { name: string, surname: string }[] = [{
+        "name": "Sunshine",
+        "surname": "Strauss"
+      }, {
+        "name": "Alfons",
+        "surname": "Guillot"
+      }, {
+        "name": "Darci",
+        "surname": "Dedam"
+      }, {
+        "name": "Eimile",
+        "surname": "Japp"
+      }, {
+        "name": "Hamlen",
+        "surname": "Tangye"
+      }, {
+        "name": "Lora",
+        "surname": "Ropkins"
+      }, {
+        "name": "Doug",
+        "surname": "Cullrford"
+      }, {
+        "name": "Opal",
+        "surname": "Gooble"
+      }, {
+        "name": "Katleen",
+        "surname": "Vise"
+      }, {
+        "name": "Malinda",
+        "surname": "Jacobsz"
+      }, {
+        "name": "Carey",
+        "surname": "Blann"
+      }, {
+        "name": "Evangelin",
+        "surname": "Trembey"
+      }, {
+        "name": "Grannie",
+        "surname": "Beatens"
+      }, {
+        "name": "Kelly",
+        "surname": "Duignan"
+      }, {
+        "name": "Arlinda",
+        "surname": "Furlong"
+      }, {
+        "name": "Prudence",
+        "surname": "Greg"
+      }, {
+        "name": "Weider",
+        "surname": "Smout"
+      }, {
+        "name": "Crissie",
+        "surname": "Atterley"
+      }, {
+        "name": "Alessandro",
+        "surname": "Smither"
+      }, {
+        "name": "Rodrique",
+        "surname": "Coltart"
+      }]
 
     constructor(props: unknown){
         super(props)
@@ -27,7 +82,7 @@ export class SpotlightPage extends React.Component<unknown, { readonly visible: 
         <WhenToUse>When you want to render a search dialog (or spotlight).</WhenToUse>
 
         <ResultCode
-            title="Simple messagebox"
+            title="Simple spotlight"
             result={<>
                 <Button btnColor="green" onClick={this.toggle} size="small">Show spotlight</Button>
         
@@ -43,36 +98,52 @@ export class SpotlightPage extends React.Component<unknown, { readonly visible: 
 
         <Apis data={[
             {
-                name: "content",
-                desc: "The content of the message.",
-                type: "string or JSX",
+                name: "data",
+                desc: "The data source of the spotlight.",
+                type: "Array",
                 required: true
             },
             {
-                name: "title",
-                desc: "The title of the message.",
-                type: "string or JSX",
-                required: false,
-                default: "null"
+                name: "renderItem",
+                desc: "Function to render a single item of the list.",
+                type: "function",
+                required: true,
+                fnParams: "The single item of the list"
             },
             {
-                name: "position",
-                desc: "The position of the message.",
-                type: "string (top-left, top-right, bottom-left, bottom-right)",
+                name: "loading",
+                desc: "Determines whether the data source is loading or not.",
+                type: "boolean",
                 required: false,
-                default: "top-right"
+                default: "false"
             },
             {
-                name: "hideDelay",
-                desc: "The amount of seconds after the message should disappear.",
-                type: "number (seconds x 1000) or 'never'",
+                name: "visible",
+                desc: "Determines whether the spotlight should show or not.",
+                type: "boolean",
                 required: false,
-                default: "2 seconds (2000)"
+                default: "false"
+            },
+            {
+                name: "onClickItem",
+                desc: "Function triggered when the user clicks an item.",
+                type: "function",
+                required: false,
+                default: "null",
+                fnParams: "The clicked item (any)"
+            },
+            {
+                name: "onChangeFilter",
+                desc: "Function triggered when the filter changes.",
+                type: "function",
+                required: false,
+                default: "null",
+                fnParams: "Filter value (string)"
             },
             {
                 name: "onClose",
-                desc: "Function triggered when the user closes the message.",
-                type: "function'",
+                desc: "Function triggered when the user closes the spotlight or clicks an item.",
+                type: "function",
                 required: false,
                 default: "null",
                 fnParams: "None"

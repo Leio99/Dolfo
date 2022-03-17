@@ -1,15 +1,16 @@
 import React from "react"
 import { TextInput } from "../form/TextInput"
 import { Constants } from "../shared/Constants"
+import { LoadingIcon } from "./Icon"
 
 interface IProps{
     readonly data: any[]
     readonly renderItem: (item: any) => string | JSX.Element
     readonly loading?: boolean
+    readonly visible?: boolean
     readonly onChangeFilter?: (value: string) => void
     readonly onClickItem?: (item: any) => void
     readonly onClose?: () => void
-    readonly visible?: boolean
 }
 
 interface IState{
@@ -92,19 +93,21 @@ export class Spotlight extends React.Component<IProps, IState>{
         const { props, state } = this,
         { visible, focusedIndex, filter } = state
 
-        return <div className={"dolfo-spotlight" + (visible ? " show" : "")}>
+        return <div className={"dolfo-spotlight" + (visible ? " show" : "") + (props.loading ? " loading" : "")}>
             <div className="dolfo-spotlight-overlay" onClick={this.onClose}></div>
 
             <div className="dolfo-spotlight-inner">
                 <div className="dolfo-spotlight-filter">  
                     <div className="dolfo-spotlight-input">
-                        <TextInput onChange={this.changeFilter} value={filter} onKeyDown={this.handleKeyDown} icon={{ iconKey: "search" }} />
+                        <TextInput onChange={this.changeFilter} value={filter} onKeyDown={this.handleKeyDown} icon={{ iconKey: "search" }} disabled={props.loading} />
                     </div>         
                 </div>
 
                 <div className="dolfo-spotlight-data">
                     {
-                        props.data && props.data.length ? props.data.map((d, i) => <div className={"dolfo-spotlight-item" + (focusedIndex === i ? " focused" : "")} onClick={() => this.clickItem(d)}>
+                        props.loading ? <div className="dolfo-spotlight-loading">
+                            <LoadingIcon spinning /> {Constants.LOADING_TEXT}
+                        </div> : props.data && props.data.length ? props.data.map((d, i) => <div className={"dolfo-spotlight-item" + (focusedIndex === i ? " focused" : "")} onClick={() => this.clickItem(d)}>
                             {props.renderItem(d)}
                         </div>): <div className="dolfo-spotlight-nodata">{Constants.TABLE_NO_RESULTS}</div>
                     }    

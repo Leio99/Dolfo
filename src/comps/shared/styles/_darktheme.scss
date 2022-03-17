@@ -484,6 +484,10 @@ html.dark-theme{
             .dolfo-spotlight-data{
                 padding: 0.6rem;
                 padding-top: 0;
+
+                .dolfo-spotlight-item{
+                    border-color: $darkThemeDarkActive
+                }
             
                 .dolfo-spotlight-item:hover, .dolfo-spotlight-item.focused{
                     background-color: $darkThemeDarkHover

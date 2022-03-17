@@ -95,7 +95,7 @@ export class MessageboxPage extends React.Component{
             {
                 name: "onClose",
                 desc: "Function triggered when the user closes the message.",
-                type: "function'",
+                type: "function",
                 required: false,
                 default: "null",
                 fnParams: "None"
