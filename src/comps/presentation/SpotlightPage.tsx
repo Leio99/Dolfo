@@ -5,67 +5,12 @@ import { SpotExample } from "./Examples"
 import { ResultCode, WhenToUse, Apis } from "./Layouts"
 
 export class SpotlightPage extends React.Component<unknown, { readonly visible: boolean, readonly data: any[] }>{
-    private readonly DATA: { name: string, surname: string }[] = [{
-        "name": "Sunshine",
-        "surname": "Strauss"
-      }, {
-        "name": "Alfons",
-        "surname": "Guillot"
-      }, {
-        "name": "Darci",
-        "surname": "Dedam"
-      }, {
-        "name": "Eimile",
-        "surname": "Japp"
-      }, {
-        "name": "Hamlen",
-        "surname": "Tangye"
-      }, {
-        "name": "Lora",
-        "surname": "Ropkins"
-      }, {
-        "name": "Doug",
-        "surname": "Cullrford"
-      }, {
-        "name": "Opal",
-        "surname": "Gooble"
-      }, {
-        "name": "Katleen",
-        "surname": "Vise"
-      }, {
-        "name": "Malinda",
-        "surname": "Jacobsz"
-      }, {
-        "name": "Carey",
-        "surname": "Blann"
-      }, {
-        "name": "Evangelin",
-        "surname": "Trembey"
-      }, {
-        "name": "Grannie",
-        "surname": "Beatens"
-      }, {
-        "name": "Kelly",
-        "surname": "Duignan"
-      }, {
-        "name": "Arlinda",
-        "surname": "Furlong"
-      }, {
-        "name": "Prudence",
-        "surname": "Greg"
-      }, {
-        "name": "Weider",
-        "surname": "Smout"
-      }, {
-        "name": "Crissie",
-        "surname": "Atterley"
-      }, {
-        "name": "Alessandro",
-        "surname": "Smither"
-      }, {
-        "name": "Rodrique",
-        "surname": "Coltart"
-      }]
+    private readonly DATA: { name: string, surname: string }[] = [
+        { name: "Jules", surname: "Cesar" },
+        { name: "Andrew", surname: "Garfield" },
+        { name: "Tom", surname: "Holland" },
+        { name: "Tobey", surname: "Maguire" }
+    ]
 
     constructor(props: unknown){
         super(props)

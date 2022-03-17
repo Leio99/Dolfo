@@ -16,6 +16,7 @@ interface IProps extends FullInputProps{
     readonly value?: string
     readonly max?: number
     readonly min?: number
+    readonly placeHolder?: string
 }
 
 interface IState{
@@ -135,6 +136,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
 
             {
                 props.type !== "textarea" ? <input
+                    placeholder={props.placeHolder}
                     type={inputType}
                     name={props.name}
                     autoFocus={props.autoFocus}
@@ -154,6 +156,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
                 /> : <textarea
+                    placeholder={props.placeHolder}
                     name={props.name}
                     onChange={this.onChange}
                     disabled={props.disabled}

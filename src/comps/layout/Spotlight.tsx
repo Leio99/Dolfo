@@ -99,7 +99,7 @@ export class Spotlight extends React.Component<IProps, IState>{
             <div className="dolfo-spotlight-inner">
                 <div className="dolfo-spotlight-filter">  
                     <div className="dolfo-spotlight-input">
-                        <TextInput onChange={this.changeFilter} value={filter} onKeyDown={this.handleKeyDown} icon={{ iconKey: "search" }} disabled={props.loading} />
+                        <TextInput onChange={this.changeFilter} value={filter} onKeyDown={this.handleKeyDown} icon={{ iconKey: "search" }} disabled={props.loading} placeHolder={Constants.FILTER_TEXT} />
                     </div>         
                 </div>
 
