@@ -497,6 +497,11 @@ html.dark-theme{
     }
 
     .dolfo-alert, .dolfo-status{
+        &.pending, &.dolfo-alert{
+            background-color: darken($dark, 14%);
+            color: $grey
+        }
+
         &.info{
             color: lighten($darkBlue, 30%);
             background-color: darken($darkBlue, 35%)
@@ -515,11 +520,6 @@ html.dark-theme{
         &.warning{
             background-color: darken($orange, 20%);
             color: lighten($orange, 40%)
-        }
-
-        &.pending{
-            background-color: darken($dark, 14%);
-            color: $grey
         }
     }
 
