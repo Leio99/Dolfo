@@ -496,6 +496,33 @@ html.dark-theme{
         }
     }
 
+    .dolfo-alert, .dolfo-status{
+        &.info{
+            color: lighten($darkBlue, 30%);
+            background-color: darken($darkBlue, 35%)
+        }
+
+        &.success{
+            background-color: darken($green, 22%);
+            color: lighten($green, 50%)
+        }
+    
+        &.error{
+            background-color: darken($red, 20%);
+            color: lighten($red, 40%)
+        }
+
+        &.warning{
+            background-color: darken($orange, 20%);
+            color: lighten($orange, 40%)
+        }
+
+        &.pending{
+            background-color: darken($dark, 14%);
+            color: $grey
+        }
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }
