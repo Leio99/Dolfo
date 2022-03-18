@@ -11,8 +11,6 @@ import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 export class DialogPage extends React.Component<any, {
     readonly [x: string]: boolean
 }>{
-    readonly homepage = require("../../../package.json").homepage
-
     constructor(props: any){
         super(props)
 
