@@ -473,6 +473,28 @@ html.dark-theme{
         }
     }
 
+    .dolfo-tooltip{
+        $tooltipBg: rgba(255, 255, 255, 0.8);
+        background-color: $tooltipBg;
+        color: $black;
+
+        &:not(.Left):not(.Right):not(.Bottom):after{
+            border-top-color: $tooltipBg
+        }
+
+        &.Left:after{
+            border-left-color: $tooltipBg
+        }
+
+        &.Right:after{
+            border-right-color: $tooltipBg
+        }
+
+        &.Bottom:after{
+            border-bottom-color: $tooltipBg
+        }
+    }
+
     .dolfo-spotlight{
         .dolfo-spotlight-overlay{
             background-color: rgba(255, 255, 255, 0.15)
@@ -504,22 +526,22 @@ html.dark-theme{
 
         &.info{
             color: lighten($darkBlue, 30%);
-            background-color: darken($darkBlue, 35%)
+            background-color: $lightBlueDark
         }
 
         &.success{
             background-color: darken($green, 22%);
-            color: lighten($green, 50%)
+            color: $lightGreenDark
         }
     
         &.error{
             background-color: darken($red, 20%);
-            color: lighten($red, 40%)
+            color: $lightRedDark
         }
 
         &.warning{
             background-color: darken($orange, 27%);
-            color: lighten($orange, 40%)
+            color: $lightOrangeDark
         }
     }
 

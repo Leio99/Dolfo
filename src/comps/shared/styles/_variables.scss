@@ -8,17 +8,28 @@ $blue:  #239ad1;
 $darkBlue: #236fd1;
 $red: #eb1d1d;
 $orange: #f1a80b;
-$dark: #333;
+$dark: #353535;
 $white: #fff;
 $disabled: #aaa;
 $grey: #ccc;
 $lightGrey: #eee;
 $black: #000;
+$violet: #c0133e;
+$lightGreen: lighten($green, 47%);
+$lightRed: lighten($red, 42%);
+$lightBlue: lighten($darkBlue, 47%);
+$lightOrange: lighten($orange, 42%);
+$lightViolet: lighten($violet, 20%);
+$lightDarkBlue: lighten($darkBlue, 20%);
 
 $darkThemeDark: darken($dark, 5%);
 $darkThemeDarkHover: darken($dark, 15%);
 $darkThemeDarkActive: darken($dark, 25%);
 $darkThemeSelectionBlue: lighten($selectionBlue, 20%);
+$lightBlueDark: darken($darkBlue, 35%);
+$lightGreenDark: lighten($green, 50%);
+$lightRedDark: lighten($red, 40%);
+$lightOrangeDark: lighten($orange, 40%);
 
 $colors: (
   "red": $red,
@@ -29,6 +40,17 @@ $colors: (
   "black": #333,
   "grey": $disabled,
   "white": $white
+);
+
+$lightColors: (
+  "red": $lightRed,
+  "blue": $lightBlue,
+  "darkblue": $lightDarkBlue,
+  "green": $lightGreen,
+  "orange": $lightOrange,
+  "black": #333,
+  "grey": $lightGrey,
+  "violet": $lightViolet
 );
 
 :root{

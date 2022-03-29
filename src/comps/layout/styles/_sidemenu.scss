@@ -1,5 +1,56 @@
 $menuWidth: 350px;
 
+@mixin sideMenuArrow(){
+    .dolfo-submenu-arrow{
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.4s ease
+    }
+}
+
+@mixin dolfoSideMenuTitle(){
+    cursor: pointer;
+    font-weight: 400;
+    text-transform: uppercase
+}
+
+@mixin dolfoSideMenuSubTitle($word: "padding"){
+    &.dolfo-submenu-title{
+        position: relative;
+        #{$word}-inline-start: 2rem;
+
+        @include sideMenuArrow();
+    }
+}
+
+@mixin dolfoSubMenuBase($word: "padding"){
+    .dolfo-submenu{
+        overflow: hidden;
+        #{$word}-inline-start: 0;
+        margin-bottom: 0;
+
+        .dolfo-submenu-inner{
+            #{$word}-inline-start: 2rem;
+            max-height: 0;
+            transition: 0.2s ease
+        }
+
+        &.opened{
+            > .dolfo-submenu-title{
+                .dolfo-submenu-arrow{
+                    transform: rotate(180deg) translateY(50%)
+                }
+            }
+
+            > .dolfo-submenu-inner{
+                max-height: 1000px
+            }
+        }
+    }
+}
+
 .dolfo-side-menu{
     position: fixed;
     top: 0;
@@ -80,50 +131,15 @@ $menuWidth: 350px;
     }
 
     .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
-        cursor: pointer;
         padding: 1rem 2rem;
         position: sticky;
         font-size: 20px;
-        font-weight: 400;
-        text-transform: uppercase;
 
-        &.dolfo-submenu-title{
-            position: relative;
-            padding-inline-start: 2rem;
-
-            .dolfo-submenu-arrow{
-                position: absolute;
-                right: 2rem;
-                top: 50%;
-                transform: translateY(-50%);
-                transition: transform 0.4s ease
-            }
-        }
+        @include dolfoSideMenuTitle();
+        @include dolfoSideMenuSubTitle()
     }
 
-    .dolfo-submenu{
-        overflow: hidden;
-        padding-inline-start: 0;
-        margin-bottom: 0;
-
-        .dolfo-submenu-inner{
-            padding-inline-start: 2rem;
-            max-height: 0;
-            transition: 0.2s ease
-        }
-
-        &.opened{
-            > .dolfo-submenu-title{
-                .dolfo-submenu-arrow{
-                    transform: rotate(180deg) translateY(50%)
-                }
-            }
-
-            > .dolfo-submenu-inner{
-                max-height: 1000px
-            }
-        }
-    }
+    @include dolfoSubMenuBase();
 }
 
 @media screen and (max-width: 400px){

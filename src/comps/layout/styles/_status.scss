@@ -4,22 +4,22 @@
     display: inline-block;
 
     &.success{
-        background-color: lighten($green, 47%);
+        background-color: $lightGreen;
         color: $green
     }
 
     &.error{
-        background-color: lighten($red, 42%);
+        background-color: $lightRed;
         color: $red
     }
 
     &.info{
-        background-color: lighten($darkBlue, 47%);
+        background-color: $lightBlue;
         color: $darkBlue
     }
 
     &.warning{
-        background-color: lighten($orange, 42%);
+        background-color: $lightOrange;
         color: darken($orange, 7%)
     }
 

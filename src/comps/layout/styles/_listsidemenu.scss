@@ -1,0 +1,38 @@
+.dolfo-list-side-menu{
+    @each $key, $color in $lightColors {
+        &.dolfo-list-side-menu-#{$key}{
+            .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
+                $darkenVoice: darken($color, 20%);
+                
+                color: $darkenVoice;
+
+                &.selected{
+                    color: $white;
+                    background-color: $color
+                }
+
+                &:hover:not(.selected){
+                    background-color: lighten($color, 30%)
+                }
+            }
+
+            .dolfo-submenu.opened > .dolfo-submenu-title{
+                color: $white;
+                background-color: $color !important
+            }
+        }
+    }
+
+    .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
+        padding: 0.4rem 1rem;
+        margin-inline-start: 0 !important;
+        border-radius: $smallRadius;
+        margin-bottom: 0.5rem;
+        font-size: 17px;
+
+        @include dolfoSideMenuTitle();
+        @include dolfoSideMenuSubTitle("margin")
+    }
+
+    @include dolfoSubMenuBase("margin");
+}
