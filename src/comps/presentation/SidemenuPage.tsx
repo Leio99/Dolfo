@@ -57,7 +57,8 @@ export class SidemenuPage extends React.Component<any, {
                 <Button btnColor="blue" size="small" onClick={() => this.toggle("black")} style={{ marginRight: 5 }}>Black</Button>
                 <Button btnColor="blue" size="small" onClick={() => this.toggle("orange")} style={{ marginRight: 5 }}>Orange</Button>
                 <Button btnColor="blue" size="small" onClick={() => this.toggle("grey")} style={{ marginRight: 5 }}>Grey</Button>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("white")}>White</Button>
+                <Button btnColor="blue" size="small" onClick={() => this.toggle("white")} style={{ marginRight: 5 }}>White</Button>
+                <Button btnColor="blue" size="small" onClick={() => this.toggle("violet")}>Violet</Button>
 
                 <SideMenu opened={this.state["red"]} onToggle={() => this.toggle("red")} menuColor="red">
                     <MenuItem>I am a voice</MenuItem>
@@ -86,6 +87,10 @@ export class SidemenuPage extends React.Component<any, {
                 <SideMenu opened={this.state["white"]} onToggle={() => this.toggle("white")} menuColor="white">
                     <MenuItem>I am a voice</MenuItem>
                 </SideMenu>
+
+                <SideMenu opened={this.state["violet"]} onToggle={() => this.toggle("violet")} menuColor="violet">
+                    <MenuItem>I am a voice</MenuItem>
+                </SideMenu>
             </>}
             code={'<Button btnColor="blue" size="small" onClick={() => this.toggle("red")} style={{ marginRight: 5 }}>Red</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("green")} style={{ marginRight: 5 }}>Green</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("darkblue")} style={{ marginRight: 5 }}>Dark blue</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("black")} style={{ marginRight: 5 }}>Black</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("orange")} style={{ marginRight: 5 }}>Orange</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("grey")}>Grey</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("white")}>White</Button>\n\n<SideMenu opened={this.state["red"]} onToggle={() => this.toggle("red")} menuColor="red">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["green"]} onToggle={() => this.toggle("green")} menuColor="green">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["darkblue"]} onToggle={() => this.toggle("darkblue")} menuColor="darkblue">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["black"]} onToggle={() => this.toggle("black")} menuColor="black">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["orange"]} onToggle={() => this.toggle("orange")} menuColor="orange">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["grey"]} onToggle={() => this.toggle("grey")} menuColor="grey">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["white"]} onToggle={() => this.toggle("white")} menuColor="white">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>'}
         />
@@ -101,9 +106,9 @@ export class SidemenuPage extends React.Component<any, {
             {
                 name: "menuColor",
                 desc: "Defines the menu background and text color.",
-                type: "string (red, blue, green, black, orange, grey, darkblue, white)",
+                type: "string (red, blue, green, black, orange, grey, darkblue, white, violet)",
                 required: false,
-                default: "circle"
+                default: "blue"
             },
             {
                 name: "onToggle",

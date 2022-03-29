@@ -545,6 +545,70 @@ html.dark-theme{
         }
     }
 
+    .dolfo-list-side-menu{
+        &.dolfo-list-side-menu-blue{
+            .dolfo-menu-voice:hover:not(.selected), .dolfo-submenu .dolfo-submenu-title:hover{
+                background-color: $lightBlueDark
+            }
+        }
+        &.dolfo-list-side-menu-red{
+            .dolfo-menu-voice:hover:not(.selected), .dolfo-submenu .dolfo-submenu-title:hover{
+                background-color: darken($lightRedDark, 70%);
+                color: $white
+            }
+        }
+        &.dolfo-list-side-menu-green{
+            .dolfo-menu-voice:hover:not(.selected), .dolfo-submenu .dolfo-submenu-title:hover{
+                background-color: darken($lightGreenDark, 70%);
+                color: $white
+            }
+        }
+        &.dolfo-list-side-menu-darkblue{
+            .dolfo-menu-voice:hover:not(.selected), .dolfo-submenu .dolfo-submenu-title:hover{
+                background-color: darken($darkBlue, 20%);
+                color: $white
+            }
+        }
+        &.dolfo-list-side-menu-orange{
+            .dolfo-menu-voice:hover:not(.selected), .dolfo-submenu .dolfo-submenu-title:hover{
+                background-color: darken($lightOrangeDark, 70%);
+                color: $white
+            }
+        }
+        &.dolfo-list-side-menu-violet{
+            .dolfo-menu-voice:hover:not(.selected), .dolfo-submenu .dolfo-submenu-title:hover{
+                background-color: darken($lightViolet, 40%);
+                color: $white
+            }
+        }
+        &.dolfo-list-side-menu-white, &.dolfo-list-side-menu-grey{
+            .dolfo-menu-voice:not(.selected), .dolfo-submenu .dolfo-submenu-title{
+                color: $white;
+
+                &:hover{
+                    color: $black
+                }
+            }
+        }
+        &.dolfo-list-side-menu-black{
+            .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
+                color: $white !important;
+
+                &:hover:not(.selected){
+                    background-color: $darkThemeDark
+                }
+
+                &.dolfo-menu-voice.selected{
+                    background-color: $darkThemeDarkActive
+                }
+            }
+
+            .dolfo-submenu.opened .dolfo-submenu-title{
+                background-color: $darkThemeDarkActive !important
+            }
+        }
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }

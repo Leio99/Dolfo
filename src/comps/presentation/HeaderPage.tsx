@@ -24,9 +24,10 @@ export class HeaderPage extends React.Component{
                 <Header title="Grey" menuColor="grey" style={{ position: "relative", marginBottom: 10 }} />
                 <Header title="Orange" menuColor="orange" style={{ position: "relative", marginBottom: 10 }} />
                 <Header title="Red" menuColor="red" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="White" menuColor="white" style={{ position: "relative" }} />
+                <Header title="White" menuColor="white" style={{ position: "relative", marginBottom: 10 }} />
+                <Header title="Violet" menuColor="violet" style={{ position: "relative" }} />
             </>}
-            code={'<Header title="Black" menuColor="black" />\n<Header title="Blue" menuColor="blue" />\n<Header title="Darkblue" menuColor="darkblue" />\n\n<Header title="Green" menuColor="green" />\n<Header title="Grey" menuColor="grey" />\n<Header title="Orange" menuColor="orange" />\n<Header title="Red" menuColor="red" />\n<Header title="White" menuColor="white" />'}
+            code={'<Header title="Black" menuColor="black" />\n<Header title="Blue" menuColor="blue" />\n<Header title="Darkblue" menuColor="darkblue" />\n\n<Header title="Green" menuColor="green" />\n<Header title="Grey" menuColor="grey" />\n<Header title="Orange" menuColor="orange" />\n<Header title="Red" menuColor="red" />\n<Header title="White" menuColor="white" />\n<Header title="Violet" menuColor="violet" />'}
         />
 
         <ResultCode
@@ -52,7 +53,7 @@ export class HeaderPage extends React.Component{
             {
                 name: "menuColor",
                 desc: "Defines the header color.",
-                type: "string (red, blue, green, black, orange, grey, darkblue, white)",
+                type: "string (red, blue, green, black, orange, grey, darkblue, white, violet)",
                 required: false,
                 default: "blue"
             },

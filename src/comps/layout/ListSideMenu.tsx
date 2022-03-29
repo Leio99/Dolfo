@@ -1,12 +1,11 @@
 import React from "react"
-import { SideMenu } from "./SideMenu"
+import { BaseSideMenuProps, SideMenu } from "./SideMenu"
 
-export class ListSideMenu extends SideMenu{
+export class ListSideMenu extends SideMenu<BaseSideMenuProps>{
     render = (): JSX.Element => {
-        const { props } = this,
-        { opened } = this.state
+        const { props } = this
 
-        return <div className={"dolfo-list-side-menu dolfo-list-side-menu-"+ (props.menuColor || "blue") + (opened ? " opened": "")}>
+        return <div className={"dolfo-list-side-menu dolfo-list-side-menu-"+ (props.menuColor || "blue")}>
             {props.children}
         </div>
     }

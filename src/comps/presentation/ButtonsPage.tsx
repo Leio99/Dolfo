@@ -25,9 +25,10 @@ export class ButtonsPage extends React.Component{
                 <Button btnColor="green" style={{ marginRight: 5 }}>Green</Button>
                 <Button btnColor="grey" style={{ marginRight: 5 }}>Grey</Button>
                 <Button btnColor="orange" style={{ marginRight: 5 }}>Orange</Button>
-                <Button btnColor="red">Red</Button>
+                <Button btnColor="red" style={{ marginRight: 5 }}>Red</Button>
+                <Button btnColor="violet">Violet</Button>
             </>}
-            code={'<Button btnColor="white">White</Button>\n<Button btnColor="black">Black</Button>\n<Button btnColor="blue">Blue</Button>\n<Button btnColor="darkblue">Dark blue</Button>\n<Button btnColor="green">Green</Button>\n<Button btnColor="grey">Grey</Button>\n<Button btnColor="orange">Orange</Button>\n<Button btnColor="red">Red</Button>'}
+            code={'<Button btnColor="white">White</Button>\n<Button btnColor="black">Black</Button>\n<Button btnColor="blue">Blue</Button>\n<Button btnColor="darkblue">Dark blue</Button>\n<Button btnColor="green">Green</Button>\n<Button btnColor="grey">Grey</Button>\n<Button btnColor="orange">Orange</Button>\n<Button btnColor="red">Red</Button>\n<Button btnColor="violet">Violet</Button>'}
         />
 
         <ResultCode
@@ -85,7 +86,7 @@ export class ButtonsPage extends React.Component{
             {
                 name: "btnColor",
                 desc: "Defines button color.",
-                type: "string (red, blue, green, black, orange, grey, darkblue, white)",
+                type: "string (red, blue, green, black, orange, grey, darkblue, white, violet)",
                 required: false,
                 default: "null (no color)"
             },

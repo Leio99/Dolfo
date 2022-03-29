@@ -1,23 +1,78 @@
 .dolfo-list-side-menu{
     @each $key, $color in $lightColors {
         &.dolfo-list-side-menu-#{$key}{
+            $darkenVoice: darken($color, 20%);
+            $lightenedColor: lighten($color, 30%);
+            $fgColor: $white;
+            $fgColor2: $white;
+            $fgColor3: $white;
+            
+            @if $key == "red" {
+                $fgColor: $red;
+                $fgColor3: $red;
+                $lightenedColor: $lightRed;
+                $fgColor2: $white;
+                $color: lighten($red, 10%)
+            } @else if $key == "blue" {
+                $fgColor: $blue;
+                $fgColor3: $blue;
+                $lightenedColor: $lightBlue;
+                $fgColor2: $white;
+                $color: lighten($blue, 10%)
+            } @else if $key == "green" {
+                $fgColor: $green;
+                $fgColor3: $green;
+                $lightenedColor: $lightGreen;
+                $fgColor2: $white;
+                $color: lighten($green, 30%)
+            } @else if $key == "orange" {
+                $fgColor: $orange;
+                $fgColor3: $orange;
+                $lightenedColor: $lightOrange;
+                $fgColor2: $white;
+                $color: lighten($orange, 20%)
+            } @else if $key == "darkblue" {
+                $fgColor: $darkBlue;
+                $fgColor3: $darkBlue;
+                $lightenedColor: lighten($lightDarkBlue, 25%);
+                $fgColor2: $white;
+                $color: lighten($darkBlue, 20%)
+            } @else if $key == "white" {
+                $fgColor: $black;
+                $fgColor3: $black;
+                $lightenedColor: $lightGrey;
+                $fgColor2: $black;
+                $color: darken($lightGrey, 10%)
+            } @else if $key == "black" {
+                $fgColor: $black;
+                $lightenedColor: darken($lightGrey, 5%);
+                $fgColor3: $black
+            } @else if $key == "violet" {
+                $fgColor: $color;
+                $fgColor3: $color;
+            } @else if $key == "grey" {
+                $fgColor: $black;
+                $lightenedColor: darken($lightGrey, 5%);
+                $fgColor3: $black;
+                $color: darken($disabled, 20%)
+            } 
+
             .dolfo-menu-voice, .dolfo-submenu .dolfo-submenu-title{
-                $darkenVoice: darken($color, 20%);
-                
-                color: $darkenVoice;
+                color: $fgColor;
 
                 &.selected{
-                    color: $white;
+                    color: $fgColor2;
                     background-color: $color
                 }
 
                 &:hover:not(.selected){
-                    background-color: lighten($color, 30%)
+                    background-color: $lightenedColor;
+                    color: $fgColor3
                 }
             }
 
             .dolfo-submenu.opened > .dolfo-submenu-title{
-                color: $white;
+                color: $fgColor2 !important;
                 background-color: $color !important
             }
         }

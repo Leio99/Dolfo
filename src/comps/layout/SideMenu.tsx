@@ -5,18 +5,21 @@ import { ButtonColors } from "./Button"
 export { SubMenu } from "./SubMenu"
 export { MenuItem } from "./MenuItem"
 
-interface IProps{
+export interface BaseSideMenuProps{
+    readonly menuColor?: ButtonColors
+}
+
+interface IProps extends BaseSideMenuProps{
     readonly opened?: boolean
     readonly onToggle?: () => void
-    readonly menuColor?: ButtonColors
 }
 
 interface IState{
     readonly opened: boolean
 }
 
-export class SideMenu extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+export class SideMenu<P extends IProps = IProps> extends React.PureComponent<P, IState>{
+    constructor(props: P){
         super(props)
 
         this.state = {
@@ -24,7 +27,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps): void => {
+    componentDidUpdate = (prevProps: P): void => {
         if(prevProps.opened !== this.props.opened){
             this.setState({
                 opened: this.props.opened

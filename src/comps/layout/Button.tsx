@@ -5,7 +5,7 @@ import onClickOutside from "react-onclickoutside"
 import { TooltipProps } from "./Tooltip"
 import { ContextMenu } from "./ContextMenu"
 
-export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue"
+export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue" | "violet"
 export type ButtonColors = BaseColors | "white"
 
 export interface ButtonProps extends TooltipProps{
