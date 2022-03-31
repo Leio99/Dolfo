@@ -10,7 +10,7 @@ export class SelectPage extends React.Component{
         <Usage notes="using the up and down arrows, the user can navigate through the options and select them pressing the Enter key." />
 
         <ResultCode
-            title="Simple switch"
+            title="Simple select"
             result={<Select>
                 <Option value={1} label="First option" />
                 <Option value={2} label="Second option" />

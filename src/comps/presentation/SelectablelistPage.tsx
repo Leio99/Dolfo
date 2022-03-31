@@ -62,7 +62,7 @@ export class SelectablelistPage extends React.Component{
             title="Show checkboxes"
             result={<SelectableCardList showCheckbox>
                 <SelectableCard value="opt1" title="Option 1" desc="Click me" />
-                <SelectableCard value="opt2" title="I'm disabled" />
+                <SelectableCard value="opt2" disabled title="I'm disabled" />
                 <SelectableCard value="opt3" title="Option 3" />
             </SelectableCardList>}
             code={'<SelectableCardList showCheckbox>\n\t<SelectableCard value="opt1" title="Option 1" desc="Click me" />\n\t<SelectableCard value="opt2" title="I\'m disabled" disabled />\n\t<SelectableCard value="opt3" title="Option 3" />\n</SelectableCardList>'}
