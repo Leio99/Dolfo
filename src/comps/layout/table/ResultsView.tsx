@@ -18,11 +18,11 @@ export interface ResultViewProps extends CardTableProps, ResultsManagerProps{
     readonly onToggleViewMode?: (viewMode: ViewType) => void
 }
 
-interface IState{
+export interface BaseResultsState{
     readonly layoutType: ViewType
 }
 
-export class ResultsView extends BaseExportableManager<ResultViewProps, IState>{
+export class ResultsView extends BaseExportableManager<ResultViewProps, BaseResultsState>{
     constructor(props: ResultViewProps){
         super(props)
 

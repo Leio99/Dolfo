@@ -3,7 +3,7 @@ import { Constants } from "../../shared/Constants"
 import { IDataColumn } from "../../shared/models/IColumn"
 import Button from "../Button"
 import { DetailIcon, Icon } from "../Icon"
-import { ResultsView, ResultViewProps, ViewType } from "./ResultsView"
+import { BaseResultsState, ResultsView, ResultViewProps, ViewType } from "./ResultsView"
 
 interface IProps extends ResultViewProps{
     readonly actions?: (dataItem: IDataColumn) => JSX.Element
@@ -11,9 +11,8 @@ interface IProps extends ResultViewProps{
     readonly onOpenDetail?: (item: any) => void
 }
 
-interface IState{
+interface IState extends BaseResultsState{
     readonly selectedItem: any
-    readonly layoutType: ViewType
 }
 
 export class MasterDetail extends React.Component<IProps, IState>{
