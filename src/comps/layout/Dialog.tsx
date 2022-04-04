@@ -8,7 +8,7 @@ import { Closable } from "../shared/models/Closable"
 export type DialogType = "success" | "info" | "error" | "warning"
 
 export interface ComponentAsDialogProps{
-    readonly close: () => void
+    readonly close?: () => void
 }
 
 interface BaseProps{
@@ -20,7 +20,7 @@ interface BaseProps{
     readonly clickOutside?: boolean
 }
 
-interface IProps extends BaseProps{
+export interface DialogFullProps extends BaseProps{
     readonly onClose?: () => void
     readonly visible?: boolean
     readonly okBtnClass?: string
@@ -42,13 +42,13 @@ interface IState{
     readonly visible: boolean
 }
 
-interface DialogProps extends IProps{
+interface DialogProps extends DialogFullProps{
     readonly type?: DialogType
     readonly icon?: JSX.Element
 }
 
-export class Dialog extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps) {
+export class Dialog extends React.PureComponent<DialogFullProps, IState>{
+    constructor(props: DialogFullProps) {
         super(props)
 
         this.state = {
@@ -57,23 +57,8 @@ export class Dialog extends React.PureComponent<IProps, IState>{
     }
 
     static infoDialog = (data: DialogProps): Closable => {
-        let title = data.title || Constants.INFO_TEXT,
-        okType: DialogProps["okType"] = "blue"
-
-        if(data.type === "success"){
-            if(!data.title) title = Constants.SUCCESS_TEXT
-            okType = "green"
-        }
-
-        if(data.type === "error"){
-            if(!data.title) title = Constants.ERROR_TEXT
-            okType = "red"
-        }
-
-        if(data.type === "warning"){
-            if(!data.title) title = Constants.WARNING_TEXT
-            okType = "orange"
-        }
+        let title = data.title || Dialog.getInfoTitle(data.type),
+        okType: DialogProps["okType"] = Dialog.getColor(data.type)
 
         return Dialog.openDialog({
             ...data,
@@ -85,7 +70,7 @@ export class Dialog extends React.PureComponent<IProps, IState>{
         })
     }
 
-    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: () => void): Closable => {
+    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: DialogProps["onOk"]): Closable => {
         return Dialog.openDialog({
             title: title || Constants.CONFIRM_TITLE,
             content: message,
@@ -112,34 +97,66 @@ export class Dialog extends React.PureComponent<IProps, IState>{
 
     static openDialog = (data: DialogProps): Closable => {
         const popup = document.createElement("div"),
-        onCloseFunction = (props: IProps) => {
+        onCloseFunction = (props: DialogFullProps) => {
             popup.remove()
             props.onClose && props.onClose()
         },
-        onOkFunction = (props: IProps) => {
+        onOkFunction = (props: DialogFullProps) => {
             popup.remove()
             props.onOk && props.onOk()
         },
-        icon = data.icon || Dialog.getIcon(data.type)
+        icon = data.icon || Dialog.getIcon(data.type),
+        okType = data.okType || Dialog.getColor(data.type)
 
         document.body.appendChild(popup);
 
-        (popup as Closable).close = () => popup.remove()
+        (popup as any).close = () => {
+            popup.remove()
+        }
 
-        ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={data.customFooter} />, popup)
+        ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={data.customFooter} okType={okType} />, popup)
 
         return popup as Closable
     }
 
-    static openDialogComponent = (Class: any, props?: any): Closable => {
+    static openDialogComponent = <T extends unknown>(Class: any, props?: T): Closable => {
+        let ref: React.Component
+
         const popup = document.createElement("div"),
-        Component = <Class close={() => popup.remove()} {...props} />
+        closeFn = () => {
+            popup.remove()
+
+            if(ref.componentWillUnmount)
+                ref.componentWillUnmount()
+        },
+        Component = <Class {...props} close={closeFn} ref={(r: React.Component) => ref = r} />
 
         document.body.appendChild(popup)
 
         ReactDOM.render(Component, popup)
         
-        return { close: () => popup.remove() }
+        return { close: closeFn }
+    }
+
+    private static getColor = (type: DialogProps["type"]): DialogProps["okType"] => {
+        if(type === "success") return "green"
+        if(type === "error") return "red"
+        if(type === "warning") return "orange"
+
+        return "darkblue"
+    }
+
+    private static getInfoTitle = (type: DialogProps["type"]): string => {
+        if(type === "success")
+            return Constants.SUCCESS_TEXT
+
+        if(type === "error")
+            return Constants.ERROR_TEXT
+
+        if(type === "warning")
+            return Constants.WARNING_TEXT
+
+        return Constants.INFO_TEXT
     }
 
     private static getIcon = (icon: string): JSX.Element => {
