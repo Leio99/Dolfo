@@ -1,12 +1,13 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 import * as serviceWorker from "./serviceWorker"
 import "./index.scss"
 import { MenuContent } from "./comps/MenuContent"
 import { checkDarkTheme } from "./comps/shared/utility"
 import { initializeTooltips } from "./comps/layout/Tooltip"
 
-ReactDOM.render(<MenuContent />, document.getElementById("root"))
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(<MenuContent />)
 
 serviceWorker.unregister()
 
