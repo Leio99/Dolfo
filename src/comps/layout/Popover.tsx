@@ -37,8 +37,10 @@ export class Popover extends React.Component<IProps>{
 
         popover.relativeElement = node
 
+        const root = createRoot(popover)
+
         node.addEventListener(event, () => {
-            createRoot(popover).render(content)
+            root.render(content)
 
             document.body.appendChild(popover)
 
