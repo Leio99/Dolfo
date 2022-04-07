@@ -1,9 +1,9 @@
 import React, { CSSProperties } from "react"
-import ReactDOM from "react-dom"
 import Button, { ButtonColors } from "./Button"
 import { CheckCircleOutlineIcon, CloseIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, QuestionCircleOutlineIcon, WarningIconOutline } from "./Icon"
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
+import { createRoot } from "react-dom/client"
 
 export type DialogType = "success" | "info" | "error" | "warning"
 
@@ -110,13 +110,9 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
         document.body.appendChild(popup);
 
-        (popup as any).close = () => {
-            popup.remove()
-        }
+        createRoot(popup).render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} />)
 
-        ReactDOM.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} width={data.width} hideCancel={data.type ? true : data.hideCancel} className={data.className} customFooter={data.customFooter} okType={okType} />, popup)
-
-        return popup as Closable
+        return new Closable(() => popup.remove())
     }
 
     static openDialogComponent = <T extends unknown>(Class: any, props?: T): Closable => {
@@ -133,9 +129,9 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
         document.body.appendChild(popup)
 
-        ReactDOM.render(Component, popup)
+        createRoot(popup).render(Component)
         
-        return { close: closeFn }
+        return new Closable(closeFn)
     }
 
     private static getColor = (type: DialogProps["type"]): DialogProps["okType"] => {

@@ -1,6 +1,7 @@
 import _ from "lodash"
 import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import { TooltipPlacement } from "./Tooltip"
 
 interface IProps{
@@ -37,7 +38,7 @@ export class Popover extends React.Component<IProps>{
         popover.relativeElement = node
 
         node.addEventListener(event, () => {
-            ReactDOM.render(<>{content}</>, popover)
+            createRoot(popover).render(content)
 
             document.body.appendChild(popover)
 

@@ -16,7 +16,9 @@ interface DefaultIconProps extends TooltipProps{
     readonly notFW?: boolean
 }
 
-export class Icon extends React.PureComponent<DefaultIconProps & BaseIconProps>{
+export type FullIconProps = DefaultIconProps & BaseIconProps
+
+export class Icon extends React.PureComponent<FullIconProps>{
     render = (): JSX.Element => {
         const { props } = this
 

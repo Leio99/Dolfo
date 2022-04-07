@@ -1,5 +1,4 @@
 import React, { CSSProperties } from "react"
-import { BtnOptions } from "../shared/models/BtnOptions"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
 import { TooltipProps } from "./Tooltip"
@@ -25,6 +24,12 @@ export interface ButtonProps extends TooltipProps{
 
 interface IState{
     readonly openPopup: boolean
+}
+
+export interface BtnOptions{
+    readonly text: string | JSX.Element
+    readonly onClick: () => void
+    readonly disabled?: boolean
 }
 
 class Button extends React.PureComponent<ButtonProps, IState>{

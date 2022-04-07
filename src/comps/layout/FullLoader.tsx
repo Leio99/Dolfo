@@ -1,12 +1,11 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import { Closable } from "../shared/models/Closable"
 
 export class FullLoader extends React.Component{
     static show = (data?: { loadingText?: string, type?: "circle" | "balls" }): Closable => {
-        const loader = document.createElement("div");
-
-        (loader as Closable).close = () => {
+        const loader = document.createElement("div"),
+        close = () => {
             loader.remove()
             document.body.classList.remove("dolfo-loader-showing")
         }
@@ -15,7 +14,7 @@ export class FullLoader extends React.Component{
         document.body.classList.add("dolfo-loader-showing")
         document.body.appendChild(loader)
 
-        ReactDOM.render(<div className="dolfo-full-loader-inner">
+        createRoot(loader).render(<div className="dolfo-full-loader-inner">
             {
                 data?.type === "balls" ? <div className="balls-loading">
                     <div className="ball-inner"></div>
@@ -25,8 +24,8 @@ export class FullLoader extends React.Component{
             }
 
             {data?.loadingText && <span className="loading-text">{data.loadingText}</span>}
-        </div>, loader)
+        </div>)
 
-        return loader as Closable
+        return new Closable(close)
     }
 }

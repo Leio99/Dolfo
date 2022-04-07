@@ -1,18 +1,18 @@
 import _ from "lodash"
 import React from "react"
 import { CSSProperties } from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { DialogType } from "./Dialog"
-import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
+import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, FullIconProps, Icon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 
 export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
 export type NotificationDelay = number | "never"
 
 interface NotificationProps{
     readonly type?: DialogType | "loading"
-    readonly icon?: JSX.Element
+    readonly icon?: FullIconProps
     readonly message: string | JSX.Element
     readonly hideDelay?: NotificationDelay
     readonly position?: NotificationPosition | "centered-top" | "centered-bottom"
@@ -86,15 +86,13 @@ export class NotificationMsg{
         
         document.body.appendChild(notification);
 
-        (notification as Closable).close = closeFunc
-
         setTimeout(NotificationMsg.moveNotifications)
         
-        ReactDOM.render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" && props.dismissOnClick ? closeFunc : null}>
-            {props.icon || (props.type ? getIcon(props.type) : null)} {props.message}
-        </div>, notification)
+        createRoot(notification).render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" && props.dismissOnClick ? closeFunc : null}>
+            {props.icon ? <Icon {...props.icon} /> : (props.type ? getIcon(props.type) : null)} {props.message}
+        </div>)
 
-        return notification as Closable
+        return new Closable(closeFunc)
     }
 
     static moveNotifications = (): void => {

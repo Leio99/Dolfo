@@ -1,5 +1,5 @@
 import _ from "lodash"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 
 export interface ContextMenuOption{
     readonly label: string | JSX.Element
@@ -73,7 +73,7 @@ export class ContextMenu{
             if(_.isString(item.label))
                 htmlItem.innerText = item.label
             else
-                ReactDOM.render(item.label, htmlItem)
+                createRoot(htmlItem).render(item.label)
 
             context.appendChild(htmlItem)
         })
