@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client"
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { DialogType } from "./Dialog"
-import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, FullIconProps, Icon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
+import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, ExclamationCircleIcon, FullIconProps, Icon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
 
 export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
 export type NotificationDelay = number | "never"
@@ -68,7 +68,7 @@ export class NotificationMsg{
             if(type === "success") return <CheckCircleOutlineIcon color="var(--green)" />
             if(type === "warning") return <WarningIconOutline color="var(--orange)" />
 
-            return null
+            return <ExclamationCircleIcon color="var(--blue)" />
         },
         closeFunc = () => {
             notification.remove()
@@ -89,13 +89,13 @@ export class NotificationMsg{
         setTimeout(NotificationMsg.moveNotifications)
         
         createRoot(notification).render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" && props.dismissOnClick ? closeFunc : null}>
-            {props.icon ? <Icon {...props.icon} /> : (props.type ? getIcon(props.type) : null)} {props.message}
+            {props.icon ? <Icon {...props.icon} /> : getIcon(props.type)} {props.message}
         </div>)
 
         return new Closable(closeFunc)
     }
 
-    static moveNotifications = (): void => {
+    private static moveNotifications = (): void => {
         ["bottom-left", "bottom-right", "top-left", "top-right", "centered-top", "centered-bottom"].forEach(dir => {
             const nots = document.querySelectorAll(`.dolfo-notification.${dir}`)
             let base = 0

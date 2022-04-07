@@ -42,6 +42,10 @@ export const CheckCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {
 
 export const CheckCircleOutlineIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} type="far" iconKey="check-circle" />
 
+export const ExclamationIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="exclamation" />
+
+export const ExclamationCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="exclamation-circle" />
+
 export const QuestionIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="question" />
 
 export const QuestionCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="question-circle" />

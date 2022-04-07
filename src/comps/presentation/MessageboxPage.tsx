@@ -93,6 +93,13 @@ export class MessageboxPage extends React.Component{
                 default: "2 seconds (2000)"
             },
             {
+                name: "hideIcon",
+                desc: "Defines whether to show the title icon or not.",
+                type: "boolean",
+                required: false,
+                default: "false"
+            },
+            {
                 name: "onClose",
                 desc: "Function triggered when the user closes the message.",
                 type: "function",

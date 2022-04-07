@@ -1,7 +1,7 @@
 import React from "react"
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
-import { CloseIcon } from "./Icon"
+import { CloseIcon, Icon } from "./Icon"
 import { NotificationDelay, NotificationMsg, NotificationPosition } from "./NotificationMsg"
 
 interface MessageProps{
@@ -9,6 +9,7 @@ interface MessageProps{
     readonly title?: string | JSX.Element
     readonly content: string | JSX.Element
     readonly hideDelay?: NotificationDelay
+    readonly hideIcon?: boolean
 	readonly onClose?: () => void
 }
 
@@ -20,7 +21,9 @@ export class MessageBox{
                     message.close()
                     props.onClose && props.onClose()
                 }} tooltip={Constants.CLOSE_TEXT} />
-                {props.title && <h5 className="dolfo-message-box-title">{props.title}</h5>}
+                {props.title && <h5 className="dolfo-message-box-title">
+                    {!props.hideIcon && <Icon color="var(--blue)" iconKey="circle" />} {props.title}
+                </h5>}
                 <div className="dolfo-message-box-content">{props.content}</div>
             </div>,
             position: props.position || "top-right",

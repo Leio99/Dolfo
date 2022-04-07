@@ -1,14 +1,13 @@
 .dolfo-message-box{
-    padding: 1rem;
+    padding: 0;
     max-width: 350px;
 
     .dolfo-message-close{
         float: right;
-        margin-left: 0.5rem;
-        margin-bottom: 0.5rem;
         font-size: 20px;
         color: $grey;
         cursor: pointer;
+        margin: 0.7rem;
 
         &:hover{
             color: $disabled
@@ -16,6 +15,15 @@
 
         &:active{
             color: $dark
+        }
+    }
+
+    .dolfo-message-box-title, .dolfo-message-box-content{
+        padding: 0.7rem 1rem;
+
+        &.dolfo-message-box-title{
+            border-bottom: 1px solid $lightGrey;
+            margin: 0
         }
     }
 }

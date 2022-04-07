@@ -188,7 +188,11 @@ html.dark-theme{
     
     .dolfo-message-box{
         background-color: $darkThemeDark;
-        color: $white
+        color: $white;
+
+        .dolfo-message-box-title{
+            border-color: $dark
+        }
     }
     
     .dolfo-notification{
