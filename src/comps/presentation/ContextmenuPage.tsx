@@ -1,14 +1,14 @@
 import React from "react"
 import Button from "../layout/Button"
 import { Icon } from "../layout/Icon"
-import { ContextMenu } from "../layout/ContextMenu"
+import { openContextMenu } from "../layout/ContextMenu"
 import { goToApiBlock } from "../MenuContent"
 import { ContextMenuExample } from "./Examples"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class ContextMenuPage extends React.Component{
     openContextMenu = (e: any) => {
-        ContextMenu.renderMenu(e, [{
+        openContextMenu(e, [{
             label: <span>Option <Icon iconKey="star" type="far" /></span>,
             onClick: () => alert("AAAAAAAA")
         }, {

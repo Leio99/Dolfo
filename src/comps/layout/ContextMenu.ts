@@ -18,7 +18,7 @@ interface MenuItemElement extends HTMLDivElement{
 export class ContextMenu{
     static renderMenu = (event: Event, options: ContextMenuOption[], additionalProps: AdditionalMenuProps = {
         closeAfterClickItem: true
-    })  => {
+    }): void => {
         window.onclick = () => {
             const contexts = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
     
@@ -83,7 +83,7 @@ export class ContextMenu{
         ContextMenu.positionContext(context)   
     }
 
-    private static positionContext = (context: MenuItemElement) => {
+    private static positionContext = (context: MenuItemElement): void => {
         const menuPos = context.getBoundingClientRect(),
         position = context.relativeButton.getBoundingClientRect(),
         width = menuPos.width,
@@ -105,3 +105,5 @@ export class ContextMenu{
             context.style.top = position.top + "px"
     }
 }
+
+export const openContextMenu = ContextMenu.renderMenu

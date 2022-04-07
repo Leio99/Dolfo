@@ -2,8 +2,13 @@ import React from "react"
 import { createRoot } from "react-dom/client"
 import { Closable } from "../shared/models/Closable"
 
+interface FullLoaderProps{ 
+    readonly loadingText?: string, 
+    readonly type?: "circle" | "balls"
+}
+
 export class FullLoader extends React.Component{
-    static show = (data?: { loadingText?: string, type?: "circle" | "balls" }): Closable => {
+    static show = (data?: FullLoaderProps): Closable => {
         const loader = document.createElement("div"),
         close = () => {
             loader.remove()
@@ -29,3 +34,5 @@ export class FullLoader extends React.Component{
         return new Closable(close)
     }
 }
+
+export const showFullLoader = FullLoader.show

@@ -60,7 +60,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         let title = data.title || Dialog.getInfoTitle(data.type),
         okType: DialogProps["okType"] = Dialog.getColor(data.type)
 
-        return Dialog.openDialog({
+        return openDialog({
             ...data,
             title,
             hideCancel: true,
@@ -71,7 +71,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
     }
 
     static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: DialogProps["onOk"]): Closable => {
-        return Dialog.openDialog({
+        return openDialog({
             title: title || Constants.CONFIRM_TITLE,
             content: message,
             onOk: onYes,
@@ -84,7 +84,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
     }
 
     static loadingDialog = (loadingText: string | JSX.Element = Constants.LOADING_TEXT): Closable => {
-        return Dialog.openDialog({
+        return openDialog({
             title: "",
             content: <div>
                 <LoadingIcon spinning /> {loadingText}
@@ -222,3 +222,13 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         </div>
     }
 }
+
+export const openYesNoDialog = Dialog.yesNoDialog
+
+export const openDialog = Dialog.openDialog
+
+export const openDialogComponent = Dialog.openDialogComponent
+
+export const openInfoDialog = Dialog.infoDialog
+
+export const openLoadingDialog = Dialog.loadingDialog

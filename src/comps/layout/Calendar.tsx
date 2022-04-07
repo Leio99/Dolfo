@@ -2,7 +2,7 @@ import React from "react"
 import { decodeMonth, getCalendar, getTime } from "../shared/utility"
 import { CalendarEvent, GoogleCalendarEvent } from "../shared/models/CalendarEvent"
 import Button from "./Button"
-import { Dialog } from "./Dialog"
+import { openDialog, openInfoDialog } from "./Dialog"
 import { Icon } from "./Icon"
 import { Constants } from "../shared/Constants"
 import Select from "../form/Select"
@@ -92,7 +92,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
                 this.setState({ events })
             }, () => {
-                Dialog.infoDialog({
+                openInfoDialog({
                     type: "error",
                     content: Constants.CALENDAR_ERROR_UNABLE_TO_GET_EVENTS
                 })
@@ -132,7 +132,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
         const { currentYear, currentMonth } = this.state,
         years = Array.from(Array(new Date().getFullYear() - 1999).keys()).map((_, i) => new Date().getFullYear() - i),
-        dialog = Dialog.openDialog({
+        dialog = openDialog({
             title: Constants.CALENDAR_CHANGE_DATE,
             width: "300px",
             clickOutside: true,

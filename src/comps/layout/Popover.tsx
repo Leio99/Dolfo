@@ -19,7 +19,7 @@ interface PopoverElement extends HTMLDivElement{
 export class Popover extends React.Component<IProps>{
     private onPopoverOrNode = false
 
-    componentDidMount = () => {
+    componentDidMount = (): void => {
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
         { content, openOnOver, style, className } = this.props,
         popover = document.createElement("div") as PopoverElement,
@@ -64,7 +64,7 @@ export class Popover extends React.Component<IProps>{
         window.addEventListener("scroll", () => this.positionPopover(popover))
     }
 
-    private positionPopover = (popover: PopoverElement) => {
+    private positionPopover = (popover: PopoverElement): void => {
         const popoverPos = popover.getBoundingClientRect(),
         { position } = this.props,
         { relativeElement } = popover,
@@ -90,7 +90,7 @@ export class Popover extends React.Component<IProps>{
 
     render = () => _.isString(this.props.children) ? <span>{this.props.children}</span> : this.props.children
 
-    public static forceRemoveAll = () => {
+    static forceRemoveAll = (): void => {
         const popovers = document.querySelectorAll(".dolfo-popover")
 
         popovers.forEach(p => p.remove())

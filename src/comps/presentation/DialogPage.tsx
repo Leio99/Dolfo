@@ -1,6 +1,6 @@
 import React from "react"
 import Button from "../layout/Button"
-import { ComponentAsDialogProps, Dialog } from "../layout/Dialog"
+import { ComponentAsDialogProps, Dialog, openDialog, openDialogComponent, openInfoDialog, openLoadingDialog, openYesNoDialog } from "../layout/Dialog"
 import { DetailIcon, Icon } from "../layout/Icon"
 import { Table } from "../layout/table/Table"
 import { Tab, Tabs } from "../layout/Tabs"
@@ -39,55 +39,55 @@ export class DialogPage extends React.Component<any, {
 
         <ResultCode
             title="Open with function"
-            result={<Button onClick={() => Dialog.openDialog({
+            result={<Button onClick={() => openDialog({
                 title: "Hi there!",
                 content: <>
                     <Icon iconKey="mouse-pointer" /> Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime architecto dolor dolore voluptas libero est provident id aperiam minima non nobis harum laboriosam excepturi, nesciunt animi atque asperiores error? Quaerat.
                 </>
             })} btnColor="blue" size="small">Open dialog</Button>}
-            code={'<Button onClick={() => Dialog.openDialog({\n\ttitle: "Hi there!",\n\tcontent: <>\n\t\t<Icon iconKey="mouse-pointer" /> Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime architecto dolor dolore voluptas libero est provident id aperiam minima non nobis harum laboriosam excepturi, nesciunt animi atque asperiores error? Quaerat.\n\t</>\n})} btnColor="blue" size="small">Open dialog</Button>'}
+            code={'<Button onClick={() => openDialog({\n\ttitle: "Hi there!",\n\tcontent: <>\n\t\t<Icon iconKey="mouse-pointer" /> Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime architecto dolor dolore voluptas libero est provident id aperiam minima non nobis harum laboriosam excepturi, nesciunt animi atque asperiores error? Quaerat.\n\t</>\n})} btnColor="blue" size="small">Open dialog</Button>'}
         />
 
         <ResultCode
             title="Types"
             result={<>
-                <Button style={{ marginRight: 5 }} onClick={() => Dialog.infoDialog({ content: "Infos here" })} btnColor="blue" size="small">Info dialog</Button>
-                <Button style={{ marginRight: 5 }} onClick={() => Dialog.infoDialog({ type: "success", content: "You did it!" })} btnColor="blue" size="small">Success dialog</Button>
-                <Button style={{ marginRight: 5 }} onClick={() => Dialog.infoDialog({ type: "error", content: "An error occurred!" })} btnColor="blue" size="small">Error dialog</Button>
-                <Button onClick={() => Dialog.infoDialog({ type: "warning", content: "Think about it..." })} btnColor="blue" size="small">Warning dialog</Button>
+                <Button style={{ marginRight: 5 }} onClick={() => openInfoDialog({ content: "Infos here" })} btnColor="blue" size="small">Info dialog</Button>
+                <Button style={{ marginRight: 5 }} onClick={() => openInfoDialog({ type: "success", content: "You did it!" })} btnColor="blue" size="small">Success dialog</Button>
+                <Button style={{ marginRight: 5 }} onClick={() => openInfoDialog({ type: "error", content: "An error occurred!" })} btnColor="blue" size="small">Error dialog</Button>
+                <Button onClick={() => openInfoDialog({ type: "warning", content: "Think about it..." })} btnColor="blue" size="small">Warning dialog</Button>
             </>}
-            code={'<Button onClick={() => Dialog.infoDialog({ content: "Infos here" })} btnColor="blue" size="small">Open dialog</Button>\n\n<Button onClick={() => Dialog.infoDialog({ type: "success", content: "You did it!" })} btnColor="blue" size="small">Open dialog</Button>\n\n<Button onClick={() => Dialog.infoDialog({ type: "error", content: "An error occurred!" })} btnColor="blue" size="small">Open dialog</Button>\n\n<Button onClick={() => Dialog.infoDialog({ type: "warning", content: "Think about it..." })} btnColor="blue" size="small">Open dialog</Button>'}
+            code={'<Button onClick={() => openInfoDialog({ content: "Infos here" })} btnColor="blue" size="small">Open dialog</Button>\n\n<Button onClick={() => openInfoDialog({ type: "success", content: "You did it!" })} btnColor="blue" size="small">Open dialog</Button>\n\n<Button onClick={() => openInfoDialog({ type: "error", content: "An error occurred!" })} btnColor="blue" size="small">Open dialog</Button>\n\n<Button onClick={() => openInfoDialog({ type: "warning", content: "Think about it..." })} btnColor="blue" size="small">Open dialog</Button>'}
         />
 
         <ResultCode
             title="Close on mask"
-            result={<Button onClick={() => Dialog.infoDialog({
+            result={<Button onClick={() => openInfoDialog({
                 content: "Click outside me to close.",
                 clickOutside: true
             })} btnColor="blue" size="small">Open dialog</Button>}
-            code={'<Button onClick={() => Dialog.infoDialog({\n\tcontent: "Click outside me to close.",\n\tclickOutside: true\n})} btnColor="blue" size="small">Open dialog</Button>'}
+            code={'<Button onClick={() => openInfoDialog({\n\tcontent: "Click outside me to close.",\n\tclickOutside: true\n})} btnColor="blue" size="small">Open dialog</Button>'}
         />
 
         <ResultCode
             title="Yes/No dialog"
-            result={<Button onClick={() => Dialog.yesNoDialog("Warning", "Are you sure about that?", null)} btnColor="blue" size="small">Open dialog</Button>}
-            code={'<Button onClick={() => Dialog.yesNoDialog("Warning", "Are you sure about that?", null)} btnColor="blue" size="small">Open dialog</Button>'}
+            result={<Button onClick={() => openYesNoDialog("Warning", "Are you sure about that?", null)} btnColor="blue" size="small">Open dialog</Button>}
+            code={'<Button onClick={() => openYesNoDialog("Warning", "Are you sure about that?", null)} btnColor="blue" size="small">Open dialog</Button>'}
         />
 
         <ResultCode
             title="Loading dialog"
             result={<Button onClick={() => {
-                const dialog = Dialog.loadingDialog()
+                const dialog = openLoadingDialog()
 
                 setTimeout(dialog.close, 2000)
             }} btnColor="blue" size="small">Open dialog</Button>}
-            code={'<Button onClick={() => {\n\tconst dialog = Dialog.loadingDialog()\n\n\tsetTimeout(dialog.close, 2000)\n}} btnColor="blue" size="small">Open dialog</Button>'}
+            code={'<Button onClick={() => {\n\tconst dialog = openLoadingDialog\n\n\tsetTimeout(dialog.close, 2000)\n}} btnColor="blue" size="small">Open dialog</Button>'}
         />
 
         <ResultCode
             title="Footer"
             result={<>
-                <Button onClick={() => Dialog.openDialog({
+                <Button onClick={() => openDialog({
                     title: "No footer",
                     content: "I have no footer.",
                     hideFooter: true,
@@ -95,7 +95,7 @@ export class DialogPage extends React.Component<any, {
                 })} btnColor="blue" size="small" style={{ marginRight: 5 }}>Hidden footer</Button>
 
                 <Button onClick={() => {
-                    const dialog = Dialog.openDialog({
+                    const dialog = openDialog({
                         title: "Custom footer",
                         content: "Here is my custom footer.",
                         customFooter: [
@@ -113,7 +113,7 @@ export class DialogPage extends React.Component<any, {
                     })
                 }} btnColor="blue" size="small">Custom footer</Button>
             </>}
-            code={'<Button onClick={() => Dialog.openDialog({\n\ttitle: "No footer",\n\tcontent: "I have no footer.",\n\thideFooter: true,\n\tclickOutside: true\n})} btnColor="blue" size="small" style={{ marginRight: 5 }}>Hidden footer</Button>\n\n<Button onClick={() => {\n\tconst dialog = Dialog.openDialog({\n\t\ttitle: "Custom footer",\n\t\tcontent: "Here is my custom footer.",\n\t\tcustomFooter: [\n\t\t\t<Button type="text" btnColor="green">\n\t\t\t\t<Icon iconKey="save" /> Save\n\t\t\t</Button>,\n\t\t\t<Button type="text" btnColor="red" style={{ marginLeft: 10 }}>\n\t\t\t\t<Icon iconKey="trash-alt" /> Delete\n\t\t\t</Button>,\n\t\t\t<Button type="text" btnColor="grey" onClick={() => dialog.close()}>\n\t\t\t\t<Icon iconKey="times" /> Close\n\t\t\t</Button>\n\t\t],\n\t\tclickOutside: true\n\t})\n}} btnColor="blue" size="small">Custom footer</Button>'}
+            code={'<Button onClick={() => openDialog({\n\ttitle: "No footer",\n\tcontent: "I have no footer.",\n\thideFooter: true,\n\tclickOutside: true\n})} btnColor="blue" size="small" style={{ marginRight: 5 }}>Hidden footer</Button>\n\n<Button onClick={() => {\n\tconst dialog = openDialog({\n\t\ttitle: "Custom footer",\n\t\tcontent: "Here is my custom footer.",\n\t\tcustomFooter: [\n\t\t\t<Button type="text" btnColor="green">\n\t\t\t\t<Icon iconKey="save" /> Save\n\t\t\t</Button>,\n\t\t\t<Button type="text" btnColor="red" style={{ marginLeft: 10 }}>\n\t\t\t\t<Icon iconKey="trash-alt" /> Delete\n\t\t\t</Button>,\n\t\t\t<Button type="text" btnColor="grey" onClick={() => dialog.close()}>\n\t\t\t\t<Icon iconKey="times" /> Close\n\t\t\t</Button>\n\t\t],\n\t\tclickOutside: true\n\t})\n}} btnColor="blue" size="small">Custom footer</Button>'}
         />
 
         <Apis data={[
@@ -311,7 +311,7 @@ export class DialogPage extends React.Component<any, {
                         }
                     ]} />,
                     other: <>
-                        The component opened gets an additional prop passed in: close (function). You can also pass custom props to it. <Button type="text" btnColor="darkblue" onClick={() => Dialog.openDialogComponent(Example)} style={{ verticalAlign: "top" }}>Click here to open example</Button>
+                        The component opened gets an additional prop passed in: close (function). You can also pass custom props to it. <Button type="text" btnColor="darkblue" onClick={() => openDialogComponent(Example)} style={{ verticalAlign: "top" }}>Click here to open example</Button>
                     </>
                 }
             ]} />
@@ -329,7 +329,7 @@ class Example extends React.Component<ComponentAsDialogProps, { readonly current
     }
 
     render = (): JSX.Element => {
-        const codes = [`export class Parent extends React.Component {\n\tshowDialog = () => Dialog.openDialogComponent(Children)\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`, `export class Children extends React.Component<ComponentAsDialogProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tThis is my content\n\t</Dialog>\n}`, `export class Parent extends React.Component {\n\tshowDialog = () => Dialog.openDialogComponent(Children, {\n\t\tfirstName: "Jack",\n\t\tlastName: "Nicholson"\n\t})\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`, `interface ChildrenProps extends ComponentAsDialogProps{\n\treadonly firstName: string\n\treadonly lastName: string\n}\n\nexport class Children extends React.Component<ChildrenProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tMy name is {this.props.firstName} {this.props.lastName}\n\t</Dialog>\n}`],
+        const codes = [`export class Parent extends React.Component {\n\tshowDialog = () => openDialogComponent(Children)\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`, `export class Children extends React.Component<ComponentAsDialogProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tThis is my content\n\t</Dialog>\n}`, `export class Parent extends React.Component {\n\tshowDialog = () => openDialogComponent(Children, {\n\t\tfirstName: "Jack",\n\t\tlastName: "Nicholson"\n\t})\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`, `interface ChildrenProps extends ComponentAsDialogProps{\n\treadonly firstName: string\n\treadonly lastName: string\n}\n\nexport class Children extends React.Component<ChildrenProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tMy name is {this.props.firstName} {this.props.lastName}\n\t</Dialog>\n}`],
         { current } = this.state
 
         return <Dialog width="70vw" onClose={this.props.close} clickOutside visible title="External dialog component example" overflows top customFooter={[

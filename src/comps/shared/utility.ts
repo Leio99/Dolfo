@@ -2,7 +2,7 @@ import { ICalendarDay } from "./models/ICalendarDay"
 import { IDataColumn } from "./models/IColumn"
 import { Constants } from "./Constants"
 import _ from "lodash"
-import { NotificationMsg } from "../layout/NotificationMsg"
+import { showInfo } from "../layout/NotificationMsg"
 
 export const formatDate = (date: Date, monthString = false): string => {
     const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
@@ -176,7 +176,7 @@ export const copyToClipBoard = (text: string): void => {
     document.execCommand("copy")
     document.body.removeChild(el)
 
-    NotificationMsg.showInfo(Constants.COPIED_TO_CLIPBOARD)
+    showInfo(Constants.COPIED_TO_CLIPBOARD)
 }
 
 export const toggleDarkTheme = () => {

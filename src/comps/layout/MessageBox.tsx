@@ -2,21 +2,18 @@ import React from "react"
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { CloseIcon, Icon } from "./Icon"
-import { NotificationDelay, NotificationMsg, NotificationPosition } from "./NotificationMsg"
+import { BaseNotificationProps, showNotification, NotificationPosition } from "./NotificationMsg"
 
-interface MessageProps{
+interface MessageProps extends BaseNotificationProps{
+    readonly content: string | JSX.Element
     readonly position?: NotificationPosition,
     readonly title?: string | JSX.Element
-    readonly content: string | JSX.Element
-    readonly hideDelay?: NotificationDelay
-    readonly hideIcon?: boolean
-	readonly onClose?: () => void
 }
 
 export class MessageBox{
     static show = (props: MessageProps): Closable => {
-        const message = NotificationMsg.show({
-            message: <div className="dolfo-message-box-inner">
+        const message = showNotification({
+            message: <div className={"dolfo-message-box-inner" + (props.className ? (" " + props.className) : "")} style={props.style}>
                 <CloseIcon className="dolfo-message-close" onClick={() => {
                     message.close()
                     props.onClose && props.onClose()
@@ -29,9 +26,12 @@ export class MessageBox{
             position: props.position || "top-right",
             className: "dolfo-message-box",
             hideDelay: props.hideDelay,
-			onClose: props.onClose
+			onClose: props.onClose,
+            hideIcon: true
         })
         
         return message
     }
 }
+
+export const showMessage = MessageBox.show

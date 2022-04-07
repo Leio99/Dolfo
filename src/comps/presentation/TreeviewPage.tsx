@@ -2,8 +2,8 @@ import React from "react"
 import Button from "../layout/Button"
 import { CloseCircleIcon, CloseIcon, DeleteIcon, EditIcon, Icon } from "../layout/Icon"
 import { TreeNode, TreeView } from "../layout/table/TreeView"
-import { NotificationMsg } from "../layout/NotificationMsg"
-import { Dialog } from "../layout/Dialog"
+import { showError } from "../layout/NotificationMsg"
+import { openInfoDialog, openLoadingDialog } from "../layout/Dialog"
 import { Status } from "../layout/Status"
 import { formatDate } from "../shared/utility"
 import { IColumn } from "../shared/models/IColumn"
@@ -349,7 +349,7 @@ export class TreeviewPage extends TreeView{
     }
 
     openDettaglioComico = (comico: any): void => {
-        Dialog.infoDialog({
+        openInfoDialog({
             title: "Dettaglio comico",
             clickOutside: true,
             content: <>
@@ -370,14 +370,14 @@ export class TreeviewPage extends TreeView{
     }
 
     openDettaglioCanale = (canale: any): void => {
-        const loading = Dialog.loadingDialog()
+        const loading = openLoadingDialog()
 
         fetch("https://guidatv-api.herokuapp.com/getChannelsList?api_key=e1fwxMBsQKaOmq5X5Pf0cy")
         .then(response => response.json())
         .then(response => {
             const channel = response.data.find((c: any) => c.id === canale.id)
 
-            Dialog.infoDialog({
+            openInfoDialog({
                 title: "Dettaglio canale",
                 clickOutside: true,
                 content: <>
@@ -393,7 +393,7 @@ export class TreeviewPage extends TreeView{
                 </>
             })
         })
-        .catch(() => NotificationMsg.showError("Unable to load channel!"))
+        .catch(() => showError("Unable to load channel!"))
         .finally(loading.close)
     }
 

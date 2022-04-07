@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
 import { TooltipProps } from "./Tooltip"
-import { ContextMenu } from "./ContextMenu"
+import { openContextMenu } from "./ContextMenu"
 
 export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue" | "violet"
 export type ButtonColors = BaseColors | "white"
@@ -48,7 +48,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         if(!this.props.iconPopup)
             this.setState({ openPopup: !this.state.openPopup })
         else if(this.props.options){
-            ContextMenu.renderMenu(e, this.props.options.map(o => {
+            openContextMenu(e, this.props.options.map(o => {
                 return {
                     label: o.text,
                     onClick: o.onClick,

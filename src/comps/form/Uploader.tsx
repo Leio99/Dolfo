@@ -1,5 +1,5 @@
 import React from "react"
-import { NotificationMsg } from "../layout/NotificationMsg"
+import { showNotification, showError } from "../layout/NotificationMsg"
 import { Constants } from "../shared/Constants"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
@@ -43,7 +43,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
         if(!this.props.multiple && e.dataTransfer.items.length > 1 && !this.state.showingMsg){
             this.toggleShowing()
 
-            NotificationMsg.show({
+            showNotification({
                 type: "error",
                 message: Constants.UPLOAD_FILE_ERROR_NOT_MULTIPLE,
                 onClose: this.toggleShowing
@@ -77,7 +77,7 @@ export class Uploader extends React.PureComponent<IProps, IState>{
 
                     if(files[i].name.indexOf(ext) !== files[i].name.length - ext.length){
                         notAcceptable = true
-                        NotificationMsg.showError(Constants.UPLOAD_FILE_NOT_ACCEPTABLE)
+                        showError(Constants.UPLOAD_FILE_NOT_ACCEPTABLE)
                     }
                 }
             }

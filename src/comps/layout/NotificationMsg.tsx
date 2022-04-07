@@ -10,49 +10,53 @@ import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, ExclamationCircleIcon, 
 export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right"
 export type NotificationDelay = number | "never"
 
-interface NotificationProps{
+export interface BaseNotificationProps{
+    readonly hideIcon?: boolean
+    readonly hideDelay?: NotificationDelay
+    readonly style?: CSSProperties
+    readonly className?: string
+	readonly onClose?: () => void
+}
+
+interface NotificationProps extends BaseNotificationProps{
     readonly type?: DialogType | "loading"
     readonly icon?: FullIconProps
     readonly message: string | JSX.Element
-    readonly hideDelay?: NotificationDelay
     readonly position?: NotificationPosition | "centered-top" | "centered-bottom"
-    readonly style?: CSSProperties
-    readonly className?: string
     readonly dismissOnClick?: boolean
-	readonly onClose?: () => void
 }
 
 export class NotificationMsg{
     static showError = (message: string | JSX.Element): Closable => {
-        return NotificationMsg.show({
+        return showNotification({
             message,
             type: "error"
         })
     }
 
     static showInfo = (message: string | JSX.Element): Closable => {
-        return NotificationMsg.show({
+        return showNotification({
             message,
             type: "info"
         })
     }
 
     static showSuccess = (message: string | JSX.Element): Closable => {
-        return NotificationMsg.show({
+        return showNotification({
             message,
             type: "success"
         })
     }
 
     static showLoading = (message?: string | JSX.Element): Closable => {
-        return NotificationMsg.show({
+        return showNotification({
             message: message || Constants.LOADING_TEXT,
             type: "loading"
         })
     }
 
     static showWarning = (message: string | JSX.Element): Closable => {
-        return NotificationMsg.show({
+        return showNotification({
             message,
             type: "warning"
         })
@@ -89,7 +93,7 @@ export class NotificationMsg{
         setTimeout(NotificationMsg.moveNotifications)
         
         createRoot(notification).render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" && props.dismissOnClick ? closeFunc : null}>
-            {props.icon ? <Icon {...props.icon} /> : getIcon(props.type)} {props.message}
+            {props.icon ? <Icon {...props.icon} /> : !props.hideIcon ? getIcon(props.type) : null} {props.message}
         </div>)
 
         return new Closable(closeFunc)
@@ -111,3 +115,13 @@ export class NotificationMsg{
         })
     }
 }
+
+export const showNotification = NotificationMsg.show
+
+export const showError = NotificationMsg.showError
+
+export const showInfo = NotificationMsg.showInfo
+
+export const showWarning = NotificationMsg.showWarning
+
+export const showSuccess = NotificationMsg.showSuccess
