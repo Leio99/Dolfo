@@ -7,7 +7,7 @@ export class MessageboxPage extends React.Component{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a message box.</WhenToUse>
         <Usage notes={<>this component can only be rendered by calling a function (<em>MessageBox.show(params)</em>)</>} />
-
+        
         <ResultCode
             title="Simple messagebox"
             result={<Button btnColor="blue" size="small" onClick={() => MessageBox.show({
@@ -91,13 +91,6 @@ export class MessageboxPage extends React.Component{
                 type: "number (seconds x 1000) or 'never'",
                 required: false,
                 default: "2 seconds (2000)"
-            },
-            {
-                name: "static",
-                desc: "Defines whether the message should float or not.",
-                type: "boolean",
-                required: false,
-                default: "false"
             },
             {
                 name: "hideIcon",

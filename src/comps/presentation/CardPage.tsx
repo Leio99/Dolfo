@@ -23,9 +23,15 @@ export class CardPage extends React.Component{
         />
 
         <ResultCode
+            title="Flat layout"
+            result={<Card title="I have flat layout" layout="flat">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>}
+            code={'<Card title="I have tab layout" layout="flat">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>'}
+        />
+
+        <ResultCode
             title="Tab layout"
-            result={<Card title="I have tab layout" tabLayout>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>}
-            code={'<Card title="I have tab layout" tabLayout>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>'}
+            result={<Card title="I have tab layout" layout="tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>}
+            code={'<Card title="I have tab layout" layout="tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>'}
         />
 
         <ResultCode
@@ -65,11 +71,11 @@ export class CardPage extends React.Component{
                 default: "null"
             },
             {
-                name: "tabLayout",
-                desc: "Determines if the card should be tab-styled.",
-                type: "boolean",
+                name: "layout",
+                desc: "Determines the type of layout of the card.",
+                type: "string (default, tab, flat)",
                 required: false,
-                default: "false"
+                default: "default"
             },
             {
                 name: "Card actions children",

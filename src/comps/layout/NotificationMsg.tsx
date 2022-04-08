@@ -15,7 +15,6 @@ export interface BaseNotificationProps{
     readonly message: string | JSX.Element
     readonly hideIcon?: boolean
     readonly hideDelay?: NotificationDelay
-    readonly static?: boolean
     readonly style?: CSSProperties
     readonly className?: string
 	readonly onClose?: () => void
@@ -75,7 +74,7 @@ export class NotificationMsg extends React.Component<NotificationProps>{
 
         setTimeout(NotificationMsg.moveNotifications)
         
-        createRoot(notification).render(<NotificationMsg {...props} />)
+        createRoot(notification).render(new NotificationMsg(props).render(false))
 
         return new Closable(closeFunc)
     }
@@ -117,12 +116,12 @@ export class NotificationMsg extends React.Component<NotificationProps>{
         return <ExclamationCircleIcon color="var(--blue)" />
     }
 
-    render = (): JSX.Element => {
+    render = (isStatic = true): JSX.Element => {
         const { props } = this,
         position = props.position || "centered-top",
         closeFunc = props.type !== "loading" && props.dismissOnClick ? () => NotificationMsg.onClose(ReactDOM.findDOMNode(this) as HTMLElement, props) : null
 
-        return <div className={"dolfo-notification " + position + (props.static ? " static" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onClick={closeFunc}>
+        return <div className={"dolfo-notification " + position + (isStatic ? " static" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onClick={closeFunc}>
             {props.icon ? <Icon {...props.icon} /> : !props.hideIcon ? this.getIcon(props.type) : null} {props.message}
         </div>
     }

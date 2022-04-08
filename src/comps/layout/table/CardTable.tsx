@@ -20,7 +20,7 @@ export class CardTable extends BaseResultsManager<CardTableProps>{
                     check = props.columns.find(c => c.type === "check"),
                     checkClass = d.checked ? " selected" : ""
 
-                    return <Card className={addClass + checkClass} tabLayout title={(check || props.getTitle) && <>
+                    return <Card className={addClass + checkClass} layout="tab" title={(check || props.getTitle) && <>
                         {check && !d.hideCheck && d[check.field]}
                         {props.getTitle && props.getTitle(d)}
                     </>} onDoubleClick={() => this.onDoubleClick(d)}>
