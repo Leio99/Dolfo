@@ -2,10 +2,13 @@
     position: fixed;
     border: 1px solid $grey;
     border-radius: $smallRadius;
-    padding: 1rem;
     z-index: 5;
     background-color: $white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    .dolfo-popover-inner{
+        padding: 1rem
+    }
 
     &:before, &:after{
         content: "";
@@ -25,7 +28,7 @@
         z-index: -10
     }
 
-    &.pos-right{
+    &.pos-right, &.pos-right-top{
         &:before, &:after{
             border-right-color: $white;
             right: auto;
@@ -69,6 +72,13 @@
             border-top-color: $grey;
             bottom: -17px;
             right: calc(50% + 0.5px)
+        }
+    }
+
+    &.pos-left-top, &.pos-right-top{
+        &:before, &:after{
+            top: 10px;
+            transform: translateY(0)
         }
     }
 }

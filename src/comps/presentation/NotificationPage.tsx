@@ -137,6 +137,13 @@ export class NotificationPage extends React.Component{
                                 type: "string or JSX"
                             },
                             {
+                                name: "static",
+                                desc: "Defines whether the notification should float or not.",
+                                type: "boolean",
+                                required: false,
+                                default: "false"
+                            },
+                            {
                                 name: "type",
                                 desc: "Notification type",
                                 required: false,

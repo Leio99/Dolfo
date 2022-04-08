@@ -6,7 +6,7 @@ import { TooltipPlacement } from "./Tooltip"
 
 interface IProps{
     readonly content: string | JSX.Element
-    readonly position?: TooltipPlacement
+    readonly position?: TooltipPlacement | "left-top" | "right-top"
     readonly openOnOver?: boolean
     readonly style?: CSSProperties
     readonly className?: string
@@ -23,21 +23,26 @@ export class Popover extends React.Component<IProps>{
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
         { content, openOnOver, style, className } = this.props,
         popover = document.createElement("div") as PopoverElement,
-        event = openOnOver ? "mouseenter" : "click"
+        event = openOnOver ? "mouseenter" : "click",
+        inner = document.createElement("div")
 
+        inner.classList.add("dolfo-popover-inner")
         popover.classList.add("dolfo-popover")
+
+        popover.appendChild(inner)
 
         if(className)
             className.split(" ").forEach(c => popover.classList.add(c))
         if(style){
             Object.keys(style).forEach((k: any) => {
-                popover.style[k] = (style as any)[k] as any
+                const kk: any = _.kebabCase(k)
+                inner.style[kk] = (style as any)[k] as any
             })
         }
 
         popover.relativeElement = node
 
-        createRoot(popover).render(content)
+        createRoot(inner).render(content)
 
         node.addEventListener(event, () => {
             document.body.appendChild(popover)
@@ -74,12 +79,18 @@ export class Popover extends React.Component<IProps>{
         if(position === "right"){
             popover.style.left = nodePos.left + nodePos.width + "px"
             popover.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
+        }else if(position === "right-top"){
+            popover.style.left = nodePos.left + nodePos.width + "px"
+            popover.style.top = nodePos.top + "px"
         }else if(position === "bottom"){
             popover.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
             popover.style.top = nodePos.top + nodePos.height + "px"
         }else if(position === "top"){
             popover.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
             popover.style.top = nodePos.top - popoverPos.height + "px"
+        }else if(position === "left-top"){
+            popover.style.left = nodePos.left + 10 - popoverPos.width + "px"
+            popover.style.top = nodePos.top + "px"
         }else{
             popover.style.left = nodePos.left + 10 - popoverPos.width + "px"
             popover.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"

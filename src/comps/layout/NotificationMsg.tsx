@@ -1,6 +1,7 @@
 import _ from "lodash"
 import React from "react"
 import { CSSProperties } from "react"
+import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
@@ -11,8 +12,10 @@ export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "b
 export type NotificationDelay = number | "never"
 
 export interface BaseNotificationProps{
+    readonly message: string | JSX.Element
     readonly hideIcon?: boolean
     readonly hideDelay?: NotificationDelay
+    readonly static?: boolean
     readonly style?: CSSProperties
     readonly className?: string
 	readonly onClose?: () => void
@@ -21,12 +24,11 @@ export interface BaseNotificationProps{
 interface NotificationProps extends BaseNotificationProps{
     readonly type?: DialogType | "loading"
     readonly icon?: FullIconProps
-    readonly message: string | JSX.Element
     readonly position?: NotificationPosition | "centered-top" | "centered-bottom"
     readonly dismissOnClick?: boolean
 }
 
-export class NotificationMsg{
+export class NotificationMsg extends React.Component<NotificationProps>{
     static showError = (message: string | JSX.Element): Closable => {
         return showNotification({
             message,
@@ -65,26 +67,7 @@ export class NotificationMsg{
     static show = (data: string | NotificationProps): Closable => {
         const props = _.isString(data) ? { message: data } : data,
         notification = document.createElement("div"),
-        getIcon = (type: string) => {
-            if(type === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
-            if(type === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
-            if(type === "loading") return <LoadingIcon spinning />
-            if(type === "success") return <CheckCircleOutlineIcon color="var(--green)" />
-            if(type === "warning") return <WarningIconOutline color="var(--orange)" />
-
-            return <ExclamationCircleIcon color="var(--blue)" />
-        },
-        closeFunc = () => {
-            notification.remove()
-
-            if(!notification.classList.contains("removed"))
-                NotificationMsg.moveNotifications()
-            
-            notification.classList.add("removed")
-			
-			props.onClose && props.onClose()
-        },
-        position = props.position || "centered-top"
+        closeFunc = () => NotificationMsg.onClose(notification, props)
         
         props.type !== "loading" && props.hideDelay !== "never" && setTimeout(closeFunc, props.hideDelay ? props.hideDelay : 2000)
         
@@ -92,16 +75,14 @@ export class NotificationMsg{
 
         setTimeout(NotificationMsg.moveNotifications)
         
-        createRoot(notification).render(<div className={"dolfo-notification " + position + (props.className ? (" " + props.className) : "")} style={props.style} onClick={props.type !== "loading" && props.dismissOnClick ? closeFunc : null}>
-            {props.icon ? <Icon {...props.icon} /> : !props.hideIcon ? getIcon(props.type) : null} {props.message}
-        </div>)
+        createRoot(notification).render(<NotificationMsg {...props} />)
 
         return new Closable(closeFunc)
     }
 
     private static moveNotifications = (): void => {
         ["bottom-left", "bottom-right", "top-left", "top-right", "centered-top", "centered-bottom"].forEach(dir => {
-            const nots = document.querySelectorAll(`.dolfo-notification.${dir}`)
+            const nots = document.querySelectorAll(`.dolfo-notification.${dir}:not(.static)`)
             let base = 0
 
             Array.from(nots).filter((_: any, i: number) => i < nots.length).reverse().forEach((not: any) => {
@@ -113,6 +94,37 @@ export class NotificationMsg{
                 base += not.clientHeight + 15
             })
         })
+    }
+    
+    static onClose = (notification: HTMLElement, props: NotificationProps): void => {
+        notification.remove()
+
+        if(!notification.classList.contains("removed"))
+            NotificationMsg.moveNotifications()
+        
+        notification.classList.add("removed")
+        
+        props.onClose && props.onClose()
+    }
+
+    getIcon = (type: string): JSX.Element => {
+        if(type === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
+        if(type === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
+        if(type === "loading") return <LoadingIcon spinning />
+        if(type === "success") return <CheckCircleOutlineIcon color="var(--green)" />
+        if(type === "warning") return <WarningIconOutline color="var(--orange)" />
+
+        return <ExclamationCircleIcon color="var(--blue)" />
+    }
+
+    render = (): JSX.Element => {
+        const { props } = this,
+        position = props.position || "centered-top",
+        closeFunc = props.type !== "loading" && props.dismissOnClick ? () => NotificationMsg.onClose(ReactDOM.findDOMNode(this) as HTMLElement, props) : null
+
+        return <div className={"dolfo-notification " + position + (props.static ? " static" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onClick={closeFunc}>
+            {props.icon ? <Icon {...props.icon} /> : !props.hideIcon ? this.getIcon(props.type) : null} {props.message}
+        </div>
     }
 }
 
