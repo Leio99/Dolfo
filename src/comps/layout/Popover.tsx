@@ -37,16 +37,14 @@ export class Popover extends React.Component<IProps>{
 
         popover.relativeElement = node
 
-        const root = createRoot(popover)
+        createRoot(popover).render(content)
 
         node.addEventListener(event, () => {
-            root.render(content)
-
             document.body.appendChild(popover)
 
             this.positionPopover(popover)
 
-            popover.addEventListener("DOMSubtreeModified", () => this.positionPopover(popover))
+            new MutationObserver(() => this.positionPopover(popover)).observe(popover, { childList: true })
         })
 
         popover.addEventListener("mouseenter", () => this.onPopoverOrNode = true)
@@ -61,7 +59,7 @@ export class Popover extends React.Component<IProps>{
 
         window.addEventListener("resize", () => this.positionPopover(popover))
 
-        window.addEventListener("scroll", () => this.positionPopover(popover))
+        window.addEventListener("scroll", () => this.positionPopover(popover), true)
     }
 
     private positionPopover = (popover: PopoverElement): void => {
