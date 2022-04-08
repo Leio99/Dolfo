@@ -12,7 +12,7 @@
     background-color: unset;
 
     &[disabled]{
-        opacity: 0.7;
+        opacity: $disabledOpacity;
         pointer-events: none
     }
     
@@ -104,7 +104,7 @@
     display: inline-block;
 
     &.disabled{
-        opacity: 0.7;
+        opacity: $disabledOpacity;
         pointer-events: none
     }
 
@@ -163,7 +163,7 @@
             }
 
             &.disabled{
-                opacity: 0.7;
+                opacity: $disabledOpacity;
                 cursor: default
             }
         }

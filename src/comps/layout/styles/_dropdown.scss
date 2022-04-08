@@ -9,7 +9,7 @@
     max-width: 250px;
 
     &.disabled{
-        opacity: 0.6
+        opacity: $disabledOpacity
     }
 
     &:not(.disabled):hover{
@@ -65,7 +65,7 @@
             }
 
             &.disabled{
-                opacity: 0.6;
+                opacity: $disabledOpacity;
                 cursor: not-allowed
             }
 

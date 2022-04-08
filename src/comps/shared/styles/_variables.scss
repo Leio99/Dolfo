@@ -31,6 +31,8 @@ $lightGreenDark: lighten($green, 50%);
 $lightRedDark: lighten($red, 40%);
 $lightOrangeDark: lighten($orange, 40%);
 
+$disabledOpacity: 0.6;
+
 $colors: (
   "red": $red,
   "blue": $blue,

@@ -18,9 +18,9 @@
         }
     }
 
-    &.disabled{
+    &.disabled, .dolfo-transfer-list-items .dolfo-transfer-item.disabled{
         pointer-events: none;
-        opacity: 0.6
+        opacity: $disabledOpacity
     }
 
     > input{

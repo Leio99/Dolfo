@@ -5,7 +5,7 @@
     box-shadow: inset 0 0 0 1px $lightGrey;
 
     &.disabled{
-        opacity: 0.6;
+        opacity: $disabledOpacity;
         pointer-events: none
     }
 

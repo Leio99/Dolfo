@@ -14,6 +14,7 @@ export interface TransferListProps extends BaseInputProps{
     readonly allowTransferAll?: boolean
     readonly leftListTitle?: string
     readonly rightListTitle?: string
+    readonly disabledItem?: (item: any) => boolean
 }
 
 interface IState{
@@ -43,13 +44,13 @@ export class TransferList extends React.Component<TransferListProps, IState>{
     }
 
     focusItem = (item: any): void => {
-        if(this.props.disabled) return
+        if(this.props.disabled || (this.props.disabledItem && this.props.disabledItem(item))) return
 
         this.setState({ focusedKey: this.props.getKey(item) })
     }
 
     transferItem = (item: any): void => {
-        if(this.props.disabled) return
+        if(this.props.disabled || (this.props.disabledItem && this.props.disabledItem(item))) return
 
         const { selectedItems } = this.state,
         { getKey, onChange } = this.props,
@@ -107,9 +108,13 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                     </div>}
                     <div className="dolfo-transfer-list-items">
                         {
-                            unselected.length ? unselected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
-                                {props.getLabel(item)}
-                            </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
+                            unselected.length ? unselected.map(item => {
+                                const disabled = props.disabledItem && props.disabledItem(item)
+
+                                return <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "") + (disabled ? " disabled" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
+                                    {props.getLabel(item)}
+                                </div>
+                            }) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
                         }
                     </div>
                 </div>

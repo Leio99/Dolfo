@@ -5,7 +5,7 @@
     pointer-events: none;
 
     &.disabled{
-        opacity: 0.6
+        opacity: $disabledOpacity
     }
 
     &:not(.disabled) *:not(.dolfo-input-label){
@@ -34,7 +34,7 @@
         > span{
             transition: 0.2s ease;
             position: absolute;
-	    top: 2.5rem;
+	        top: 2.5rem;
             left: 63px;
             z-index: 1;
             opacity: 0.6

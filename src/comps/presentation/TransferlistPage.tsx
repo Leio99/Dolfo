@@ -43,7 +43,7 @@ export class TransferlistPage extends React.Component{
                 { id: 1, label: "Option 1" },
                 { id: 2, label: "Option 2" },
                 { id: 3, label: "Option 3" }
-            ]} getLabel={v => v.label} getKey={v => v.id} canFilter />}
+            ]} disabledItem={d => d.id === 1} getLabel={v => v.label} getKey={v => v.id} canFilter />}
             code={'<TransferList list={[\n\t{ id: 1, label: "Option 1" },\n\t{ id: 2, label: "Option 2" },\n\t{ id: 3, label: "Option 3" }\n]} getLabel={v => v.label} getKey={v => v.id} canFilter />'}
         />
 
@@ -165,7 +165,14 @@ export class TransferlistPage extends React.Component{
                 required: false,
                 default: "null",
                 fnParams: "List of selected items (Array)"
-            }
+            },
+            {
+                name: "disabledItem",
+                desc: "Function to define disabled items.",
+                type: "function",
+                required: false,
+                fnParams: "Item of the list"
+            },
         ]} />
     </>
 }
