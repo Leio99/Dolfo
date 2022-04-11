@@ -39,7 +39,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         "Meta", 
         "Escape"
     ]
-    private typing: NodeJS.Timeout
+    private typing: _.DebouncedFunc<() => void>
 
     constructor(props: IProps<E> & P){
         super(props)
@@ -54,6 +54,22 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             showOptions: false,
             focusedIndex: -1
         }
+
+        this.typing = _.debounce(() => {
+            const { filter } = this.state
+
+            if(!filter?.trim())
+                return
+
+            this.toggleLoading()
+
+            Promise.resolve(this.getSource(filter)).then(list => {
+                this.setState({ list, showOptions: true })
+
+                if(list.length === 1)
+                    this.selectOption(list[0])
+            }).finally(this.toggleLoading)
+        }, this.TIMING)
     }
 
     abstract getSource: (filter: string) => Promise<E[]> | E[]
@@ -62,7 +78,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
 
     abstract getKey: (item: E) => K
 
-    abstract getSingle: (key: E) => Promise<E> | E
+    getSingle: (key: E) => Promise<E> | E
 
     componentDidMount = (): void => {
         window.addEventListener("click", this.clickOutside)
@@ -91,6 +107,9 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     }
 
     fetchDefaultValue = (): void => {
+        if(!this.getSingle)
+            return console.error("Errore: metodo getSingle non implementato!")
+
         this.toggleLoading()
         Promise.resolve(this.getSingle(this.props.defaultValue)).then(r => this.selectOption(r)).finally(this.toggleLoading)
     }
@@ -121,8 +140,6 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         if(this.EXCLUDED_KEYS.includes(e.key))
             return
 
-        clearTimeout(this.typing)
-
         const { selectedItem, filter } = this.state
 
         if(selectedItem){
@@ -132,19 +149,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             })
         }
 
-        this.typing = setTimeout(() => {
-            if(!filter?.trim())
-                return
-
-            this.toggleLoading()
-
-            Promise.resolve(this.getSource(filter)).then(list => {
-                this.setState({ list, showOptions: true })
-
-                if(list.length === 1)
-                    this.selectOption(list[0])
-            }).finally(this.toggleLoading)
-        }, this.TIMING)
+        this.typing()
     }
 
     onKeyDown = (e: any): void => {
@@ -178,17 +183,21 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             this.setState({ focusedIndex: newIndex })
             
             e.preventDefault()
-        }else
-            clearTimeout(this.typing)
+        }
     }
 
-    reset = () => {
+    reset = (input?: HTMLInputElement) => {
         this.setState({
             focused: false,
             showOptions: false,
             selectedItem: null,
             selectedKey: null,
             filter: ""
+        }, () => {
+            if(input){
+                input.blur()
+                setTimeout(() => input.focus())
+            }
         })
     }
 
@@ -198,7 +207,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         icon = props.icon || { iconKey: "keyboard", type: "far" }
         let input: HTMLInputElement
 
-        return <InputWrapper icon={icon} label={props.label} forceFocus={() => input.focus()} focusBool={focused} isFocusable disabled={props.disabled} resetFunction={this.reset} style={props.wrapperStyle} required={props.required} className={props.className} value={filter} selectedOption={selectedKey}>
+        return <InputWrapper icon={icon} label={props.label} forceFocus={() => input.focus()} focusBool={focused} isFocusable disabled={props.disabled} resetFunction={() => this.reset(input)} style={props.wrapperStyle} required={props.required} className={"dolfo-select-wrapper" + (props.className ? " " + props.className : "")} value={filter} selectedOption={selectedKey}>
             <input
                 type="text"
                 autoFocus={props.autoFocus}
@@ -212,12 +221,13 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
                 onKeyUp={this.onKeyUp}
                 onPaste={props.onPaste}
                 onFocus={this.onFocus}
+                autoComplete="new-password"
             />
 
             {
-                loading ? <div className="dolfo-select-options show dolfo-autocomplete-text">
+                loading && focused ? <div className="dolfo-select-options show dolfo-autocomplete-text">
                     <LoadingIcon spinning /> {Constants.LOADING_TEXT}
-                </div> : showOptions && list.length > 0 ? <div className="dolfo-select-options show">
+                </div> : showOptions && focused && list.length > 0 ? <div className="dolfo-select-options show">
                     {
                         list.map((option, i) => {
                             const key = this.getKey(option)
