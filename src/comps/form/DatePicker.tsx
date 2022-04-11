@@ -248,6 +248,13 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         }, () => this.selectDay(this.state.currentDay, this.state.currentMonth, this.state.currentYear, false, true))
     }
 
+    handleKeyDown = (e: any): void => {
+        if(e.key.toLowerCase() === "d")
+            this.chooseToday()
+
+        this.props.onKeyDown && this.props.onKeyDown(e)
+    }
+
     render = (): JSX.Element => {
         const { date, showCalendar, selectingMonth, selectingYear, currentYear, currentMonth, currentDecade, currentHour, currentMinute } = this.state,
         props = this.props,
@@ -267,7 +274,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 disabled={props.disabled}
                 onChange={this.tryChangeDate}
                 onPaste={props.onPaste}
-                onKeyDown={props.onKeyDown}
+                onKeyDown={this.handleKeyDown}
                 onKeyPress={props.onKeyPress}
                 onKeyUp={props.onKeyUp}
             />
