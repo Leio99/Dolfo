@@ -140,7 +140,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         if(this.EXCLUDED_KEYS.includes(e.key))
             return
 
-        const { selectedItem, filter } = this.state
+        const { selectedItem } = this.state
 
         if(selectedItem){
             this.setState({
