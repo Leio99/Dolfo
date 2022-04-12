@@ -136,3 +136,5 @@ export const showInfo = NotificationMsg.showInfo
 export const showWarning = NotificationMsg.showWarning
 
 export const showSuccess = NotificationMsg.showSuccess
+
+export const showLoading = NotificationMsg.showLoading
