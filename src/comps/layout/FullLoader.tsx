@@ -7,31 +7,41 @@ interface FullLoaderProps{
     readonly type?: "circle" | "balls"
 }
 
-export class FullLoader extends React.Component{
-    static show = (data?: FullLoaderProps): Closable => {
-        const loader = document.createElement("div"),
-        close = () => {
-            loader.remove()
-            document.body.classList.remove("dolfo-loader-showing")
-        }
+export class FullLoader extends React.Component<FullLoaderProps>{
+    componentDidMount = () => document.body.classList.add("dolfo-loader-showing")
 
-        loader.classList.add("dolfo-full-loader")
-        document.body.classList.add("dolfo-loader-showing")
+    componentWillUnmount = () => document.body.classList.remove("dolfo-loader-showing")
+
+    static show = (data?: FullLoaderProps): Closable => {
+        const loader = document.createElement("div")
+        let component: FullLoader
+
         document.body.appendChild(loader)
 
-        createRoot(loader).render(<div className="dolfo-full-loader-inner">
-            {
-                data?.type === "balls" ? <div className="balls-loading">
-                    <div className="ball-inner"></div>
-                </div> : <div className="circle-loading">
-                    <div className="circle-loading-inner"></div>
-                </div>
-            }
+        createRoot(loader).render(<FullLoader ref={r => component = r} {...data} />)
 
-            {data?.loadingText && <span className="loading-text">{data.loadingText}</span>}
-        </div>)
+        return new Closable(() => {
+            component.componentWillUnmount()
+            loader.remove()
+        })
+    }
 
-        return new Closable(close)
+    render = (): JSX.Element => {
+        const { props } = this
+
+        return <div className="dolfo-full-loader">
+            <div className="dolfo-full-loader-inner">
+                {
+                    props.type === "balls" ? <div className="balls-loading">
+                        <div className="ball-inner"></div>
+                    </div> : <div className="circle-loading">
+                        <div className="circle-loading-inner"></div>
+                    </div>
+                }
+
+                {props.loadingText && <span className="loading-text">{props.loadingText}</span>}
+            </div>
+        </div>
     }
 }
 
