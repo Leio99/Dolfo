@@ -59,7 +59,7 @@ $lightColors: (
 
 :root{
   @each $key, $color in $colors {
-    --#{$key}: #{$color}
+    --#{$key}: #{$color};
   }
 
   --dark: #{$dark};
