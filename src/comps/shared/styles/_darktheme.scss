@@ -620,4 +620,10 @@ html.dark-theme{
     ::-webkit-scrollbar-thumb{
         background: $darkThemeDarkActive
     }
+
+    @media screen and (max-width: 600px) {
+        .dolfo-g-calendar-content table.dolfo-g-calendar tbody tr td .content .events-container .event:hover{
+            background-color: $darkThemeDarkHover
+        }
+    }
 }
