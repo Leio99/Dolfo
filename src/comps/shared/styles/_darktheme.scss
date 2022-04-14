@@ -140,7 +140,7 @@ html.dark-theme{
         background-color: $dark;
 
         .dolfo-card-title{
-            color: $white
+            color: $white !important
         }
 
         &.tab-layout .dolfo-card-title{

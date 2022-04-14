@@ -9,7 +9,7 @@
         margin-top: 0.7rem
     }
 
-    &:not(.tab-layout):not(.flat-layout) .dolfo-card-title{
+    &:not(.tab-layout):not(.flat-layout) > .dolfo-card-title{
         position: absolute;
         background-color: inherit;
         border-radius: $roundRadius;
