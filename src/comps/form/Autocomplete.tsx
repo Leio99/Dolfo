@@ -61,14 +61,14 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             if(!filter?.trim())
                 return
 
-            this.toggleLoading(true)
+            this.toggleLoading()
 
             Promise.resolve(this.getSource(filter)).then(list => {
                 this.setState({ list, showOptions: true })
 
                 if(list.length === 1)
                     this.selectOption(list[0])
-            }).finally(this.toggleLoading)
+            }).finally(() => setTimeout(() => this.toggleLoading()))
         }, this.TIMING)
     }
 
@@ -110,12 +110,12 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         if(!this.getSingle)
             return console.error("Errore: metodo getSingle non implementato!")
 
-        this.toggleLoading(true)
+        this.toggleLoading()
 
-        Promise.resolve(this.getSingle(this.props.defaultValue)).then(r => this.selectOption(r)).finally(this.toggleLoading)
+        Promise.resolve(this.getSingle(this.props.defaultValue)).then(r => this.selectOption(r)).finally(() => setTimeout(() => this.toggleLoading()))
     }
 
-    toggleLoading = (loading = false): void => this.setState({ loading })
+    toggleLoading = (): void => this.setState({ loading: !this.state.loading })
 
     onBlur = (): void => this.setState({ focused: false, showOptions: false, focusedIndex: null })
 
