@@ -24,21 +24,6 @@ interface IState<E, K>{
 
 export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps<E> & P, IState<E, K>>{
     private readonly TIMING = 500
-    private readonly EXCLUDED_KEYS = [
-        "Alt", 
-        "Control", 
-        "Tab", 
-        "Enter", 
-        "ArrowUp", 
-        "ArrowDown", 
-        "ArrowLeft", 
-        "ArrowRight", 
-        "Shift", 
-        "CapsLock", 
-        "ContextMenu", 
-        "Meta", 
-        "Escape"
-    ]
     private typing: _.DebouncedFunc<() => void>
 
     constructor(props: IProps<E> & P){
@@ -138,7 +123,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     onKeyUp = (e: any): void => {
         this.props.onKeyUp && this.props.onKeyUp(e)
 
-        if(this.EXCLUDED_KEYS.includes(e.key))
+        if(Constants.AUTOCOMPLETE_EXLUDE_KEYS.includes(e.key))
             return
 
         const { selectedItem } = this.state
@@ -156,7 +141,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     onKeyDown = (e: any): void => {
         this.props.onKeyDown && this.props.onKeyDown(e)
 
-        if(this.EXCLUDED_KEYS.includes(e.key) && e.key !== "Enter" && e.key !== "ArrowUp" && e.key !== "ArrowDown")
+        if(Constants.AUTOCOMPLETE_EXLUDE_KEYS.includes(e.key) && e.key !== "Enter" && e.key !== "ArrowUp" && e.key !== "ArrowDown")
             return
 
         const { focusedIndex, list, showOptions } = this.state

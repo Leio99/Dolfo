@@ -68,4 +68,5 @@ export class Constants {
     static readonly TRANSFER_TEXT = "Sposta"
     static readonly TRANSFER_ALL_TEXT = "Sposta tutti"
     static readonly TRANSFER_NO_ITEMS = "Nessun elemento"
+    static readonly AUTOCOMPLETE_EXLUDE_KEYS = ["Alt", "Control", "Tab", "Enter", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Shift", "CapsLock", "ContextMenu", "Meta", "Escape"]
 }
