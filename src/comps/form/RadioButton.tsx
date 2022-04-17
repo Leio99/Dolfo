@@ -1,9 +1,10 @@
 import React from "react"
+import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { Option } from "./Option"
 
-interface IProps extends BaseInputProps{
+export interface RadioButtonProps extends BaseInputProps{
     readonly controlName: string
     readonly defaultValue?: any
 }
@@ -12,16 +13,16 @@ interface IState{
     readonly value: any
 }
 
-export class RadioButton extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+export class RadioButton extends React.PureComponent<RadioButtonProps, IState>{
+    constructor(props: RadioButtonProps){
         super(props)
 
         this.state = {
-            value: props.defaultValue || ""
+            value: props.defaultValue
         }
     }
 
-    componentDidUpdate = (prevProps: IProps): void => {
+    componentDidUpdate = (prevProps: RadioButtonProps): void => {
         if(prevProps.defaultValue !== this.props.defaultValue){
             this.setState({
                 value: this.props.defaultValue
@@ -43,10 +44,12 @@ export class RadioButton extends React.PureComponent<IProps, IState>{
         options = this.getOptions(),
         { value } = this.state
 
-        return <div className={"dolfo-input-radio-container" + (props.disabled ? " disabled" : "")} style={props.style}>
+        return <div className={"dolfo-input-radio-container" + (props.disabled ? " disabled" : "") + (props.className ? " " + props.className : "")} style={props.style}>
             {props.label && <label className="dolfo-input-radio-label">
                 {props.label}
-                {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>}  
+                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                    <span className="dolfo-input-required"> *</span>
+                </Tooltip>}  
             </label>}
             {
                 options?.map(option => {

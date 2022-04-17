@@ -4,6 +4,7 @@ import Button from "../layout/Button"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import _ from "lodash"
+import { Tooltip } from "../layout/Tooltip"
 
 export interface TransferListProps extends BaseInputProps{
     readonly list: any[]
@@ -120,21 +121,29 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                 </div>
             </div>
             <div className="dolfo-transfer-buttons">
-                {props.allowTransferAll && <Button size="small" btnColor="darkblue" disabled={props.list.every(d => selectedKeys.includes(props.getKey(d)))} onClick={this.transferAll} tooltip={Constants.TRANSFER_ALL_TEXT}>
-                    <Icon iconKey="chevron-double-right" type="far" />
-                </Button>}
+                {props.allowTransferAll && <Tooltip tooltip={Constants.TRANSFER_ALL_TEXT}>
+                    <Button size="small" btnColor="darkblue" disabled={props.list.every(d => selectedKeys.includes(props.getKey(d)))} onClick={this.transferAll}>
+                        <Icon iconKey="chevron-double-right" type="far" />
+                    </Button>
+                </Tooltip>}
 
-                <Button size="small" btnColor="darkblue" disabled={focusedKey === null || selectedKeys.includes(focusedKey)} onClick={this.selectByFocused} tooltip={Constants.TRANSFER_TEXT}>
-                    <Icon iconKey="arrow-right" type="far" />
-                </Button>
+                <Tooltip tooltip={Constants.TRANSFER_TEXT}>
+                    <Button size="small" btnColor="darkblue" disabled={focusedKey === null || selectedKeys.includes(focusedKey)} onClick={this.selectByFocused}>
+                        <Icon iconKey="arrow-right" type="far" />
+                    </Button>
+                </Tooltip>
 
-                <Button size="small" btnColor="darkblue" disabled={focusedKey === null || !selectedKeys.includes(focusedKey)} onClick={this.selectByFocused} tooltip={Constants.TRANSFER_TEXT}>
-                    <Icon iconKey="arrow-left" type="far" />
-                </Button>
+                <Tooltip tooltip={Constants.TRANSFER_TEXT}>
+                    <Button size="small" btnColor="darkblue" disabled={focusedKey === null || !selectedKeys.includes(focusedKey)} onClick={this.selectByFocused}>
+                        <Icon iconKey="arrow-left" type="far" />
+                    </Button>
+                </Tooltip>
 
-                {props.allowTransferAll && <Button size="small" btnColor="darkblue" disabled={!selectedKeys.length} onClick={this.untransferAll} tooltip={Constants.TRANSFER_ALL_TEXT}>
-                    <Icon iconKey="chevron-double-left" type="far" />
-                </Button>}
+                {props.allowTransferAll && <Tooltip tooltip={Constants.TRANSFER_ALL_TEXT}>
+                    <Button size="small" btnColor="darkblue" disabled={!selectedKeys.length} onClick={this.untransferAll}>
+                        <Icon iconKey="chevron-double-left" type="far" />
+                    </Button>
+                </Tooltip>}
             </div>
             <div className="dolfo-transfer-to">
                 {props.rightListTitle && <label>{props.rightListTitle} ({selectedKeys.length})</label>}

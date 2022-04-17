@@ -20,12 +20,6 @@ export class IconPage extends React.Component{
         />
 
         <ResultCode
-            title="Tooltip"
-            result={<Icon tooltip="Hi there!" iconKey="globe" />}
-            code={'<Icon tooltip="Hi there!" iconKey="globe" />'}
-        />
-
-        <ResultCode
             title="Large"
             result={<Icon large iconKey="globe" />}
             code={'<Icon large iconKey="globe" />'}

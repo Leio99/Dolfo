@@ -10,7 +10,7 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
     z-index: 151;
     width: fit-content;
     transform-origin: bottom;
-    animation: showTooltipTop 0.1s ease forwards;
+    animation: showTooltip 0.1s ease forwards;
     max-width: 350px;
 
     &:after{
@@ -25,7 +25,6 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
     }
 
     &.Left{
-        animation: showTooltipLeft 0.1s ease forwards;
         transform-origin: right;
 
         &:after{
@@ -38,7 +37,6 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
     }
 
     &.Right{
-        animation: showTooltipRight 0.1s ease forwards;
         transform-origin: left;
 
         &:after{
@@ -52,7 +50,6 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
     }
 
     &.Bottom{
-        animation: showTooltipBottom 0.1s ease forwards;
         transform-origin: top;
 
         &:after{
@@ -66,22 +63,7 @@ $tooltipBg: rgba(0, 0, 0, 0.8);
     }
 }
 
-@keyframes showTooltipTop{
-    0%{ transform: translate(-50%, calc(-100% - 10px)) scale(0) }
-    100%{ transform: translate(-50%, calc(-100% - 10px)) scale(1) }
-}
-
-@keyframes showTooltipBottom{
-    0%{ transform: translate(-50%, calc(100% + 10px)) scale(0) }
-    100%{ transform: translate(-50%, calc(100% + 10px)) scale(1) }
-}
-
-@keyframes showTooltipLeft{
-    0%{ transform: translate(calc(-100% - 30px), calc(50% - 15px)) scale(0) }
-    100%{ transform: translate(calc(-100% - 30px), calc(50% - 15px)) scale(1) }
-}
-
-@keyframes showTooltipRight{
-    0%{ transform: translate(30%, calc(50% - 15px)) scale(0) }
-    100%{ transform: translate(30%, calc(50% - 15px)) scale(1) }
+@keyframes showTooltip{
+    0%{ transform: scale(0) }
+    100%{ transform: scale(1) }
 }

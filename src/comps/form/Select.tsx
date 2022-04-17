@@ -6,8 +6,9 @@ import { Option } from "./Option"
 import onClickOutside from "react-onclickoutside"
 import { Constants } from "../shared/Constants"
 import _ from "lodash"
+import { Tooltip } from "../layout/Tooltip"
 
-interface IProps extends ExtendedInputProps{
+export interface SelectProps extends ExtendedInputProps{
     readonly defaultValue?: any
     readonly multiple?: boolean
     readonly canSearch?: boolean
@@ -22,8 +23,8 @@ interface IState{
     readonly currentSelection: number
 }
 
-class Select extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+class Select extends React.PureComponent<SelectProps, IState>{
+    constructor(props: SelectProps){
         super(props)
 
         this.state = {
@@ -35,7 +36,7 @@ class Select extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: any): void => {
+    componentDidUpdate = (prevProps: React.PropsWithChildren<SelectProps>): void => {
         if(!_.isEqual(prevProps.children, this.props.children)){
             const value = this.state.value,
             options = this.getOptions()
@@ -159,12 +160,14 @@ class Select extends React.PureComponent<IProps, IState>{
         icon = props.icon || { iconKey: "hand-pointer", type: "far" },
         searchInput = <div className="dolfo-select-search-content">
             <SearchIcon className="dolfo-select-search-icon" />
-            {searchValue.length ? <CloseIcon className="reset-input" onClick={this.resetSearch} tooltip={Constants.RESET_INPUT_TEXT} /> : null}
+            {searchValue.length ? <Tooltip tooltip={Constants.RESET_INPUT_TEXT}>
+                <CloseIcon className="reset-input" onClick={this.resetSearch} />
+            </Tooltip> : null}
 
             <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
         </div>
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required} className={props.className} value={value} selectedOption={currentSelection}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required} className={"dolfo-select-wrapper" + (props.className ? " " + props.className : "")} value={value} selectedOption={currentSelection}>
             <span className="select-icon">
                 {props.loading ? <LoadingIcon spinning className="loading" /> : <Icon type="far" iconKey="chevron-down" />}
             </span>
@@ -173,8 +176,8 @@ class Select extends React.PureComponent<IProps, IState>{
                 <input
                     type="text"
                     value={value}
-                    tabIndex={-1}
                     disabled={props.disabled}
+                    tabIndex={-1}
                     required={props.required}
                     autoFocus={props.autoFocus}
                 />

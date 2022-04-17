@@ -1,13 +1,12 @@
 import React, { CSSProperties } from "react"
 import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
-import { TooltipProps } from "./Tooltip"
 import { openContextMenu } from "./ContextMenu"
 
 export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue" | "violet"
 export type ButtonColors = BaseColors | "white"
 
-export interface ButtonProps extends TooltipProps{
+export interface ButtonProps{
     readonly type?: "button" | "submit" | "popup" | "text"
     readonly size?: "full" | "small" | "big"
     readonly loading?: boolean
@@ -20,16 +19,17 @@ export interface ButtonProps extends TooltipProps{
     readonly style?: CSSProperties
     readonly disabled?: boolean
     readonly onClick?: (e: any) => void
-}
-
-interface IState{
-    readonly openPopup: boolean
+    readonly onMouseDown?: (e: any) => void
 }
 
 export interface BtnOptions{
     readonly text: string | JSX.Element
     readonly onClick: () => void
     readonly disabled?: boolean
+}
+
+interface IState{
+    readonly openPopup: boolean
 }
 
 class Button extends React.PureComponent<ButtonProps, IState>{
@@ -70,7 +70,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         if(btnType === "popup"){
             const popupDir = props.popupPosition || "bottom"
 
-            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "") + (props.disabled ? " disabled" : "")} onClick={this.togglePopup} data-tooltip={props.tooltip} data-place={props.placeTooltip} style={props.style}>
+            return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.iconPopup ? " icon-popup" : "") + (props.disabled ? " disabled" : "")} onClick={this.togglePopup} style={props.style}>
                 <div className={"dolfo-popup-options" + (openPopup ? " show" : "") + (" pos-" + popupDir)}>
                     {
                         props.options?.map(opt => <div className={"dolfo-popup-option" + (opt.disabled ? " disabled" : "")} onClick={!opt.disabled && !props.disabled ? opt.onClick : (e: any) => e.stopPropagation()}>
@@ -100,7 +100,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
             (props.type === "text" ? " text-btn" : "") + 
             (props.circleBtn ? " circle-btn" : "") + 
             (props.size === "big" ? " big-button" : "")
-        } data-tooltip={props.tooltip} data-place={props.placeTooltip} style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick}>
+        } style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick} onMouseDown={props.onMouseDown}>
             {props.loading && <LoadingIcon spinning />} {props.circleBtn && props.loading ? null : props.children}
         </button>
     }

@@ -2,14 +2,17 @@ import React from "react"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { LoadingIcon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
+import { Tooltip } from "../layout/Tooltip"
 
-interface IProps extends ExtendedInputProps{
+export interface SwitchProps extends ExtendedInputProps{
     readonly checked?: boolean
     readonly loading?: boolean
+    readonly leftText?: string | JSX.Element
+    readonly rightText?: string | JSX.Element
 }
 
-export class Switch extends React.PureComponent<IProps, IProps>{
-    constructor(props: IProps){
+export class Switch extends React.PureComponent<SwitchProps, SwitchProps>{
+    constructor(props: SwitchProps){
         super(props)
         
         this.state = {
@@ -17,12 +20,9 @@ export class Switch extends React.PureComponent<IProps, IProps>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps): void => {
-        if(prevProps.checked !== this.props.checked){
-            this.setState({
-                checked: this.props.checked
-            })
-        }
+    componentDidUpdate = (prevProps: SwitchProps): void => {
+        if(prevProps.checked !== this.props.checked)
+            this.setState({ checked: this.props.checked })
     }
 
     onChange = (): void => {
@@ -50,14 +50,18 @@ export class Switch extends React.PureComponent<IProps, IProps>{
             <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} />
 
             <div className={"dolfo-switch" + (checked ? " checked" : "")} tabIndex={props.loading ? -1 : 0} onKeyUp={this.checkSpace} style={props.style}>
+                {props.leftText && checked && <span className="left-text">{props.leftText}</span>}
                 <div className={"dolfo-switch-dot" + (props.loading ? " loading" : "")}>
                     {props.loading && <LoadingIcon spinning />}
                 </div>
+                {props.rightText && !checked && <span className="right-text">{props.rightText}</span>}
             </div>
             
             {props.label && <label>
                 {props.label}
-                {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>} 
+                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                    <span className="dolfo-input-required"> *</span>
+                </Tooltip>} 
             </label>}
         </div>
     }

@@ -4,6 +4,7 @@ import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { CloseIcon, Icon } from "./Icon"
 import { BaseNotificationProps, showNotification, NotificationPosition, NotificationMsg } from "./NotificationMsg"
+import { Tooltip } from "./Tooltip"
 
 interface MessageProps extends BaseNotificationProps{
     readonly position?: NotificationPosition
@@ -22,10 +23,12 @@ export class MessageBox extends React.Component<MessageProps>{
     }
 
     private static getInner = (props: MessageProps, closeFn: () => void): JSX.Element => <div className={"dolfo-message-box-inner" + (props.className ? (" " + props.className) : "")} style={props.style}>
-        <CloseIcon className="dolfo-message-close" onClick={() => {
-            closeFn()
-            props.onClose && props.onClose()
-        }} tooltip={Constants.CLOSE_TEXT} />
+        <Tooltip tooltip={Constants.CLOSE_TEXT}>
+            <CloseIcon className="dolfo-message-close" onClick={() => {
+                closeFn()
+                props.onClose && props.onClose()
+            }} />
+        </Tooltip>
         {props.title && <h5 className="dolfo-message-box-title">
             {!props.hideIcon && <Icon color="var(--blue)" iconKey="circle" />} {props.title}
         </h5>}

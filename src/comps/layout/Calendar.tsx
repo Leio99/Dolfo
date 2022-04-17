@@ -7,6 +7,7 @@ import { Icon } from "./Icon"
 import { Constants } from "../shared/Constants"
 import Select from "../form/Select"
 import { Option } from "../form/Option"
+import { Tooltip } from "./Tooltip"
 
 interface IProps{
     readonly calendarId: string
@@ -150,16 +151,18 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                 </Select>
             </>,
             customFooter: [
-                <Button type="text" tooltip={Constants.CALENDAR_SELECT_CURRENT} style={{ float: "left" }} size="big" btnColor="green" onClick={() => {
-                    const d = new Date()
+                <Tooltip tooltip={Constants.CALENDAR_SELECT_CURRENT} >
+                    <Button type="text"style={{ float: "left" }} size="big" btnColor="green" onClick={() => {
+                        const d = new Date()
 
-                    this.setState({
-                        currentMonth: d.getMonth(),
-                        currentYear: d.getFullYear()
-                    }, dialog.close)
-                }}>
-                    <Icon iconKey="calendar-alt" type="far" />
-                </Button>,
+                        this.setState({
+                            currentMonth: d.getMonth(),
+                            currentYear: d.getFullYear()
+                        }, dialog.close)
+                    }}>
+                        <Icon iconKey="calendar-alt" type="far" />
+                    </Button>
+                </Tooltip>,
                 <Button size="small" btnColor="blue" onClick={() => {
                     this.setState({
                         currentMonth: selMonth ?? currentMonth,
@@ -183,17 +186,23 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         return <div className="dolfo-g-calendar-content">
             <h3 className="month-title">
                 <div className="month-buttons">
-                    <Button btnColor="white" size="big" tooltip={Constants.CALENDAR_PREVIOUS_MONTH} className="month-button-prev" onClick={this.decreaseMonth}>
-                        <Icon iconKey="chevron-left" type="far" large />
-                    </Button>
-                    <Button btnColor="white" size="big" tooltip={Constants.CALENDAR_NEXT_MONTH} className="month-button-next" onClick={this.increaseMonth}>
-                        <Icon iconKey="chevron-right" type="far" large />
-                    </Button>
+                    <Tooltip tooltip={Constants.CALENDAR_PREVIOUS_MONTH}>
+                        <Button btnColor="white" size="big" className="month-button-prev" onClick={this.decreaseMonth}>
+                            <Icon iconKey="chevron-left" type="far" large />
+                        </Button>
+                    </Tooltip>
+                    <Tooltip tooltip={Constants.CALENDAR_NEXT_MONTH}>
+                        <Button btnColor="white" size="big" className="month-button-next" onClick={this.increaseMonth}>
+                            <Icon iconKey="chevron-right" type="far" large />
+                        </Button>
+                    </Tooltip>
                 </div>
 
-                <Button btnColor="white" size="big" tooltip={Constants.CALENDAR_CHANGE} onClick={this.openDateChange}>
-                    {decodeMonth(currentMonth)} {currentYear}
-                </Button>
+                <Tooltip tooltip={Constants.CALENDAR_CHANGE}>
+                    <Button btnColor="white" size="big" onClick={this.openDateChange}>
+                        {decodeMonth(currentMonth)} {currentYear}
+                    </Button>
+                </Tooltip>
             </h3>
 
             {!monthEvents.length && <div className="no-month-events">{Constants.MONTH_NO_EVENTS}</div>}
@@ -225,7 +234,9 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
                                         return <td className={(isPrev || isNext ? "external" : "") + (!dEvents.length ? " empty" : "")}>
                                             <div className="content">
-                                                {isToday && <Icon iconKey="map-pin" large tooltip={Constants.CALENDAR_PIN_TODAY} className="icon-today" />}
+                                                {isToday && <Tooltip tooltip={Constants.CALENDAR_PIN_TODAY}>
+                                                    <Icon iconKey="map-pin" large className="icon-today" />
+                                                </Tooltip>}
 
                                                 <div className="day-number-container">
                                                     <div className="day-number">
@@ -236,11 +247,13 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
                                                 <div className="events-container">
                                                     {
-                                                        dEvents.map(e => <div className="event" data-tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
-                                                            {e.start && e.end && <span>{e.start} - {e.end}</span>} 
-                                                            {e.start && e.end && <span className="event-desc-separator"> • </span>}
-                                                            <span className="event-desc">{e.desc}</span>
-                                                        </div>)
+                                                        dEvents.map(e => <Tooltip tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP}>
+                                                            <div className="event" onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
+                                                                {e.start && e.end && <span>{e.start} - {e.end}</span>} 
+                                                                {e.start && e.end && <span className="event-desc-separator"> • </span>}
+                                                                <span className="event-desc">{e.desc}</span>
+                                                            </div>
+                                                        </Tooltip>)
                                                     }
                                                 </div>
                                             </div>

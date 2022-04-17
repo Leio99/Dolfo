@@ -4,6 +4,7 @@ import { IColumn } from "../../shared/models/IColumn"
 import Button from "../Button"
 import { Icon } from "../Icon"
 import _ from "lodash"
+import { Tooltip } from "../Tooltip"
 
 export interface TreeNode{
     readonly type: string
@@ -123,14 +124,18 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
             <td>
                 <span style={{ paddingLeft: (25 * subNode) + (hasChildren ? 0 : subNode === 0 ? 0 : 25) }}></span>
                 {
-                    hasChildren ? <Button btnColor="black" type="text" onClick={() => this.toggleNode(node, index)} tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
-                        <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="tree-view-angle" />
-                    </Button> : null
+                    hasChildren ? <Tooltip tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
+                        <Button btnColor="black" type="text" onClick={() => this.toggleNode(node, index)}>
+                            <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="tree-view-angle" />
+                        </Button>
+                    </Tooltip> : null
                 }
 
-                <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} type="text" onClick={() => this.toggleAllNode(node, index)} tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
-                    <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="tree-view-folder" large />
-                </Button> {this.getLabel(node)}
+                <Tooltip tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
+                    <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} type="text" onClick={() => this.toggleAllNode(node, index)}>
+                        <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="tree-view-folder" large />
+                    </Button>
+                </Tooltip> {this.getLabel(node)}
             </td>
 
             {
@@ -150,8 +155,8 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
     autoExpandAll = (list: any[] = this.state.list): TreeLevel => {
         let obj: TreeLevel = {}
 
-        list.forEach((l, i) => {
-            const node = { type: "root", data: l },
+        list.forEach((data, i) => {
+            const node = { type: "root", data },
             allList = []
 
             if(this.hasChildren(node))
@@ -179,12 +184,16 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                     showExpandAll && <thead className="dolfo-table-actions">
                         <tr>
                             <td colSpan={showActions ? baseSpan + 2 : baseSpan + 1}>
-                                <Button btnColor="white" tooltip={Constants.TREE_EXPAND_ALL_NODES} onClick={this.toggleAllNodes}>
-                                    <Icon iconKey="folder-plus" type="far" />
-                                </Button>
-                                <Button btnColor="white" tooltip={Constants.TREE_COLLAPSE_ALL_NODES} onClick={this.collapseAllNodes}>
-                                    <Icon iconKey="folder-minus" type="far" />
-                                </Button>
+                                <Tooltip tooltip={Constants.TREE_EXPAND_ALL_NODES}>
+                                    <Button btnColor="white" onClick={this.toggleAllNodes}>
+                                        <Icon iconKey="folder-plus" type="far" />
+                                    </Button>
+                                </Tooltip>
+                                <Tooltip tooltip={Constants.TREE_COLLAPSE_ALL_NODES}>
+                                    <Button btnColor="white" onClick={this.collapseAllNodes}>
+                                        <Icon iconKey="folder-minus" type="far" />
+                                    </Button>
+                                </Tooltip>
                             </td>
                         </tr>
                     </thead>
@@ -202,8 +211,8 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
                 <tbody>
                     {
-                        list && list.length ? list.map((l, i) => {
-                            const node = { type: "root", data: l },
+                        list && list.length ? list.map((data, i) => {
+                            const node = { type: "root", data },
                             treeList: JSX.Element[] = []
                             
                             this.renderNode(node, treeList, i.toString(), true)

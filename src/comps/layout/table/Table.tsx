@@ -1,9 +1,9 @@
-import _ from "lodash"
 import React from "react"
 import { CheckBox } from "../../form/CheckBox"
 import { Constants } from "../../shared/Constants"
 import Button from "../Button"
 import { Icon } from "../Icon"
+import { Tooltip } from "../Tooltip"
 import { BaseResultsManager } from "./BaseResultsManager"
 
 export class Table extends BaseResultsManager{
@@ -20,9 +20,11 @@ export class Table extends BaseResultsManager{
                         <tr>
                             <td colSpan={props.columns.length}>
                                 {
-                                    props.exportable && (!props.exportFormat || props.exportFormat.includes("csv")) && <Button type="text" btnColor="green" tooltip={Constants.EXPORT_CSV_TEXT} onClick={this.exportCSV}>
-                                        <Icon iconKey="file-csv" className="fa-2x" />
-                                    </Button>
+                                    props.exportable && (!props.exportFormat || props.exportFormat.includes("csv")) && <Tooltip tooltip={Constants.EXPORT_CSV_TEXT}>
+                                        <Button type="text" btnColor="green" onClick={this.exportCSV}>
+                                            <Icon iconKey="file-csv" className="fa-2x" />
+                                        </Button>
+                                    </Tooltip>
                                 }
                             </td>
                         </tr>
@@ -33,9 +35,13 @@ export class Table extends BaseResultsManager{
                     <tr>
                         {
                             props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
-                                {col.type === "check" && <CheckBox tooltip={_.isString(col.checkTooltip) ? col.checkTooltip : null} checked={col.checked} onChange={col.onCheckAll} />}
+                                {col.type === "check" && <Tooltip tooltip={col.checkTooltip}>
+                                    <CheckBox checked={col.checked} onChange={col.onCheckAll} />
+                                </Tooltip>}
  
-                                {col.canSearch && <Icon iconKey="filter" className="dolfo-column-search-icon" tooltip={Constants.FILTER_TEXT} onClick={() => this.changeActiveFiler(col.field)} />}
+                                {col.canSearch && <Tooltip tooltip={Constants.FILTER_TEXT}>
+                                    <Icon iconKey="filter" className="dolfo-column-search-icon" onClick={() => this.changeActiveFiler(col.field)} />
+                                </Tooltip>}
 
                                 {col.type !== "check" && col.label}
 
@@ -54,11 +60,13 @@ export class Table extends BaseResultsManager{
 
                             return <tr onDoubleClick={() => this.onDoubleClick(d)}>
                                 {
-                                    props.columns.map(col => <td style={{ ...rowStyle, ...d.rowStyle, textAlign: col.align }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
-                                        {
-                                            d[col.field]
-                                        }
-                                    </td>)
+                                    props.columns.map(col => <Tooltip tooltip={col.tooltip ? d[col.field] : null} placeTooltip={col.placeTooltip}>
+                                            <td style={{ ...rowStyle, ...d.rowStyle, textAlign: col.align }}>
+                                            {
+                                                d[col.field]
+                                            }
+                                        </td>
+                                    </Tooltip>)
                                 }
                             </tr>
                         }) : <tr>

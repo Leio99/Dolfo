@@ -1,6 +1,7 @@
 import React, { CSSProperties } from "react"
 import { Constants } from "../shared/Constants"
 import { Icon } from "./Icon"
+import { Tooltip } from "./Tooltip"
 
 interface IProps{
     readonly style?: CSSProperties,
@@ -10,6 +11,7 @@ interface IProps{
 
 export interface BreadcrumbItemProps{
     readonly onClick?: () => void
+    readonly onMouseDown?: (e: any) => void
 }
 
 export class BreadCrumb extends React.PureComponent<IProps>{
@@ -27,9 +29,11 @@ export class BreadCrumb extends React.PureComponent<IProps>{
             {
                 options.map((opt, i) => {
                     return <div className="dolfo-breadcrumb-item">
-                        <div className={"dolfo-breadcrumb-item-inner" + (opt.props.onClick ? " clickable" : "")} onClick={opt.props.onClick} data-tooltip={opt.props.onClick && Constants.NAVIGATE_BREADCRUMB}>
-                            {opt.props.children}
-                        </div>
+                        <Tooltip tooltip={opt.props.onClick && Constants.NAVIGATE_BREADCRUMB}>
+                            <div className={"dolfo-breadcrumb-item-inner" + (opt.props.onClick ? " clickable" : "")} onClick={opt.props.onClick} onMouseDown={opt.props.onMouseDown}>
+                                {opt.props.children}
+                            </div>
+                        </Tooltip>
             
                         {!!options[i + 1] && <div className="dolfo-breadcrumb-arrow">
                             <Icon iconKey="chevron-right" type="fal" />    

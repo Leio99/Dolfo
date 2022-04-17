@@ -28,7 +28,7 @@ export class Progress extends React.PureComponent<IProps>{
             return <svg viewBox="0 0 36 36" className={"dolfo-circular-progress" + (props.className ? (" " + props.className) : "")} style={{ width, height: width }}>
                 <defs>
                     <filter id="inset-shadow">
-                        <feFlood flood-color="rgba(0, 0, 0, 0.15)"/>
+                        <feFlood floodColor="rgba(0, 0, 0, 0.15)"/>
                         <feComposite operator="out" in2="SourceGraphic"/>
                         <feGaussianBlur stdDeviation="2"/>
                         <feComposite operator="atop" in2="SourceGraphic"/>

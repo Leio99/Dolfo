@@ -21,8 +21,8 @@ export class CheckboxPage extends React.Component{
 
         <ResultCode
             title="With tooltip"
-            result={<CheckBox label="Click to agree" tooltip="I'm the square" checked />}
-            code={'<CheckBox label="Click to agree" tooltip="I\'m the square" checked />'}
+            result={<CheckBox label="Click to agree" checked />}
+            code={'<CheckBox label="Click to agree" checked />'}
         />
 
         <ResultCode

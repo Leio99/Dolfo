@@ -1,7 +1,9 @@
 import { CSSProperties } from "react"
-import { TooltipProps } from "../../layout/Tooltip"
+import { TooltipPlacement } from "../../layout/Tooltip"
 
-export interface IColumn extends TooltipProps<boolean>{
+export interface IColumn{
+    readonly tooltip?: boolean
+    readonly placeTooltip?: TooltipPlacement
     readonly field?: string
     readonly label?: string
     readonly width?: number | string

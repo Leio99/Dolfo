@@ -5,6 +5,7 @@ import { openContextMenu } from "../layout/ContextMenu"
 import { goToApiBlock } from "../MenuContent"
 import { ContextMenuExample } from "./Examples"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { Tooltip } from "../layout/Tooltip"
 
 export class ContextMenuPage extends React.Component{
     openContextMenu = (e: any) => {
@@ -24,9 +25,11 @@ export class ContextMenuPage extends React.Component{
 
         <ResultCode
             title="Example"
-            result={<Button circleBtn size="small" tooltip="Click to open" btnColor="white" onClick={this.openContextMenu}>
-                <Icon iconKey="ellipsis-v" />
-            </Button>}
+            result={<Tooltip tooltip="Click to open">
+                <Button circleBtn size="small" btnColor="white" onClick={this.openContextMenu}>
+                    <Icon iconKey="ellipsis-v" />
+                </Button>
+            </Tooltip>}
             code={ContextMenuExample}
         />
 

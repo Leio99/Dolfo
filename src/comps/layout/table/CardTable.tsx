@@ -2,6 +2,7 @@ import React from "react"
 import { Constants } from "../../shared/Constants"
 import { IDataColumn } from "../../shared/models/IColumn"
 import { Card, CardActions } from "../Card"
+import { Tooltip } from "../Tooltip"
 import { BaseResultsManager } from "./BaseResultsManager"
 
 export interface CardTableProps{
@@ -25,12 +26,18 @@ export class CardTable extends BaseResultsManager<CardTableProps>{
                         {props.getTitle && props.getTitle(d)}
                     </>} onDoubleClick={() => this.onDoubleClick(d)}>
                         {
-                            props.columns.map(col => !col.hideCard && col.type !== "check" && <div style={{ ...d.rowStyle }} data-tooltip={col.tooltip && typeof d[col.field] === "string" ? d[col.field] : null} data-place={col.placeTooltip}>
-                                {col.field !== "actions" ? <div className="key-value">
-                                    <strong>{col.label}</strong>
-                                    <div>{d[col.field]}</div>
-                                </div> : <CardActions>{d[col.field]}</CardActions>}
-                            </div>)
+                            props.columns.map(col => !col.hideCard && col.type !== "check" && <Tooltip tooltip={col.tooltip ? d[col.field] : null} placeTooltip={col.placeTooltip}>
+                                <div style={{ ...d.rowStyle }}>
+                                    {col.field !== "actions" ? <div className="key-value">
+                                        <strong>
+                                            <Tooltip tooltip={col.label}>{col.label}</Tooltip>
+                                        </strong>
+                                        <div>
+                                            <Tooltip tooltip={d[col.field]}>{d[col.field]}</Tooltip>
+                                        </div>
+                                    </div> : <CardActions>{d[col.field]}</CardActions>}
+                                </div>
+                            </Tooltip>)
                         }
                     </Card>
                 }) : <div className="dolfo-card-table-noresults">

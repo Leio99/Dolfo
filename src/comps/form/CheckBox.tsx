@@ -2,14 +2,14 @@ import React from "react"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { CheckIcon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
-import { TooltipProps } from "../layout/Tooltip"
+import { Tooltip } from "../layout/Tooltip"
 
-interface IProps extends BaseInputProps, TooltipProps{
+export interface CheckBoxProps extends BaseInputProps{
     readonly checked?: boolean
 }
 
-export class CheckBox extends React.PureComponent<IProps, IProps>{ 
-    constructor(props: IProps){
+export class CheckBox extends React.PureComponent<CheckBoxProps, CheckBoxProps>{ 
+    constructor(props: CheckBoxProps){
         super(props)
         
         this.state = {
@@ -17,12 +17,9 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps): void => {
-        if(prevProps.checked !== this.props.checked){
-            this.setState({
-                checked: this.props.checked
-            })
-        }
+    componentDidUpdate = (prevProps: CheckBoxProps): void => {
+        if(prevProps.checked !== this.props.checked)
+            this.setState({ checked: this.props.checked })
     }
 
     onChange = (): void => {
@@ -48,12 +45,14 @@ export class CheckBox extends React.PureComponent<IProps, IProps>{
         return <div className={"dolfo-checkbox" + (props.className ? (" " + props.className) : "") + (props.disabled ? " disabled" : "")} style={props.style} onClick={this.onChange}>
             <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} />
 
-            <div className={"dolfo-checkbox-square" + (checked ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace} data-tooltip={props.tooltip} data-place={props.placeTooltip}>
+            <div className={"dolfo-checkbox-square" + (checked ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace}>
                 <CheckIcon />
             </div>
             {props.label && <label className="dolfo-checkbox-label">
                 {props.label}
-                {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>} 
+                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                    <span className="dolfo-input-required"> *</span>
+                </Tooltip>} 
             </label>}
         </div>
     }

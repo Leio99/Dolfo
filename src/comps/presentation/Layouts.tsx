@@ -2,6 +2,7 @@ import React from "react"
 import Button from "../layout/Button"
 import { Icon, DetailIcon } from "../layout/Icon"
 import { Table } from "../layout/table/Table"
+import { Tooltip } from "../layout/Tooltip"
 import { MenuItem } from "../MenuContent"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import { copyToClipBoard } from "../shared/utility"
@@ -92,16 +93,22 @@ export class ResultCode extends React.Component<ResultCodeProps, ResultCodeState
             </div>
 
             <div className="component-buttons">
-                {isCode && <Button type="text" onClick={() => copyToClipBoard(code)} style={{ marginRight: "0.5rem" }} tooltip="Copy code">
-                    <Icon iconKey="copy" type="far" large />
-                </Button>}
+                {isCode && <Tooltip tooltip="Copy code">
+                    <Button type="text" onClick={() => copyToClipBoard(code)} style={{ marginRight: "0.5rem" }}>
+                        <Icon iconKey="copy" type="far" large />
+                    </Button>
+                </Tooltip>}
 
-                <Button type="text" onClick={this.showPreview} style={{ marginRight: "0.5rem" }} tooltip="Show preview">
-                    <Icon iconKey="window" type="far" color={!isCode && "var(--dark)"} large />
-                </Button>
-                <Button type="text" onClick={this.showCode} tooltip="Show code">
-                    <Icon iconKey="code" type="far" color={isCode && "var(--dark)"} large />
-                </Button>
+                <Tooltip tooltip="Show preview">
+                    <Button type="text" onClick={this.showPreview} style={{ marginRight: "0.5rem" }}>
+                        <Icon iconKey="window" type="far" color={!isCode && "var(--dark)"} large />
+                    </Button>
+                </Tooltip>
+                <Tooltip tooltip="Show code">
+                    <Button type="text" onClick={this.showCode}>
+                        <Icon iconKey="code" type="far" color={isCode && "var(--dark)"} large />
+                    </Button>
+                </Tooltip>
             </div>
         </div>
     }

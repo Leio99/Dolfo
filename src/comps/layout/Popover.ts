@@ -97,7 +97,7 @@ export class Popover extends React.Component<IProps>{
         }
     }
 
-    render = () => _.isString(this.props.children) ? <span>{this.props.children}</span> : this.props.children
+    render = () => _.isString(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
 
     static forceRemoveAll = (): void => {
         const popovers = document.querySelectorAll(".dolfo-popover")

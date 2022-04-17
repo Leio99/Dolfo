@@ -476,38 +476,52 @@ TreeExample = `export class TreeviewPage extends TreeView{
     }
 
     getActions = (node: TreeNode): JSX.Element => {
-        if(node.type === "concorrente" || node.type === "conduttore") return <Button type="text" onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")} tooltip="Apri Wikipedia" btnColor="black">
-            <Icon iconKey="wikipedia-w" type="fab" large />
-        </Button>
+        if(node.type === "concorrente" || node.type === "conduttore") return <Tooltip tooltip="Apri Wikipedia">
+            <Button btnColor="black" type="text" onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")}>
+                <Icon iconKey="wikipedia-w" type="fab" large />
+            </Button>
+        </Tooltip>
 
         if(node.type === "comico") return <>
             {
-                !node.data.composizione && <Button type="text" btnColor="darkblue" tooltip="Dati" style={{ marginRight: "1rem" }} onClick={() => this.openDettaglioComico(node.data)}>
-                    <Icon iconKey="id-card" type="far" large />
-                </Button>
+                !node.data.composizione && <Tooltip tooltip="Dati">
+                    <Button type="text" btnColor="darkblue" style={{ marginRight: "1rem" }} onClick={() => this.openDettaglioComico(node.data)}>
+                        <Icon iconKey="id-card" type="far" large />
+                    </Button>
+                </Tooltip>
             }
 
-            <Button type="text" btnColor="red" tooltip={this.hasChildren(node) ? "Elimina gruppo" : "Elimina comico"}>
-                <DeleteIcon large />
-            </Button>
+            <Tooltip tooltip={this.hasChildren(node) ? "Elimina gruppo" : "Elimina comico"}>
+                <Button type="text" btnColor="red">
+                    <DeleteIcon large />
+                </Button>
+            </Tooltip>
         </>
 
-        if(node.type === "luogo") return <Button type="text" btnColor="darkblue" tooltip="Dettagli" onClick={() => this.openDettaglioCanale(node.data)}>
-            <Icon iconKey="tv" type="far" large />
-        </Button>
+        if(node.type === "luogo") return <Tooltip tooltip="Dettagli">
+            <Button type="text" btnColor="darkblue" onClick={() => this.openDettaglioCanale(node.data)}>
+                <Icon iconKey="tv" type="far" large />
+            </Button>
+        </Tooltip>
 
         if(node.type === "componente") return <>
-            <Button type="text" btnColor="darkblue" tooltip="Dati" style={{ marginRight: "1rem" }} onClick={() => this.openDettaglioComico(node.data)}>
-                <Icon iconKey="id-card" type="far" large />
-            </Button>
+            <Tooltip tooltip="Dati">
+                <Button type="text" btnColor="darkblue" style={{ marginRight: "1rem" }} onClick={() => this.openDettaglioComico(node.data)}>
+                    <Icon iconKey="id-card" type="far" large />
+                </Button>
+            </Tooltip>
 
-            <Button type="text" btnColor="orange" tooltip="Modifica" style={{ marginRight: "1rem" }}>
-                <EditIcon large />
-            </Button>
+            <Tooltip tooltip="Modifica">
+                <Button type="text" btnColor="orange" style={{ marginRight: "1rem" }}>
+                    <EditIcon large />
+                </Button>
+            </Tooltip>
 
-            <Button type="text" btnColor="red" tooltip="Rimuovi dal gruppo">
-                <CloseCircleIcon large />
-            </Button>
+            <Tooltip tooltip="Rimuovi dal gruppo">
+                <Button type="text" btnColor="red">
+                    <CloseCircleIcon large />
+                </Button>
+            </Tooltip>
         </>
     }
 
@@ -531,9 +545,11 @@ ContextMenuExample = `export class ContextExample extends React.Component{
         }])
     }
 
-    render = () => <Button circleBtn size="small" tooltip="Click to open" btnColor="white" onClick={this.openContextMenu}>
-        <Icon iconKey="ellipsis-v" />
-    </Button>
+    render = () => <Tooltip tooltip="Click to open">
+        <Button circleBtn size="small" btnColor="white" onClick={this.openContextMenu}>
+            <Icon iconKey="ellipsis-v" />
+        </Button>
+    </Tooltip>
 }`,
 SpotExample = `export class SpotExample extends React.Component<unknown, { readonly visible: boolean, readonly data: any[] }>{
     private readonly DATA: { name: string, surname: string }[] = [

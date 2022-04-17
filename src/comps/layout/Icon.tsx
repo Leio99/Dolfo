@@ -1,12 +1,11 @@
 import React, { CSSProperties } from "react"
-import { TooltipProps } from "./Tooltip"
 
 export interface BaseIconProps {
     readonly type?: "fa" | "far" | "fal" | "fas" | "fab" | "fad"
     readonly iconKey: string
 }
 
-interface DefaultIconProps extends TooltipProps{
+interface DefaultIconProps{
     readonly className?: string
     readonly spinning?: boolean
     readonly style?: CSSProperties
@@ -30,7 +29,7 @@ export class Icon extends React.PureComponent<FullIconProps>{
             (props.large ? " fa-lg" : "") +
             (props.className ? (" " + props.className) : "") + 
             (props.spinning ? " spin" : "")
-        } data-tooltip={props.tooltip} data-place={props.placeTooltip} style={{ ...props.style, color: props.color }} onClick={props.onClick}></i>
+        } style={{ ...props.style, color: props.color }} onClick={props.onClick}></i>
     }
 }
 
@@ -42,15 +41,15 @@ export const CheckCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {
 
 export const CheckCircleOutlineIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} type="far" iconKey="check-circle" />
 
-export const ExclamationIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="exclamation" />
-
-export const ExclamationCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="exclamation-circle" />
-
 export const QuestionIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="question" />
 
 export const QuestionCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="question-circle" />
 
 export const QuestionCircleOutlineIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} type="far" iconKey="question-circle" />
+
+export const ExclamationIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="exclamation" />
+
+export const ExclamationCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="exclamation-circle" />
 
 export const ErrorIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="exclamation" />
 
@@ -68,7 +67,7 @@ export const LoadingIcon = (props: DefaultIconProps): JSX.Element => <Icon {...p
 
 export const CloseIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} type="far" iconKey="times" />
 
-export const CloseCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} type="far" iconKey="times-circle" />
+export const CloseCircleIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="times-circle" />
 
 export const WarningIcon = (props: DefaultIconProps): JSX.Element => <Icon {...props} iconKey="exclamation-triangle" />
 

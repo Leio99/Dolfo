@@ -40,12 +40,12 @@ export class CardPage extends React.Component{
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.
 
                 <CardActions>
-                    <Button btnColor="blue" tooltip="Click me" onClick={() => alert("Clicked an action")} type="text">
+                    <Button btnColor="blue" onClick={() => alert("Clicked an action")} type="text">
                         <Icon iconKey="tachometer" large />
                     </Button>
                 </CardActions>
             </Card>}
-            code={'<Card title="I have actions">\n\tLorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.\n\t<CardActions>\n\t\t<Button btnColor="blue" tooltip="Click me" onClick={() => alert("Clicked an action")} type="text">\n\t\t\t<Icon iconKey="tachometer" large />\n\t\t</Button>\n\t</CardActions>\n</Card>'}
+            code={'<Card title="I have actions">\n\tLorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.\n\t<CardActions>\n\t\t<Button btnColor="blue" onClick={() => alert("Clicked an action")} type="text">\n\t\t\t<Icon iconKey="tachometer" large />\n\t\t</Button>\n\t</CardActions>\n</Card>'}
         />
 
         <Apis data={[

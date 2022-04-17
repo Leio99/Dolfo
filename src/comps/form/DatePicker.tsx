@@ -1,5 +1,4 @@
 import React from "react"
-import { getCalendar, decodeMonth, zeroBefore, blurInput, isValidDate } from "../shared/utility"
 import { ICalendarDay } from "../shared/models/ICalendarDay"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
@@ -8,10 +7,12 @@ import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import TimePicker from "./TimePicker"
 import _ from "lodash"
+import { Tooltip } from "../layout/Tooltip"
+import { blurInput, zeroBefore, isValidDate, getCalendar, decodeMonth } from "../shared/utility"
 
 type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
 
-interface IProps extends ExtendedInputProps{
+export interface DatePickerProps extends ExtendedInputProps{
     readonly defaultValue?: Date
     readonly dateFormat?: DateFormats
     readonly selectTime?: boolean
@@ -33,8 +34,8 @@ interface IState {
     readonly currentMinute: number
 }
 
-class DatePicker extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps) {
+class DatePicker extends React.PureComponent<DatePickerProps, IState>{
+    constructor(props: DatePickerProps) {
         super(props)
 
         this.state = this.composeDateFromDefault(props.defaultValue)
@@ -66,7 +67,7 @@ class DatePicker extends React.PureComponent<IProps, IState>{
         return newState
     }
 
-    componentDidUpdate = (prevProps: IProps): void => {
+    componentDidUpdate = (prevProps: DatePickerProps): void => {
         if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
             this.setState(this.composeDateFromDefault(this.props.defaultValue))
     }
@@ -269,9 +270,9 @@ class DatePicker extends React.PureComponent<IProps, IState>{
             <input
                 type="text"
                 value={showDate}
+                disabled={props.disabled}
                 autoFocus={props.autoFocus}
                 required={props.required}
-                disabled={props.disabled}
                 onChange={this.tryChangeDate}
                 onPaste={props.onPaste}
                 onKeyDown={this.handleKeyDown}
@@ -283,18 +284,26 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 {
                     !selectingMonth && !selectingYear && <div className="dolfo-calendar">
                         <div className="dolfo-calendar-row">
-                            <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevMonth} data-tooltip={Constants.PREV_TEXT}>
-                                <Icon iconKey="chevron-left" />
-                            </div>
-                            <div className="select-month dolfo-calendar-cell-h" onClick={this.changeMonth} data-tooltip={Constants.CHANGE_MONTH}>
-                                {decodeMonth(currentMonth)}
-                            </div>
-                            <div className="select-year dolfo-calendar-cell-h" onClick={this.changeYear} data-tooltip={Constants.CHANGE_YEAR}>
-                                {currentYear}
-                            </div>
-                            <div className="next-month dolfo-calendar-cell-h" onClick={this.nextMonth} data-tooltip={Constants.NEXT_TEXT}>
-                                <Icon iconKey="chevron-right" />
-                            </div>
+                            <Tooltip tooltip={Constants.PREV_TEXT}>
+                                <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevMonth}>
+                                    <Icon iconKey="chevron-left" />
+                                </div>
+                            </Tooltip>
+                            <Tooltip tooltip={Constants.CHANGE_MONTH}>
+                                <div className="select-month dolfo-calendar-cell-h" onClick={this.changeMonth}>
+                                    {decodeMonth(currentMonth)}
+                                </div>
+                            </Tooltip>
+                            <Tooltip tooltip={Constants.CHANGE_YEAR}>
+                                <div className="select-year dolfo-calendar-cell-h" onClick={this.changeYear}>
+                                    {currentYear}
+                                </div>
+                            </Tooltip>
+                            <Tooltip tooltip={Constants.NEXT_TEXT}>
+                                <div className="next-month dolfo-calendar-cell-h" onClick={this.nextMonth}>
+                                    <Icon iconKey="chevron-right" />
+                                </div>
+                            </Tooltip>
                         </div>
 
                         <div className="dolfo-calendar-row">
@@ -362,15 +371,19 @@ class DatePicker extends React.PureComponent<IProps, IState>{
                 {
                     selectingYear && <div className="year-selection">
                         <div className="dolfo-calendar-row">
-                            <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevDecade} data-tooltip={Constants.PREV_TEXT}>
-                                <span><Icon iconKey="chevron-left" /></span>
-                            </div>
+                            <Tooltip tooltip={Constants.PREV_TEXT}>
+                                <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevDecade}>
+                                    <span><Icon iconKey="chevron-left" /></span>
+                                </div>
+                            </Tooltip>
                             <div className="dolfo-calendar-cell-h">
                                 <span>{currentDecade}</span>
                             </div>
-                            <div className="next-month dolfo-calendar-cell-h" onClick={this.nextDecade} data-tooltip={Constants.NEXT_TEXT}>
-                                <span><Icon iconKey="chevron-right" /></span>
-                            </div>
+                            <Tooltip tooltip={Constants.NEXT_TEXT}>
+                                <div className="next-month dolfo-calendar-cell-h" onClick={this.nextDecade}>
+                                    <span><Icon iconKey="chevron-right" /></span>
+                                </div>
+                            </Tooltip>
                         </div>
 
                         {

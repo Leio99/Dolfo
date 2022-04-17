@@ -1,13 +1,15 @@
 import _ from "lodash"
 import React, { CSSProperties } from "react"
+import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { CheckBox } from "./CheckBox"
 
-interface IProps extends BaseInputProps{
+export interface SelectableCardListProps extends BaseInputProps{
     readonly multiple?: boolean
     readonly defaultValue?: any | any[]
     readonly showCheckbox?: boolean
+    readonly fullSize?: boolean
 }
 
 interface SelectableCardProps{
@@ -20,20 +22,22 @@ interface SelectableCardProps{
 }
 
 interface IState{
+    readonly mappedProps: SelectableCardProps[]
     readonly value: any | any[]
 }
 
-export class SelectableCardList extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+export class SelectableCardList extends React.PureComponent<SelectableCardListProps, IState>{
+    constructor(props: SelectableCardListProps){
         super(props)
 
         this.state = {
-            value: props.defaultValue ?? (props.multiple ? [] : null)
+            value: props.defaultValue ?? (props.multiple ? [] : null),
+            mappedProps: this.mapProps()
         }
     }
 
-    componentDidUpdate = (prevProps: any): void => {
-        if(!_.isEqual(prevProps.children, this.props.children)){
+    componentDidUpdate = (prevProps: React.PropsWithChildren<SelectableCardListProps>): void => {
+        if(!_.isEqual(this.state.mappedProps, this.mapProps())){
             const value = this.state.value,
             options = this.getOptions()
             let hasValues = false
@@ -43,7 +47,10 @@ export class SelectableCardList extends React.PureComponent<IProps, IState>{
             else
                 hasValues = options?.some(opt => value.some((v: any) => _.isEqual(v, opt.props.value)))
 
-            this.setState({ value: hasValues ? value : (this.props.multiple ? [] : this.props.defaultValue) })
+            this.setState({
+                value: hasValues ? value : (this.props.multiple ? [] : this.props.defaultValue),
+                mappedProps: this.mapProps()
+            })
 
             !_.isEqual(value, this.state.value) && this.props.onChange && this.props.onChange(value)
         }
@@ -59,6 +66,8 @@ export class SelectableCardList extends React.PureComponent<IProps, IState>{
 
         this.props.onChange && this.props.onChange(value)
     }
+
+    mapProps = (children = this.props.children): SelectableCardProps[] => this.getOptions(children).map(o => o.props)
 
     changeMultiple = (value: any): void => {
         if(this.props.disabled) return
@@ -76,25 +85,27 @@ export class SelectableCardList extends React.PureComponent<IProps, IState>{
         this.props.onChange && this.props.onChange(newList)
     }
 
-    getOptions = (): SelectableCard[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
+    getOptions = (children = this.props.children): SelectableCard[] => React.Children.map(children, (child: any) => child).filter(o => !!o)
 
     render = (): JSX.Element => {
         const { props } = this,
         { value } = this.state,
         options = this.getOptions()
 
-        return <div className={"dolfo-selectable-list" + (props.disabled ? " disabled" : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
+        return <div className={"dolfo-selectable-list" + (props.disabled ? " disabled" : "") + (props.className ? (" " + props.className) : "") + (props.fullSize ? " fullsize" : "")} style={props.style}>
             <input value={value?.toString()} required={props.required} />
             {props.label && <label className="dolfo-selectable-list-label">
                 {props.label}
-                {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>}  
+                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                    <span className="dolfo-input-required"> *</span>
+                </Tooltip>}  
             </label>}
             
             {
                 options.map((opt, i) => {
                     const selected = props.multiple ? value.includes(opt.props.value) : _.isEqual(value, opt.props.value),
                     onChange = props.multiple ? this.changeMultiple : this.changeOption,
-                    addClass = (i - 1) % 3 === 0 ? " middle" : ""
+                    addClass = (i - 1) % 3 === 0 && !props.fullSize ? " middle" : ""
 
                     return <div className={"dolfo-selectable-option" + (opt.props.disabled && !props.disabled ? " disabled" : "") + (opt.props.className ? (" " + opt.props.className) : "") + (selected ? " selected" : "") + addClass} style={opt.props.style} onClick={() => onChange(opt.props.value)}>
                         {props.showCheckbox && <CheckBox checked={selected} />}

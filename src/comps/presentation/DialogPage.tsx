@@ -4,6 +4,7 @@ import { ComponentAsDialogProps, Dialog, openDialog, openDialogComponent, openIn
 import { DetailIcon, Icon } from "../layout/Icon"
 import { Table } from "../layout/table/Table"
 import { Tab, Tabs } from "../layout/Tabs"
+import { Tooltip } from "../layout/Tooltip"
 import { MenuItem } from "../MenuContent"
 import { copyToClipBoard } from "../shared/utility"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
@@ -333,9 +334,11 @@ class Example extends React.Component<ComponentAsDialogProps, { readonly current
         { current } = this.state
 
         return <Dialog width="70vw" onClose={this.props.close} clickOutside visible title="External dialog component example" overflows top customFooter={[
-            <Button type="text" onClick={() => copyToClipBoard(codes[current === 0 ? 0 : 2] + "\n\n" +  codes[current === 0 ? 1 : 3])} style={{ marginRight: "0.5rem" }} tooltip="Copy code">
-                <Icon iconKey="copy" type="far" large />
-            </Button>
+            <Tooltip tooltip="Copy code">
+                <Button type="text" onClick={() => copyToClipBoard(codes[current === 0 ? 0 : 2] + "\n\n" +  codes[current === 0 ? 1 : 3])} style={{ marginRight: "0.5rem" }}>
+                    <Icon iconKey="copy" type="far" large />
+                </Button>
+            </Tooltip>
         ]}>
             <Tabs onChangeTab={current => this.setState({ current })}>
                 <Tab title="Example 1">

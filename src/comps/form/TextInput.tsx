@@ -3,6 +3,7 @@ import { FullInputProps } from "../shared/models/InputProps"
 import { Icon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Constants } from "../shared/Constants"
+import { Tooltip } from "../layout/Tooltip"
 
 type InputTypes = "textarea" | "password" | "email" | "number"
 
@@ -124,13 +125,19 @@ export class TextInput extends React.PureComponent<IProps, IState>{
 
         return <InputWrapper style={props.wrapperStyle} label={props.label} focusBool={focused} icon={icon} value={value} resetFunction={this.resetInput} forceFocus={() => input.focus()} disabled={props.disabled} className={(props.type === "number" ? "input-number" : (props.type === "password" && props.togglePassword) ? "toggle-password" : "") + (props.className ? (" " + props.className) : "")} required={props.required}>
             {
-                props.type === "password" && props.togglePassword && value.length > 0 && <Icon type="far" iconKey={inputType === "password" ? "eye" : "eye-slash"} onClick={this.toggleInputType} className="toggle-password" tooltip={inputType === "password" ? Constants.SHOW_PASSWORD_TEXT : Constants.HIDE_PASSWORD_TEXT} />
+                props.type === "password" && props.togglePassword && value.length > 0 && <Tooltip tooltip={inputType === "password" ? Constants.SHOW_PASSWORD_TEXT : Constants.HIDE_PASSWORD_TEXT}>
+                    <Icon type="far" iconKey={inputType === "password" ? "eye" : "eye-slash"} onClick={this.toggleInputType} className="toggle-password" />
+                </Tooltip>
             }
 
             {
                 props.type === "number" && <div className="dolfo-input-number-btns">
-                    <Icon iconKey="caret-up" className="increase" onClick={this.increaseValue} tooltip={Constants.INCREASE_TEXT} />
-                    <Icon iconKey="caret-down" className="decrease" onClick={this.decreaseValue} tooltip={Constants.DECREASE_TEXT} />
+                    <Tooltip tooltip={Constants.INCREASE_TEXT}>
+                        <Icon iconKey="caret-up" className="increase" onClick={this.increaseValue} />
+                    </Tooltip>
+                    <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
+                        <Icon iconKey="caret-down" className="decrease" onClick={this.decreaseValue} />
+                    </Tooltip>
                 </div>
             }
 

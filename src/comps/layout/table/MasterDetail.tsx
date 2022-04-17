@@ -1,22 +1,24 @@
+import _ from "lodash"
 import React from "react"
 import { Constants } from "../../shared/Constants"
 import { IDataColumn } from "../../shared/models/IColumn"
 import Button from "../Button"
 import { DetailIcon, Icon } from "../Icon"
+import { Tooltip } from "../Tooltip"
 import { BaseResultsState, ResultsView, ResultViewProps, ViewType } from "./ResultsView"
 
-interface IProps extends ResultViewProps{
+export interface MasterDetailProps extends ResultViewProps{
     readonly actions?: (dataItem: IDataColumn) => JSX.Element
-    readonly getDetailTitle: (item: any) => string | JSX.Element
+    readonly getDetailTitle: (item: any, isBreadcrumb?: boolean) => string | JSX.Element
     readonly onOpenDetail?: (item: any) => void
 }
 
-interface IState extends BaseResultsState{
+export interface MasterDetailState extends BaseResultsState{
     readonly selectedItem: any
 }
 
-export class MasterDetail extends React.Component<IProps, IState>{
-    constructor(props: IProps){
+export class MasterDetail<P> extends React.Component<MasterDetailProps & P, MasterDetailState>{
+    constructor(props: P & MasterDetailProps){
         super(props)
 
         this.state = {
@@ -25,33 +27,47 @@ export class MasterDetail extends React.Component<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps): void => {
+    componentDidUpdate(prevProps: MasterDetailProps, _: MasterDetailState): void {
         if(this.props.layoutType !== prevProps.layoutType)
             this.setState({ layoutType: this.props.layoutType })
     }
     
-    resetSelection = (): void => {
+    resetSelection(): void {
         this.setState({ selectedItem: null })
         this.props.onOpenDetail && this.props.onOpenDetail(null)
     }
 
-    toggleViewMode = (layoutType: ViewType): void => this.setState({ layoutType }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(layoutType))
+    toggleViewMode = (layoutType: ViewType) => this.setState({ layoutType }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(layoutType))
 
-    render = (): JSX.Element => {
-        const { columns, data, onOpenDetail, children, getDetailTitle, actions, getTitle, className, exportFormat, exportable, style } = this.props,
+    clearData = (d: IDataColumn): IDataColumn => {
+        const { columns } = this.props,
+        excludeCols = columns.filter(c => React.isValidElement(d[c.field])).map(c => c.field),
+        data = _.omit(d, excludeCols)
+
+        return data
+    }
+
+    clearAllData = (data: IDataColumn[]): IDataColumn[] => data.map(d => this.clearData(d))
+
+    render(children = this.props.children): JSX.Element {
+        const { columns, data, onOpenDetail, getDetailTitle, actions, getTitle, className, exportFormat, exportable, style } = this.props,
         { selectedItem, layoutType } = this.state,
         cols = columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center", exportable: false }),
         colData = data.map(v => {
+            const dataItemToSelect = this.clearData(v)
+
             const tmp: IDataColumn = {
                 ...v,
                 onDoubleClick: () => {
-                    this.setState({ selectedItem: v })
-                    onOpenDetail && onOpenDetail(v)
+                    this.setState({ selectedItem: dataItemToSelect })
+                    onOpenDetail && onOpenDetail(dataItemToSelect)
                 },
                 actions: <>
-                    <Button onClick={() => tmp.onDoubleClick()} btnColor="blue" type="text" tooltip={Constants.OPEN_DETAIL}>
-                        <DetailIcon large />
-                    </Button>
+                    <Tooltip tooltip={Constants.OPEN_DETAIL}>
+                        <Button onClick={() => tmp.onDoubleClick()} btnColor="blue" type="text">
+                            <DetailIcon large />
+                        </Button>
+                    </Tooltip>
 
                     {actions && actions(v)}
                 </>
@@ -66,9 +82,11 @@ export class MasterDetail extends React.Component<IProps, IState>{
                     <ResultsView data={colData} columns={cols} getTitle={getTitle} onToggleViewMode={this.toggleViewMode} layoutType={layoutType} className={className} style={style} exportFormat={exportFormat} exportable={exportable} />
                 </div> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
-                        <Button btnColor="white" circleBtn onClick={this.resetSelection} tooltip={Constants.BACK_TO_LIST}>
-                            <Icon iconKey="arrow-left" type="far" />
-                        </Button>
+                        <Tooltip tooltip={Constants.BACK_TO_LIST}>
+                            <Button btnColor="white" circleBtn onClick={this.resetSelection}>
+                                <Icon iconKey="arrow-left" type="far" />
+                            </Button>
+                        </Tooltip>
                         <div className="dolfo-detail-separator"></div>
                         <h2>{getDetailTitle(selectedItem)}</h2>
                     </div>

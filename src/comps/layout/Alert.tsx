@@ -4,6 +4,7 @@ import { Constants } from "../shared/Constants"
 import Button, { ButtonColors } from "./Button"
 import { DialogType } from "./Dialog"
 import { CloseIcon } from "./Icon"
+import { Tooltip } from "./Tooltip"
 
 interface IProps{
     readonly type?: DialogType
@@ -49,9 +50,11 @@ export class Alert extends React.Component<IProps>{
             <div className="dolfo-alert-content">{props.children}</div>
 
             {
-                props.customAction || (props.closable && <Button type="text" btnColor={this.getBtnColor()} onClick={this.closeAlert} tooltip={Constants.CLOSE_TEXT}>
-                    <CloseIcon large />
-                </Button>)
+                props.customAction || (props.closable && <Tooltip tooltip={Constants.CLOSE_TEXT}>
+                    <Button type="text" btnColor={this.getBtnColor()} onClick={this.closeAlert}>
+                        <CloseIcon large />
+                    </Button>
+                </Tooltip>)
             }
         </div>
     }

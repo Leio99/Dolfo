@@ -1,9 +1,8 @@
 import React, { CSSProperties } from "react"
 import { DialogType } from "./Dialog"
 import { CheckIcon, ErrorCircleIcon, Icon, InfoCircleIcon, WarningIcon } from "./Icon"
-import { TooltipProps } from "./Tooltip"
 
-interface IProps extends TooltipProps{
+interface IProps{
     readonly type: DialogType | "pending"
     readonly hideIcon?: boolean
     readonly style?: CSSProperties
@@ -21,7 +20,7 @@ export class Status extends React.Component<IProps>{
             pending: <Icon iconKey="clock" color="var(--dark)" />
         }
 
-        return <div className={"dolfo-status" + (props.type ? (" " + props.type) : "") + (props.className ? (" " + props.className) : "")} style={props.style} data-tooltip={props.tooltip} data-place={props.placeTooltip}>
+        return <div className={"dolfo-status" + (props.type ? (" " + props.type) : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             {!props.hideIcon && icons[props.type]} {props.children}
         </div>
     }

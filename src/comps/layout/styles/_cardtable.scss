@@ -41,7 +41,10 @@
             align-items: center;
 
             > *{
-                flex: 0 0 50%
+                flex: 0 0 50%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis
             }
         }
     }

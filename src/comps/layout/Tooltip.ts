@@ -1,108 +1,126 @@
 import _ from "lodash"
+import React from "react"
+import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 
 export type TooltipPlacement = "top" | "left" | "bottom" | "right"
 
-export interface TooltipProps<TooltipType = string>{
-    readonly tooltip?: TooltipType
+interface TooltipElement extends HTMLDivElement{
+    relativeElement: HTMLElement
+}
+
+interface IProps{
+    readonly tooltip: string | JSX.Element
     readonly placeTooltip?: TooltipPlacement
 }
 
-let tooltips: NodeListOf<Element>,
-toolTexts: string[] = []
+export class Tooltip extends React.Component<IProps>{
+    private onTooltipOrNode = false
+    private element: TooltipElement
 
-export const initializeTooltips = (): void => {
-    document.addEventListener("mouseover", () => {
-        const newTips = document.querySelectorAll("[data-tooltip]")
+    renderTooltip = (): void => {        
+        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        { tooltip, placeTooltip } = this.props,
+        tooltipEl = document.createElement("div") as TooltipElement
 
-        if(areDifferentTooltips(newTips))
-            checkTooltips()
-    })
+        tooltipEl.classList.add("dolfo-tooltip")
+        
+        if(placeTooltip)
+            tooltipEl.classList.add(_.capitalize(placeTooltip))
 
-    document.addEventListener("click", () => document.querySelector(".dolfo-tooltip")?.remove())
-}
+        tooltipEl.relativeElement = node
 
-const areDifferentTooltips = (newTips: NodeListOf<Element>): boolean => {
-    if(!tooltips || !newTips || tooltips.length !== newTips.length) return true
+        createRoot(tooltipEl).render(tooltip)
 
-    for(let i = 0; i < tooltips.length; i++){
-        const current = tooltips[i],
-        newTip = newTips[i],
-        toolText = toolTexts[i]
-
-        if(current !== newTip || toolText !== newTip.getAttribute("data-tooltip"))
-            return true
-    }
-
-    return false
-},
-checkTooltips = (): void => {
-    const elements = document.querySelectorAll("[data-tooltip]"),
-    newTexts: string[] = []
-
-    elements.forEach(tool => {
-        const tooltip = document.createElement("div"),
-        content = tool.getAttribute("data-tooltip"),
-        place = tool.getAttribute("data-place") || "top"
-
-        if(!content?.trim())
-            return
-
-        newTexts.push(content);
-
-        (tool as any).tooltip?.remove();
-        (tool as any).tooltip = tooltip
-
-        tooltip.classList.add("dolfo-tooltip")
-        tooltip.innerHTML = content
-
-        tool.addEventListener("mouseenter", () => {
-            const title = tool.getAttribute("data-tooltip")
-
-            if(!title)
-                return
-                
-            const bound = tool.getBoundingClientRect()
+        node.addEventListener("mouseenter", () => {
+            this.onTooltipOrNode = true
             
-            tooltip.style.top = bound.top + "px"
-            tooltip.style.left = (bound.left + (bound.width / 2)) + "px"
+            
+            if(this.props.tooltip)
+                document.body.appendChild(tooltipEl)
 
-            document.body.appendChild((tool as any).tooltip)
+            this.positionTooltip(tooltipEl)
 
-            tooltip.classList.add(_.capitalize(place))
-
-            const copy = tooltip.cloneNode(true) as HTMLElement
-            copy.style.animation = "showTooltip" + _.capitalize(place) + " 0s forwards"
-            copy.style.visibility = "hidden"
-            document.body.appendChild(copy)
-
-            const checkPosition = !isElementInViewport(copy),
-            dirs = ["Top", "Right", "Left", "Bottom"]
-
-            copy.remove()
-
-            checkPosition && dirs.forEach(d => {
-                const copy = tooltip.cloneNode(true) as HTMLElement
-                copy.style.animation = "showTooltip" + d + " 0s forwards"
-                copy.style.visibility = "hidden"
-                document.body.appendChild(copy)
-
-                if(isElementInViewport(copy)){
-                    tooltip.setAttribute("class", "dolfo-tooltip")
-                    tooltip.classList.add(d)
-                }
-
-                copy.remove()
-            })
+            new MutationObserver(() => this.positionTooltip(tooltipEl)).observe(tooltipEl, { childList: true })
         })
 
-        tool.addEventListener("mouseleave", () => (tool as any).tooltip.remove())
-    })
+        node.addEventListener("mouseenter", () => this.onTooltipOrNode = true)
 
-    tooltips = elements
-    toolTexts = newTexts
-},
-isElementInViewport = (el: Element): boolean => {
-    const rect = el.getBoundingClientRect()
+        node.addEventListener("mouseleave", () => {
+            this.onTooltipOrNode = false
+            tooltipEl.remove()
+        })
 
-    return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        window.addEventListener("mouseout", () => !this.onTooltipOrNode && tooltipEl.remove())
+
+        window.addEventListener("resize", () => this.positionTooltip(tooltipEl))
+
+        window.addEventListener("scroll", () => this.positionTooltip(tooltipEl), true)
+        window.addEventListener("click", () => this.element?.remove(), true)
+
+        this.element = tooltipEl
+    }
+
+    componentDidMount = this.renderTooltip
+
+    componentWillUnmount = (): void => this.element?.remove()
+
+    componentDidUpdate = (prevProps: IProps): void => {
+        if(!_.isEqual(prevProps.tooltip, this.props.tooltip))
+            this.renderTooltip()
+    }
+
+    private positionTooltip = (tooltip: TooltipElement, tries: TooltipPlacement[] = [], place?: TooltipPlacement): void => {
+        const copy = tooltip.cloneNode(true) as TooltipElement,
+        { placeTooltip } = this.props,
+        placement = place || placeTooltip || "top"
+
+        copy.relativeElement = tooltip.relativeElement
+        copy.style.animation = "showTooltip 0s forwards"
+        copy.style.visibility = "hidden"
+        document.body.appendChild(copy)
+
+        const popoverPos = copy.getBoundingClientRect(),
+        { relativeElement } = copy,
+        nodePos = relativeElement.getBoundingClientRect()
+
+        copy.classList.add(_.capitalize(placement))
+        tries.forEach(t => copy.classList.remove(_.capitalize(t)))
+
+        tooltip.setAttribute("class", copy.getAttribute("class"))
+
+        if(placement === "right"){
+            copy.style.left = nodePos.left + nodePos.width + "px"
+            copy.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
+        }else if(placement === "bottom"){
+            copy.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
+            copy.style.top = nodePos.top + nodePos.height + "px"
+        }else if(placement === "left"){
+            copy.style.left = nodePos.left - 5 - popoverPos.width + "px"
+            copy.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
+        }else{
+            copy.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
+            copy.style.top = nodePos.top - 5 - popoverPos.height + "px"
+        }
+
+        if(!this.isElementInViewport(copy) && tries.length < 4){
+            const dirs: TooltipPlacement[] = ["top", "left", "right", "bottom"],
+            exclude = dirs.filter(d => !tries.includes(d) && d !== placement)
+            tries.push(placement)
+            this.positionTooltip(tooltip, tries, exclude[0])
+        }else{
+            tooltip.style.left = copy.style.left
+            tooltip.style.top = copy.style.top
+        }
+
+        copy.remove()
+    }
+    
+    isElementInViewport = (el: Element): boolean => {
+        const rect = el.getBoundingClientRect()
+
+        return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    }
+
+    render = () => !React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
 }

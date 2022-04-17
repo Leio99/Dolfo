@@ -21,12 +21,6 @@ export class StatustagsPage extends React.Component{
         />
 
         <ResultCode
-            title="Tooltip"
-            result={<Status type="success" tooltip="You did it!">Active</Status>}
-            code={'<Status type="success" tooltip="You did it!">Active</Status>'}
-        />
-
-        <ResultCode
             title="Custom icon"
             result={<Status type="success" hideIcon>
                 <Icon iconKey="briefcase" /> Active

@@ -4,6 +4,7 @@ import { CheckCircleOutlineIcon, CloseIcon, ErrorCircleOutlineIcon, InfoCircleOu
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { createRoot } from "react-dom/client"
+import { Tooltip } from "./Tooltip"
 
 export type DialogType = "success" | "info" | "error" | "warning"
 
@@ -155,7 +156,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         return Constants.INFO_TEXT
     }
 
-    private static getIcon = (icon: string): JSX.Element => {
+    public static getIcon = (icon: string): JSX.Element => {
         if(icon === "success") return <CheckCircleOutlineIcon color="var(--green)" />
         if(icon === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
         if(icon === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
@@ -191,9 +192,11 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
             <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width || props.style?.width }}>
                 <div className="dolfo-dialog-header">
-                    <Button circleBtn btnColor="white" onClick={this.onClose} className="dialog-close" tooltip={Constants.CLOSE_TEXT}>
-                        <CloseIcon style={{ fontSize: 20 }} />
-                    </Button>
+                    <Tooltip tooltip={Constants.CLOSE_TEXT}>
+                        <Button circleBtn btnColor="white" onClick={this.onClose} className="dialog-close">
+                            <CloseIcon style={{ fontSize: 20 }} />
+                        </Button>
+                    </Tooltip>
 
                     <h4 className="dolfo-dialog-title">{props.title}</h4>
                 </div>

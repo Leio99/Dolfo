@@ -1,10 +1,11 @@
 import React from "react"
 import { showNotification, showError } from "../layout/NotificationMsg"
+import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 
-interface IProps extends ExtendedInputProps{
+export interface UploaderProps extends ExtendedInputProps{
     readonly multiple?: boolean
     readonly accept?: string
     readonly dropArea?: boolean
@@ -16,8 +17,8 @@ interface IState{
     readonly showingMsg: boolean
 }
 
-export class Uploader extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+export class Uploader extends React.PureComponent<UploaderProps, IState>{
+    constructor(props: UploaderProps){
         super(props)
 
         this.state = {
@@ -146,9 +147,11 @@ export class Uploader extends React.PureComponent<IProps, IState>{
                     <div className="dolfo-uploader-drop-label">{props.label || Constants.UPLOAD_FILE_DROP_LABEL}</div>
 
                     {
-                        files && value.length ? <div className="selected-files" data-tooltip={this.getFilesNameSeparated()}>
-                            <strong>{Constants.SELECTED_FILES_LABEL}</strong> {this.getFilesNameSeparated()}
-                        </div> : null
+                        files && value.length ? <Tooltip tooltip={this.getFilesNameSeparated()}>
+                            <div className="selected-files">
+                                <strong>{Constants.SELECTED_FILES_LABEL}</strong> {this.getFilesNameSeparated()}
+                            </div>
+                        </Tooltip> : null
                     }
                 </div>
             }

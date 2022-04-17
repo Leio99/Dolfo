@@ -46,13 +46,13 @@ export class ButtonsPage extends React.Component{
             title="Alternatives"
             result={<>
                 <Button btnColor="blue" style={{ marginRight: 5 }} type="text">Text button</Button>
-                <Button btnColor="blue" style={{ marginRight: 5 }} circleBtn tooltip="I am a circle">
+                <Button btnColor="blue" style={{ marginRight: 5 }} circleBtn>
                     <Icon iconKey="globe" />
                 </Button>
                 <Button btnColor="blue" style={{ marginRight: 5 }} disabled>Disabled button</Button>
                 <Button btnColor="blue" loading>Loading button</Button>
             </>}
-            code={'<Button btnColor="blue" type="text">Text button</Button>\n<Button btnColor="blue" circleBtn tooltip="I am a circle">\n\t<Icon iconKey="globe" />\n</Button>\n<Button btnColor="blue" disabled>Disabled button</Button>\n<Button btnColor="blue" loading>Loading button</Button>'}
+            code={'<Button btnColor="blue" type="text">Text button</Button>\n<Button btnColor="blue" circleBtn>\n\t<Icon iconKey="globe" />\n</Button>\n<Button btnColor="blue" disabled>Disabled button</Button>\n<Button btnColor="blue" loading>Loading button</Button>'}
         />
 
         <ResultCode
@@ -75,11 +75,11 @@ export class ButtonsPage extends React.Component{
                     { text: <span>
                         <Icon iconKey="magic" /> Magic
                     </span>, onClick: () => alert("You clicked the second option!") },
-                ]} tooltip="I am an icon popup">
+                ]}>
                     <Icon iconKey="magic" />
                 </Button>
             </>}
-            code={'<Button btnColor="blue" type="popup" options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>Click to open me</Button>\n\n<Button btnColor="blue" type="popup" popupPosition="top" options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>Options appear above</Button>\n\n<Button btnColor="blue" style={{ marginRight: 5 }} type="popup" iconPopup options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]} tooltip="I am an icon popup">\n\t<Icon iconKey="magic" />\n</Button>'}
+            code={'<Button btnColor="blue" type="popup" options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>Click to open me</Button>\n\n<Button btnColor="blue" type="popup" popupPosition="top" options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>Options appear above</Button>\n\n<Button btnColor="blue" style={{ marginRight: 5 }} type="popup" iconPopup options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>\n\t<Icon iconKey="magic" />\n</Button>'}
         />
 
         <Apis data={[

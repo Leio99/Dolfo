@@ -4,9 +4,10 @@ import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
+import { Tooltip } from "../layout/Tooltip"
 import { zeroBefore } from "../shared/utility"
 
-interface IProps extends ExtendedInputProps{
+export interface TimePickerProps extends ExtendedInputProps{
     readonly defaultValue?: string
     readonly onKeyUpHour?: (e: any) => void
     readonly onKeyUpMinute?: (e: any) => void
@@ -21,8 +22,8 @@ interface IState{
     readonly showTime: boolean
 }
 
-class TimePicker extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+class TimePicker extends React.PureComponent<TimePickerProps, IState>{
+    constructor(props: TimePickerProps){
         super(props)
 
         this.state = {
@@ -31,7 +32,7 @@ class TimePicker extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps) : void=> {
+    componentDidUpdate = (prevProps: TimePickerProps) : void=> {
         if(prevProps.defaultValue !== this.props.defaultValue){
             this.setState({
                 value: this.props.defaultValue || (zeroBefore(new Date().getHours()) + ":" + zeroBefore(new Date().getMinutes()))
@@ -154,13 +155,17 @@ class TimePicker extends React.PureComponent<IProps, IState>{
             <div className={"dolfo-time-container" + (showTime ? " show" : "")}>
                 <div className="dolfo-picker-table">
                     <div className="dolfo-picker-row">
-                        <div className="dolfo-picker-cell" onClick={this.increaseHour} data-tooltip={Constants.INCREASE_TEXT}>
-                            <Icon iconKey="caret-up" />
-                        </div>
+                        <Tooltip tooltip={Constants.INCREASE_TEXT}>
+                            <div className="dolfo-picker-cell" onClick={this.increaseHour}>
+                                <Icon iconKey="caret-up" />
+                            </div>
+                        </Tooltip>
                         <div className="dolfo-picker-cell-e"></div>
-                        <div className="dolfo-picker-cell" onClick={this.increaseMinute} data-tooltip={Constants.INCREASE_TEXT}>
-                            <Icon iconKey="caret-up" />
-                        </div>
+                        <Tooltip tooltip={Constants.INCREASE_TEXT}>
+                            <div className="dolfo-picker-cell" onClick={this.increaseMinute}>
+                                <Icon iconKey="caret-up" />
+                            </div>
+                        </Tooltip>
                     </div>
                     <div className="dolfo-picker-row">
                         <div className="dolfo-picker-cell">
@@ -172,13 +177,17 @@ class TimePicker extends React.PureComponent<IProps, IState>{
                         </div>
                     </div>
                     <div className="dolfo-picker-row">
-                        <div className="dolfo-picker-cell" onClick={this.decreaseHour} data-tooltip={Constants.DECREASE_TEXT}>
-                            <Icon iconKey="caret-down" />
-                        </div>
+                        <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
+                            <div className="dolfo-picker-cell" onClick={this.decreaseHour}>
+                                <Icon iconKey="caret-down" />
+                            </div>
+                        </Tooltip>
                         <div className="dolfo-picker-cell-e"></div>
-                        <div className="dolfo-picker-cell" onClick={this.decreaseMinute} data-tooltip={Constants.DECREASE_TEXT}>
-                            <Icon iconKey="caret-down" />
-                        </div>
+                        <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
+                            <div className="dolfo-picker-cell" onClick={this.decreaseMinute}>
+                                <Icon iconKey="caret-down" />
+                            </div>
+                        </Tooltip>
                     </div>
                 </div>
             </div>

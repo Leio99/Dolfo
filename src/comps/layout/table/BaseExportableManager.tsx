@@ -4,6 +4,7 @@ import { Constants } from "../../shared/Constants"
 import { IColumn, IDataColumn } from "../../shared/models/IColumn"
 import { downloadCSV, formatDate, getTime } from "../../shared/utility"
 import { CheckIcon, CloseIcon } from "../Icon"
+import { Tooltip } from "../Tooltip"
 
 export interface BaseResultsData{
     readonly columns: IColumn[]
@@ -46,7 +47,11 @@ export abstract class BaseExportableManager<P = any, S = any> extends React.Comp
         if(col.type === "time")
             return d ? getTime(d) : ""
         if(col.type === "boolean")
-            return d ? (exp ? Constants.YES_TEXT : <CheckIcon tooltip={Constants.YES_TEXT} />) : (exp ? Constants.NO_TEXT : <CloseIcon tooltip={Constants.NO_TEXT} />)
+            return d ? (exp ? Constants.YES_TEXT : <Tooltip tooltip={Constants.YES_TEXT}>
+                <CheckIcon />
+            </Tooltip>) : (exp ? Constants.NO_TEXT : <Tooltip tooltip={Constants.NO_TEXT}>
+                <CloseIcon />
+            </Tooltip>)
 
         return d
     }
