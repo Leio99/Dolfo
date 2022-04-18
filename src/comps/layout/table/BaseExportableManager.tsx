@@ -15,7 +15,7 @@ export abstract class BaseExportableManager<P = any, S = any> extends React.Comp
     private isPressingCheckbox = false
 
     getColumnDataType = (col: IColumn, data: IDataColumn, exp = false): any => {
-        if(col.field && col.field.indexOf(".") >= 0 && !exp){
+        if(col.field?.indexOf(".") >= 0 && !exp){
             const pieces = col.field.split(".")
             let ret = data
 
