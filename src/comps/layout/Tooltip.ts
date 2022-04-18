@@ -17,6 +17,25 @@ interface IProps{
 export class Tooltip extends React.Component<IProps>{
     private onTooltipOrNode = false
     private element: TooltipElement
+    private readonly LISTENERS = {
+        nodeClickOrLeave: () => {
+            this.onTooltipOrNode = false
+            this.element.remove()
+        },
+        nodeMouseEnter: () =>  {
+            this.onTooltipOrNode = true
+            
+            if(this.props.tooltip)
+                document.body.appendChild(this.element)
+
+            this.positionTooltip(this.element)
+
+            new MutationObserver(() => this.positionTooltip(this.element)).observe(this.element, { childList: true })
+        },
+        windowResizeOrScroll: () => this.positionTooltip(this.element),
+        windowMouseOut: () => !this.onTooltipOrNode && this.element.remove(),
+        windowClick: () => this.element?.remove()
+    }
 
     renderTooltip = (): void => {        
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
@@ -32,38 +51,44 @@ export class Tooltip extends React.Component<IProps>{
 
         createRoot(tooltipEl).render(tooltip)
 
-        node.addEventListener("mouseenter", () => {
-            this.onTooltipOrNode = true
-            
-            
-            if(this.props.tooltip)
-                document.body.appendChild(tooltipEl)
+        node.addEventListener("mouseenter", this.LISTENERS.nodeMouseEnter)
 
-            this.positionTooltip(tooltipEl)
+        node.addEventListener("mouseleave", this.LISTENERS.nodeClickOrLeave)
 
-            new MutationObserver(() => this.positionTooltip(tooltipEl)).observe(tooltipEl, { childList: true })
-        })
+        node.addEventListener("click", this.LISTENERS.nodeClickOrLeave)
 
-        node.addEventListener("mouseenter", () => this.onTooltipOrNode = true)
+        window.addEventListener("mouseout", this.LISTENERS.windowMouseOut)
 
-        node.addEventListener("mouseleave", () => {
-            this.onTooltipOrNode = false
-            tooltipEl.remove()
-        })
+        window.addEventListener("resize", this.LISTENERS.windowResizeOrScroll)
 
-        window.addEventListener("mouseout", () => !this.onTooltipOrNode && tooltipEl.remove())
-
-        window.addEventListener("resize", () => this.positionTooltip(tooltipEl))
-
-        window.addEventListener("scroll", () => this.positionTooltip(tooltipEl), true)
-        window.addEventListener("click", () => this.element?.remove(), true)
+        window.addEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
+        
+        window.addEventListener("click", this.LISTENERS.windowClick, true)
 
         this.element = tooltipEl
     }
 
     componentDidMount = this.renderTooltip
 
-    componentWillUnmount = (): void => this.element?.remove()
+    componentWillUnmount = () => {
+        const node = ReactDOM.findDOMNode(this) as HTMLElement
+
+        this.LISTENERS.windowClick()
+        
+        node.removeEventListener("mouseenter", this.LISTENERS.nodeMouseEnter)
+
+        node.removeEventListener("mouseleave", this.LISTENERS.nodeClickOrLeave)
+
+        node.removeEventListener("click", this.LISTENERS.nodeClickOrLeave)
+
+        window.removeEventListener("mouseout", this.LISTENERS.windowMouseOut)
+
+        window.removeEventListener("resize", this.LISTENERS.windowResizeOrScroll)
+
+        window.removeEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
+        
+        window.removeEventListener("click", this.LISTENERS.windowClick, true)
+    }
 
     componentDidUpdate = (prevProps: IProps): void => {
         if(!_.isEqual(prevProps.tooltip, this.props.tooltip))
