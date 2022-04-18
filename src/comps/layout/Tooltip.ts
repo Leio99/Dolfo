@@ -96,6 +96,9 @@ export class Tooltip extends React.Component<IProps>{
     }
 
     private positionTooltip = (tooltip: TooltipElement, tries: TooltipPlacement[] = [], place?: TooltipPlacement): void => {
+        if(!document.body.contains(tooltip))
+            return
+        
         const copy = tooltip.cloneNode(true) as TooltipElement,
         { placeTooltip } = this.props,
         placement = place || placeTooltip || "top"
