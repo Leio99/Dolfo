@@ -95,6 +95,6 @@ export class IconPage extends React.Component{
                 default: "null",
                 fnParams: "Event"
             }
-        ]} addTooltip />
+        ]} />
     </>
 }

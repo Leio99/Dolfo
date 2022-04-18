@@ -18,12 +18,11 @@ interface ApisProps{
     readonly title?: string
     readonly id?: string
     readonly data: IDataColumn[]
-    readonly addTooltip?: boolean
 }
 
 export class Apis extends React.Component<ApisProps>{
     render = (): JSX.Element => {
-        const { data, addTooltip, title, id } = this.props,
+        const { data, title, id } = this.props,
         columns: IColumn[] = [
             { field: "name", label: "Name"},
             { field: "desc", label: "Description", align: "justify" },
@@ -38,22 +37,7 @@ export class Apis extends React.Component<ApisProps>{
 
         return <div className="apis" id={id}>
             <h3>{title || "APIs"}</h3>
-            <Table columns={columns} data={addTooltip ? data.concat([
-                {
-                    name: "tooltip",
-                    desc: "Title of the tooltip to show. If not passed, the tooltip won't show.",
-                    type: "string",
-                    required: false,
-                    default: "null"
-                },
-                {
-                    name: "placeTooltip",
-                    desc: "Determines where to place the tooltip, if set.",
-                    type: "string: top, left, bottom, right",
-                    required: false,
-                    default: "top"
-                }
-            ]) : data} />
+            <Table columns={columns} data={data} />
         </div>
     }
 }

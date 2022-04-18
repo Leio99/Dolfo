@@ -170,7 +170,7 @@ export class ButtonsPage extends React.Component{
                 default: "null",
                 fnParams: "None"
             }
-        ]} addTooltip />
+        ]} />
 
         <Apis id="btnOptionProps" title="Popup button option props" data={[
             {

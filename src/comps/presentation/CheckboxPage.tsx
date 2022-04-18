@@ -20,12 +20,6 @@ export class CheckboxPage extends React.Component{
         />
 
         <ResultCode
-            title="With tooltip"
-            result={<CheckBox label="Click to agree" checked />}
-            code={'<CheckBox label="Click to agree" checked />'}
-        />
-
-        <ResultCode
             title="Disabled"
             result={<CheckBox label="I am disabled" disabled checked />}
             code={'<CheckBox label="I am disabled" disabled checked />'}
@@ -88,6 +82,6 @@ export class CheckboxPage extends React.Component{
                 default: "null",
                 fnParams: "Checkbox value (boolean)"
             }
-        ]} addTooltip />
+        ]} />
     </>
 }
