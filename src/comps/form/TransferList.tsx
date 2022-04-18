@@ -95,7 +95,9 @@ export class TransferList extends React.Component<TransferListProps, IState>{
         return <div className={"dolfo-transfer-list" + (props.disabled ? " disabled" : "") + (props.className ? " " + props.className : "")} style={props.style}>
             {props.label && <label className="dolfo-transfer-list-label">
                 {props.label}
-                {props.required && <span className="dolfo-input-required" data-tooltip={Constants.REQUIRED_FIELD}> *</span>}  
+                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                    <span className="dolfo-input-required"> *</span>  
+                </Tooltip>}
             </label>}
 
             <input value={selectedKeys.join(", ")} required={props.required} />

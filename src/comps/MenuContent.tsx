@@ -8,6 +8,7 @@ import Button from "./layout/Button"
 import { Icon } from "./layout/Icon"
 import { Switch as InputSwitch } from "./form/Switch"
 import { isDarkTheme, toggleDarkTheme } from "./shared/utility"
+import { Tooltip } from "./layout/Tooltip"
 
 const homepage = process.env.PUBLIC_URL + "/",
 hashHistory = createBrowserHistory()
@@ -58,8 +59,10 @@ export class MenuContent extends React.Component<unknown, { readonly darkTheme: 
         return <Router history={hashHistory}>
             <Route render={({ location }) => <div className="page-content">
                 <div className="navigation-menu">
-                    <div style={{ float: "right", color: "var(--white)", marginRight: 10 }} data-tooltip="Toggle dark mode">
-                        <InputSwitch checked={darkTheme} label={<Icon iconKey="moon" />} onChange={this.toggleDarkMode} />
+                    <div style={{ float: "right", color: "var(--white)", marginRight: 10 }}>
+                        <Tooltip tooltip="Toggle dark mode">
+                            <InputSwitch checked={darkTheme} label={<Icon iconKey="moon" />} onChange={this.toggleDarkMode} />
+                        </Tooltip>
                     </div>
 
                     {menuBtn("darkblue")} <h4 style={{ display: "inline" }}>Dolfo</h4>

@@ -90,11 +90,11 @@ export class Tooltip extends React.Component<IProps>{
         tooltip.setAttribute("class", copy.getAttribute("class"))
 
         if(placement === "right"){
-            copy.style.left = nodePos.left + nodePos.width + "px"
+            copy.style.left = nodePos.left + 5 + nodePos.width + "px"
             copy.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
         }else if(placement === "bottom"){
             copy.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
-            copy.style.top = nodePos.top + nodePos.height + "px"
+            copy.style.top = nodePos.top + 5 + nodePos.height + "px"
         }else if(placement === "left"){
             copy.style.left = nodePos.left - 5 - popoverPos.width + "px"
             copy.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
