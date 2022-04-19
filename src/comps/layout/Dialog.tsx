@@ -140,7 +140,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         if(type === "error") return "red"
         if(type === "warning") return "orange"
 
-        return "darkblue"
+        return "blue"
     }
 
     private static getInfoTitle = (type: DialogProps["type"]): string => {
