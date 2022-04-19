@@ -116,7 +116,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         return new Closable(() => popup.remove())
     }
 
-    static openDialogComponent = <T extends unknown>(Class: any, props?: T): Closable => {
+    static openDialogComponent = <T extends unknown>(Class: React.ComponentType<T & ComponentAsDialogProps>, props?: React.ComponentProps<typeof Class>): Closable => {
         let ref: React.Component
 
         const popup = document.createElement("div"),
