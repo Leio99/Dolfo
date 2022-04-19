@@ -108,27 +108,24 @@ export class Tooltip extends React.Component<IProps>{
         copy.style.visibility = "hidden"
         document.body.appendChild(copy)
 
-        const popoverPos = copy.getBoundingClientRect(),
+        const tooltipPos = copy.getBoundingClientRect(),
         { relativeElement } = copy,
         nodePos = relativeElement.getBoundingClientRect()
 
-        copy.classList.add(_.capitalize(placement))
-        tries.forEach(t => copy.classList.remove(_.capitalize(t)))
-
-        tooltip.setAttribute("class", copy.getAttribute("class"))
+        copy.setAttribute("class", "dolfo-tooltip " + _.capitalize(placement))
 
         if(placement === "right"){
             copy.style.left = nodePos.left + 5 + nodePos.width + "px"
-            copy.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
+            copy.style.top = nodePos.top - (tooltipPos.height / 2) + (nodePos.height / 2) + "px"
         }else if(placement === "bottom"){
-            copy.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
+            copy.style.left = nodePos.left - (tooltipPos.width / 2) + (nodePos.width / 2) + "px"
             copy.style.top = nodePos.top + 5 + nodePos.height + "px"
         }else if(placement === "left"){
-            copy.style.left = nodePos.left - 5 - popoverPos.width + "px"
-            copy.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
+            copy.style.left = nodePos.left - 5 - tooltipPos.width + "px"
+            copy.style.top = nodePos.top - (tooltipPos.height / 2) + (nodePos.height / 2) + "px"
         }else{
-            copy.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
-            copy.style.top = nodePos.top - 5 - popoverPos.height + "px"
+            copy.style.left = nodePos.left - (tooltipPos.width / 2) + (nodePos.width / 2) + "px"
+            copy.style.top = nodePos.top - 5 - tooltipPos.height + "px"
         }
 
         if(!this.isElementInViewport(copy) && tries.length < 4){
@@ -139,6 +136,7 @@ export class Tooltip extends React.Component<IProps>{
         }else{
             tooltip.style.left = copy.style.left
             tooltip.style.top = copy.style.top
+            tooltip.setAttribute("class", copy.getAttribute("class"))
         }
 
         copy.remove()
