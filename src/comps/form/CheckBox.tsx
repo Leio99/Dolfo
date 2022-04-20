@@ -18,7 +18,7 @@ export class CheckBox extends React.PureComponent<CheckBoxProps, CheckBoxProps>{
     }
 
     componentDidUpdate = (prevProps: CheckBoxProps): void => {
-        if(prevProps.checked !== this.props.checked)
+        if(prevProps.checked !== this.props.checked || this.props.checked !== this.state.checked)
             this.setState({ checked: this.props.checked })
     }
 
