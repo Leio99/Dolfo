@@ -19,34 +19,29 @@ export class ContextMenu{
     static renderMenu = (event: Event, options: ContextMenuOption[], additionalProps: AdditionalMenuProps = {
         closeAfterClickItem: true
     }): void => {
-        window.onclick = () => {
-            const contexts = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
-    
-            if(contexts && contexts.length)
-                contexts.forEach(c => c.remove())
+        const context = document.createElement("div") as MenuItemElement,
+        observer = new MutationObserver(() => this.positionContext(context)),
+        LISTENERS = {
+            windowResizeOrScroll: () => ContextMenu.positionContext(context),
+            windowClick: () => {
+                context?.remove()
+
+                window.removeEventListener("click", LISTENERS.windowClick)
+                window.removeEventListener("scroll", LISTENERS.windowResizeOrScroll)
+                window.removeEventListener("resize", LISTENERS.windowResizeOrScroll)
+                observer.disconnect()
+            }
         }
-
-        window.onresize = () => {
-            const contexts = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
-    
-            if(contexts && contexts.length)
-                contexts.forEach(c => ContextMenu.positionContext(c))
-        }
-
-        document.querySelectorAll('*').forEach(elem => {
-            elem.addEventListener('scroll', () => {
-                const contexts = document.querySelectorAll(".context-menu") as NodeListOf<MenuItemElement>
-    
-                if(contexts && contexts.length)
-                    contexts.forEach(c => ContextMenu.positionContext(c))
-            })
-        })
-
-        event.stopPropagation()
 
         document.body.click()
 
-        const context = document.createElement("div") as MenuItemElement
+        window.addEventListener("click", LISTENERS.windowClick)
+        window.addEventListener("scroll", LISTENERS.windowResizeOrScroll)
+        window.addEventListener("resize", LISTENERS.windowResizeOrScroll)
+        observer.observe(context, { childList: true })
+
+        event.stopPropagation()
+
         context.classList.add("context-menu")
         context.relativeButton = event.target as HTMLElement
 

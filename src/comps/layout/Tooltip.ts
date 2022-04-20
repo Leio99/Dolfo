@@ -17,6 +17,7 @@ interface IProps{
 export class Tooltip extends React.Component<IProps>{
     private onTooltipOrNode = false
     private element: TooltipElement
+    private observer: MutationObserver
     private readonly LISTENERS = {
         nodeClickOrLeave: () => {
             this.onTooltipOrNode = false
@@ -30,14 +31,14 @@ export class Tooltip extends React.Component<IProps>{
 
             this.positionTooltip(this.element)
 
-            new MutationObserver(() => this.positionTooltip(this.element)).observe(this.element, { childList: true })
+            this.observer.observe(this.element, { childList: true })
         },
         windowResizeOrScroll: () => this.positionTooltip(this.element),
         windowMouseOut: () => !this.onTooltipOrNode && this.element.remove(),
         windowClick: () => this.element?.remove()
     }
 
-    renderTooltip = (): void => {        
+    renderTooltip = (): void => {  
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
         { tooltip, placeTooltip } = this.props,
         tooltipEl = document.createElement("div") as TooltipElement
@@ -66,6 +67,9 @@ export class Tooltip extends React.Component<IProps>{
         window.addEventListener("click", this.LISTENERS.windowClick, true)
 
         this.element = tooltipEl
+
+        if(!this.observer)
+            this.observer = new MutationObserver(() => this.positionTooltip(this.element))   
     }
 
     componentDidMount = this.renderTooltip
@@ -88,6 +92,8 @@ export class Tooltip extends React.Component<IProps>{
         window.removeEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
         
         window.removeEventListener("click", this.LISTENERS.windowClick, true)
+
+        this.observer.disconnect()
     }
 
     componentDidUpdate = (prevProps: IProps): void => {

@@ -6,7 +6,7 @@ import { TooltipPlacement } from "./Tooltip"
 
 interface IProps{
     readonly content: string | JSX.Element
-    readonly position?: TooltipPlacement | "left-top" | "right-top"
+    readonly position?: TooltipPlacement
     readonly openOnOver?: boolean
     readonly style?: CSSProperties
     readonly className?: string
@@ -18,53 +18,61 @@ interface PopoverElement extends HTMLDivElement{
 
 export class Popover extends React.Component<IProps>{
     private onPopoverOrNode = false
+    private observer: MutationObserver
+    private elementRef: PopoverElement
+    private readonly LISTENERS = {
+        popoverOrNodeMouseEnter: () => this.onPopoverOrNode = true,
+        popoverOrNodeMouseLeave: () => this.onPopoverOrNode = false,
+        windowResizeOrScroll: () => this.positionPopover(this.elementRef),
+        customEvent: () => !this.onPopoverOrNode && this.elementRef.remove()
+    }
 
     componentDidMount = (): void => {
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
         { content, openOnOver, style, className } = this.props,
         popover = document.createElement("div") as PopoverElement,
-        event = openOnOver ? "mouseenter" : "click",
-        inner = document.createElement("div")
+        event = openOnOver ? "mouseenter" : "click"
 
-        inner.classList.add("dolfo-popover-inner")
         popover.classList.add("dolfo-popover")
-
-        popover.appendChild(inner)
 
         if(className)
             className.split(" ").forEach(c => popover.classList.add(c))
         if(style){
             Object.keys(style).forEach((k: any) => {
                 const kk: any = _.kebabCase(k)
-                inner.style[kk] = (style as any)[k] as any
+                popover.style[kk] = (style as any)[k] as any
             })
         }
 
         popover.relativeElement = node
 
-        createRoot(inner).render(content)
+        createRoot(popover).render(content)
+
+        this.observer = new MutationObserver(() => this.positionPopover(popover))
 
         node.addEventListener(event, () => {
             document.body.appendChild(popover)
 
             this.positionPopover(popover)
 
-            new MutationObserver(() => this.positionPopover(popover)).observe(popover, { childList: true })
+            this.observer.observe(popover, { childList: true })
         })
 
-        popover.addEventListener("mouseenter", () => this.onPopoverOrNode = true)
+        popover.addEventListener("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter)
 
-        popover.addEventListener("mouseleave", () => this.onPopoverOrNode = false)
+        popover.addEventListener("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave)
 
-        node.addEventListener("mouseenter", () => this.onPopoverOrNode = true)
+        node.addEventListener("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter)
 
-        node.addEventListener("mouseleave", () => this.onPopoverOrNode = false)
+        node.addEventListener("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave)
 
-        window.addEventListener(openOnOver ? "mousemove" : event, () => !this.onPopoverOrNode && popover.remove())
+        window.addEventListener(openOnOver ? "mousemove" : event, this.LISTENERS.customEvent)
 
-        window.addEventListener("resize", () => this.positionPopover(popover))
+        window.addEventListener("resize", this.LISTENERS.windowResizeOrScroll)
 
-        window.addEventListener("scroll", () => this.positionPopover(popover), true)
+        window.addEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
+
+        this.elementRef = popover
     }
 
     private positionPopover = (popover: PopoverElement): void => {
@@ -79,25 +87,43 @@ export class Popover extends React.Component<IProps>{
         if(position === "right"){
             popover.style.left = nodePos.left + nodePos.width + "px"
             popover.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
-        }else if(position === "right-top"){
-            popover.style.left = nodePos.left + nodePos.width + "px"
-            popover.style.top = nodePos.top + "px"
         }else if(position === "bottom"){
             popover.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
             popover.style.top = nodePos.top + nodePos.height + "px"
         }else if(position === "top"){
             popover.style.left = nodePos.left - (popoverPos.width / 2) + (nodePos.width / 2) + "px"
             popover.style.top = nodePos.top - popoverPos.height + "px"
-        }else if(position === "left-top"){
-            popover.style.left = nodePos.left + 10 - popoverPos.width + "px"
-            popover.style.top = nodePos.top + "px"
         }else{
             popover.style.left = nodePos.left + 10 - popoverPos.width + "px"
             popover.style.top = nodePos.top - (popoverPos.height / 2) + (nodePos.height / 2) + "px"
         }
     }
 
-    render = () => _.isString(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
+    componentWillUnmount = () => {
+        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        { openOnOver } = this.props,
+        event = openOnOver ? "mouseenter" : "click"
+
+        this.LISTENERS.customEvent()
+
+        this.observer.disconnect()
+
+        this.elementRef.removeEventListener("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter)
+
+        this.elementRef.removeEventListener("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave)
+
+        node.removeEventListener("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter)
+
+        node.removeEventListener("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave)
+
+        window.removeEventListener(openOnOver ? "mousemove" : event, this.LISTENERS.customEvent)
+
+        window.removeEventListener("resize", this.LISTENERS.windowResizeOrScroll)
+
+        window.removeEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
+    }
+
+    render = () => React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
 
     static forceRemoveAll = (): void => {
         const popovers = document.querySelectorAll(".dolfo-popover")
