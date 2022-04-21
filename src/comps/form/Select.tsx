@@ -180,6 +180,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
                     tabIndex={-1}
                     required={props.required}
                     autoFocus={props.autoFocus}
+                    readOnly
                 />
 
                 <span>{this.decodeValue(value)}</span>

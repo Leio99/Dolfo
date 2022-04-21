@@ -38,8 +38,18 @@ import { TransferlistPage } from "./TransferlistPage"
 import { SpotlightPage } from "./SpotlightPage"
 import { ListsidemenuPage } from "./ListsidemenuPage"
 import { PopoverPage } from "./PopoverPage"
+import React from "react"
+import { IconKey } from "../shared/models/IconModel"
 
-export const MenuItems = [
+interface MenuItem{
+    readonly link: string
+    readonly children: string
+    readonly section: "form" | "layout",
+    readonly component: React.ComponentClass
+    readonly icon: IconKey
+}
+
+export const MenuItems: MenuItem[] = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
     { link: "form/datepicker", children: "Date picker", section: "form", component: DatepickerPage, icon: "calendar-day" },
     { link: "form/radio", children: "Radio button", section: "form", component: RadiobuttonPage, icon: "dot-circle" },

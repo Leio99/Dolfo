@@ -35,7 +35,7 @@ export class Option extends React.PureComponent<IProps>{
 
         if(props.isRadio){
             return <div className={"dolfo-input-radio" + (props.className ? (" " + props.className) : "")} style={props.style} onClick={this.selectOption}>
-                <input type="radio" required={props.required} checked={props.selected} tabIndex={-1} name={props.controlName} />
+                <input type="radio" required={props.required} checked={props.selected} tabIndex={-1} name={props.controlName} readOnly />
 
                 <div className={"dolfo-radio-circle" + (props.selected ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace}>
                     {props.selected && <Icon iconKey="check" />}

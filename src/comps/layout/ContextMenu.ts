@@ -20,7 +20,7 @@ export class ContextMenu{
         closeAfterClickItem: true
     }): void => {
         const context = document.createElement("div") as MenuItemElement,
-        observer = new MutationObserver(() => this.positionContext(context)),
+        observer = new MutationObserver(() => ContextMenu.positionContext(context)),
         LISTENERS = {
             windowResizeOrScroll: () => ContextMenu.positionContext(context),
             windowClick: () => {

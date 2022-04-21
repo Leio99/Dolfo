@@ -150,8 +150,8 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     autoFocus={props.autoFocus}
                     onChange={this.onChange}
                     disabled={props.disabled}
-                    maxLength={props.type !== 'number' && props.maxLength}
-                    minLength={props.type !== 'number' && props.minLength}
+                    maxLength={props.type !== 'number' && props.maxLength ? props.maxLength : null}
+                    minLength={props.type !== 'number' && props.minLength ? props.minLength : null}
                     value={value}
                     readOnly={props.readonly}
                     ref={r => input = r}

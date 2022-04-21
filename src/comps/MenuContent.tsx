@@ -9,6 +9,7 @@ import { Icon } from "./layout/Icon"
 import { Switch as InputSwitch } from "./form/Switch"
 import { isDarkTheme, toggleDarkTheme } from "./shared/utility"
 import { Tooltip } from "./layout/Tooltip"
+import { IconKey } from "./shared/models/IconModel"
 
 const homepage = process.env.PUBLIC_URL + "/",
 hashHistory = createBrowserHistory()
@@ -123,7 +124,7 @@ export class MenuContent extends React.Component<unknown, { readonly darkTheme: 
     }
 }
 
-export class MenuItem extends React.Component<{ readonly link: string, readonly icon: string }>{
+export class MenuItem extends React.Component<{ readonly link: string, readonly icon: IconKey }>{
     static clickItem = (link: string) => {
         hashHistory.push(homepage + link)
         document.querySelector(".body-content").scrollTo(0, 0)

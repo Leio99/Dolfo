@@ -142,6 +142,7 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
                         value={files && value.length ? this.getFilesNameSeparated() : ""}
                         style={props.style}
                         disabled={props.disabled}
+                        readOnly
                     />
                 </InputWrapper> : <div className={"dolfo-uploader-drop" + (props.disabled ? " disabled" : "")} onDrop={(e) => this.onDrop(e, input)} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDragEnter={this.onDragEnter} onClick={() => input.click()} style={props.style} onMouseLeave={this.onDragLeave}>
                     <div className="dolfo-uploader-drop-label">{props.label || Constants.UPLOAD_FILE_DROP_LABEL}</div>
