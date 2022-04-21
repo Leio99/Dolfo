@@ -1,8 +1,9 @@
 import React, { CSSProperties } from "react"
+import { IconKey, IconType } from "../shared/models/IconModel"
 
 export interface BaseIconProps {
-    readonly type?: "fa" | "far" | "fal" | "fas" | "fab" | "fad"
-    readonly iconKey: string
+    readonly type?: IconType
+    readonly iconKey: IconKey
 }
 
 interface DefaultIconProps{

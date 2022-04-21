@@ -4,6 +4,7 @@ import { Icon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Constants } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
+import { IconKey } from "../shared/models/IconModel"
 
 type InputTypes = "textarea" | "password" | "email" | "number"
 
@@ -100,7 +101,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         this.props.onKeyUp && this.props.onKeyUp(e)
     }
 
-    getDefaultIcon = (): string => {
+    getDefaultIcon = (): IconKey => {
         const { props } = this
 
         if(props.type === "password") return "lock"
