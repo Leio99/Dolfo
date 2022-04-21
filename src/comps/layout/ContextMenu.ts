@@ -26,6 +26,7 @@ export class ContextMenu extends React.Component<IProps>{
         windowResizeOrScroll: () => this.positionContext(this.elementRef),
         windowClick: () => this.elementRef?.remove(),
         nodeClick: (e: Event) => {
+            document.body.click()
             e.stopPropagation()
             document.body.appendChild(this.elementRef)
         }
