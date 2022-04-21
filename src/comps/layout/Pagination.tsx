@@ -6,6 +6,7 @@ import { Tooltip } from "./Tooltip"
 interface IProps{
     readonly start: number
     readonly end: number
+    readonly currentPage?: number
     readonly showNextPrevArrow?: boolean
     readonly showFirstLastPage?: boolean
     readonly onChangePage?: (page: number) => void
@@ -24,6 +25,11 @@ export class Pagination extends React.Component<IProps, IState>{
         this.state = {
             page: 1
         }
+    }
+
+    componentDidUpdate = (prevProps: IProps) => {
+        if(prevProps.currentPage !== this.props.currentPage || this.props.currentPage !== this.state.page)
+            this.setState({ page: this.props.currentPage })
     }
 
     changePage = (page: number): void => {
