@@ -36,7 +36,7 @@ export class Table extends BaseResultsManager{
                         {
                             props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
                                 {col.type === "check" && <Tooltip tooltip={col.checkTooltip}>
-                                    <CheckBox checked={col.checked} onChange={col.onCheckAll} />
+                                    <CheckBox checked={col.checked} onChange={col.onCheckAll} disabled={col.checkDisabled} />
                                 </Tooltip>}
  
                                 {col.canSearch && <Tooltip tooltip={Constants.FILTER_TEXT}>
