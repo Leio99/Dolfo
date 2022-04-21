@@ -13,8 +13,8 @@ import { goToApiBlock } from "../MenuContent"
 import { Tooltip } from "../layout/Tooltip"
 
 export class TreeviewPage extends TreeView{
-    constructor(){
-        super({
+    constructor(props: unknown){
+        super(props, {
             list: [
                 {
                     "id": "1",

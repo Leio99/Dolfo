@@ -116,7 +116,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
                     children.map((child, i) => {
                         const disabled = child.props.disabled
 
-                        return <div className={"dolfo-tab-title" + (currentTab === i ? " current" : "") + (disabled ? " disabled" : "")} onClick={!disabled ? () => this.changeSelection(i) : null} tabIndex={!disabled ? 0 : null} onKeyUp={(e) => this.checkKey(e, i)} onKeyDown={this.preventSpaceKey}>
+                        return <div className={"dolfo-tab-title" + (currentTab === i ? " current" : "") + (disabled ? " disabled" : "")} onClick={!disabled ? () => this.changeSelection(i) : null} tabIndex={!disabled ? 0 : null} onKeyUp={(e) => this.checkKey(e, i)} onKeyDown={this.preventSpaceKey} key={i}>
                             {child.props.title}
                         </div>
                     })
@@ -130,9 +130,9 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
                         style = i === 0 && !isVertical ? { ...child.props.style, marginLeft } : child.props.style
 
                         if(child.props.disabled)
-                            return <></>
+                            return <React.Fragment key={i} />
                         
-                        return <div className={"dolfo-tab-content" + (i === currentTab ? " current" : "")} style={style}>
+                        return <div className={"dolfo-tab-content" + (i === currentTab ? " current" : "")} style={style} key={i}>
                             {child.props.children}
                         </div>
                     })

@@ -107,7 +107,7 @@ export class SelectableCardList extends React.PureComponent<SelectableCardListPr
                     onChange = props.multiple ? this.changeMultiple : this.changeOption,
                     addClass = (i - 1) % 3 === 0 && !props.fullSize ? " middle" : ""
 
-                    return <div className={"dolfo-selectable-option" + (opt.props.disabled && !props.disabled ? " disabled" : "") + (opt.props.className ? (" " + opt.props.className) : "") + (selected ? " selected" : "") + addClass} style={opt.props.style} onClick={() => onChange(opt.props.value)}>
+                    return <div className={"dolfo-selectable-option" + (opt.props.disabled && !props.disabled ? " disabled" : "") + (opt.props.className ? (" " + opt.props.className) : "") + (selected ? " selected" : "") + addClass} style={opt.props.style} onClick={() => onChange(opt.props.value)} key={i}>
                         {props.showCheckbox && <CheckBox checked={selected} />}
                         <h5>{opt.props.title}</h5>
                         {opt.props.desc && <small>{opt.props.desc}</small>}

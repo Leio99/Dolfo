@@ -52,11 +52,7 @@ export class RadioButton extends React.PureComponent<RadioButtonProps, IState>{
                 </Tooltip>}  
             </label>}
             {
-                options?.map(option => {
-                    if((option as any).type !== Option) return option
-
-                    return <Option {...option.props} selected={value === option.props.value} onChange={this.changeValue} controlName={props.controlName} required={props.required} isRadio />
-                })
+                options?.map((option, i) => <Option {...option.props} selected={value === option.props.value} onChange={this.changeValue} controlName={props.controlName} required={props.required} isRadio key={i} />)
             }
         </div>
     }

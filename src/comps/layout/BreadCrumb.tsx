@@ -28,7 +28,7 @@ export class BreadCrumb extends React.PureComponent<IProps>{
         return <div className={"dolfo-breadcrumb" + (props.className ? (" " + props.className) : "") + (props.arrowStyle ? " arrow-style" : "")} style={props.style}>
             {
                 options.map((opt, i) => {
-                    return <div className="dolfo-breadcrumb-item">
+                    return <div className="dolfo-breadcrumb-item" key={i}>
                         <Tooltip tooltip={opt.props.onClick && Constants.NAVIGATE_BREADCRUMB}>
                             <div className={"dolfo-breadcrumb-item-inner" + (opt.props.onClick ? " clickable" : "")} onClick={opt.props.onClick} onMouseDown={opt.props.onMouseDown}>
                                 {opt.props.children}

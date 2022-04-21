@@ -111,10 +111,10 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                     </div>}
                     <div className="dolfo-transfer-list-items">
                         {
-                            unselected.length ? unselected.map(item => {
+                            unselected.length ? unselected.map((item, i) => {
                                 const disabled = props.disabledItem && props.disabledItem(item)
 
-                                return <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "") + (disabled ? " disabled" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
+                                return <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "") + (disabled ? " disabled" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)} key={i}>
                                     {props.getLabel(item)}
                                 </div>
                             }) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
@@ -157,7 +157,7 @@ export class TransferList extends React.Component<TransferListProps, IState>{
 
                     <div className="dolfo-transfer-list-items">
                         {
-                            selected.length ? selected.map(item => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)}>
+                            selected.length ? selected.map((item, i) => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)} key={i}>
                                 {props.getLabel(item)}
                             </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
                         }

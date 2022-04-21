@@ -31,7 +31,7 @@ interface InternalState{
 }
 
 export abstract class TreeView<P = any> extends React.PureComponent<P, InternalState & IState>{
-    constructor(state: IState, props?: P){
+    constructor(props: P, state: IState){
         super(props)
 
         this.state = {
@@ -41,12 +41,10 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         }
     }
 
-    onUpdate = (__: P, prevState: IState): void => {
+    componentDidUpdate = (__: P, prevState: IState): void => {
         if(!_.isEqual(prevState.list, this.state.list))
             this.setState({ level: this.state.autoOpen ? this.autoExpandAll() : {} })
     }
-
-    componentDidUpdate: (props: P, state: IState) => void = this.onUpdate
 
     abstract getData: (node: TreeNode) => TreeNode[]
 
@@ -139,7 +137,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
             </td>
 
             {
-                addColumn && addColumn.map(c => <td style={{ textAlign: c.align}}>
+                addColumn && addColumn.map((c, i) => <td style={{ textAlign: c.align}} key={i}>
                     {this.getColumnData(c, node)}
                 </td>)
             }
@@ -202,7 +200,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                 <thead>
                     <tr>
                         <th>{descColumn || Constants.TREE_TABLE_DESCRIPTION_LABEL}</th>
-                        {addColumn && addColumn.map(c => <th style={{ width: c.width, textAlign: c.align }}>
+                        {addColumn && addColumn.map((c, i) => <th style={{ width: c.width, textAlign: c.align }} key={i}>
                             {c.label}
                         </th>)}
                         {showActions && <th style={{ width: "20%" }}>{Constants.TREE_TABLE_ACTIONS_LABEL}</th>}

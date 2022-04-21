@@ -107,7 +107,7 @@ export class Spotlight extends React.Component<IProps, IState>{
                     {
                         props.loading ? <div className="dolfo-spotlight-loading">
                             <LoadingIcon spinning /> {Constants.LOADING_TEXT}
-                        </div> : props.data && props.data.length ? props.data.map((d, i) => <div className={"dolfo-spotlight-item" + (focusedIndex === i ? " focused" : "")} onClick={() => this.clickItem(d)}>
+                        </div> : props.data && props.data.length ? props.data.map((d, i) => <div className={"dolfo-spotlight-item" + (focusedIndex === i ? " focused" : "")} onClick={() => this.clickItem(d)} key={i}>
                             {props.renderItem(d)}
                         </div>): <div className="dolfo-spotlight-nodata">{Constants.TABLE_NO_RESULTS}</div>
                     }    

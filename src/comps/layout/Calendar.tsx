@@ -140,18 +140,18 @@ export class Calendar extends React.PureComponent<IProps, IState>{
             content: <>
                 <Select icon={{ iconKey: "calendar", type: "far" }} canSearch defaultValue={currentMonth} onChange={v => selMonth = v}>
                     {
-                        Constants.MONTHS.map((m, i) => <Option value={i} label={m} />)
+                        Constants.MONTHS.map((m, i) => <Option value={i} label={m} key={m} />)
                     }
                 </Select>
 
                 <Select icon={{ iconKey: "calendar-check", type: "far" }} canSearch defaultValue={currentYear} onChange={v => selYear = v}>
                     {
-                        years.map(y => <Option value={y} label={y.toString()} />)
+                        years.map(y => <Option value={y} label={y.toString()} key={y} />)
                     }
                 </Select>
             </>,
             customFooter: [
-                <Tooltip tooltip={Constants.CALENDAR_SELECT_CURRENT} >
+                <Tooltip key="today" tooltip={Constants.CALENDAR_SELECT_CURRENT} >
                     <Button type="text"style={{ float: "left" }} size="big" btnColor="green" onClick={() => {
                         const d = new Date()
 
@@ -163,7 +163,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                         <Icon iconKey="calendar-alt" type="far" />
                     </Button>
                 </Tooltip>,
-                <Button size="small" btnColor="blue" onClick={() => {
+                <Button key="select" size="small" btnColor="blue" onClick={() => {
                     this.setState({
                         currentMonth: selMonth ?? currentMonth,
                         currentYear: selYear ?? currentYear
@@ -171,7 +171,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                 }}>
                     {Constants.CALENDAR_SET_TEXT}
                 </Button>,
-                <Button type="text" btnColor="red" onClick={() => dialog.close()}>
+                <Button key="cancel" type="text" btnColor="red" onClick={() => dialog.close()}>
                     {Constants.CANCEL_TEXT}
                 </Button>
             ]
@@ -222,8 +222,8 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
                 <tbody>
                     {
-                        calendario.map(row => {
-                            return <tr>
+                        calendario.map((row, ri) => {
+                            return <tr key={ri}>
                                 {
                                     row.map((col, i) => {
                                         const dEvents = events.filter(e => e.day === col.day && e.month === col.month && e.year === col.year),
@@ -232,7 +232,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                                         isPrev = col.prevMonth >= 0,
                                         isNext = col.nextMonth >= 0
 
-                                        return <td className={(isPrev || isNext ? "external" : "") + (!dEvents.length ? " empty" : "")}>
+                                        return <td className={(isPrev || isNext ? "external" : "") + (!dEvents.length ? " empty" : "")} key={i}>
                                             <div className="content">
                                                 {isToday && <Tooltip tooltip={Constants.CALENDAR_PIN_TODAY}>
                                                     <Icon iconKey="map-pin" large className="icon-today" />
@@ -247,7 +247,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
                                                 <div className="events-container">
                                                     {
-                                                        dEvents.map(e => <Tooltip tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP}>
+                                                        dEvents.map((e, ei) => <Tooltip tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} key={ei}>
                                                             <div className="event" onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
                                                                 {e.start && e.end && <span>{e.start} - {e.end}</span>} 
                                                                 {e.start && e.end && <span className="event-desc-separator"> • </span>}

@@ -72,12 +72,12 @@ export class MenuContent extends React.Component<unknown, { readonly darkTheme: 
 
                     <div className="navigation-menu-title">Form</div>
                     {
-                        MenuItems.filter(m => m.section === "form").map(m => <MenuItem {...m} />)
+                        MenuItems.filter(m => m.section === "form").map((m, i) => <MenuItem {...m} key={"form_" + i} />)
                     }
 
                     <div className="navigation-menu-title">Layout</div>
                     {
-                        MenuItems.filter(m => m.section === "layout").map(m => <MenuItem {...m} />)
+                        MenuItems.filter(m => m.section === "layout").map((m, i) => <MenuItem {...m} key={"layout_" + i} />)
                     }
                 </div>
 
@@ -109,7 +109,7 @@ export class MenuContent extends React.Component<unknown, { readonly darkTheme: 
                             MenuItems.map(m => {
                                 const Component = m.component
 
-                                return <Route exact path={homepage + m.link}>
+                                return <Route exact path={homepage + m.link} key={m.link}>
                                     <h2 className="page-title">{menuBtn("white")} {m.children}</h2>
                                     {m.component ? <Component /> : "Docs to do."}
                                 </Route>

@@ -317,19 +317,19 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
                         </div>
 
                         {
-                            monthCalendar.map(week => {
-                                return <div className="dolfo-calendar-row">
+                            monthCalendar.map((week, i) => {
+                                return <div className="dolfo-calendar-row" key={i}>
                                     {
                                         week.map(day => {
                                             if (day.prevMonth >= 0) {
-                                                return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.prevMonth, day.prevYear)}>{day.day}</div>
+                                                return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.prevMonth, day.prevYear)} key={day.day}>{day.day}</div>
                                             }
 
                                             if (day.nextMonth >= 0) {
-                                                return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.nextMonth, day.nextYear)}>{day.day}</div>
+                                                return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.nextMonth, day.nextYear)} key={day.day}>{day.day}</div>
                                             }
 
-                                            return <div className={"dolfo-calendar-cell" + (this.isCurrentDay(day) ? " selected" : this.isToday(day) ? " today" : "")} onClick={() => this.selectDay(day.day)}>{day.day}</div>
+                                            return <div className={"dolfo-calendar-cell" + (this.isCurrentDay(day) ? " selected" : this.isToday(day) ? " today" : "")} onClick={() => this.selectDay(day.day)} key={day.day}>{day.day}</div>
                                         })
                                     }
                                 </div>
@@ -353,11 +353,11 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
                 {
                     selectingMonth && <div className="month-selection">
                         {
-                            [[0,1,2],[3,4,5],[6,7,8],[9,10,11]].map(tris => {
-                                return <div className="dolfo-calendar-row">
+                            [[0,1,2],[3,4,5],[6,7,8],[9,10,11]].map((tris, i) => {
+                                return <div className="dolfo-calendar-row" key={i}>
                                     {
                                         tris.map(month => {
-                                            return <div className={"dolfo-calendar-cell select" + (currentMonth === month ? " selected" : "")} onClick={() => this.selectMonth(month)}>
+                                            return <div className={"dolfo-calendar-cell select" + (currentMonth === month ? " selected" : "")} onClick={() => this.selectMonth(month)} key={month}>
                                                 <span>{decodeMonth(month, true)}</span>
                                             </div>
                                         })
@@ -387,13 +387,13 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
                         </div>
 
                         {
-                            [[-1, 0, 1],[2,3,4],[5,6,7],[8,9,10]].map(tris => {
-                                return <div className="dolfo-calendar-row">
+                            [[-1, 0, 1],[2,3,4],[5,6,7],[8,9,10]].map((tris, i) => {
+                                return <div className="dolfo-calendar-row" key={i}>
                                     {
                                         tris.map(n => {
                                             const year = currentDecade + n
 
-                                            return <div className={"dolfo-calendar-cell select" + (currentYear === year ? " selected" : "") + (n === -1 || n === 10 ? " ext-year" : "")} onClick={() => this.selectYear(currentDecade + n)}>
+                                            return <div className={"dolfo-calendar-cell select" + (currentYear === year ? " selected" : "") + (n === -1 || n === 10 ? " ext-year" : "")} onClick={() => this.selectYear(currentDecade + n)} key={n}>
                                                 <span>{year}</span>
                                             </div>
                                         })

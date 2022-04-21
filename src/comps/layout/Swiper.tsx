@@ -32,7 +32,7 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
         return <div className="dolfo-swiper-container">
             {
                 swipes.map((s, i) => {
-                    return <div className={"dolfo-swipe" + (i === 1 ? (" detail-swipe" + (opened ? " opened" : "")) : "") + (s.props.className ? (" " + s.props.className) : "")} style={s.props.style}>
+                    return <div className={"dolfo-swipe" + (i === 1 ? (" detail-swipe" + (opened ? " opened" : "")) : "") + (s.props.className ? (" " + s.props.className) : "")} style={s.props.style} key={i}>
                         {i === 1 && <div className="dolfo-swipe-header">
                             <Button type="text" btnColor="grey" onClick={s.props.onGoBack}>
                                 <Icon iconKey="chevron-left" /> {Constants.BACK_TEXT}

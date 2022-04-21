@@ -14,12 +14,12 @@ export class Timeline extends React.Component{
         hideAll = options.every(o => !o.props.position || o.props.position === (options[0].props.position || "left"))
 
         return <div className="dolfo-timeline">
-            {options.map(o => {
+            {options.map((o, i) => {
                 const item = <div className="dolfo-timeline-item" style={o.props.style}>
                     {o.props.children}
                 </div>
                 
-                return <div className={"dolfo-timeline-item-row " + (o.props.position || "left") + (hideAll ? " hide-empty" : "")}>
+                return <div className={"dolfo-timeline-item-row " + (o.props.position || "left") + (hideAll ? " hide-empty" : "")} key={i}>
                     {
                         o.props.position !== "right" ? item : !hideAll ? <div className="dolfo-timeline-empty"></div> : null
                     }

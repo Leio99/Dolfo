@@ -175,7 +175,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
             <div className="dolfo-input-select">
                 <input
                     type="text"
-                    value={value}
+                    value={value ?? ""}
                     disabled={props.disabled}
                     tabIndex={-1}
                     required={props.required}
@@ -192,13 +192,13 @@ class Select extends React.PureComponent<SelectProps, IState>{
                 options && options.length ? (props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
                     {
                         options.map((option, i) => {
-                            return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={val => this.changeMultiple(val)} multiple />
+                            return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={val => this.changeMultiple(val)} multiple key={i} />
                         })
                     }
                 </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>
                     {
                         options.map((option, i) => {
-                            return <Option {...option.props} selected={_.isEqual(option.props.value, value)} focused={i === currentSelection} onChange={this.changeOption} />
+                            return <Option {...option.props} selected={_.isEqual(option.props.value, value)} focused={i === currentSelection} onChange={this.changeOption} key={i} />
                         })
                     }
                 </div>) : null

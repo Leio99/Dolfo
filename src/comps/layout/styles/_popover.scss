@@ -5,11 +5,8 @@
     z-index: 5;
     background-color: $white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
-    .dolfo-popover-inner{
-        padding: 1rem
-    }
-
+    padding: 1rem;
+    
     &:before, &:after{
         content: "";
         display: block;

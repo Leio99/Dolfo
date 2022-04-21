@@ -91,7 +91,9 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
                         if(slide.props.imageUrl)
                             style.backgroundImage = `url('${slide.props.imageUrl}')`
 
-                        return <Slide {...slide.props} style={style} />
+                        return <div className="dolfo-slide" style={style} key={i}>
+                            {slide.props.children}
+                        </div>
                     })
                 }
             </div>
@@ -99,7 +101,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
             <div className="dolfo-slides-dots">
                 {
                     slides.map((_, i) => {
-                        return <div className={"slide-dot" + (currentSlide === i ? " selected" : "")} onClick={() => this.changeSlide(i)}></div>
+                        return <div className={"slide-dot" + (currentSlide === i ? " selected" : "")} onClick={() => this.changeSlide(i)} key={i}></div>
                     })
                 }
             </div>
@@ -108,11 +110,5 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
 }
 
 export class Slide extends React.PureComponent<SlideProps>{
-    render = (): JSX.Element => {
-        const { props } = this
-
-        return <div className="dolfo-slide" style={props.style}>
-            {this.props.children}
-        </div>
-    }
+    render = (): JSX.Element => <></>
 }

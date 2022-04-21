@@ -55,10 +55,10 @@ export class Stepper extends React.PureComponent<IProps>{
         return <div className={"dolfo-stepper" + (props.vertical ? " vertical" : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
             <div className="dolfo-stepper-header">
                 {
-                    stepsSeparated.map(child => {
-                        if(_.isString(child)) return <div className="dolfo-step-separator"></div>
+                    stepsSeparated.map((child, i) => {
+                        if(_.isString(child)) return <div className="dolfo-step-separator" key={i}></div>
 
-                        return <div className={"dolfo-stepper-step-title" + (currentStep === child.index ? " current" : "")}>
+                        return <div className={"dolfo-stepper-step-title" + (currentStep === child.index ? " current" : "")} key={i}>
                             <div className="dolfo-stepper-step-circle">
                                 {child.step.props.icon ? <Icon type={child.step.props.icon.type} iconKey={child.step.props.icon.iconKey} /> : (child.index + 1)}
                             </div>
@@ -72,11 +72,11 @@ export class Stepper extends React.PureComponent<IProps>{
 
             <div className="dolfo-stepper-steps">
                 {
-                    steps.map((step: Step, i: number) => {
+                    steps.map((step, i) => {
                         const style = i === 0 ? props.vertical ? step.props.style : { ...step.props.style, marginLeft } : null,
                         isCurrent = currentStep === i
 
-                        return <div className={"dolfo-step" + (isCurrent ? " current" : "")} style={style}>
+                        return <div className={"dolfo-step" + (isCurrent ? " current" : "")} style={style} key={i}>
                             {step}
                         </div>
                     })

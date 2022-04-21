@@ -34,7 +34,7 @@ export class Table extends BaseResultsManager{
                 <thead>
                     <tr>
                         {
-                            props.columns.map(col => <th style={{ width: col.width, textAlign: col.align }}>
+                            props.columns.map((col, i) => <th style={{ width: col.width, textAlign: col.align }} key={i}>
                                 {col.type === "check" && <Tooltip tooltip={col.checkTooltip}>
                                     <CheckBox checked={col.checked} onChange={col.onCheckAll} disabled={col.checkDisabled} />
                                 </Tooltip>}
@@ -53,14 +53,14 @@ export class Table extends BaseResultsManager{
 
                 <tbody>
                     {
-                        data.length ? data.map(d => {
+                        data.length ? data.map((d, i) => {
                             const rowStyle = d.checked ? {
                                 backgroundColor: "var(--hoverblue)"
                             } : null
 
-                            return <tr onDoubleClick={() => this.onDoubleClick(d)}>
+                            return <tr onDoubleClick={() => this.onDoubleClick(d)} key={i}>
                                 {
-                                    props.columns.map(col => <Tooltip tooltip={col.tooltip ? d[col.field] : null} placeTooltip={col.placeTooltip}>
+                                    props.columns.map((col, ii) => <Tooltip tooltip={col.tooltip ? d[col.field] : null} placeTooltip={col.placeTooltip} key={ii}>
                                             <td style={{ ...rowStyle, ...d.rowStyle, textAlign: col.align }}>
                                             {
                                                 d[col.field]

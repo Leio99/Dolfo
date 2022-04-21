@@ -96,7 +96,7 @@ export class DropDown extends React.Component<IProps, IState>{
             {
                 opened && <div className="dropdown-items-container">
                     {
-                        items.map(i => <div className={"dolfo-dropdown-item" + (i.props.static ? " static" : "") + (i.props.disabled ? " disabled" : "") + (i.props.className ? " " + i.props.className : "")} onClick={e => this.clickItem(e, i)} style={i.props.style}>{i.props.children}</div>)
+                        items.map((i, k) => <div className={"dolfo-dropdown-item" + (i.props.static ? " static" : "") + (i.props.disabled ? " disabled" : "") + (i.props.className ? " " + i.props.className : "")} onClick={e => this.clickItem(e, i)} style={i.props.style} key={k}>{i.props.children}</div>)
                     }
                 </div>
             }

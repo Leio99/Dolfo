@@ -24,9 +24,9 @@ export class CardTable extends BaseResultsManager<CardTableProps>{
                     return <Card className={addClass + checkClass} layout="tab" title={(check || props.getTitle) && <>
                         {check && !d.hideCheck && d[check.field]}
                         {props.getTitle && props.getTitle(d)}
-                    </>} onDoubleClick={() => this.onDoubleClick(d)}>
+                    </>} onDoubleClick={() => this.onDoubleClick(d)} key={i}>
                         {
-                            props.columns.map(col => !col.hideCard && col.type !== "check" && <Tooltip tooltip={col.tooltip ? d[col.field] : null} placeTooltip={col.placeTooltip}>
+                            props.columns.map((col, ii) => !col.hideCard && col.type !== "check" && <Tooltip tooltip={col.tooltip ? d[col.field] : null} placeTooltip={col.placeTooltip} key={ii}>
                                 <div style={{ ...d.rowStyle }}>
                                     {col.field !== "actions" ? <div className="key-value">
                                         <strong>
