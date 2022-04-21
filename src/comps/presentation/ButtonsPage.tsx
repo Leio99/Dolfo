@@ -70,16 +70,8 @@ export class ButtonsPage extends React.Component{
                         <Icon iconKey="magic" /> Magic
                     </span>, onClick: () => alert("You clicked the second option!") },
                 ]}>Options appear above</Button>
-                <Button btnColor="blue" style={{ marginRight: 5 }} type="popup" iconPopup options={[
-                    { text: "I am the first", onClick: () => alert("You clicked the first option!") },
-                    { text: <span>
-                        <Icon iconKey="magic" /> Magic
-                    </span>, onClick: () => alert("You clicked the second option!") },
-                ]}>
-                    <Icon iconKey="magic" />
-                </Button>
             </>}
-            code={'<Button btnColor="blue" type="popup" options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>Click to open me</Button>\n\n<Button btnColor="blue" type="popup" popupPosition="top" options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>Options appear above</Button>\n\n<Button btnColor="blue" style={{ marginRight: 5 }} type="popup" iconPopup options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>\n\t<Icon iconKey="magic" />\n</Button>'}
+            code={'<Button btnColor="blue" type="popup" options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>Click to open me</Button>\n\n<Button btnColor="blue" type="popup" popupPosition="top" options={[\n\t{ text: "I am the first", onClick: () => alert("You clicked the first option!") },\n\t{ text: <span>\n\t\t<Icon iconKey="magic" /> Magic\n\t</span>, onClick: () => alert("You clicked the second option!") }\n]}>Options appear above</Button>'}
         />
 
         <Apis data={[
@@ -140,13 +132,6 @@ export class ButtonsPage extends React.Component{
                 type: "string (top, bottom)",
                 required: false,
                 default: "bottom"
-            },
-            {
-                name: "iconPopup",
-                desc: "If type is 'popup', shows a small button with a context menu popup.",
-                type: "boolean",
-                required: false,
-                default: "false"
             },
             {
                 name: "style",

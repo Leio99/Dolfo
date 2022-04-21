@@ -1,49 +1,54 @@
 import _ from "lodash"
+import React from "react"
+import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
 
-export interface ContextMenuOption{
+interface ContextMenuOption{
     readonly label: string | JSX.Element
     readonly onClick: (e: any, clickedItem: HTMLElement) => void
     readonly disabled?: boolean
 }
 
-interface AdditionalMenuProps{
-    readonly closeAfterClickItem: boolean
+interface ContextMenuElement extends HTMLDivElement{
+    relativeElement: HTMLElement
 }
 
-interface MenuItemElement extends HTMLDivElement{
-    relativeButton: HTMLElement
+interface IProps{
+    readonly options: ContextMenuOption[]
+    readonly closeAfterClickItem?: boolean
+    readonly openWithRightClick?: boolean
 }
 
-export class ContextMenu{
-    static renderMenu = (event: Event, options: ContextMenuOption[], additionalProps: AdditionalMenuProps = {
-        closeAfterClickItem: true
-    }): void => {
-        const context = document.createElement("div") as MenuItemElement,
-        observer = new MutationObserver(() => ContextMenu.positionContext(context)),
-        LISTENERS = {
-            windowResizeOrScroll: () => ContextMenu.positionContext(context),
-            windowClick: () => {
-                context?.remove()
-
-                window.removeEventListener("click", LISTENERS.windowClick)
-                window.removeEventListener("scroll", LISTENERS.windowResizeOrScroll)
-                window.removeEventListener("resize", LISTENERS.windowResizeOrScroll)
-                observer.disconnect()
-            }
+export class ContextMenu extends React.Component<IProps>{
+    private elementRef: ContextMenuElement
+    private observer: MutationObserver
+    private readonly LISTENERS = {
+        windowResizeOrScroll: () => this.positionContext(this.elementRef),
+        windowClick: () => this.elementRef?.remove(),
+        nodeClick: (e: Event) => {
+            e.stopPropagation()
+            document.body.appendChild(this.elementRef)
         }
+    }
+
+    componentDidMount = (): void => {
+        const { options, closeAfterClickItem, openWithRightClick } = this.props,
+        context = document.createElement("div") as ContextMenuElement,
+        node = ReactDOM.findDOMNode(this) as HTMLElement,
+        event = openWithRightClick ? "contextmenu" : "click"
+
+        this.observer = new MutationObserver(() => this.positionContext(context))
 
         document.body.click()
 
-        window.addEventListener("click", LISTENERS.windowClick)
-        window.addEventListener("scroll", LISTENERS.windowResizeOrScroll)
-        window.addEventListener("resize", LISTENERS.windowResizeOrScroll)
-        observer.observe(context, { childList: true })
-
-        event.stopPropagation()
+        node.addEventListener(event, this.LISTENERS.nodeClick)
+        window.addEventListener("click", this.LISTENERS.windowClick)
+        window.addEventListener("scroll", this.LISTENERS.windowResizeOrScroll)
+        window.addEventListener("resize", this.LISTENERS.windowResizeOrScroll)
+        this.observer.observe(context, { childList: true })
 
         context.classList.add("context-menu")
-        context.relativeButton = event.target as HTMLElement
+        context.relativeElement = node
 
         options.forEach(item => {
             const htmlItem = document.createElement("div")
@@ -61,7 +66,7 @@ export class ContextMenu{
 
                 item.onClick(e, htmlItem)
 
-                if(additionalProps?.closeAfterClickItem)
+                if(closeAfterClickItem || closeAfterClickItem == null)
                     document.body.click()
             })
 
@@ -73,14 +78,26 @@ export class ContextMenu{
             context.appendChild(htmlItem)
         })
 
-        document.body.appendChild(context)
+        this.positionContext(context)
 
-        ContextMenu.positionContext(context)   
+        this.elementRef = context
     }
 
-    private static positionContext = (context: MenuItemElement): void => {
+    componentWillUnmount = (): void => {
+        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        event = this.props.openWithRightClick ? "contextmenu" : "click"
+
+        this.LISTENERS.windowClick()
+        node.removeEventListener(event, this.LISTENERS.nodeClick)
+        window.removeEventListener("click", this.LISTENERS.windowClick)
+        window.removeEventListener("scroll", this.LISTENERS.windowResizeOrScroll)
+        window.removeEventListener("resize", this.LISTENERS.windowResizeOrScroll)
+        this.observer.disconnect()
+    }
+
+    positionContext = (context: ContextMenuElement): void => {
         const menuPos = context.getBoundingClientRect(),
-        position = context.relativeButton.getBoundingClientRect(),
+        position = context.relativeElement.getBoundingClientRect(),
         width = menuPos.width,
         height = menuPos.height,
         bodyRect = document.body.getBoundingClientRect(),
@@ -99,6 +116,6 @@ export class ContextMenu{
         }else
             context.style.top = position.top + "px"
     }
-}
 
-export const openContextMenu = ContextMenu.renderMenu
+    render = () => !React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
+}

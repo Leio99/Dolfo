@@ -1,45 +1,34 @@
 import React from "react"
 import Button from "../layout/Button"
 import { Icon } from "../layout/Icon"
-import { openContextMenu } from "../layout/ContextMenu"
 import { goToApiBlock } from "../MenuContent"
-import { ContextMenuExample } from "./Examples"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { ResultCode, WhenToUse, Apis } from "./Layouts"
 import { Tooltip } from "../layout/Tooltip"
+import { ContextMenu } from "../layout/ContextMenu"
 
 export class ContextMenuPage extends React.Component{
-    openContextMenu = (e: any) => {
-        openContextMenu(e, [{
-            label: <span>Option <Icon iconKey="star" type="far" /></span>,
-            onClick: () => alert("AAAAAAAA")
-        }, {
-            label: <span>Disabled</span>,
-            disabled: true,
-            onClick: () => {}
-        }])
-    }
-
     render = (): JSX.Element => <>
         <WhenToUse>When you want to open a custom menu by clicking on a button.</WhenToUse>
-        <Usage notes={<>this component can only be rendered by calling a function (<em>ContextMenu.renderMenu(params)</em>)</>} />
 
         <ResultCode
             title="Example"
             result={<Tooltip tooltip="Click to open">
-                <Button circleBtn size="small" btnColor="white" onClick={this.openContextMenu}>
-                    <Icon iconKey="ellipsis-v" />
-                </Button>
+                <ContextMenu options={[{
+                    label: <span>Option <Icon iconKey="star" type="far" /></span>,
+                    onClick: () => alert("AAAAAAAA")
+                }, {
+                    label: <span>Disabled</span>,
+                    disabled: true,
+                    onClick: () => {}
+                }]}>
+                    <Button circleBtn size="small" btnColor="white">
+                        <Icon iconKey="ellipsis-v" />
+                    </Button>
+                </ContextMenu>
             </Tooltip>}
-            code={ContextMenuExample}
-        />
+            code={'<ContextMenu options={[{\n\tlabel: <span>Option <Icon iconKey="star" type="far" /></span>,\n\tonClick: () => alert("AAAAAAAA")\n}, {\n\tlabel: \n\t<span>Disabled</span>,\n\tdisabled: true,\n\tonClick: () => {}\n}]}>\n\t<Button circleBtn size="small" btnColor="white">\n\t\t<Icon iconKey="ellipsis-v" />\n\t</Button>\n</ContextMenu>'} />
 
-        <Apis title="Function properties" data={[
-            {
-                name: "event",
-                desc: "The event that triggered the opening of the menu.",
-                type: "Event",
-                required: true
-            },
+        <Apis data={[
             {
                 name: "options",
                 desc: "The options to show.",
@@ -49,12 +38,18 @@ export class ContextMenuPage extends React.Component{
                 rowStyle: { backgroundColor: "var(--hoverblue)" }
             },
             {
-                name: "additionalProps",
-                desc: "Additional properties.",
+                name: "closeAfterClickItem",
+                desc: "Determines whether the context menu should close after clicking an option.",
                 type: "boolean",
                 required: false,
-                onDoubleClick: () => goToApiBlock("#additionalProps"),
-                rowStyle: { backgroundColor: "var(--hoverblue)" }
+                default: "true"
+            },
+            {
+                name: "openWithRightClick",
+                desc: "Determines whether the context menu should open when clicking the right button of the mouse.",
+                type: "boolean",
+                required: false,
+                default: "false"
             }
         ]} />
 
@@ -79,16 +74,6 @@ export class ContextMenuPage extends React.Component{
                 type: "boolean",
                 required: false,
                 default: "false"
-            }
-        ]} />
-
-        <Apis title="Additional properties" id="additionalProps" data={[
-            {
-                name: "closeAfterClickItem",
-                desc: "Determines whether the context menu should close after clicking an option.",
-                type: "boolean",
-                required: false,
-                default: "true"
             }
         ]} />
     </>

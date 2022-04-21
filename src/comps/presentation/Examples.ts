@@ -533,24 +533,6 @@ TreeExample = `export class TreeviewPage extends TreeView{
         }
     }
 }`,
-ContextMenuExample = `export class ContextExample extends React.Component{
-    openContextMenu = (e: any) => {
-        MenuContext.renderMenu(e, [{
-            label: "I am the first option",
-            onClick: () => alert("AAAAAAAA")
-        }, {
-            label: <span>Disabled</span>,
-            disabled: true,
-            onClick: () => {}
-        }])
-    }
-
-    render = () => <Tooltip tooltip="Click to open">
-        <Button circleBtn size="small" btnColor="white" onClick={this.openContextMenu}>
-            <Icon iconKey="ellipsis-v" />
-        </Button>
-    </Tooltip>
-}`,
 SpotExample = `export class SpotExample extends React.Component<unknown, { readonly visible: boolean, readonly data: any[] }>{
     private readonly DATA: { name: string, surname: string }[] = [
         { name: "Jules", surname: "Cesar" },
