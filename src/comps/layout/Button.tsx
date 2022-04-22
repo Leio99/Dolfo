@@ -89,7 +89,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
             (props.circleBtn ? " circle-btn" : "") + 
             (props.size === "big" ? " big-button" : "")
         } style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick} onMouseDown={props.onMouseDown}>
-            {props.loading && <LoadingIcon spinning />} {props.circleBtn && props.loading ? null : props.children}
+            {props.loading && <LoadingIcon className="btn-loading-icon" spinning />}{props.circleBtn && props.loading ? <></> : props.children}
         </button>
     }
 }

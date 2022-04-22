@@ -15,6 +15,10 @@
         opacity: $disabledOpacity;
         pointer-events: none
     }
+
+    .btn-loading-icon{
+        margin-right: 0.4rem
+    }
     
     &:not(.text-btn){
         border-radius: $smallRadius;
