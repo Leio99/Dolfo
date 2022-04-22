@@ -100,13 +100,13 @@ export class DialogPage extends React.Component<any, {
                         title: "Custom footer",
                         content: "Here is my custom footer.",
                         customFooter: [
-                            <Button type="text" btnColor="green">
+                            <Button key="save" type="text" btnColor="green">
                                 <Icon iconKey="save" /> Save
                             </Button>,
-                            <Button type="text" btnColor="red" style={{ marginLeft: 10 }}>
+                            <Button key="delete" type="text" btnColor="red" style={{ marginLeft: 10 }}>
                                 <Icon iconKey="trash-alt" /> Delete
                             </Button>,
-                            <Button type="text" btnColor="grey" onClick={() => dialog.close()}>
+                            <Button key="close" type="text" btnColor="grey" onClick={() => dialog.close()}>
                                 <Icon iconKey="times" /> Close
                             </Button>
                         ],
