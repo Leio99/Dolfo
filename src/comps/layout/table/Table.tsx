@@ -9,7 +9,7 @@ import { BaseResultsManager } from "./BaseResultsManager"
 export class Table extends BaseResultsManager{
     render = (): JSX.Element => {
         const { props } = this,
-        { filter, activeFilter } = this.state,
+        { activeFilter } = this.state,
         data = this.getFilteredData()
  
         return <div className={"dolfo-table-content" + (props.className ? (" " + props.className) : "")}>
@@ -45,7 +45,7 @@ export class Table extends BaseResultsManager{
 
                                 {col.type !== "check" && col.label}
 
-                                {col.canSearch && activeFilter === col.field && <input type="text" value={filter[col.searchField || col.field]} onChange={e => this.changeFilter(col.searchField || col.field, e.target.value)} className="dolfo-column-search-input" onBlur={this.blurSearch} autoFocus placeholder={Constants.SEARCH_PLACEHOLDER} />}
+                                {col.canSearch && activeFilter === col.field && <input type="text" onChange={e => this.changeFilter(col.searchField || col.field, e.target.value)} className="dolfo-column-search-input" onBlur={this.blurSearch} autoFocus placeholder={Constants.SEARCH_PLACEHOLDER} />}
                             </th>)
                         }
                     </tr>
