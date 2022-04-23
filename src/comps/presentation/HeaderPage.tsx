@@ -10,35 +10,35 @@ export class HeaderPage extends React.Component{
 
         <ResultCode
             title="Simple header"
-            result={<Header title="I'm the header" />}
+            result={<Header title="I'm the header" style={{ zIndex: 0 }} />}
             code={'<Header title="I\'m the header" />'}
         />
 
         <ResultCode
             title="Colors"
             result={<>
-                <Header title="Black" menuColor="black" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="Blue" menuColor="blue" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="Darkblue" menuColor="darkblue" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="Green" menuColor="green" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="Grey" menuColor="grey" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="Orange" menuColor="orange" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="Red" menuColor="red" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="White" menuColor="white" style={{ position: "relative", marginBottom: 10 }} />
-                <Header title="Violet" menuColor="violet" style={{ position: "relative" }} />
+                <Header title="Black" menuColor="black" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Blue" menuColor="blue" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Darkblue" menuColor="darkblue" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Green" menuColor="green" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Grey" menuColor="grey" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Orange" menuColor="orange" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Red" menuColor="red" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="White" menuColor="white" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Violet" menuColor="violet" style={{ position: "relative", zIndex: 0 }} />
             </>}
             code={'<Header title="Black" menuColor="black" />\n<Header title="Blue" menuColor="blue" />\n<Header title="Darkblue" menuColor="darkblue" />\n\n<Header title="Green" menuColor="green" />\n<Header title="Grey" menuColor="grey" />\n<Header title="Orange" menuColor="orange" />\n<Header title="Red" menuColor="red" />\n<Header title="White" menuColor="white" />\n<Header title="Violet" menuColor="violet" />'}
         />
 
         <ResultCode
             title="Menu toggler"
-            result={<Header menuTogglerFn={() => alert("Toggle some side menu")} title="I'm the header" />}
+            result={<Header menuTogglerFn={() => alert("Toggle some side menu")} title="I'm the header" style={{ zIndex: 0 }} />}
             code={'<Header menuTogglerFn={() => alert("Toggle some side menu")} title="I\'m the header" />'}
         />
 
         <ResultCode
             title="Custom icon"
-            result={<Header menuTogglerIcon={{ iconKey: "globe" }} menuTogglerFn={() => alert("Toggle some side menu")} title="I'm the header" />}
+            result={<Header menuTogglerIcon={{ iconKey: "globe" }} menuTogglerFn={() => alert("Toggle some side menu")} title="I'm the header" style={{ zIndex: 0 }} />}
             code={'<Header menuTogglerIcon={{ iconKey: "globe" }} menuTogglerFn={() => alert("Toggle some side menu")} title="I\'m the header" />'}
         />
 

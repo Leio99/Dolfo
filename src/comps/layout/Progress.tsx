@@ -38,9 +38,9 @@ export class Progress extends React.PureComponent<IProps>{
                 <path filter="url(#inset-shadow)" className="dolfo-progress-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
                 
                 <path className={"dolfo-progress-circle line-" + color} strokeDasharray={percent + ", 100"} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                <text x="18" y="20.35" className="dolfo-progress-percentage">
+                <foreignObject x="0" y="35%" className="dolfo-progress-percentage">
                     {props.customCircleText || (formattedPercent + "%")}
-                </text>
+                </foreignObject>
             </svg>
         }
 
