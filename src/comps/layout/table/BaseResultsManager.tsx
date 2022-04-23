@@ -54,6 +54,18 @@ export abstract class BaseResultsManager<P = {}> extends BaseExportableManager<R
             return temp
         })
 
+        if(activeFilterKey?.indexOf(".") >= 0){
+            const pieces = activeFilterKey.split(".")
+
+            return ajdustData.filter(d => {
+                let ret = d
+
+                pieces.forEach(p => ret = ret[p])
+
+                return ret.toLowerCase().indexOf(filter[activeFilterKey].toLowerCase()) >= 0
+            })
+        }
+
         return activeFilterKey === "" ? ajdustData : ajdustData.filter(d => d[activeFilterKey].toLowerCase().indexOf(filter[activeFilterKey].toLowerCase()) >= 0)
     }
 }

@@ -114,8 +114,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         sendDate.setFullYear(year)
         sendDate.setHours(this.props.selectTime ? this.state.currentHour : 0)
         sendDate.setMinutes(this.props.selectTime ? this.state.currentMinute : 0)
-        sendDate.setSeconds(0)
-        sendDate.setMilliseconds(0)
+        sendDate.setSeconds(0, 0)
 
         this.setState({
             showCalendar,

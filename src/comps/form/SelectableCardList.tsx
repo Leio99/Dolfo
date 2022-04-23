@@ -93,7 +93,7 @@ export class SelectableCardList extends React.PureComponent<SelectableCardListPr
         options = this.getOptions()
 
         return <div className={"dolfo-selectable-list" + (props.disabled ? " disabled" : "") + (props.className ? (" " + props.className) : "") + (props.fullSize ? " fullsize" : "")} style={props.style}>
-            <input value={value?.toString()} required={props.required} readOnly />
+            <input value={value?.toString() ?? ""} required={props.required} readOnly />
             {props.label && <label className="dolfo-selectable-list-label">
                 {props.label}
                 {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>

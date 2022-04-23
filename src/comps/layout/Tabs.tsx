@@ -44,7 +44,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
     componentDidMount = (): void => {
         this.loadTabs()
         window.addEventListener("resize", this.handleBar)
-        window.addEventListener("load", this.handleBar)
+        window.addEventListener("load", this.handleBar, { once: true })
     }
 
     componentWillUnmount = (): void => window.removeEventListener("resize", this.handleBar)
@@ -108,7 +108,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
         { children, currentTab } = this.state,
         isVertical = props.vertical
 
-        return <div className={"dolfo-tabs" + (props.tabStyle ? " tab-layout" : "") + (props.className ? (" " + props.className) : "") + (isVertical ? " vertical" : "")} style={props.style}>
+        return <div className={"dolfo-tabs" + (props.tabStyle && !isVertical ? " tab-layout" : "") + (props.className ? (" " + props.className) : "") + (isVertical ? " vertical" : "")} style={props.style}>
             <div className="dolfo-tabs-links">
                 {(!props.tabStyle || props.vertical) && <div className="dolfo-tabs-underline"></div>}
 

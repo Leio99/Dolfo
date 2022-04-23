@@ -22,7 +22,7 @@ export class Switch extends React.PureComponent<SwitchProps, SwitchProps>{
 
     componentDidUpdate = (prevProps: SwitchProps): void => {
         if(prevProps.checked !== this.props.checked || this.props.checked !== this.state.checked)
-            this.setState({ checked: this.props.checked })
+            this.setState({ checked: !!this.props.checked })
     }
 
     onChange = (): void => {

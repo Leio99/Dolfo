@@ -33,7 +33,9 @@ export class CardTable extends BaseResultsManager<CardTableProps>{
                                             <Tooltip tooltip={col.label}>{col.label}</Tooltip>
                                         </strong>
                                         <div>
-                                            <Tooltip tooltip={d[col.field]}>{d[col.field]}</Tooltip>
+                                            {
+                                                !React.isValidElement(d[col.field]) ? <Tooltip tooltip={d[col.field]}>{d[col.field]}</Tooltip> : d[col.field]
+                                            }
                                         </div>
                                     </div> : <CardActions>{d[col.field]}</CardActions>}
                                 </div>
