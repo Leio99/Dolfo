@@ -409,7 +409,7 @@ html.dark-theme{
         }
     }
 
-    .dolfo-dropdown:not(.disabled):hover{
+    .dolfo-dropdown:not(.disabled){
         .dolfo-dropdown-label, .dropdown-items-container, .dropdown-items-container:before{
             background-color: $dark;
             color: $white

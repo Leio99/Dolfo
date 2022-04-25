@@ -25,6 +25,7 @@ interface NotificationProps extends BaseNotificationProps{
     readonly icon?: FullIconProps
     readonly position?: NotificationPosition | "centered-top" | "centered-bottom"
     readonly dismissOnClick?: boolean
+    readonly isStatic?: boolean
 }
 
 export class NotificationMsg extends React.Component<NotificationProps>{
@@ -74,7 +75,7 @@ export class NotificationMsg extends React.Component<NotificationProps>{
 
         setTimeout(NotificationMsg.moveNotifications)
         
-        createRoot(notification).render(new NotificationMsg(props).render(false))
+        createRoot(notification).render(<NotificationMsg {...props} isStatic={false} />)
 
         return new Closable(closeFunc)
     }
@@ -116,10 +117,11 @@ export class NotificationMsg extends React.Component<NotificationProps>{
         return <ExclamationCircleIcon color="var(--blue)" />
     }
 
-    render = (isStatic = true): JSX.Element => {
+    render = (): JSX.Element => {
         const { props } = this,
         position = props.position || "centered-top",
-        closeFunc = props.type !== "loading" && props.dismissOnClick ? () => NotificationMsg.onClose(ReactDOM.findDOMNode(this) as HTMLElement, props) : null
+        closeFunc = props.type !== "loading" && props.dismissOnClick ? () => NotificationMsg.onClose(ReactDOM.findDOMNode(this) as HTMLElement, props) : null,
+        isStatic = props.isStatic != null ? props.isStatic : true
 
         return <div className={"dolfo-notification " + position + (isStatic ? " static" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onClick={closeFunc}>
             {props.icon ? <Icon {...props.icon} /> : !props.hideIcon ? this.getIcon(props.type) : null} {props.message}

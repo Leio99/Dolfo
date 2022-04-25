@@ -83,7 +83,7 @@ export class MasterDetail<P> extends React.Component<MasterDetailProps & P, Mast
                 </div> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
                         <Tooltip tooltip={Constants.BACK_TO_LIST}>
-                            <Button btnColor="white" circleBtn onClick={this.resetSelection}>
+                            <Button btnColor="white" circleBtn onClick={() => this.resetSelection()}>
                                 <Icon iconKey="arrow-left" type="far" />
                             </Button>
                         </Tooltip>

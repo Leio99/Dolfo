@@ -13,11 +13,11 @@ export class Status extends React.Component<IProps>{
     render = (): JSX.Element => {
         const { props } = this,
         icons = {
-            success: <CheckIcon color="var(--green)" />,
-            error: <ErrorCircleIcon color="var(--red)" />,
-            info: <InfoCircleIcon color="var(--darkblue)" />,
-            warning: <WarningIcon color="var(--orange)" />,
-            pending: <Icon iconKey="clock" color="var(--dark)" />
+            success: <CheckIcon />,
+            error: <ErrorCircleIcon />,
+            info: <InfoCircleIcon />,
+            warning: <WarningIcon />,
+            pending: <Icon iconKey="clock" />
         }
 
         return <div className={"dolfo-status" + (props.type ? (" " + props.type) : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
