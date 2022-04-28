@@ -19,6 +19,16 @@ export class DropdownPage extends React.Component{
         />
 
         <ResultCode
+            title="Static item"
+            result={<DropDown label="Hover me">
+                <DropDownItem onClick={() => alert("Clicked item")}>Click me</DropDownItem>
+                <DropDownItem static>Separator</DropDownItem>
+                <DropDownItem>Sub item 3</DropDownItem>
+            </DropDown>}
+            code={'<DropDown label="Hover me">\n\t<DropDownItem onClick={() => alert("Clicked item")}>Click me</DropDownItem>\n\t<DropDownItem static>Separator</DropDownItem>\n\t<DropDownItem>Sub item 3</DropDownItem>\n</DropDown>'}
+        />
+
+        <ResultCode
             title="Disabled"
             result={<>
                 <DropDown label="I am a disabled" disabled>
@@ -84,6 +94,13 @@ export class DropdownPage extends React.Component{
             {
                 name: "disabled",
                 desc: "Determines whether the item is disabled or not.",
+                type: "boolean",
+                required: false,
+                default: "false"
+            },
+            {
+                name: "static",
+                desc: "Determines whether the item is static (unclickable) or not.",
                 type: "boolean",
                 required: false,
                 default: "false"
