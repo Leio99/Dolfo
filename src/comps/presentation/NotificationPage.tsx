@@ -8,7 +8,7 @@ import { ResultCode, WhenToUse, Usage } from "./Layouts"
 export class NotificationPage extends React.Component{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a notification.</WhenToUse>
-        <Usage notes={<>this component can only be rendered by calling a function (<em>NotificationMsg.show(params)</em>)</>} />
+        <Usage notes={<>this component can be rendered by calling a function (<em>NotificationMsg.show(params)</em>)</>} />
 
         <ResultCode
             title="Simple notification"

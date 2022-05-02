@@ -2,6 +2,12 @@
     padding: 0;
     max-width: 350px;
 
+    .dolfo-notification-elapser{
+        top: auto;
+        height: 5px;
+        background-color: $selectionBlue
+    }
+
     .dolfo-message-close{
         float: right;
         font-size: 20px;

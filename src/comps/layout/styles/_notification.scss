@@ -5,7 +5,19 @@
     background-color: $white;
     padding: 0.5rem 0.8rem;
     max-width: 300px;
+    overflow: hidden;
     position: relative;
+
+    .dolfo-notification-elapser{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        transition: width 0.1s linear;
+        background-color: $hoverBlue;
+        z-index: -1
+    }
 
     &:not(.static){
         position: fixed;

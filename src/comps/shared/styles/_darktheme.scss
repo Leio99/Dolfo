@@ -193,11 +193,19 @@ html.dark-theme{
         .dolfo-message-box-title{
             border-color: $dark
         }
+
+        .dolfo-notification-elapser{
+            background-color: $darkThemeSelectionBlue
+        }
     }
     
     .dolfo-notification{
         background-color: $darkThemeDarkHover;
-        color: $white
+        color: $white;
+
+        .dolfo-notification-elapser{
+            background-color: darken($darkThemeSelectionBlue, 45%)
+        }
     }
     
     .dolfo-progress-line{

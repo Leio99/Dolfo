@@ -6,7 +6,7 @@ import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 export class MessageboxPage extends React.Component{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a message box.</WhenToUse>
-        <Usage notes={<>this component can only be rendered by calling a function (<em>MessageBox.show(params)</em>)</>} />
+        <Usage notes={<>this component can be rendered by calling a function (<em>MessageBox.show(params)</em>)</>} />
         
         <ResultCode
             title="Simple messagebox"

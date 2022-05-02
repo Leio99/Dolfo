@@ -65,17 +65,45 @@ export class NotificationMsg extends React.Component<NotificationProps>{
     }
 
     static show = (data: string | NotificationProps): Closable => {
+        let interval: NodeJS.Timer
+
         const props = _.isString(data) ? { message: data } : data,
         notification = document.createElement("div"),
+        delay = props.hideDelay ?? 2000,
         closeFunc = () => NotificationMsg.onClose(notification, props)
         
-        props.type !== "loading" && props.hideDelay !== "never" && setTimeout(closeFunc, props.hideDelay ? props.hideDelay : 2000)
-        
-        document.body.appendChild(notification);
+        document.body.appendChild(notification)
 
         setTimeout(NotificationMsg.moveNotifications)
         
-        createRoot(notification).render(<NotificationMsg {...props} isStatic={false} />)
+        createRoot(notification).render(<NotificationMsg {...props} isStatic={false} onClose={closeFunc} />)
+
+        if(delay && delay !== "never" && props.type !== "loading"){
+            let percentage = (delay - 200) / 100
+
+            const fn = () => {
+                const not = notification.childNodes[0] as HTMLElement,
+                current = not.querySelector(".dolfo-notification-elapser") as HTMLElement,
+                elapser = current || document.createElement("div"),
+                perc = ((percentage * 10000) / delay)
+
+                elapser.classList.add("dolfo-notification-elapser")
+                elapser.style.width = perc + "%"
+                
+                if(!current)
+                    not.appendChild(elapser)
+                
+                percentage--
+            }
+
+            setTimeout(fn)
+
+            interval = setInterval(fn, 100)
+
+            setTimeout(() => clearInterval(interval), delay)
+        }
+        
+        props.type !== "loading" && delay !== "never" && setTimeout(closeFunc, delay)
 
         return new Closable(closeFunc)
     }
