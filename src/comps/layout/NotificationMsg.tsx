@@ -89,8 +89,6 @@ export class NotificationMsg extends React.Component<NotificationProps>{
                 percentage--
             }
 
-            setTimeout(fn)
-
             interval = setInterval(fn, 100)
 
             setTimeout(() => clearInterval(interval), delay)
