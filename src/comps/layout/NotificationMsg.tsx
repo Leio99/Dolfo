@@ -29,40 +29,30 @@ interface NotificationProps extends BaseNotificationProps{
 }
 
 export class NotificationMsg extends React.Component<NotificationProps>{
-    static showError = (message: string | JSX.Element): Closable => {
-        return showNotification({
-            message,
-            type: "error"
-        })
-    }
+    static showError = (message: string | JSX.Element): Closable => showNotification({
+        message,
+        type: "error"
+    })
 
-    static showInfo = (message: string | JSX.Element): Closable => {
-        return showNotification({
-            message,
-            type: "info"
-        })
-    }
+    static showInfo = (message: string | JSX.Element): Closable => showNotification({
+        message,
+        type: "info"
+    })
 
-    static showSuccess = (message: string | JSX.Element): Closable => {
-        return showNotification({
-            message,
-            type: "success"
-        })
-    }
+    static showSuccess = (message: string | JSX.Element): Closable => showNotification({
+        message,
+        type: "success"
+    })
 
-    static showLoading = (message?: string | JSX.Element): Closable => {
-        return showNotification({
-            message: message || Constants.LOADING_TEXT,
-            type: "loading"
-        })
-    }
+    static showLoading = (message?: string | JSX.Element): Closable => showNotification({
+        message: message || Constants.LOADING_TEXT,
+        type: "loading"
+    })
 
-    static showWarning = (message: string | JSX.Element): Closable => {
-        return showNotification({
-            message,
-            type: "warning"
-        })
-    }
+    static showWarning = (message: string | JSX.Element): Closable => showNotification({
+        message,
+        type: "warning"
+    })
 
     static show = (data: string | NotificationProps): Closable => {
         let interval: NodeJS.Timer
@@ -82,6 +72,9 @@ export class NotificationMsg extends React.Component<NotificationProps>{
             let percentage = (delay - 200) / 100
 
             const fn = () => {
+                if(notification.classList.contains("removed"))
+                    return
+                
                 const not = notification.childNodes[0] as HTMLElement,
                 current = not.querySelector(".dolfo-notification-elapser") as HTMLElement,
                 elapser = current || document.createElement("div"),
@@ -108,21 +101,19 @@ export class NotificationMsg extends React.Component<NotificationProps>{
         return new Closable(closeFunc)
     }
 
-    private static moveNotifications = (): void => {
-        ["bottom-left", "bottom-right", "top-left", "top-right", "centered-top", "centered-bottom"].forEach(dir => {
-            const nots = document.querySelectorAll(`.dolfo-notification.${dir}:not(.static)`)
-            let base = 0
+    private static moveNotifications = (): void => ["bottom-left", "bottom-right", "top-left", "top-right", "centered-top", "centered-bottom"].forEach(dir => {
+        const nots = document.querySelectorAll(`.dolfo-notification.${dir}:not(.static)`)
+        let base = 0
 
-            Array.from(nots).filter((_: any, i: number) => i < nots.length).reverse().forEach((not: any) => {
-                if(dir.indexOf("bottom") !== -1)
-                    not.style.marginBottom = base + "px"
-                else
-                    not.style.marginTop = base + "px"
-                
-                base += not.clientHeight + 15
-            })
+        Array.from(nots).filter((_: any, i: number) => i < nots.length).reverse().forEach((not: any) => {
+            if(dir.indexOf("bottom") !== -1)
+                not.style.marginBottom = base + "px"
+            else
+                not.style.marginTop = base + "px"
+            
+            base += not.clientHeight + 15
         })
-    }
+    })
     
     static onClose = (notification: HTMLElement, props: NotificationProps): void => {
         notification.remove()
