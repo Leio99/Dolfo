@@ -120,20 +120,17 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
     }
 
     static openDialogComponent = <T extends unknown>(Class: React.ComponentType<T & ComponentAsDialogProps>, props?: React.ComponentProps<typeof Class>): Closable => {
-        let ref: React.Component
-
         const popup = document.createElement("div"),
+        root = createRoot(popup),
         closeFn = () => {
             popup.remove()
-
-            if(ref.componentWillUnmount)
-                ref.componentWillUnmount()
+            root.unmount()
         },
-        Component = <Class {...props} close={closeFn} ref={(r: React.Component) => ref = r} />
+        Component = <Class {...props} close={closeFn} />
 
         document.body.appendChild(popup)
 
-        createRoot(popup).render(Component)
+        root.render(Component)
         
         return new Closable(closeFn)
     }
