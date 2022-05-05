@@ -98,22 +98,25 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
     static openDialog = (data: DialogProps): Closable => {
         const popup = document.createElement("div"),
+        root = createRoot(popup),
         onCloseFunction = (props: DialogFullProps) => {
             popup.remove()
             props.onClose && props.onClose()
+            root.unmount()
         },
         onOkFunction = (props: DialogFullProps) => {
             popup.remove()
             props.onOk && props.onOk()
+            root.unmount()
         },
         icon = data.icon || Dialog.getIcon(data.type),
         okType = data.okType || Dialog.getColor(data.type)
 
         document.body.appendChild(popup);
 
-        createRoot(popup).render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} />)
+        root.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} />)
 
-        return new Closable(() => popup.remove())
+        return new Closable(() => onCloseFunction(data))
     }
 
     static openDialogComponent = <T extends unknown>(Class: React.ComponentType<T & ComponentAsDialogProps>, props?: React.ComponentProps<typeof Class>): Closable => {

@@ -59,14 +59,18 @@ export class NotificationMsg extends React.Component<NotificationProps>{
 
         const props = _.isString(data) ? { message: data } : data,
         notification = document.createElement("div"),
+        root = createRoot(notification),
         delay = props.hideDelay ?? 2000,
-        closeFunc = () => NotificationMsg.onClose(notification, props)
+        closeFunc = () => {
+            NotificationMsg.onClose(notification, props)
+            root.unmount()
+        }
         
         document.body.appendChild(notification)
 
         setTimeout(NotificationMsg.moveNotifications)
         
-        createRoot(notification).render(<NotificationMsg {...props} isStatic={false} onClose={closeFunc} />)
+        root.render(<NotificationMsg {...props} isStatic={false} onClose={closeFunc} />)
 
         if(delay && delay !== "never" && props.type !== "loading"){
             let percentage = (delay - 200) / 100
