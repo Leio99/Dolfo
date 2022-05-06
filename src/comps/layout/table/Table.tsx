@@ -81,7 +81,7 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
                     <tr onMouseMove={e => {
                         if(this.tmpElement)
                             this.tmpElement.style.left = e.clientX + "px"
-                    }} style={{ position: "relative", overflow: "hidden" }}>
+                    }}>
                         {
                             columns.map((col, i) => <th style={{ width: col.width, textAlign: col.align }} key={i} onMouseUp={e => {
                                 (e.target as HTMLElement).classList.remove("dropping")

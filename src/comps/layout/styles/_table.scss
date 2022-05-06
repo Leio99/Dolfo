@@ -11,6 +11,8 @@
         border: 0;
         
         > tbody > tr, > thead > tr{
+            position: relative;
+            overflow: hidden;
             background-color: $white;
 
             &:first-child{
