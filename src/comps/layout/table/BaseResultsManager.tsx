@@ -15,13 +15,14 @@ interface IState{
     readonly activeFilter: string
 }
 
-export abstract class BaseResultsManager<P = {}> extends BaseExportableManager<ResultsManagerProps & P, IState>{
+export abstract class BaseResultsManager<P = {}, S = {}> extends BaseExportableManager<ResultsManagerProps & P, S & IState>{
     abstract render: () => JSX.Element
 
-    constructor(props: ResultsManagerProps & P){
+    constructor(props: P & ResultsManagerProps, state?: S){
         super(props)
 
         this.state = {
+            ...state,
             filter: {},
             activeFilterKey: "",
             activeFilter: ""
@@ -29,7 +30,7 @@ export abstract class BaseResultsManager<P = {}> extends BaseExportableManager<R
     }
 
     changeFilter = (key: string, value: string): void => {
-        const filter = {
+        const filter: IState["filter"] = {
             ...this.state.filter,
             [key]: value
         }
@@ -37,12 +38,12 @@ export abstract class BaseResultsManager<P = {}> extends BaseExportableManager<R
         this.setState({
             filter,
             activeFilterKey: key
-        })
+        } as IState & S)
     }
 
-    changeActiveFiler = (key: string): void => this.setState({ activeFilter: key })
+    changeActiveFiler = (key: string): void => this.setState({ activeFilter: key } as IState & S)
 
-    blurSearch = (): void => this.setState({ activeFilter: "" })
+    blurSearch = (): void => this.setState({ activeFilter: "" } as IState & S)
 
     getFilteredData = (): IDataColumn[] => {
         const { filter, activeFilterKey } = this.state,

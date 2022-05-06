@@ -235,7 +235,11 @@ html.dark-theme{
                 background-color: $dark;
 
                 > td, > th{
-                    background-color: $dark
+                    background-color: $dark;
+
+                    &.dropping{
+                        background-color: darken($darkThemeSelectionBlue, 45%)
+                    }
                 }
             }
 

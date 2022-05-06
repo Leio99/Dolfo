@@ -16,7 +16,11 @@
             &:first-child{
                 > th{
                     border-top: $borderRule;
-                    border-bottom: $borderRule     
+                    border-bottom: $borderRule;
+                    
+                    &.dropping{
+                        background-color: lighten($selectionBlue, 40%)
+                    }
                 }
 
                 > th:first-child{
@@ -140,4 +144,16 @@
 
 .tree-view-angle, .tree-view-folder{
     margin-right: 0.5rem
+}
+
+.dolfo-table-content .dolfo-table .shifter{
+    position: fixed;
+    pointer-events: none;
+    background-color: $selectionBlue;
+    padding: 0.2rem 1rem;
+    border-radius: $roundRadius;
+    color: $white;
+    font-weight: bold;
+    text-align: center;
+    transform: translateY(35%)
 }
