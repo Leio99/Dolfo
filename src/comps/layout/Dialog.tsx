@@ -71,30 +71,26 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         })
     }
 
-    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: DialogProps["onOk"]): Closable => {
-        return openDialog({
-            title: title || Constants.CONFIRM_TITLE,
-            content: message,
-            onOk: onYes,
-            okText: Constants.YES_TEXT,
-            clickOutside: true,
-            cancelText: Constants.NO_TEXT,
-            icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
-            width: "350px"
-        })
-    }
+    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: DialogProps["onOk"]): Closable => openDialog({
+        title: title || Constants.CONFIRM_TITLE,
+        content: message,
+        onOk: onYes,
+        okText: Constants.YES_TEXT,
+        clickOutside: true,
+        cancelText: Constants.NO_TEXT,
+        icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
+        width: "350px"
+    })
 
-    static loadingDialog = (loadingText: string | JSX.Element = Constants.LOADING_TEXT): Closable => {
-        return openDialog({
-            title: "",
-            content: <div>
-                <LoadingIcon spinning /> {loadingText}
-            </div>,
-            style: { height: 100 },
-            width: "270px",
-            className: "loading-dialog"
-        })
-    }
+    static loadingDialog = (loadingText: string | JSX.Element = Constants.LOADING_TEXT): Closable => openDialog({
+        title: "",
+        content: <div>
+            <LoadingIcon spinning /> {loadingText}
+        </div>,
+        style: { height: 100 },
+        width: "270px",
+        className: "loading-dialog"
+    })
 
     static openDialog = (data: DialogProps): Closable => {
         const popup = document.createElement("div"),
@@ -102,12 +98,12 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         onCloseFunction = (props: DialogFullProps) => {
             popup.remove()
             props.onClose && props.onClose()
-            root.unmount()
+            setTimeout(() => root.unmount())
         },
         onOkFunction = (props: DialogFullProps) => {
             popup.remove()
             props.onOk && props.onOk()
-            root.unmount()
+            setTimeout(() => root.unmount())
         },
         icon = data.icon || Dialog.getIcon(data.type),
         okType = data.okType || Dialog.getColor(data.type)
@@ -124,7 +120,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         root = createRoot(popup),
         closeFn = () => {
             popup.remove()
-            root.unmount()
+            setTimeout(() => root.unmount())
         },
         Component = <Class {...props} close={closeFn} />
 
@@ -165,17 +161,11 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         return null
     }
 
-    componentDidUpdate = (): void => {
-        this.setState({
-            visible: this.props.visible != null ? this.props.visible : this.props.autoLoad ? true : false
-        })
-    }
+    componentDidUpdate = (): void => this.setState({
+        visible: this.props.visible != null ? this.props.visible : this.props.autoLoad ? true : false
+    })
 
-    onClose = (): void => {
-        this.setState({ visible: false })
-
-        this.props.onClose && this.props.onClose()
-    }
+    onClose = (): void => this.setState({ visible: false }, this.props.onClose)
 
     onOk = (): void => {
         this.props.autoLoad && this.setState({ visible: false })

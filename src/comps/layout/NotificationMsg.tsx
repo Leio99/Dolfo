@@ -63,7 +63,7 @@ export class NotificationMsg extends React.Component<NotificationProps>{
         delay = props.hideDelay ?? 2000,
         closeFunc = () => {
             NotificationMsg.onClose(notification, props)
-            root.unmount()
+            setTimeout(() => root.unmount())
         }
         
         document.body.appendChild(notification)
