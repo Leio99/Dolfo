@@ -16,7 +16,6 @@
     }
 
     .dolfo-switch{
-        margin-right: 0.5rem;
         border-radius: $roundRadius;
         position: relative;
         background: $grey;
@@ -66,6 +65,7 @@
         vertical-align: middle;
         font-size: 13px;
         margin-bottom: 0;
+        margin-left: 0.5rem;
         cursor: pointer;
 
         .dolfo-input-required{
