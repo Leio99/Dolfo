@@ -28,7 +28,6 @@ export interface DialogFullProps extends BaseProps{
     readonly cancelBtnClass?: string
     readonly cancelText?: string | JSX.Element
     readonly hideCancel?: boolean
-    readonly autoLoad?: boolean
     readonly style?: CSSProperties
     readonly okType?: ButtonColors
     readonly cancelType?: ButtonColors
@@ -53,7 +52,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         super(props)
 
         this.state = {
-            visible: props.visible || props.autoLoad ? true : false
+            visible: props.visible
         }
     }
 
@@ -110,7 +109,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
         document.body.appendChild(popup);
 
-        root.render(<Dialog autoLoad {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} />)
+        root.render(<Dialog visible {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} />)
 
         return new Closable(() => onCloseFunction(data))
     }
@@ -162,13 +161,13 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
     }
 
     componentDidUpdate = (): void => this.setState({
-        visible: this.props.visible != null ? this.props.visible : this.props.autoLoad ? true : false
+        visible: this.props.visible != null ? this.props.visible : this.state.visible
     })
 
     onClose = (): void => this.setState({ visible: false }, this.props.onClose)
 
     onOk = (): void => {
-        this.props.autoLoad && this.setState({ visible: false })
+        this.props.visible && this.setState({ visible: false })
 
         this.props.onOk && this.props.onOk()
     }

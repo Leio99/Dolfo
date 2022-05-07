@@ -133,13 +133,6 @@ export class DialogPage extends React.Component<any, {
                 default: "false"
             },
             {
-                name: "autoLoad",
-                desc: "Determines whether the dialog should load itself automatically.",
-                type: "boolean",
-                required: false,
-                default: "false"
-            },
-            {
                 name: "okBtnClass",
                 desc: "Additional className for the ok button.",
                 type: "string",
