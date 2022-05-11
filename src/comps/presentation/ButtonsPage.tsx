@@ -32,6 +32,22 @@ export class ButtonsPage extends React.Component{
         />
 
         <ResultCode
+            title="Outline"
+            result={<>
+                <Button btnColor="white" outline style={{ marginRight: 5 }}>White</Button>
+                <Button btnColor="black" outline style={{ marginRight: 5 }}>Black</Button>
+                <Button btnColor="blue" outline style={{ marginRight: 5 }}>Blue</Button>
+                <Button btnColor="darkblue" outline style={{ marginRight: 5 }}>Dark blue</Button>
+                <Button btnColor="green" outline style={{ marginRight: 5 }}>Green</Button>
+                <Button btnColor="grey" outline style={{ marginRight: 5 }}>Grey</Button>
+                <Button btnColor="orange" outline size="small" style={{ marginRight: 5 }}>Orange</Button>
+                <Button btnColor="red" outline style={{ marginRight: 5 }}>Red</Button>
+                <Button btnColor="violet" outline>Violet</Button>
+            </>}
+            code={'<Button btnColor="white" outline style={{ marginRight: 5 }}>White</Button>\n<Button btnColor="black" outline style={{ marginRight: 5 }}>Black</Button>\n<Button btnColor="blue" outline style={{ marginRight: 5 }}>Blue</Button>\n<Button btnColor="darkblue" outline style={{ marginRight: 5 }}>Dark blue</Button>\n<Button btnColor="green" outline style={{ marginRight: 5 }}>Green</Button>\n<Button btnColor="grey" outline style={{ marginRight: 5 }}>Grey</Button>\n<Button btnColor="orange" outline style={{ marginRight: 5 }}>Orange</Button>\n<Button btnColor="red" outline style={{ marginRight: 5 }}>Red</Button>\n<Button btnColor="violet" outline>Violet</Button>'}
+        />
+
+        <ResultCode
             title="Sizes"
             result={<>
                 <Button btnColor="blue" style={{ marginRight: 5 }} size="small">Small</Button>
@@ -113,6 +129,13 @@ export class ButtonsPage extends React.Component{
             {
                 name: "circleBtn",
                 desc: "Defines whether the button is rendered as a circle.",
+                type: "boolean",
+                required: false,
+                default: "false"
+            },
+            {
+                name: "outline",
+                desc: "Defines whether the button should be outlined or not.",
                 type: "boolean",
                 required: false,
                 default: "false"

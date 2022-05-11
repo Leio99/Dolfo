@@ -11,6 +11,10 @@
     vertical-align: middle;
     background-color: unset;
 
+    &.outline{
+        border: 1px solid
+    }
+
     &[disabled]{
         opacity: $disabledOpacity;
         pointer-events: none
@@ -75,16 +79,27 @@
 
     @each $key, $color in $colors {
         &.btn-#{$key} {
-            &:not(.text-btn){
-                color: setBtnColor($color);
-                background-color: $color;
+            &:not(.text-btn){                
+                &:not(.outline){
+                    color: setBtnColor($color);
+                    background-color: $color
+                }
+
+                &.outline{
+                    color: $color;
+                    border-color: $color
+                }
 
                 &:hover{
-                    background-color: darken($color, 10%)
+                    color: setBtnColor($color);
+                    background-color: darken($color, 10%);
+                    border-color: darken($color, 10%)
                 }
 
                 &:active{
-                    background-color: darken($color, 15%)
+                    color: setBtnColor($color);
+                    background-color: darken($color, 15%);
+                    border-color: darken($color, 15%)
                 }
             }
 

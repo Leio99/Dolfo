@@ -13,11 +13,11 @@ export interface ComponentAsDialogProps{
 }
 
 interface BaseProps{
-    readonly title?: string | JSX.Element,
-    readonly content?: string | JSX.Element,
-    readonly onOk?: () => void,
-    readonly width?: string,
-    readonly okText?: string,
+    readonly title?: string | JSX.Element
+    readonly content?: string | JSX.Element
+    readonly onOk?: () => void
+    readonly width?: string
+    readonly okText?: string
     readonly clickOutside?: boolean
 }
 

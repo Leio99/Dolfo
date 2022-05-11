@@ -163,6 +163,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     onCopy={props.onCopy}
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
+                    style={props.style}
                 /> : <textarea
                     placeholder={props.placeHolder}
                     name={props.name}
@@ -184,6 +185,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
                     ref={r => input = r}
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
+                    style={props.style}
                 ></textarea>
             }
         </InputWrapper>

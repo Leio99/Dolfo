@@ -16,6 +16,7 @@ export interface ButtonProps{
     readonly className?: string
     readonly style?: CSSProperties
     readonly disabled?: boolean
+    readonly outline?: boolean
     readonly onClick?: (e: any) => void
     readonly onMouseDown?: (e: any) => void
 }
@@ -87,7 +88,8 @@ class Button extends React.PureComponent<ButtonProps, IState>{
             (props.size === "small" ? " small-button" : "") + 
             (props.type === "text" ? " text-btn" : "") + 
             (props.circleBtn ? " circle-btn" : "") + 
-            (props.size === "big" ? " big-button" : "")
+            (props.size === "big" ? " big-button" : "") + 
+            (props.outline ? " outline" : "")
         } style={props.style} disabled={props.disabled || props.loading} onClick={props.onClick} onMouseDown={props.onMouseDown}>
             {props.loading && <LoadingIcon className="btn-loading-icon" spinning />}{props.circleBtn && props.loading ? <></> : props.children}
         </button>
