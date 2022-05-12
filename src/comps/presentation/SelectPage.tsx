@@ -1,10 +1,10 @@
 import React from "react"
 import { Option } from "../form/Option"
 import Select from "../form/Select"
-import { goToApiBlock } from "../MenuContent"
+import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, OptionApis, IconApis } from "./Layouts"
 
-export class SelectPage extends React.Component{
+export class SelectPage extends React.Component<MenuContentProps>{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a select combobox component inside your form.</WhenToUse>
         <Usage notes="using the up and down arrows, the user can navigate through the options and select them pressing the Enter key." />
@@ -200,6 +200,6 @@ export class SelectPage extends React.Component{
 
         <OptionApis />
 
-        <IconApis />
+        <IconApis {...this.props} />
     </>
 }

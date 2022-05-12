@@ -1,9 +1,9 @@
 import React from "react"
 import { Header } from "../layout/Header"
-import { goToApiBlock } from "../MenuContent"
+import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
-export class HeaderPage extends React.Component{
+export class HeaderPage extends React.Component<MenuContentProps>{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a navigation header on your page.</WhenToUse>
         <Usage />
@@ -97,6 +97,6 @@ export class HeaderPage extends React.Component{
             }
         ]} />
 
-        <IconApis />
+        <IconApis {...this.props} />
     </>
 }

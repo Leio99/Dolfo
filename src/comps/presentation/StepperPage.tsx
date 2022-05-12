@@ -1,13 +1,13 @@
 import React from "react"
 import Button from "../layout/Button"
 import { Step, Stepper } from "../layout/Stepper"
-import { goToApiBlock } from "../MenuContent"
+import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
-export class StepperPage extends React.Component<any, {
+export class StepperPage extends React.Component<MenuContentProps, {
     readonly [x: string]: number
 }>{
-    constructor(props: any){
+    constructor(props: MenuContentProps){
         super(props)
 
         this.state = {
@@ -134,6 +134,6 @@ export class StepperPage extends React.Component<any, {
             }
         ]} />
 
-        <IconApis />
+        <IconApis {...this.props} />
     </>
 }

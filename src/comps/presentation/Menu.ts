@@ -40,12 +40,13 @@ import { ListsidemenuPage } from "./ListsidemenuPage"
 import { PopoverPage } from "./PopoverPage"
 import React from "react"
 import { IconKey } from "../shared/models/IconModel"
+import { MenuContentProps } from "../MenuContent"
 
 interface MenuItem{
     readonly link: string
     readonly children: string
     readonly section: "form" | "layout",
-    readonly component: React.ComponentClass
+    readonly component: React.ComponentClass<MenuContentProps | any>
     readonly icon: IconKey
 }
 

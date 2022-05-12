@@ -3,7 +3,7 @@ import Button from "../layout/Button"
 import { Icon, DetailIcon } from "../layout/Icon"
 import { Table } from "../layout/table/Table"
 import { Tooltip } from "../layout/Tooltip"
-import { MenuItem } from "../MenuContent"
+import { MenuContentProps, MenuItem } from "../MenuContent"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import { copyToClipBoard } from "../shared/utility"
 
@@ -107,7 +107,7 @@ export class Usage extends React.Component<{ readonly notes?: string | JSX.Eleme
     }
 }
 
-export class IconApis extends React.Component{
+export class IconApis extends React.Component<MenuContentProps>{
     render = (): JSX.Element => <>
         <Apis id="iconProps" title="BaseIconProps" data={[
             {
@@ -125,7 +125,7 @@ export class IconApis extends React.Component{
             }
         ]} />
 
-        <Button type="text" btnColor="darkblue" onClick={() => MenuItem.clickItem(MenuItem.findLink("Icon"))}>
+        <Button type="text" btnColor="darkblue" onClick={() => MenuItem.clickItem(MenuItem.findLink("Icon"), this.props.history)}>
             <DetailIcon /> Learn more about <strong>Icons</strong>.
         </Button>
     </>

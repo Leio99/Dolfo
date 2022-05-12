@@ -5,14 +5,14 @@ import { DetailIcon, Icon } from "../layout/Icon"
 import { Table } from "../layout/table/Table"
 import { Tab, Tabs } from "../layout/Tabs"
 import { Tooltip } from "../layout/Tooltip"
-import { MenuItem } from "../MenuContent"
+import { MenuContentProps, MenuItem } from "../MenuContent"
 import { copyToClipBoard } from "../shared/utility"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
-export class DialogPage extends React.Component<any, {
+export class DialogPage extends React.Component<MenuContentProps, {
     readonly [x: string]: boolean
 }>{
-    constructor(props: any){
+    constructor(props: MenuContentProps){
         super(props)
 
         this.state = {
@@ -185,7 +185,7 @@ export class DialogPage extends React.Component<any, {
                 name: "customFooter",
                 desc: "Custom buttons for the footer.",
                 type: <>
-                    Array of <Button onClick={() => MenuItem.clickItem(MenuItem.findLink("Buttons"))} btnColor="darkblue" type="text" style={{ verticalAlign: "top" }}>
+                    Array of <Button onClick={() => MenuItem.clickItem(MenuItem.findLink("Button"), this.props.history)} btnColor="darkblue" type="text" style={{ verticalAlign: "top" }}>
                         <DetailIcon /> Buttons
                     </Button>
                 </>,

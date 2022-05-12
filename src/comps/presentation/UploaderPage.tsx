@@ -1,10 +1,10 @@
 import React from "react"
 import { Uploader } from "../form/Uploader"
-import { goToApiBlock } from "../MenuContent"
+import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { Constants } from "../shared/Constants"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
-export class UploaderPage extends React.Component{
+export class UploaderPage extends React.Component<MenuContentProps>{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a file uploader component inside your form.</WhenToUse>
         <Usage />
@@ -134,6 +134,6 @@ export class UploaderPage extends React.Component{
             }
         ]} />
 
-        <IconApis />
+        <IconApis {...this.props} />
     </>
 }

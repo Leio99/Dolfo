@@ -1,9 +1,9 @@
 import React from "react"
 import TimePicker from "../form/TimePicker"
-import { goToApiBlock } from "../MenuContent"
+import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
-export class TimepickerPage extends React.Component{
+export class TimepickerPage extends React.Component<MenuContentProps>{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a time picker component inside your form.</WhenToUse>
         <Usage notes="user can use arrow up and down keys to increase or decrease hours/minutes." />
@@ -162,6 +162,6 @@ export class TimepickerPage extends React.Component{
             }
         ]} />
 
-        <IconApis />
+        <IconApis {...this.props} />
     </>
 }

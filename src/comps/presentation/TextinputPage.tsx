@@ -1,9 +1,9 @@
 import React from "react"
 import { TextInput } from "../form/TextInput"
-import { goToApiBlock } from "../MenuContent"
+import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
-export class TextinputPage extends React.Component{
+export class TextinputPage extends React.Component<MenuContentProps>{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a text input component inside your form.</WhenToUse>
         <Usage notes="includes password input, email input, number input and textarea." />
@@ -270,6 +270,6 @@ export class TextinputPage extends React.Component{
             }
         ]} />
 
-        <IconApis />
+        <IconApis {...this.props} />
     </>
 }

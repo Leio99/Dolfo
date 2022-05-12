@@ -1,9 +1,9 @@
 import React from "react"
 import DatePicker from "../form/DatePicker"
-import { goToApiBlock } from "../MenuContent"
+import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
-export class DatepickerPage extends React.Component{
+export class DatepickerPage extends React.Component<MenuContentProps>{
     render = (): JSX.Element => <>
         <WhenToUse>When you want to render a date picker inside your form.</WhenToUse>
         <Usage />
@@ -177,6 +177,6 @@ export class DatepickerPage extends React.Component{
             }
         ]} />
 
-        <IconApis />
+        <IconApis {...this.props} />
     </>
 }
