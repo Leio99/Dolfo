@@ -40,7 +40,7 @@ export class ButtonsPage extends React.Component{
                 <Button btnColor="darkblue" outline style={{ marginRight: 5 }}>Dark blue</Button>
                 <Button btnColor="green" outline style={{ marginRight: 5 }}>Green</Button>
                 <Button btnColor="grey" outline style={{ marginRight: 5 }}>Grey</Button>
-                <Button btnColor="orange" outline size="small" style={{ marginRight: 5 }}>Orange</Button>
+                <Button btnColor="orange" outline style={{ marginRight: 5 }}>Orange</Button>
                 <Button btnColor="red" outline style={{ marginRight: 5 }}>Red</Button>
                 <Button btnColor="violet" outline>Violet</Button>
             </>}
