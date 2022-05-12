@@ -3,16 +3,16 @@ import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
 import { BaseIconProps, Icon, LoadingIcon } from "./Icon"
 
-type InternalStep = { step: Step, index: number } | string
+type InternalStep = { readonly step: Step, readonly index: number } | string
 
-interface IProps{
+interface IProps extends React.PropsWithChildren<unknown>{
     readonly currentStep: number
     readonly className?: string
     readonly style?: CSSProperties
     readonly vertical?: boolean
 }
 
-interface StepProps{
+interface StepProps extends React.PropsWithChildren<unknown>{
     readonly title?: string
     readonly icon?: BaseIconProps
     readonly style?: CSSProperties
@@ -77,7 +77,13 @@ export class Stepper extends React.PureComponent<IProps>{
                         isCurrent = currentStep === i
 
                         return <div className={"dolfo-step" + (isCurrent ? " current" : "")} style={style} key={i}>
-                            {step}
+                            <div className={"dolfo-step-content" + (step.props.loading ? " loading" : "")} style={step.props.style}>
+                                {step.props.loading && <div className="dolfo-step-loading">
+                                    <LoadingIcon spinning style={{ fontSize: 50 }} />    
+                                </div>}
+
+                                {step.props.children}
+                            </div>
                         </div>
                     })
                 }
@@ -87,15 +93,5 @@ export class Stepper extends React.PureComponent<IProps>{
 }
 
 export class Step extends React.PureComponent<StepProps>{
-    render = (): JSX.Element => {
-        const { props } = this
-
-        return <div className={"dolfo-step-content" + (props.loading ? " loading" : "")} style={props.style}>
-            {props.loading && <div className="dolfo-step-loading">
-                <LoadingIcon spinning style={{ fontSize: 50 }} />    
-            </div>}
-
-            {props.children}
-        </div>
-    }
+    render = (): JSX.Element => <></>
 }

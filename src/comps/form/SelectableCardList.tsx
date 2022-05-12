@@ -5,7 +5,7 @@ import { Constants } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { CheckBox } from "./CheckBox"
 
-export interface SelectableCardListProps extends BaseInputProps{
+export interface SelectableCardListProps extends BaseInputProps, React.PropsWithChildren<unknown>{
     readonly multiple?: boolean
     readonly defaultValue?: any | any[]
     readonly showCheckbox?: boolean

@@ -8,7 +8,7 @@ import { Constants } from "../shared/Constants"
 import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
 
-export interface SelectProps extends ExtendedInputProps{
+export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren<unknown>{
     readonly defaultValue?: any
     readonly multiple?: boolean
     readonly canSearch?: boolean

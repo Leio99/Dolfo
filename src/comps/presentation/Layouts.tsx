@@ -7,7 +7,7 @@ import { MenuItem } from "../MenuContent"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import { copyToClipBoard } from "../shared/utility"
 
-export class WhenToUse extends React.Component{
+export class WhenToUse extends React.Component<React.PropsWithChildren<unknown>>{
     render = (): JSX.Element => <div className="when-to-use">
         <h3>When to use?</h3>
         {this.props.children}

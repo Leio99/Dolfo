@@ -1,12 +1,12 @@
 import React, { CSSProperties } from "react"
 import { Icon } from "./Icon"
 
-interface IProps{
+interface IProps extends React.PropsWithChildren<unknown>{
     readonly style?: CSSProperties
     readonly automatic?: boolean
 }
 
-interface SlideProps{
+interface SlideProps extends React.PropsWithChildren<unknown>{
     readonly selected?: boolean
     readonly imageUrl?: string
     readonly style?: CSSProperties

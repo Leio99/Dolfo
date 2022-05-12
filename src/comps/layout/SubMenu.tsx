@@ -1,7 +1,7 @@
 import React from "react"
 import { Icon } from "./Icon"
 
-interface IProps{
+interface IProps extends React.PropsWithChildren<unknown>{
     readonly opened?: boolean
     readonly text: string | JSX.Element
     readonly onClick?:() => void

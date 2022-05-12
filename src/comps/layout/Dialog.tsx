@@ -21,7 +21,7 @@ interface BaseProps{
     readonly clickOutside?: boolean
 }
 
-export interface DialogFullProps extends BaseProps{
+export interface DialogFullProps extends BaseProps, React.PropsWithChildren<unknown>{
     readonly onClose?: () => void
     readonly visible?: boolean
     readonly okBtnClass?: string

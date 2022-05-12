@@ -3,8 +3,14 @@ import { Constants } from "../shared/Constants"
 import Button from "./Button"
 import { Icon } from "./Icon"
 
-interface IProps{
+interface IProps extends React.PropsWithChildren<unknown>{
     readonly opened?: boolean
+}
+
+interface SwipeProps extends React.PropsWithChildren<unknown>{
+    readonly style?: CSSProperties
+    readonly className?: string
+    readonly onGoBack?: () => void
 }
 
 export class Swiper extends React.PureComponent<IProps, IProps>{
@@ -44,12 +50,6 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
             }
         </div>
     }
-}
-
-interface SwipeProps{
-    readonly style?: CSSProperties
-    readonly className?: string
-    readonly onGoBack?: () => void
 }
 
 export class Swipe extends React.PureComponent<SwipeProps>{

@@ -13,7 +13,7 @@ interface ContextMenuElement extends HTMLDivElement{
     relativeElement: HTMLElement
 }
 
-interface IProps{
+interface IProps extends React.PropsWithChildren<unknown>{
     readonly options: ContextMenuOption[]
     readonly closeAfterClickItem?: boolean
     readonly openWithRightClick?: boolean

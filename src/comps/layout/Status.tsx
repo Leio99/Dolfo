@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react"
 import { DialogType } from "./Dialog"
 import { CheckIcon, ErrorCircleIcon, Icon, InfoCircleIcon, WarningIcon } from "./Icon"
 
-interface IProps{
+interface IProps extends React.PropsWithChildren<unknown>{
     readonly type: DialogType | "pending"
     readonly hideIcon?: boolean
     readonly style?: CSSProperties

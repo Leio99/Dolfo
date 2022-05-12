@@ -1,6 +1,6 @@
 import React from "react"
 
-interface IProps{
+interface IProps extends React.PropsWithChildren<unknown>{
     readonly onClick?: () => void
     readonly selected?: boolean
 }

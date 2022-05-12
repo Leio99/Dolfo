@@ -9,7 +9,7 @@ interface TooltipElement extends HTMLDivElement{
     relativeElement: HTMLElement
 }
 
-interface IProps{
+interface IProps extends React.PropsWithChildren<unknown>{
     readonly tooltip: string | JSX.Element
     readonly placeTooltip?: TooltipPlacement
 }

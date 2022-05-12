@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react"
 
-interface CardActionsProps{
+interface CardActionsProps extends React.PropsWithChildren<unknown>{
     readonly className?: string
     readonly style?: CSSProperties
     readonly layout?: "flat" | "tab" | "default"
