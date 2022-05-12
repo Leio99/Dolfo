@@ -9,7 +9,7 @@ import { Switch as InputSwitch } from "./form/Switch"
 import { isDarkTheme, toggleDarkTheme } from "./shared/utility"
 import { Tooltip } from "./layout/Tooltip"
 import { IconKey } from "./shared/models/IconModel"
-import { BrowserRouter, Location } from "react-router-dom"
+import { Location } from "react-router-dom"
 
 export interface MenuContentProps{
     readonly history: NavigateFunction
