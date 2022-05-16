@@ -1,0 +1,10 @@
+import React from "react"
+import { DocItemProps } from "../../models/DocItem"
+
+export class Doc<className> extends React.Component<DocItemProps>{
+    render = () => {
+        const { companyConfig } = this.props
+
+        return <>DOC DA IMPLEMENTARE</>
+    }
+}
