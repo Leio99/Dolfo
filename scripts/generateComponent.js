@@ -18,7 +18,6 @@ else{
         isPure = args.includes("--pure"),
         templateDir = __dirname + "\\templates/" + template + ".template",
         reactComponent = isPure ? "PureComponent" : "Component",
-		prefix = template === "doc" ? "Doc" : "",
         cName = componentName[0].toUpperCase() + componentName.substring(1, componentName.length),
         extension = tsTemplates.includes(template) ? "ts" : "tsx"
         
@@ -29,7 +28,7 @@ else{
                 data = data.replace("<className>", cName)
                 data = data.replace("<reactComponent>", reactComponent)
 
-                const newDir = `${currentDir}/${prefix}${componentName}.${extension}`
+                const newDir = `${currentDir}/${componentName}.${extension}`
 
                 fs.readFile(newDir, 'utf8', (_, data2) => {
                     if(!data2)
