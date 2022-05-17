@@ -32,6 +32,8 @@ export class ContextMenu extends React.Component<IProps>{
             e.stopPropagation()
             e.preventDefault()
 
+            this.elementRef.innerHTML = ""
+
             options.forEach(item => {
                 const htmlItem = document.createElement("div")
     
