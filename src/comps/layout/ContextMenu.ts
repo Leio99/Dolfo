@@ -3,7 +3,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
 
-interface ContextMenuOption{
+export interface ContextMenuOption{
     readonly label: string | JSX.Element
     readonly onClick: (e: any, clickedItem: HTMLElement) => void
     readonly disabled?: boolean
@@ -26,14 +26,46 @@ export class ContextMenu extends React.Component<IProps>{
         windowResizeOrScroll: () => this.positionContext(this.elementRef),
         windowClick: () => this.elementRef?.remove(),
         nodeClick: (e: Event) => {
+            const { options, closeAfterClickItem } = this.props
+
             document.body.click()
             e.stopPropagation()
+            e.preventDefault()
+
+            options.forEach(item => {
+                const htmlItem = document.createElement("div")
+    
+                htmlItem.classList.add("context-item")
+    
+                if(item.disabled)
+                    htmlItem.classList.add("disabled")
+    
+                htmlItem.addEventListener("click", e => {
+                    if(item.disabled)
+                        return
+    
+                    e.stopPropagation()
+    
+                    item.onClick(e, htmlItem)
+    
+                    if(closeAfterClickItem || closeAfterClickItem == null)
+                        document.body.click()
+                })
+    
+                if(_.isString(item.label))
+                    htmlItem.innerText = item.label
+                else
+                    createRoot(htmlItem).render(item.label)
+    
+                this.elementRef.appendChild(htmlItem)
+            })
+
             document.body.appendChild(this.elementRef)
         }
     }
 
     componentDidMount = (): void => {
-        const { options, closeAfterClickItem, openWithRightClick } = this.props,
+        const { openWithRightClick } = this.props,
         context = document.createElement("div") as ContextMenuElement,
         node = ReactDOM.findDOMNode(this) as HTMLElement,
         event = openWithRightClick ? "contextmenu" : "click"
@@ -50,34 +82,6 @@ export class ContextMenu extends React.Component<IProps>{
 
         context.classList.add("context-menu")
         context.relativeElement = node
-
-        options.forEach(item => {
-            const htmlItem = document.createElement("div")
-
-            htmlItem.classList.add("context-item")
-
-            if(item.disabled)
-                htmlItem.classList.add("disabled")
-
-            htmlItem.addEventListener("click", e => {
-                if(item.disabled)
-                    return
-
-                e.stopPropagation()
-
-                item.onClick(e, htmlItem)
-
-                if(closeAfterClickItem || closeAfterClickItem == null)
-                    document.body.click()
-            })
-
-            if(_.isString(item.label))
-                htmlItem.innerText = item.label
-            else
-                createRoot(htmlItem).render(item.label)
-
-            context.appendChild(htmlItem)
-        })
 
         this.positionContext(context)
 
