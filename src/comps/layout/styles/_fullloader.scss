@@ -14,6 +14,12 @@ body.dolfo-loader-showing{
     align-items: center;
     justify-content: center;
 
+    .dolfo-full-loader-inner{
+        display: flex;
+        flex-direction: column;
+        align-items: center
+    }
+
     .circle-loading, .circle-loading-inner{
         width: 200px;
         height: 200px;
