@@ -63,18 +63,20 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     onChange = (e: any): void => {
         if(this.props.disabled) return
 
+        let value = e.target.value
+
         if(this.props.type === "number"){
             const number =  Number(e.target.value)
+
+            value = number
 
             if(isNaN(number) || number > this.props.max || number < this.props.min) return
         }
 		
 		this.checkRows(e)
 
-        this.props.onChange && this.props.onChange(e.target.value)
-        this.setState({
-            value: e.target.value
-        })
+        this.props.onChange && this.props.onChange(value)
+        this.setState({ value })
     }
     
     resetInput = (): void => {
