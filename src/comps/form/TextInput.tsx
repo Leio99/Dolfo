@@ -66,7 +66,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         let value = e.target.value
 
         if(this.props.type === "number"){
-            const number =  Number(e.target.value)
+            const number = Number(e.target.value)
 
             value = number
 
