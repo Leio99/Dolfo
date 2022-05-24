@@ -21,6 +21,7 @@ $lightBlue: lighten($darkBlue, 47%);
 $lightOrange: lighten($orange, 42%);
 $lightViolet: lighten($violet, 20%);
 $lightDarkBlue: lighten($darkBlue, 20%);
+$smallShadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 
 $darkThemeDark: darken($dark, 5%);
 $darkThemeDarkHover: darken($dark, 15%);

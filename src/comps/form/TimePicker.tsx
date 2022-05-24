@@ -6,6 +6,9 @@ import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
 import { zeroBefore } from "../shared/utility"
+import { createRoot } from "react-dom/client"
+import ReactDOM from "react-dom"
+import _ from "lodash"
 
 export interface TimePickerProps extends ExtendedInputProps{
     readonly defaultValue?: string
@@ -23,6 +26,10 @@ interface IState{
 }
 
 class TimePicker extends React.PureComponent<TimePickerProps, IState>{
+    private rootContent = document.createElement("div")
+    private root = createRoot(this.rootContent)
+    private observer: ResizeObserver
+    
     constructor(props: TimePickerProps){
         super(props)
 
@@ -32,12 +39,34 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: TimePickerProps) : void=> {
+    componentDidMount = (): void => {
+        this.observer = new ResizeObserver(this.positionPicker)
+        this.observer.observe(this.rootContent)
+        window.addEventListener("scroll", this.positionPicker, true)
+    }
+
+    componentDidUpdate = (prevProps: TimePickerProps, prevState: IState) : void=> {
         if(prevProps.defaultValue !== this.props.defaultValue){
             this.setState({
                 value: this.props.defaultValue || (zeroBefore(new Date().getHours()) + ":" + zeroBefore(new Date().getMinutes()))
             })
         }
+
+        if(this.state.showTime !== prevState.showTime){
+            if(this.state.showTime)
+                this.showPicker()
+            else
+                this.hidePicker()
+        }
+
+        if(!_.isEqual(this.state.value, prevState.value))
+            this.showPicker()
+    }
+
+    componentWillUnmount = (): void => {
+        setTimeout(() => this.root.unmount())
+        window.removeEventListener("scroll", this.positionPicker, true)
+        this.observer.disconnect()
     }
 
     changeTime = (): void => !this.props.disabled && this.props.onChange && this.props.onChange(this.state.value)
@@ -98,7 +127,12 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
     hideTime = (): void => this.setState({ showTime: false })
 
-    handleClickOutside: () => void = this.hideTime
+    handleClickOutside = (args: any) => {
+        if(this.state.showTime && this.rootContent.contains(args.target))
+            return
+        
+        this.hideTime()
+    }
 
     keyDownHour = (e: any): void => {
         if(e.key === 'ArrowUp')
@@ -118,6 +152,79 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         this.props.onKeyDownMinute && this.props.onKeyDownMinute(e)
     }
 
+    showPicker = (): void => {
+        const { showTime, value } = this.state,
+        hour = value.split(":")[0],
+        minute = value.split(":")[1],
+        content = <div className={"dolfo-time-container" + (showTime ? " show" : "")}>
+            <div className="dolfo-picker-table">
+                <div className="dolfo-picker-row">
+                    <Tooltip tooltip={Constants.INCREASE_TEXT}>
+                        <div className="dolfo-picker-cell" onClick={this.increaseHour}>
+                            <Icon iconKey="caret-up" />
+                        </div>
+                    </Tooltip>
+                    <div className="dolfo-picker-cell-e"></div>
+                    <Tooltip tooltip={Constants.INCREASE_TEXT}>
+                        <div className="dolfo-picker-cell" onClick={this.increaseMinute}>
+                            <Icon iconKey="caret-up" />
+                        </div>
+                    </Tooltip>
+                </div>
+                <div className="dolfo-picker-row">
+                    <div className="dolfo-picker-cell">
+                        <div className="time-display">{hour}</div>
+                    </div>
+                    <div className="dolfo-picker-cell">:</div>
+                    <div className="dolfo-picker-cell">
+                        <div className="time-display">{minute}</div>
+                    </div>
+                </div>
+                <div className="dolfo-picker-row">
+                    <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
+                        <div className="dolfo-picker-cell" onClick={this.decreaseHour}>
+                            <Icon iconKey="caret-down" />
+                        </div>
+                    </Tooltip>
+                    <div className="dolfo-picker-cell-e"></div>
+                    <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
+                        <div className="dolfo-picker-cell" onClick={this.decreaseMinute}>
+                            <Icon iconKey="caret-down" />
+                        </div>
+                    </Tooltip>
+                </div>
+            </div>
+        </div>
+
+        if(!showTime)
+            return
+
+        this.root.render(content)
+        setTimeout(this.positionPicker)
+
+        if(!document.body.contains(this.rootContent))
+            document.body.appendChild(this.rootContent)
+    }
+
+    hidePicker = (): void => this.rootContent.remove()
+
+    positionPicker = (): void => {
+        if(!this.state.showTime || !document.body.contains(this.rootContent))
+            return
+
+        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        datepicker = this.rootContent.childNodes[0] as HTMLElement,
+        { top, left, height } = node.getBoundingClientRect()
+
+        if(!datepicker)
+            return
+
+        datepicker.style.left = left + "px"
+        datepicker.style.top = top + height + 5 + "px"
+    }
+
+    handleTabKey = (e: KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideTime()
+
     render = (): JSX.Element => {
         const { props } = this,
         { value, showTime } = this.state,
@@ -128,7 +235,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         hour = value.split(":")[0],
         minute = value.split(":")[1]
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled} style={props.wrapperStyle} required={props.required} value={value} className={props.className} onBlur={this.hideTime}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled} style={props.wrapperStyle} required={props.required} value={value} className={props.className} onKeyDown={this.handleTabKey}>
             <input
                 type="text"
                 className="dolfo-input-time"
@@ -151,46 +258,6 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
                 onKeyPress={props.onKeyPressMinute}
                 onKeyUp={props.onKeyUpMinute}
             />
-
-            <div className={"dolfo-time-container" + (showTime ? " show" : "")}>
-                <div className="dolfo-picker-table">
-                    <div className="dolfo-picker-row">
-                        <Tooltip tooltip={Constants.INCREASE_TEXT}>
-                            <div className="dolfo-picker-cell" onClick={this.increaseHour}>
-                                <Icon iconKey="caret-up" />
-                            </div>
-                        </Tooltip>
-                        <div className="dolfo-picker-cell-e"></div>
-                        <Tooltip tooltip={Constants.INCREASE_TEXT}>
-                            <div className="dolfo-picker-cell" onClick={this.increaseMinute}>
-                                <Icon iconKey="caret-up" />
-                            </div>
-                        </Tooltip>
-                    </div>
-                    <div className="dolfo-picker-row">
-                        <div className="dolfo-picker-cell">
-                            <div className="time-display">{hour}</div>
-                        </div>
-                        <div className="dolfo-picker-cell">:</div>
-                        <div className="dolfo-picker-cell">
-                            <div className="time-display">{minute}</div>
-                        </div>
-                    </div>
-                    <div className="dolfo-picker-row">
-                        <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
-                            <div className="dolfo-picker-cell" onClick={this.decreaseHour}>
-                                <Icon iconKey="caret-down" />
-                            </div>
-                        </Tooltip>
-                        <div className="dolfo-picker-cell-e"></div>
-                        <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
-                            <div className="dolfo-picker-cell" onClick={this.decreaseMinute}>
-                                <Icon iconKey="caret-down" />
-                            </div>
-                        </Tooltip>
-                    </div>
-                </div>
-            </div>
         </InputWrapper>
     }
 }

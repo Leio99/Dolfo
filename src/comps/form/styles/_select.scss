@@ -83,57 +83,54 @@
         transform: rotate(180deg) translateY(50%);
         z-index: 3
     }
+}
 
-    .dolfo-select-options{
-        position: absolute;
-        top: 100%;
-        z-index: 2;
-        width: calc(100% + 55px);
-        left: -51px;
-        border: 1px solid #0997ff;
-        background-color: #fff;
-        border-radius: 0 0 $smallRadius $smallRadius;
-        display: none;
-        max-height: 200px;
-        overflow: auto;
-        border-top: 0;
-        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+.dolfo-select-options{
+    position: fixed;
+    z-index: 2;
+    border: 1px solid #0997ff;
+    background-color: #fff;
+    border-radius: 0 0 $smallRadius $smallRadius;
+    display: none;
+    max-height: 200px;
+    overflow: auto;
+    border-top: 0;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 
-        &.show{
-            display: block
+    &.show{
+        display: block
+    }
+
+    .dolfo-option{
+        padding: calc(0.5rem + 3px) calc(0.8rem - 1px);
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-right: 2rem;
+
+        &:hover, &.selected{
+            background-color: $lightGrey
         }
 
-        .dolfo-option{
-            padding: calc(0.5rem + 3px) calc(0.8rem - 1px);
-            cursor: pointer;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            padding-right: 2rem;
-
-            &:hover, &.selected{
-                background-color: $lightGrey
-            }
-
-            &.disabled{
-                pointer-events: none;
-                opacity: $disabledOpacity
-            }
-
-            &.focused{
-                background-color: $lightGrey !important
-            }
+        &.disabled{
+            pointer-events: none;
+            opacity: $disabledOpacity
         }
 
-        &.multiple{
-            .dolfo-option .dolfo-input-checkbox{
-                label{
-                    font-size: inherit
-                }
+        &.focused{
+            background-color: $lightGrey !important
+        }
+    }
 
-                &, *{
-                    pointer-events: none
-                }
+    &.multiple{
+        .dolfo-option .dolfo-input-checkbox{
+            label{
+                font-size: inherit
+            }
+
+            &, *{
+                pointer-events: none
             }
         }
     }

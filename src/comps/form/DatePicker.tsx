@@ -9,6 +9,8 @@ import TimePicker from "./TimePicker"
 import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
 import { blurInput, zeroBefore, isValidDate, getCalendar, decodeMonth } from "../shared/utility"
+import { createRoot } from "react-dom/client"
+import ReactDOM from "react-dom"
 
 type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
 
@@ -35,10 +37,41 @@ interface IState {
 }
 
 class DatePicker extends React.PureComponent<DatePickerProps, IState>{
+    private rootContent = document.createElement("div")
+    private root = createRoot(this.rootContent)
+    private observer: ResizeObserver
+    
     constructor(props: DatePickerProps) {
         super(props)
 
         this.state = this.composeDateFromDefault(props.defaultValue)
+    }
+
+    componentDidMount = (): void => {
+        this.observer = new ResizeObserver(this.positionPicker)
+        this.observer.observe(this.rootContent)
+        window.addEventListener("scroll", this.positionPicker, true)
+    }
+
+    componentDidUpdate = (prevProps: DatePickerProps, prevState: IState): void => {
+        if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
+            this.setState(this.composeDateFromDefault(this.props.defaultValue))
+
+        if(this.state.showCalendar !== prevState.showCalendar){
+            if(this.state.showCalendar)
+                this.showPicker()
+            else
+                this.hidePicker()
+        }
+
+        if(!_.isEqual(this.state.date, prevState.date))
+            this.showPicker()
+    }
+
+    componentWillUnmount = (): void => {
+        setTimeout(() => this.root.unmount())
+        window.removeEventListener("scroll", this.positionPicker, true)
+        this.observer.disconnect()
     }
 
     composeDateFromDefault = (defaultValue: Date): IState => {
@@ -67,11 +100,6 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         return newState
     }
 
-    componentDidUpdate = (prevProps: DatePickerProps): void => {
-        if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
-            this.setState(this.composeDateFromDefault(this.props.defaultValue))
-    }
-
     nextMonth = (): void => {
         let newMonth,
         newYear = this.state.currentYear
@@ -85,7 +113,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         this.setState({
             currentYear: newYear,
             currentMonth: newMonth
-        })
+        }, this.showPicker)
     }
 
     prevMonth = (): void => {
@@ -101,7 +129,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         this.setState({
             currentYear: newYear,
             currentMonth: newMonth
-        })
+        }, this.showPicker)
     }
 
     selectDay = (day: number, month: number = this.state.currentMonth, year: number = this.state.currentYear, blur = true, showCalendar = false): void => {
@@ -154,13 +182,13 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
 
     hideCalendar = (): void => this.setState({ showCalendar: false })
 
-    changeMonth = (): void => this.setState({ selectingMonth: true })
+    changeMonth = (): void => this.setState({ selectingMonth: true }, this.showPicker)
 
-    changeYear = (): void => this.setState({ selectingYear: true })
+    changeYear = (): void => this.setState({ selectingYear: true }, this.showPicker)
 
-    prevDecade = (): void => this.setState({ currentDecade: this.state.currentDecade - 10 })
+    prevDecade = (): void => this.setState({ currentDecade: this.state.currentDecade - 10 }, this.showPicker)
 
-    nextDecade = (): void => this.setState({ currentDecade: this.state.currentDecade + 10 })
+    nextDecade = (): void => this.setState({ currentDecade: this.state.currentDecade + 10 }, this.showPicker)
 
     isCurrentDay = (day: ICalendarDay): boolean => {
         const { currentDay, selectedMonth, selectedYear } = this.state
@@ -174,20 +202,16 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         return day.day === date.getDate() && day.month === date.getMonth() && day.year === date.getFullYear()
     }
 
-    selectMonth = (month: number): void => {
-        this.setState({
-            selectingMonth: false,
-            currentMonth: month
-        })
-    }
+    selectMonth = (month: number): void => this.setState({
+        selectingMonth: false,
+        currentMonth: month
+    }, this.showPicker)
 
-    selectYear = (year: number): void => {
-        this.setState({
-            selectingYear: false,
-            currentYear: year,
-            currentDecade: parseInt(year.toString().slice(0, -1) + "0")
-        })
-    }
+    selectYear = (year: number): void => this.setState({
+        selectingYear: false,
+        currentYear: year,
+        currentDecade: parseInt(year.toString().slice(0, -1) + "0")
+    }, this.showPicker)
 
     resetDate = (): void => {
         if(this.props.disabled) return
@@ -216,7 +240,17 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
 
     chooseToday = (): void => this.selectDay(new Date().getDate(), new Date().getMonth(), new Date().getFullYear())
 
-    handleClickOutside: () => void = this.hideCalendar
+    handleClickOutside = (args: any) => {
+        if(this.state.showCalendar && this.rootContent.contains(args.target))
+            return
+
+        const timePicker = document.querySelector(".dolfo-time-container")
+
+        if(timePicker && timePicker.contains(args.target))
+            return
+        
+        this.hideCalendar()
+    }
 
     handleTabKey = (e: KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideCalendar()
 
@@ -255,10 +289,170 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         this.props.onKeyDown && this.props.onKeyDown(e)
     }
 
-    render = (): JSX.Element => {
-        const { date, showCalendar, selectingMonth, selectingYear, currentYear, currentMonth, currentDecade, currentHour, currentMinute } = this.state,
-        props = this.props,
+    showPicker = (): void => {
+        const { selectingMonth, selectingYear, currentMonth, showCalendar, currentYear, currentHour, currentMinute, currentDecade } = this.state,
         monthCalendar = getCalendar(currentMonth, currentYear),
+        { selectTime, showOnTop } = this.props,
+        content = <div className={"dolfo-calendar-container" + (showOnTop ? " top" : "") + (showCalendar ? " show" : "") + (selectTime ? " time-picker" : "")}>
+            {
+                !selectingMonth && !selectingYear && <div className="dolfo-calendar">
+                    <div className="dolfo-calendar-row">
+                        <Tooltip tooltip={Constants.PREV_TEXT}>
+                            <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevMonth}>
+                                <Icon iconKey="chevron-left" />
+                            </div>
+                        </Tooltip>
+                        <Tooltip tooltip={Constants.CHANGE_MONTH}>
+                            <div className="select-month dolfo-calendar-cell-h" onClick={this.changeMonth}>
+                                {decodeMonth(currentMonth)}
+                            </div>
+                        </Tooltip>
+                        <Tooltip tooltip={Constants.CHANGE_YEAR}>
+                            <div className="select-year dolfo-calendar-cell-h" onClick={this.changeYear}>
+                                {currentYear}
+                            </div>
+                        </Tooltip>
+                        <Tooltip tooltip={Constants.NEXT_TEXT}>
+                            <div className="next-month dolfo-calendar-cell-h" onClick={this.nextMonth}>
+                                <Icon iconKey="chevron-right" />
+                            </div>
+                        </Tooltip>
+                    </div>
+
+                    <div className="dolfo-calendar-row">
+                        <div className="dolfo-calendar-cell-h">L</div>
+                        <div className="dolfo-calendar-cell-h">M</div>
+                        <div className="dolfo-calendar-cell-h">M</div>
+                        <div className="dolfo-calendar-cell-h">G</div>
+                        <div className="dolfo-calendar-cell-h">V</div>
+                        <div className="dolfo-calendar-cell-h">S</div>
+                        <div className="dolfo-calendar-cell-h">D</div>
+                    </div>
+
+                    {
+                        monthCalendar.map((week, i) => {
+                            return <div className="dolfo-calendar-row" key={i}>
+                                {
+                                    week.map(day => {
+                                        if (day.prevMonth >= 0) {
+                                            return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.prevMonth, day.prevYear)} key={day.day}>{day.day}</div>
+                                        }
+
+                                        if (day.nextMonth >= 0) {
+                                            return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.nextMonth, day.nextYear)} key={day.day}>{day.day}</div>
+                                        }
+
+                                        return <div className={"dolfo-calendar-cell" + (this.isCurrentDay(day) ? " selected" : this.isToday(day) ? " today" : "")} onClick={() => this.selectDay(day.day)} key={day.day}>{day.day}</div>
+                                    })
+                                }
+                            </div>
+                        })
+                    }
+
+                    <div className="dolfo-calendar-row">
+                        <div className="dolfo-calendar-cell select-today" onClick={this.chooseToday}>
+                            Oggi
+                        </div>
+                    </div>
+
+                    {
+                        selectTime && <div className="dolfo-calendar-time-picker">
+                            <TimePicker defaultValue={zeroBefore(currentHour) + ":" + zeroBefore(currentMinute)} onChange={this.changeTime} />
+                        </div>
+                    }
+                </div>
+            }
+
+            {
+                selectingMonth && <div className="month-selection">
+                    {
+                        [[0,1,2],[3,4,5],[6,7,8],[9,10,11]].map((tris, i) => {
+                            return <div className="dolfo-calendar-row" key={i}>
+                                {
+                                    tris.map(month => {
+                                        return <div className={"dolfo-calendar-cell select" + (currentMonth === month ? " selected" : "")} onClick={() => this.selectMonth(month)} key={month}>
+                                            <span>{decodeMonth(month, true)}</span>
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        })
+                    }
+                </div>
+            }
+
+            {
+                selectingYear && <div className="year-selection">
+                    <div className="dolfo-calendar-row">
+                        <Tooltip tooltip={Constants.PREV_TEXT}>
+                            <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevDecade}>
+                                <span><Icon iconKey="chevron-left" /></span>
+                            </div>
+                        </Tooltip>
+                        <div className="dolfo-calendar-cell-h">
+                            <span>{currentDecade}</span>
+                        </div>
+                        <Tooltip tooltip={Constants.NEXT_TEXT}>
+                            <div className="next-month dolfo-calendar-cell-h" onClick={this.nextDecade}>
+                                <span><Icon iconKey="chevron-right" /></span>
+                            </div>
+                        </Tooltip>
+                    </div>
+
+                    {
+                        [[-1, 0, 1],[2,3,4],[5,6,7],[8,9,10]].map((tris, i) => {
+                            return <div className="dolfo-calendar-row" key={i}>
+                                {
+                                    tris.map(n => {
+                                        const year = currentDecade + n
+
+                                        return <div className={"dolfo-calendar-cell select" + (currentYear === year ? " selected" : "") + (n === -1 || n === 10 ? " ext-year" : "")} onClick={() => this.selectYear(currentDecade + n)} key={n}>
+                                            <span>{year}</span>
+                                        </div>
+                                    })
+                                }
+                            </div>
+                        })
+                    }
+                </div>
+            }
+        </div>
+
+        if(!showCalendar)
+            return
+
+        this.root.render(content)
+        setTimeout(this.positionPicker)
+
+        if(!document.body.contains(this.rootContent))
+            document.body.appendChild(this.rootContent)
+    }
+
+    hidePicker = (): void => this.rootContent.remove()
+
+    positionPicker = (): void => {
+        if(!this.state.showCalendar || !document.body.contains(this.rootContent))
+            return
+
+        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        datepicker = this.rootContent.childNodes[0] as HTMLElement,
+        { top, left, height } = node.getBoundingClientRect(),
+        { showOnTop } = this.props
+
+        if(!datepicker)
+            return
+
+        datepicker.style.left = left + "px"
+
+        if(showOnTop)
+            datepicker.style.top = top - datepicker.clientHeight - 7 + "px"
+        else
+            datepicker.style.top = top + height + 5 + "px"
+    }
+
+    render = (): JSX.Element => {
+        const { date, showCalendar, currentHour, currentMinute } = this.state,
+        props = this.props,
         icon = props.icon || {
             type: "far",
             iconKey: "calendar-day"
@@ -278,131 +472,6 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
                 onKeyPress={props.onKeyPress}
                 onKeyUp={props.onKeyUp}
             />
-            
-            <div className={"dolfo-calendar-container" + (props.showOnTop ? " top" : "") + (showCalendar ? " show" : "") + (props.selectTime ? " time-picker" : "")}>
-                {
-                    !selectingMonth && !selectingYear && <div className="dolfo-calendar">
-                        <div className="dolfo-calendar-row">
-                            <Tooltip tooltip={Constants.PREV_TEXT}>
-                                <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevMonth}>
-                                    <Icon iconKey="chevron-left" />
-                                </div>
-                            </Tooltip>
-                            <Tooltip tooltip={Constants.CHANGE_MONTH}>
-                                <div className="select-month dolfo-calendar-cell-h" onClick={this.changeMonth}>
-                                    {decodeMonth(currentMonth)}
-                                </div>
-                            </Tooltip>
-                            <Tooltip tooltip={Constants.CHANGE_YEAR}>
-                                <div className="select-year dolfo-calendar-cell-h" onClick={this.changeYear}>
-                                    {currentYear}
-                                </div>
-                            </Tooltip>
-                            <Tooltip tooltip={Constants.NEXT_TEXT}>
-                                <div className="next-month dolfo-calendar-cell-h" onClick={this.nextMonth}>
-                                    <Icon iconKey="chevron-right" />
-                                </div>
-                            </Tooltip>
-                        </div>
-
-                        <div className="dolfo-calendar-row">
-                            <div className="dolfo-calendar-cell-h">L</div>
-                            <div className="dolfo-calendar-cell-h">M</div>
-                            <div className="dolfo-calendar-cell-h">M</div>
-                            <div className="dolfo-calendar-cell-h">G</div>
-                            <div className="dolfo-calendar-cell-h">V</div>
-                            <div className="dolfo-calendar-cell-h">S</div>
-                            <div className="dolfo-calendar-cell-h">D</div>
-                        </div>
-
-                        {
-                            monthCalendar.map((week, i) => {
-                                return <div className="dolfo-calendar-row" key={i}>
-                                    {
-                                        week.map(day => {
-                                            if (day.prevMonth >= 0) {
-                                                return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.prevMonth, day.prevYear)} key={day.day}>{day.day}</div>
-                                            }
-
-                                            if (day.nextMonth >= 0) {
-                                                return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.nextMonth, day.nextYear)} key={day.day}>{day.day}</div>
-                                            }
-
-                                            return <div className={"dolfo-calendar-cell" + (this.isCurrentDay(day) ? " selected" : this.isToday(day) ? " today" : "")} onClick={() => this.selectDay(day.day)} key={day.day}>{day.day}</div>
-                                        })
-                                    }
-                                </div>
-                            })
-                        }
-
-                        <div className="dolfo-calendar-row">
-                            <div className="dolfo-calendar-cell select-today" onClick={this.chooseToday}>
-                                Oggi
-                            </div>
-                        </div>
-
-                        {
-                            props.selectTime && <div className="dolfo-calendar-time-picker">
-                                <TimePicker defaultValue={zeroBefore(currentHour) + ":" + zeroBefore(currentMinute)} onChange={this.changeTime} />
-                            </div>
-                        }
-                    </div>
-                }
-
-                {
-                    selectingMonth && <div className="month-selection">
-                        {
-                            [[0,1,2],[3,4,5],[6,7,8],[9,10,11]].map((tris, i) => {
-                                return <div className="dolfo-calendar-row" key={i}>
-                                    {
-                                        tris.map(month => {
-                                            return <div className={"dolfo-calendar-cell select" + (currentMonth === month ? " selected" : "")} onClick={() => this.selectMonth(month)} key={month}>
-                                                <span>{decodeMonth(month, true)}</span>
-                                            </div>
-                                        })
-                                    }
-                                </div>
-                            })
-                        }
-                    </div>
-                }
-
-                {
-                    selectingYear && <div className="year-selection">
-                        <div className="dolfo-calendar-row">
-                            <Tooltip tooltip={Constants.PREV_TEXT}>
-                                <div className="prev-month dolfo-calendar-cell-h" onClick={this.prevDecade}>
-                                    <span><Icon iconKey="chevron-left" /></span>
-                                </div>
-                            </Tooltip>
-                            <div className="dolfo-calendar-cell-h">
-                                <span>{currentDecade}</span>
-                            </div>
-                            <Tooltip tooltip={Constants.NEXT_TEXT}>
-                                <div className="next-month dolfo-calendar-cell-h" onClick={this.nextDecade}>
-                                    <span><Icon iconKey="chevron-right" /></span>
-                                </div>
-                            </Tooltip>
-                        </div>
-
-                        {
-                            [[-1, 0, 1],[2,3,4],[5,6,7],[8,9,10]].map((tris, i) => {
-                                return <div className="dolfo-calendar-row" key={i}>
-                                    {
-                                        tris.map(n => {
-                                            const year = currentDecade + n
-
-                                            return <div className={"dolfo-calendar-cell select" + (currentYear === year ? " selected" : "") + (n === -1 || n === 10 ? " ext-year" : "")} onClick={() => this.selectYear(currentDecade + n)} key={n}>
-                                                <span>{year}</span>
-                                            </div>
-                                        })
-                                    }
-                                </div>
-                            })
-                        }
-                    </div>
-                }
-            </div>
         </InputWrapper>
     }
 }

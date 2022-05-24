@@ -7,13 +7,13 @@
 .dolfo-time-container{
     position: absolute;
     display: none;
-    margin-top: 44px;
     background-color: $white;
     border: 1px solid $selectionBlue;
     border-radius: $smallRadius;
-    z-index: 2;
+    z-index: 3;
     width: 100px;
     padding: 0.5rem;
+    box-shadow: $smallShadow;
 
     .dolfo-picker-table{
         width: 100%;

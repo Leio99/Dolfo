@@ -5,12 +5,12 @@
     border-radius: $smallRadius;
     align-items: center;
     justify-content: center;
-    margin-top: 44px;
     position: absolute;
     z-index: 3;
     background-color: $white;
     width: 275px;
     display: none;
+    box-shadow: $smallShadow;
 
     &.top{
         bottom: 44px

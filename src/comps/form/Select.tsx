@@ -7,6 +7,8 @@ import onClickOutside from "react-onclickoutside"
 import { Constants } from "../shared/Constants"
 import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
+import { createRoot } from "react-dom/client"
+import ReactDOM from "react-dom"
 
 export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren<unknown>{
     readonly defaultValue?: any
@@ -24,6 +26,10 @@ interface IState{
 }
 
 class Select extends React.PureComponent<SelectProps, IState>{
+    private rootContent = document.createElement("div")
+    private root = createRoot(this.rootContent)
+    private observer: ResizeObserver
+
     constructor(props: SelectProps){
         super(props)
 
@@ -36,7 +42,13 @@ class Select extends React.PureComponent<SelectProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: React.PropsWithChildren<SelectProps>): void => {
+    componentDidMount = (): void => {
+        this.observer = new ResizeObserver(this.positionOptions)
+        this.observer.observe(this.rootContent)
+        window.addEventListener("scroll", this.positionOptions, true)
+    }
+
+    componentDidUpdate = (prevProps: React.PropsWithChildren<SelectProps>, prevState: IState): void => {
         if(!_.isEqual(prevProps.children, this.props.children)){
             const value = this.state.value,
             options = this.getOptions()
@@ -57,6 +69,22 @@ class Select extends React.PureComponent<SelectProps, IState>{
         
         if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
             this.setState({ value: this.props.defaultValue })
+
+        if(this.state.openSelect !== prevState.openSelect){
+            if(this.state.openSelect)
+                this.showOptions()
+            else
+                this.hideOptions()
+        }
+
+        if(!_.isEqual(this.state.value, prevState.value))
+            this.showOptions()
+    }
+
+    componentWillUnmount = (): void => {
+        setTimeout(() => this.root.unmount())
+        window.removeEventListener("scroll", this.positionOptions, true)
+        this.observer.disconnect()
     }
 
     changeOption = (value: any): void => {
@@ -113,14 +141,17 @@ class Select extends React.PureComponent<SelectProps, IState>{
         return this.state.options?.find(option => _.isEqual(value, option.props.value))?.props.label
     }
 
-    handleClickOutside: () => void = this.onBlur
-
-    changeSearch = (e: any): void => {
-        this.setState({
-            searchValue: e.target.value,
-            options: this.getOptions()?.filter(opt => opt.props.label?.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
-        })
+    handleClickOutside = (args: any) => {
+        if(this.state.openSelect && this.rootContent.contains(args.target))
+            return
+        
+        this.onBlur()
     }
+
+    changeSearch = (e: any): void => this.setState({
+        searchValue: e.target.value,
+        options: this.getOptions()?.filter(opt => opt.props.label?.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
+    }, this.showOptions)
 
     resetSearch = (): void => this.changeSearch({ target: { value: "" }})
 
@@ -153,10 +184,55 @@ class Select extends React.PureComponent<SelectProps, IState>{
         newIndex > -1 && this.setState({ currentSelection: newIndex })
     }
 
+    showOptions = (): void => {
+        const { options, openSelect, currentSelection, value } = this.state,
+        { multiple } = this.props,
+        content = options && options.length ? (multiple ? <div className={"dolfo-select-options multiple" + (openSelect ? " show" : "")}>
+            {
+                options.map((option, i) => {
+                    return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={val => this.changeMultiple(val)} multiple key={i} />
+                })
+            }
+        </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>
+            {
+                options.map((option, i) => {
+                    return <Option {...option.props} selected={_.isEqual(option.props.value, value)} focused={i === currentSelection} onChange={this.changeOption} key={i} />
+                })
+            }
+        </div>) : null
+
+        if(!openSelect)
+            return
+
+        this.root.render(content)
+        setTimeout(this.positionOptions)
+
+        if(!document.body.contains(this.rootContent))
+            document.body.appendChild(this.rootContent)
+    }
+
+    hideOptions = (): void => this.rootContent.remove()
+
+    positionOptions = (): void => {
+        if(!this.state.openSelect || !document.body.contains(this.rootContent))
+            return
+
+        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        options = this.rootContent.childNodes[0] as HTMLElement,
+        { top, left, height, width } = node.getBoundingClientRect()
+
+        if(!options)
+            return
+
+        options.style.left = left + "px"
+        options.style.top = top + height - 5 + "px"
+        options.style.width = width + "px"
+    }
+
     render = (): JSX.Element => {
         let input: HTMLInputElement
         const { props } = this,
-        { value, openSelect, options, searchValue, currentSelection } = this.state,
+        { value, openSelect, searchValue, currentSelection } = this.state,
         icon = props.icon || { iconKey: "hand-pointer", type: "far" },
         searchInput = <div className="dolfo-select-search-content">
             <SearchIcon className="dolfo-select-search-icon" />
@@ -187,22 +263,6 @@ class Select extends React.PureComponent<SelectProps, IState>{
 
                 {props.canSearch && searchInput}
             </div>
-
-            {
-                options && options.length ? (props.multiple ? <div className={"dolfo-select-options" + (openSelect ? " show" : "") + (props.multiple ? " multiple" : "")}>
-                    {
-                        options.map((option, i) => {
-                            return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={val => this.changeMultiple(val)} multiple key={i} />
-                        })
-                    }
-                </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>
-                    {
-                        options.map((option, i) => {
-                            return <Option {...option.props} selected={_.isEqual(option.props.value, value)} focused={i === currentSelection} onChange={this.changeOption} key={i} />
-                        })
-                    }
-                </div>) : null
-            }
         </InputWrapper>
     }
 }

@@ -11,7 +11,8 @@ html, body{
     color: $black;
     word-break: break-word;
     margin: 0;
-    background-color: $white
+    background-color: $white;
+    overflow: hidden
 }
 .dolfo-icon.spin{
     animation: spinIcon 0.8s linear infinite
