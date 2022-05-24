@@ -189,3 +189,19 @@ export const toggleDarkTheme = () => {
 export const isDarkTheme = () => localStorage.getItem("darkTheme") === "1"
 
 export const checkDarkTheme = () => isDarkTheme() && document.querySelector("html").classList.add("dark-theme")
+
+export const sumParentZIndex = (element: HTMLElement) => {
+    let sum = 0,
+    temp = element
+
+    while(temp.parentElement){
+        const index = window.getComputedStyle(temp).zIndex
+
+        if(!isNaN(Number(index)))
+            sum += Number(index)
+        
+        temp = temp.parentElement
+    }
+
+    return sum
+}

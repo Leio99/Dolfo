@@ -9,6 +9,7 @@ import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
 import { createRoot } from "react-dom/client"
 import ReactDOM from "react-dom"
+import { sumParentZIndex } from "../shared/utility"
 
 export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren<unknown>{
     readonly defaultValue?: any
@@ -224,8 +225,9 @@ class Select extends React.PureComponent<SelectProps, IState>{
         if(!options)
             return
 
+        options.style.zIndex = sumParentZIndex(node) + 1 + ""
         options.style.left = left + "px"
-        options.style.top = top + height - 5 + "px"
+        options.style.top = top + height + document.documentElement.scrollTop - 5 + "px"
         options.style.width = width + "px"
     }
 

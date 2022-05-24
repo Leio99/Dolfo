@@ -8,7 +8,7 @@ import { Constants } from "../shared/Constants"
 import TimePicker from "./TimePicker"
 import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
-import { blurInput, zeroBefore, isValidDate, getCalendar, decodeMonth } from "../shared/utility"
+import { blurInput, zeroBefore, isValidDate, getCalendar, decodeMonth, sumParentZIndex } from "../shared/utility"
 import { createRoot } from "react-dom/client"
 import ReactDOM from "react-dom"
 
@@ -443,11 +443,12 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
             return
 
         datepicker.style.left = left + "px"
+        datepicker.style.zIndex = sumParentZIndex(node) + 1 + ""
 
         if(showOnTop)
-            datepicker.style.top = top - datepicker.clientHeight - 7 + "px"
+            datepicker.style.top = top - datepicker.clientHeight + document.documentElement.scrollTop + 15 + "px"
         else
-            datepicker.style.top = top + height + 5 + "px"
+            datepicker.style.top = top + height + document.documentElement.scrollTop + 5 + "px"
     }
 
     render = (): JSX.Element => {

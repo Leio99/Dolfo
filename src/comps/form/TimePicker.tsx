@@ -5,7 +5,7 @@ import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
-import { zeroBefore } from "../shared/utility"
+import { sumParentZIndex, zeroBefore } from "../shared/utility"
 import { createRoot } from "react-dom/client"
 import ReactDOM from "react-dom"
 import _ from "lodash"
@@ -213,14 +213,15 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
             return
 
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
-        datepicker = this.rootContent.childNodes[0] as HTMLElement,
+        timepicker = this.rootContent.childNodes[0] as HTMLElement,
         { top, left, height } = node.getBoundingClientRect()
 
-        if(!datepicker)
+        if(!timepicker)
             return
 
-        datepicker.style.left = left + "px"
-        datepicker.style.top = top + height + 5 + "px"
+        timepicker.style.zIndex = sumParentZIndex(node) + 1 + ""
+        timepicker.style.left = left + "px"
+        timepicker.style.top = top + height + document.documentElement.scrollTop + 5 + "px"
     }
 
     handleTabKey = (e: KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideTime()
