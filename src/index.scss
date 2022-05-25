@@ -35,7 +35,7 @@ ul{
           $menuItemHeight: 1rem;
           
           list-style-type: none;
-          color: $darkThemeWhite;
+          color: $white;
           padding: 0.7rem 2rem;
           cursor: pointer;
           position: relative;
@@ -48,7 +48,7 @@ ul{
           }
           
           &.selected{
-            background-color: $darkThemeWhite;
+            background-color: $white;
             color: $black;
             border-radius: $roundRadius 0 0 $roundRadius
           }
@@ -64,7 +64,7 @@ ul{
           b{
             height: $menuItemHeight;
             width: $menuItemHeight;
-            background-color: $darkThemeWhite;
+            background-color: $white;
             position: absolute;
             top: -$menuItemHeight;
             right: 0;
@@ -96,12 +96,12 @@ ul{
         }
 
         > h4{
-            color: $darkThemeWhite
+            color: $white
         }
 
         .navigation-menu-title{
             font-weight: bold;
-            color: $darkThemeWhite
+            color: $white
         }
     }
 
@@ -130,7 +130,7 @@ ul{
 
     .component-showing{
         padding: 1rem;
-        background-color: $darkThemeWhite;
+        background-color: $white;
         border-radius: $smallRadius
     }
 
@@ -223,7 +223,7 @@ button.dolfo-button.menu-toggler{
 
     .navigation-menu.show{
         margin-left: 0;
-        box-shadow: 5px 0 10px $darkThemeWhite
+        box-shadow: 5px 0 10px $white
     }
 	
 	html.dark-theme .navigation-menu.show{
