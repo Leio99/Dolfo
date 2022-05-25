@@ -160,6 +160,9 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
     onKeyDown = (e: any): void => {
         this.props.onKeyDown && this.props.onKeyDown(e)
 
+        if(e.key.charCodeAt(0) === 84)
+            this.onBlur()
+        
         if(Constants.AUTOCOMPLETE_EXLUDE_KEYS.includes(e.key) && e.key !== "Enter" && e.key !== "ArrowUp" && e.key !== "ArrowDown")
             return
 
