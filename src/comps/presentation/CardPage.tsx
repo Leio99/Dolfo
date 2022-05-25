@@ -23,12 +23,6 @@ export class CardPage extends React.Component{
         />
 
         <ResultCode
-            title="Flat layout"
-            result={<Card title="I have flat layout" layout="flat">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>}
-            code={'<Card title="I have tab layout" layout="flat">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>'}
-        />
-
-        <ResultCode
             title="Tab layout"
             result={<Card title="I have tab layout" layout="tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>}
             code={'<Card title="I have tab layout" layout="tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur possimus, ad accusantium velit voluptatibus id eius at corporis debitis, unde eligendi laborum commodi. Esse rerum iusto nesciunt culpa quibusdam corporis.</Card>'}
@@ -73,9 +67,9 @@ export class CardPage extends React.Component{
             {
                 name: "layout",
                 desc: "Determines the type of layout of the card.",
-                type: "string (default, tab, flat)",
+                type: "string (tab, flat)",
                 required: false,
-                default: "default"
+                default: "flat"
             },
             {
                 name: "Card actions children",

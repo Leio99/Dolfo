@@ -3,7 +3,7 @@ import React, { CSSProperties } from "react"
 interface CardActionsProps extends React.PropsWithChildren<unknown>{
     readonly className?: string
     readonly style?: CSSProperties
-    readonly layout?: "flat" | "tab" | "default"
+    readonly layout?: "flat" | "tab"
 }
 
 interface CardProps extends CardActionsProps{
@@ -14,7 +14,7 @@ interface CardProps extends CardActionsProps{
 export class Card extends React.PureComponent<CardProps>{
     render = (): JSX.Element => {
         const { props } = this,
-        layout = props.layout && props.layout !== "default" ? " " + props.layout + "-layout" : ""
+        layout = " " + (props.layout || "flat") + "-layout"
 
         return <div className={"dolfo-card" + layout + (!props.title ? " no-title" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onDoubleClick={props.onDoubleClick}>
             {props.title && <div className="dolfo-card-title">{props.title}</div>}
