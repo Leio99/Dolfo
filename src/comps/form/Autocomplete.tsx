@@ -6,7 +6,7 @@ import { LoadingIcon } from "../layout/Icon"
 import { showError } from "../layout/NotificationMsg"
 import { Constants } from "../shared/Constants"
 import { ExtendedInputProps } from "../shared/models/InputProps"
-import { sumParentZIndex } from "../shared/utility"
+import { blurInput, sumParentZIndex } from "../shared/utility"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 
@@ -87,10 +87,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
             this.fetchDefaultValue()
 
-        if(!_.isEqual(this.state.selectedItem, prevState.selectedItem))
-            this.showOptions()
-
-        if(this.state.loading !== prevState.loading)
+        if(!_.isEqual(this.state.selectedItem, prevState.selectedItem) || this.state.loading !== prevState.loading || (this.state.focusedIndex !== prevState.focusedIndex && this.state.focusedIndex > -1))
             this.showOptions()
     }
 
@@ -171,7 +168,10 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         if(e.key === "Enter" && focusedIndex !== null && focusedIndex >= 0){
             e.preventDefault()
             this.selectOption(list.find((_, i) => i === focusedIndex))
-            this.setState({ focusedIndex: -1 })
+            this.setState({ focusedIndex: -1 }, () => {
+                this.hideOptions()
+                blurInput()
+            })
         }else if(e.key === "ArrowUp" && showOptions){
             let newIndex: number
 
