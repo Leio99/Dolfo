@@ -35,7 +35,7 @@ ul{
           $menuItemHeight: 1rem;
           
           list-style-type: none;
-          color: $white;
+          color: $darkThemeWhite;
           padding: 0.7rem 2rem;
           cursor: pointer;
           position: relative;
@@ -48,7 +48,7 @@ ul{
           }
           
           &.selected{
-            background-color: $white;
+            background-color: $darkThemeWhite;
             color: $black;
             border-radius: $roundRadius 0 0 $roundRadius
           }
@@ -64,7 +64,7 @@ ul{
           b{
             height: $menuItemHeight;
             width: $menuItemHeight;
-            background-color: $white;
+            background-color: $darkThemeWhite;
             position: absolute;
             top: -$menuItemHeight;
             right: 0;
@@ -96,12 +96,12 @@ ul{
         }
 
         > h4{
-            color: $white
+            color: $darkThemeWhite
         }
 
         .navigation-menu-title{
             font-weight: bold;
-            color: $white
+            color: $darkThemeWhite
         }
     }
 
@@ -130,7 +130,7 @@ ul{
 
     .component-showing{
         padding: 1rem;
-        background-color: $white;
+        background-color: $darkThemeWhite;
         border-radius: $smallRadius
     }
 
@@ -223,7 +223,7 @@ button.dolfo-button.menu-toggler{
 
     .navigation-menu.show{
         margin-left: 0;
-        box-shadow: 5px 0 10px $white
+        box-shadow: 5px 0 10px $darkThemeWhite
     }
 	
 	html.dark-theme .navigation-menu.show{
@@ -234,7 +234,7 @@ button.dolfo-button.menu-toggler{
 html.dark-theme{
     .page-content{
         .navigation-menu .navigation-menu-item.selected{
-            color: $white;
+            color: $darkThemeWhite;
     
             &, b{
                 background-color: $dark
@@ -246,7 +246,7 @@ html.dark-theme{
             border-color: $darkThemeDark;
 
             h6{
-                color: $white
+                color: $darkThemeWhite
             }
 
             .component-showing{
@@ -257,7 +257,7 @@ html.dark-theme{
                 color: $lightGrey;
 
                 &:hover{
-                    color: $white
+                    color: $darkThemeWhite
                 }
             }
         }
