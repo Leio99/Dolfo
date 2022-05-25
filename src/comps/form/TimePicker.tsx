@@ -5,7 +5,7 @@ import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
-import { sumParentZIndex, zeroBefore } from "../shared/utility"
+import { blurInput, sumParentZIndex, zeroBefore } from "../shared/utility"
 import { createRoot } from "react-dom/client"
 import ReactDOM from "react-dom"
 import _ from "lodash"
@@ -125,7 +125,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
     showTime = (): void => this.setState({ showTime: true })
 
-    hideTime = (): void => this.setState({ showTime: false })
+    hideTime = (): void => this.setState({ showTime: false }, blurInput)
 
     handleClickOutside = (args: any) => {
         if(this.state.showTime && this.rootContent.contains(args.target))

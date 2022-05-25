@@ -9,7 +9,7 @@ import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
 import { createRoot } from "react-dom/client"
 import ReactDOM from "react-dom"
-import { sumParentZIndex } from "../shared/utility"
+import { blurInput, sumParentZIndex } from "../shared/utility"
 
 export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren<unknown>{
     readonly defaultValue?: any
@@ -128,6 +128,8 @@ class Select extends React.PureComponent<SelectProps, IState>{
         })
 
         this.resetSearch()
+
+        blurInput()
     }
 
     getOptions = (): Option[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)

@@ -180,7 +180,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
 
     showCalendar = (): void => this.setState({ showCalendar: true })
 
-    hideCalendar = (): void => this.setState({ showCalendar: false })
+    hideCalendar = (): void => this.setState({ showCalendar: false }, blurInput)
 
     changeMonth = (): void => this.setState({ selectingMonth: true }, this.showPicker)
 
