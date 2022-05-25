@@ -291,7 +291,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         const { selectingMonth, selectingYear, currentMonth, showCalendar, currentYear, currentHour, currentMinute, currentDecade } = this.state,
         monthCalendar = getCalendar(currentMonth, currentYear),
         { selectTime } = this.props,
-        content = <div className={"dolfo-calendar-container" + (showCalendar ? " show" : "") + (selectTime ? " time-picker" : "")}>
+        content = <div className={"dolfo-calendar-container floating-popup" + (showCalendar ? " show" : "") + (selectTime ? " time-picker" : "")}>
             {
                 !selectingMonth && !selectingYear && <div className="dolfo-calendar">
                     <div className="dolfo-calendar-row">

@@ -24,7 +24,15 @@ export class Popover extends React.Component<IProps>{
         popoverOrNodeMouseEnter: () => this.onPopoverOrNode = true,
         popoverOrNodeMouseLeave: () => this.onPopoverOrNode = false,
         windowResizeOrScroll: () => this.positionPopover(this.elementRef),
-        customEvent: () => !this.onPopoverOrNode && this.elementRef.remove()
+        customEvent: (e: MouseEvent) => {
+            const target = e.target as HTMLElement,
+            popups = Array.from(document.querySelectorAll(".floating-popup"))
+
+            if(popups.length && popups.some(p => p.contains(target)))
+                return
+
+            !this.onPopoverOrNode && this.elementRef.remove()
+        }
     }
 
     componentDidMount = (): void => {
@@ -104,7 +112,7 @@ export class Popover extends React.Component<IProps>{
         { openOnOver } = this.props,
         event = openOnOver ? "mouseenter" : "click"
 
-        this.LISTENERS.customEvent()
+        this.LISTENERS.customEvent(new MouseEvent(""))
 
         this.observer.disconnect()
 

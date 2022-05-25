@@ -1,9 +1,12 @@
 import _ from "lodash"
 import React from "react"
 import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import { LoadingIcon } from "../layout/Icon"
+import { showError } from "../layout/NotificationMsg"
 import { Constants } from "../shared/Constants"
 import { ExtendedInputProps } from "../shared/models/InputProps"
+import { sumParentZIndex } from "../shared/utility"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 
@@ -25,6 +28,9 @@ interface IState<E, K>{
 export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps<E> & P, IState<E, K>>{
     private readonly TIMING = 500
     private typing: _.DebouncedFunc<() => void>
+    private rootContent = document.createElement("div")
+    private root = createRoot(this.rootContent)
+    private observer: ResizeObserver
 
     constructor(props: IProps<E> & P){
         super(props)
@@ -49,11 +55,13 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             this.toggleLoading()
 
             Promise.resolve(this.getSource(filter)).then(list => {
-                this.setState({ list, showOptions: true })
+                this.setState({ list, showOptions: true }, this.showOptions)
 
-                if(list.length === 1)
+                if(list.length === 1){
                     this.selectOption(list[0])
-            }).finally(() => setTimeout(() => this.toggleLoading()))
+                    this.hideOptions()
+                }
+            }).catch(showError).finally(() => setTimeout(() => this.toggleLoading()))
         }, this.TIMING)
     }
 
@@ -67,17 +75,31 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
 
     componentDidMount = (): void => {
         window.addEventListener("click", this.clickOutside)
+        this.observer = new ResizeObserver(this.positionOptions)
+        this.observer.observe(this.rootContent)
+        window.addEventListener("scroll", this.positionOptions, true)
 
         if(this.props.defaultValue != null)
             this.fetchDefaultValue()
     }
 
-    componentDidUpdate = (prevProps: IProps<E> & P): void => {
+    componentDidUpdate = (prevProps: IProps<E> & P, prevState: IState<E, K>): void => {
         if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
             this.fetchDefaultValue()
+
+        if(!_.isEqual(this.state.selectedItem, prevState.selectedItem))
+            this.showOptions()
+
+        if(this.state.loading !== prevState.loading)
+            this.showOptions()
     }
 
-    componentWillUnmount = (): void => window.removeEventListener("click", this.clickOutside)
+    componentWillUnmount = (): void => {
+        setTimeout(() => this.root.unmount())
+        window.removeEventListener("click", this.clickOutside)
+        window.removeEventListener("scroll", this.positionOptions, true)
+        this.observer.disconnect()
+    }
 
     clickOutside = (e: MouseEvent): void => {
         const element = e.target as Node,
@@ -102,9 +124,9 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
 
     toggleLoading = (): void => this.setState({ loading: !this.state.loading })
 
-    onBlur = (): void => this.setState({ focused: false, showOptions: false, focusedIndex: null })
+    onBlur = (): void => this.setState({ focused: false, showOptions: false, focusedIndex: null }, this.hideOptions)
 
-    onFocus = (): void => this.setState({ focused: true })
+    onFocus = (): void => this.setState({ focused: true }, this.showOptions)
 
     selectOption = (item: E): void => {
         this.setState({
@@ -187,8 +209,55 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         })
     }
 
+    showOptions = (): void => {
+        const { loading, focused, showOptions, list, selectedKey, focusedIndex } = this.state,
+        content = loading && focused ? <div className="dolfo-select-options show dolfo-autocomplete-text floating-popup">
+            <LoadingIcon spinning /> {Constants.LOADING_TEXT}
+        </div> : showOptions && focused && list.length > 0 ? <div className="dolfo-select-options floating-popup show">
+            {
+                list.map((option, i) => {
+                    const key = this.getKey(option)
+                    return <Option selected={selectedKey === key} key={key.toString()} label={this.getDescription(option)} onChange={() => this.selectOption(option)} value={key} focused={focusedIndex === i} />
+                })
+            }
+        </div> : focused && <div className="dolfo-select-options show dolfo-autocomplete-text floating-popup">
+            {Constants.TABLE_NO_RESULTS}
+        </div>
+
+        if(!showOptions && !focused)
+            return
+
+        this.root.render(content)
+        setTimeout(this.positionOptions)
+
+        if(!document.body.contains(this.rootContent))
+            document.body.appendChild(this.rootContent)
+    }
+
+    hideOptions = (): void => this.rootContent.remove()
+
+    positionOptions = (): void => {
+        if((!this.state.showOptions && !this.state.focused) || !document.body.contains(this.rootContent))
+            return
+
+        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        options = this.rootContent.childNodes[0] as HTMLElement,
+        { top, left, height, width } = node.getBoundingClientRect(),
+        wrapper = node.querySelector(".dolfo-input-wrapper")
+
+        if(!options)
+            return
+
+        options.style.zIndex = sumParentZIndex(node) + 1 + ""
+        options.style.left = left + "px"
+        options.style.top = top + height + document.documentElement.scrollTop - 5 + "px"
+        options.style.width = width + "px"
+
+        options.classList.toggle("invalid", wrapper.classList.contains("invalid"))
+    }
+
     render = (): JSX.Element => {
-        const { loading, list, filter, focused, showOptions, selectedKey, focusedIndex } = this.state,
+        const { filter, focused, selectedKey } = this.state,
         { props } = this,
         icon = props.icon || { iconKey: "keyboard", type: "far" }
         let input: HTMLInputElement
@@ -209,21 +278,6 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
                 onFocus={this.onFocus}
                 autoComplete="new-password"
             />
-
-            {
-                loading && focused ? <div className="dolfo-select-options show dolfo-autocomplete-text">
-                    <LoadingIcon spinning /> {Constants.LOADING_TEXT}
-                </div> : showOptions && focused && list.length > 0 ? <div className="dolfo-select-options show">
-                    {
-                        list.map((option, i) => {
-                            const key = this.getKey(option)
-                            return <Option selected={selectedKey === key} label={this.getDescription(option)} onChange={() => this.selectOption(option)} value={key} focused={focusedIndex === i} />
-                        })
-                    }
-                </div> : focused && <div className="dolfo-select-options show dolfo-autocomplete-text">
-                    {Constants.TABLE_NO_RESULTS}
-                </div>
-            }
         </InputWrapper>
     }
 }

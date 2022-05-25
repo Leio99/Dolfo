@@ -155,7 +155,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         const { showTime, value } = this.state,
         hour = value.split(":")[0],
         minute = value.split(":")[1],
-        content = <div className={"dolfo-time-container" + (showTime ? " show" : "")}>
+        content = <div className={"dolfo-time-container floating-popup" + (showTime ? " show" : "")}>
             <div className="dolfo-picker-table">
                 <div className="dolfo-picker-row">
                     <Tooltip tooltip={Constants.INCREASE_TEXT}>

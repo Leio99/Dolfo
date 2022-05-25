@@ -182,21 +182,24 @@ class Select extends React.PureComponent<SelectProps, IState>{
             else this.changeOption(option.props.value)
             
             e.preventDefault()
-        }
 
-        newIndex > -1 && this.setState({ currentSelection: newIndex })
+            blurInput()
+        }else if(e.key.charCodeAt(0) === 84)
+            this.onBlur()
+
+        newIndex > -1 && this.setState({ currentSelection: newIndex }, this.showOptions)
     }
 
     showOptions = (): void => {
         const { options, openSelect, currentSelection, value } = this.state,
         { multiple } = this.props,
-        content = options && options.length ? (multiple ? <div className={"dolfo-select-options multiple" + (openSelect ? " show" : "")}>
+        content = options && options.length ? (multiple ? <div className={"dolfo-select-options multiple floating-popup" + (openSelect ? " show" : "")}>
             {
                 options.map((option, i) => {
                     return <Option {...option.props} selected={value.includes(option.props.value)} focused={i === currentSelection} onChange={val => this.changeMultiple(val)} multiple key={i} />
                 })
             }
-        </div> : <div className={"dolfo-select-options" + (openSelect ? " show" : "")}>
+        </div> : <div className={"dolfo-select-options floating-popup" + (openSelect ? " show" : "")}>
             {
                 options.map((option, i) => {
                     return <Option {...option.props} selected={_.isEqual(option.props.value, value)} focused={i === currentSelection} onChange={this.changeOption} key={i} />
