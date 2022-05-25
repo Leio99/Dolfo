@@ -2,6 +2,7 @@ import _ from "lodash"
 import React from "react"
 import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
+import { isElementInViewport } from "../shared/utility"
 
 export type TooltipPlacement = "top" | "left" | "bottom" | "right"
 
@@ -134,7 +135,7 @@ export class Tooltip extends React.Component<IProps>{
             copy.style.top = nodePos.top - 5 - tooltipPos.height + "px"
         }
 
-        if(!this.isElementInViewport(copy) && tries.length < 4){
+        if(!isElementInViewport(copy) && tries.length < 4){
             const dirs: TooltipPlacement[] = ["top", "left", "right", "bottom"],
             exclude = dirs.filter(d => !tries.includes(d) && d !== placement)
             tries.push(placement)
@@ -146,12 +147,6 @@ export class Tooltip extends React.Component<IProps>{
         }
 
         copy.remove()
-    }
-    
-    isElementInViewport = (el: Element): boolean => {
-        const rect = el.getBoundingClientRect()
-
-        return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     }
 
     render = () => !React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children

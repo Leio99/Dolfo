@@ -45,12 +45,6 @@ export class DatepickerPage extends React.Component<MenuContentProps>{
         />
 
         <ResultCode
-            title="Show picker on top"
-            result={<DatePicker showOnTop />}
-            code={'<DatePicker showOnTop />'}
-        />
-
-        <ResultCode
             title="Disabled"
             result={<DatePicker label="I am disabled" disabled />}
             code={'<DatePicker label="I am disabled" disabled />'}

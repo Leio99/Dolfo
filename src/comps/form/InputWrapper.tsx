@@ -1,5 +1,6 @@
 import _ from "lodash"
 import React, { CSSProperties } from "react"
+import ReactDOM from "react-dom"
 import { CloseIcon, Icon, BaseIconProps } from "../layout/Icon"
 import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
@@ -43,6 +44,11 @@ export class InputWrapper extends React.PureComponent<IProps, IState>{
             else
                 this.setState({ error: false })
         }
+    }
+
+    static findWrapper = (component: React.Component) => {
+        const node = ReactDOM.findDOMNode(component) as HTMLElement
+        return node.querySelector(".dolfo-input-wrapper") as HTMLElement
     }
 
     render = (): JSX.Element => {

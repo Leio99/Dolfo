@@ -5,9 +5,8 @@ import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { Constants } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
-import { blurInput, sumParentZIndex, zeroBefore } from "../shared/utility"
+import { blurInput, isElementInViewport, sumParentZIndex, zeroBefore } from "../shared/utility"
 import { createRoot } from "react-dom/client"
-import ReactDOM from "react-dom"
 import _ from "lodash"
 
 export interface TimePickerProps extends ExtendedInputProps{
@@ -212,9 +211,10 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         if(!this.state.showTime || !document.body.contains(this.rootContent))
             return
 
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        const node = InputWrapper.findWrapper(this),
         timepicker = this.rootContent.childNodes[0] as HTMLElement,
-        { top, left, height } = node.getBoundingClientRect()
+        { top, left, height } = node.getBoundingClientRect(),
+        calendarTime = node.closest(".dolfo-calendar-container")
 
         if(!timepicker)
             return
@@ -222,6 +222,17 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         timepicker.style.zIndex = sumParentZIndex(node) + 1 + ""
         timepicker.style.left = left + "px"
         timepicker.style.top = top + height + document.documentElement.scrollTop + 5 + "px"
+
+        if(!isElementInViewport(timepicker)){
+            timepicker.style.top = top - timepicker.offsetHeight + document.documentElement.scrollTop - 5 + "px"
+
+            if(!isElementInViewport(node))
+                timepicker.classList.remove("show")
+            else if(!timepicker.classList.contains("show")){
+                timepicker.classList.add("show")
+            }
+        }else if(!timepicker.classList.contains("show") && isElementInViewport(node) && !calendarTime)
+            timepicker.classList.add("show")
     }
 
     handleTabKey = (e: KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideTime()

@@ -8,9 +8,8 @@ import { Constants } from "../shared/Constants"
 import TimePicker from "./TimePicker"
 import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
-import { blurInput, zeroBefore, isValidDate, getCalendar, decodeMonth, sumParentZIndex } from "../shared/utility"
+import { blurInput, zeroBefore, isValidDate, getCalendar, decodeMonth, sumParentZIndex, isElementInViewport } from "../shared/utility"
 import { createRoot } from "react-dom/client"
-import ReactDOM from "react-dom"
 
 type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
 
@@ -18,7 +17,6 @@ export interface DatePickerProps extends ExtendedInputProps{
     readonly defaultValue?: Date
     readonly dateFormat?: DateFormats
     readonly selectTime?: boolean
-    readonly showOnTop?: boolean
 }
 
 interface IState {
@@ -292,8 +290,8 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
     showPicker = (): void => {
         const { selectingMonth, selectingYear, currentMonth, showCalendar, currentYear, currentHour, currentMinute, currentDecade } = this.state,
         monthCalendar = getCalendar(currentMonth, currentYear),
-        { selectTime, showOnTop } = this.props,
-        content = <div className={"dolfo-calendar-container" + (showOnTop ? " top" : "") + (showCalendar ? " show" : "") + (selectTime ? " time-picker" : "")}>
+        { selectTime } = this.props,
+        content = <div className={"dolfo-calendar-container" + (showCalendar ? " show" : "") + (selectTime ? " time-picker" : "")}>
             {
                 !selectingMonth && !selectingYear && <div className="dolfo-calendar">
                     <div className="dolfo-calendar-row">
@@ -434,21 +432,32 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         if(!this.state.showCalendar || !document.body.contains(this.rootContent))
             return
 
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        const node = InputWrapper.findWrapper(this),
         datepicker = this.rootContent.childNodes[0] as HTMLElement,
         { top, left, height } = node.getBoundingClientRect(),
-        { showOnTop } = this.props
+        timePicker = document.querySelector(".dolfo-time-container")
 
         if(!datepicker)
             return
-
+        
         datepicker.style.left = left + "px"
         datepicker.style.zIndex = sumParentZIndex(node) + 1 + ""
+        datepicker.style.top = top + height + document.documentElement.scrollTop + 5 + "px"
 
-        if(showOnTop)
-            datepicker.style.top = top - datepicker.clientHeight + document.documentElement.scrollTop + 15 + "px"
-        else
-            datepicker.style.top = top + height + document.documentElement.scrollTop + 5 + "px"
+        if(!isElementInViewport(datepicker)){
+            datepicker.style.top = top - datepicker.offsetHeight + document.documentElement.scrollTop - 5 + "px"
+
+            if(!isElementInViewport(node)){
+                datepicker.classList.remove("show")
+                timePicker?.classList.remove("show")
+            }else if(!datepicker.classList.contains("show") || (timePicker && !timePicker.classList.contains("show"))){
+                datepicker.classList.add("show")
+                timePicker?.classList.add("show")
+            }
+        }else if((!datepicker.classList.contains("show") || (timePicker && !timePicker.classList.contains("show"))) && isElementInViewport(node)){
+            datepicker.classList.add("show")
+            timePicker?.classList.add("show")
+        }
     }
 
     render = (): JSX.Element => {
