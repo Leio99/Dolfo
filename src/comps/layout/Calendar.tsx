@@ -32,76 +32,64 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         }
     }
     
-    componentDidMount = (): void => {
-        const start = () => {
-            gapi.client.init({
-                apiKey: this.props.apiKey
-            }).then(() => {
-                return gapi.client.request({
-                    path: `https://www.googleapis.com/calendar/v3/calendars/${this.props.calendarId}/events?singleEvents=True&orderBy=startTime`
-                })
-            }).then(response => {
-                const gEvents = response.result.items as GoogleCalendarEvent[],
-                events: CalendarEvent[] = []
+    componentDidMount = (): void => gapi.load("client", () => gapi.client.init({ apiKey: this.props.apiKey }).then(() => gapi.client.request({ path: `https://www.googleapis.com/calendar/v3/calendars/${this.props.calendarId}/events?singleEvents=True&orderBy=startTime` })).then(response => {
+        const gEvents = response.result.items as GoogleCalendarEvent[],
+        events: CalendarEvent[] = []
+        
+        gEvents.forEach(e => {
+            const start = new Date(e.start.dateTime || e.start.date),
+            end = new Date(e.end.dateTime || e.start.date)
+
+            let isDifferentDay = start.getDay() !== end.getDay()
+
+            if(isDifferentDay){
+                const copy = new Date(start)
                 
-                gEvents.forEach(e => {
-                    const start = new Date(e.start.dateTime || e.start.date),
-                    end = new Date(e.end.dateTime || e.start.date)
-
-                    let isDifferentDay = start.getDay() !== end.getDay()
-
-                    if(isDifferentDay){
-                        const copy = new Date(start)
-                        
-                        events.push({
-                            day: start.getDate(),
-                            month: start.getMonth(),
-                            year: start.getFullYear(),
-                            desc: e.summary,
-                            start: null,
-                            end: null,
-                            date: start
-                        })
-
-                        while(isDifferentDay){
-                            copy.setDate(copy.getDate() + 1)
-
-                            events.push({
-                                day: copy.getDate(),
-                                month: copy.getMonth(),
-                                year: copy.getFullYear(),
-                                desc: e.summary,
-                                start: null,
-                                end: null,
-                                date: copy
-                            })
-
-                            isDifferentDay = copy.getDate() !== end.getDate()
-                        }
-                    }else{
-                        events.push({
-                            day: start.getDate(),
-                            month: start.getMonth(),
-                            year: start.getFullYear(),
-                            desc: e.summary,
-                            start: e.start.date ? null : getTime(start.toString()),
-                            end: e.end.date ? null : getTime(end.toString()),
-                            date: start
-                        })
-                    }
+                events.push({
+                    day: start.getDate(),
+                    month: start.getMonth(),
+                    year: start.getFullYear(),
+                    desc: e.summary,
+                    start: null,
+                    end: null,
+                    date: start
                 })
 
-                this.setState({ events })
-            }, () => {
-                openInfoDialog({
-                    type: "error",
-                    content: Constants.CALENDAR_ERROR_UNABLE_TO_GET_EVENTS
-                })
-            })
-        }
+                while(isDifferentDay){
+                    copy.setDate(copy.getDate() + 1)
 
-        gapi.load("client", start)
-    }
+                    events.push({
+                        day: copy.getDate(),
+                        month: copy.getMonth(),
+                        year: copy.getFullYear(),
+                        desc: e.summary,
+                        start: null,
+                        end: null,
+                        date: copy
+                    })
+
+                    isDifferentDay = copy.getDate() !== end.getDate()
+                }
+            }else{
+                events.push({
+                    day: start.getDate(),
+                    month: start.getMonth(),
+                    year: start.getFullYear(),
+                    desc: e.summary,
+                    start: e.start.date ? null : getTime(start.toString()),
+                    end: e.end.date ? null : getTime(end.toString()),
+                    date: start
+                })
+            }
+        })
+
+        this.setState({ events })
+    }, () => {
+        openInfoDialog({
+            type: "error",
+            content: Constants.CALENDAR_ERROR_UNABLE_TO_GET_EVENTS
+        })
+    }))
 
     increaseMonth = (): void => {
         const { currentMonth, currentYear } = this.state,
