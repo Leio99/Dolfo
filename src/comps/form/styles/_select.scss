@@ -87,14 +87,21 @@
 
 .dolfo-select-options{
     position: fixed;
-    border: 1px solid #0997ff;
-    background-color: #fff;
+    border: 1px solid $selectionBlue;
+    background-color: $white;
     border-radius: 0 0 $smallRadius $smallRadius;
     display: none;
     max-height: 200px;
     overflow: auto;
     border-top: 0;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+
+    &.top{
+        box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.2);
+        border-top: 1px solid $selectionBlue;
+        border-bottom: 0;
+        border-radius: $smallRadius $smallRadius 0 0
+    }
 
     &.show{
         display: block
