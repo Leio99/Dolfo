@@ -41,6 +41,7 @@ import { PopoverPage } from "./PopoverPage"
 import React from "react"
 import { IconKey } from "../shared/models/IconModel"
 import { MenuContentProps } from "../MenuContent"
+import { LabelPage } from "./LabelPage"
 
 interface MenuItem{
     readonly link: string
@@ -74,6 +75,7 @@ export const MenuItems: MenuItem[] = [
     { link: "layout/fullpageloader", children: "Fullpage loader", section: "layout", component: FullpageLoaderPage, icon: "spinner" },
     { link: "layout/header", children: "Header", section: "layout", component: HeaderPage, icon: "heading" },
     { link: "layout/icons", children: "Icon", section: "layout", component: IconPage, icon: "icons" },
+    { link: "layout/label", children: "Label", section: "layout", component: LabelPage, icon: "marker" },
     { link: "layout/masterdetail", children: "Master-Detail", section: "layout", component: MasterdetailPage, icon: "external-link" },
     { link: "layout/messages", children: "Message box", section: "layout", component: MessageboxPage, icon: "sticky-note" },
     { link: "layout/notifications", children: "Notifications", section: "layout", component: NotificationPage, icon: "bell" },

@@ -1,0 +1,18 @@
+.dolfo-label{
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &.small{
+        font-size: 80%
+    }
+
+    &.big{
+        font-size: 140%
+    }
+
+    @each $key, $color in $colors {
+        &.#{$key} {
+            color: $color
+        }
+    }
+}

@@ -170,14 +170,14 @@ export class DialogPage extends React.Component<MenuContentProps, {
             {
                 name: "okType",
                 desc: "Type of the ok button (color).",
-                type: "string (red, blue, green, black, orange, grey, darkblue, white)",
+                type: "string (red, blue, green, black, orange, grey, darkblue, white, violet)",
                 required: false,
                 default: "darkblue"
             },
             {
                 name: "cancelType",
                 desc: "Type of the cancel button (color).",
-                type: "string (red, blue, green, black, orange, grey, darkblue, white)",
+                type: "string (red, blue, green, black, orange, grey, darkblue, white, violet)",
                 required: false,
                 default: "red"
             },
