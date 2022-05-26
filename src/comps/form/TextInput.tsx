@@ -70,7 +70,10 @@ export class TextInput extends React.PureComponent<IProps, IState>{
 
             value = number
 
-            if(isNaN(number) || number > this.props.max || number < this.props.min) return
+            if((isNaN(number) || number > this.props.max || number < this.props.min) && e.target.value) return
+
+            if(!e.target.value)
+                value = ""
         }
 		
 		this.checkRows(e)
