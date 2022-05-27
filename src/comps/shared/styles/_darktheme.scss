@@ -87,7 +87,7 @@ html.dark-theme{
 
     .dolfo-input-switch{
         .dolfo-switch:not(.checked){
-            background-color: $darkThemeDark
+            background-color: lighten($darkThemeDark, 40%)
         }
 
         .dolfo-switch-dot.loading{
