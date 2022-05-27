@@ -31,7 +31,8 @@ export class Popover extends React.Component<IProps>{
             if(popups.length && popups.some(p => p.contains(target)))
                 return
 
-            !this.onPopoverOrNode && this.elementRef.remove()
+            if(!this.onPopoverOrNode && document.body.contains(this.elementRef))
+                this.elementRef.remove()
         }
     }
 

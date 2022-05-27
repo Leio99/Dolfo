@@ -89,6 +89,9 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
 
         if(!_.isEqual(this.state.selectedItem, prevState.selectedItem) || this.state.loading !== prevState.loading || (this.state.focusedIndex !== prevState.focusedIndex && this.state.focusedIndex > -1))
             this.showOptions()
+
+        if(this.props.disabled !== prevProps.disabled)
+            this.onBlur()
     }
 
     componentWillUnmount = (): void => {
@@ -166,7 +169,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         if(Constants.AUTOCOMPLETE_EXLUDE_KEYS.includes(e.key) && e.key !== "Enter" && e.key !== "ArrowUp" && e.key !== "ArrowDown")
             return
 
-        const { focusedIndex, list, showOptions } = this.state
+        const { focusedIndex, list, showOptions, selectedItem } = this.state
 
         if(e.key === "Enter" && focusedIndex !== null && focusedIndex >= 0){
             e.preventDefault()
@@ -175,6 +178,8 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
                 this.hideOptions()
                 blurInput()
             })
+
+            return
         }else if(e.key === "ArrowUp" && showOptions){
             let newIndex: number
 
@@ -194,7 +199,10 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             this.setState({ focusedIndex: newIndex })
             
             e.preventDefault()
-        }
+        }else if(e.key === "Enter" && !selectedItem)
+            e.preventDefault()
+
+        this.showOptions()
     }
 
     reset = (input?: HTMLInputElement) => {
@@ -246,9 +254,10 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
         options = this.rootContent.childNodes[0] as HTMLElement,
         { top, left, height, width } = node.getBoundingClientRect(),
-        wrapper = node.querySelector(".dolfo-input-wrapper")
+        wrapper = node.querySelector(".dolfo-input-wrapper"),
+        { disabled } = this.props
 
-        if(!options)
+        if(!options || disabled)
             return
 
         options.style.zIndex = sumParentZIndex(node) + 1 + ""
