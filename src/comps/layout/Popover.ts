@@ -28,7 +28,7 @@ export class Popover extends React.Component<IProps>{
             const target = e.target as HTMLElement,
             popups = Array.from(document.querySelectorAll(".floating-popup"))
 
-            if(popups.length && popups.some(p => p.contains(target)))
+            if((popups.length && popups.some(p => p.contains(target))) || ((e.target as HTMLButtonElement).form && this.elementRef.contains(e.target as Node)))
                 return
 
             if(!this.onPopoverOrNode && document.body.contains(this.elementRef))
