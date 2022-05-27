@@ -34,7 +34,7 @@
         > span{
             transition: 0.2s ease;
             position: absolute;
-	        top: 2.5rem;
+	        top: 2.4rem;
             left: 63px;
             z-index: 1;
             opacity: 0.6
@@ -71,7 +71,7 @@
             cursor: pointer;
             position: absolute;
             margin-right: 0.7rem;
-            top: 1.1rem;
+            top: 1rem;
             right: 0;
             font-size: 15px;
             z-index: 1;
@@ -116,7 +116,7 @@
                 border: 0;
                 border-radius: $smallRadius;
                 background-color: $white;
-                padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+                padding: $inputPaddingY $inputPaddingX $inputPaddingY 0.8rem;
                 flex-grow: 1;
                 width: 100%;
                 resize: none;
@@ -124,7 +124,6 @@
                 font-family: inherit;
                 font-size: inherit;
                 line-height: inherit;
-                padding-right: 2rem;
                 
                 &:-webkit-autofill,
                 &:-webkit-autofill:hover, 
@@ -180,11 +179,11 @@
                 }
 				
 				&.increase{
-					top: 4px
+					top: 2px
 				}
 				
 				&.decrease{
-					bottom: 4px
+					bottom: 2px
 				}
             }
         }

@@ -63,12 +63,12 @@ export class TextInput extends React.PureComponent<IProps, IState>{
     onChange = (e: any): void => {
         if(this.props.disabled) return
 
-        let value = e.target.value
+        let value: string = e.target.value
 
         if(this.props.type === "number"){
             const number = Number(e.target.value)
 
-            value = number
+            value = number.toString()
 
             if((isNaN(number) || number > this.props.max || number < this.props.min) && e.target.value) return
 

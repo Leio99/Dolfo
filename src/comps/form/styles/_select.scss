@@ -13,8 +13,8 @@
 
         span{
             position: absolute;
-            top: 0.5rem;
-            right: 2rem;
+            top: $inputPaddingY;
+            right: $inputPaddingX;
             left: 0.8rem;
             display: block;
             overflow: hidden;
@@ -43,8 +43,8 @@
         }
 
         .dolfo-select-search-input{
-            padding-top: calc(0.5rem + 3px) !important;
-            padding-bottom: calc(0.5rem + 3px) !important;
+            padding-top: calc($inputPaddingY + 3px) !important;
+            padding-bottom: calc($inputPaddingY + 3px) !important;
             padding-right: 3.8rem !important;
             padding-left: 2.5rem !important
         }
@@ -108,12 +108,12 @@
     }
 
     .dolfo-option{
-        padding: calc(0.5rem + 3px) calc(0.8rem - 1px);
+        padding: calc($inputPaddingY + 3px) calc(0.8rem - 1px);
         cursor: pointer;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        padding-right: 2rem;
+        padding-right: $inputPaddingX;
 
         &:hover, &.selected{
             background-color: $lightGrey
