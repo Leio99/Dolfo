@@ -108,7 +108,7 @@
     }
 
     .dolfo-option{
-        padding: calc($inputPaddingY + 3px) calc(0.8rem - 1px);
+        padding: calc(#{$inputPaddingY} + 3px) calc(0.8rem - 1px);
         cursor: pointer;
         overflow: hidden;
         text-overflow: ellipsis;
