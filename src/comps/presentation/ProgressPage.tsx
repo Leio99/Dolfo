@@ -42,8 +42,10 @@ export class ProgressPage extends React.Component{
             result={<>
                 <Progress percent={10} loading />
                 <Progress percent={65} loading loadingText="Wait please..." />
+                <Progress circular percent={65} loading />
+                <Progress circular percent={65} loading loadingText="Wait.." />
             </>}
-            code={'<Progress percent={10} loading />\n<Progress percent={65} loading loadingText="Wait please..." />'}
+            code={'<Progress percent={10} loading />\n<Progress percent={65} loading loadingText="Wait please..." />\n<Progress circular percent={65} loading />\n<Progress circular percent={65} loading loadingText="Wait.." />'}
         />
 
         <ResultCode
