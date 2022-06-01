@@ -14,7 +14,6 @@ export interface ComponentAsDialogProps{
 
 interface BaseProps{
     readonly title?: string | JSX.Element
-    readonly content?: string | JSX.Element
     readonly onOk?: () => void
     readonly width?: string
     readonly okText?: string
@@ -45,6 +44,7 @@ interface IState{
 interface DialogProps extends DialogFullProps{
     readonly type?: DialogType
     readonly icon?: JSX.Element
+    readonly content?: string | JSX.Element
 }
 
 export class Dialog extends React.PureComponent<DialogFullProps, IState>{
@@ -107,9 +107,9 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         icon = data.icon || Dialog.getIcon(data.type),
         okType = data.okType || Dialog.getColor(data.type)
 
-        document.body.appendChild(popup);
+        document.body.appendChild(popup)
 
-        root.render(<Dialog visible {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} />)
+        root.render(<Dialog visible {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} children={data.content} />)
 
         return new Closable(() => onCloseFunction(data))
     }
@@ -191,7 +191,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
                 </div>
 
                 <div className="dolfo-dialog-content">
-                    {props.content || props.children}
+                    {props.children}
                 </div>
 
                 {
