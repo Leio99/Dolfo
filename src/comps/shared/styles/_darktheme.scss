@@ -25,14 +25,10 @@ html.dark-theme{
     }
 
     .dolfo-g-calendar-content table.dolfo-g-calendar tbody tr td.external .content .event{
-        background-color: $darkThemeDark;
-
+        background-color: lighten($darkThemeDark, 30%);
+    
         &:hover{
-            background-color: $darkThemeDarkHover
-        }
-
-        &:active{
-            background-color: $darkThemeDarkActive
+            background-color: lighten($darkThemeDark, 15%)
         }
     }
 
