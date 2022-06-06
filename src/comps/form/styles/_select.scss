@@ -6,7 +6,7 @@
 
         input:not(.dolfo-select-search-input){
             pointer-events: none;
-            color: transparent !important;
+            opacity: 0;
             width: 100%;
             cursor: pointer !important;
         }
