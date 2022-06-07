@@ -22,7 +22,7 @@ export class MessageBox extends React.Component<MessageProps>{
         return messageBox
     }
 
-    private static getInner = (props: MessageProps, closeFn: () => void): JSX.Element => <div className={"dolfo-message-box-inner" + (props.className ? (" " + props.className) : "")} style={props.style}>
+    private static getInner = (props: MessageProps, closeFn: () => void): JSX.Element => <div className={"dolfo-message-box-inner" + (props.className ? (" " + props.className) : "")}>
         <Tooltip tooltip={Constants.CLOSE_TEXT}>
             <CloseIcon className="dolfo-message-close" onClick={() => {
                 closeFn()
