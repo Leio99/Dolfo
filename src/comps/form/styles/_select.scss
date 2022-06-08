@@ -1,4 +1,4 @@
-.dolfo-input-wrapper{
+.dolfo-select-wrapper .dolfo-input-wrapper{
     .dolfo-input-select{
         cursor: pointer !important;
         position: relative;
@@ -27,35 +27,40 @@
         display: none
     }
 
-    &.focused .dolfo-select-search-content{
-        background-color: $white;
-        position: absolute;
-        display: block;
-        top: -3px;
-        left: 0;
-        right: 0;
-        z-index: 1;
-        border-radius: $smallRadius;
-
-        .reset-input{
-            right: 1.5rem;
-            top: 1rem
-        }
-
-        .dolfo-select-search-input{
-            padding-top: calc($inputPaddingY + 3px) !important;
-            padding-bottom: calc($inputPaddingY + 3px) !important;
-            padding-right: 3.8rem !important;
-            padding-left: 2.5rem !important
-        }
-
-        .dolfo-select-search-icon{
-            right: auto;
-            left: 0.7rem;
-            top: 0.5rem;
-            transform: translateY(50%);
-            font-size: 14px;
-            pointer-events: none
+    &.focused {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+        
+        .dolfo-select-search-content{
+            background-color: $white;
+            position: absolute;
+            display: block;
+            top: -3px;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            border-radius: $smallRadius;
+    
+            .reset-input{
+                right: 1.5rem;
+                top: 1rem
+            }
+    
+            .dolfo-select-search-input{
+                padding-top: calc($inputPaddingY + 3px) !important;
+                padding-bottom: calc($inputPaddingY + 3px) !important;
+                padding-right: 3.8rem !important;
+                padding-left: 2.5rem !important
+            }
+    
+            .dolfo-select-search-icon{
+                right: auto;
+                left: 0.7rem;
+                top: 0.5rem;
+                transform: translateY(50%);
+                font-size: 14px;
+                pointer-events: none
+            }
         }
     }
 
