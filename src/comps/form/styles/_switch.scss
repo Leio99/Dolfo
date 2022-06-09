@@ -26,11 +26,7 @@
         vertical-align: middle;
 
         &:focus{
-            outline: none;
-
-            .dolfo-switch-dot{
-                background-color: darken($grey, 15%)
-            }
+            outline: none
         }
 
         .dolfo-switch-dot{
