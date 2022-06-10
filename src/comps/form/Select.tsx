@@ -236,10 +236,12 @@ class Select extends React.PureComponent<SelectProps, IState>{
         options.style.top = top + height + document.documentElement.scrollTop - 3 + "px"
         options.style.width = width + "px"
         options.classList.remove("top")
+        node.classList.remove("top")
 
         if(!isElementInViewport(options)){
             options.style.top = wrapper.getBoundingClientRect().top + document.documentElement.scrollTop - options.offsetHeight + 3 + "px"
             options.classList.add("top")
+            node.classList.add("top")
 
             if(!isElementInViewport(node))
                 options.classList.remove("show")

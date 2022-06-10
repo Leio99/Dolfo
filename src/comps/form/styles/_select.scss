@@ -1,92 +1,98 @@
-.dolfo-select-wrapper .dolfo-input-wrapper{
-    .dolfo-input-select{
-        cursor: pointer !important;
-        position: relative;
-        flex-grow: 1;
+.dolfo-select-wrapper{
+    &.top .dolfo-input-wrapper.focused{
+        border-radius: 0 0 $smallRadius $smallRadius
+    }
 
-        input:not(.dolfo-select-search-input){
-            pointer-events: none;
-            opacity: 0;
-            width: 100%;
+    .dolfo-input-wrapper{
+        .dolfo-input-select{
             cursor: pointer !important;
-        }
-
-        span{
-            position: absolute;
-            top: $inputPaddingY;
-            right: $inputPaddingX;
-            left: 0.8rem;
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap
-        }
-    }
+            position: relative;
+            flex-grow: 1;
     
-    .dolfo-select-search-content{
-        display: none
-    }
-
-    &.focused {
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
+            input:not(.dolfo-select-search-input){
+                pointer-events: none;
+                opacity: 0;
+                width: 100%;
+                cursor: pointer !important;
+            }
+    
+            span{
+                position: absolute;
+                top: $inputPaddingY;
+                right: $inputPaddingX;
+                left: 0.8rem;
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap
+            }
+        }
         
         .dolfo-select-search-content{
-            background-color: $white;
+            display: none
+        }
+    
+        &.focused {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            
+            .dolfo-select-search-content{
+                background-color: $white;
+                position: absolute;
+                display: block;
+                top: -3px;
+                left: 0;
+                right: 0;
+                z-index: 1;
+                border-radius: $smallRadius;
+        
+                .reset-input{
+                    right: 1.5rem;
+                    top: 1rem
+                }
+        
+                .dolfo-select-search-input{
+                    padding-top: calc($inputPaddingY + 3px) !important;
+                    padding-bottom: calc($inputPaddingY + 3px) !important;
+                    padding-right: 3.8rem !important;
+                    padding-left: 2.5rem !important
+                }
+        
+                .dolfo-select-search-icon{
+                    right: auto;
+                    left: 0.7rem;
+                    top: 0.5rem;
+                    transform: translateY(50%);
+                    font-size: 14px;
+                    pointer-events: none
+                }
+            }
+        }
+    
+        .select-icon{
             position: absolute;
-            display: block;
-            top: -3px;
-            left: 0;
+            margin-right: 0.7rem;
+            color: $disabled;
+            top: 50%;
             right: 0;
+            font-size: 15px;
             z-index: 1;
-            border-radius: $smallRadius;
+            transition: transform 0.3s ease;
+            transform: translateY(-50%);
     
-            .reset-input{
-                right: 1.5rem;
-                top: 1rem
+            .loading{
+                color: $selectionBlue
             }
     
-            .dolfo-select-search-input{
-                padding-top: calc($inputPaddingY + 3px) !important;
-                padding-bottom: calc($inputPaddingY + 3px) !important;
-                padding-right: 3.8rem !important;
-                padding-left: 2.5rem !important
+            &, *{
+                pointer-events: none !important
             }
+        }
     
-            .dolfo-select-search-icon{
-                right: auto;
-                left: 0.7rem;
-                top: 0.5rem;
-                transform: translateY(50%);
-                font-size: 14px;
-                pointer-events: none
-            }
+        &.focused .select-icon{
+            transform: rotate(180deg) translateY(50%);
+            z-index: 3
         }
-    }
-
-    .select-icon{
-        position: absolute;
-        margin-right: 0.7rem;
-        color: $disabled;
-        top: 50%;
-        right: 0;
-        font-size: 15px;
-        z-index: 1;
-        transition: transform 0.3s ease;
-        transform: translateY(-50%);
-
-        .loading{
-            color: $selectionBlue
-        }
-
-        &, *{
-            pointer-events: none !important
-        }
-    }
-
-    &.focused .select-icon{
-        transform: rotate(180deg) translateY(50%);
-        z-index: 3
     }
 }
 
