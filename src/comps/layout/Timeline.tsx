@@ -1,12 +1,12 @@
 import React, { CSSProperties } from "react"
 
-interface TimelineItemProps extends React.PropsWithChildren<unknown>{
+interface TimelineItemProps extends React.PropsWithChildren{
     readonly position?: "left" | "right"
     readonly pinColor?: string
     readonly style?: CSSProperties
 }
 
-export class Timeline extends React.Component<React.PropsWithChildren<unknown>>{
+export class Timeline extends React.Component<React.PropsWithChildren>{
     getOptions = (): TimelineItem[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
     render = (): JSX.Element => {

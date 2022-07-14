@@ -4,7 +4,7 @@ import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
 import { TooltipPlacement } from "./Tooltip"
 
-interface IProps extends React.PropsWithChildren<unknown>{
+interface IProps extends React.PropsWithChildren{
     readonly content: string | JSX.Element
     readonly position?: TooltipPlacement
     readonly openOnOver?: boolean

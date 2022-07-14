@@ -4,7 +4,7 @@ import { Constants } from "../shared/Constants"
 import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
-interface IProps extends React.PropsWithChildren<unknown>{
+interface IProps extends React.PropsWithChildren{
 	readonly title: string | JSX.Element
 	readonly opened?: boolean
 	readonly wrapperStyle?: CSSProperties

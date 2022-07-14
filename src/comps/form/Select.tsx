@@ -11,7 +11,7 @@ import { createRoot } from "react-dom/client"
 import ReactDOM from "react-dom"
 import { blurInput, isElementInViewport, sumParentZIndex } from "../shared/utility"
 
-export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren<unknown>{
+export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren{
     readonly defaultValue?: any
     readonly multiple?: boolean
     readonly canSearch?: boolean

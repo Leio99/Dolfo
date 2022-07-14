@@ -42,6 +42,7 @@ import React from "react"
 import { IconKey } from "../shared/models/IconModel"
 import { MenuContentProps } from "../MenuContent"
 import { LabelPage } from "./LabelPage"
+import { DisplayPage } from "./DisplayPage"
 
 interface MenuItem{
     readonly link: string
@@ -71,6 +72,7 @@ export const MenuItems: MenuItem[] = [
     { link: "layout/card", children: "Card", section: "layout", component: CardPage, icon: "id-card" },
     { link: "layout/contextmenu", children: "Context menu", section: "layout", component: ContextMenuPage, icon: "comment-dots" },
     { link: "layout/dialog", children: "Dialog", section: "layout", component: DialogPage, icon: "window" },
+    { link: "layout/display", children: "Display", section: "layout", component: DisplayPage, icon: "tablet-android-alt" },
     { link: "layout/dropdown", children: "Dropdown", section: "layout", component: DropdownPage, icon: "caret-square-down" },
     { link: "layout/fullpageloader", children: "Fullpage loader", section: "layout", component: FullpageLoaderPage, icon: "spinner" },
     { link: "layout/header", children: "Header", section: "layout", component: HeaderPage, icon: "heading" },

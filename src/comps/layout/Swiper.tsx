@@ -3,11 +3,11 @@ import { Constants } from "../shared/Constants"
 import Button from "./Button"
 import { Icon } from "./Icon"
 
-interface IProps extends React.PropsWithChildren<unknown>{
+interface IProps extends React.PropsWithChildren{
     readonly opened?: boolean
 }
 
-interface SwipeProps extends React.PropsWithChildren<unknown>{
+interface SwipeProps extends React.PropsWithChildren{
     readonly style?: CSSProperties
     readonly className?: string
     readonly onGoBack?: () => void

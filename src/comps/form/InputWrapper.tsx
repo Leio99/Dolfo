@@ -5,7 +5,7 @@ import { CloseIcon, Icon, BaseIconProps } from "../layout/Icon"
 import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
 
-interface IProps extends React.PropsWithChildren<unknown>{
+interface IProps extends React.PropsWithChildren{
     readonly label?: JSX.Element | string
     readonly style?: CSSProperties
     readonly icon: BaseIconProps

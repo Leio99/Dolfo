@@ -5,7 +5,7 @@ import { Card, CardActions } from "../Card"
 import { Tooltip } from "../Tooltip"
 import { BaseResultsManager } from "./BaseResultsManager"
 
-export interface CardTableProps extends React.PropsWithChildren<unknown>{
+export interface CardTableProps extends React.PropsWithChildren{
     readonly getTitle?: (item: IDataColumn) => string | JSX.Element
 }
 

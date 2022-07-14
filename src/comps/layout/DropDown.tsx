@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
 import { Icon } from "./Icon"
 
-interface IProps extends React.PropsWithChildren<unknown>{
+interface IProps extends React.PropsWithChildren{
     readonly label: string | JSX.Element
     readonly preventCloseOnClick?: boolean
     readonly disabled?: boolean
@@ -10,7 +10,7 @@ interface IProps extends React.PropsWithChildren<unknown>{
     readonly style?: CSSProperties
 }
 
-interface DropDownItemProps extends React.PropsWithChildren<unknown>{
+interface DropDownItemProps extends React.PropsWithChildren{
     readonly disabled?: boolean
     readonly onClick?: (e: any) => void
     readonly className?: string

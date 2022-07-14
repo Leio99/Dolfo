@@ -633,6 +633,11 @@ html.dark-theme{
         }
     }
 
+    .dolfo-display-content{
+        background-color: $dark;
+        color: $white
+    }
+
     ::-webkit-scrollbar{
         background: $darkThemeDark
     }

@@ -5,7 +5,7 @@ import onClickOutside from "react-onclickoutside"
 export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue" | "violet"
 export type ButtonColors = BaseColors | "white"
 
-export interface ButtonProps extends React.PropsWithChildren<unknown>{
+export interface ButtonProps extends React.PropsWithChildren{
     readonly type?: "button" | "submit" | "popup" | "text"
     readonly size?: "full" | "small" | "big"
     readonly loading?: boolean

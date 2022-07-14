@@ -5,7 +5,7 @@ import { ButtonColors } from "./Button"
 export { SubMenu } from "./SubMenu"
 export { MenuItem } from "./MenuItem"
 
-export interface BaseSideMenuProps extends React.PropsWithChildren<unknown>{
+export interface BaseSideMenuProps extends React.PropsWithChildren{
     readonly menuColor?: ButtonColors
 }
 

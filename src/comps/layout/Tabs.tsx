@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react"
 import _ from "lodash"
 import ReactDOM from "react-dom"
 
-interface TabsProps extends React.PropsWithChildren<unknown>{
+interface TabsProps extends React.PropsWithChildren{
     readonly style?: CSSProperties
     readonly className?: string
     readonly vertical?: boolean
@@ -15,7 +15,7 @@ interface IState{
     readonly currentTab: number
 }
 
-interface TabProps extends React.PropsWithChildren<unknown>{
+interface TabProps extends React.PropsWithChildren{
     readonly title: string | JSX.Element
     readonly isDefault?: boolean
     readonly style?: CSSProperties

@@ -4,7 +4,7 @@ import { Constants } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { Option } from "./Option"
 
-export interface RadioButtonProps extends BaseInputProps, React.PropsWithChildren<unknown>{
+export interface RadioButtonProps extends BaseInputProps, React.PropsWithChildren{
     readonly controlName: string
     readonly defaultValue?: any
 }

@@ -3,13 +3,13 @@ import { Constants } from "../shared/Constants"
 import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
-interface IProps extends React.PropsWithChildren<unknown>{
+interface IProps extends React.PropsWithChildren{
     readonly style?: CSSProperties,
     readonly className?: string
     readonly arrowStyle?: boolean
 }
 
-export interface BreadcrumbItemProps extends React.PropsWithChildren<unknown>{
+export interface BreadcrumbItemProps extends React.PropsWithChildren{
     readonly onClick?: () => void
     readonly onMouseDown?: (e: any) => void
 }

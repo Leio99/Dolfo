@@ -1,0 +1,28 @@
+.dolfo-display{
+    background-color: $blue;
+    
+    &, .dolfo-display-content, .dolfo-display-title{
+        border-radius: $smallRadius;
+        padding: 0.4rem
+    }
+
+    .dolfo-display-content{
+        background-color: $white
+    }
+
+    .dolfo-display-title{
+        margin-bottom: 0.5rem
+    }
+
+    @each $key, $color in $colors {
+        &.color-#{$key} {
+            $newColor: lighten($color, 10%);
+            
+            background-color: $newColor;
+
+            .dolfo-display-title{
+                color: setBtnColor($newColor)
+            }
+        }
+    }
+}

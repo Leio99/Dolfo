@@ -6,7 +6,7 @@ import { DialogType } from "./Dialog"
 import { CloseIcon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
-interface IProps extends React.PropsWithChildren<unknown>{
+interface IProps extends React.PropsWithChildren{
     readonly type?: DialogType
     readonly style?: CSSProperties
     readonly className?: string

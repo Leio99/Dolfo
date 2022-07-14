@@ -5,14 +5,14 @@ import { BaseIconProps, Icon, LoadingIcon } from "./Icon"
 
 type InternalStep = { readonly step: Step, readonly index: number } | string
 
-interface IProps extends React.PropsWithChildren<unknown>{
+interface IProps extends React.PropsWithChildren{
     readonly currentStep: number
     readonly className?: string
     readonly style?: CSSProperties
     readonly vertical?: boolean
 }
 
-interface StepProps extends React.PropsWithChildren<unknown>{
+interface StepProps extends React.PropsWithChildren{
     readonly title?: string
     readonly icon?: BaseIconProps
     readonly style?: CSSProperties

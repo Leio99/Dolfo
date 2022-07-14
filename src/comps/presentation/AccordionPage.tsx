@@ -8,7 +8,7 @@ export class AccordionPage extends React.Component{
         <Usage />
 
         <ResultCode
-            title="Single file uploader"
+            title="Simple accordion"
             result={<Accordion title="Open me">I am some hidden content</Accordion>}
             code={'<Accordion title="Open me">I am some hidden content</Accordion>'}
         />
