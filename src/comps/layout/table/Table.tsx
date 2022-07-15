@@ -84,12 +84,18 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
                     }}>
                         {
                             columns.map((col, i) => <th style={{ width: col.width, textAlign: col.align }} key={i} onMouseUp={e => {
+                                if(col.type === "check")
+                                    return
+                                
                                 (e.target as HTMLElement).classList.remove("dropping")
                                 this.shiftColumn(moving, i)
                                 moving = null
                                 this.lookItem()
                                 this.tmpElement = null
                             }} onMouseDown={e => {
+                                if(col.type === "check")
+                                    return
+                                
                                 e.preventDefault()
                                 const target = e.target as HTMLElement,
                                 parent = target.parentElement
@@ -101,7 +107,7 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
                                 parent.after(this.tmpElement)
                                 moving = i
                             }} onMouseOver={e => {
-                                if(moving != null && moving !== i)
+                                if(moving != null && moving !== i && col.type !== "check")
                                     (e.target as HTMLElement).classList.add("dropping")
                             }} onMouseLeave={e => (e.target as HTMLElement).classList.remove("dropping")}>
                                 {col.type === "check" && <Tooltip tooltip={col.checkTooltip}>

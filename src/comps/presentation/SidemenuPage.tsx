@@ -51,14 +51,14 @@ export class SidemenuPage extends React.Component<any, {
         <ResultCode
             title="Colors"
             result={<>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("red")} style={{ marginRight: 5 }}>Red</Button>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("green")} style={{ marginRight: 5 }}>Green</Button>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("darkblue")} style={{ marginRight: 5 }}>Dark blue</Button>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("black")} style={{ marginRight: 5 }}>Black</Button>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("orange")} style={{ marginRight: 5 }}>Orange</Button>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("grey")} style={{ marginRight: 5 }}>Grey</Button>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("white")} style={{ marginRight: 5 }}>White</Button>
-                <Button btnColor="blue" size="small" onClick={() => this.toggle("violet")}>Violet</Button>
+                <Button btnColor="red" size="small" onClick={() => this.toggle("red")} style={{ marginRight: 5 }}>Red</Button>
+                <Button btnColor="green" size="small" onClick={() => this.toggle("green")} style={{ marginRight: 5 }}>Green</Button>
+                <Button btnColor="darkblue" size="small" onClick={() => this.toggle("darkblue")} style={{ marginRight: 5 }}>Dark blue</Button>
+                <Button btnColor="black" size="small" onClick={() => this.toggle("black")} style={{ marginRight: 5 }}>Black</Button>
+                <Button btnColor="orange" size="small" onClick={() => this.toggle("orange")} style={{ marginRight: 5 }}>Orange</Button>
+                <Button btnColor="grey" size="small" onClick={() => this.toggle("grey")} style={{ marginRight: 5 }}>Grey</Button>
+                <Button btnColor="white" size="small" onClick={() => this.toggle("white")} style={{ marginRight: 5 }}>White</Button>
+                <Button btnColor="violet" size="small" onClick={() => this.toggle("violet")}>Violet</Button>
 
                 <SideMenu opened={this.state["red"]} onToggle={() => this.toggle("red")} menuColor="red">
                     <MenuItem>I am a voice</MenuItem>
