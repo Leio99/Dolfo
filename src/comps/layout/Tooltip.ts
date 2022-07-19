@@ -98,8 +98,10 @@ export class Tooltip extends React.Component<IProps>{
     }
 
     componentDidUpdate = (prevProps: IProps): void => {
-        if(!_.isEqual(prevProps.tooltip, this.props.tooltip))
+        if(!_.isEqual(prevProps.tooltip, this.props.tooltip)){
+            this.element.remove()
             this.renderTooltip()
+        }
     }
 
     private positionTooltip = (tooltip: TooltipElement, tries: TooltipPlacement[] = [], place?: TooltipPlacement): void => {
