@@ -13,6 +13,7 @@ interface IProps extends React.PropsWithChildren{
 interface DropDownItemProps extends React.PropsWithChildren{
     readonly disabled?: boolean
     readonly onClick?: (e: any) => void
+    readonly onMouseDown?: (e: any) => void
     readonly className?: string
     readonly style?: CSSProperties
     readonly static?: boolean
@@ -73,14 +74,14 @@ export class DropDown extends React.Component<IProps, IState>{
 
     getItems = (): DropDownItem[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
-    clickItem = (e: any, item: DropDownItem) => {
+    clickItem = (e: any, item: DropDownItem, property: keyof DropDownItemProps = "onClick") => {
         if(item.props.disabled || item.props.static) return
 
-        if(item.props.onClick)
-            item.props.onClick(e)
+        if(item.props[property])
+            (item.props[property] as Function)(e)
 
         if(!this.props.preventCloseOnClick)
-            this.close()
+            setTimeout(this.close)
     }
 
     render = (): JSX.Element => {
@@ -96,7 +97,7 @@ export class DropDown extends React.Component<IProps, IState>{
             {
                 opened && <div className="dropdown-items-container">
                     {
-                        items.map((i, k) => <div className={"dolfo-dropdown-item" + (i.props.static ? " static" : "") + (i.props.disabled ? " disabled" : "") + (i.props.className ? " " + i.props.className : "")} onClick={e => this.clickItem(e, i)} style={i.props.style} key={k}>{i.props.children}</div>)
+                        items.map((i, k) => <div className={"dolfo-dropdown-item" + (i.props.static ? " static" : "") + (i.props.disabled ? " disabled" : "") + (i.props.className ? " " + i.props.className : "")} onClick={e => this.clickItem(e, i)} onMouseDown={e => this.clickItem(e, i, "onMouseDown")} style={i.props.style} key={k}>{i.props.children}</div>)
                     }
                 </div>
             }
