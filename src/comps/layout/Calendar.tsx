@@ -38,13 +38,13 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         
         gEvents.forEach(e => {
             const start = new Date(e.start.dateTime || e.start.date),
-            end = new Date(e.end.dateTime || e.start.date)
+            end = new Date(e.end.dateTime || e.end.date)
 
-            let isDifferentDay = start.getDay() !== end.getDay()
+            let isDifferentDay = start.getTime() !== end.getTime() && (start.getDate() !== end.getDate() || start.getMonth() !== end.getMonth() || start.getFullYear() !== end.getFullYear())
 
             if(isDifferentDay){
                 const copy = new Date(start)
-                
+
                 events.push({
                     day: start.getDate(),
                     month: start.getMonth(),
@@ -68,7 +68,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                         date: copy
                     })
 
-                    isDifferentDay = copy.getDate() !== end.getDate()
+                    isDifferentDay = copy.getTime() !== end.getTime() && (copy.getDate() !== end.getDate() || copy.getMonth() !== end.getMonth() || copy.getFullYear() !== end.getFullYear())
                 }
             }else{
                 events.push({
@@ -84,12 +84,10 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         })
 
         this.setState({ events })
-    }, () => {
-        openInfoDialog({
-            type: "error",
-            content: Constants.CALENDAR_ERROR_UNABLE_TO_GET_EVENTS
-        })
-    }))
+    }, () => openInfoDialog({
+        type: "error",
+        content: Constants.CALENDAR_ERROR_UNABLE_TO_GET_EVENTS
+    })))
 
     increaseMonth = (): void => {
         const { currentMonth, currentYear } = this.state,
@@ -151,12 +149,10 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                         <Icon iconKey="calendar-alt" type="far" />
                     </Button>
                 </Tooltip>,
-                <Button key="select" size="small" btnColor="blue" onClick={() => {
-                    this.setState({
-                        currentMonth: selMonth ?? currentMonth,
-                        currentYear: selYear ?? currentYear
-                    }, dialog.close)
-                }}>
+                <Button key="select" size="small" btnColor="blue" onClick={() => this.setState({
+                    currentMonth: selMonth ?? currentMonth,
+                    currentYear: selYear ?? currentYear
+                }, dialog.close)}>
                     {Constants.CALENDAR_SET_TEXT}
                 </Button>,
                 <Button key="cancel" type="text" btnColor="red" onClick={() => dialog.close()}>
