@@ -43,6 +43,7 @@ import { IconKey } from "../shared/models/IconModel"
 import { MenuContentProps } from "../MenuContent"
 import { LabelPage } from "./LabelPage"
 import { DisplayPage } from "./DisplayPage"
+import { PininputPage } from "./PininputPage"
 
 interface MenuItem{
     readonly link: string
@@ -55,6 +56,7 @@ interface MenuItem{
 export const MenuItems: MenuItem[] = [
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
     { link: "form/datepicker", children: "Date picker", section: "form", component: DatepickerPage, icon: "calendar-day" },
+    { link: "form/pin", children: "Pin input", section: "form", component: PininputPage, icon: "hashtag" },
     { link: "form/radio", children: "Radio button", section: "form", component: RadiobuttonPage, icon: "dot-circle" },
     { link: "form/select", children: "Select", section: "form", component: SelectPage, icon: "hand-pointer" },
     { link: "form/selectablelist", children: "Selectable list", section: "form", component: SelectablelistPage, icon: "tasks" },

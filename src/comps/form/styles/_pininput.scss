@@ -1,0 +1,57 @@
+.dolfo-input-pin{
+    text-align: center;
+
+    label.dolfo-input-label{
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: inline-block;
+        
+        &, *{
+            pointer-events: none !important
+        }
+
+        .dolfo-input-required{
+            color: $red;
+            font-size: 15px;
+            vertical-align: top;
+            position: relative;
+            top: -3px
+        }
+
+        > span{
+            left: 0;
+            opacity: 1;
+            pointer-events: all !important
+        }
+    }
+
+    .dolfo-input-wrapper{
+        border: 0;
+        justify-content: center;
+
+        .dolfo-input-pin-field{
+            border-radius: $smallRadius;
+            flex-grow: unset;
+
+            input[type="text"]{
+                border: 1px solid $disabled;
+                text-align: center;
+                width: 30px;
+                margin: 0 10px;
+                padding: $inputPaddingY;
+
+                &.big{
+                    width: 60px;
+                    font-size: 30px;
+                    padding: $inputPaddingY
+                }
+
+                &[disabled]{
+                    opacity: $disabledOpacity
+                }
+            }
+        }
+    }
+}
