@@ -29,7 +29,7 @@ export class AlertPage extends React.Component{
                 <Alert style={{ marginBottom: 10 }} type="warning">Think about it first...</Alert>
                 <Alert type="error"><ErrorIcon /> Some error happened!</Alert>
             </>}
-            code={'<Alert>I am the default color</Alert>\n<Alert type="info">Here is some information</Alert>\n<Alert type="success">You did it!</Alert>\n<Alert type="warning">Think about it first...</Alert>\n<Alert type="error">Some error happened!</Alert>'}
+            code={'<Alert>I am the default color</Alert>\n<Alert type="info">Here is some information</Alert>\n<Alert type="success">You did it!</Alert>\n<Alert type="warning">Think about it first...</Alert>\n<Alert type="error">\n\t<ErrorIcon /> Some error happened!\n</Alert>'}
         />
 
         <Apis data={[
