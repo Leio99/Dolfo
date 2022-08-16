@@ -51,6 +51,7 @@ export class PinInput extends React.Component<IProps, IState>{
 
     checkBackSpace = (index: number, key: string) => {
         if(index > 0 && key === "Backspace"){
+            this.onChange("", index)
             const node = ReactDOM.findDOMNode(this) as HTMLElement,
             childInput = node.querySelector(".dolfo-input-wrapper").childNodes[index] as HTMLElement,
             sibling = childInput.previousSibling,
