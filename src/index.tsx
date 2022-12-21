@@ -5,7 +5,7 @@ import "./index.scss"
 import { MenuContent } from "./comps/MenuContent"
 import { checkDarkTheme } from "./comps/shared/utility"
 import { useLocation, useNavigate } from "react-router-dom"
-import { Post } from "./Post"
+import { BrowserRouter } from "react-router-dom"
 
 const WrappedComponent = () => {
     const history: any = useNavigate(),
@@ -14,7 +14,9 @@ const WrappedComponent = () => {
     return <MenuContent history={history} location={location} />
 }
 
-createRoot(document.getElementById("root")).render(<Post />)
+createRoot(document.getElementById("root")).render(<BrowserRouter>
+    <WrappedComponent />
+</BrowserRouter>)
 
 serviceWorker.unregister()
 

@@ -2,10 +2,6 @@
 
 $menuWidth: 230px;
 
-// html, body{
-//     overflow: hidden
-// }
-
 ul{
     margin-top: 0
 }
@@ -296,10 +292,12 @@ html.dark-theme{
             }
         }
 
-        span{
+        > span{
             color: $disabled;
             font-size: small;
             transition: 0.2s ease;
+            margin-top: -5px;
+            cursor: pointer;
 
             &:hover{
                 color: $dark
@@ -307,9 +305,67 @@ html.dark-theme{
         }
     }
 
-    > span{
+    > button{
         margin-left: auto;
         align-self: flex-start;
         font-size: 90%
     }
+}
+
+.post-info{
+    display: flex;
+
+    .post-date{
+        display: block;
+        font-size: small;
+        color: $disabled;
+        margin-top: 0.5rem
+    }
+
+    .post-votes{
+        margin-left: auto
+    }
+}
+
+.post-separator{
+    margin-top: 1rem;
+    background-color: $grey;
+    height: 1px
+}
+
+.actions-popup{
+    position: fixed;
+    z-index: 1;
+    background-color: $white;
+    border: 1px solid $grey;
+    border-radius: $smallRadius;
+    box-shadow: $smallShadow;
+    animation: showActions 0.1s ease forwards;
+    overflow: hidden;
+
+    .popup-option{
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        
+        .dolfo-icon{
+            margin-right: 0.2rem
+        }
+
+        &:hover{
+            background-color: $lightGrey
+        }
+
+        &.red{
+            color: $red;
+
+            &:hover{
+                background-color: lighten($red, 44%)
+            }
+        }
+    }
+}
+
+@keyframes showActions{
+    0%{ opacity: 0 }
+    100%{ opacity: 1 }
 }
