@@ -1,12 +1,11 @@
 {
   "name": "dolfo",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.5",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/gapi": "0.0.43",
+    "@types/gapi": "^0.0.44",
     "@types/jest": "^29.2.5",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.18",
@@ -25,10 +24,17 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "clean": "rm -rf dist",
+    "copy-styles-main": "shx mkdir ./dist/comps/shared/styles && shx cp src/comps/shared/styles/* ./dist/comps/shared/styles",
+    "copy-styles-form": "shx mkdir ./dist/comps/form/styles && shx cp src/comps/form/styles/* ./dist/comps/form/styles",
+    "copy-styles-layout": "shx mkdir ./dist/comps/layout/styles && shx cp src/comps/layout/styles/* ./dist/comps/layout/styles",
+    "build-npm": "shx rm -rf ./dist && tsc && shx cp package.json ./dist && shx cp README.md ./dist && npm run copy-styles-main && npm run copy-styles-form && npm run copy-styles-layout",
+    "publish-npm": "npm publish ./dist",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "gen": "node scripts/generateComponent.js"
   },
+  "main": "lib/index.tsx",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -43,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "shx": "^0.3.4"
   }
 }
