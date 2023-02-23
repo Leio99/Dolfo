@@ -3,7 +3,7 @@ import Button, { ButtonColors } from "./Button"
 import { BaseIconProps, Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
-    readonly title?: string
+    readonly title?: string | JSX.Element
     readonly menuColor?: ButtonColors
     readonly menuTogglerFn?: () => void
     readonly menuTogglerIcon?: BaseIconProps

@@ -10,7 +10,7 @@ interface IProps extends React.PropsWithChildren{
 }
 
 export interface BreadcrumbItemProps extends React.PropsWithChildren{
-    readonly onClick?: () => void
+    readonly onClick?: (e: any) => void
     readonly onMouseDown?: (e: any) => void
 }
 

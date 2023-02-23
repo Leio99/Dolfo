@@ -1,6 +1,6 @@
 {
   "name": "dolfo",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -34,7 +34,6 @@
     "eject": "react-scripts eject",
     "gen": "node scripts/generateComponent.js"
   },
-  "main": "lib/index.tsx",
   "eslintConfig": {
     "extends": "react-app"
   },

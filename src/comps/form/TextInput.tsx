@@ -8,7 +8,7 @@ import { IconKey } from "../shared/models/IconModel"
 
 type InputTypes = "textarea" | "password" | "email" | "number"
 
-interface IProps extends FullInputProps{
+export interface TextInputProps extends FullInputProps{
     readonly type?: InputTypes
     readonly expandTextarea?: boolean
     readonly rows?: number
@@ -30,8 +30,8 @@ interface IState{
 
 const MAX_ROWS = 5
 
-export class TextInput extends React.PureComponent<IProps, IState>{
-    constructor(props: IProps){
+export class TextInput extends React.PureComponent<TextInputProps, IState>{
+    constructor(props: TextInputProps){
         super(props)
         
         this.state = {
@@ -42,7 +42,7 @@ export class TextInput extends React.PureComponent<IProps, IState>{
         }
     }
 
-    componentDidUpdate = (prevProps: IProps): void => {
+    componentDidUpdate = (prevProps: TextInputProps): void => {
         let value = this.state.value,
         inputType = this.state.inputType
 

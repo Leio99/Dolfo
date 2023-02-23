@@ -4,8 +4,9 @@ import { Constants } from "./Constants"
 import _ from "lodash"
 import { showInfo } from "../layout/NotificationMsg"
 
-export const formatDate = (date: Date, monthString = false): string => {
-    const month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
+export const formatDate = (inputDate: Date | string, monthString = false): string => {
+    const date = new Date(inputDate),
+    month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
 
     return `${zeroBefore(date.getDate()) + month + date.getFullYear()}`
 }
@@ -138,7 +139,7 @@ export const getCalendar = (month?: number, year?: number) => {
     return table
 }
 
-export const getTime = (d: string): string => {
+export const getTime = (d: string | Date): string => {
     const date = new Date(d)
 
     return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
@@ -164,19 +165,9 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
     link.remove()
 }
 
-export const copyToClipBoard = (text: string): void => {
-    const el = document.createElement("textarea")
-    el.value = text
-    el.style.opacity = "0"
-    el.style.width = "0"
-    el.style.height = "0"
-
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand("copy")
-    document.body.removeChild(el)
-
-    showInfo(Constants.COPIED_TO_CLIPBOARD)
+export const copyToClipBoard = (text: string, msg = Constants.COPIED_TO_CLIPBOARD): void => {
+    navigator.clipboard.writeText(text)
+    showInfo(msg)
 }
 
 export const toggleDarkTheme = () => {
