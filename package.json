@@ -1,6 +1,7 @@
 {
   "name": "dolfo",
   "version": "1.0.9",
+  "main": "main.ts",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -28,7 +29,9 @@
     "copy-styles-main": "shx mkdir ./dist/comps/shared/styles && shx cp src/comps/shared/styles/* ./dist/comps/shared/styles",
     "copy-styles-form": "shx mkdir ./dist/comps/form/styles && shx cp src/comps/form/styles/* ./dist/comps/form/styles",
     "copy-styles-layout": "shx mkdir ./dist/comps/layout/styles && shx cp src/comps/layout/styles/* ./dist/comps/layout/styles",
-    "build-npm": "shx rm -rf ./dist && tsc && shx cp package.json ./dist && shx cp README.md ./dist && npm run copy-styles-main && npm run copy-styles-form && npm run copy-styles-layout",
+    "build-npm": "shx rm -rf ./dist && npm run rename1 && tsc && shx cp package.json ./dist && shx cp README.md ./dist && npm run copy-styles-main && npm run copy-styles-form && npm run copy-styles-layout && npm run rename2",
+    "rename1": "node -e \"require('fs').rename('src/main.ts', 'src/index.ts', () => {})\"",
+    "rename2": "node -e \"require('fs').rename('src/index.ts', 'src/main.ts', () => {})\"",
     "publish-npm": "npm publish ./dist",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

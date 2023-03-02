@@ -124,7 +124,6 @@ export class NotificationMsg extends React.Component<NotificationProps>{
             NotificationMsg.moveNotifications()
         
         notification.classList.add("removed")
-        
         props.onClose && props.onClose()
     }
 
