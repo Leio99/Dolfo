@@ -63,7 +63,7 @@ export class NotificationMsg extends React.Component<NotificationProps>{
         delay = props.hideDelay ?? 2000,
         closeFunc = () => {
             NotificationMsg.onClose(notification, props)
-            setTimeout(() => root.unmount())
+            root.unmount()
         }
         
         document.body.appendChild(notification)
@@ -118,13 +118,14 @@ export class NotificationMsg extends React.Component<NotificationProps>{
     })
     
     static onClose = (notification: HTMLElement, props: NotificationProps): void => {
+        props.onClose && props.onClose()
+
         notification.remove()
 
         if(!notification.classList.contains("removed"))
             NotificationMsg.moveNotifications()
         
         notification.classList.add("removed")
-        props.onClose && props.onClose()
     }
 
     getIcon = (type: string): JSX.Element => {
