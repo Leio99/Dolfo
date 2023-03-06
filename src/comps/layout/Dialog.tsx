@@ -7,6 +7,7 @@ import { createRoot } from "react-dom/client"
 import { Tooltip } from "./Tooltip"
 
 export type DialogType = "success" | "info" | "error" | "warning"
+export type DialogCloseType = "close" | "cancel"
 
 export interface ComponentAsDialogProps{
     readonly close?: () => void
@@ -21,7 +22,7 @@ interface BaseProps{
 }
 
 export interface DialogFullProps extends BaseProps, React.PropsWithChildren{
-    readonly onClose?: () => void
+    readonly onClose?: (type: DialogCloseType) => void
     readonly visible?: boolean
     readonly okBtnClass?: string
     readonly cancelBtnClass?: string
@@ -70,7 +71,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         })
     }
 
-    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: DialogProps["onOk"]): Closable => openDialog({
+    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: DialogProps["onOk"], onNo?: DialogProps["onClose"]): Closable => openDialog({
         title: title || Constants.CONFIRM_TITLE,
         content: message,
         onOk: onYes,
@@ -78,7 +79,8 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         clickOutside: true,
         cancelText: Constants.NO_TEXT,
         icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
-        width: "350px"
+        width: "350px",
+        onClose: onNo
     })
 
     static loadingDialog = (loadingText: string | JSX.Element = Constants.LOADING_TEXT): Closable => openDialog({
@@ -94,9 +96,9 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
     static openDialog = (data: DialogProps): Closable => {
         const popup = document.createElement("div"),
         root = createRoot(popup),
-        onCloseFunction = (props: DialogFullProps) => {
+        onCloseFunction = (props: DialogFullProps, e: DialogCloseType) => {
             popup.remove()
-            props.onClose && props.onClose()
+            props.onClose && props.onClose(e)
             setTimeout(() => root.unmount())
         },
         onOkFunction = (props: DialogFullProps) => {
@@ -109,9 +111,9 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
         document.body.appendChild(popup)
 
-        root.render(<Dialog visible {...data} onClose={() => onCloseFunction(data)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} children={data.content} />)
+        root.render(<Dialog visible {...data} onClose={e => onCloseFunction(data, e)} onOk={() => onOkFunction(data)} title={<span>{icon} {data.title}</span>} hideCancel={data.type ? true : data.hideCancel} okType={okType} children={data.content} />)
 
-        return new Closable(() => onCloseFunction(data))
+        return new Closable(() => onCloseFunction(data, "close"))
     }
 
     static openDialogComponent = <T extends unknown>(Class: React.ComponentType<T & ComponentAsDialogProps>, props?: React.ComponentProps<typeof Class>): Closable => {
@@ -164,7 +166,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         visible: this.props.visible != null ? this.props.visible : this.state.visible
     })
 
-    onClose = (): void => this.setState({ visible: false }, this.props.onClose)
+    onClose = (event: DialogCloseType): void => this.setState({ visible: false }, () => this.props.onClose && this.props.onClose(event))
 
     onOk = (): void => {
         this.props.visible && this.setState({ visible: false })
@@ -177,12 +179,12 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         { visible } = this.state
 
         return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "") + (props.top ? " place-top" : "") + (props.overflows ? " overflows" : "")}>
-            <div className="dolfo-dialog-overlay" onClick={props.clickOutside ? this.onClose : null}></div>
+            <div className="dolfo-dialog-overlay" onClick={props.clickOutside ? () => this.onClose("cancel") : null}></div>
 
             <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width || props.style?.width }}>
                 <div className="dolfo-dialog-header">
                     <Tooltip tooltip={Constants.CLOSE_TEXT}>
-                        <Button circleBtn btnColor="white" onClick={this.onClose} className="dialog-close">
+                        <Button circleBtn btnColor="white" onClick={() => this.onClose("cancel")} className="dialog-close">
                             <CloseIcon style={{ fontSize: 20 }} />
                         </Button>
                     </Tooltip>
@@ -203,7 +205,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
                             </Button>
 
                             {
-                                !props.hideCancel && <Button onClick={this.onClose} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} size="small" type="text" btnColor={props.cancelType || "red"}>
+                                !props.hideCancel && <Button onClick={() => this.onClose("close")} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} size="small" type="text" btnColor={props.cancelType || "red"}>
                                     {props.cancelText || Constants.CANCEL_TEXT}
                                 </Button>
                             }
