@@ -9,7 +9,7 @@ interface IProps {
     readonly circular?: boolean
     readonly color?: BaseColors
     readonly barSize?: "small" | "medium" | "large"
-    readonly circleWidth?: number | string
+    readonly circleWidth?: number
     readonly loading?: boolean
     readonly loadingText?: string | JSX.Element
     readonly className?: string
