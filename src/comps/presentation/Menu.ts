@@ -44,6 +44,7 @@ import { MenuContentProps } from "../MenuContent"
 import { LabelPage } from "./LabelPage"
 import { DisplayPage } from "./DisplayPage"
 import { PininputPage } from "./PininputPage"
+import { CarswiperPage } from "./CardswiperPage"
 
 interface MenuItem{
     readonly link: string
@@ -72,6 +73,7 @@ export const MenuItems: MenuItem[] = [
     { link: "layout/buttons", children: "Button", section: "layout", component: ButtonsPage, icon: "mouse" },
     { link: "layout/calendar", children: "Calendar", section: "layout", component: CalendarPage, icon: "calendar-alt" },
     { link: "layout/card", children: "Card", section: "layout", component: CardPage, icon: "id-card" },
+    { link: "layout/cardswiper", children: "Card swiper", section: "layout", component: CarswiperPage, icon: "id-card" },
     { link: "layout/contextmenu", children: "Context menu", section: "layout", component: ContextMenuPage, icon: "comment-dots" },
     { link: "layout/dialog", children: "Dialog", section: "layout", component: DialogPage, icon: "window" },
     { link: "layout/display", children: "Display", section: "layout", component: DisplayPage, icon: "tablet-android-alt" },

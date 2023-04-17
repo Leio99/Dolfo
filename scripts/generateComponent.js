@@ -1,10 +1,7 @@
 const fs = require('fs'),
-parse = JSON.parse(process.env.npm_config_argv),
-args = parse.original,
+args = process.argv.slice(2),
 currentDir = process.env.INIT_CWD,
 tsTemplates = ["interface", "class"]
-
-args.splice(0, 2)
 
 if(args.length === 0)
     logError("Nome del componente non inserito!")
