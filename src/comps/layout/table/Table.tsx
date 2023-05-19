@@ -100,6 +100,9 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
                                 const target = e.target as HTMLElement,
                                 parent = target.parentElement
 
+                                if(target.classList.contains("dolfo-column-order-icon") || target.classList.contains("dolfo-column-search-icon"))
+                                    return
+
                                 this.tmpElement = target.cloneNode(true) as HTMLElement
                                 this.tmpElement.classList.add("shifter")
                                 this.tmpElement.style.left = e.clientX + "px"
@@ -116,6 +119,10 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
  
                                 {col.canSearch && <Tooltip tooltip={Constants.FILTER_TEXT}>
                                     <Icon iconKey="filter" className="dolfo-column-search-icon" onClick={() => this.changeActiveFiler(col.field)} />
+                                </Tooltip>}
+ 
+                                {col.orderable && <Tooltip tooltip={this.orderHasKey(col.orderKey || col.field) ? this.getOrderKeyType(col.orderKey || col.field) === "asc" ? Constants.ORDER_ASCENDING : Constants.ORDER_DESCENDING : Constants.COLUMN_ORDER}>
+                                    <Icon iconKey={this.orderHasKey(col.orderKey || col.field) ? this.getOrderKeyType(col.orderKey || col.field) === "asc" ? "arrow-down" : "arrow-up" : "sort"} className="dolfo-column-order-icon" onClick={() => this.toggleOrder(col.orderKey || col.field)} />
                                 </Tooltip>}
 
                                 {col.type !== "check" && col.label}

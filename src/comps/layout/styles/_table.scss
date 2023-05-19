@@ -103,7 +103,7 @@
         > thead > tr > th{
             position: relative;
 
-            .dolfo-column-search-icon{
+            .dolfo-column-search-icon, .dolfo-column-order-icon{
                 position: absolute;
                 right: 0.8rem;
                 transform: translateY(25%);
@@ -111,7 +111,11 @@
                 cursor: pointer
             }
 
-            &:hover .dolfo-column-search-icon{
+            .dolfo-column-search-icon ~ .dolfo-column-order-icon{
+                right: 2.5rem
+            }
+
+            &:hover .dolfo-column-search-icon, &:hover .dolfo-column-order-icon{
                 visibility: visible
             }
 

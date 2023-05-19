@@ -210,7 +210,7 @@ export class ColumnApis extends React.Component<{ readonly hideData?: boolean }>
             {
                 name: "type",
                 desc: "Defines the kind of data passed in.",
-                type: "string: date, time, check (shows a checkbox), boolean (shows a check icon if true, an X icon if false)",
+                type: "string: date, time (data should be a date and it will be converted), check (shows a checkbox), boolean (shows a check icon if true, an X icon if false)",
                 required: false,
                 default: "null (string)"
             },
@@ -249,6 +249,13 @@ export class ColumnApis extends React.Component<{ readonly hideData?: boolean }>
                 required: false,
                 default: "null",
                 fnParams: "None"
+            },
+            {
+                name: "orderable",
+                desc: "Defines wether the column can be ordered or not.",
+                type: "boolean",
+                required: false,
+                default: "false"
             }
         ]} />
 

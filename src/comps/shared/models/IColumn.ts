@@ -17,6 +17,8 @@ export interface IColumn{
     readonly exportField?: string
     readonly hideCard?: boolean
     readonly checkDisabled?: boolean
+    readonly orderable?: boolean
+    readonly orderKey?: string
     readonly onCheckAll?: () => void
 }
 

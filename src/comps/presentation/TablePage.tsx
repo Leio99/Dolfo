@@ -43,6 +43,14 @@ export class TablePage extends React.Component{
                 code={'<Table columns={[\n\t{ field: "firstName", label: "First name", canSearch: true },\n\t{ field: "lastName", label: "Last name", canSearch: true },\n\t{ field: "birth", label: "Date of birth", type: "date", align: "center", canSearch: true },\n\t{ field: "isActive", label: "Active", type: "boolean", align: "center", canSearch: true }\n]} data={[\n\t{ firstName: "Jack", lastName: "Nickolson", birth: new Date(1999, 3, 17), isActive: true },\n\t{ firstName: "James", lastName: "Spark", birth: new Date(1970, 11, 9), isActive: false }\n]} />'}
             />
 
+            <ResultCode
+                title="Sortable"
+                result={<Table columns={this.cols.map(c => {
+                    return {...c, orderable: true}
+                })} data={this.data} />}
+                code={'<Table columns={[\n\t{ field: "firstName", label: "First name", orderable: true },\n\t{ field: "lastName", label: "Last name", orderable: true },\n\t{ field: "birth", label: "Date of birth", type: "date", align: "center", orderable: true },\n\t{ field: "isActive", label: "Active", type: "boolean", align: "center", orderable: true }\n]} data={[\n\t{ firstName: "Jack", lastName: "Nickolson", birth: new Date(1999, 3, 17), isActive: true },\n\t{ firstName: "James", lastName: "Spark", birth: new Date(1970, 11, 9), isActive: false }\n]} />'}
+            />
+
             <Apis data={[
                 {
                     name: "columns",

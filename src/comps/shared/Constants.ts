@@ -73,4 +73,7 @@ export class Constants {
     static readonly PAGINATION_LAST_PAGE = "Ultima pagina"
     static readonly PAGINATION_NEXT_PAGE = "Prossima pagina"
     static readonly PAGINATION_PREV_PAGE = "Pagina precedente"
+    static readonly COLUMN_ORDER = "Ordina"
+    static readonly ORDER_ASCENDING = "Ascendente"
+    static readonly ORDER_DESCENDING = "Discendente"
 }
