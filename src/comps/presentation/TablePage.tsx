@@ -38,9 +38,9 @@ export class TablePage extends React.Component{
             <ResultCode
                 title="Searchable"
                 result={<Table columns={this.cols.map(c => {
-                    return {...c, canSearch: true}
+                    return {...c, canSearch: c.type !== "boolean"}
                 })} data={this.data} />}
-                code={'<Table columns={[\n\t{ field: "firstName", label: "First name", canSearch: true },\n\t{ field: "lastName", label: "Last name", canSearch: true },\n\t{ field: "birth", label: "Date of birth", type: "date", align: "center", canSearch: true },\n\t{ field: "isActive", label: "Active", type: "boolean", align: "center", canSearch: true }\n]} data={[\n\t{ firstName: "Jack", lastName: "Nickolson", birth: new Date(1999, 3, 17), isActive: true },\n\t{ firstName: "James", lastName: "Spark", birth: new Date(1970, 11, 9), isActive: false }\n]} />'}
+                code={'<Table columns={[\n\t{ field: "firstName", label: "First name", canSearch: true },\n\t{ field: "lastName", label: "Last name", canSearch: true },\n\t{ field: "birth", label: "Date of birth", type: "date", align: "center", canSearch: true },\n\t{ field: "isActive", label: "Active", type: "boolean", align: "center" }\n]} data={[\n\t{ firstName: "Jack", lastName: "Nickolson", birth: new Date(1999, 3, 17), isActive: true },\n\t{ firstName: "James", lastName: "Spark", birth: new Date(1970, 11, 9), isActive: false }\n]} />'}
             />
 
             <ResultCode
