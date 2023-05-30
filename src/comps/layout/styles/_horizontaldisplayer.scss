@@ -1,0 +1,157 @@
+.dolfo-h-display {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    background-color: $lightGrey;
+
+    &:hover {
+        .dolfo-h-display-next-btn, .dolfo-h-display-prev-btn {
+            display: block
+        }
+    }
+
+    .dolfo-h-display-prev-btn, .dolfo-h-display-next-btn {
+        position: absolute;
+        top: 50%;
+        color: $white;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.4);
+        font-size: 40px;
+        cursor: pointer;
+        z-index: 1;
+        padding: 1rem 0.5rem;
+        padding-left: 0;
+        border-radius: 0 50px 50px 0;
+        display: none;
+        transition: 0.2s ease;
+
+        &.dolfo-h-display-next-btn {
+            right: 0;
+            padding-right: 0;
+            padding-left: 0.5rem;
+            border-radius: 50px 0 0 50px;
+
+            &:hover {
+                padding-right: 0.5rem
+            }
+        }
+
+        &.dolfo-h-display-prev-btn:hover {
+            padding-left: 0.5rem
+        }
+    }
+
+    .dolfo-h-display-inner {
+        min-height: calc(250px + 1rem);
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 1rem;
+        gap: 1rem;
+        transition: 0.3s ease;
+
+        .dolfo-h-display-item {
+            flex: 0 0 200px;
+            position: relative;
+            height: 250px;
+            max-width: 200px;
+            min-width: 200px;
+            border-radius: 5px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            background-color: #111;
+
+            &.free {
+                position: fixed;
+                color: #fff;
+
+                &.temporary {
+                    box-shadow: inset 0 0 10px #333;
+                    animation: enlarge 0.5s cubic-bezier(0, 0.68, 0.25, 1) forwards;
+
+                    * {
+                        display: none
+                    }
+                }
+
+                &:not(.temporary) {
+                    top: 0 !important;
+                    left: 0 !important;
+                    right: 0;
+                    bottom: 0;
+                    max-width: 100vw;
+                    width: 100vwh !important;
+                    height: 100vh;
+                    background: #333 !important
+                }
+            }
+
+            &:not(.free) {
+                cursor: pointer
+            }
+
+            &:hover > .dolfo-h-display-title {
+                bottom: 0
+            }
+
+            > .dolfo-h-display-title {
+                transition: 0.2s ease;
+                position: absolute;
+                bottom: -100%;
+                left: 0;
+                right: 0;
+                padding: 0.4rem;
+                background-color: rgba(0, 0, 0, 0.6);
+                color: $white;
+                max-height: 100%;
+                overflow: auto;
+
+                strong {
+                    font-weight: 500
+                }
+
+                p {
+                    white-space: pre-wrap;
+                    font-size: small;
+                    margin: 0
+                }
+            }
+        }
+    }
+}
+
+html.dark-theme{
+    .dolfo-h-display{
+        background-color: $darkThemeDark;
+
+        .dolfo-h-display-prev-btn, .dolfo-h-display-next-btn{
+            background-color: rgba(0, 0, 0, 0.7)
+        }
+
+        .dolfo-h-display-item{
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.9)
+        }
+    }
+}
+
+@media screen and (max-width: 700px){
+    .dolfo-h-display{
+        .dolfo-h-display-next-btn, .dolfo-h-display-prev-btn{
+            display: none !important
+        }
+  
+        .dolfo-h-display-inner{
+            overflow-y: hidden;
+            overflow-x: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        
+            &::-webkit-scrollbar { 
+                display: none
+            }
+        }
+    }
+}

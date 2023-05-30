@@ -45,6 +45,7 @@ import { LabelPage } from "./LabelPage"
 import { DisplayPage } from "./DisplayPage"
 import { PininputPage } from "./PininputPage"
 import { CarswiperPage } from "./CardswiperPage"
+import { HorizontaldisplayerPage } from "./HorizontaldisplayerPage"
 
 interface MenuItem{
     readonly link: string
@@ -80,6 +81,7 @@ export const MenuItems: MenuItem[] = [
     { link: "layout/dropdown", children: "Dropdown", section: "layout", component: DropdownPage, icon: "caret-square-down" },
     { link: "layout/fullpageloader", children: "Fullpage loader", section: "layout", component: FullpageLoaderPage, icon: "spinner" },
     { link: "layout/header", children: "Header", section: "layout", component: HeaderPage, icon: "heading" },
+    { link: "layout/horizontaldisplayer", children: "Horizontal display", section: "layout", component: HorizontaldisplayerPage, icon: "photo-video" },
     { link: "layout/icons", children: "Icon", section: "layout", component: IconPage, icon: "icons" },
     { link: "layout/label", children: "Label", section: "layout", component: LabelPage, icon: "marker" },
     { link: "layout/masterdetail", children: "Master-Detail", section: "layout", component: MasterdetailPage, icon: "external-link" },
