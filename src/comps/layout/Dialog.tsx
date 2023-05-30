@@ -123,7 +123,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
             popup.remove()
             setTimeout(() => root.unmount())
         },
-        Component = <Class {...props} close={closeFn} />
+        Component = React.createElement(Class, { ...props, close: closeFn })
 
         document.body.appendChild(popup)
 
