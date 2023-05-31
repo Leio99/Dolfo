@@ -16,6 +16,7 @@ export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren
     readonly multiple?: boolean
     readonly canSearch?: boolean
     readonly loading?: boolean
+    readonly parentContainerScroller?: string
 }
 
 interface IState{
@@ -219,6 +220,28 @@ class Select extends React.PureComponent<SelectProps, IState>{
 
     hideOptions = (): void => this.rootContent.remove()
 
+    findParentScroller = (): HTMLElement => {
+        const { parentContainerScroller } = this.props,
+        node = ReactDOM.findDOMNode(this) as HTMLElement
+
+        if(parentContainerScroller){
+            let parent = node.parentElement,
+            found: HTMLElement = null
+
+            while(parent && !found){
+                if(parent.matches(parentContainerScroller))
+                    found = parent
+                else
+                    parent = parent.parentElement
+            }
+
+            if(found)
+                return found
+        }
+
+        return document.documentElement
+    }
+
     positionOptions = (): void => {
         if(!this.state.openSelect || !document.body.contains(this.rootContent))
             return
@@ -226,20 +249,21 @@ class Select extends React.PureComponent<SelectProps, IState>{
         const node = ReactDOM.findDOMNode(this) as HTMLElement,
         options = this.rootContent.childNodes[0] as HTMLElement,
         { top, left, height, width } = node.getBoundingClientRect(),
-        wrapper = InputWrapper.findWrapper(this)
+        wrapper = InputWrapper.findWrapper(this),
+        parent = this.findParentScroller()
 
         if(!options)
             return
 
         options.style.zIndex = sumParentZIndex(node) + 1 + ""
         options.style.left = left + "px"
-        options.style.top = top + height + document.documentElement.scrollTop - 3 + "px"
+        options.style.top = top + height + parent.scrollTop - 3 + "px"
         options.style.width = width + "px"
         options.classList.remove("top")
         node.classList.remove("top")
 
         if(!isElementInViewport(options)){
-            options.style.top = wrapper.getBoundingClientRect().top + document.documentElement.scrollTop - options.offsetHeight + 3 + "px"
+            options.style.top = wrapper.getBoundingClientRect().top + parent.scrollTop - options.offsetHeight + 3 + "px"
             options.classList.add("top")
             node.classList.add("top")
 

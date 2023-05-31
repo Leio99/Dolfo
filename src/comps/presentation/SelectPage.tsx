@@ -189,6 +189,13 @@ export class SelectPage extends React.Component<MenuContentProps>{
                 default: "false"
             },
             {
+                name: "parentContainerScroller",
+                desc: "Identifies the CSS selector of the parent which the Select should be tracked, in order to manage options scrolling.",
+                type: "string (CSS selector)",
+                required: false,
+                default: "null"
+            },
+            {
                 name: "onChange",
                 desc: "Function triggered when an option is selected.",
                 type: "function",
