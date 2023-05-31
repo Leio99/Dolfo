@@ -62,7 +62,9 @@
             background-position: center;
             overflow: hidden;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-            background-color: #111;
+            background-color: $white;
+            padding: 0.5rem;
+            overflow: auto;
 
             &.free {
                 position: fixed;
@@ -132,6 +134,7 @@ html.dark-theme{
         }
 
         .dolfo-h-display-item{
+            background-color: $darkThemeDarkHover;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.9)
         }
     }
