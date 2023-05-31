@@ -18,12 +18,14 @@ import { BreadCrumb } from "./comps/layout/BreadCrumb"
 import Button from "./comps/layout/Button"
 import { Calendar } from "./comps/layout/Calendar"
 import { Card } from "./comps/layout/Card"
+import { CardsSwiper, SwiperCard } from "./comps/layout/CardsSwiper"
 import { ContextMenu } from "./comps/layout/ContextMenu"
 import { Dialog } from "./comps/layout/Dialog"
 import { Display } from "./comps/layout/Display"
 import { DropDown } from "./comps/layout/DropDown"
 import { FullLoader } from "./comps/layout/FullLoader"
 import { Header } from "./comps/layout/Header"
+import { HorizontalDisplayer, HorizontalDisplayItem } from "./comps/layout/HorizontalDisplayer"
 import { Icon } from "./comps/layout/Icon"
 import { Label } from "./comps/layout/Label"
 import { ListSideMenu } from "./comps/layout/ListSideMenu"
@@ -99,7 +101,11 @@ export {
     CardTable,
     MasterDetail,
     TreeView,
-    ResultsView
+    ResultsView,
+    HorizontalDisplayer,
+    HorizontalDisplayItem,
+    CardsSwiper,
+    SwiperCard
 }
 
 export * from "./comps/shared/utility"
