@@ -19,6 +19,7 @@ interface BaseProps{
     readonly width?: string
     readonly okText?: string
     readonly clickOutside?: boolean
+    readonly hideCloseX?: boolean
 }
 
 export interface DialogFullProps extends BaseProps, React.PropsWithChildren{
@@ -183,11 +184,13 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
             <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width || props.style?.width }}>
                 <div className="dolfo-dialog-header">
-                    <Tooltip tooltip={Constants.CLOSE_TEXT}>
-                        <Button circleBtn btnColor="white" onClick={() => this.onClose("cancel")} className="dialog-close">
-                            <CloseIcon style={{ fontSize: 20 }} />
-                        </Button>
-                    </Tooltip>
+                    {
+                        !props.hideCloseX && <Tooltip tooltip={Constants.CLOSE_TEXT}>
+                            <Button circleBtn btnColor="white" onClick={() => this.onClose("cancel")} className="dialog-close">
+                                <CloseIcon style={{ fontSize: 20 }} />
+                            </Button>
+                        </Tooltip>
+                    }
 
                     <h4 className="dolfo-dialog-title">{props.title}</h4>
                 </div>

@@ -256,6 +256,13 @@ export class DialogPage extends React.Component<MenuContentProps, {
                 required: false,
                 default: "null",
                 fnParams: "None"
+            },
+            {
+                name: "hideCloseX",
+                desc: "If true, hides the X button on the top right corner.",
+                type: "boolean",
+                required: false,
+                default: "false"
             }
         ]} />
 
