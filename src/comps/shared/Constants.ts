@@ -76,4 +76,5 @@ export class Constants {
     static readonly COLUMN_ORDER = "Ordina"
     static readonly ORDER_ASCENDING = "Ascendente"
     static readonly ORDER_DESCENDING = "Discendente"
+    static readonly STRING_NOT_DEFINED_OPTION = "Opzione non definita"
 }

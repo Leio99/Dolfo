@@ -137,7 +137,13 @@ class Select extends React.PureComponent<SelectProps, IState>{
 
     decodeValue = (value: any): any => {
         if(this.props.multiple){
-            const list = this.state.value.map((v: any) => this.state.options?.find(option => _.isEqual(v, option.props.value))?.props.label).filter((v: any) => v)
+            const list = this.state.value.map((v: any) => {
+                const opt = this.state.options?.find(option => _.isEqual(v, option.props.value)),
+                optLabel = opt?.props.label,
+                stringToCheck = opt && _.isString(optLabel) ? optLabel : opt?.props.getLabelString ? opt?.props.getLabelString() : Constants.STRING_NOT_DEFINED_OPTION
+
+                return stringToCheck
+            }).filter((v: any) => v)
 
             return list.join(", ")
         }
@@ -154,7 +160,11 @@ class Select extends React.PureComponent<SelectProps, IState>{
 
     changeSearch = (e: any): void => this.setState({
         searchValue: e.target.value,
-        options: this.getOptions()?.filter(opt => opt.props.label?.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0)
+        options: this.getOptions()?.filter(opt => {
+            const stringToCheck = _.isString(opt.props.label) ? opt.props.label : opt.props.getLabelString ? opt.props.getLabelString() : Constants.STRING_NOT_DEFINED_OPTION
+
+            return stringToCheck?.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0
+        })
     }, this.showOptions)
 
     resetSearch = (): void => this.changeSearch({ target: { value: "" }})

@@ -142,8 +142,14 @@ export class OptionApis extends React.Component{
         {
             name: "label",
             desc: "The label of the option.",
-            type: "string",
+            type: "string | JSX.Element",
             required: true
+        },
+        {
+            name: "getLabelString",
+            desc: "If label is a JSX Element, this function can be passed to define a string label for the option (in case of multiple selection).",
+            type: "Function (requires the function to return a string value)",
+            required: false
         }
     ]} />
 }

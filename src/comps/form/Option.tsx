@@ -6,12 +6,13 @@ import { CheckBox } from "./CheckBox"
 
 interface IProps extends BaseInputProps{
     readonly value: any
-    readonly label: string
+    readonly label: string | JSX.Element
     readonly selected?: boolean
     readonly multiple?: boolean
     readonly isRadio?: boolean
     readonly controlName?: string
     readonly focused?: boolean
+    readonly getLabelString?: () => string
 }
 
 export class Option extends React.PureComponent<IProps>{
