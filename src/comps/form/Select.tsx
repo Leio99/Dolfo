@@ -315,7 +315,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
                     readOnly
                 />
 
-                <span>{this.decodeValue(value)}</span>
+                <span className="input-value">{this.decodeValue(value)}</span>
 
                 {props.canSearch && searchInput}
             </div>
