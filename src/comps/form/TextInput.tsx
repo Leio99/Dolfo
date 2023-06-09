@@ -19,6 +19,7 @@ export interface TextInputProps extends FullInputProps{
     readonly max?: number
     readonly min?: number
     readonly placeHolder?: string
+    readonly autocomplete?: string
 }
 
 interface IState{
@@ -168,6 +169,7 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
                     onCopy={props.onCopy}
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
+                    autoComplete={props.autocomplete}
                     style={props.style}
                 /> : <textarea
                     placeholder={props.placeHolder}

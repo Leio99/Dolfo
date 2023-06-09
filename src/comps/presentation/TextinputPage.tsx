@@ -205,6 +205,13 @@ export class TextinputPage extends React.Component<MenuContentProps>{
                 default: "false"
             },
             {
+                name: "autocomplete",
+                desc: "Input text autocomplete.",
+                type: "string",
+                required: false,
+                default: "null"
+            },
+            {
                 name: "onChange",
                 desc: "Function triggered when input value changes.",
                 type: "function",
