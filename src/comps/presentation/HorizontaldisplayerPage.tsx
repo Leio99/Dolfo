@@ -36,14 +36,14 @@ export class HorizontaldisplayerPage extends React.Component{
             },
             {
                 name: "className",
-                desc: "Additional className to apply to the swiper.",
+                desc: "Additional className to apply to the displayer.",
                 type: "string",
                 required: false,
                 default: "null"
             },
             {
                 name: "style",
-                desc: "Additional style for the swiper.",
+                desc: "Additional style for the displayer.",
                 type: "CSSProperties",
                 required: false,
                 default: "null"
@@ -79,6 +79,20 @@ export class HorizontaldisplayerPage extends React.Component{
                 required: false,
                 default: "null",
                 fnParams: "None"
+            },
+            {
+                name: "className",
+                desc: "Additional className to apply to the item.",
+                type: "string",
+                required: false,
+                default: "null"
+            },
+            {
+                name: "style",
+                desc: "Additional style for the item.",
+                type: "CSSProperties",
+                required: false,
+                default: "null"
             }
         ]} />
     </>

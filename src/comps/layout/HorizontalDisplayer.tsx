@@ -5,6 +5,8 @@ interface DisplayItemProps{
     readonly title?: JSX.Element | string
     readonly imageUrl?: string
     readonly infos?: JSX.Element | string
+    readonly className?: string
+    readonly style?: CSSProperties
     readonly onClick?: () => void
 }
 
@@ -71,8 +73,9 @@ export class HorizontalDisplayer extends React.Component<React.PropsWithChildren
             <div className="dolfo-h-display-inner">
                 {
                     children.map((c, i) => {
-                        return <div className="dolfo-h-display-item" key={i} style={c.props.imageUrl ? {
-                            backgroundImage: `url(${c.props.imageUrl})`
+                        return <div className={"dolfo-h-display-item" + (c.props.className ? " " + c.props.className : "")} key={i} style={c.props.imageUrl ? {
+                            backgroundImage: `url(${c.props.imageUrl})`,
+                            ...c.props.style
                         } : null} onClick={c.props.onClick}>
                             {c.props.children}
                             {c.props.title && <div className="dolfo-h-display-title">
