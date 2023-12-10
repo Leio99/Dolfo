@@ -55,7 +55,7 @@ export class NotificationMsg extends React.Component<NotificationProps>{
     })
 
     static show = (data: string | NotificationProps): Closable => {
-        let interval: NodeJS.Timer
+        let interval: NodeJS.Timeout
 
         const props = _.isString(data) ? { message: data } : data,
         notification = document.createElement("div"),
