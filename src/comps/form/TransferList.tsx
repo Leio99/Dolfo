@@ -100,7 +100,7 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                 </Tooltip>}
             </label>}
 
-            <input value={selectedKeys.join(", ")} required={props.required} />
+            <input value={selectedKeys.join(", ")} required={props.required} onChange={() => {}} />
 
             <div className="dolfo-transfer-from">
                 {props.leftListTitle && <label>{props.leftListTitle} ({unselected.length})</label>}

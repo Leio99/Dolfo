@@ -47,7 +47,7 @@ export class Switch extends React.PureComponent<SwitchProps, SwitchProps>{
         { checked } = this.state
 
         return <div className={"dolfo-input-switch" + ((props.disabled || props.loading) ? " disabled" : "") + (props.className ? (" " + props.className) : "")} onClick={this.onChange} style={props.wrapperStyle}>
-            <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} />
+            <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} onChange={() => {}} />
 
             <div className={"dolfo-switch" + (checked ? " checked" : "")} tabIndex={props.loading ? -1 : 0} onKeyUp={this.checkSpace} style={props.style}>
                 {props.leftText && checked && <span className="left-text">{props.leftText}</span>}
