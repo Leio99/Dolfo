@@ -20,9 +20,10 @@
         position: relative;
         background: $grey;
         width: 40px;
+        height: 20px;
         cursor: pointer;
         display: inline-flex;
-        padding: 2px;
+        padding: 2px 0;
         vertical-align: middle;
 
         &:focus{
@@ -38,6 +39,8 @@
             background-color: $white;
             border-radius: $roundRadius;
             transition: 0.5s ease;
+            position: absolute;
+            left: 2px;
 
             *{
                 font-size: 10px
@@ -49,7 +52,8 @@
             animation: expandSwitch 1s ease;
 
             .dolfo-switch-dot{
-                transform: translateX(120%)
+                left: calc(100% - 2px);
+                transform: translateX(-100%)
             }
         }
     }

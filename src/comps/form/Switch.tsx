@@ -7,8 +7,6 @@ import { Tooltip } from "../layout/Tooltip"
 export interface SwitchProps extends ExtendedInputProps{
     readonly checked?: boolean
     readonly loading?: boolean
-    readonly leftText?: string | JSX.Element
-    readonly rightText?: string | JSX.Element
 }
 
 export class Switch extends React.PureComponent<SwitchProps, SwitchProps>{
@@ -50,11 +48,9 @@ export class Switch extends React.PureComponent<SwitchProps, SwitchProps>{
             <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} onChange={() => {}} />
 
             <div className={"dolfo-switch" + (checked ? " checked" : "")} tabIndex={props.loading ? -1 : 0} onKeyUp={this.checkSpace} style={props.style}>
-                {props.leftText && checked && <span className="left-text">{props.leftText}</span>}
                 <div className={"dolfo-switch-dot" + (props.loading ? " loading" : "")}>
                     {props.loading && <LoadingIcon spinning />}
                 </div>
-                {props.rightText && !checked && <span className="right-text">{props.rightText}</span>}
             </div>
             
             {props.label && <label>
