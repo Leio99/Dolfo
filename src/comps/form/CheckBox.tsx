@@ -43,7 +43,7 @@ export class CheckBox extends React.PureComponent<CheckBoxProps, CheckBoxProps>{
         { checked } = this.state
 
         return <div className={"dolfo-checkbox" + (props.className ? (" " + props.className) : "") + (props.disabled ? " disabled" : "")} style={props.style} onClick={this.onChange}>
-            <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} readOnly />
+            <input type="checkbox" required={props.required} checked={checked} tabIndex={-1} />
 
             <div className={"dolfo-checkbox-square" + (checked ? " checked" : "")} tabIndex={0} onKeyUp={this.checkSpace}>
                 <CheckIcon />
