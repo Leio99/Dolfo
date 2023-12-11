@@ -75,7 +75,7 @@ export class DropDown extends React.Component<IProps, IState>{
                     maxWidth = width
             })
 
-            if(node.clientWidth < maxWidth)
+            if(node.clientWidth <= maxWidth)
                 node.style.width = maxWidth + "px"
             else
                 node.style.width = "auto"

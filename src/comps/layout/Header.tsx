@@ -26,8 +26,6 @@ export class Header extends React.PureComponent<IProps>{
 
             {props.title && <h2 className="dolfo-header-title">{props.title}</h2>}
 
-            <div className="clearfix"></div>
-
             {props.children}
         </div>
     }
