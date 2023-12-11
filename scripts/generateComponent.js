@@ -27,7 +27,7 @@ else{
 
                 const newDir = `${currentDir}/${componentName}.${extension}`
 
-                fs.readFile(newDir, 'utf8', (_, data2) => {
+                fs.readFile(newDir, "utf8", (_, data2) => {
                     if(!data2)
                         fs.writeFile(newDir, data, () => logSuccess("File generato con successo!"))
                 })
