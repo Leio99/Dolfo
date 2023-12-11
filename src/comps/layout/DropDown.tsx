@@ -32,6 +32,15 @@ export class DropDown extends React.Component<IProps, IState>{
         }
     }
 
+    componentDidMount = () => window.addEventListener("resize", this.resetNodeWidth)
+
+    componentWillUnmount = () => window.removeEventListener("resize", this.resetNodeWidth)
+
+    resetNodeWidth = () => {
+        const node = ReactDOM.findDOMNode(this) as HTMLElement
+        node.style.width = "auto"
+    }
+
     close = () => this.setState({ opened: false })
     
     open = () => {
@@ -40,7 +49,6 @@ export class DropDown extends React.Component<IProps, IState>{
 
         this.setState({ opened: true }, () => {
             const node = ReactDOM.findDOMNode(this) as HTMLElement,
-            container = node.querySelector(".dropdown-items-container") as HTMLElement,
             items = node.querySelectorAll(".dropdown-items-container .dolfo-dropdown-item")
             let maxWidth = 0
 
@@ -68,7 +76,9 @@ export class DropDown extends React.Component<IProps, IState>{
             })
 
             if(node.clientWidth < maxWidth)
-                container.style.width = maxWidth + "px"
+                node.style.width = maxWidth + "px"
+            else
+                node.style.width = "auto"
         })
     }
 
