@@ -95,7 +95,7 @@ export class SidemenuPage extends React.Component<any, {
             code={'<Button btnColor="blue" size="small" onClick={() => this.toggle("red")} style={{ marginRight: 5 }}>Red</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("green")} style={{ marginRight: 5 }}>Green</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("darkblue")} style={{ marginRight: 5 }}>Dark blue</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("black")} style={{ marginRight: 5 }}>Black</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("orange")} style={{ marginRight: 5 }}>Orange</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("grey")}>Grey</Button>\n<Button btnColor="blue" size="small" onClick={() => this.toggle("white")}>White</Button>\n\n<SideMenu opened={this.state["red"]} onToggle={() => this.toggle("red")} menuColor="red">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["green"]} onToggle={() => this.toggle("green")} menuColor="green">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["darkblue"]} onToggle={() => this.toggle("darkblue")} menuColor="darkblue">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["black"]} onToggle={() => this.toggle("black")} menuColor="black">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["orange"]} onToggle={() => this.toggle("orange")} menuColor="orange">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["grey"]} onToggle={() => this.toggle("grey")} menuColor="grey">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>\n\n<SideMenu opened={this.state["white"]} onToggle={() => this.toggle("white")} menuColor="white">\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>'}
         />
 
-        <Apis title="Function properties" data={[
+        <Apis title="Menu properties" data={[
             {
                 name: "opened",
                 desc: "Determines wheteher the menu is opened or not.",
@@ -109,6 +109,20 @@ export class SidemenuPage extends React.Component<any, {
                 type: "string (red, blue, green, black, orange, grey, darkblue, white, violet)",
                 required: false,
                 default: "blue"
+            },
+            {
+                name: "style",
+                desc: "Additional menu style.",
+                type: "CSSProperties",
+                required: false,
+                default: "null"
+            },
+            {
+                name: "className",
+                desc: "Additional menu className.",
+                type: "string",
+                required: false,
+                default: "null"
             },
             {
                 name: "onToggle",

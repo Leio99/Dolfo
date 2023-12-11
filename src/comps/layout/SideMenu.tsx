@@ -1,11 +1,12 @@
-import React from "react"
+import React, { CSSProperties } from "react"
 import { Constants } from "../shared/Constants"
 import { ButtonColors } from "./Button"
-
 export { SubMenu } from "./SubMenu"
 export { MenuItem } from "./MenuItem"
 
 export interface BaseSideMenuProps extends React.PropsWithChildren{
+    readonly className?: string
+    readonly style?: CSSProperties
     readonly menuColor?: ButtonColors
 }
 
@@ -18,8 +19,8 @@ interface IState{
     readonly opened: boolean
 }
 
-export class SideMenu<P extends IProps = IProps> extends React.PureComponent<P, IState>{
-    constructor(props: P){
+export class SideMenu extends React.PureComponent<IProps, IState>{
+    constructor(props: IProps){
         super(props)
 
         this.state = {
@@ -27,7 +28,7 @@ export class SideMenu<P extends IProps = IProps> extends React.PureComponent<P, 
         }
     }
 
-    componentDidUpdate = (prevProps: P): void => {
+    componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.opened !== this.props.opened){
             this.setState({
                 opened: this.props.opened
@@ -45,7 +46,7 @@ export class SideMenu<P extends IProps = IProps> extends React.PureComponent<P, 
         const { props } = this,
         { opened } = this.state
 
-        return <div className={"dolfo-side-menu dolfo-side-menu-"+ (props.menuColor || "blue") + (opened ? " opened": "")}>
+        return <div className={"dolfo-side-menu dolfo-side-menu-"+ (props.menuColor || "blue") + (opened ? " opened": "") + (props.className ? " " + props.className : "")} style={props.style}>
             <div className="dolfo-menu-overlay" onClick={this.toggleMenu}></div>
             {props.children}
 
