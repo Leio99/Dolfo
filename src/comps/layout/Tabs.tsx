@@ -23,6 +23,8 @@ interface TabProps extends React.PropsWithChildren{
 }
 
 export class Tabs extends React.PureComponent<TabsProps, IState>{
+    mounted = true
+
     constructor(props: TabsProps) {
         super(props)
 
@@ -47,7 +49,10 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
         window.addEventListener("load", this.handleBar, { once: true })
     }
 
-    componentWillUnmount = (): void => window.removeEventListener("resize", this.handleBar)
+    componentWillUnmount = (): void => {
+        this.mounted = false
+        window.removeEventListener("resize", this.handleBar)
+    }
 
     componentDidUpdate = (prevProps: React.PropsWithChildren<TabsProps>): void => {
         this.handleBar()
@@ -76,6 +81,9 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
     }
 
     handleBar = (): void => {
+        if(!this.mounted)
+            return
+        
         if(this.props.tabStyle && !this.props.vertical) return
 
         const { vertical } = this.props,
