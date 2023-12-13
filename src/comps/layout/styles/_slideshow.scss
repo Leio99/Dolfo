@@ -35,6 +35,7 @@
 
     .dolfo-slides{
         display: flex;
+        width: 100%;
 
         .dolfo-slide{
             flex: 0 0 100%;
@@ -49,9 +50,14 @@
     .dolfo-slides-dots{
         position: absolute;
         bottom: 1rem;
-        right: 1rem;
-        left: 1rem;
+        transform: translateX(-50%);
+        left: 50%;
         text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50px;
+        display: flex;
+        padding: 0.5rem;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
         .slide-dot{
             width: 15px;

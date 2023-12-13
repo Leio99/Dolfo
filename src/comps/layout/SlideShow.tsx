@@ -34,18 +34,16 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
 
     componentDidMount = (): void => {
         this.props.automatic && setInterval(() => {
-            if(!this.state.isHover) this.nextSlide()
+            if(!this.state.isHover)
+                this.nextSlide()
         }, 2500)
     }
 
     toggleHover = (): void => this.setState({ isHover: !this.state.isHover })
 
     compontentDidUpdate = (prevProps: any): void => {
-        if(prevProps.children !== this.props.children){
-            this.setState({
-                slides: this.getSlides()
-            })
-        }
+        if(prevProps.children !== this.props.children)
+            this.setState({ slides: this.getSlides() })
     }
 
     getSlides = (): Slide[] => React.Children.map(this.props.children, (child: any) => child)
@@ -54,7 +52,8 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
         const length = this.state.slides.length
         let newCurrent = this.state.currentSlide + 1
 
-        if(newCurrent >= length) newCurrent = 0
+        if(newCurrent >= length)
+            newCurrent = 0
 
         this.setState({ currentSlide: newCurrent })
     }
