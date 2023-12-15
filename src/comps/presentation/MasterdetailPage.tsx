@@ -131,6 +131,13 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                     default: "grid"
                 },
                 {
+                    name: "hideToggleButton",
+                    desc: "Hides the button used to toggle the layout type.",
+                    type: "boolean",
+                    required: false,
+                    default: "false"
+                },
+                {
                     name: "getDetailTitle",
                     desc: "Function to determine the title of the detail page.",
                     type: "function (must return string or JSX)",

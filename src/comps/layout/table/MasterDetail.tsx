@@ -50,7 +50,7 @@ export class MasterDetail<P> extends React.Component<MasterDetailProps & P, Mast
     clearAllData = (data: IDataColumn[]): IDataColumn[] => data.map(d => this.clearData(d))
 
     render(children = this.props.children): JSX.Element {
-        const { columns, data, onOpenDetail, getDetailTitle, actions, getTitle, className, exportFormat, exportable, style } = this.props,
+        const { columns, data, onOpenDetail, getDetailTitle, actions, getTitle, className, exportFormat, exportable, style, hideToggleButton } = this.props,
         { selectedItem, layoutType } = this.state,
         cols = columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center", exportable: false }),
         colData = data.map(v => {
@@ -79,7 +79,7 @@ export class MasterDetail<P> extends React.Component<MasterDetailProps & P, Mast
         return <div className="dolfo-master-detail">
             {
                 !selectedItem ? <div className="master-detail-results">
-                    <ResultsView data={colData} columns={cols} getTitle={getTitle} onToggleViewMode={this.toggleViewMode} layoutType={layoutType} className={className} style={style} exportFormat={exportFormat} exportable={exportable} />
+                    <ResultsView data={colData} columns={cols} getTitle={getTitle} onToggleViewMode={this.toggleViewMode} layoutType={layoutType} className={className} style={style} exportFormat={exportFormat} exportable={exportable} hideToggleButton={hideToggleButton} />
                 </div> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
                         <Tooltip tooltip={Constants.BACK_TO_LIST}>
