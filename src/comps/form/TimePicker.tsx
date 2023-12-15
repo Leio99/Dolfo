@@ -27,7 +27,6 @@ interface IState{
 class TimePicker extends React.PureComponent<TimePickerProps, IState>{
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
-    private observer: ResizeObserver
     
     constructor(props: TimePickerProps){
         super(props)
@@ -39,8 +38,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
     }
 
     componentDidMount = (): void => {
-        this.observer = new ResizeObserver(this.positionPicker)
-        this.observer.observe(this.rootContent)
+        window.addEventListener("resize", this.positionPicker, true)
         window.addEventListener("scroll", this.positionPicker, true)
     }
 
@@ -65,7 +63,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
     componentWillUnmount = (): void => {
         setTimeout(() => this.root.unmount())
         window.removeEventListener("scroll", this.positionPicker, true)
-        this.observer.disconnect()
+        window.removeEventListener("resize", this.positionPicker, true)
     }
 
     changeTime = (): void => !this.props.disabled && this.props.onChange && this.props.onChange(this.state.value)

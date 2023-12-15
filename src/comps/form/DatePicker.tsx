@@ -14,6 +14,7 @@ import { createRoot } from "react-dom/client"
 type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
 
 export interface DatePickerProps extends ExtendedInputProps{
+    readonly placeHolder?: string
     readonly defaultValue?: Date
     readonly dateFormat?: DateFormats
     readonly selectTime?: boolean
@@ -37,7 +38,6 @@ interface IState {
 class DatePicker extends React.PureComponent<DatePickerProps, IState>{
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
-    private observer: ResizeObserver
     
     constructor(props: DatePickerProps) {
         super(props)
@@ -46,8 +46,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
     }
 
     componentDidMount = (): void => {
-        this.observer = new ResizeObserver(this.positionPicker)
-        this.observer.observe(this.rootContent)
+        window.addEventListener("resize", this.positionPicker, true)
         window.addEventListener("scroll", this.positionPicker, true)
     }
 
@@ -69,7 +68,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
     componentWillUnmount = (): void => {
         setTimeout(() => this.root.unmount())
         window.removeEventListener("scroll", this.positionPicker, true)
-        this.observer.disconnect()
+        window.removeEventListener("resize", this.positionPicker, true)
     }
 
     composeDateFromDefault = (defaultValue: Date): IState => {
@@ -473,6 +472,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
             <input
                 type="text"
                 value={showDate}
+                placeholder={props.placeHolder}
                 disabled={props.disabled}
                 autoFocus={props.autoFocus}
                 required={props.required}

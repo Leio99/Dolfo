@@ -1,6 +1,6 @@
 {
   "name": "dolfo",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "main": "main.ts",
   "dependencies": {
     "@testing-library/jest-dom": "^6.1.5",

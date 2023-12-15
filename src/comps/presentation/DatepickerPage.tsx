@@ -10,7 +10,7 @@ export class DatepickerPage extends React.Component<MenuContentProps>{
 
         <ResultCode
             title="Simple datepicker"
-            result={<DatePicker />}
+            result={<DatePicker placeHolder="Select a date" />}
             code={'<DatePicker />'}
         />
 
@@ -128,6 +128,13 @@ export class DatepickerPage extends React.Component<MenuContentProps>{
                 type: "boolean",
                 required: false,
                 default: "false"
+            },
+            {
+                name: "placeHolder",
+                desc: "Additional placeholder for input.",
+                type: "string",
+                required: false,
+                default: "null"
             },
             {
                 name: "onChange",
