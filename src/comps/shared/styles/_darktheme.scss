@@ -74,7 +74,11 @@ html.dark-theme{
 
     .dolfo-select-options{
         background-color: $dark;
-        color: $darkThemeWhite
+        color: $darkThemeWhite;
+
+        .dolfo-option.focused{
+            background: $darkThemeDarkHover !important
+        }
     }
 
     .dolfo-select-options .dolfo-option:hover, .dolfo-select-options .dolfo-option.selected, .dolfo-input-wrapper.focused .dolfo-select-search-content{
