@@ -10,7 +10,7 @@ import { blurInput, sumParentZIndex } from "../shared/utility"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 
-interface IProps<E> extends ExtendedInputProps{
+export interface AutocompleteProps<E> extends ExtendedInputProps{
     readonly defaultValue?: E
     readonly selectOptionIfOnlyOne?: boolean
 }
@@ -26,14 +26,14 @@ interface IState<E, K>{
     readonly focusedIndex: number
 }
 
-export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps<E> & P, IState<E, K>>{
+export abstract class Autocomplete<E, K, P = any> extends React.Component<AutocompleteProps<E> & P, IState<E, K>>{
     private readonly TIMING = 500
     private typing: _.DebouncedFunc<() => void>
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
     private observer: ResizeObserver
 
-    constructor(props: IProps<E> & P){
+    constructor(props: AutocompleteProps<E> & P){
         super(props)
 
         this.state = {
@@ -84,7 +84,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             this.fetchDefaultValue()
     }
 
-    componentDidUpdate = (prevProps: IProps<E> & P, prevState: IState<E, K>): void => {
+    componentDidUpdate = (prevProps: AutocompleteProps<E> & P, prevState: IState<E, K>): void => {
         if(!_.isEqual(prevProps.defaultValue, this.props.defaultValue))
             this.fetchDefaultValue()
 
