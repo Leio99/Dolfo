@@ -12,6 +12,7 @@ import { Option } from "./Option"
 
 interface IProps<E> extends ExtendedInputProps{
     readonly defaultValue?: E
+    readonly selectOptionIfOnlyOne?: boolean
 }
 
 interface IState<E, K>{
@@ -57,7 +58,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<IProps
             Promise.resolve(this.getSource(filter)).then(list => {
                 this.setState({ list, showOptions: true }, this.showOptions)
 
-                if(list.length === 1){
+                if(list.length === 1 && props.selectOptionIfOnlyOne){
                     this.selectOption(list[0])
                     this.hideOptions()
                 }
