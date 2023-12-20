@@ -38,9 +38,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
         const { children, currentTab } = this.state,
         findCurrent = currentTab || children.indexOf(children.find(child => child.props?.isDefault && !child.props?.disabled))
 
-        this.setState({
-            currentTab: findCurrent >= 0 ? findCurrent : 0
-        }, this.handleBar)
+        this.setState({ currentTab: findCurrent >= 0 ? findCurrent : 0 }, this.handleBar)
     }
 
     componentDidMount = (): void => {
@@ -65,7 +63,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
                 newDefault = newChildren.indexOf(newChildren.find((child: Tab) => child?.props?.isDefault))
 
                 if(prevDefault !== newDefault)
-                    this.loadTabs()
+                    this.setState({ currentTab: newDefault }, this.loadTabs)
             })
         }
     }
