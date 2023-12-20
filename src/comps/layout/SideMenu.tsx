@@ -11,6 +11,7 @@ export interface BaseSideMenuProps extends React.PropsWithChildren{
 }
 
 interface IProps extends BaseSideMenuProps{
+    readonly direction?: "left" | "right"
     readonly opened?: boolean
     readonly onToggle?: () => void
 }
@@ -46,7 +47,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
         const { props } = this,
         { opened } = this.state
 
-        return <div className={"dolfo-side-menu dolfo-side-menu-"+ (props.menuColor || "blue") + (opened ? " opened": "") + (props.className ? " " + props.className : "")} style={props.style}>
+        return <div className={"dolfo-side-menu dolfo-side-menu-"+ (props.menuColor || "blue") + (opened ? " opened": "") + (props.className ? " " + props.className : "") + " direction-" + (props.direction || "left")} style={props.style}>
             <div className="dolfo-menu-overlay" onClick={this.toggleMenu}></div>
             {props.children}
 

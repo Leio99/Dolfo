@@ -33,6 +33,20 @@ export class SidemenuPage extends React.Component<any, {
         />
 
         <ResultCode
+            title="Right menu"
+            result={<>
+                <Button btnColor="blue" size="small" onClick={() => this.toggle("second")}>Click to show</Button>
+
+                <SideMenu direction="right" opened={this.state["second"]} onToggle={() => this.toggle("second")}>
+                    <div style={{ textAlign: "center"}}>I am a side menu</div>
+
+                    <MenuItem>I am a voice</MenuItem>
+                </SideMenu>
+            </>}
+            code={'<Button btnColor="blue" size="small" onClick={() => this.toggle("second")}>Click to show</Button>\n\n<SideMenu direction="right" opened={this.state["second"]} onToggle={() => this.toggle("second")}>\n\t<div style={{ textAlign: "center"}}>I am a side menu</div>\n\n\t<MenuItem>I am a voice</MenuItem>\n</SideMenu>'}
+        />
+
+        <ResultCode
             title="Sub menu"
             result={<>
                 <Button btnColor="blue" size="small" onClick={() => this.toggle("sub")}>Click to show</Button>
@@ -109,6 +123,13 @@ export class SidemenuPage extends React.Component<any, {
                 type: "string (red, blue, green, black, orange, grey, darkblue, white, violet)",
                 required: false,
                 default: "blue"
+            },
+            {
+                name: "direction",
+                desc: "Defines the menu direction.",
+                type: "string (left, right)",
+                required: false,
+                default: "left"
             },
             {
                 name: "style",
