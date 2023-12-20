@@ -11,12 +11,12 @@ import _ from "lodash"
 
 export interface TimePickerProps extends ExtendedInputProps{
     readonly defaultValue?: string
-    readonly onKeyUpHour?: (e: any) => void
-    readonly onKeyUpMinute?: (e: any) => void
-    readonly onKeyDownHour?: (e: any) => void
-    readonly onKeyDownMinute?: (e: any) => void
-    readonly onKeyPressHour?: (e: any) => void
-    readonly onKeyPressMinute?: (e: any) => void
+    readonly onKeyUpHour?: (e: React.KeyboardEvent) => void
+    readonly onKeyUpMinute?: (e: React.KeyboardEvent) => void
+    readonly onKeyDownHour?: (e: React.KeyboardEvent) => void
+    readonly onKeyDownMinute?: (e: React.KeyboardEvent) => void
+    readonly onKeyPressHour?: (e: React.KeyboardEvent) => void
+    readonly onKeyPressMinute?: (e: React.KeyboardEvent) => void
 }
 
 interface IState{
@@ -68,7 +68,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
     changeTime = (): void => !this.props.disabled && this.props.onChange && this.props.onChange(this.state.value)
 
-    changeHour = (e: any): void => {
+    changeHour = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const value = parseInt(e.target.value)
         let time = this.state.value
 
@@ -78,7 +78,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         this.setState({ value: time }, this.changeTime)
     }
 
-    changeMinute = (e: any): void => {
+    changeMinute = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const value = parseInt(e.target.value)
         let time = this.state.value
 
@@ -93,7 +93,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
         if(hour > 23) hour = 0
 
-        this.changeHour({ target: { value: hour }})
+        this.changeHour({ target: { value: hour.toString() }} as React.ChangeEvent<HTMLInputElement>)
     }
 
     decreaseHour = (): void => {
@@ -101,7 +101,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
         if(hour < 0) hour = 23
 
-        this.changeHour({ target: { value: hour }})
+        this.changeHour({ target: { value: hour.toString() }} as React.ChangeEvent<HTMLInputElement>)
     }
 
     increaseMinute = (): void => {
@@ -109,7 +109,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
         if(minute > 59) minute = 0
 
-        this.changeMinute({ target: { value: minute }})
+        this.changeMinute({ target: { value: minute.toString() }} as React.ChangeEvent<HTMLInputElement>)
     }
 
     decreaseMinute = (): void => {
@@ -117,7 +117,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
         if(minute < 0) minute = 59
 
-        this.changeMinute({ target: { value: minute }})
+        this.changeMinute({ target: { value: minute.toString() }} as React.ChangeEvent<HTMLInputElement>)
     }
 
     showTime = (): void => this.setState({ showTime: true })
@@ -131,7 +131,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         this.hideTime()
     }
 
-    keyDownHour = (e: any): void => {
+    keyDownHour = (e: React.KeyboardEvent): void => {
         if(e.key === 'ArrowUp')
             this.increaseHour()
         else if(e.key === 'ArrowDown')
@@ -140,7 +140,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         this.props.onKeyDownHour && this.props.onKeyDownHour(e)
     }
 
-    keyDownMinute = (e: any): void => {
+    keyDownMinute = (e: React.KeyboardEvent): void => {
         if(e.key === 'ArrowUp')
             this.increaseMinute()
         else if(e.key === 'ArrowDown')
@@ -233,7 +233,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
             timepicker.classList.add("show")
     }
 
-    handleTabKey = (e: KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideTime()
+    handleTabKey = (e: React.KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideTime()
 
     render = (): JSX.Element => {
         const { props } = this,

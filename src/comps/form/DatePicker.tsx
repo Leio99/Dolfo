@@ -249,9 +249,9 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         this.hideCalendar()
     }
 
-    handleTabKey = (e: KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideCalendar()
+    handleTabKey = (e: React.KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideCalendar()
 
-    tryChangeDate = (e: any): void => {
+    tryChangeDate = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const date = e.target.value.trim(),
         pieces = date.split("-"),
         day = parseInt(pieces[0]),
@@ -279,7 +279,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         }, () => this.selectDay(this.state.currentDay, this.state.currentMonth, this.state.currentYear, false, true))
     }
 
-    handleKeyDown = (e: any): void => {
+    handleKeyDown = (e: React.KeyboardEvent): void => {
         if(e.key.toLowerCase() === "d")
             this.chooseToday()
 

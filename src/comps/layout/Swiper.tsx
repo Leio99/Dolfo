@@ -52,6 +52,4 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
     }
 }
 
-export class Swipe extends React.PureComponent<SwipeProps>{
-    render = (): JSX.Element => <></>
-}
+export class Swipe extends React.PureComponent<SwipeProps>{}

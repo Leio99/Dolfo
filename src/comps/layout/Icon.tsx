@@ -10,7 +10,7 @@ interface DefaultIconProps{
     readonly className?: string
     readonly spinning?: boolean
     readonly style?: CSSProperties
-    readonly onClick?: (e: any) => void
+    readonly onClick?: (e: React.MouseEvent) => void
     readonly color?: string
     readonly large?: boolean
     readonly notFW?: boolean

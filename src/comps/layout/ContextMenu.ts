@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client"
 
 export interface ContextMenuOption{
     readonly label: string | JSX.Element
-    readonly onClick: (e: any, clickedItem: HTMLElement) => void
+    readonly onClick: (e: MouseEvent, clickedItem: HTMLElement) => void
     readonly disabled?: boolean
 }
 
@@ -42,7 +42,7 @@ export class ContextMenu extends React.Component<IProps>{
                 if(item.disabled)
                     htmlItem.classList.add("disabled")
     
-                htmlItem.addEventListener("click", e => {
+                htmlItem.addEventListener("click", (e: MouseEvent) => {
                     if(item.disabled)
                         return
     

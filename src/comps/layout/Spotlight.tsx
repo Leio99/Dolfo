@@ -51,7 +51,7 @@ export class Spotlight extends React.Component<IProps, IState>{
             this.props.onChangeFilter("")
     }
 
-    handleKeyDown = (e: any) => {
+    handleKeyDown = (e: React.KeyboardEvent) => {
         const { data } = this.props,
         { focusedIndex } = this.state
         let newIndex: number

@@ -66,9 +66,9 @@ export class TransferList extends React.Component<TransferListProps, IState>{
 
     untransferAll = (): void => this.setState({ selectedItems: [] })
 
-    changeFilterLeft = (e: any): void => this.setState({ filterLeft: e.target.value })
+    changeFilterLeft = (e: React.ChangeEvent<HTMLInputElement>): void => this.setState({ filterLeft: e.target.value })
 
-    changeFilterRight = (e: any): void => this.setState({ filterRight: e.target.value })
+    changeFilterRight = (e: React.ChangeEvent<HTMLInputElement>): void => this.setState({ filterRight: e.target.value })
 
     selectByFocused = (): void => {
         const { focusedKey } = this.state,

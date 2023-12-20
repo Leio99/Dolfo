@@ -158,7 +158,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
         this.onBlur()
     }
 
-    changeSearch = (e: any): void => this.setState({
+    changeSearch = (e: React.ChangeEvent<HTMLInputElement>): void => this.setState({
         searchValue: e.target.value,
         options: this.getOptions()?.filter(opt => {
             const stringToCheck = _.isString(opt.props.label) ? opt.props.label : opt.props.getLabelString ? opt.props.getLabelString() : Constants.STRING_NOT_DEFINED_OPTION
@@ -167,9 +167,9 @@ class Select extends React.PureComponent<SelectProps, IState>{
         })
     }, this.showOptions)
 
-    resetSearch = (): void => this.changeSearch({ target: { value: "" }})
+    resetSearch = (): void => this.changeSearch({ target: { value: "" }} as React.ChangeEvent<HTMLInputElement>)
 
-    handleKeyDown = (e: KeyboardEvent): void => {        
+    handleKeyDown = (e: React.KeyboardEvent): void => {        
         const options = this.state.options,
         currentSelection = this.state.currentSelection,
         currentIndex = currentSelection === -1 ? -1 : options.indexOf(options.find((_, i) => i === currentSelection))

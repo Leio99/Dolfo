@@ -12,8 +12,8 @@ interface IProps extends React.PropsWithChildren{
 
 interface DropDownItemProps extends React.PropsWithChildren{
     readonly disabled?: boolean
-    readonly onClick?: (e: any) => void
-    readonly onMouseDown?: (e: any) => void
+    readonly onClick?: (e: React.MouseEvent) => void
+    readonly onMouseDown?: (e: React.MouseEvent) => void
     readonly className?: string
     readonly style?: CSSProperties
     readonly static?: boolean
@@ -84,14 +84,17 @@ export class DropDown extends React.Component<IProps, IState>{
 
     getItems = (): DropDownItem[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
-    clickItem = (e: any, item: DropDownItem, property: keyof DropDownItemProps = "onClick") => {
+    clickItem = (e: React.MouseEvent, item: DropDownItem, property: keyof DropDownItemProps = "onClick") => {
         if(item.props.disabled || item.props.static) return
 
-        if(item.props[property])
-            (item.props[property] as Function)(e)
+        e.stopPropagation()
 
-        if(!this.props.preventCloseOnClick)
-            setTimeout(this.close)
+        if(item.props[property]){
+            (item.props[property] as Function)(e)
+            
+            if(!this.props.preventCloseOnClick)
+                this.close()
+        }
     }
 
     render = (): JSX.Element => {
@@ -115,6 +118,4 @@ export class DropDown extends React.Component<IProps, IState>{
     }
 }
 
-export class DropDownItem extends React.Component<DropDownItemProps>{
-    render = (): JSX.Element => <></>
-}
+export class DropDownItem extends React.Component<DropDownItemProps>{}

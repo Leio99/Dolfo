@@ -37,9 +37,9 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
         input.files && input.value && this.props.onChange && this.props.onChange(input.files)
     }
 
-    onDragEnter = (e: any): void => {
+    onDragEnter = (e: React.DragEvent<HTMLInputElement>): void => {
+        (e.target as HTMLInputElement).classList.add("dragging")
         e.preventDefault()
-        e.target.classList.add("dragging")
 
         if(!this.props.multiple && e.dataTransfer.items.length > 1 && !this.state.showingMsg){
             this.toggleShowing()
@@ -54,14 +54,14 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
 
     toggleShowing = (): void => this.setState({ showingMsg: !this.state.showingMsg })
 
-    onDragOver = (e: any): void => {
+    onDragOver = (e: React.DragEvent): void => {
         e.stopPropagation()
         e.preventDefault()
     }
 
-    onDragLeave = (e: any): void => e.target.classList.remove("dragging")
+    onDragLeave = (e: React.MouseEvent): void => (e.target as HTMLInputElement).classList.remove("dragging")
 
-    onDrop = (e: any, input: HTMLInputElement): void => {
+    onDrop = (e: React.DragEvent<HTMLDivElement>, input: HTMLInputElement): void => {
         e.preventDefault()
 
         const files = e.dataTransfer.files,
@@ -110,7 +110,7 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
         return names.join(", ")
     }
 
-    resetFiles = (e: Event): void => {
+    resetFiles = (e: React.MouseEvent): void => {
         e.stopPropagation()
 
         this.setState({
@@ -119,11 +119,11 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
         })
     }
 
-    clickInput = (e: any): void => {
+    clickInput = (e: React.MouseEvent<HTMLInputElement>): void => {
         if(this.props.disabled) return
         
+        (e.target as HTMLInputElement).value = null
         this.setState({ value: "" })
-        e.target.value = null
     }
 
     render = (): JSX.Element => {

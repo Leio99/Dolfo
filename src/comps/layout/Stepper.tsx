@@ -92,6 +92,4 @@ export class Stepper extends React.PureComponent<IProps>{
     }
 }
 
-export class Step extends React.PureComponent<StepProps>{
-    render = (): JSX.Element => <></>
-}
+export class Step extends React.PureComponent<StepProps>{}

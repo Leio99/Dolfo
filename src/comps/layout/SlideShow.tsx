@@ -108,6 +108,4 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
     }
 }
 
-export class Slide extends React.PureComponent<SlideProps>{
-    render = (): JSX.Element => <></>
-}
+export class Slide extends React.PureComponent<SlideProps>{}

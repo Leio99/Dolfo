@@ -30,7 +30,7 @@ export class CheckBox extends React.PureComponent<CheckBoxProps, CheckBoxProps>{
         }, () => this.props.onChange && this.props.onChange(this.state.checked))
     }
 
-    checkSpace = (e: any): void => {
+    checkSpace = (e: React.KeyboardEvent): void => {
         if(e.key.charCodeAt(0) === 32){
             this.onChange()
             e.preventDefault()

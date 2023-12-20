@@ -17,8 +17,8 @@ export interface ButtonProps extends React.PropsWithChildren{
     readonly style?: CSSProperties
     readonly disabled?: boolean
     readonly outline?: boolean
-    readonly onClick?: (e: any) => void
-    readonly onMouseDown?: (e: any) => void
+    readonly onClick?: (e: React.MouseEvent) => void
+    readonly onMouseDown?: (e: React.MouseEvent) => void
 }
 
 export interface BtnOptions{
@@ -62,7 +62,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
             return <div className={"dolfo-popup-button-container" + (props.className ? (" " + props.className) : "") + (props.disabled ? " disabled" : "")} onClick={this.togglePopup} style={props.style}>
                 <div className={"dolfo-popup-options" + (openPopup ? " show" : "") + (" pos-" + popupDir)}>
                     {
-                        props.options?.map((opt, i) => <div className={"dolfo-popup-option" + (opt.disabled ? " disabled" : "")} onClick={!opt.disabled && !props.disabled ? opt.onClick : (e: any) => e.stopPropagation()} key={i}>
+                        props.options?.map((opt, i) => <div className={"dolfo-popup-option" + (opt.disabled ? " disabled" : "")} onClick={!opt.disabled && !props.disabled ? opt.onClick : e => e.stopPropagation()} key={i}>
                             {opt.text}
                         </div>)
                     }

@@ -1,4 +1,4 @@
-import { CSSProperties } from "react"
+import React, { CSSProperties } from "react"
 import { BaseIconProps } from "../../layout/Icon"
 
 export interface BaseInputProps{
@@ -14,16 +14,16 @@ export interface ExtendedInputProps extends BaseInputProps{
     readonly icon?: BaseIconProps
     readonly wrapperStyle?: CSSProperties
     readonly autoFocus?: boolean
-    readonly onPaste?: (e: any) => void
-    readonly onKeyUp?: (e: any) => void
-    readonly onKeyDown?: (e: any) => void
-    readonly onKeyPress?: (e: any) => void
+    readonly onPaste?: (e: React.ClipboardEvent) => void
+    readonly onKeyUp?: (e: React.KeyboardEvent) => void
+    readonly onKeyDown?: (e: React.KeyboardEvent) => void
+    readonly onKeyPress?: (e: React.KeyboardEvent) => void
 }
 
 export interface FullInputProps extends ExtendedInputProps{
-    readonly onFocus?: (e: any) => void
-    readonly onBlur?: (e: any) => void
+    readonly onFocus?: (e: React.FocusEvent) => void
+    readonly onBlur?: (e: React.FocusEvent) => void
     readonly name?: string
     readonly readonly?: boolean
-    readonly onCopy?: (e: any) => void
+    readonly onCopy?: (e: React.ClipboardEvent) => void
 }

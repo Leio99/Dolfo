@@ -16,11 +16,11 @@ interface IProps extends React.PropsWithChildren{
     readonly required?: boolean
     readonly className?: string
     readonly selectedOption?: any
-    readonly onFocus?: (e: any) => void
-    readonly onBlur?: (e: any) => void
-    readonly resetFunction?: (e: any) => void
+    readonly onFocus?: (e: React.FocusEvent) => void
+    readonly onBlur?: (e: React.FocusEvent) => void
+    readonly resetFunction?: (e: React.MouseEvent) => void
     readonly forceFocus?: () => void
-    readonly onKeyDown?: (e: any) => void
+    readonly onKeyDown?: (e: React.KeyboardEvent) => void
     readonly onClick?: () => void
 }
 

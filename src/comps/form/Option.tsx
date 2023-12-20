@@ -24,7 +24,7 @@ export class Option extends React.PureComponent<IProps>{
         !this.props.multiple && blurInput()
     }
 
-    checkSpace = (e: any): void => {
+    checkSpace = (e: React.KeyboardEvent): void => {
         if(e.key.charCodeAt(0) === 32){
             this.selectOption()
             e.preventDefault()

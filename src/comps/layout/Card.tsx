@@ -8,7 +8,7 @@ interface CardActionsProps extends React.PropsWithChildren{
 
 interface CardProps extends CardActionsProps{
     readonly title?: string | JSX.Element
-    readonly onDoubleClick?: (e: any) => void
+    readonly onDoubleClick?: (e: React.MouseEvent) => void
 }
 
 export class Card extends React.PureComponent<CardProps>{

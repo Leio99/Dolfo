@@ -31,12 +31,12 @@ export class Switch extends React.PureComponent<SwitchProps, SwitchProps>{
         }, () => this.props.onChange && this.props.onChange(this.state.checked))
     }
 
-    checkSpace = (e: any): void => {
+    checkSpace = (e: React.KeyboardEvent): void => {
         if(e.key.charCodeAt(0) === 32){
             e.preventDefault()
             
-            !this.props.loading && this.onChange()
-            e.target.blur()
+            !this.props.loading && this.onChange();
+            (e.target as HTMLElement).blur()
         }
     }
 

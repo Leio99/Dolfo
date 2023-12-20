@@ -102,14 +102,14 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
         }
     }
 
-    checkKey = (e: any, index: number): void => {
+    checkKey = (e: React.KeyboardEvent, index: number): void => {
         if(e.key.charCodeAt(0) === 32 || e.key === "Enter"){
             e.preventDefault()
             this.changeSelection(index)
         }
     }
 
-    preventSpaceKey = (e: any): void => e.key.charCodeAt(0) === 32 && e.preventDefault()
+    preventSpaceKey = (e: React.KeyboardEvent): void => e.key.charCodeAt(0) === 32 && e.preventDefault()
 
     render = (): JSX.Element => {
         const { props } = this,
@@ -150,6 +150,4 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
     }
 }
 
-export class Tab extends React.PureComponent<TabProps>{
-    render = (): JSX.Element => <></>
-}
+export class Tab extends React.PureComponent<TabProps>{}

@@ -57,11 +57,11 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
 
     toggleInputType = (): void => this.setState({ inputType: this.state.inputType === "password" ? "text" : "password" })
 
-    onBlur = (e: any): void => this.setState({ focused: false },  () => this.props.onBlur && this.props.onBlur(e))
+    onBlur = (e: React.FocusEvent): void => this.setState({ focused: false },  () => this.props.onBlur && this.props.onBlur(e))
 
-    onFocus = (e: any): void => this.setState({ focused: true }, () => this.props.onFocus && this.props.onFocus(e))
+    onFocus = (e: React.FocusEvent): void => this.setState({ focused: true }, () => this.props.onFocus && this.props.onFocus(e))
 
-    onChange = (e: any): void => {
+    onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         if(this.props.disabled) return
 
         let value: string = e.target.value
@@ -86,7 +86,7 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
     resetInput = (): void => {
         if(this.props.disabled) return
         
-        this.props.onChange && this.onChange({ target: { value: "" }})
+        this.props.onChange && this.onChange({ target: { value: "" }} as React.ChangeEvent<HTMLInputElement>)
 
         this.setState({
             rows: 1,
@@ -94,7 +94,7 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
         })
     }
 
-    checkRows = (e: any): void => {
+    checkRows = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         if(this.props.expandTextarea){
             const rows = e.target.value.split("\n").length,
             max = this.props.rows || MAX_ROWS
@@ -103,8 +103,6 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
                 rows: rows <= max ? rows : max
             })
         }
-
-        this.props.onKeyUp && this.props.onKeyUp(e)
     }
 
     getDefaultIcon = (): IconKey => {
@@ -117,9 +115,9 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
         return "pen"
     }
 
-    increaseValue = (): void => this.onChange({ target: { value: Number(this.state.value) + 1 }})
+    increaseValue = (): void => this.onChange({ target: { value: (Number(this.state.value) + 1).toString() }} as React.ChangeEvent<HTMLInputElement>)
 
-    decreaseValue = (): void => this.onChange({ target: { value: Number(this.state.value) - 1 }})
+    decreaseValue = (): void => this.onChange({ target: { value: (Number(this.state.value) - 1).toString() }} as React.ChangeEvent<HTMLInputElement>)
 
     render = (): JSX.Element => {
         const { props } = this,

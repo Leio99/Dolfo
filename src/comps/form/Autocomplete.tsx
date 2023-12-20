@@ -141,9 +141,9 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
         this.props.onChange && this.props.onChange(item)
     }
 
-    onChange = (e: any): void => this.setState({ filter: e.target.value })
+    onChange = (e: React.ChangeEvent<HTMLInputElement>): void => this.setState({ filter: e.target.value })
 
-    onKeyUp = (e: any): void => {
+    onKeyUp = (e: React.KeyboardEvent): void => {
         this.props.onKeyUp && this.props.onKeyUp(e)
 
         if(Constants.AUTOCOMPLETE_EXLUDE_KEYS.includes(e.key))
@@ -161,7 +161,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
         this.typing()
     }
 
-    onKeyDown = (e: any): void => {
+    onKeyDown = (e: React.KeyboardEvent): void => {
         this.props.onKeyDown && this.props.onKeyDown(e)
 
         if(e.key.charCodeAt(0) === 84)

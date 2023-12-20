@@ -10,8 +10,8 @@ interface IProps extends React.PropsWithChildren{
 }
 
 export interface BreadcrumbItemProps extends React.PropsWithChildren{
-    readonly onClick?: (e: any) => void
-    readonly onMouseDown?: (e: any) => void
+    readonly onClick?: (e: React.MouseEvent) => void
+    readonly onMouseDown?: (e: React.MouseEvent) => void
 }
 
 export class BreadCrumb extends React.PureComponent<IProps>{
@@ -45,6 +45,4 @@ export class BreadCrumb extends React.PureComponent<IProps>{
     }
 }
 
-export class BreadCrumbItem extends React.PureComponent<BreadcrumbItemProps>{
-    render = (): JSX.Element => <></>
-}
+export class BreadCrumbItem extends React.PureComponent<BreadcrumbItemProps>{}

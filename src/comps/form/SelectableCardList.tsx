@@ -118,6 +118,4 @@ export class SelectableCardList extends React.PureComponent<SelectableCardListPr
     }
 }
 
-export class SelectableCard extends React.Component<SelectableCardProps>{
-    render = () => <></>
-}
+export class SelectableCard extends React.Component<SelectableCardProps>{}

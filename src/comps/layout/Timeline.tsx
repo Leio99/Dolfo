@@ -33,6 +33,4 @@ export class Timeline extends React.Component<React.PropsWithChildren>{
     }
 }
 
-export class TimelineItem extends React.Component<TimelineItemProps>{
-    render = (): JSX.Element => <></>
-}
+export class TimelineItem extends React.Component<TimelineItemProps>{}
