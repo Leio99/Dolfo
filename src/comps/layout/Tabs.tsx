@@ -91,7 +91,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
         header = tab.querySelector(".dolfo-tabs-links"),
         titles = header.querySelectorAll(".dolfo-tab-title"),
         bar = header.querySelector(".dolfo-tabs-underline") as HTMLElement,
-        current = Array.from(titles).find(t => t.classList.contains("current")) as HTMLElement
+        current = Array.from(titles).find(t => t.classList.contains("current")) as HTMLElement || titles[0] as HTMLElement
 
         if(vertical){
             bar.style.marginTop = current.offsetTop + "px"
