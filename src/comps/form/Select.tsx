@@ -1,6 +1,6 @@
 import React from "react"
 import { ExtendedInputProps } from "../shared/models/InputProps"
-import { CloseIcon, Icon, LoadingIcon, SearchIcon } from "../layout/Icon"
+import { CloseIcon, Icon, LoadingIcon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 import onClickOutside from "react-onclickoutside"
@@ -291,7 +291,6 @@ class Select extends React.PureComponent<SelectProps, IState>{
         { value, openSelect, searchValue, currentSelection } = this.state,
         icon = props.icon || { iconKey: "hand-pointer", type: "far" },
         searchInput = <div className="dolfo-select-search-content">
-            <SearchIcon className="dolfo-select-search-icon" />
             {searchValue.length ? <Tooltip tooltip={Constants.RESET_INPUT_TEXT}>
                 <CloseIcon className="reset-input" onClick={this.resetSearch} />
             </Tooltip> : null}

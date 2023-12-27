@@ -97,6 +97,11 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
                             <li>The APIs the component can take</li>
                         </ul>
 
+                        <div className="component-preview">
+                            <h6>You need to import the main stylesheet in your SCSS file, by adding this line:</h6>
+                            <div className="component-showing code">@import "~dolfo/comps/shared/styles/dolfo";</div>
+                        </div>
+
                         <h3 className="page-title">External dependencies</h3>
                         <ul>
                             <li>FontAwesome PRO</li>
@@ -113,7 +118,7 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
 
                             return <Route path={homepage + m.link} key={m.link} element={<React.Fragment>
                                 <h2 className="page-title">{menuBtn("white")} {m.children}</h2>
-                                {Component ? <Component {...this.props} /> : "Docs to do."}
+                                {Component ? React.createElement(Component, this.props) : "Docs to do."}
                             </React.Fragment>} />
                         })
                     }

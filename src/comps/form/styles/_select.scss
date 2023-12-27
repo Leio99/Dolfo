@@ -4,6 +4,8 @@
     }
 
     .dolfo-input-wrapper{
+        overflow: hidden;
+        
         .dolfo-input-select{
             cursor: pointer !important;
             position: relative;
@@ -52,10 +54,9 @@
                 }
         
                 .dolfo-select-search-input{
-                    padding-top: calc($inputPaddingY + 3px) !important;
-                    padding-bottom: calc($inputPaddingY + 3px) !important;
-                    padding-right: 3.8rem !important;
-                    padding-left: 2.5rem !important
+                    padding-top: calc(#{$inputPaddingY} + 3px) !important;
+                    padding-bottom: calc(#{$inputPaddingY} + 3px) !important;
+                    padding-right: 3.8rem !important
                 }
         
                 .dolfo-select-search-icon{
