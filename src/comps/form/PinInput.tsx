@@ -5,7 +5,7 @@ import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 
-interface IProps extends BaseInputProps{
+export interface PinInputProps extends BaseInputProps{
     readonly length: number
     readonly value?: string
     readonly big?: boolean
@@ -17,8 +17,8 @@ interface IState{
     }
 }
 
-export class PinInput extends React.Component<IProps, IState>{
-    constructor(props: IProps){
+export class PinInput extends React.Component<PinInputProps, IState>{
+    constructor(props: PinInputProps){
         super(props)
 
         this.state = {

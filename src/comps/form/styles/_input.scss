@@ -55,12 +55,15 @@
         position: relative;
         display: flex;
         border: 1px solid $disabled;
-        background-color: $white;
         padding: 3px;
         padding-left: 0;
         align-items: center;
         border-radius: $smallRadius;
         transition: background-color 0.2s ease;
+
+        &:not(.dolfo-input-pin){
+            background-color: $white
+        }
 
         &:hover .reset-input, &:hover .toggle-password{
             visibility: visible !important

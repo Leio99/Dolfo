@@ -32,6 +32,10 @@ html.dark-theme{
         }
     }
 
+    .dolfo-form-input.dolfo-input-pin .dolfo-input-wrapper{
+        background-color: inherit
+    }
+
     .dolfo-form-input .dolfo-input-wrapper{
         &, .dolfo-input-content input[type="text"], input[type="password"], input[type="email"], textarea{
             background-color: $dark;
