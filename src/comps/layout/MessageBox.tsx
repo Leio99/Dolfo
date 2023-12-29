@@ -1,5 +1,4 @@
-import React from "react"
-import ReactDOM from "react-dom"
+import React, { createRef } from "react"
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { CloseIcon, Icon } from "./Icon"
@@ -13,6 +12,8 @@ interface MessageProps extends BaseNotificationProps{
 }
 
 export class MessageBox extends React.Component<MessageProps>{
+    private ref = createRef<NotificationMsg>()
+
     static show = (props: MessageProps): Closable => {
         const internalProps = MessageBox.getInternalProps(props),
         messageBox = showNotification({
@@ -48,9 +49,9 @@ export class MessageBox extends React.Component<MessageProps>{
     render = (): JSX.Element => {
         const { props } = this,
         internalProps = MessageBox.getInternalProps(props),
-        message = MessageBox.getInner(props, () => ReactDOM.findDOMNode(this)?.remove())
+        message = MessageBox.getInner(props, () => this.ref.current.getRef()?.remove())
 
-        return <NotificationMsg {...internalProps} message={message} />
+        return <NotificationMsg {...internalProps} message={message} ref={this.ref} />
     }
 }
 

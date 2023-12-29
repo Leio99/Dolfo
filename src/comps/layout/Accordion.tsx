@@ -1,5 +1,4 @@
-import React, { CSSProperties } from "react"
-import ReactDOM from "react-dom"
+import React, { CSSProperties, createRef } from "react"
 import { Constants } from "../shared/Constants"
 import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
@@ -20,6 +19,7 @@ interface IState{
 }
 
 export class Accordion extends React.PureComponent<IProps, IState>{
+	private ref = createRef<HTMLDivElement>()
 	constructor(props: IProps){
 		super(props)
 		
@@ -51,7 +51,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 	})
 
 	handleAccordions = (load = false): void => {
-		const accordion = ReactDOM.findDOMNode(this) as HTMLElement,
+		const accordion = this.ref.current,
 		content = accordion.children[1] as HTMLElement,
 		{ opened } = this.state,
 		fn = () => content.style.maxHeight = opened ? content.scrollHeight + "px" : "0"
@@ -79,7 +79,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		const { props } = this,
 		{ opened } = this.state
 		
-		return <div className={"dolfo-accordion" + (opened ? " opened" : "") + (props.wrapperClassName ? (" " + props.wrapperClassName) : "") + (props.disabled ? " disabled" : "")} style={props.wrapperStyle}>
+		return <div className={"dolfo-accordion" + (opened ? " opened" : "") + (props.wrapperClassName ? (" " + props.wrapperClassName) : "") + (props.disabled ? " disabled" : "")} style={props.wrapperStyle} ref={this.ref}>
 			<Tooltip tooltip={opened ? Constants.COLLAPSE_TEXT : Constants.EXPAND_TEXT}>
 				<div className="dolfo-accordion-header" onClick={this.toggleAccordion}>
 					<Icon iconKey="chevron-down" className="accordion-caret" />

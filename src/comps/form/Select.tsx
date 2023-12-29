@@ -1,4 +1,4 @@
-import React from "react"
+import React, { createRef } from "react"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { CloseIcon, Icon, LoadingIcon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
@@ -8,7 +8,6 @@ import { Constants } from "../shared/Constants"
 import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
 import { createRoot } from "react-dom/client"
-import ReactDOM from "react-dom"
 import { blurInput, isElementInViewport, sumParentZIndex } from "../shared/utility"
 
 export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren{
@@ -31,6 +30,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
     private observer: ResizeObserver
+    private wrapperRef = createRef<InputWrapper>()
 
     constructor(props: SelectProps){
         super(props)
@@ -232,7 +232,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
 
     findParentScroller = (): HTMLElement => {
         const { parentContainerScroller } = this.props,
-        node = ReactDOM.findDOMNode(this) as HTMLElement
+        node = this.wrapperRef.current.getRef()
 
         if(parentContainerScroller){
             let parent = node.parentElement,
@@ -256,10 +256,9 @@ class Select extends React.PureComponent<SelectProps, IState>{
         if(!this.state.openSelect || !document.body.contains(this.rootContent))
             return
 
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        const node = this.wrapperRef.current.getRef(),
         options = this.rootContent.childNodes[0] as HTMLElement,
         { top, left, height, width } = node.getBoundingClientRect(),
-        wrapper = InputWrapper.findWrapper(this),
         parent = this.findParentScroller()
 
         if(!options)
@@ -273,7 +272,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
         node.classList.remove("top")
 
         if(!isElementInViewport(options)){
-            options.style.top = wrapper.getBoundingClientRect().top + parent.scrollTop - options.offsetHeight + 3 + "px"
+            options.style.top = node.getBoundingClientRect().top + parent.scrollTop - options.offsetHeight + 3 + "px"
             options.classList.add("top")
             node.classList.add("top")
 
@@ -298,7 +297,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
             <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
         </div>
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required} className={"dolfo-select-wrapper" + (props.className ? " " + props.className : "")} value={value} selectedOption={currentSelection}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required} className={"dolfo-select-wrapper" + (props.className ? " " + props.className : "")} value={value} selectedOption={currentSelection} ref={this.wrapperRef}>
             <span className="select-icon">
                 {props.loading ? <LoadingIcon spinning className="loading" /> : <Icon type="far" iconKey="chevron-down" />}
             </span>

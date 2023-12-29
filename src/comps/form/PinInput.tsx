@@ -1,6 +1,5 @@
 import _ from "lodash"
-import React from "react"
-import ReactDOM from "react-dom"
+import React, { createRef } from "react"
 import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
@@ -18,6 +17,7 @@ interface IState{
 }
 
 export class PinInput extends React.Component<PinInputProps, IState>{
+    private ref = createRef<HTMLDivElement>()
     constructor(props: PinInputProps){
         super(props)
 
@@ -40,7 +40,7 @@ export class PinInput extends React.Component<PinInputProps, IState>{
         onChange && onChange(Object.values(valueTmp).join(""))
 
         if(index !== length - 1 && value){
-            const node = ReactDOM.findDOMNode(this) as HTMLElement,
+            const node = this.ref.current,
             childInput = node.querySelector(".dolfo-input-wrapper").childNodes[index] as HTMLElement,
             sibling = childInput.nextSibling,
             input = sibling.childNodes[0] as HTMLInputElement
@@ -52,7 +52,7 @@ export class PinInput extends React.Component<PinInputProps, IState>{
     checkBackSpace = (index: number, key: string) => {
         if(index > 0 && key === "Backspace"){
             this.onChange("", index)
-            const node = ReactDOM.findDOMNode(this) as HTMLElement,
+            const node = this.ref.current,
             childInput = node.querySelector(".dolfo-input-wrapper").childNodes[index] as HTMLElement,
             sibling = childInput.previousSibling,
             input = sibling.childNodes[0] as HTMLInputElement
@@ -98,7 +98,7 @@ export class PinInput extends React.Component<PinInputProps, IState>{
         { value } = this.state,
         range = _.range(0, props.length)
 
-        return <div className={"dolfo-input-pin dolfo-form-input" + (props.className ? " " + props.className : "")} style={props.style}>
+        return <div className={"dolfo-input-pin dolfo-form-input" + (props.className ? " " + props.className : "")} style={props.style} ref={this.ref}>
             {props.label && <label className="dolfo-input-label">
                 {props.label}
                 {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>

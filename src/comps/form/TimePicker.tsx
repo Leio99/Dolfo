@@ -1,4 +1,4 @@
-import React from "react"
+import React, { createRef } from "react"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
@@ -27,6 +27,7 @@ interface IState{
 class TimePicker extends React.PureComponent<TimePickerProps, IState>{
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
+    private wrapperRef = createRef<InputWrapper>()
     
     constructor(props: TimePickerProps){
         super(props)
@@ -209,7 +210,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         if(!this.state.showTime || !document.body.contains(this.rootContent))
             return
 
-        const node = InputWrapper.findWrapper(this),
+        const node = this.wrapperRef.current.getRef(),
         timepicker = this.rootContent.childNodes[0] as HTMLElement,
         { top, left, height } = node.getBoundingClientRect(),
         calendarTime = node.closest(".dolfo-calendar-container")
@@ -245,7 +246,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         hour = value.split(":")[0],
         minute = value.split(":")[1]
 
-        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled} style={props.wrapperStyle} required={props.required} value={value} className={props.className} onKeyDown={this.handleTabKey}>
+        return <InputWrapper icon={icon} label={props.label} onFocus={this.showTime} focusBool={showTime} disabled={props.disabled} style={props.wrapperStyle} required={props.required} value={value} className={props.className} onKeyDown={this.handleTabKey} ref={this.wrapperRef}>
             <input
                 type="text"
                 className="dolfo-input-time"

@@ -1,5 +1,4 @@
-import React, { CSSProperties } from "react"
-import ReactDOM from "react-dom"
+import React, { CSSProperties, createRef } from "react"
 import { Icon } from "./Icon"
 
 interface CardProps{
@@ -18,6 +17,8 @@ interface IState{
 }
 
 export class CardsSwiper extends React.Component<React.PropsWithChildren<IProps>, IState>{
+	private ref = createRef<HTMLDivElement>()
+
     constructor(props: IProps){
         super(props)
 
@@ -27,7 +28,7 @@ export class CardsSwiper extends React.Component<React.PropsWithChildren<IProps>
     }
 
     calcolaSwipers = () => {
-        const sw = ReactDOM.findDOMNode(this) as HTMLElement, 
+        const sw = this.ref.current, 
         cards = sw.querySelectorAll(".dolfo-swiper-card") as NodeListOf<HTMLElement>,
         current = sw.querySelector(".dolfo-swiper-card.current") as HTMLElement,
         cardsBefore = Array.from(cards).indexOf(current),
@@ -112,7 +113,7 @@ export class CardsSwiper extends React.Component<React.PropsWithChildren<IProps>
         { current } = this.state,
         { className, style } = this.props
 
-        return <div className={"dolfo-card-swiper" + (className ? " " + className : "")} style={style}>
+        return <div className={"dolfo-card-swiper" + (className ? " " + className : "")} style={style} ref={this.ref}>
             <div className="btn-prev" onClick={this.goPrev}>
                 <Icon iconKey="chevron-left" type="far" />
             </div>

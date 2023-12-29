@@ -1,4 +1,4 @@
-import React from "react"
+import React, { createRef } from "react"
 import { ICalendarDay } from "../shared/models/ICalendarDay"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
@@ -38,6 +38,7 @@ interface IState {
 class DatePicker extends React.PureComponent<DatePickerProps, IState>{
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
+    private wrapperRef = createRef<InputWrapper>()
     
     constructor(props: DatePickerProps) {
         super(props)
@@ -431,7 +432,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         if(!this.state.showCalendar || !document.body.contains(this.rootContent))
             return
 
-        const node = InputWrapper.findWrapper(this),
+        const node = this.wrapperRef.current.getRef(),
         datepicker = this.rootContent.childNodes[0] as HTMLElement,
         { top, left, height } = node.getBoundingClientRect(),
         timePicker = document.querySelector(".dolfo-time-container")
@@ -468,7 +469,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         },
         showDate = props.selectTime && date ? (date + " " + zeroBefore(currentHour) + ":" + zeroBefore(currentMinute)) : date
 
-        return <InputWrapper style={props.wrapperStyle} onFocus={this.showCalendar} label={props.label} icon={icon} focusBool={showCalendar} value={date} resetFunction={this.resetDate} disabled={props.disabled} onKeyDown={this.handleTabKey} required={props.required} className={props.className}>
+        return <InputWrapper style={props.wrapperStyle} onFocus={this.showCalendar} label={props.label} icon={icon} focusBool={showCalendar} value={date} resetFunction={this.resetDate} disabled={props.disabled} onKeyDown={this.handleTabKey} required={props.required} className={props.className} ref={this.wrapperRef}>
             <input
                 type="text"
                 value={showDate}

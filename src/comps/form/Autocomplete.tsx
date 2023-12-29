@@ -1,6 +1,5 @@
 import _ from "lodash"
-import React from "react"
-import ReactDOM from "react-dom"
+import React, { createRef } from "react"
 import { createRoot } from "react-dom/client"
 import { LoadingIcon } from "../layout/Icon"
 import { showError } from "../layout/NotificationMsg"
@@ -32,6 +31,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
     private observer: ResizeObserver
+    private wrapperRef = createRef<InputWrapper>()
 
     constructor(props: AutocompleteProps<E> & P){
         super(props)
@@ -104,7 +104,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
 
     clickOutside = (e: MouseEvent): void => {
         const element = e.target as Node,
-        node = ReactDOM.findDOMNode(this)
+        node = this.wrapperRef.current.getRef()
 
         if(!node.contains(element)){
             this.onBlur()
@@ -252,7 +252,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
         if((!this.state.showOptions && !this.state.focused) || !document.body.contains(this.rootContent))
             return
 
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        const node = this.wrapperRef.current.getRef(),
         options = this.rootContent.childNodes[0] as HTMLElement,
         { top, left, height, width } = node.getBoundingClientRect(),
         wrapper = node.querySelector(".dolfo-input-wrapper"),
@@ -275,7 +275,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
         icon = props.icon || { iconKey: "keyboard", type: "far" }
         let input: HTMLInputElement
 
-        return <InputWrapper icon={icon} label={props.label} forceFocus={() => input.focus()} focusBool={focused} isFocusable disabled={props.disabled} resetFunction={() => this.reset(input)} style={props.wrapperStyle} required={props.required} className={"dolfo-select-wrapper" + (props.className ? " " + props.className : "")} value={filter} selectedOption={selectedKey}>
+        return <InputWrapper icon={icon} label={props.label} forceFocus={() => input.focus()} focusBool={focused} isFocusable disabled={props.disabled} resetFunction={() => this.reset(input)} style={props.wrapperStyle} required={props.required} className={"dolfo-select-wrapper" + (props.className ? " " + props.className : "")} value={filter} selectedOption={selectedKey} ref={this.wrapperRef}>
             <input
                 type="text"
                 autoFocus={props.autoFocus}

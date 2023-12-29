@@ -1,6 +1,5 @@
-import React, { CSSProperties } from "react"
+import React, { CSSProperties, createRef } from "react"
 import _ from "lodash"
-import ReactDOM from "react-dom"
 
 interface TabsProps extends React.PropsWithChildren{
     readonly style?: CSSProperties
@@ -23,7 +22,8 @@ interface TabProps extends React.PropsWithChildren{
 }
 
 export class Tabs extends React.PureComponent<TabsProps, IState>{
-    mounted = true
+    private ref = createRef<HTMLDivElement>()
+    private mounted = true
 
     constructor(props: TabsProps) {
         super(props)
@@ -85,7 +85,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
         if(this.props.tabStyle && !this.props.vertical) return
 
         const { vertical } = this.props,
-        tab = ReactDOM.findDOMNode(this) as HTMLElement,
+        tab = this.ref.current,
         header = tab.querySelector(".dolfo-tabs-links"),
         titles = header.querySelectorAll(".dolfo-tab-title"),
         bar = header.querySelector(".dolfo-tabs-underline") as HTMLElement,
@@ -114,7 +114,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
         { children, currentTab } = this.state,
         isVertical = props.vertical
 
-        return <div className={"dolfo-tabs" + (props.tabStyle && !isVertical ? " tab-layout" : "") + (props.className ? (" " + props.className) : "") + (isVertical ? " vertical" : "")} style={props.style}>
+        return <div className={"dolfo-tabs" + (props.tabStyle && !isVertical ? " tab-layout" : "") + (props.className ? (" " + props.className) : "") + (isVertical ? " vertical" : "")} style={props.style} ref={this.ref}>
             <div className="dolfo-tabs-links">
                 {(!props.tabStyle || props.vertical) && <div className="dolfo-tabs-underline"></div>}
 

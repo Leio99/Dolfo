@@ -1,6 +1,5 @@
 import _ from "lodash"
-import React, { CSSProperties } from "react"
-import ReactDOM from "react-dom"
+import React, { CSSProperties, createRef } from "react"
 import { BaseIconProps, Icon, LoadingIcon } from "./Icon"
 
 type InternalStep = { readonly step: Step, readonly index: number } | string
@@ -20,9 +19,11 @@ interface StepProps extends React.PropsWithChildren{
 }
 
 export class Stepper extends React.PureComponent<IProps>{
+    private ref = createRef<HTMLDivElement>()
+
     componentDidUpdate = (prevProps: IProps): void => {
         if(prevProps.currentStep !== this.props.currentStep){
-            const node = ReactDOM.findDOMNode(this),
+            const node = this.ref.current,
             container = Array.from(node.childNodes).find((v: any) => v.classList.contains("dolfo-stepper-steps")) as HTMLElement
 
             container.style.overflow = "hidden"
@@ -52,7 +53,7 @@ export class Stepper extends React.PureComponent<IProps>{
         currentStep = props.currentStep >= 0 ? props.currentStep : 0,
         marginLeft = (-currentStep * 100) + "%"
 
-        return <div className={"dolfo-stepper" + (props.vertical ? " vertical" : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
+        return <div className={"dolfo-stepper" + (props.vertical ? " vertical" : "") + (props.className ? (" " + props.className) : "")} style={props.style} ref={this.ref}>
             <div className="dolfo-stepper-header">
                 {
                     stepsSeparated.map((child, i) => {

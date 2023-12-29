@@ -1,8 +1,7 @@
-import React from "react"
+import React, { createRef } from "react"
 import { NavigateFunction, Routes } from "react-router"
 import { MenuItems } from "./presentation/Menu"
 import { Route } from "react-router-dom"
-import ReactDOM from "react-dom"
 import Button from "./layout/Button"
 import { Icon } from "./layout/Icon"
 import { Switch as InputSwitch } from "./form/Switch"
@@ -32,6 +31,7 @@ export const goToApiBlock = (selector: string) => {
 }
 
 export class MenuContent extends React.Component<MenuContentProps, { readonly darkTheme: boolean }>{
+    private ref = createRef<HTMLDivElement>()
     constructor(props: MenuContentProps){
         super(props)
 
@@ -42,7 +42,7 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
 
     componentDidMount = () => {
         if(window.location.pathname !== homepage){
-            const nav = (ReactDOM.findDOMNode(this) as Element).querySelector(".navigation-menu"),
+            const nav = this.ref.current.querySelector(".navigation-menu"),
             selected = nav.querySelector(".navigation-menu-item.selected"),
             top = selected.getBoundingClientRect().top - 10
 
@@ -60,7 +60,7 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
         </Button>,
         { darkTheme } = this.state
 
-        return <div className="page-content">
+        return <div className="page-content" ref={this.ref}>
             <div className="navigation-menu">
                 <div style={{ float: "right", color: "var(--white)", marginRight: 10 }}>
                     <Tooltip tooltip="Toggle dark mode">

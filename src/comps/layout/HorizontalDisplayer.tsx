@@ -1,5 +1,4 @@
-import React, { CSSProperties } from "react"
-import ReactDOM from "react-dom"
+import React, { CSSProperties, createRef } from "react"
 
 interface DisplayItemProps{
     readonly title?: JSX.Element | string
@@ -19,6 +18,7 @@ export class HorizontalDisplayItem extends React.Component<React.PropsWithChildr
 
 export class HorizontalDisplayer extends React.Component<React.PropsWithChildren<IProps>>{
     private readonly MOVE_SIZE = 250
+    private ref = createRef<HTMLDivElement>()
 
     componentDidMount = () => window.addEventListener("resize", this.reset)
 
@@ -27,14 +27,14 @@ export class HorizontalDisplayer extends React.Component<React.PropsWithChildren
     getChildren = () => React.Children.toArray(this.props.children).filter((c: any) => c.type === HorizontalDisplayItem) as unknown as HorizontalDisplayItem[]
 
     reset = () => {
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        const node = this.ref.current,
         inner = node.querySelector(".dolfo-h-display-inner") as HTMLElement
 
         inner.style.marginLeft = "0"
     }
 
     movePrevious = () => {
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        const node = this.ref.current,
         inner = node.querySelector(".dolfo-h-display-inner") as HTMLElement,
         margin = Number(inner.style.marginLeft.replace("px", ""))
 
@@ -45,7 +45,7 @@ export class HorizontalDisplayer extends React.Component<React.PropsWithChildren
     }
 
     moveNext = () => {
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
+        const node = this.ref.current,
         inner = node.querySelector(".dolfo-h-display-inner") as HTMLElement,
         margin = Number(inner.style.marginLeft.replace("px", "")),
         paddingRight = Number(getComputedStyle(inner).paddingRight.replace("px", "")),
@@ -63,7 +63,7 @@ export class HorizontalDisplayer extends React.Component<React.PropsWithChildren
         const children = this.getChildren(),
         { className, style } = this.props
 
-        return <div className={"dolfo-h-display" + (className ? " " + className : "")} style={style}>
+        return <div className={"dolfo-h-display" + (className ? " " + className : "")} style={style} ref={this.ref}>
             <div className="dolfo-h-display-prev-btn" onClick={this.movePrevious}>
                 <i className="fal fa-fw fa-chevron-left"></i>
             </div>

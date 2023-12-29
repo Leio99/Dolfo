@@ -1,7 +1,6 @@
 import _ from "lodash"
-import React from "react"
+import React, { createRef } from "react"
 import { CSSProperties } from "react"
-import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
 import { Constants } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
@@ -29,6 +28,10 @@ interface NotificationProps extends BaseNotificationProps{
 }
 
 export class NotificationMsg extends React.Component<NotificationProps>{
+    private ref = createRef<HTMLDivElement>()
+
+    getRef = () => this.ref.current
+
     static showError = (message: string | JSX.Element): Closable => showNotification({
         message,
         type: "error"
@@ -141,10 +144,10 @@ export class NotificationMsg extends React.Component<NotificationProps>{
     render = (): JSX.Element => {
         const { props } = this,
         position = props.position || "centered-top",
-        closeFunc = props.type !== "loading" && props.dismissOnClick ? () => NotificationMsg.onClose(ReactDOM.findDOMNode(this) as HTMLElement, props) : null,
+        closeFunc = props.type !== "loading" && props.dismissOnClick ? () => NotificationMsg.onClose(this.ref.current, props) : null,
         isStatic = props.isStatic != null ? props.isStatic : true
 
-        return <div className={"dolfo-notification " + position + (isStatic ? " static" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onClick={closeFunc}>
+        return <div className={"dolfo-notification " + position + (isStatic ? " static" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onClick={closeFunc} ref={this.ref}>
             {props.icon ? <Icon {...props.icon} /> : !props.hideIcon ? this.getIcon(props.type) : null} {props.message}
         </div>
     }

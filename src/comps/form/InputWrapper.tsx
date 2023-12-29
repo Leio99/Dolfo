@@ -1,6 +1,5 @@
 import _ from "lodash"
-import React, { CSSProperties } from "react"
-import ReactDOM from "react-dom"
+import React, { CSSProperties, createRef } from "react"
 import { CloseIcon, Icon, BaseIconProps } from "../layout/Icon"
 import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
@@ -29,6 +28,8 @@ interface IState{
 }
 
 export class InputWrapper extends React.PureComponent<IProps, IState>{
+    private ref = createRef<HTMLDivElement>()
+
     constructor(props: IProps){
         super(props)
 
@@ -36,6 +37,8 @@ export class InputWrapper extends React.PureComponent<IProps, IState>{
             error: false
         }
     }
+
+    getRef = () => this.ref.current
 
     componentDidUpdate = (prevProps: IProps) => {
         if(!_.isEqual(prevProps.value, this.props.value)){
@@ -46,16 +49,11 @@ export class InputWrapper extends React.PureComponent<IProps, IState>{
         }
     }
 
-    static findWrapper = (component: React.Component) => {
-        const node = ReactDOM.findDOMNode(component) as HTMLElement
-        return node.querySelector(".dolfo-input-wrapper") as HTMLElement
-    }
-
     render = (): JSX.Element => {
         const { props } = this,
         { error } = this.state
 
-        return <div className={"dolfo-form-input" + (props.disabled ? " disabled" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onFocus={props.onFocus} tabIndex={props.isFocusable ? 0 : -1} onBlur={props.onBlur} onKeyDown={props.onKeyDown} onClick={props.onClick}>
+        return <div className={"dolfo-form-input" + (props.disabled ? " disabled" : "") + (props.className ? (" " + props.className) : "")} style={props.style} onFocus={props.onFocus} tabIndex={props.isFocusable ? 0 : -1} onBlur={props.onBlur} onKeyDown={props.onKeyDown} onClick={props.onClick} ref={this.ref}>
             {props.label && <label className={"dolfo-input-label" + (props.focusBool || props.value || props.selectedOption ? " dirty" : "")}>
                 <span>
                     {props.label}

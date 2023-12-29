@@ -1,5 +1,4 @@
-import React, { CSSProperties } from "react"
-import ReactDOM from "react-dom"
+import React, { CSSProperties, createRef } from "react"
 import { Constants } from "../shared/Constants"
 import Button, { ButtonColors } from "./Button"
 import { DialogType } from "./Dialog"
@@ -16,6 +15,7 @@ interface IProps extends React.PropsWithChildren{
 }
 
 export class Alert extends React.Component<IProps>{
+	private ref = createRef<HTMLDivElement>()
     private isComponentMounted = true
 
     getBtnColor = (): ButtonColors => {
@@ -38,7 +38,7 @@ export class Alert extends React.Component<IProps>{
     closeAlert = (): void => {
         this.props.onClose && this.props.onClose()
 
-        setTimeout(() => this.isComponentMounted && ReactDOM.findDOMNode(this).remove())
+        setTimeout(() => this.isComponentMounted && this.ref.current.remove())
     }
 
     componentWillUnmount = () => this.isComponentMounted = false
@@ -46,7 +46,7 @@ export class Alert extends React.Component<IProps>{
     render = (): JSX.Element => {
         const { props } = this
 
-        return <div className={"dolfo-alert" + (props.type ? (" " + props.type) : "") + (props.className ? (" " + props.className) : "")} style={props.style}>
+        return <div className={"dolfo-alert" + (props.type ? (" " + props.type) : "") + (props.className ? (" " + props.className) : "")} style={props.style} ref={this.ref}>
             <div className="dolfo-alert-content">{props.children}</div>
 
             {
