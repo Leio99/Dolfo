@@ -2,7 +2,7 @@ import _ from "lodash"
 import React, { createRef } from "react"
 import { CSSProperties } from "react"
 import { createRoot } from "react-dom/client"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { DialogType } from "./Dialog"
 import { CheckCircleOutlineIcon, ErrorCircleOutlineIcon, ExclamationCircleIcon, FullIconProps, Icon, InfoCircleOutlineIcon, LoadingIcon, WarningIconOutline } from "./Icon"
@@ -48,7 +48,7 @@ export class NotificationMsg extends React.Component<NotificationProps>{
     })
 
     static showLoading = (message?: string | React.ReactNode): Closable => showNotification({
-        message: message || Constants.LOADING_TEXT,
+        message: message || getConstant("LOADING_TEXT"),
         type: "loading"
     })
 

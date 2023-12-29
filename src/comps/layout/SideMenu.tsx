@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { ButtonColors } from "./Button"
 export { SubMenu } from "./SubMenu"
 export { MenuItem } from "./MenuItem"
@@ -52,7 +52,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
             {props.children}
 
             <div className="dolfo-side-menu-close">
-                <span onClick={this.toggleMenu}>{Constants.CLOSE_TEXT}</span>
+                <span onClick={this.toggleMenu}>{getConstant("CLOSE_TEXT")}</span>
             </div>
         </div>
     }

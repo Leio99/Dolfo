@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
@@ -66,12 +66,12 @@ export class Pagination extends React.Component<IProps, IState>{
         filteredButtons = this.getFilteredButtons()
 
         return <div className={"dolfo-pagination" + (props.className ? " " + props.className : "")} style={props.style}>
-            {props.showFirstLastPage && page !== props.start && <Tooltip tooltip={Constants.PAGINATION_FIRST_PAGE}>
+            {props.showFirstLastPage && page !== props.start && <Tooltip tooltip={getConstant("PAGINATION_FIRST_PAGE")}>
                 <div className="dolfo-pagination-btn" onClick={this.goToFirstPage}>
                     <Icon iconKey="chevron-double-left" type="far" />
                 </div>
             </Tooltip>}
-            {props.showNextPrevArrow && page !== props.start && <Tooltip tooltip={Constants.PAGINATION_PREV_PAGE}>
+            {props.showNextPrevArrow && page !== props.start && <Tooltip tooltip={getConstant("PAGINATION_PREV_PAGE")}>
                 <div className="dolfo-pagination-btn" onClick={this.goToPrevPage}>
                     <Icon iconKey="chevron-left" type="far" />
                 </div>
@@ -83,12 +83,12 @@ export class Pagination extends React.Component<IProps, IState>{
                 </div>)
             }
 
-            {props.showNextPrevArrow && page !== props.end && <Tooltip tooltip={Constants.PAGINATION_NEXT_PAGE}>
+            {props.showNextPrevArrow && page !== props.end && <Tooltip tooltip={getConstant("PAGINATION_NEXT_PAGE")}>
                 <div className="dolfo-pagination-btn" onClick={this.goToNextPage}>
                     <Icon iconKey="chevron-right" type="far" />
                 </div>
             </Tooltip>}
-            {props.showFirstLastPage && page !== props.end && <Tooltip tooltip={Constants.PAGINATION_LAST_PAGE}>
+            {props.showFirstLastPage && page !== props.end && <Tooltip tooltip={getConstant("PAGINATION_LAST_PAGE")}>
                 <div className="dolfo-pagination-btn" onClick={this.goToLastPage}>
                     <Icon iconKey="chevron-double-right" type="far" />
                 </div>

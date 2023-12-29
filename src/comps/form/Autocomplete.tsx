@@ -3,7 +3,7 @@ import React, { createRef } from "react"
 import { createRoot } from "react-dom/client"
 import { LoadingIcon } from "../layout/Icon"
 import { showError } from "../layout/NotificationMsg"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { blurInput, sumParentZIndex } from "../shared/utility"
 import { InputWrapper } from "./InputWrapper"
@@ -146,7 +146,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
     onKeyUp = (e: React.KeyboardEvent): void => {
         this.props.onKeyUp && this.props.onKeyUp(e)
 
-        if(Constants.AUTOCOMPLETE_EXLUDE_KEYS.includes(e.key))
+        if(getConstant("AUTOCOMPLETE_EXLUDE_KEYS").includes(e.key))
             return
 
         const { selectedItem } = this.state
@@ -167,7 +167,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
         if(e.key.charCodeAt(0) === 84)
             this.onBlur()
         
-        if(Constants.AUTOCOMPLETE_EXLUDE_KEYS.includes(e.key) && e.key !== "Enter" && e.key !== "ArrowUp" && e.key !== "ArrowDown")
+        if(getConstant("AUTOCOMPLETE_EXLUDE_KEYS").includes(e.key) && e.key !== "Enter" && e.key !== "ArrowUp" && e.key !== "ArrowDown")
             return
 
         const { focusedIndex, list, showOptions, selectedItem } = this.state
@@ -224,7 +224,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
     showOptions = (): void => {
         const { loading, focused, showOptions, list, selectedKey, focusedIndex } = this.state,
         content = loading && focused ? <div className="dolfo-select-options show dolfo-autocomplete-text floating-popup">
-            <LoadingIcon spinning /> {Constants.LOADING_TEXT}
+            <LoadingIcon spinning /> {getConstant("LOADING_TEXT")}
         </div> : showOptions && focused && list.length > 0 ? <div className="dolfo-select-options floating-popup show">
             {
                 list.map((option, i) => {
@@ -233,7 +233,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
                 })
             }
         </div> : focused && <div className="dolfo-select-options show dolfo-autocomplete-text floating-popup">
-            {Constants.TABLE_NO_RESULTS}
+            {getConstant("TABLE_NO_RESULTS")}
         </div>
 
         if(!showOptions && !focused)

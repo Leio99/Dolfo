@@ -1,5 +1,5 @@
 import React from "react"
-import { Constants } from "../../shared/Constants"
+import { getConstant } from "../../shared/Constants"
 import { IDataColumn } from "../../shared/models/IColumn"
 import { Card, CardActions } from "../Card"
 import { Tooltip } from "../Tooltip"
@@ -43,7 +43,7 @@ export class CardTable extends BaseResultsManager<CardTableProps>{
                         }
                     </Card>
                 }) : <div className="dolfo-card-table-noresults">
-                    {Constants.TABLE_NO_RESULTS}
+                    {getConstant("TABLE_NO_RESULTS")}
                 </div>
             }
         </div>

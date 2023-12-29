@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
@@ -29,7 +29,7 @@ export class BreadCrumb extends React.PureComponent<IProps>{
             {
                 options.map((opt, i) => {
                     return <div className="dolfo-breadcrumb-item" key={i}>
-                        <Tooltip tooltip={opt.props.onClick && Constants.NAVIGATE_BREADCRUMB}>
+                        <Tooltip tooltip={opt.props.onClick && getConstant("NAVIGATE_BREADCRUMB")}>
                             <div className={"dolfo-breadcrumb-item-inner" + (opt.props.onClick ? " clickable" : "")} onClick={opt.props.onClick} onMouseDown={opt.props.onMouseDown}>
                                 {opt.props.children}
                             </div>

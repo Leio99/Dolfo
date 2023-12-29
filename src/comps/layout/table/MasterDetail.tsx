@@ -1,6 +1,6 @@
 import _ from "lodash"
 import React from "react"
-import { Constants } from "../../shared/Constants"
+import { getConstant } from "../../shared/Constants"
 import { IDataColumn } from "../../shared/models/IColumn"
 import Button from "../Button"
 import { DetailIcon, Icon } from "../Icon"
@@ -52,7 +52,7 @@ export class MasterDetail<P> extends React.Component<MasterDetailProps & P, Mast
     render(children = this.props.children): React.ReactNode {
         const { columns, data, onOpenDetail, getDetailTitle, actions, getTitle, className, exportFormat, exportable, style, hideToggleButton } = this.props,
         { selectedItem, layoutType } = this.state,
-        cols = columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center", exportable: false }),
+        cols = columns.concat({ field: "actions", label: getConstant("TREE_TABLE_ACTIONS_LABEL"), align: "center", exportable: false }),
         colData = data.map(v => {
             const dataItemToSelect = this.clearData(v)
 
@@ -63,7 +63,7 @@ export class MasterDetail<P> extends React.Component<MasterDetailProps & P, Mast
                     onOpenDetail && onOpenDetail(dataItemToSelect)
                 },
                 actions: <>
-                    <Tooltip tooltip={Constants.OPEN_DETAIL}>
+                    <Tooltip tooltip={getConstant("OPEN_DETAIL")}>
                         <Button onClick={() => tmp.onDoubleClick()} btnColor="blue" type="text">
                             <DetailIcon large />
                         </Button>
@@ -82,7 +82,7 @@ export class MasterDetail<P> extends React.Component<MasterDetailProps & P, Mast
                     <ResultsView data={colData} columns={cols} getTitle={getTitle} onToggleViewMode={this.toggleViewMode} layoutType={layoutType} className={className} style={style} exportFormat={exportFormat} exportable={exportable} hideToggleButton={hideToggleButton} />
                 </div> : <div className="dolfo-detail">
                     <div className="dolfo-detail-header">
-                        <Tooltip tooltip={Constants.BACK_TO_LIST}>
+                        <Tooltip tooltip={getConstant("BACK_TO_LIST")}>
                             <Button btnColor="white" circleBtn onClick={() => this.resetSelection()}>
                                 <Icon iconKey="arrow-left" type="far" />
                             </Button>

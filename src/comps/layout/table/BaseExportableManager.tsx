@@ -1,6 +1,6 @@
 import React from "react"
 import { CheckBox } from "../../form/CheckBox"
-import { Constants } from "../../shared/Constants"
+import { getConstant } from "../../shared/Constants"
 import { IColumn, IDataColumn } from "../../shared/models/IColumn"
 import { downloadCSV, formatDate, getTime } from "../../shared/utility"
 import { CheckIcon, CloseIcon } from "../Icon"
@@ -47,9 +47,9 @@ export abstract class BaseExportableManager<P = any, S = any> extends React.Comp
         if(col.type === "time")
             return d ? getTime(d) : ""
         if(col.type === "boolean")
-            return d ? (exp ? Constants.YES_TEXT : <Tooltip tooltip={Constants.YES_TEXT}>
+            return d ? (exp ? getConstant("YES_TEXT") : <Tooltip tooltip={getConstant("YES_TEXT")}>
                 <CheckIcon />
-            </Tooltip>) : (exp ? Constants.NO_TEXT : <Tooltip tooltip={Constants.NO_TEXT}>
+            </Tooltip>) : (exp ? getConstant("NO_TEXT") : <Tooltip tooltip={getConstant("NO_TEXT")}>
                 <CloseIcon />
             </Tooltip>)
 

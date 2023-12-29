@@ -1,5 +1,5 @@
 import React, { createRef } from "react"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { CloseIcon, Icon } from "./Icon"
 import { BaseNotificationProps, showNotification, NotificationPosition, NotificationMsg } from "./NotificationMsg"
@@ -25,7 +25,7 @@ export class MessageBox extends React.Component<MessageProps>{
     }
 
     private static getInner = (props: MessageProps, closeFn: () => void): React.ReactNode => <div className={"dolfo-message-box-inner" + (props.className ? (" " + props.className) : "")}>
-        <Tooltip tooltip={Constants.CLOSE_TEXT}>
+        <Tooltip tooltip={getConstant("CLOSE_TEXT")}>
             {!props.hideClose && <CloseIcon className="dolfo-message-close" onClick={() => {
                 closeFn()
                 props.onClose && props.onClose()

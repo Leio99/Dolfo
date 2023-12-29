@@ -4,7 +4,7 @@ import { CloseIcon, Icon, LoadingIcon } from "../layout/Icon"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 import onClickOutside from "react-onclickoutside"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
 import { createRoot } from "react-dom/client"
@@ -140,7 +140,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
             const list = this.state.value.map((v: any) => {
                 const opt = this.state.options?.find(option => _.isEqual(v, option.props.value)),
                 optLabel = opt?.props.label,
-                stringToCheck = opt && _.isString(optLabel) ? optLabel : opt?.props.getLabelString ? opt?.props.getLabelString() : Constants.STRING_NOT_DEFINED_OPTION
+                stringToCheck = opt && _.isString(optLabel) ? optLabel : opt?.props.getLabelString ? opt?.props.getLabelString() : getConstant("STRING_NOT_DEFINED_OPTION")
 
                 return stringToCheck
             }).filter((v: any) => v)
@@ -161,7 +161,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
     changeSearch = (e: React.ChangeEvent<HTMLInputElement>): void => this.setState({
         searchValue: e.target.value,
         options: this.getOptions()?.filter(opt => {
-            const stringToCheck = _.isString(opt.props.label) ? opt.props.label : opt.props.getLabelString ? opt.props.getLabelString() : Constants.STRING_NOT_DEFINED_OPTION
+            const stringToCheck = _.isString(opt.props.label) ? opt.props.label : opt.props.getLabelString ? opt.props.getLabelString() : getConstant("STRING_NOT_DEFINED_OPTION")
 
             return stringToCheck?.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0
         })
@@ -290,11 +290,11 @@ class Select extends React.PureComponent<SelectProps, IState>{
         { value, openSelect, searchValue, currentSelection } = this.state,
         icon = props.icon || { iconKey: "hand-pointer", type: "far" },
         searchInput = <div className="dolfo-select-search-content">
-            {searchValue.length ? <Tooltip tooltip={Constants.RESET_INPUT_TEXT}>
+            {searchValue.length ? <Tooltip tooltip={getConstant("RESET_INPUT_TEXT")}>
                 <CloseIcon className="reset-input" onClick={this.resetSearch} />
             </Tooltip> : null}
 
-            <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={Constants.SEARCH_PLACEHOLDER} />
+            <input type="text" ref={r => input = r} value={searchValue} onChange={this.changeSearch} className="dolfo-select-search-input" placeholder={getConstant("SEARCH_PLACEHOLDER")} />
         </div>
 
         return <InputWrapper icon={icon} label={props.label} onFocus={() => this.onFocus(input)} focusBool={openSelect} isFocusable disabled={props.disabled || props.loading} onKeyDown={this.handleKeyDown} style={props.wrapperStyle} required={props.required} className={"dolfo-select-wrapper" + (props.className ? " " + props.className : "")} value={value} selectedOption={currentSelection} ref={this.wrapperRef}>

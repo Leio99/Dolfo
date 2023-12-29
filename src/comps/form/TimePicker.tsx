@@ -3,7 +3,7 @@ import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
 import { blurInput, isElementInViewport, sumParentZIndex, zeroBefore } from "../shared/utility"
 import { createRoot } from "react-dom/client"
@@ -157,13 +157,13 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         content = <div className={"dolfo-time-container floating-popup" + (showTime ? " show" : "")}>
             <div className="dolfo-picker-table">
                 <div className="dolfo-picker-row">
-                    <Tooltip tooltip={Constants.INCREASE_TEXT}>
+                    <Tooltip tooltip={getConstant("INCREASE_TEXT")}>
                         <div className="dolfo-picker-cell" onClick={this.increaseHour}>
                             <Icon iconKey="caret-up" />
                         </div>
                     </Tooltip>
                     <div className="dolfo-picker-cell-e"></div>
-                    <Tooltip tooltip={Constants.INCREASE_TEXT}>
+                    <Tooltip tooltip={getConstant("INCREASE_TEXT")}>
                         <div className="dolfo-picker-cell" onClick={this.increaseMinute}>
                             <Icon iconKey="caret-up" />
                         </div>
@@ -179,13 +179,13 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
                     </div>
                 </div>
                 <div className="dolfo-picker-row">
-                    <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
+                    <Tooltip tooltip={getConstant("DECREASE_TEXT")} placeTooltip="bottom">
                         <div className="dolfo-picker-cell" onClick={this.decreaseHour}>
                             <Icon iconKey="caret-down" />
                         </div>
                     </Tooltip>
                     <div className="dolfo-picker-cell-e"></div>
-                    <Tooltip tooltip={Constants.DECREASE_TEXT} placeTooltip="bottom">
+                    <Tooltip tooltip={getConstant("DECREASE_TEXT")} placeTooltip="bottom">
                         <div className="dolfo-picker-cell" onClick={this.decreaseMinute}>
                             <Icon iconKey="caret-down" />
                         </div>

@@ -1,7 +1,7 @@
 import _ from "lodash"
 import React, { CSSProperties } from "react"
 import { Tooltip } from "../layout/Tooltip"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { CheckBox } from "./CheckBox"
 
@@ -96,7 +96,7 @@ export class SelectableCardList extends React.PureComponent<SelectableCardListPr
             <input value={value?.toString() ?? ""} required={props.required} onChange={() => {}} />
             {props.label && <label className="dolfo-selectable-list-label">
                 {props.label}
-                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                {props.required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
                     <span className="dolfo-input-required"> *</span>
                 </Tooltip>}  
             </label>}

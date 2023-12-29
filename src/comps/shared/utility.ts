@@ -1,6 +1,6 @@
 import { ICalendarDay } from "./models/ICalendarDay"
 import { IDataColumn } from "./models/IColumn"
-import { Constants } from "./Constants"
+import { getConstant } from "./Constants"
 import _ from "lodash"
 import { showInfo } from "../layout/NotificationMsg"
 
@@ -38,18 +38,18 @@ export const formatNumber = (n: string | number): string => {
 
 export const decodeMonth = (month: number, short: boolean = false): string => {
     switch(month){
-        case 0: return short ? Constants.MONTHS[0].substring(0, 3) : Constants.MONTHS[0]
-        case 1: return short ? Constants.MONTHS[1].substring(0, 3) : Constants.MONTHS[1]
-        case 2: return short ? Constants.MONTHS[2].substring(0, 3) : Constants.MONTHS[2]
-        case 3: return short ? Constants.MONTHS[3].substring(0, 3) : Constants.MONTHS[3]
-        case 4: return short ? Constants.MONTHS[4].substring(0, 3) : Constants.MONTHS[4]
-        case 5: return short ? Constants.MONTHS[5].substring(0, 3) : Constants.MONTHS[5]
-        case 6: return short ? Constants.MONTHS[6].substring(0, 3) : Constants.MONTHS[6]
-        case 7: return short ? Constants.MONTHS[7].substring(0, 3) : Constants.MONTHS[7]
-        case 8: return short ? Constants.MONTHS[8].substring(0, 3) : Constants.MONTHS[8]
-        case 9: return short ? Constants.MONTHS[9].substring(0, 3) : Constants.MONTHS[9]
-        case 10: return short ? Constants.MONTHS[10].substring(0, 3) : Constants.MONTHS[10]
-        default: return short ? Constants.MONTHS[11].substring(0, 3) : Constants.MONTHS[11]
+        case 0: return short ? getConstant("MONTHS")[0].substring(0, 3) : getConstant("MONTHS")[0]
+        case 1: return short ? getConstant("MONTHS")[1].substring(0, 3) : getConstant("MONTHS")[1]
+        case 2: return short ? getConstant("MONTHS")[2].substring(0, 3) : getConstant("MONTHS")[2]
+        case 3: return short ? getConstant("MONTHS")[3].substring(0, 3) : getConstant("MONTHS")[3]
+        case 4: return short ? getConstant("MONTHS")[4].substring(0, 3) : getConstant("MONTHS")[4]
+        case 5: return short ? getConstant("MONTHS")[5].substring(0, 3) : getConstant("MONTHS")[5]
+        case 6: return short ? getConstant("MONTHS")[6].substring(0, 3) : getConstant("MONTHS")[6]
+        case 7: return short ? getConstant("MONTHS")[7].substring(0, 3) : getConstant("MONTHS")[7]
+        case 8: return short ? getConstant("MONTHS")[8].substring(0, 3) : getConstant("MONTHS")[8]
+        case 9: return short ? getConstant("MONTHS")[9].substring(0, 3) : getConstant("MONTHS")[9]
+        case 10: return short ? getConstant("MONTHS")[10].substring(0, 3) : getConstant("MONTHS")[10]
+        default: return short ? getConstant("MONTHS")[11].substring(0, 3) : getConstant("MONTHS")[11]
     }
 }
 
@@ -165,7 +165,7 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
     link.remove()
 }
 
-export const copyToClipBoard = (text: string, msg = Constants.COPIED_TO_CLIPBOARD): void => {
+export const copyToClipBoard = (text: string, msg = getConstant("COPIED_TO_CLIPBOARD")): void => {
     navigator.clipboard.writeText(text)
     showInfo(msg)
 }

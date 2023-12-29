@@ -1,7 +1,7 @@
 import React from "react"
 import { Uploader } from "../form/Uploader"
 import { goToApiBlock, MenuContentProps } from "../MenuContent"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class UploaderPage extends React.Component<MenuContentProps>{
@@ -94,7 +94,7 @@ export class UploaderPage extends React.Component<MenuContentProps>{
                 desc: "The label to show over the uploader.",
                 type: "string or ReactNode",
                 required: false,
-                default: `'${Constants.UPLOAD_FILE_DROP_LABEL}' if 'dropArea' is true, '${Constants.UPLOAD_FILE_LABEL}' instead.`
+                default: `'${getConstant("UPLOAD_FILE_DROP_LABEL")}' if 'dropArea' is true, '${getConstant("UPLOAD_FILE_LABEL")}' instead.`
             },
             {
                 name: "wrapperStyle",

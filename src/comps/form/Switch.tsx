@@ -1,7 +1,7 @@
 import React from "react"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { LoadingIcon } from "../layout/Icon"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
 
 export interface SwitchProps extends ExtendedInputProps{
@@ -55,7 +55,7 @@ export class Switch extends React.PureComponent<SwitchProps, SwitchProps>{
             
             {props.label && <label>
                 {props.label}
-                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                {props.required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
                     <span className="dolfo-input-required"> *</span>
                 </Tooltip>} 
             </label>}

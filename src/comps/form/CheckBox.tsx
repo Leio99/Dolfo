@@ -1,7 +1,7 @@
 import React from "react"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { CheckIcon } from "../layout/Icon"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
 
 export interface CheckBoxProps extends BaseInputProps{
@@ -50,7 +50,7 @@ export class CheckBox extends React.PureComponent<CheckBoxProps, CheckBoxProps>{
             </div>
             {props.label && <label className="dolfo-checkbox-label">
                 {props.label}
-                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                {props.required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
                     <span className="dolfo-input-required"> *</span>
                 </Tooltip>} 
             </label>}

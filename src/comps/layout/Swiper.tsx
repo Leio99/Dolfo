@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import Button from "./Button"
 import { Icon } from "./Icon"
 
@@ -33,7 +33,7 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
         const swipes = this.getSwipes(),
         { opened } = this.state
         
-        if(swipes.length !== 2) return <span>{Constants.SWIPE_ERROR_ONLY_ONE}</span>
+        if(swipes.length !== 2) return <span>{getConstant("SWIPE_ERROR_ONLY_ONE")}</span>
 
         return <div className="dolfo-swiper-container">
             {
@@ -41,7 +41,7 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
                     return <div className={"dolfo-swipe" + (i === 1 ? (" detail-swipe" + (opened ? " opened" : "")) : "") + (s.props.className ? (" " + s.props.className) : "")} style={s.props.style} key={i}>
                         {i === 1 && <div className="dolfo-swipe-header">
                             <Button type="text" btnColor="grey" onClick={s.props.onGoBack}>
-                                <Icon iconKey="chevron-left" /> {Constants.BACK_TEXT}
+                                <Icon iconKey="chevron-left" /> {getConstant("BACK_TEXT")}
                             </Button>  
                         </div>}
                         {s.props.children}

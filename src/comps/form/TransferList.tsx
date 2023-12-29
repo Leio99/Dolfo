@@ -2,7 +2,7 @@ import React from "react"
 import { BaseInputProps } from "../shared/models/InputProps"
 import Button from "../layout/Button"
 import { Icon } from "../layout/Icon"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
 
@@ -95,7 +95,7 @@ export class TransferList extends React.Component<TransferListProps, IState>{
         return <div className={"dolfo-transfer-list" + (props.disabled ? " disabled" : "") + (props.className ? " " + props.className : "")} style={props.style}>
             {props.label && <label className="dolfo-transfer-list-label">
                 {props.label}
-                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                {props.required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
                     <span className="dolfo-input-required"> *</span>  
                 </Tooltip>}
             </label>}
@@ -107,7 +107,7 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                 
                 <div className="transfer-content">
                     {props.canFilter && <div className="filter">
-                        <input type="text" onChange={this.changeFilterLeft} placeholder={Constants.TRANSFER_FILTER_TEXT} />
+                        <input type="text" onChange={this.changeFilterLeft} placeholder={getConstant("TRANSFER_FILTER_TEXT")} />
                     </div>}
                     <div className="dolfo-transfer-list-items">
                         {
@@ -117,31 +117,31 @@ export class TransferList extends React.Component<TransferListProps, IState>{
                                 return <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "") + (disabled ? " disabled" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)} key={i}>
                                     {props.getLabel(item)}
                                 </div>
-                            }) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
+                            }) : <div className="dolfo-transfer-no-items">{getConstant("TRANSFER_NO_ITEMS")}</div>
                         }
                     </div>
                 </div>
             </div>
             <div className="dolfo-transfer-buttons">
-                {props.allowTransferAll && <Tooltip tooltip={Constants.TRANSFER_ALL_TEXT}>
+                {props.allowTransferAll && <Tooltip tooltip={getConstant("TRANSFER_ALL_TEXT")}>
                     <Button size="small" btnColor="darkblue" disabled={props.list.every(d => selectedKeys.includes(props.getKey(d)))} onClick={this.transferAll}>
                         <Icon iconKey="chevron-double-right" type="far" />
                     </Button>
                 </Tooltip>}
 
-                <Tooltip tooltip={Constants.TRANSFER_TEXT}>
+                <Tooltip tooltip={getConstant("TRANSFER_TEXT")}>
                     <Button size="small" btnColor="darkblue" disabled={focusedKey === null || selectedKeys.includes(focusedKey)} onClick={this.selectByFocused}>
                         <Icon iconKey="arrow-right" type="far" />
                     </Button>
                 </Tooltip>
 
-                <Tooltip tooltip={Constants.TRANSFER_TEXT}>
+                <Tooltip tooltip={getConstant("TRANSFER_TEXT")}>
                     <Button size="small" btnColor="darkblue" disabled={focusedKey === null || !selectedKeys.includes(focusedKey)} onClick={this.selectByFocused}>
                         <Icon iconKey="arrow-left" type="far" />
                     </Button>
                 </Tooltip>
 
-                {props.allowTransferAll && <Tooltip tooltip={Constants.TRANSFER_ALL_TEXT}>
+                {props.allowTransferAll && <Tooltip tooltip={getConstant("TRANSFER_ALL_TEXT")}>
                     <Button size="small" btnColor="darkblue" disabled={!selectedKeys.length} onClick={this.untransferAll}>
                         <Icon iconKey="chevron-double-left" type="far" />
                     </Button>
@@ -152,14 +152,14 @@ export class TransferList extends React.Component<TransferListProps, IState>{
 
                 <div className="transfer-content">
                     {props.canFilter && <div className="filter">
-                        <input type="text" onChange={this.changeFilterRight} placeholder={Constants.TRANSFER_FILTER_TEXT} />
+                        <input type="text" onChange={this.changeFilterRight} placeholder={getConstant("TRANSFER_FILTER_TEXT")} />
                     </div>}
 
                     <div className="dolfo-transfer-list-items">
                         {
                             selected.length ? selected.map((item, i) => <div className={"dolfo-transfer-item" + (focusedKey === props.getKey(item) ? " focused" : "")} onDoubleClick={() => this.transferItem(item)} onClick={() => this.focusItem(item)} key={i}>
                                 {props.getLabel(item)}
-                            </div>) : <div className="dolfo-transfer-no-items">{Constants.TRANSFER_NO_ITEMS}</div>
+                            </div>) : <div className="dolfo-transfer-no-items">{getConstant("TRANSFER_NO_ITEMS")}</div>
                         }
                     </div>
                 </div>

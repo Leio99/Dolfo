@@ -48,7 +48,7 @@ import { TreeView } from "./comps/layout/table/TreeView"
 import { Tabs, Tab } from "./comps/layout/Tabs"
 import { Timeline } from "./comps/layout/Timeline"
 import { Tooltip } from "./comps/layout/Tooltip"
-import { Constants } from "./comps/shared/Constants"
+import { getConstant } from "./comps/shared/Constants"
 
 export {
     CheckBox,
@@ -96,7 +96,7 @@ export {
     Tabs, Tab,
     Timeline,
     Tooltip,
-    Constants,
+    getConstant,
     Table,
     CardTable,
     MasterDetail,

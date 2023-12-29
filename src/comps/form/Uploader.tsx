@@ -1,7 +1,7 @@
 import React from "react"
 import { showNotification, showError } from "../layout/NotificationMsg"
 import { Tooltip } from "../layout/Tooltip"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 
@@ -46,7 +46,7 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
 
             showNotification({
                 type: "error",
-                message: Constants.UPLOAD_FILE_ERROR_NOT_MULTIPLE,
+                message: getConstant("UPLOAD_FILE_ERROR_NOT_MULTIPLE"),
                 onClose: this.toggleShowing
             })
         }
@@ -78,7 +78,7 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
 
                     if(files[i].name.indexOf(ext) !== files[i].name.length - ext.length){
                         notAcceptable = true
-                        showError(Constants.UPLOAD_FILE_NOT_ACCEPTABLE)
+                        showError(getConstant("UPLOAD_FILE_NOT_ACCEPTABLE"))
                     }
                 }
             }
@@ -136,7 +136,7 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
             <input type="file" accept={props.accept} value={value} multiple={props.multiple} ref={r => input = r} onChange={() => this.onChange(input)} onClick={this.clickInput} required={props.required} />
 
             {
-                !props.dropArea ? <InputWrapper onClick={() => input.click()} icon={icon} style={props.wrapperStyle} label={props.label || Constants.UPLOAD_FILE_LABEL} resetFunction={this.resetFiles} value={files ? this.getFilesNameSeparated() : ""} disabled={props.disabled} required={props.required} className={props.className}>
+                !props.dropArea ? <InputWrapper onClick={() => input.click()} icon={icon} style={props.wrapperStyle} label={props.label || getConstant("UPLOAD_FILE_LABEL")} resetFunction={this.resetFiles} value={files ? this.getFilesNameSeparated() : ""} disabled={props.disabled} required={props.required} className={props.className}>
                     <input
                         type="text"
                         value={files && value.length ? this.getFilesNameSeparated() : ""}
@@ -145,12 +145,12 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
                         readOnly
                     />
                 </InputWrapper> : <div className={"dolfo-uploader-drop" + (props.disabled ? " disabled" : "")} onDrop={(e) => this.onDrop(e, input)} onDragOver={this.onDragOver} onDragLeave={this.onDragLeave} onDragEnter={this.onDragEnter} onClick={() => input.click()} style={props.style} onMouseLeave={this.onDragLeave}>
-                    <div className="dolfo-uploader-drop-label">{props.label || Constants.UPLOAD_FILE_DROP_LABEL}</div>
+                    <div className="dolfo-uploader-drop-label">{props.label || getConstant("UPLOAD_FILE_DROP_LABEL")}</div>
 
                     {
                         files && value.length ? <Tooltip tooltip={this.getFilesNameSeparated()}>
                             <div className="selected-files">
-                                <strong>{Constants.SELECTED_FILES_LABEL}</strong> {this.getFilesNameSeparated()}
+                                <strong>{getConstant("SELECTED_FILES_LABEL")}</strong> {this.getFilesNameSeparated()}
                             </div>
                         </Tooltip> : null
                     }

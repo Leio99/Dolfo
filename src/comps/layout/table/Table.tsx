@@ -1,7 +1,7 @@
 import _ from "lodash"
 import React from "react"
 import { CheckBox } from "../../form/CheckBox"
-import { Constants } from "../../shared/Constants"
+import { getConstant } from "../../shared/Constants"
 import Button from "../Button"
 import { Icon } from "../Icon"
 import { Tooltip } from "../Tooltip"
@@ -66,7 +66,7 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
                         <tr>
                             <td colSpan={columns.length}>
                                 {
-                                    props.exportable && (!props.exportFormat || props.exportFormat.includes("csv")) && <Tooltip tooltip={Constants.EXPORT_CSV_TEXT}>
+                                    props.exportable && (!props.exportFormat || props.exportFormat.includes("csv")) && <Tooltip tooltip={getConstant("EXPORT_CSV_TEXT")}>
                                         <Button type="text" btnColor="green" onClick={this.exportCSV}>
                                             <Icon iconKey="file-csv" className="fa-2x" />
                                         </Button>
@@ -117,17 +117,17 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
                                     <CheckBox checked={col.checked} onChange={col.onCheckAll} disabled={col.checkDisabled} />
                                 </Tooltip>}
  
-                                {col.canSearch && <Tooltip tooltip={Constants.FILTER_TEXT}>
+                                {col.canSearch && <Tooltip tooltip={getConstant("FILTER_TEXT")}>
                                     <Icon iconKey="filter" className="dolfo-column-search-icon" onClick={() => this.changeActiveFiler(col.field)} />
                                 </Tooltip>}
  
-                                {col.orderable && <Tooltip tooltip={this.orderHasKey(col.orderKey || col.field) ? this.getOrderKeyType(col.orderKey || col.field) === "asc" ? Constants.ORDER_ASCENDING : Constants.ORDER_DESCENDING : Constants.COLUMN_ORDER}>
+                                {col.orderable && <Tooltip tooltip={this.orderHasKey(col.orderKey || col.field) ? this.getOrderKeyType(col.orderKey || col.field) === "asc" ? getConstant("ORDER_ASCENDING") : getConstant("ORDER_DESCENDING") : getConstant("COLUMN_ORDER")}>
                                     <Icon iconKey={this.orderHasKey(col.orderKey || col.field) ? this.getOrderKeyType(col.orderKey || col.field) === "asc" ? "arrow-down" : "arrow-up" : "sort"} className="dolfo-column-order-icon" onClick={() => this.toggleOrder(col.orderKey || col.field)} />
                                 </Tooltip>}
 
                                 {col.type !== "check" && col.label}
 
-                                {col.canSearch && activeFilter === col.field && <input type="text" onChange={e => this.changeFilter(col.searchField || col.field, e.target.value)} className="dolfo-column-search-input" onBlur={this.blurSearch} autoFocus placeholder={Constants.SEARCH_PLACEHOLDER} />}
+                                {col.canSearch && activeFilter === col.field && <input type="text" onChange={e => this.changeFilter(col.searchField || col.field, e.target.value)} className="dolfo-column-search-input" onBlur={this.blurSearch} autoFocus placeholder={getConstant("SEARCH_PLACEHOLDER")} />}
                             </th>)
                         }
                     </tr>
@@ -153,7 +153,7 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
                             </tr>
                         }) : <tr>
                             <td className="dolfo-table-noresults" colSpan={columns.length}>
-                                {Constants.TABLE_NO_RESULTS}
+                                {getConstant("TABLE_NO_RESULTS")}
                             </td>
                         </tr>
                     }

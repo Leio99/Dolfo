@@ -1,5 +1,5 @@
 import React, { CSSProperties, createRef } from "react"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
@@ -80,7 +80,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		{ opened } = this.state
 		
 		return <div className={"dolfo-accordion" + (opened ? " opened" : "") + (props.wrapperClassName ? (" " + props.wrapperClassName) : "") + (props.disabled ? " disabled" : "")} style={props.wrapperStyle} ref={this.ref}>
-			<Tooltip tooltip={opened ? Constants.COLLAPSE_TEXT : Constants.EXPAND_TEXT}>
+			<Tooltip tooltip={opened ? getConstant("COLLAPSE_TEXT") : getConstant("EXPAND_TEXT")}>
 				<div className="dolfo-accordion-header" onClick={this.toggleAccordion}>
 					<Icon iconKey="chevron-down" className="accordion-caret" />
 					

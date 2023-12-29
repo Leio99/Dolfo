@@ -1,5 +1,5 @@
 import React, { CSSProperties, createRef } from "react"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import Button, { ButtonColors } from "./Button"
 import { DialogType } from "./Dialog"
 import { CloseIcon } from "./Icon"
@@ -50,7 +50,7 @@ export class Alert extends React.Component<IProps>{
             <div className="dolfo-alert-content">{props.children}</div>
 
             {
-                props.customAction || (props.closable && <Tooltip tooltip={Constants.CLOSE_TEXT}>
+                props.customAction || (props.closable && <Tooltip tooltip={getConstant("CLOSE_TEXT")}>
                     <Button type="text" btnColor={this.getBtnColor()} onClick={this.closeAlert}>
                         <CloseIcon large />
                     </Button>

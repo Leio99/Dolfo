@@ -2,7 +2,7 @@ import React from "react"
 import Button from "../layout/Button"
 import { NotificationMsg } from "../layout/NotificationMsg"
 import { Table } from "../layout/table/Table"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { ResultCode, WhenToUse, Usage } from "./Layouts"
 
 export class NotificationPage extends React.Component{
@@ -95,7 +95,7 @@ export class NotificationPage extends React.Component{
                 {
                     name: "showLoading",
                     desc: "Shows a loading notification.",
-                    params: `Loading text (string or ReactNode, default: '${Constants.LOADING_TEXT}'), not required`
+                    params: `Loading text (string or ReactNode, default: '${getConstant("LOADING_TEXT")}'), not required`
                 },
                 {
                     name: "showSuccess",

@@ -1,5 +1,5 @@
 import React from "react"
-import { Constants } from "../../shared/Constants"
+import { getConstant } from "../../shared/Constants"
 import { IColumn, IDataColumn } from "../../shared/models/IColumn"
 import Button from "../Button"
 import { Icon } from "../Icon"
@@ -50,11 +50,11 @@ export class ResultsView extends BaseExportableManager<ResultViewProps, BaseResu
         return <>
             {
                 !hideToggleButton && <div className="results-view-toggler">
-                    {layoutType === "grid" ? <Tooltip tooltip={Constants.SWITCH_TO_CARD_LAYOUT}>
+                    {layoutType === "grid" ? <Tooltip tooltip={getConstant("SWITCH_TO_CARD_LAYOUT")}>
                         <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout}>
                             <Icon iconKey="credit-card-blank" />  
                         </Button>
-                    </Tooltip> : <Tooltip tooltip={Constants.SWITCH_TO_GRID_LAYOUT}>
+                    </Tooltip> : <Tooltip tooltip={getConstant("SWITCH_TO_GRID_LAYOUT")}>
                         <Button btnColor="black" type="text" size="big" onClick={this.toggleLayout}>
                             <Icon iconKey="table" type="far" />  
                         </Button>
@@ -62,7 +62,7 @@ export class ResultsView extends BaseExportableManager<ResultViewProps, BaseResu
                 </div>
             }
             {
-                exportable && (!exportFormat || exportFormat.includes("csv")) && <Tooltip tooltip={Constants.EXPORT_CSV_TEXT}>
+                exportable && (!exportFormat || exportFormat.includes("csv")) && <Tooltip tooltip={getConstant("EXPORT_CSV_TEXT")}>
                     <Button size="big" type="text" btnColor="green" onClick={this.exportCSV}>
                         <Icon iconKey="file-csv" />
                     </Button>

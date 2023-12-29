@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react"
 import Button, { ButtonColors } from "./Button"
 import { CheckCircleOutlineIcon, CloseIcon, ErrorCircleOutlineIcon, InfoCircleOutlineIcon, LoadingIcon, QuestionCircleOutlineIcon, WarningIconOutline } from "./Icon"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
 import { createRoot } from "react-dom/client"
 import { Tooltip } from "./Tooltip"
@@ -73,18 +73,18 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
     }
 
     static yesNoDialog = (title: string | React.ReactNode, message: string | React.ReactNode, onYes: DialogProps["onOk"], onNo?: DialogProps["onClose"]): Closable => openDialog({
-        title: title || Constants.CONFIRM_TITLE,
+        title: title || getConstant("CONFIRM_TITLE"),
         content: message,
         onOk: onYes,
-        okText: Constants.YES_TEXT,
+        okText: getConstant("YES_TEXT"),
         clickOutside: true,
-        cancelText: Constants.NO_TEXT,
+        cancelText: getConstant("NO_TEXT"),
         icon: <QuestionCircleOutlineIcon color="var(--orange)" />,
         width: "350px",
         onClose: onNo
     })
 
-    static loadingDialog = (loadingText: string | React.ReactNode = Constants.LOADING_TEXT): Closable => openDialog({
+    static loadingDialog = (loadingText: string | React.ReactNode = getConstant("LOADING_TEXT")): Closable => openDialog({
         title: "",
         content: <div>
             <LoadingIcon spinning /> {loadingText}
@@ -143,15 +143,15 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
     private static getInfoTitle = (type: DialogProps["type"]): string => {
         if(type === "success")
-            return Constants.SUCCESS_TEXT
+            return getConstant("SUCCESS_TEXT")
 
         if(type === "error")
-            return Constants.ERROR_TEXT
+            return getConstant("ERROR_TEXT")
 
         if(type === "warning")
-            return Constants.WARNING_TEXT
+            return getConstant("WARNING_TEXT")
 
-        return Constants.INFO_TEXT
+        return getConstant("INFO_TEXT")
     }
 
     public static getIcon = (icon: string): React.ReactNode => {
@@ -185,7 +185,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
             <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width || props.style?.width }}>
                 <div className="dolfo-dialog-header">
                     {
-                        !props.hideCloseX && <Tooltip tooltip={Constants.CLOSE_TEXT}>
+                        !props.hideCloseX && <Tooltip tooltip={getConstant("CLOSE_TEXT")}>
                             <Button circleBtn btnColor="white" onClick={() => this.onClose("cancel")} className="dialog-close">
                                 <CloseIcon style={{ fontSize: 20 }} />
                             </Button>
@@ -204,12 +204,12 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
                             {props.customFooter}
                         </div> : <div className="dolfo-dialog-footer">
                             <Button onClick={this.onOk} className={props.okBtnClass ? (" " + props.okBtnClass) : ""} size="small" btnColor={props.okType || "darkblue"}>
-                                {props.okText || Constants.OK_TEXT}
+                                {props.okText || getConstant("OK_TEXT")}
                             </Button>
 
                             {
                                 !props.hideCancel && <Button onClick={() => this.onClose("close")} className={props.cancelBtnClass ? (" " + props.cancelBtnClass) : ""} size="small" type="text" btnColor={props.cancelType || "red"}>
-                                    {props.cancelText || Constants.CANCEL_TEXT}
+                                    {props.cancelText || getConstant("CANCEL_TEXT")}
                                 </Button>
                             }
                         </div>

@@ -1,6 +1,6 @@
 import React from "react"
 import { Tooltip } from "../layout/Tooltip"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 import { Option } from "./Option"
 
@@ -47,7 +47,7 @@ export class RadioButton extends React.PureComponent<RadioButtonProps, IState>{
         return <div className={"dolfo-input-radio-container" + (props.disabled ? " disabled" : "") + (props.className ? " " + props.className : "")} style={props.style}>
             {props.label && <label className="dolfo-input-radio-label">
                 {props.label}
-                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                {props.required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
                     <span className="dolfo-input-required"> *</span>
                 </Tooltip>}  
             </label>}

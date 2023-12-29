@@ -1,5 +1,5 @@
 import React from "react"
-import { Constants } from "../../shared/Constants"
+import { getConstant } from "../../shared/Constants"
 import { IColumn } from "../../shared/models/IColumn"
 import Button from "../Button"
 import { Icon } from "../Icon"
@@ -122,14 +122,14 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
             <td>
                 <span style={{ paddingLeft: (25 * subNode) + (hasChildren ? 0 : subNode === 0 ? 0 : 25) }}></span>
                 {
-                    hasChildren ? <Tooltip tooltip={isOpened ? Constants.TREE_CLOSE_NODE : Constants.TREE_OPEN_NODE}>
+                    hasChildren ? <Tooltip tooltip={isOpened ? getConstant("TREE_CLOSE_NODE") : getConstant("TREE_OPEN_NODE")}>
                         <Button btnColor="black" type="text" onClick={() => this.toggleNode(node, index)}>
                             <Icon iconKey={isOpened ? "chevron-down" : "chevron-right"} type="far" className="tree-view-angle" />
                         </Button>
                     </Tooltip> : null
                 }
 
-                <Tooltip tooltip={isOpened ? Constants.TREE_COLLAPSE_ALL_NODE : hasChildren ? Constants.TREE_EXPAND_ALL_NODE : null}>
+                <Tooltip tooltip={isOpened ? getConstant("TREE_COLLAPSE_ALL_NODE") : hasChildren ? getConstant("TREE_EXPAND_ALL_NODE") : null}>
                     <Button btnColor={isOpened ? "orange" : hasChildren ? "orange" : "black"} type="text" onClick={() => this.toggleAllNode(node, index)}>
                         <Icon iconKey={isOpened ? "folder-open" : hasChildren ? "folder" : "file-alt"} className="tree-view-folder" large />
                     </Button>
@@ -182,12 +182,12 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                     showExpandAll && <thead className="dolfo-table-actions">
                         <tr>
                             <td colSpan={showActions ? baseSpan + 2 : baseSpan + 1}>
-                                <Tooltip tooltip={Constants.TREE_EXPAND_ALL_NODES}>
+                                <Tooltip tooltip={getConstant("TREE_EXPAND_ALL_NODES")}>
                                     <Button btnColor="white" onClick={this.toggleAllNodes}>
                                         <Icon iconKey="folder-plus" type="far" />
                                     </Button>
                                 </Tooltip>
-                                <Tooltip tooltip={Constants.TREE_COLLAPSE_ALL_NODES}>
+                                <Tooltip tooltip={getConstant("TREE_COLLAPSE_ALL_NODES")}>
                                     <Button btnColor="white" onClick={this.collapseAllNodes}>
                                         <Icon iconKey="folder-minus" type="far" />
                                     </Button>
@@ -199,11 +199,11 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
                 <thead>
                     <tr>
-                        <th>{descColumn || Constants.TREE_TABLE_DESCRIPTION_LABEL}</th>
+                        <th>{descColumn || getConstant("TREE_TABLE_DESCRIPTION_LABEL")}</th>
                         {addColumn && addColumn.map((c, i) => <th style={{ width: c.width, textAlign: c.align }} key={i}>
                             {c.label}
                         </th>)}
-                        {showActions && <th style={{ width: "20%" }}>{Constants.TREE_TABLE_ACTIONS_LABEL}</th>}
+                        {showActions && <th style={{ width: "20%" }}>{getConstant("TREE_TABLE_ACTIONS_LABEL")}</th>}
                     </tr>
                 </thead>
 
@@ -218,7 +218,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                             return treeList
                         }) : <tr>
                             <td className="dolfo-table-noresults" colSpan={baseSpan + 1}>
-                                {Constants.TABLE_NO_RESULTS}
+                                {getConstant("TABLE_NO_RESULTS")}
                             </td>
                         </tr>
                     }

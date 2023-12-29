@@ -2,7 +2,7 @@ import _ from "lodash"
 import React, { CSSProperties, createRef } from "react"
 import { CloseIcon, Icon, BaseIconProps } from "../layout/Icon"
 import { Tooltip } from "../layout/Tooltip"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 
 interface IProps extends React.PropsWithChildren{
     readonly label?: React.ReactNode | string
@@ -57,14 +57,14 @@ export class InputWrapper extends React.PureComponent<IProps, IState>{
             {props.label && <label className={"dolfo-input-label" + (props.focusBool || props.value || props.selectedOption ? " dirty" : "")}>
                 <span>
                     {props.label}
-                    {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                    {props.required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
                         <span className="dolfo-input-required"> *</span>
                     </Tooltip>}  
                 </span>  
             </label>}
             
             <div className={"dolfo-input-wrapper" + (props.focusBool ? " focused" : "") + (error ? " invalid" : "")} onClick={props.forceFocus}>
-                {(props.value && props.value.length && props.resetFunction) ? <Tooltip tooltip={Constants.RESET_INPUT_TEXT}>
+                {(props.value && props.value.length && props.resetFunction) ? <Tooltip tooltip={getConstant("RESET_INPUT_TEXT")}>
                     <CloseIcon className="reset-input" onClick={props.resetFunction} />
                 </Tooltip> : null}
                 

@@ -4,7 +4,7 @@ import { CalendarEvent, GoogleCalendarEvent } from "../shared/models/CalendarEve
 import Button from "./Button"
 import { openDialog, openInfoDialog } from "./Dialog"
 import { Icon } from "./Icon"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import Select from "../form/Select"
 import { Option } from "../form/Option"
 import { Tooltip } from "./Tooltip"
@@ -86,7 +86,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         this.setState({ events })
     }, () => openInfoDialog({
         type: "error",
-        content: Constants.CALENDAR_ERROR_UNABLE_TO_GET_EVENTS
+        content: getConstant("CALENDAR_ERROR_UNABLE_TO_GET_EVENTS")
     })))
 
     increaseMonth = (): void => {
@@ -120,13 +120,13 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         const { currentYear, currentMonth } = this.state,
         years = Array.from(Array(new Date().getFullYear() - 1999).keys()).map((_, i) => new Date().getFullYear() - i),
         dialog = openDialog({
-            title: Constants.CALENDAR_CHANGE_DATE,
+            title: getConstant("CALENDAR_CHANGE_DATE"),
             width: "300px",
             clickOutside: true,
             content: <>
                 <Select icon={{ iconKey: "calendar", type: "far" }} canSearch defaultValue={currentMonth} onChange={v => selMonth = v}>
                     {
-                        Constants.MONTHS.map((m, i) => <Option value={i} label={m} key={m} />)
+                        getConstant("MONTHS").map((m, i) => <Option value={i} label={m} key={m} />)
                     }
                 </Select>
 
@@ -137,7 +137,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                 </Select>
             </>,
             customFooter: [
-                <Tooltip key="today" tooltip={Constants.CALENDAR_SELECT_CURRENT} >
+                <Tooltip key="today" tooltip={getConstant("CALENDAR_SELECT_CURRENT")} >
                     <Button type="text"style={{ float: "left" }} size="big" btnColor="green" onClick={() => {
                         const d = new Date()
 
@@ -153,10 +153,10 @@ export class Calendar extends React.PureComponent<IProps, IState>{
                     currentMonth: selMonth ?? currentMonth,
                     currentYear: selYear ?? currentYear
                 }, dialog.close)}>
-                    {Constants.CALENDAR_SET_TEXT}
+                    {getConstant("CALENDAR_SET_TEXT")}
                 </Button>,
                 <Button key="cancel" type="text" btnColor="red" onClick={() => dialog.close()}>
-                    {Constants.CANCEL_TEXT}
+                    {getConstant("CANCEL_TEXT")}
                 </Button>
             ]
         })
@@ -170,37 +170,37 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         return <div className="dolfo-g-calendar-content">
             <h3 className="month-title">
                 <div className="month-buttons">
-                    <Tooltip tooltip={Constants.CALENDAR_PREVIOUS_MONTH}>
+                    <Tooltip tooltip={getConstant("CALENDAR_PREVIOUS_MONTH")}>
                         <Button btnColor="white" size="big" className="month-button-prev" onClick={this.decreaseMonth}>
                             <Icon iconKey="chevron-left" type="far" large />
                         </Button>
                     </Tooltip>
-                    <Tooltip tooltip={Constants.CALENDAR_NEXT_MONTH}>
+                    <Tooltip tooltip={getConstant("CALENDAR_NEXT_MONTH")}>
                         <Button btnColor="white" size="big" className="month-button-next" onClick={this.increaseMonth}>
                             <Icon iconKey="chevron-right" type="far" large />
                         </Button>
                     </Tooltip>
                 </div>
 
-                <Tooltip tooltip={Constants.CALENDAR_CHANGE}>
+                <Tooltip tooltip={getConstant("CALENDAR_CHANGE")}>
                     <Button btnColor="white" size="big" onClick={this.openDateChange}>
                         {decodeMonth(currentMonth)} {currentYear}
                     </Button>
                 </Tooltip>
             </h3>
 
-            {!monthEvents.length && <div className="no-month-events">{Constants.MONTH_NO_EVENTS}</div>}
+            {!monthEvents.length && <div className="no-month-events">{getConstant("MONTH_NO_EVENTS")}</div>}
 
             <table className="dolfo-g-calendar">
                 <thead>
                     <tr>
-                        <th>{Constants.WEEK_DAYS[0]}</th>
-                        <th>{Constants.WEEK_DAYS[1]}</th>
-                        <th>{Constants.WEEK_DAYS[2]}</th>
-                        <th>{Constants.WEEK_DAYS[3]}</th>
-                        <th>{Constants.WEEK_DAYS[4]}</th>
-                        <th>{Constants.WEEK_DAYS[5]}</th>
-                        <th>{Constants.WEEK_DAYS[6]}</th>
+                        <th>{getConstant("WEEK_DAYS")[0]}</th>
+                        <th>{getConstant("WEEK_DAYS")[1]}</th>
+                        <th>{getConstant("WEEK_DAYS")[2]}</th>
+                        <th>{getConstant("WEEK_DAYS")[3]}</th>
+                        <th>{getConstant("WEEK_DAYS")[4]}</th>
+                        <th>{getConstant("WEEK_DAYS")[5]}</th>
+                        <th>{getConstant("WEEK_DAYS")[6]}</th>
                     </tr>
                 </thead>
 
@@ -218,20 +218,20 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
                                         return <td className={(isPrev || isNext ? "external" : "") + (!dEvents.length ? " empty" : "")} key={i}>
                                             <div className="content">
-                                                {isToday && <Tooltip tooltip={Constants.CALENDAR_PIN_TODAY}>
+                                                {isToday && <Tooltip tooltip={getConstant("CALENDAR_PIN_TODAY")}>
                                                     <Icon iconKey="map-pin" large className="icon-today" />
                                                 </Tooltip>}
 
                                                 <div className="day-number-container">
                                                     <div className="day-number">
-                                                        <div className="week-day">{Constants.WEEK_DAYS[i].substring(0, 3)}</div>
+                                                        <div className="week-day">{getConstant("WEEK_DAYS")[i].substring(0, 3)}</div>
                                                         {col.day}
                                                     </div>
                                                 </div>
 
                                                 <div className="events-container">
                                                     {
-                                                        dEvents.map((e, ei) => <Tooltip tooltip={this.props.onEventClick && Constants.EVENT_DETAIL_TOOLTIP} key={ei}>
+                                                        dEvents.map((e, ei) => <Tooltip tooltip={this.props.onEventClick && getConstant("EVENT_DETAIL_TOOLTIP")} key={ei}>
                                                             <div className="event" onClick={() => this.tryOpenEvent(e, isPrev, isNext)}>
                                                                 {e.start && e.end && <span>{e.start} - {e.end}</span>} 
                                                                 {e.start && e.end && <span className="event-desc-separator"> • </span>}

@@ -1,7 +1,7 @@
 import _ from "lodash"
 import React, { createRef } from "react"
 import { Tooltip } from "../layout/Tooltip"
-import { Constants } from "../shared/Constants"
+import { getConstant } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 
 export interface PinInputProps extends BaseInputProps{
@@ -101,7 +101,7 @@ export class PinInput extends React.Component<PinInputProps, IState>{
         return <div className={"dolfo-input-pin dolfo-form-input" + (props.className ? " " + props.className : "")} style={props.style} ref={this.ref}>
             {props.label && <label className="dolfo-input-label">
                 {props.label}
-                {props.required && <Tooltip tooltip={Constants.REQUIRED_FIELD}>
+                {props.required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
                     <span className="dolfo-input-required"> *</span>  
                 </Tooltip>}
             </label>}
