@@ -26,7 +26,7 @@ export class FullLoader extends React.Component<FullLoaderProps>{
         })
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this
 
         return <div className="dolfo-full-loader">

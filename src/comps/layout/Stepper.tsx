@@ -46,7 +46,7 @@ export class Stepper extends React.PureComponent<IProps>{
 
     getChildrenSteps = (): Step[] => React.Children.map(this.props.children, (child: any) => child)
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         steps = this.getChildrenSteps(),
         stepsSeparated = this.getChildrenStepsWithSeparators(),

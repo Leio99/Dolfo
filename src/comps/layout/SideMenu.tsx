@@ -43,7 +43,7 @@ export class SideMenu extends React.PureComponent<IProps, IState>{
         this.props.onToggle && this.props.onToggle()
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { opened } = this.state
 

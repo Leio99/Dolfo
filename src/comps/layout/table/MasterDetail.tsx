@@ -8,8 +8,8 @@ import { Tooltip } from "../Tooltip"
 import { BaseResultsState, ResultsView, ResultViewProps, ViewType } from "./ResultsView"
 
 export interface MasterDetailProps extends ResultViewProps{
-    readonly actions?: (dataItem: IDataColumn) => JSX.Element
-    readonly getDetailTitle: (item: any, isBreadcrumb?: boolean) => string | JSX.Element
+    readonly actions?: (dataItem: IDataColumn) => React.ReactNode
+    readonly getDetailTitle: (item: any, isBreadcrumb?: boolean) => string | React.ReactNode
     readonly onOpenDetail?: (item: any) => void
 }
 
@@ -49,7 +49,7 @@ export class MasterDetail<P> extends React.Component<MasterDetailProps & P, Mast
 
     clearAllData = (data: IDataColumn[]): IDataColumn[] => data.map(d => this.clearData(d))
 
-    render(children = this.props.children): JSX.Element {
+    render(children = this.props.children): React.ReactNode {
         const { columns, data, onOpenDetail, getDetailTitle, actions, getTitle, className, exportFormat, exportable, style, hideToggleButton } = this.props,
         { selectedItem, layoutType } = this.state,
         cols = columns.concat({ field: "actions", label: Constants.TREE_TABLE_ACTIONS_LABEL, align: "center", exportable: false }),

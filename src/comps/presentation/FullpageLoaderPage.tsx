@@ -4,7 +4,7 @@ import { FullLoader } from "../layout/FullLoader"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class FullpageLoaderPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a loader showing on the entire page.</WhenToUse>
         <Usage notes={<>this component can only be rendered by calling a function (<em>FullLoader.show(params)</em>)</>} />
 

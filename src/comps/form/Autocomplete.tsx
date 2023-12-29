@@ -269,7 +269,7 @@ export abstract class Autocomplete<E, K, P = any> extends React.Component<Autoco
         options.classList.toggle("invalid", wrapper.classList.contains("invalid"))
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { filter, focused, selectedKey } = this.state,
         { props } = this,
         icon = props.icon || { iconKey: "keyboard", type: "far" }

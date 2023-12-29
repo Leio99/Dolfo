@@ -4,7 +4,7 @@ import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 import { CardsSwiper, SwiperCard } from "../layout/CardsSwiper"
 
 export class CarswiperPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a cards slider.</WhenToUse>
         <Usage />
 

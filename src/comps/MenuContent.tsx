@@ -54,7 +54,7 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
 
     toggleDarkMode = () => this.setState({ darkTheme: !this.state.darkTheme }, toggleDarkTheme)
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const menuBtn = (color: "darkblue" | "white") => <Button circleBtn size="big" btnColor={color} onClick={this.toggleSideMenu} className="menu-toggler">
             <Icon iconKey="bars" type="far" />
         </Button>,
@@ -94,7 +94,7 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
                             <li>What the component is used for</li>
                             <li>How to use it</li>
                             <li>Its appearance</li>
-                            <li>The APIs the component can take</li>
+                            <li>The props the component can take</li>
                         </ul>
 
                         <div className="component-preview">

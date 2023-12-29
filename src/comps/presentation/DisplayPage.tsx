@@ -3,7 +3,7 @@ import { Display } from "../layout/Display"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class DisplayPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render some information displayer.</WhenToUse>
         <Usage />
 
@@ -37,7 +37,7 @@ export class DisplayPage extends React.Component{
             {
                 name: "title",
                 desc: "The display title.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

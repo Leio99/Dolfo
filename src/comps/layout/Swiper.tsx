@@ -29,7 +29,7 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
 
     getSwipes = (): Swipe[] => React.Children.map(this.props.children, (child: any) => child).filter(t => !!t)
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const swipes = this.getSwipes(),
         { opened } = this.state
         

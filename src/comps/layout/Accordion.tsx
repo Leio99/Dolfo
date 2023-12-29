@@ -4,7 +4,7 @@ import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
 interface IProps extends React.PropsWithChildren{
-	readonly title: string | JSX.Element
+	readonly title: string | React.ReactNode
 	readonly opened?: boolean
 	readonly wrapperStyle?: CSSProperties
 	readonly wrapperClassName?: string
@@ -75,7 +75,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 
 	internalHandler = () => this.handleAccordions()
 	
-	render = (): JSX.Element => {
+	render = (): React.ReactNode => {
 		const { props } = this,
 		{ opened } = this.state
 		

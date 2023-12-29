@@ -4,7 +4,7 @@ import { Popover } from "../layout/Popover"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class PopoverPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a popover message.</WhenToUse>
         <Usage />
 
@@ -66,7 +66,7 @@ export class PopoverPage extends React.Component{
             {
                 name: "content",
                 desc: "The popover content.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {

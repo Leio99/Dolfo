@@ -6,7 +6,7 @@ import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class CardPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a card component.</WhenToUse>
         <Usage />
 
@@ -46,7 +46,7 @@ export class CardPage extends React.Component{
             {
                 name: "title",
                 desc: "The title of the card.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null (title not shown)"
             },

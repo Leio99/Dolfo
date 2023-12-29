@@ -3,7 +3,7 @@ import { Accordion } from "../layout/Accordion"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class AccordionPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render an accordion component with hidden content.</WhenToUse>
         <Usage />
 
@@ -48,7 +48,7 @@ export class AccordionPage extends React.Component{
             {
                 name: "title",
                 desc: "The accordion title.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {

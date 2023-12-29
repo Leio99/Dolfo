@@ -75,7 +75,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
 
     getTitle = ({ nome, cognome }: any) => cognome + " " + nome
 
-    getDetailTitle = ({ nome, cognome }: any): JSX.Element => <span>
+    getDetailTitle = ({ nome, cognome }: any): React.ReactNode => <span>
         {this.getTitle({ nome, cognome })} <Status type="info" style={{
             fontSize: "initial",
             fontWeight: "normal",
@@ -83,7 +83,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
         }}>Attivo</Status>
     </span>
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { list } = this.state
 
         return <>
@@ -140,7 +140,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                 {
                     name: "getDetailTitle",
                     desc: "Function to determine the title of the detail page.",
-                    type: "function (must return string or JSX)",
+                    type: "function (must return string or ReactNode)",
                     required: true,
                     default: "null",
                     fnParams: "The selected item in the grid (any)"
@@ -148,7 +148,7 @@ export class MasterdetailPage extends React.Component<{}, IState>{
                 {
                     name: "getTitle",
                     desc: "Function to determine the title of the card (when shown).",
-                    type: "function (must return string or JSX)",
+                    type: "function (must return string or ReactNode)",
                     required: true,
                     default: "null",
                     fnParams: "The selected item in the grid (any)"

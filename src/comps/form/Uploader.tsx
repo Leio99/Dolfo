@@ -126,7 +126,7 @@ export class Uploader extends React.PureComponent<UploaderProps, IState>{
         this.setState({ value: "" })
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { files, value } = this.state,
         icon = props.icon || { iconKey: "file-upload", type: "far" }

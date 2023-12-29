@@ -23,7 +23,7 @@ export class SpotlightPage extends React.Component<unknown, { readonly visible: 
     
     toggle = () => this.setState({ visible: !this.state.visible })
 
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a search dialog (or spotlight).</WhenToUse>
 
         <ResultCode

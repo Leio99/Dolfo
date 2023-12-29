@@ -9,7 +9,7 @@ interface TimelineItemProps extends React.PropsWithChildren{
 export class Timeline extends React.Component<React.PropsWithChildren>{
     getOptions = (): TimelineItem[] => React.Children.map(this.props.children, (child: any) => child).filter(o => !!o)
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const options = this.getOptions(),
         hideAll = options.every(o => !o.props.position || o.props.position === (options[0].props.position || "left"))
 

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import { Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
-    readonly label: string | JSX.Element
+    readonly label: string | React.ReactNode
     readonly preventCloseOnClick?: boolean
     readonly disabled?: boolean
     readonly className?: string
@@ -97,7 +97,7 @@ export class DropDown extends React.Component<IProps, IState>{
         }
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { opened } = this.state,
         items = this.getItems()

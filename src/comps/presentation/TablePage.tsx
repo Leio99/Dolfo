@@ -16,7 +16,7 @@ export class TablePage extends React.Component{
         { firstName: "James", lastName: "Spark", birth: new Date(1970, 11, 9), isActive: false }
     ]
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         return <>
             <WhenToUse>When you want to render a table with data.</WhenToUse>
             <Usage />

@@ -119,7 +119,7 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
 
     decreaseValue = (): void => this.onChange({ target: { value: (Number(this.state.value) - 1).toString() }} as React.ChangeEvent<HTMLInputElement>)
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { focused, rows, value, inputType } = this.state,
         icon = props.icon || {

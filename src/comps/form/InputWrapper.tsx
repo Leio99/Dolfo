@@ -5,7 +5,7 @@ import { Tooltip } from "../layout/Tooltip"
 import { Constants } from "../shared/Constants"
 
 interface IProps extends React.PropsWithChildren{
-    readonly label?: JSX.Element | string
+    readonly label?: React.ReactNode | string
     readonly style?: CSSProperties
     readonly icon: BaseIconProps
     readonly focusBool?: boolean
@@ -49,7 +49,7 @@ export class InputWrapper extends React.PureComponent<IProps, IState>{
         }
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { error } = this.state
 

@@ -1,9 +1,9 @@
 import React, { CSSProperties, createRef } from "react"
 
 interface DisplayItemProps{
-    readonly title?: JSX.Element | string
+    readonly title?: React.ReactNode | string
     readonly imageUrl?: string
-    readonly infos?: JSX.Element | string
+    readonly infos?: React.ReactNode | string
     readonly className?: string
     readonly style?: CSSProperties
     readonly onClick?: () => void

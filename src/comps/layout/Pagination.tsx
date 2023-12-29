@@ -60,7 +60,7 @@ export class Pagination extends React.Component<IProps, IState>{
 
     goToPrevPage = (): void => this.changePage(this.state.page - 1)
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props, state } = this,
         { page } = state,
         filteredButtons = this.getFilteredButtons()

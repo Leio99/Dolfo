@@ -4,7 +4,7 @@ import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class DropdownPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a dropdown menu.</WhenToUse>
         <Usage />
 
@@ -57,7 +57,7 @@ export class DropdownPage extends React.Component{
             {
                 name: "label",
                 desc: "The label of the dropdown.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {

@@ -43,7 +43,7 @@ export class ResultsView extends BaseExportableManager<ResultViewProps, BaseResu
         }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(this.state.layoutType))
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { hideToggleButton, columns, data, getTitle, exportFormat, exportable } = this.props,
         { layoutType } = this.state
 

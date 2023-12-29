@@ -6,7 +6,7 @@ interface IProps extends React.PropsWithChildren{
 }
 
 export class MenuItem extends React.PureComponent<IProps>{
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this
 
         return <div className={"dolfo-menu-voice" + (props.selected ? " selected": "")} onClick={props.onClick}>

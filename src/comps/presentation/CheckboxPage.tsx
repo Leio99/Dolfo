@@ -3,7 +3,7 @@ import { CheckBox } from "../form/CheckBox"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class CheckboxPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a checkbox component inside your form.</WhenToUse>
         <Usage />
 
@@ -42,7 +42,7 @@ export class CheckboxPage extends React.Component{
             {
                 name: "label",
                 desc: "The label to show near the checkbox.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

@@ -11,13 +11,13 @@ interface IProps {
     readonly barSize?: "small" | "medium" | "large"
     readonly circleWidth?: number
     readonly loading?: boolean
-    readonly loadingText?: string | JSX.Element
+    readonly loadingText?: string | React.ReactNode
     readonly className?: string
-    readonly customCircleText?: string | JSX.Element
+    readonly customCircleText?: string | React.ReactNode
 }
 
 export class Progress extends React.PureComponent<IProps>{
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         percent = props.percent < 0 ? 0 : props.percent > 100 ? 100 : props.percent,
         color = props.color || "darkblue",

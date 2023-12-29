@@ -22,7 +22,7 @@ export interface ButtonProps extends React.PropsWithChildren{
 }
 
 export interface BtnOptions{
-    readonly text: string | JSX.Element
+    readonly text: string | React.ReactNode
     readonly onClick: () => void
     readonly disabled?: boolean
 }
@@ -51,7 +51,7 @@ class Button extends React.PureComponent<ButtonProps, IState>{
 
     handleClickOutside = () => this.props.type === "popup" && this.props.options && this.closePopup()
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         btnType = props.type === "popup" && props.options ? "popup" : (props.type || "button"),
         { openPopup } = this.state

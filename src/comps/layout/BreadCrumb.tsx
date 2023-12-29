@@ -21,7 +21,7 @@ export class BreadCrumb extends React.PureComponent<IProps>{
         })
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const options = this.getOptions(),
         props = this.props
 

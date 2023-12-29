@@ -17,7 +17,7 @@ export class ListsidemenuPage extends React.Component<any, {
 
     toggle = (color: ButtonColors) => this.setState({ color })
 
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a side menu with list style.</WhenToUse>
 
         <ResultCode
@@ -104,7 +104,7 @@ export class ListsidemenuPage extends React.Component<any, {
             {
                 name: "text",
                 desc: "The label of the sub-menu.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {

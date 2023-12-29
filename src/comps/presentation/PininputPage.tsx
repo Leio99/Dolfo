@@ -3,7 +3,7 @@ import { PinInput } from "../form/PinInput"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class PininputPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a pin input.</WhenToUse>
         <Usage />
 
@@ -82,7 +82,7 @@ export class PininputPage extends React.Component{
             {
                 name: "label",
                 desc: "The label of the input.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

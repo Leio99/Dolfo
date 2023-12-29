@@ -4,7 +4,7 @@ import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
 
 export interface ContextMenuOption{
-    readonly label: string | JSX.Element
+    readonly label: string | React.ReactNode
     readonly onClick: (e: MouseEvent, clickedItem: HTMLElement) => void
     readonly disabled?: boolean
 }

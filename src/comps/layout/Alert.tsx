@@ -11,7 +11,7 @@ interface IProps extends React.PropsWithChildren{
     readonly className?: string
     readonly onClose?: () => void
     readonly closable?: boolean
-    readonly customAction?: JSX.Element
+    readonly customAction?: React.ReactNode
 }
 
 export class Alert extends React.Component<IProps>{
@@ -43,7 +43,7 @@ export class Alert extends React.Component<IProps>{
 
     componentWillUnmount = () => this.isComponentMounted = false
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this
 
         return <div className={"dolfo-alert" + (props.type ? (" " + props.type) : "") + (props.className ? (" " + props.className) : "")} style={props.style} ref={this.ref}>

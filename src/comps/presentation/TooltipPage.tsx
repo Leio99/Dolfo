@@ -4,7 +4,7 @@ import { Tooltip } from "../layout/Tooltip"
 import { ResultCode, WhenToUse, Apis } from "./Layouts"
 
 export class TooltipPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to add some information tooltip.</WhenToUse>
 
         <ResultCode
@@ -38,7 +38,7 @@ export class TooltipPage extends React.Component{
             {
                 name: "tooltip",
                 desc: "The content of the tooltip.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {

@@ -7,7 +7,7 @@ import { Tooltip } from "./Tooltip"
 
 interface MessageProps extends BaseNotificationProps{
     readonly position?: NotificationPosition
-    readonly title?: string | JSX.Element
+    readonly title?: string | React.ReactNode
     readonly hideClose?: boolean
 }
 
@@ -24,7 +24,7 @@ export class MessageBox extends React.Component<MessageProps>{
         return messageBox
     }
 
-    private static getInner = (props: MessageProps, closeFn: () => void): JSX.Element => <div className={"dolfo-message-box-inner" + (props.className ? (" " + props.className) : "")}>
+    private static getInner = (props: MessageProps, closeFn: () => void): React.ReactNode => <div className={"dolfo-message-box-inner" + (props.className ? (" " + props.className) : "")}>
         <Tooltip tooltip={Constants.CLOSE_TEXT}>
             {!props.hideClose && <CloseIcon className="dolfo-message-close" onClick={() => {
                 closeFn()
@@ -46,7 +46,7 @@ export class MessageBox extends React.Component<MessageProps>{
         }
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         internalProps = MessageBox.getInternalProps(props),
         message = MessageBox.getInner(props, () => this.ref.current.getRef()?.remove())

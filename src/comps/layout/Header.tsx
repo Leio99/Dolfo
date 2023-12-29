@@ -3,7 +3,7 @@ import Button, { ButtonColors } from "./Button"
 import { BaseIconProps, Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
-    readonly title?: string | JSX.Element
+    readonly title?: string | React.ReactNode
     readonly menuColor?: ButtonColors
     readonly menuTogglerFn?: () => void
     readonly menuTogglerIcon?: BaseIconProps
@@ -13,7 +13,7 @@ interface IProps extends React.PropsWithChildren{
 }
 
 export class Header extends React.PureComponent<IProps>{
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         icon = props.menuTogglerIcon || { type: "far", iconKey: "bars" }
 

@@ -4,7 +4,7 @@ import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class BreadcrumbPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a navigation breadcrumb.</WhenToUse>
         <Usage />
 

@@ -7,7 +7,7 @@ import { Tooltip } from "../layout/Tooltip"
 import { ContextMenu } from "../layout/ContextMenu"
 
 export class ContextMenuPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to open a custom menu by clicking on a button.</WhenToUse>
 
         <ResultCode

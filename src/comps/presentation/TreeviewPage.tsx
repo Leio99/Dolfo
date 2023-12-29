@@ -320,7 +320,7 @@ export class TreeviewPage extends TreeView{
         return arr
     }
 
-    getLabel = (node: TreeNode): string | JSX.Element => {
+    getLabel = (node: TreeNode): string | React.ReactNode => {
         if(node.type === "root") return node.data.title
         if(node.type === "comici") return "Comici"
         if(node.type === "luoghi") return "Canali"
@@ -398,7 +398,7 @@ export class TreeviewPage extends TreeView{
         .finally(loading.close)
     }
 
-    getActions = (node: TreeNode): JSX.Element => {
+    getActions = (node: TreeNode): React.ReactNode => {
         if(node.type === "concorrente" || node.type === "conduttore") return <Tooltip tooltip="Apri Wikipedia">
             <Button btnColor="black" type="text" onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")}>
                 <Icon iconKey="wikipedia-w" type="fab" large />
@@ -448,7 +448,7 @@ export class TreeviewPage extends TreeView{
         </>
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         return <>
             <WhenToUse>When you want to render a tree-view table.</WhenToUse>
             <Usage />
@@ -506,7 +506,7 @@ export class TreeviewPage extends TreeView{
         </>
     }
 
-    getColumnData = (col: IColumn, node: TreeNode): JSX.Element => {
+    getColumnData = (col: IColumn, node: TreeNode): React.ReactNode => {
         if(node.type === "root" && this.hasChildren(node) && col.field === "status"){
             return <Status type="info" hideIcon>
                 <Icon iconKey="calendar-day" type="far" /> Prossimamente

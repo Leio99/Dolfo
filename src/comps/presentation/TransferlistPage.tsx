@@ -3,7 +3,7 @@ import { TransferList } from "../form/TransferList"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class TransferlistPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a transfer list component inside your form.</WhenToUse>
         <Usage notes="The user can double click an item to transfer it." />
 
@@ -112,7 +112,7 @@ export class TransferlistPage extends React.Component{
             {
                 name: "label",
                 desc: "The label of the transfer input.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 default: "null",
                 required: false
             },

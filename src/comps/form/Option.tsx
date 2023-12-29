@@ -6,7 +6,7 @@ import { CheckBox } from "./CheckBox"
 
 interface IProps extends BaseInputProps{
     readonly value: any
-    readonly label: string | JSX.Element
+    readonly label: string | React.ReactNode
     readonly selected?: boolean
     readonly multiple?: boolean
     readonly isRadio?: boolean
@@ -31,7 +31,7 @@ export class Option extends React.PureComponent<IProps>{
         }
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this
 
         if(props.isRadio){

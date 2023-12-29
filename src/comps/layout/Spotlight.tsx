@@ -5,7 +5,7 @@ import { LoadingIcon } from "./Icon"
 
 interface IProps{
     readonly data: any[]
-    readonly renderItem: (item: any) => string | JSX.Element
+    readonly renderItem: (item: any) => string | React.ReactNode
     readonly loading?: boolean
     readonly visible?: boolean
     readonly onChangeFilter?: (value: string) => void
@@ -89,7 +89,7 @@ export class Spotlight extends React.Component<IProps, IState>{
             this.props.onClickItem(item)
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props, state } = this,
         { visible, focusedIndex, filter } = state
 

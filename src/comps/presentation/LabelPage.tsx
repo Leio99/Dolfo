@@ -3,7 +3,7 @@ import { Label } from "../layout/Label"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class LabelPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render an alert message.</WhenToUse>
         <Usage />
 

@@ -4,7 +4,7 @@ import { Status } from "../layout/Status"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class StatustagsPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render some status tags or chips.</WhenToUse>
         <Usage />
 

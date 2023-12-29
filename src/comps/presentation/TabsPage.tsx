@@ -5,7 +5,7 @@ import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class TabsPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render some tabs.</WhenToUse>
         <Usage />
 
@@ -112,7 +112,7 @@ export class TabsPage extends React.Component{
             {
                 name: "title",
                 desc: "The title of the tab.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {

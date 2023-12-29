@@ -5,7 +5,7 @@ import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, OptionApis, IconApis } from "./Layouts"
 
 export class SelectPage extends React.Component<MenuContentProps>{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a select combobox component inside your form.</WhenToUse>
         <Usage notes="using the up and down arrows, the user can navigate through the options and select them pressing the Enter key." />
 
@@ -156,7 +156,7 @@ export class SelectPage extends React.Component<MenuContentProps>{
             {
                 name: "label",
                 desc: "The label to show near the combobox.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

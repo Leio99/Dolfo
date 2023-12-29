@@ -48,15 +48,15 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     abstract getData: (node: TreeNode) => TreeNode[]
 
-    abstract getLabel: (node: TreeNode) => string | JSX.Element
+    abstract getLabel: (node: TreeNode) => string | React.ReactNode
 
     abstract hasChildren: (node: TreeNode) => boolean
 
-    protected getActions = (node: TreeNode): JSX.Element => null
+    protected getActions = (node: TreeNode): React.ReactNode => null
 
     protected onDoubleClick: (node: TreeNode) => void
 
-    protected getColumnData = (column: IColumn, node: TreeNode): JSX.Element => null 
+    protected getColumnData = (column: IColumn, node: TreeNode): React.ReactNode => null 
 
     toggleNode = (node: TreeNode, index: string): void => {
         if(!this.hasChildren(node)) return
@@ -89,7 +89,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
             this.getData(node).forEach((n, i) => this.getNodeKeys(n, newLevel, index + "-" + i, prevOpened))
     }
 
-    renderNode = (node: TreeNode, treeList: JSX.Element[], id: string, prevOpened: boolean, autoExpand: string[] = null): void => {
+    renderNode = (node: TreeNode, treeList: React.ReactNode[], id: string, prevOpened: boolean, autoExpand: string[] = null): void => {
         const hasChildren = this.hasChildren(node),
         { level } = this.state,
         isOpened = level[id]
@@ -112,7 +112,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
         }
     }
 
-    getRender = (node: TreeNode, index: string, prevOpened: boolean): JSX.Element => {
+    getRender = (node: TreeNode, index: string, prevOpened: boolean): React.ReactNode => {
         const hasChildren = this.hasChildren(node),
         { level, showActions, addColumn } = this.state,
         isOpened = level[index] && prevOpened && hasChildren,
@@ -172,7 +172,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     collapseAllNodes = (): void => this.setState({ level: {} })
 
-    renderTree = (): JSX.Element => {
+    renderTree = (): React.ReactNode => {
         const { list, showActions, showExpandAll, descColumn, addColumn } = this.state,
         baseSpan = addColumn?.length || 0
 
@@ -211,7 +211,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
                     {
                         list && list.length ? list.map((data, i) => {
                             const node = { type: "root", data },
-                            treeList: JSX.Element[] = []
+                            treeList: React.ReactNode[] = []
                             
                             this.renderNode(node, treeList, i.toString(), true)
 

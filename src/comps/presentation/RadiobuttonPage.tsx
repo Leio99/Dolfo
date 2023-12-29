@@ -5,7 +5,7 @@ import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, OptionApis } from "./Layouts"
 
 export class RadiobuttonPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a radio button component inside your form.</WhenToUse>
         <Usage />
 
@@ -51,7 +51,7 @@ export class RadiobuttonPage extends React.Component{
             {
                 name: "label",
                 desc: "The label of the radio buttons.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 default: "null",
                 required: false
             },

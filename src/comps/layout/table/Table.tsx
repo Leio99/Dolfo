@@ -51,7 +51,7 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
         })
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { activeFilter, orderIndexes } = this.state,
         data = this.getFilteredData(),

@@ -4,7 +4,7 @@ import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class TextinputPage extends React.Component<MenuContentProps>{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a text input component inside your form.</WhenToUse>
         <Usage notes="includes password input, email input, number input and textarea." />
 
@@ -116,7 +116,7 @@ export class TextinputPage extends React.Component<MenuContentProps>{
             {
                 name: "label",
                 desc: "The label to show over the input.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

@@ -162,7 +162,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
         })
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { events, currentYear, currentMonth } = this.state,
         calendario = getCalendar(currentMonth, currentYear),
         monthEvents = events.filter(e => e.month === currentMonth && e.year === currentYear)

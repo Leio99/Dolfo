@@ -22,7 +22,7 @@ export class DialogPage extends React.Component<MenuContentProps, {
 
     toggleDialog = (key: string) => this.setState({ [key]: !this.state[key] })
     
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a dialog message.</WhenToUse>
         <Usage />
 
@@ -121,7 +121,7 @@ export class DialogPage extends React.Component<MenuContentProps, {
             {
                 name: "title",
                 desc: "The title of the dialog.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },
@@ -149,14 +149,14 @@ export class DialogPage extends React.Component<MenuContentProps, {
             {
                 name: "okText",
                 desc: "Text for the ok button.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },
             {
                 name: "cancelText",
                 desc: "Text for the cancel button.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },
@@ -329,7 +329,7 @@ class Example extends React.Component<ComponentAsDialogProps, { readonly current
         }
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const codes = [`export class Parent extends React.Component {\n\tshowDialog = () => openDialogComponent(Children)\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`, `export class Children extends React.Component<ComponentAsDialogProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tThis is my content\n\t</Dialog>\n}`, `export class Parent extends React.Component {\n\tshowDialog = () => openDialogComponent(Children, {\n\t\tfirstName: "Jack",\n\t\tlastName: "Nicholson"\n\t})\n\n\trender = () => <Button btnColor="blue" onClick={this.showDialog}>Open dialog</Button>\n}`, `interface ChildrenProps extends ComponentAsDialogProps{\n\treadonly firstName: string\n\treadonly lastName: string\n}\n\nexport class Children extends React.Component<ChildrenProps>{\n\trender = () => <Dialog title="Some title" onClose={this.props.close}>\n\t\tMy name is {this.props.firstName} {this.props.lastName}\n\t</Dialog>\n}`],
         { current } = this.state
 
@@ -363,7 +363,7 @@ class Example extends React.Component<ComponentAsDialogProps, { readonly current
 }
 
 class DialogProperties extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         Normal dialog properties (object, required) plus:
 
         <Table style={{ marginTop: 10 }} columns={[
@@ -384,7 +384,7 @@ class DialogProperties extends React.Component{
                 name: "icon",
                 desc: "Additional icon near the title.",
                 required: false,
-                type: "JSX",
+                type: "ReactNode",
                 default: "null"
             }
         ]} />

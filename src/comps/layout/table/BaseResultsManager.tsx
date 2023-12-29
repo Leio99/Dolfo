@@ -18,7 +18,7 @@ interface IState{
 }
 
 export abstract class BaseResultsManager<P = {}, S = {}> extends BaseExportableManager<ResultsManagerProps & P, S & IState>{
-    abstract render: () => JSX.Element
+    abstract render: () => React.ReactNode
 
     constructor(props: P & ResultsManagerProps, state?: S){
         super(props)

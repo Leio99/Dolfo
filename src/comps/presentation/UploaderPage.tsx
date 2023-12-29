@@ -5,7 +5,7 @@ import { Constants } from "../shared/Constants"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class UploaderPage extends React.Component<MenuContentProps>{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a file uploader component inside your form.</WhenToUse>
         <Usage />
 
@@ -92,7 +92,7 @@ export class UploaderPage extends React.Component<MenuContentProps>{
             {
                 name: "label",
                 desc: "The label to show over the uploader.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: `'${Constants.UPLOAD_FILE_DROP_LABEL}' if 'dropArea' is true, '${Constants.UPLOAD_FILE_LABEL}' instead.`
             },

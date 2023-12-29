@@ -3,7 +3,7 @@ import { Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
     readonly opened?: boolean
-    readonly text: string | JSX.Element
+    readonly text: string | React.ReactNode
     readonly onClick?:() => void
 }
 
@@ -34,7 +34,7 @@ export class SubMenu extends React.PureComponent<IProps, IState>{
         this.props.onClick && this.props.onClick()
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { opened } = this.state
 

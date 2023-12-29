@@ -14,7 +14,7 @@ export class SidemenuPage extends React.Component<any, {
 
     toggle = (key: string) => this.setState({ [key]: !this.state[key] })
 
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a side menu.</WhenToUse>
         <Usage notes="side menu can also be closed by clicking outside it." />
 
@@ -177,7 +177,7 @@ export class SidemenuPage extends React.Component<any, {
             {
                 name: "text",
                 desc: "The label of the sub-menu.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {

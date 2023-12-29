@@ -2,7 +2,7 @@ import React, { CSSProperties, createRef } from "react"
 import { Icon } from "./Icon"
 
 interface CardProps{
-    readonly title?: string | JSX.Element
+    readonly title?: string | React.ReactNode
     readonly className?: string
     readonly style?: CSSProperties
 }

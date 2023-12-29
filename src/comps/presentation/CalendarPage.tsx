@@ -4,7 +4,7 @@ import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class CalendarPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a Google Calendar.</WhenToUse>
         <Usage notes={<>You need to add <em>{'<script src="https://apis.google.com/js/api.js"></script>'}</em> to your index.html page.</>} />
 

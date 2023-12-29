@@ -15,7 +15,7 @@ interface IState{
 }
 
 interface TabProps extends React.PropsWithChildren{
-    readonly title: string | JSX.Element
+    readonly title: string | React.ReactNode
     readonly isDefault?: boolean
     readonly style?: CSSProperties
     readonly disabled?: boolean
@@ -109,7 +109,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
 
     preventSpaceKey = (e: React.KeyboardEvent): void => e.key.charCodeAt(0) === 32 && e.preventDefault()
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { children, currentTab } = this.state,
         isVertical = props.vertical

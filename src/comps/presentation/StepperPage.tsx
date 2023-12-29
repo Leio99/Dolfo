@@ -20,7 +20,7 @@ export class StepperPage extends React.Component<MenuContentProps, {
 
     removeStep = (key: string) => this.setState({ [key]: this.state[key] - 1 })
 
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a stepper.</WhenToUse>
         <Usage />
 

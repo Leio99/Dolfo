@@ -66,7 +66,7 @@ export class MasterDetailExample extends React.Component<{}, IState>{
 
     getTitle = ({ nome, cognome }: any) => cognome + " " + nome
 
-    getDetailTitle = ({ nome, cognome }: any): JSX.Element => <span>
+    getDetailTitle = ({ nome, cognome }: any): React.ReactNode => <span>
         {this.getTitle({ nome, cognome })} <Status type="info" style={{
             fontSize: "initial",
             fontWeight: "normal",
@@ -74,7 +74,7 @@ export class MasterDetailExample extends React.Component<{}, IState>{
         }}>Attivo</Status>
     </span>
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { list } = this.state
 
         return <MasterDetail columns={[
@@ -397,7 +397,7 @@ TreeExample = `export class TreeviewPage extends TreeView{
         return arr
     }
 
-    getLabel = (node: TreeNode): string | JSX.Element => {
+    getLabel = (node: TreeNode): string | React.ReactNode => {
         if(node.type === "root") return node.data.title
         if(node.type === "comici") return "Comici"
         if(node.type === "luoghi") return "Canali"
@@ -475,7 +475,7 @@ TreeExample = `export class TreeviewPage extends TreeView{
         .finally(loading.close)
     }
 
-    getActions = (node: TreeNode): JSX.Element => {
+    getActions = (node: TreeNode): React.ReactNode => {
         if(node.type === "concorrente" || node.type === "conduttore") return <Tooltip tooltip="Apri Wikipedia">
             <Button btnColor="black" type="text" onClick={() => window.open("https://it.wikipedia.org/wiki/" + node.data.nome, "_blank")}>
                 <Icon iconKey="wikipedia-w" type="fab" large />
@@ -525,7 +525,7 @@ TreeExample = `export class TreeviewPage extends TreeView{
         </>
     }
 
-    getColumnData = (col: IColumn, node: TreeNode): JSX.Element => {
+    getColumnData = (col: IColumn, node: TreeNode): React.ReactNode => {
         if(node.type === "root" && this.hasChildren(node) && col.field === "status"){
             return <Status type="info" hideIcon>
                 <Icon iconKey="calendar-day" type="far" /> Prossimamente

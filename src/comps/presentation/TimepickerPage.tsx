@@ -4,7 +4,7 @@ import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class TimepickerPage extends React.Component<MenuContentProps>{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a time picker component inside your form.</WhenToUse>
         <Usage notes="user can use arrow up and down keys to increase or decrease hours/minutes." />
 
@@ -72,7 +72,7 @@ export class TimepickerPage extends React.Component<MenuContentProps>{
             {
                 name: "label",
                 desc: "The label to show over the time picker.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

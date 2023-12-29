@@ -14,7 +14,7 @@ export interface ComponentAsDialogProps{
 }
 
 interface BaseProps{
-    readonly title?: string | JSX.Element
+    readonly title?: string | React.ReactNode
     readonly onOk?: () => void
     readonly width?: string
     readonly okText?: string
@@ -27,7 +27,7 @@ export interface DialogFullProps extends BaseProps, React.PropsWithChildren{
     readonly visible?: boolean
     readonly okBtnClass?: string
     readonly cancelBtnClass?: string
-    readonly cancelText?: string | JSX.Element
+    readonly cancelText?: string | React.ReactNode
     readonly hideCancel?: boolean
     readonly style?: CSSProperties
     readonly okType?: ButtonColors
@@ -45,8 +45,8 @@ interface IState{
 
 interface DialogProps extends DialogFullProps{
     readonly type?: DialogType
-    readonly icon?: JSX.Element
-    readonly content?: string | JSX.Element
+    readonly icon?: React.ReactNode
+    readonly content?: string | React.ReactNode
 }
 
 export class Dialog extends React.PureComponent<DialogFullProps, IState>{
@@ -72,7 +72,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         })
     }
 
-    static yesNoDialog = (title: string | JSX.Element, message: string | JSX.Element, onYes: DialogProps["onOk"], onNo?: DialogProps["onClose"]): Closable => openDialog({
+    static yesNoDialog = (title: string | React.ReactNode, message: string | React.ReactNode, onYes: DialogProps["onOk"], onNo?: DialogProps["onClose"]): Closable => openDialog({
         title: title || Constants.CONFIRM_TITLE,
         content: message,
         onOk: onYes,
@@ -84,7 +84,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         onClose: onNo
     })
 
-    static loadingDialog = (loadingText: string | JSX.Element = Constants.LOADING_TEXT): Closable => openDialog({
+    static loadingDialog = (loadingText: string | React.ReactNode = Constants.LOADING_TEXT): Closable => openDialog({
         title: "",
         content: <div>
             <LoadingIcon spinning /> {loadingText}
@@ -154,7 +154,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         return Constants.INFO_TEXT
     }
 
-    public static getIcon = (icon: string): JSX.Element => {
+    public static getIcon = (icon: string): React.ReactNode => {
         if(icon === "success") return <CheckCircleOutlineIcon color="var(--green)" />
         if(icon === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
         if(icon === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
@@ -175,7 +175,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         this.props.onOk && this.props.onOk()
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { visible } = this.state
 

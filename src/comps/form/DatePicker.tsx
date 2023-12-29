@@ -460,7 +460,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         }
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { date, showCalendar, currentHour, currentMinute } = this.state,
         props = this.props,
         icon = props.icon || {

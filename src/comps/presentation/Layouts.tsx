@@ -8,7 +8,7 @@ import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import { copyToClipBoard } from "../shared/utility"
 
 export class WhenToUse extends React.Component<React.PropsWithChildren>{
-    render = (): JSX.Element => <div className="when-to-use">
+    render = (): React.ReactNode => <div className="when-to-use">
         <h3>When to use?</h3>
         {this.props.children}
     </div>
@@ -21,7 +21,7 @@ interface ApisProps{
 }
 
 export class Apis extends React.Component<ApisProps>{
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { data, title, id } = this.props,
         columns: IColumn[] = [
             { field: "name", label: "Name"},
@@ -44,7 +44,7 @@ export class Apis extends React.Component<ApisProps>{
 
 interface ResultCodeProps{
     readonly title: string
-    readonly result: JSX.Element
+    readonly result: React.ReactNode
     readonly code: string
 }
 
@@ -65,7 +65,7 @@ export class ResultCode extends React.Component<ResultCodeProps, ResultCodeState
 
     showCode = () => this.setState({ showing: "code" })
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { showing } = this.state,
         { code, result, title } = this.props,
         isCode = showing === "code"
@@ -98,8 +98,8 @@ export class ResultCode extends React.Component<ResultCodeProps, ResultCodeState
     }
 }
 
-export class Usage extends React.Component<{ readonly notes?: string | JSX.Element }>{
-    render = (): JSX.Element => {
+export class Usage extends React.Component<{ readonly notes?: string | React.ReactNode }>{
+    render = (): React.ReactNode => {
         return <>
             <h3 className="usage">Usage</h3>
             {this.props.notes && <p className="notes">Note: {this.props.notes}</p>}
@@ -108,7 +108,7 @@ export class Usage extends React.Component<{ readonly notes?: string | JSX.Eleme
 }
 
 export class IconApis extends React.Component<MenuContentProps>{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <Apis id="iconProps" title="BaseIconProps" data={[
             {
                 name: "iconKey",
@@ -132,7 +132,7 @@ export class IconApis extends React.Component<MenuContentProps>{
 }
 
 export class OptionApis extends React.Component{
-    render = (): JSX.Element => <Apis id="optionProps" title="Option properties" data={[
+    render = (): React.ReactNode => <Apis id="optionProps" title="Option properties" data={[
         {
             name: "value",
             desc: "The value of the option.",
@@ -142,12 +142,12 @@ export class OptionApis extends React.Component{
         {
             name: "label",
             desc: "The label of the option.",
-            type: "string | JSX.Element",
+            type: "string | React.ReactNode",
             required: true
         },
         {
             name: "getLabelString",
-            desc: "If label is a JSX Element, this function can be passed to define a string label for the option (in case of multiple selection).",
+            desc: "If label is a ReactNode Element, this function can be passed to define a string label for the option (in case of multiple selection).",
             type: "Function (requires the function to return a string value)",
             required: false
         }
@@ -155,7 +155,7 @@ export class OptionApis extends React.Component{
 }
 
 export class ColumnApis extends React.Component<{ readonly hideData?: boolean }>{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <Apis id="columnProps" title="Column properties" data={[
             {
                 name: "field",

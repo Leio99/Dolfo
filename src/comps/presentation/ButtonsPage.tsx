@@ -5,7 +5,7 @@ import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class ButtonsPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a button.</WhenToUse>
         <Usage />
 
@@ -184,7 +184,7 @@ export class ButtonsPage extends React.Component{
             {
                 name: "text",
                 desc: "The text of the option.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {

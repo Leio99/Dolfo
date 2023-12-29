@@ -11,7 +11,7 @@ export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "b
 export type NotificationDelay = number | "never"
 
 export interface BaseNotificationProps{
-    readonly message: string | JSX.Element
+    readonly message: string | React.ReactNode
     readonly hideIcon?: boolean
     readonly hideDelay?: NotificationDelay
     readonly style?: CSSProperties
@@ -32,27 +32,27 @@ export class NotificationMsg extends React.Component<NotificationProps>{
 
     getRef = () => this.ref.current
 
-    static showError = (message: string | JSX.Element): Closable => showNotification({
+    static showError = (message: string | React.ReactNode): Closable => showNotification({
         message,
         type: "error"
     })
 
-    static showInfo = (message: string | JSX.Element): Closable => showNotification({
+    static showInfo = (message: string | React.ReactNode): Closable => showNotification({
         message,
         type: "info"
     })
 
-    static showSuccess = (message: string | JSX.Element): Closable => showNotification({
+    static showSuccess = (message: string | React.ReactNode): Closable => showNotification({
         message,
         type: "success"
     })
 
-    static showLoading = (message?: string | JSX.Element): Closable => showNotification({
+    static showLoading = (message?: string | React.ReactNode): Closable => showNotification({
         message: message || Constants.LOADING_TEXT,
         type: "loading"
     })
 
-    static showWarning = (message: string | JSX.Element): Closable => showNotification({
+    static showWarning = (message: string | React.ReactNode): Closable => showNotification({
         message,
         type: "warning"
     })
@@ -131,7 +131,7 @@ export class NotificationMsg extends React.Component<NotificationProps>{
         notification.classList.add("removed")
     }
 
-    getIcon = (type: string): JSX.Element => {
+    getIcon = (type: string): React.ReactNode => {
         if(type === "info") return <InfoCircleOutlineIcon color="var(--blue)" />
         if(type === "error") return <ErrorCircleOutlineIcon color="var(--red)" />
         if(type === "loading") return <LoadingIcon spinning />
@@ -141,7 +141,7 @@ export class NotificationMsg extends React.Component<NotificationProps>{
         return <ExclamationCircleIcon color="var(--blue)" />
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         position = props.position || "centered-top",
         closeFunc = props.type !== "loading" && props.dismissOnClick ? () => NotificationMsg.onClose(this.ref.current, props) : null,

@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react"
 import { BaseIconProps } from "../../layout/Icon"
 
 export interface BaseInputProps{
-    readonly label?: JSX.Element | string
+    readonly label?: React.ReactNode | string
     readonly disabled?: boolean
     readonly required?: boolean
     readonly style?: CSSProperties

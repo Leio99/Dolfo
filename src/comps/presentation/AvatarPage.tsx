@@ -4,7 +4,7 @@ import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 import avatarImage from "./images/avatarImage.png"
 
 export class AvatarPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a user avatar image.</WhenToUse>
         <Usage />
 

@@ -69,7 +69,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
 
     changeSlide = (currentSlide: number): void => this.setState({ currentSlide })
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { slides, currentSlide } = this.state,
         marginLeft = (-currentSlide * 100) + "%"

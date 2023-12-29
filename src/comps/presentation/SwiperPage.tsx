@@ -17,7 +17,7 @@ export class SwiperPage extends React.Component<any, {
 
     toggleOpen = () => this.setState({ opened: !this.state.opened })
 
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a master-detail swiper.</WhenToUse>
         <Usage />
 

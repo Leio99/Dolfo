@@ -4,7 +4,7 @@ import { ErrorIcon } from "../layout/Icon"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class AlertPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render an alert message.</WhenToUse>
         <Usage />
 

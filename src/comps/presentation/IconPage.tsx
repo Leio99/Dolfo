@@ -3,7 +3,7 @@ import { Icon } from "../layout/Icon"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class IconPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a simple icon.</WhenToUse>
         <Usage notes={<>the Icon component exports some default icons (i.e.: <em>CheckIcon, DeleteIcon, EditIcon, ...</em>), check them out!</>} />
 

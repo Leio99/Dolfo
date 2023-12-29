@@ -4,7 +4,7 @@ import { goToApiBlock, MenuContentProps } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
 
 export class DatepickerPage extends React.Component<MenuContentProps>{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a date picker inside your form.</WhenToUse>
         <Usage />
 
@@ -67,7 +67,7 @@ export class DatepickerPage extends React.Component<MenuContentProps>{
             {
                 name: "label",
                 desc: "The label to show over the input.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

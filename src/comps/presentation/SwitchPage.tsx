@@ -3,7 +3,7 @@ import { Switch } from "../form/Switch"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class SwitchPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a switcher component inside your form.</WhenToUse>
         <Usage />
 
@@ -56,7 +56,7 @@ export class SwitchPage extends React.Component{
             {
                 name: "label",
                 desc: "The label to show near the switcher.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

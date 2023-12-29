@@ -40,7 +40,7 @@ export class Switch extends React.PureComponent<SwitchProps, SwitchProps>{
         }
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { checked } = this.state
 

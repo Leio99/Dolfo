@@ -4,7 +4,7 @@ import { goToApiBlock } from "../MenuContent"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class SelectablelistPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a selectable list component inside your form.</WhenToUse>
         <Usage />
 
@@ -87,7 +87,7 @@ export class SelectablelistPage extends React.Component{
             {
                 name: "label",
                 desc: "The label of the list.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 default: "null",
                 required: false
             },
@@ -153,13 +153,13 @@ export class SelectablelistPage extends React.Component{
             {
                 name: "title",
                 desc: "The title of the card.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {
                 name: "desc",
                 desc: "The description of the card.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },
@@ -180,7 +180,7 @@ export class SelectablelistPage extends React.Component{
             {
                 name: "className",
                 desc: "Additional card className.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             }

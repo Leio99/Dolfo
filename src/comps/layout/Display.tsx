@@ -3,7 +3,7 @@ import { BaseColors } from "./Button"
 
 interface IProps extends React.PropsWithChildren{
     readonly color?: BaseColors
-    readonly title?: string | JSX.Element
+    readonly title?: string | React.ReactNode
     readonly style?: CSSProperties
     readonly className?: string
 }

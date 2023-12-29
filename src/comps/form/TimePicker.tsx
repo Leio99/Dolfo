@@ -236,7 +236,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
     handleTabKey = (e: React.KeyboardEvent): void => e.key.charCodeAt(0) === 84 && this.hideTime()
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { value, showTime } = this.state,
         icon = props.icon || {

@@ -6,7 +6,7 @@ import { Constants } from "../shared/Constants"
 import { ResultCode, WhenToUse, Usage } from "./Layouts"
 
 export class NotificationPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a notification.</WhenToUse>
         <Usage notes={<>this component can be rendered by calling a function (<em>NotificationMsg.show(params)</em>)</>} />
 
@@ -95,27 +95,27 @@ export class NotificationPage extends React.Component{
                 {
                     name: "showLoading",
                     desc: "Shows a loading notification.",
-                    params: `Loading text (string or JSX, default: '${Constants.LOADING_TEXT}'), not required`
+                    params: `Loading text (string or ReactNode, default: '${Constants.LOADING_TEXT}'), not required`
                 },
                 {
                     name: "showSuccess",
                     desc: "Shows a success notification.",
-                    params: `Notification text (string or JSX), required`
+                    params: `Notification text (string or ReactNode), required`
                 },
                 {
                     name: "showError",
                     desc: "Shows an error notification.",
-                    params: `Notification text (string or JSX), required`
+                    params: `Notification text (string or ReactNode), required`
                 },
                 {
                     name: "showInfo",
                     desc: "Shows an info notification.",
-                    params: `Notification text (string or JSX), required`
+                    params: `Notification text (string or ReactNode), required`
                 },
                 {
                     name: "showWarning",
                     desc: "Shows a warning notification.",
-                    params: `Notification text (string or JSX), required`
+                    params: `Notification text (string or ReactNode), required`
                 },
                 {
                     name: "show",
@@ -134,7 +134,7 @@ export class NotificationPage extends React.Component{
                                 name: "message",
                                 desc: "Notification text",
                                 required: true,
-                                type: "string or JSX"
+                                type: "string or ReactNode"
                             },
                             {
                                 name: "isStatic",
@@ -154,7 +154,7 @@ export class NotificationPage extends React.Component{
                                 name: "icon",
                                 desc: "Additional icon near the notification text.",
                                 required: false,
-                                type: "JSX",
+                                type: "ReactNode",
                                 default: "null"
                             },
                             {

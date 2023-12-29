@@ -14,8 +14,8 @@ export interface SelectableCardListProps extends BaseInputProps, React.PropsWith
 
 interface SelectableCardProps{
     readonly value: any
-    readonly title: string | JSX.Element
-    readonly desc?: string | JSX.Element
+    readonly title: string | React.ReactNode
+    readonly desc?: string | React.ReactNode
     readonly disabled?: boolean
     readonly style?: CSSProperties
     readonly className?: string
@@ -87,7 +87,7 @@ export class SelectableCardList extends React.PureComponent<SelectableCardListPr
 
     getOptions = (children = this.props.children): SelectableCard[] => React.Children.map(children, (child: any) => child).filter(o => !!o)
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { value } = this.state,
         options = this.getOptions()

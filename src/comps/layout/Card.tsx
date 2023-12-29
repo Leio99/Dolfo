@@ -7,12 +7,12 @@ interface CardActionsProps extends React.PropsWithChildren{
 }
 
 interface CardProps extends CardActionsProps{
-    readonly title?: string | JSX.Element
+    readonly title?: string | React.ReactNode
     readonly onDoubleClick?: (e: React.MouseEvent) => void
 }
 
 export class Card extends React.PureComponent<CardProps>{
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         layout = " " + (props.layout || "flat") + "-layout"
 
@@ -24,7 +24,7 @@ export class Card extends React.PureComponent<CardProps>{
 }
 
 export class CardActions extends React.PureComponent<CardActionsProps>{
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this
 
         return <div className="dolfo-card-actions-inner">

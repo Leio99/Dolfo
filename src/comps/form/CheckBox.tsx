@@ -38,7 +38,7 @@ export class CheckBox extends React.PureComponent<CheckBoxProps, CheckBoxProps>{
         }
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { checked } = this.state
 

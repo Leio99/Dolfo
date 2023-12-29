@@ -85,7 +85,7 @@ export class TransferList extends React.Component<TransferListProps, IState>{
         return !filter?.trim() || label.indexOf(filter.toLocaleLowerCase()) >= 0
     })
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { selectedItems, focusedKey, filterLeft, filterRight } = this.state,
         { props } = this,
         selectedKeys = selectedItems.map(v => props.getKey(v)),

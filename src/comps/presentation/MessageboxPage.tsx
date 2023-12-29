@@ -4,7 +4,7 @@ import { MessageBox } from "../layout/MessageBox"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class MessageboxPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a message box.</WhenToUse>
         <Usage notes={<>this component can be rendered by calling a function (<em>MessageBox.show(params)</em>)</>} />
         
@@ -68,13 +68,13 @@ export class MessageboxPage extends React.Component{
             {
                 name: "message",
                 desc: "The content of the message.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: true
             },
             {
                 name: "title",
                 desc: "The title of the message.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

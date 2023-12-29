@@ -6,11 +6,11 @@ import { Tooltip } from "../Tooltip"
 import { BaseResultsManager } from "./BaseResultsManager"
 
 export interface CardTableProps extends React.PropsWithChildren{
-    readonly getTitle?: (item: IDataColumn) => string | JSX.Element
+    readonly getTitle?: (item: IDataColumn) => string | React.ReactNode
 }
 
 export class CardTable extends BaseResultsManager<CardTableProps>{
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         data = this.getFilteredData()
  

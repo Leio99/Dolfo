@@ -284,7 +284,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
             options.classList.add("show")
     }
 
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         let input: HTMLInputElement
         const { props } = this,
         { value, openSelect, searchValue, currentSelection } = this.state,

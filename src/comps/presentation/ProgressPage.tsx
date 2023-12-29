@@ -3,7 +3,7 @@ import { Progress } from "../layout/Progress"
 import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 
 export class ProgressPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a progress to show statistic.</WhenToUse>
         <Usage />
 
@@ -111,7 +111,7 @@ export class ProgressPage extends React.Component{
             {
                 name: "loadingText",
                 desc: "Defines a custom loading text (only if not 'circular').",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null (shows loading icon)"
             },
@@ -132,7 +132,7 @@ export class ProgressPage extends React.Component{
             {
                 name: "customCircleText",
                 desc: "If 'circular' is true, defines a custom text inside the circle.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null (shows percentage)"
             },

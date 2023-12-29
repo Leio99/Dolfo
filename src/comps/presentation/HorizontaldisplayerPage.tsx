@@ -4,7 +4,7 @@ import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
 import { HorizontalDisplayItem, HorizontalDisplayer } from "../layout/HorizontalDisplayer"
 
 export class HorizontaldisplayerPage extends React.Component{
-    render = (): JSX.Element => <>
+    render = (): React.ReactNode => <>
         <WhenToUse>When you want to render an horizontal displayer of items.</WhenToUse>
         <Usage />
 
@@ -68,7 +68,7 @@ export class HorizontaldisplayerPage extends React.Component{
             {
                 name: "infos",
                 desc: "Additional infos for the item.",
-                type: "string or JSX",
+                type: "string or ReactNode",
                 required: false,
                 default: "null"
             },

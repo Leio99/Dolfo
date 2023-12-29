@@ -10,7 +10,7 @@ interface IProps extends React.PropsWithChildren{
 }
 
 export class Status extends React.Component<IProps>{
-    render = (): JSX.Element => {
+    render = (): React.ReactNode => {
         const { props } = this,
         icons = {
             success: <CheckIcon />,
