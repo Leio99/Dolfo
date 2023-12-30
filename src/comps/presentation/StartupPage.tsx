@@ -33,6 +33,10 @@ export class StartupPage extends React.Component{
             </div>
         </div>
         <p>Or, you can define it at any time by changing the window variable value.</p>
+        <br />
+
+        <p>You can always access the constants by using the <em>Constants</em> object or by calling the <em>getConstant</em> method.</p>
+        <br />
 
         <h4>Available keys:</h4>
         <Table columns={[
