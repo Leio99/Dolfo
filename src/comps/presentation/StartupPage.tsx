@@ -1,7 +1,7 @@
 import React from "react";
-import { Table } from "../../main";
 import { Constants } from "../shared/Constants";
 import _ from "lodash";
+import { Table } from "../layout/table/Table";
 
 export class StartupPage extends React.Component{
     render = (): React.ReactNode => <>
@@ -36,9 +36,9 @@ export class StartupPage extends React.Component{
 
         <h4>Available keys:</h4>
         <Table columns={[
-            { field: "key", label: "Key" },
+            { field: "key", label: "Key", canSearch: true },
             { field: "description", label: "Description" },
-            { field: "default", label: "Default value" }
+            { field: "default", label: "Default value", canSearch: true }
         ]} data={_.orderBy(Object.keys(Constants)).map(key => {
             const value = Constants[key]
             let description: string
@@ -166,6 +166,18 @@ export class StartupPage extends React.Component{
                     break
                 case "ORDER_DESCENDING":
                     description = "Used to define the tooltip of the 'order descending' button on tables."
+                    break
+                case "PAGINATION_FIRST_PAGE":
+                    description = "Used to define the tooltip of the first page button on the pagination."
+                    break
+                case "PAGINATION_LAST_PAGE":
+                    description = "Used to define the tooltip of the last page button on the pagination."
+                    break
+                case "PAGINATION_PAGE":
+                    description = "Used to define the text of page buttons on the pagination collapsed buttons."
+                    break
+                case "PAGINATION_PAGES":
+                    description = "Used to define the tooltip of the 'pages' collapsed button on the pagination."
                     break
                 case "PREV_TEXT":
                     description = "Used to define the tooltip of the previous button on the datepicker."

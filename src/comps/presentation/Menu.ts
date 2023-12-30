@@ -49,6 +49,7 @@ import { HorizontaldisplayerPage } from "./HorizontaldisplayerPage"
 import { StartupPage } from "./StartupPage"
 import { HomePage } from "./HomePage"
 import { AutocompletePage } from "./AutocompletePage"
+import { PaginationPage } from "./PaginationPage"
 
 interface MenuItem{
     readonly link: string
@@ -93,6 +94,7 @@ export const MenuItems: MenuItem[] = [
     { link: "layout/masterdetail", children: "Master-Detail", section: "layout", component: MasterdetailPage, icon: "external-link" },
     { link: "layout/messages", children: "Message box", section: "layout", component: MessageboxPage, icon: "sticky-note" },
     { link: "layout/notifications", children: "Notifications", section: "layout", component: NotificationPage, icon: "bell" },
+    { link: "layout/pagination", children: "Pagination", section: "layout", component: PaginationPage, icon: "pager" },
     { link: "layout/popover", children: "Popover", section: "layout", component: PopoverPage, icon: "comment" },
     { link: "layout/progress", children: "Progress", section: "layout", component: ProgressPage, icon: "tasks-alt" },
     { link: "layout/sidemenu", children: "Side menu", section: "layout", component: SidemenuPage, icon: "bars" },

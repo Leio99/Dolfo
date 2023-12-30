@@ -70,7 +70,11 @@ export const Constants = {
     COLUMN_ORDER: "Ordina",
     ORDER_ASCENDING: "Ascendente",
     ORDER_DESCENDING: "Discendente",
-    STRING_NOT_DEFINED_OPTION: "Opzione non definita"
+    STRING_NOT_DEFINED_OPTION: "Opzione non definita",
+    PAGINATION_FIRST_PAGE: "Prima pagina",
+    PAGINATION_PAGE: "Pagina",
+    PAGINATION_PAGES: "Pagine",
+    PAGINATION_LAST_PAGE: "Ultima pagina"
 }
 
 export const getConstant = (key: keyof typeof Constants) => {

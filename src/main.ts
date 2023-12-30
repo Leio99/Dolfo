@@ -31,6 +31,7 @@ import { Label } from "./comps/layout/Label"
 import { ListSideMenu } from "./comps/layout/ListSideMenu"
 import { MessageBox } from "./comps/layout/MessageBox"
 import { NotificationMsg } from "./comps/layout/NotificationMsg"
+import { Pagination } from "./comps/layout/Pagination"
 import { Popover } from "./comps/layout/Popover"
 import { Progress } from "./comps/layout/Progress"
 import { SideMenu, MenuItem, SubMenu } from "./comps/layout/SideMenu"
@@ -82,6 +83,7 @@ export {
     MenuItem,
     MessageBox,
     NotificationMsg,
+    Pagination,
     Popover,
     Progress,
     SideMenu,
