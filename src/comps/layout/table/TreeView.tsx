@@ -52,11 +52,11 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     abstract hasChildren: (node: TreeNode) => boolean
 
-    protected getActions = (node: TreeNode): React.ReactNode => null
+    protected getActions = (_: TreeNode): React.ReactNode => null
 
     protected onDoubleClick: (node: TreeNode) => void
 
-    protected getColumnData = (column: IColumn, node: TreeNode): React.ReactNode => null 
+    protected getColumnData = (_: IColumn, __: TreeNode): React.ReactNode => null 
 
     toggleNode = (node: TreeNode, index: string): void => {
         if(!this.hasChildren(node)) return

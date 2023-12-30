@@ -46,16 +46,22 @@ import { DisplayPage } from "./DisplayPage"
 import { PininputPage } from "./PininputPage"
 import { CarswiperPage } from "./CardswiperPage"
 import { HorizontaldisplayerPage } from "./HorizontaldisplayerPage"
+import { StartupPage } from "./StartupPage"
+import { HomePage } from "./HomePage"
+import { AutocompletePage } from "./AutocompletePage"
 
 interface MenuItem{
     readonly link: string
     readonly children: string
-    readonly section: "form" | "layout",
+    readonly section: "base" | "form" | "layout",
     readonly component: React.ComponentClass<MenuContentProps | any>
     readonly icon: IconKey
 }
 
 export const MenuItems: MenuItem[] = [
+    { link: "", children: "Home", section: "base", component: HomePage, icon: "info-square" },
+    { link: "startup", children: "Getting started", section: "base", component: StartupPage, icon: "rocket" },
+    { link: "form/autocomplete", children: "Autocomplete", section: "form", component: AutocompletePage, icon: "typewriter" },
     { link: "form/checkbox", children: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
     { link: "form/datepicker", children: "Date picker", section: "form", component: DatepickerPage, icon: "calendar-day" },
     { link: "form/pin", children: "Pin input", section: "form", component: PininputPage, icon: "hashtag" },

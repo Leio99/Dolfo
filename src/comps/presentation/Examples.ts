@@ -562,4 +562,32 @@ SpotExample = `export class SpotExample extends React.Component<unknown, { reado
             data: this.DATA.filter(e => e.name.toLowerCase().indexOf(f.trim().toLowerCase()) >= 0  || e.surname.toLowerCase().indexOf(f.trim().toLowerCase()) >= 0)
         })} visible={this.state.visible} onClose={this.toggle} onClickItem={i => console.warn(i)} />
     </>
+}`,
+AutocompleteExample = `interface DemoElement{
+    readonly id: string
+    readonly name: string
+}
+
+interface AdditionalProps{
+    // any additional props
+}
+
+export class AutocompleteDemo extends Autocomplete<DemoElement, string /* The type of the primary key */, AdditionalProps>{
+    getSource = (filter: string) => new Promise<DemoElement[]>(resolve => setTimeout(() => {
+        const elements = [
+            { id: "1", name: "First element" },
+            { id: "2", name: "Joe Pesci" },
+            { id: "3", name: "Carl Johnson" }
+        ]
+
+        resolve(elements.filter(e => e.name.toLowerCase().indexOf(filter.toLocaleLowerCase()) >= 0))
+    }, 1000))
+
+    getDescription = (item: DemoElement) => item.name
+
+    getKey = (item: DemoElement) => item.id
+}
+
+export class RenderAutocomplete extends React.Component{
+    render = () => <AutocompleteDemo />
 }`

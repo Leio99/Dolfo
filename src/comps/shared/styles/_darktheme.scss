@@ -629,18 +629,6 @@ html.dark-theme{
         }
     }
 
-    .dolfo-pagination .dolfo-pagination-btn{
-        border-color: $darkThemeSelectionBlue;
-
-        &:hover, &.current{
-            background-color: $darkThemeSelectionBlue
-        }
-
-        &:not(:hover):not(.current){
-            color: $darkThemeSelectionBlue
-        }
-    }
-
     .dolfo-display-content{
         background-color: $dark;
         color: $white

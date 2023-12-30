@@ -33,7 +33,7 @@ export class Swiper extends React.PureComponent<IProps, IProps>{
         const swipes = this.getSwipes(),
         { opened } = this.state
         
-        if(swipes.length !== 2) return <span>{getConstant("SWIPE_ERROR_ONLY_ONE")}</span>
+        if(swipes.length !== 2) return <span>{getConstant("SWIPE_ERROR_ONLY_TWO")}</span>
 
         return <div className="dolfo-swiper-container">
             {

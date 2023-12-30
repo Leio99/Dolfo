@@ -15,7 +15,7 @@ export interface MenuContentProps{
     readonly location: Location
 }
 
-const homepage = process.env.PUBLIC_URL + "/"
+export const homepage = process.env.PUBLIC_URL + "/"
 
 export const goToApiBlock = (selector: string) => {
     const element = document.querySelector(selector) as HTMLElement
@@ -70,7 +70,9 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
 
                 {menuBtn("darkblue")} <h4 style={{ display: "inline" }}>Dolfo</h4>
 
-                <MenuItem link="" icon="info-square" {...this.props}>Getting started</MenuItem>
+                {
+                    MenuItems.filter(m => m.section === "base").map((m, i) => <MenuItem {...m} {...this.props} key={"base_" + i} />)
+                }
 
                 <div className="navigation-menu-title">Form</div>
                 {
@@ -85,40 +87,13 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
 
             <div className="body-content">
                 <Routes>
-                    <Route path={homepage} element={<React.Fragment>
-                        <h2 className="page-title">{menuBtn("white")} Getting started</h2>
-                        <p>This is a simple website to show the <strong>Dolfo components</strong>, developed by me.</p>
-                        <p>Use the side menu to navigate.</p>
-                        In each page, you will find:
-                        <ul>
-                            <li>What the component is used for</li>
-                            <li>How to use it</li>
-                            <li>Its appearance</li>
-                            <li>The props the component can take</li>
-                        </ul>
-
-                        <div className="component-preview">
-                            <h6>You need to import the main stylesheet in your SCSS file, by adding this line:</h6>
-                            <div className="component-showing code">@import "~dolfo/comps/shared/styles/dolfo";</div>
-                        </div>
-
-                        <h3 className="page-title">External dependencies</h3>
-                        <ul>
-                            <li>FontAwesome PRO</li>
-                            <li>React onClickOutside</li>
-                            <li>Google gapi</li>
-                            <li>Lodash library</li>
-                            <li>SASS</li>
-                        </ul>
-                    </React.Fragment>} />
-
                     {
                         MenuItems.map(m => {
                             const Component = m.component
 
                             return <Route path={homepage + m.link} key={m.link} element={<React.Fragment>
                                 <h2 className="page-title">{menuBtn("white")} {m.children}</h2>
-                                {Component ? React.createElement(Component, this.props) : "Docs to do."}
+                                {React.createElement(Component, this.props)}
                             </React.Fragment>} />
                         })
                     }

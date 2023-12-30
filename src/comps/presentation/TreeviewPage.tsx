@@ -448,63 +448,63 @@ export class TreeviewPage extends TreeView{
         </>
     }
 
-    render = (): React.ReactNode => {
-        return <>
-            <WhenToUse>When you want to render a tree-view table.</WhenToUse>
-            <Usage />
+    render = (): React.ReactNode => <>
+        <WhenToUse>When you want to render a tree-view table.</WhenToUse>
+        <Usage />
 
-            <ResultCode
-                title="Example"
-                result={this.renderTree()}
-                code={TreeExample}
-            />
+        <ResultCode
+            title="Example"
+            result={this.renderTree()}
+            code={TreeExample}
+        />
 
-            <p className="notes">Note: to render a tree view, your component must extend the <em>TreeView</em> class and implement the abstract methods inherited. See the code example for more.</p>
+        <p className="notes">Note: to render a tree view, your component must extend the <em>TreeView</em> class and implement the abstract methods inherited. See the code example for more.</p>
+        <p className="notes">You can implement the <em>getActions</em> method to manage the action column depending on the node type.</p>
+        <p className="notes">You can implement the <em>onDoubleClick</em> method to manage double click on a row.</p>
+        <p className="notes">You can implement the <em>getColumnData</em> method to manage additional columns.</p>
 
-            <Apis title="Initial state" data={[
-                {
-                    name: "list",
-                    desc: "The data source of the tree.",
-                    required: true,
-                    type: "Array"
-                },
-                {
-                    name: "autoOpen",
-                    desc: "Determines whether the tree should be opened by default or not.",
-                    required: false,
-                    type: "boolean",
-                    default: "false"
-                },
-                {
-                    name: "showExpandAll",
-                    desc: "If true, shows the 'Expand all' and 'Collapse all' buttons on top of the table.",
-                    required: false,
-                    type: "boolean",
-                    default: "false"
-                },
-                {
-                    name: "descColumn",
-                    desc: "Custom label for the description column.",
-                    required: false,
-                    type: "boolean",
-                    default: "false"
-                },
-                {
-                    name: "addColumn",
-                    desc: "Adds custom columns to the table (function 'getColumnData' must be implemented).",
-                    required: false,
-                    type: "Array of IColumn",
-                    default: "null",
-                    onDoubleClick: () => goToApiBlock("#columnProps"),
-                    rowStyle: { backgroundColor: "var(--hoverblue)" }
-                }
-            ]} />
+        <Apis title="Initial state" data={[
+            {
+                name: "list",
+                desc: "The data source of the tree.",
+                required: true,
+                type: "Array"
+            },
+            {
+                name: "autoOpen",
+                desc: "Determines whether the tree should be opened by default or not.",
+                required: false,
+                type: "boolean",
+                default: "false"
+            },
+            {
+                name: "showExpandAll",
+                desc: "If true, shows the 'Expand all' and 'Collapse all' buttons on top of the table.",
+                required: false,
+                type: "boolean",
+                default: "false"
+            },
+            {
+                name: "descColumn",
+                desc: "Custom label for the description column.",
+                required: false,
+                type: "boolean",
+                default: "false"
+            },
+            {
+                name: "addColumn",
+                desc: "Adds custom columns to the table (function 'getColumnData' must be implemented).",
+                required: false,
+                type: "Array of IColumn",
+                default: "null",
+                onDoubleClick: () => goToApiBlock("#columnProps"),
+                rowStyle: { backgroundColor: "var(--hoverblue)" }
+            }
+        ]} />
 
-            <p className="notes">Note: the state can also contain custom variables that you can use inside your component.</p>
-
-            <ColumnApis hideData />
-        </>
-    }
+        <p className="notes">Note: the state can also contain custom variables that you can use inside your component.</p>
+        <ColumnApis hideData />
+    </>
 
     getColumnData = (col: IColumn, node: TreeNode): React.ReactNode => {
         if(node.type === "root" && this.hasChildren(node) && col.field === "status"){
