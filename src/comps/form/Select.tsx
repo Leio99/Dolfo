@@ -11,10 +11,25 @@ import { createRoot } from "react-dom/client"
 import { blurInput, isElementInViewport, sumParentZIndex } from "../shared/utility"
 
 export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren{
+    /** Defines the default value of the select
+     * @type any
+     */
     readonly defaultValue?: any
+    /** Allows multiple selection
+     * @type boolean 
+     */
     readonly multiple?: boolean
+    /** Determines if the user can search for an option
+     * @type boolean
+     */
     readonly canSearch?: boolean
+    /** Determines if the select is loading
+     * @type boolean
+     */
     readonly loading?: boolean
+    /** Defines a parent container for the select, in order to property attach the options to the body
+     * @type string (CSS selector)
+     */
     readonly parentContainerScroller?: string
 }
 

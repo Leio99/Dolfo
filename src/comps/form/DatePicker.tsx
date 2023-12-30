@@ -11,12 +11,24 @@ import { Tooltip } from "../layout/Tooltip"
 import { blurInput, zeroBefore, isValidDate, getCalendar, decodeMonth, sumParentZIndex, isElementInViewport } from "../shared/utility"
 import { createRoot } from "react-dom/client"
 
-type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
+export type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
 
 export interface DatePickerProps extends ExtendedInputProps{
+    /** Defines the placeholder of the datepicker
+     * @type string
+     */
     readonly placeHolder?: string
+    /** Defines the default value of the datepicker
+     * @type Date
+     */
     readonly defaultValue?: Date
+    /** Defines the format of the shown date
+     * @type DateFormats
+     */
     readonly dateFormat?: DateFormats
+    /** If true, allows the user to also select the time
+     * @type boolean
+     */
     readonly selectTime?: boolean
 }
 
@@ -291,7 +303,11 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         const { selectingMonth, selectingYear, currentMonth, showCalendar, currentYear, currentHour, currentMinute, currentDecade } = this.state,
         monthCalendar = getCalendar(currentMonth, currentYear),
         { selectTime } = this.props,
-        content = <div className={"dolfo-calendar-container floating-popup" + (showCalendar ? " show" : "") + (selectTime ? " time-picker" : "")}>
+        currentDate = new Date()
+        currentDate.setHours(currentHour)
+        currentDate.setMinutes(currentMinute)
+
+        const content = <div className={"dolfo-calendar-container floating-popup" + (showCalendar ? " show" : "") + (selectTime ? " time-picker" : "")}>
             {
                 !selectingMonth && !selectingYear && <div className="dolfo-calendar">
                     <div className="dolfo-calendar-row">
@@ -355,7 +371,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
 
                     {
                         selectTime && <div className="dolfo-calendar-time-picker">
-                            <TimePicker defaultValue={zeroBefore(currentHour) + ":" + zeroBefore(currentMinute)} onChange={this.changeTime} />
+                            <TimePicker defaultValue={currentDate} onChange={this.changeTime} />
                         </div>
                     }
                 </div>

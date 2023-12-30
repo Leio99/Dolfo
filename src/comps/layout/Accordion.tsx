@@ -4,13 +4,39 @@ import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
 interface IProps extends React.PropsWithChildren{
-	readonly title: string | React.ReactNode
+	/** The title of the accordion
+	 * @type ReactNode
+	 * @required
+	 */
+	readonly title: React.ReactNode
+	/** Defines if the accordion is opened by default
+	 * @type boolean
+	 */
 	readonly opened?: boolean
+	/** Additional style for the accordion wrapper
+	 * @type CSSProperties
+	 */
 	readonly wrapperStyle?: CSSProperties
+	/** Additional className for the accordion wrapper
+	 * @type string
+	 */
 	readonly wrapperClassName?: string
+	/** Additional style for the accordion content
+	 * @type CSSProperties
+	 */
 	readonly style?: CSSProperties
+	/** Additional className for the accordion content
+	 * @type string
+	 */
 	readonly className?: string
+	/** Defines if the accordion is disabled
+	 * @type boolean
+	 */
 	readonly disabled?: boolean
+	/** Function triggered when toggling the accordion
+	 * @type Function
+	 * @param opened boolean
+	 */
 	readonly onToggle?: (opened: boolean) => void
 }
 

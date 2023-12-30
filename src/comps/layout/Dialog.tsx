@@ -10,32 +10,96 @@ export type DialogType = "success" | "info" | "error" | "warning"
 export type DialogCloseType = "close" | "cancel"
 
 export interface ComponentAsDialogProps{
-    readonly close?: () => void
+    /** Invokes the dialog closing
+     * @type Function
+     */
+    readonly close: () => void
 }
 
 interface BaseProps{
-    readonly title?: string | React.ReactNode
-    readonly onOk?: () => void
+    /** The title of the dialog
+     * @type ReactNode
+     */
+    readonly title?: React.ReactNode
+    /** Defines the width of the dialog
+     * @type string
+     */
     readonly width?: string
-    readonly okText?: string
+    /** Defines the text of the 'ok' button
+     * @type ReactNode
+     */
+    readonly okText?: React.ReactNode
+    /** If true, the dialog will close when clicking outside
+     * @type boolean
+     */
     readonly clickOutside?: boolean
+    /** If true, hides the 'X' button to close the dialog
+     * @type boolean
+     */
     readonly hideCloseX?: boolean
+    /** Function triggered when clicking the 'ok' button
+     * @type Function
+     */
+    readonly onOk?: () => void
 }
 
 export interface DialogFullProps extends BaseProps, React.PropsWithChildren{
+    /** Function triggred when closing the dialog
+     * @type Function
+     * @param type DialogCloseType
+     */
     readonly onClose?: (type: DialogCloseType) => void
+    /** Defines if the dialog is visible
+     * @type boolean
+     */
     readonly visible?: boolean
+    /** Additional class for the 'ok' button
+     * @type string
+     */
     readonly okBtnClass?: string
+    /** Additional class for the 'cancel' button
+     * @type string
+     */
     readonly cancelBtnClass?: string
-    readonly cancelText?: string | React.ReactNode
+    /** Defines the text of the 'cancel' button
+     * @type ReactNode
+     */
+    readonly cancelText?: React.ReactNode
+    /** If true, hides the 'cancel' button
+     * @type boolean
+     */
     readonly hideCancel?: boolean
-    readonly style?: CSSProperties
+    /** The type of the 'ok' button
+     * @type ButtonColors
+     */
     readonly okType?: ButtonColors
+    /** The type of the 'cancel' button
+     * @type ButtonColors
+     */
     readonly cancelType?: ButtonColors
+    /** Additional style for the dialog
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Additional className for the dialog
+     * @type string
+     */
     readonly className?: string
+    /** Defines a custom footer for the dialog
+     * @type ReactNode
+     */
     readonly customFooter?: React.ReactNode
+    /** If true, the dialog will show on top of the page
+     * @type boolean
+     */
     readonly top?: boolean
+    /** If true, the footer of the dialog won't show
+     * @type boolean
+     */
     readonly hideFooter?: boolean
+    /** Determines if the dialog can overflow its content without expanding its height
+     * @type boolean
+     */
     readonly overflows?: boolean
 }
 
@@ -44,9 +108,18 @@ interface IState{
 }
 
 interface DialogProps extends DialogFullProps{
+    /** The type of the dialog
+     * @type DialogType
+     */
     readonly type?: DialogType
+    /** Custom icon for the dialog title
+     * @type ReactNode
+     */
     readonly icon?: React.ReactNode
-    readonly content?: string | React.ReactNode
+    /** The content of the dialog
+     * @type ReactNode
+     */
+    readonly content?: React.ReactNode
 }
 
 export class Dialog extends React.PureComponent<DialogFullProps, IState>{
@@ -72,7 +145,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         })
     }
 
-    static yesNoDialog = (title: string | React.ReactNode, message: string | React.ReactNode, onYes: DialogProps["onOk"], onNo?: DialogProps["onClose"]): Closable => openDialog({
+    static yesNoDialog = (title: React.ReactNode, message: React.ReactNode, onYes: DialogProps["onOk"], onNo?: DialogProps["onClose"]): Closable => openDialog({
         title: title || getConstant("CONFIRM_TITLE"),
         content: message,
         onOk: onYes,
@@ -84,7 +157,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         onClose: onNo
     })
 
-    static loadingDialog = (loadingText: string | React.ReactNode = getConstant("LOADING_TEXT")): Closable => openDialog({
+    static loadingDialog = (loadingText: React.ReactNode = getConstant("LOADING_TEXT")): Closable => openDialog({
         title: "",
         content: <div>
             <LoadingIcon spinning /> {loadingText}

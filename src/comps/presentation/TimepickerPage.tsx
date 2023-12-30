@@ -34,8 +34,8 @@ export class TimepickerPage extends React.Component<MenuContentProps>{
 
         <ResultCode
             title="Default value (midday)"
-            result={<TimePicker defaultValue="12:00" />}
-            code={'<TimePicker defaultValue="12:00" />'}
+            result={<TimePicker defaultValue={new Date("2020-01-01 12:00")} />}
+            code={'<TimePicker defaultValue={new Date("2020-01-01 12:00")} />'}
         />
 
         <Apis data={[

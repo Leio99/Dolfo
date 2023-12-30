@@ -4,8 +4,21 @@ import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
 
 export interface ContextMenuOption{
-    readonly label: string | React.ReactNode
+    /** The label of the option
+     * @type ReactNode
+     * @required
+     */
+    readonly label: React.ReactNode
+    /** Function triggered when clicking the option
+     * @type Function
+     * @param e MouseEvent
+     * @param clickedItem HTMLElement
+     * @required
+     */
     readonly onClick: (e: MouseEvent, clickedItem: HTMLElement) => void
+    /** Defines if the option is disabled
+     * @type boolean
+     */
     readonly disabled?: boolean
 }
 
@@ -14,8 +27,18 @@ interface ContextMenuElement extends HTMLDivElement{
 }
 
 interface IProps extends React.PropsWithChildren{
+    /** Defines the options of the menu
+     * @type ContextMenuOption[]
+     * @required
+     */
     readonly options: ContextMenuOption[]
+    /** If true, the menu will close when selecting an option
+     * @type boolean
+     */
     readonly closeAfterClickItem?: boolean
+    /** If true, the menu will open when right clicking the element
+     * @type boolean
+     */
     readonly openWithRightClick?: boolean
 }
 

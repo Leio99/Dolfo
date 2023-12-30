@@ -5,8 +5,18 @@ import { getConstant } from "../shared/Constants"
 import { BaseInputProps } from "../shared/models/InputProps"
 
 export interface PinInputProps extends BaseInputProps{
+    /** The length of the pin
+     * @type number
+     * @required
+     */
     readonly length: number
+    /** The default value of the input
+     * @type string
+     */
     readonly value?: string
+    /** If true, increases the input size
+     * @type boolean
+     */
     readonly big?: boolean
 }
 

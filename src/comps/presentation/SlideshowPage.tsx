@@ -43,6 +43,13 @@ export class SlideshowPage extends React.Component{
                 default: "false"
             },
             {
+                name: "className",
+                desc: "Additional className for the slideshow.",
+                type: "string",
+                required: false,
+                default: "null"
+            },
+            {
                 name: "style",
                 desc: "Additional style for the slideshow.",
                 type: "CSSProperties",
@@ -65,6 +72,13 @@ export class SlideshowPage extends React.Component{
                 type: "boolean",
                 required: false,
                 default: "false"
+            },
+            {
+                name: "className",
+                desc: "Additional className for the slide.",
+                type: "string",
+                required: false,
+                default: "null"
             },
             {
                 name: "style",

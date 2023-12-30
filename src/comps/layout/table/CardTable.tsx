@@ -6,7 +6,12 @@ import { Tooltip } from "../Tooltip"
 import { BaseResultsManager } from "./BaseResultsManager"
 
 export interface CardTableProps extends React.PropsWithChildren{
-    readonly getTitle?: (item: IDataColumn) => string | React.ReactNode
+    /** Function to determine the title of the card
+     * @type Function
+     * @param item The datasource item
+     * @returns ReactNode
+     */
+    readonly getTitle?: (item: IDataColumn) => React.ReactNode
 }
 
 export class CardTable extends BaseResultsManager<CardTableProps>{

@@ -397,7 +397,7 @@ TreeExample = `export class TreeviewPage extends TreeView{
         return arr
     }
 
-    getLabel = (node: TreeNode): string | React.ReactNode => {
+    getLabel = (node: TreeNode): React.ReactNode => {
         if(node.type === "root") return node.data.title
         if(node.type === "comici") return "Comici"
         if(node.type === "luoghi") return "Canali"

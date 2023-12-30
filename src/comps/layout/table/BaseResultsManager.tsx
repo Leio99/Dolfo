@@ -4,9 +4,21 @@ import { BaseExportableManager, BaseResultsData } from "./BaseExportableManager"
 import _ from "lodash"
 
 export interface ResultsManagerProps extends BaseResultsData{
+    /** Additional className for the table
+     * @type string
+     */
     readonly className?: string
+    /** Defines wether the table is exportable
+     * @type boolean
+     */
     readonly exportable?: boolean
+    /** Defines the export format (currently only csv is available)
+     * @type string[]
+     */
     readonly exportFormat?: ("csv")[]
+    /** Additional style for the table
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
 }
 

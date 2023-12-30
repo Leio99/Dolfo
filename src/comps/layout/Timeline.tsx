@@ -1,9 +1,23 @@
 import React, { CSSProperties } from "react"
 
 interface TimelineItemProps extends React.PropsWithChildren{
+    /** The position of the timeline item
+     * @type "left" | "right"
+     * @default "left"
+     */
     readonly position?: "left" | "right"
+    /** The color of the timeline item icon
+     * @type string (CSS color)
+     */
     readonly pinColor?: string
+    /** Additional className for the timeline item
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the timeline item
+     * @type string
+     */
+    readonly className?: string
 }
 
 export class Timeline extends React.Component<React.PropsWithChildren>{
@@ -15,7 +29,7 @@ export class Timeline extends React.Component<React.PropsWithChildren>{
 
         return <div className="dolfo-timeline">
             {options.map((o, i) => {
-                const item = <div className="dolfo-timeline-item" style={o.props.style}>
+                const item = <div className={"dolfo-timeline-item" + (o.props.className ? (" " + o.props.className) : "")} style={o.props.style}>
                     {o.props.children}
                 </div>
                 

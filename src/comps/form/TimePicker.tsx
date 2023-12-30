@@ -5,17 +5,45 @@ import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
 import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
-import { blurInput, isElementInViewport, sumParentZIndex, zeroBefore } from "../shared/utility"
+import { blurInput, getTime, isElementInViewport, sumParentZIndex, zeroBefore } from "../shared/utility"
 import { createRoot } from "react-dom/client"
 import _ from "lodash"
 
 export interface TimePickerProps extends ExtendedInputProps{
-    readonly defaultValue?: string
+    /** Defines the defalt value of the input
+     * @type Date
+     * @default Current time
+     */
+    readonly defaultValue?: Date
+    /** Function triggered on key up on the hours input
+     * @type Function
+     * @param e React.KeyboardEvent
+     */
     readonly onKeyUpHour?: (e: React.KeyboardEvent) => void
+    /** Function triggered on key up on the minutes input
+     * @type Function
+     * @param e React.KeyboardEvent
+     */
     readonly onKeyUpMinute?: (e: React.KeyboardEvent) => void
+    /** Function triggered on key down on the hours input
+     * @type Function
+     * @param e React.KeyboardEvent
+     */
     readonly onKeyDownHour?: (e: React.KeyboardEvent) => void
+    /** Function triggered on key down on the minutes input
+     * @type Function
+     * @param e React.KeyboardEvent
+     */
     readonly onKeyDownMinute?: (e: React.KeyboardEvent) => void
+    /** Function triggered on key press on the hours input
+     * @type Function
+     * @param e React.KeyboardEvent
+     */
     readonly onKeyPressHour?: (e: React.KeyboardEvent) => void
+    /** Function triggered on key press on the minutes input
+     * @type Function
+     * @param e React.KeyboardEvent
+     */
     readonly onKeyPressMinute?: (e: React.KeyboardEvent) => void
 }
 
@@ -33,7 +61,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
         super(props)
 
         this.state = {
-            value: props.defaultValue || (zeroBefore(new Date().getHours()) + ":" + zeroBefore(new Date().getMinutes())),
+            value: getTime(props.defaultValue || new Date()),
             showTime: false
         }
     }
@@ -46,7 +74,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
     componentDidUpdate = (prevProps: TimePickerProps, prevState: IState) : void=> {
         if(prevProps.defaultValue !== this.props.defaultValue){
             this.setState({
-                value: this.props.defaultValue || (zeroBefore(new Date().getHours()) + ":" + zeroBefore(new Date().getMinutes()))
+                value: getTime(this.props.defaultValue || new Date())
             })
         }
 

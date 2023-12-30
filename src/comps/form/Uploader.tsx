@@ -6,8 +6,17 @@ import { ExtendedInputProps } from "../shared/models/InputProps"
 import { InputWrapper } from "./InputWrapper"
 
 export interface UploaderProps extends ExtendedInputProps{
+    /** Allows multiple files uploading
+     * @type boolean
+     */
     readonly multiple?: boolean
+    /** Allowed file types
+     * @type string (look for HTML upload input 'accept' attribute)
+     */
     readonly accept?: string
+    /** Shows drop area
+     * @type boolean
+     */
     readonly dropArea?: boolean
 }
 

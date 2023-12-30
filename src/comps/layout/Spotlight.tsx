@@ -4,12 +4,39 @@ import { getConstant } from "../shared/Constants"
 import { LoadingIcon } from "./Icon"
 
 interface IProps{
+    /** The datasource of the spotlight
+     * @type any[]
+     * @required
+     */
     readonly data: any[]
-    readonly renderItem: (item: any) => string | React.ReactNode
+    /** Function to determine the layout for the single item when rendered inside the list
+     * @type Function
+     * @param item The datasource item
+     * @returns ReactNode
+     * @required
+     */
+    readonly renderItem: (item: any) => React.ReactNode
+    /** Defines if the spotlight is loading
+     * @type boolean
+     */
     readonly loading?: boolean
+    /** Defines if the spotlight is visible
+     * @type boolean
+     */
     readonly visible?: boolean
+    /** Function triggered when the filter changes
+     * @type Function
+     * @param value The filter string
+     */
     readonly onChangeFilter?: (value: string) => void
+    /** Function triggered when clicking an item
+     * @type Function
+     * @param item The datasource item
+     */
     readonly onClickItem?: (item: any) => void
+    /** Function triggered when closing the spotlight
+     * @type Function
+     */
     readonly onClose?: () => void
 }
 

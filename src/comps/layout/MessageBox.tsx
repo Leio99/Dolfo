@@ -6,8 +6,17 @@ import { BaseNotificationProps, showNotification, NotificationPosition, Notifica
 import { Tooltip } from "./Tooltip"
 
 interface MessageProps extends BaseNotificationProps{
+    /** Defines the position of the message
+     * @type NotificationPosition
+     */
     readonly position?: NotificationPosition
-    readonly title?: string | React.ReactNode
+    /** The title of the message
+     * @type ReactNode
+     */
+    readonly title?: React.ReactNode
+    /** If true, hides the icon for closing the message
+     * @type boolean
+     */
     readonly hideClose?: boolean
 }
 

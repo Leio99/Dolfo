@@ -17,17 +17,17 @@ export class HeaderPage extends React.Component<MenuContentProps>{
         <ResultCode
             title="Colors"
             result={<>
-                <Header title="Black" menuColor="black" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
-                <Header title="Blue" menuColor="blue" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
-                <Header title="Darkblue" menuColor="darkblue" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
-                <Header title="Green" menuColor="green" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
-                <Header title="Grey" menuColor="grey" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
-                <Header title="Orange" menuColor="orange" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
-                <Header title="Red" menuColor="red" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
-                <Header title="White" menuColor="white" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
-                <Header title="Violet" menuColor="violet" style={{ position: "relative", zIndex: 0 }} />
+                <Header title="Black" headerColor="black" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Blue" headerColor="blue" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Darkblue" headerColor="darkblue" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Green" headerColor="green" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Grey" headerColor="grey" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Orange" headerColor="orange" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Red" headerColor="red" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="White" headerColor="white" style={{ position: "relative", marginBottom: 10, zIndex: 0 }} />
+                <Header title="Violet" headerColor="violet" style={{ position: "relative", zIndex: 0 }} />
             </>}
-            code={'<Header title="Black" menuColor="black" />\n<Header title="Blue" menuColor="blue" />\n<Header title="Darkblue" menuColor="darkblue" />\n\n<Header title="Green" menuColor="green" />\n<Header title="Grey" menuColor="grey" />\n<Header title="Orange" menuColor="orange" />\n<Header title="Red" menuColor="red" />\n<Header title="White" menuColor="white" />\n<Header title="Violet" menuColor="violet" />'}
+            code={'<Header title="Black" headerColor="black" />\n<Header title="Blue" headerColor="blue" />\n<Header title="Darkblue" headerColor="darkblue" />\n\n<Header title="Green" headerColor="green" />\n<Header title="Grey" headerColor="grey" />\n<Header title="Orange" headerColor="orange" />\n<Header title="Red" headerColor="red" />\n<Header title="White" headerColor="white" />\n<Header title="Violet" headerColor="violet" />'}
         />
 
         <ResultCode
@@ -51,7 +51,7 @@ export class HeaderPage extends React.Component<MenuContentProps>{
                 default: "null"
             },
             {
-                name: "menuColor",
+                name: "headerColor",
                 desc: "Defines the header color.",
                 type: "string (red, blue, green, black, orange, grey, darkblue, white, violet)",
                 required: false,

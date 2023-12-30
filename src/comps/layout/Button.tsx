@@ -6,24 +6,77 @@ export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" 
 export type ButtonColors = BaseColors | "white"
 
 export interface ButtonProps extends React.PropsWithChildren{
+    /** The type of button
+     * @type "button" | "submit" | "popup" | "text"
+     */
     readonly type?: "button" | "submit" | "popup" | "text"
+    /** The size of the button
+     * @type "full" | "small" | "big"
+     */
     readonly size?: "full" | "small" | "big"
+    /** Defines if the button is loading
+     * @type boolean
+     */
     readonly loading?: boolean
+    /** Defines if the button has a circled shape
+     * @type boolean
+     */
     readonly circleBtn?: boolean
+    /** Determines the color of the button
+     * @type ButtonColors
+     */
     readonly btnColor?: ButtonColors
+    /** If type is 'popup', defines the options of the popup
+     * @type BtnOptions[]
+     */
     readonly options?: BtnOptions[]
+    /** If type is 'popup', defines the position where the popup will show
+     * @type "top" | "bottom"
+     * @default "botton"
+     */
     readonly popupPosition?: "top" | "bottom"
+    /** Additional className for the button
+     * @type string
+     */
     readonly className?: string
+    /** Additional style for the button
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Defines if the button is disabled
+     * @type boolean
+     */
     readonly disabled?: boolean
+    /** Defines the layout of the button showing an outlined button
+     * @type boolean
+     */
     readonly outline?: boolean
+    /** Function triggered when clicking the button
+     * @type Function
+     * @param e React.MouseEvent
+     */
     readonly onClick?: (e: React.MouseEvent) => void
+    /** Functrion triggered on mouse down on the button
+     * @type Function
+     * @param e React.MouseEvent
+     */
     readonly onMouseDown?: (e: React.MouseEvent) => void
 }
 
 export interface BtnOptions{
-    readonly text: string | React.ReactNode
+    /** The text of the option
+     * @type ReactNode
+     * @required
+     */
+    readonly text: React.ReactNode
+    /** Function triggered when clicking the option
+     * @type Function
+     * @required
+     */
     readonly onClick: () => void
+    /** Defines if the option is disabled
+     * @type boolean
+     */
     readonly disabled?: boolean
 }
 

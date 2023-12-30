@@ -2,23 +2,56 @@ import React, { CSSProperties, createRef } from "react"
 import _ from "lodash"
 
 interface TabsProps extends React.PropsWithChildren{
-    readonly style?: CSSProperties
-    readonly className?: string
+    /** Defines if the tabs are vertical
+     * @type boolean
+     */
     readonly vertical?: boolean
+    /** Defines a tab style for the tabs
+     * @type boolean
+     */
     readonly tabStyle?: boolean
+    /** Additional className for the tabs container
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Additional className for the tabs container
+     * @type string
+     */
+    readonly className?: string
+    /** Function triggere when changing the tab
+     * @type Function
+     * @param index number
+     */
     readonly onChangeTab?: (index: number) => void
+}
+
+interface TabProps extends React.PropsWithChildren{
+    /** The title of the tab
+     * @type ReactNode
+     * @required
+     */
+    readonly title: React.ReactNode
+    /** Defines if the tab is selected by default
+     * @type boolean
+     */
+    readonly isDefault?: boolean
+    /** Additional className for the tab
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Additional className for the tab
+     * @type string
+     */
+    readonly className?: string
+    /** Defines if the tab is disabled
+     * @type boolean
+     */
+    readonly disabled?: boolean
 }
 
 interface IState{
     readonly children: Tab[]
     readonly currentTab: number
-}
-
-interface TabProps extends React.PropsWithChildren{
-    readonly title: string | React.ReactNode
-    readonly isDefault?: boolean
-    readonly style?: CSSProperties
-    readonly disabled?: boolean
 }
 
 export class Tabs extends React.PureComponent<TabsProps, IState>{
@@ -138,7 +171,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
                         if(child.props.disabled)
                             return <React.Fragment key={i} />
                         
-                        return <div className={"dolfo-tab-content" + (i === currentTab ? " current" : "")} style={style} key={i}>
+                        return <div className={"dolfo-tab-content" + (i === currentTab ? " current" : "") + (child.props.className ? (" " + child.props.className) : "")} style={style} key={i}>
                             {child.props.children}
                         </div>
                     })

@@ -11,11 +11,30 @@ export type NotificationPosition = "top-left" | "top-right" | "bottom-left" | "b
 export type NotificationDelay = number | "never"
 
 export interface BaseNotificationProps{
-    readonly message: string | React.ReactNode
+    /** The message to be shown
+     * @type ReactNode
+     * @required
+     */
+    readonly message: React.ReactNode
+    /** If true, hides the icon of the notification
+     * @type boolean
+     */
     readonly hideIcon?: boolean
+    /** Defines a hide delay for the notification
+     * @type number (in ms) | "never"
+     */
     readonly hideDelay?: NotificationDelay
+    /** Additional style for the notification
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the notification
+     * @type string
+     */
     readonly className?: string
+    /** Function triggered when closing the notification
+     * @type Function
+     */
 	readonly onClose?: () => void
 }
 
@@ -32,27 +51,27 @@ export class NotificationMsg extends React.Component<NotificationProps>{
 
     getRef = () => this.ref.current
 
-    static showError = (message: string | React.ReactNode): Closable => showNotification({
+    static showError = (message: React.ReactNode): Closable => showNotification({
         message,
         type: "error"
     })
 
-    static showInfo = (message: string | React.ReactNode): Closable => showNotification({
+    static showInfo = (message: React.ReactNode): Closable => showNotification({
         message,
         type: "info"
     })
 
-    static showSuccess = (message: string | React.ReactNode): Closable => showNotification({
+    static showSuccess = (message: React.ReactNode): Closable => showNotification({
         message,
         type: "success"
     })
 
-    static showLoading = (message?: string | React.ReactNode): Closable => showNotification({
+    static showLoading = (message?: React.ReactNode): Closable => showNotification({
         message: message || getConstant("LOADING_TEXT"),
         type: "loading"
     })
 
-    static showWarning = (message: string | React.ReactNode): Closable => showNotification({
+    static showWarning = (message: React.ReactNode): Closable => showNotification({
         message,
         type: "warning"
     })

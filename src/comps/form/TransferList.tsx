@@ -7,14 +7,50 @@ import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
 
 export interface TransferListProps extends BaseInputProps{
+    /** The list of items
+     * @type any[]
+     * @required
+     */
     readonly list: any[]
+    /** Function to get the label of each item
+     * @type Function
+     * @param item The single item
+     * @returns string
+     * @required
+     */
     readonly getLabel: (item: any) => string
+    /** Functin to get the primary key of each item
+     * @type Function
+     * @param item The single item
+     * @returns any
+     * @required
+     */
     readonly getKey: (item: any) => any
+    /** The default selected items
+     * @type any[]
+     */
     readonly defaultValue?: any[]
+    /** Allows lists filtering
+     * @type boolean
+     */
     readonly canFilter?: boolean
+    /** Allows to transfer all items at once
+     * @type boolean
+     */
     readonly allowTransferAll?: boolean
+    /** Defines a title for the left list
+     * @type string
+     */
     readonly leftListTitle?: string
+    /** Defines a title for the right list
+     * @type string
+     */
     readonly rightListTitle?: string
+    /** Function to determine if an item is disabled and not selectable
+     * @type Function
+     * @param item The single item
+     * @returns boolean
+     */
     readonly disabledItem?: (item: any) => boolean
 }
 

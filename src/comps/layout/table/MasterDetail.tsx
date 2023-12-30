@@ -8,9 +8,24 @@ import { Tooltip } from "../Tooltip"
 import { BaseResultsState, ResultsView, ResultViewProps, ViewType } from "./ResultsView"
 
 export interface MasterDetailProps extends ResultViewProps{
+    /** Function to define the actions for a row
+     * @type Function
+     * @param item The datasource item
+     * @returns ReactNode
+     */
     readonly actions?: (dataItem: IDataColumn) => React.ReactNode
-    readonly getDetailTitle: (item: any, isBreadcrumb?: boolean) => string | React.ReactNode
-    readonly onOpenDetail?: (item: any) => void
+    /** Function to define the detail title, allows to create a different title for the breadcrumb
+     * @type Function
+     * @param item The datasource item
+     * @param isBreadcrumb boolean
+     * @returns ReactNode
+     */
+    readonly getDetailTitle: (item: IDataColumn, isBreadcrumb?: boolean) => React.ReactNode
+    /** Function triggered when the detail is opened
+     * @type Function
+     * @param item The datasource item
+     */
+    readonly onOpenDetail?: (item: IDataColumn) => void
 }
 
 export interface MasterDetailState extends BaseResultsState{

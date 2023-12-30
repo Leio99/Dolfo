@@ -7,9 +7,24 @@ import Button from "./Button"
 import { ContextMenu } from "./ContextMenu"
 
 interface IProps{
+    /** Defines the page size
+     * @type number
+     * @required
+     */
     readonly pageSize: number
+    /** Defines the total of the datasource length
+     * @type number
+     * @required
+     */
     readonly dataSize: number
+    /** Defines the default page to start from
+     * @type number
+     */
     readonly startFromPage?: number
+    /** Function triggered when changing the page
+     * @type Function
+     * @param page number
+     */
     readonly onChangePage?: (page: number) => void
 }
 

@@ -5,7 +5,13 @@ import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
 
 export interface SwitchProps extends ExtendedInputProps{
+    /** Defines if the switch is checked by default
+     * @type boolean
+     */
     readonly checked?: boolean
+    /** Defines if the switch is loading
+     * @type boolean
+     */
     readonly loading?: boolean
 }
 

@@ -2,13 +2,28 @@ import React, { CSSProperties, createRef } from "react"
 import { Icon } from "./Icon"
 
 interface CardProps{
-    readonly title?: string | React.ReactNode
+    /** The title of the swiper
+     * @type ReactNode
+     */
+    readonly title?: React.ReactNode
+    /** Additional className for the card
+     * @type string
+     */
     readonly className?: string
+    /** Additional style for the card
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
 }
 
 interface IProps extends Partial<IState>{
+    /** Additional className for the swiper
+     * @type string
+     */
     readonly className?: string
+    /** Additional style for the swiper
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
 }
 

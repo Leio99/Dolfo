@@ -10,7 +10,13 @@ import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
 
 export interface AutocompleteProps<E> extends ExtendedInputProps{
+    /** Defines the default value of the autocomplete
+     * @type the passed type in generics
+     */
     readonly defaultValue?: E
+    /** If the search retrieves only one element, it will be selected automatically
+     * @type boolean
+     */
     readonly selectOptionIfOnlyOne?: boolean
 }
 
@@ -25,7 +31,7 @@ interface IState<E, K>{
     readonly focusedIndex: number
 }
 
-export abstract class Autocomplete<E, K, P = any> extends React.Component<AutocompleteProps<E> & P, IState<E, K>>{
+export abstract class Autocomplete<E, K, P = unknown> extends React.Component<AutocompleteProps<E> & P, IState<E, K>>{
     private readonly TIMING = 500
     private typing: _.DebouncedFunc<() => void>
     private rootContent = document.createElement("div")

@@ -1,16 +1,40 @@
 import React, { CSSProperties, createRef } from "react"
 
 interface DisplayItemProps{
-    readonly title?: React.ReactNode | string
+    /** The title of the displayer item
+     * @type ReactNode
+     */
+    readonly title?: React.ReactNode
+    /** Defines an image url for the displayer item backround
+     * @type string
+     */
     readonly imageUrl?: string
-    readonly infos?: React.ReactNode | string
+    /** Defines additional infos for the displayer item
+     * @type ReactNode
+     */
+    readonly infos?: React.ReactNode
+    /** Additional className for the displayer item
+     * @type string
+     */
     readonly className?: string
+    /** Additional style for the displayer item
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Function triggered when clicking the item
+     * @type Function
+     */
     readonly onClick?: () => void
 }
 
 interface IProps{
+    /** Additional className for the displayer
+     * @type string
+     */
     readonly className?: string
+    /** Additional style for the displayer
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
 }
 

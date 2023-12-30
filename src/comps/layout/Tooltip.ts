@@ -11,7 +11,15 @@ interface TooltipElement extends HTMLDivElement{
 }
 
 interface IProps extends React.PropsWithChildren{
-    readonly tooltip: string | React.ReactNode
+    /** The title of the tooltip
+     * @type ReactNode
+     * @required
+     */
+    readonly tooltip: React.ReactNode
+    /** Defines the position of the tooltip
+     * @type TooltipPlacement
+     * @default "top"
+     */
     readonly placeTooltip?: TooltipPlacement
 }
 

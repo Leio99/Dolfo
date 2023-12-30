@@ -7,11 +7,19 @@ import { CheckIcon, CloseIcon } from "../Icon"
 import { Tooltip } from "../Tooltip"
 
 export interface BaseResultsData{
+    /** Defines the columns of the table
+     * @type IColumn[]
+     * @required
+     */
     readonly columns: IColumn[]
+    /** Defines the dataSource
+     * @type IDataColumn[]
+     * @required
+     */
     readonly data: IDataColumn[]
 }
 
-export abstract class BaseExportableManager<P = any, S = any> extends React.Component<P & BaseResultsData, S>{
+export abstract class BaseExportableManager<P = unknown, S = unknown> extends React.Component<P & BaseResultsData, S>{
     private isPressingCheckbox = false
 
     getColumnDataType = (col: IColumn, data: IDataColumn, exp = false): any => {

@@ -6,18 +6,50 @@ import { BaseInputProps } from "../shared/models/InputProps"
 import { CheckBox } from "./CheckBox"
 
 export interface SelectableCardListProps extends BaseInputProps, React.PropsWithChildren{
+    /** Allows multiple selection
+     * @type boolean
+     */
     readonly multiple?: boolean
+    /** The default value of the input
+     * @type any | any[]
+     */
     readonly defaultValue?: any | any[]
+    /** If true, shows a checkbox inside the labels
+     * @type boolean
+     */
     readonly showCheckbox?: boolean
+    /** If true, on mobile, each card will take all the row space
+     * @type boolean
+     */
     readonly fullSize?: boolean
 }
 
 interface SelectableCardProps{
+    /** The value of the card
+     * @type any
+     * @required
+     */
     readonly value: any
-    readonly title: string | React.ReactNode
-    readonly desc?: string | React.ReactNode
+    /** The title of the card
+     * @type ReactNode
+     * @required
+     */
+    readonly title: React.ReactNode
+    /** The description of the card
+     * @type ReactNode
+     */
+    readonly desc?: React.ReactNode
+    /** Defines if the card will be disabled
+     * @type boolean
+     */
     readonly disabled?: boolean
+    /** Additional card style
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional card className
+     * @type string
+     */
     readonly className?: string
 }
 

@@ -98,7 +98,7 @@ export class ResultCode extends React.Component<ResultCodeProps, ResultCodeState
     }
 }
 
-export class Usage extends React.Component<{ readonly notes?: string | React.ReactNode }>{
+export class Usage extends React.Component<{ readonly notes?: React.ReactNode }>{
     render = (): React.ReactNode => {
         return <>
             <h3 className="usage">Usage</h3>
@@ -142,7 +142,7 @@ export class OptionApis extends React.Component{
         {
             name: "label",
             desc: "The label of the option.",
-            type: "string | React.ReactNode",
+            type: "React.ReactNode",
             required: true
         },
         {

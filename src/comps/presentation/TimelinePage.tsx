@@ -80,6 +80,13 @@ export class TimelinePage extends React.Component{
                 default: "blue"
             },
             {
+                name: "className",
+                desc: "Additional className for the timeline item.",
+                type: "string",
+                required: false,
+                default: "null"
+            },
+            {
                 name: "style",
                 desc: "Additional style for the timeline item.",
                 type: "CSSProperties",

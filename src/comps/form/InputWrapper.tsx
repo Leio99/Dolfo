@@ -5,7 +5,7 @@ import { Tooltip } from "../layout/Tooltip"
 import { getConstant } from "../shared/Constants"
 
 interface IProps extends React.PropsWithChildren{
-    readonly label?: React.ReactNode | string
+    readonly label?: React.ReactNode
     readonly style?: CSSProperties
     readonly icon: BaseIconProps
     readonly focusBool?: boolean

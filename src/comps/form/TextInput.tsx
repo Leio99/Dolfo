@@ -6,19 +6,54 @@ import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
 import { IconKey } from "../shared/models/IconModel"
 
-type InputTypes = "textarea" | "password" | "email" | "number"
+export type InputTypes = "text" | "textarea" | "password" | "email" | "number"
 
 export interface TextInputProps extends FullInputProps{
+    /** Defines the type of input
+     * @type InputTypes
+     * @default "text"
+     */
     readonly type?: InputTypes
+    /** If type is 'textarea', the input will expand itself when pressing the Enter key
+     * @type boolean
+     */
     readonly expandTextarea?: boolean
+    /** Defines the number of if type is 'textarea'. If the textarea is expandable, this will be the maximum size
+     * @type number
+     */
     readonly rows?: number
+    /** If type is 'password', this will toggle the visibility of the password
+     * @type boolean
+     * @default 5
+     */
     readonly togglePassword?: boolean
+    /** If type is 'text' or 'textarea', defines the maximum length of the input
+     * @type number
+     */
     readonly minLength?: number
+    /** If type is 'text' or 'textarea', defines the maximum length of the input
+     * @type number
+     */
     readonly maxLength?: number
+    /** Defines the default value of the input
+     * @type string
+     */
     readonly value?: string
+    /** If type is 'number', defines the maximum number
+     * @type number
+     */
     readonly max?: number
+    /** If type is 'number', defines the minimum number
+     * @type number
+     */
     readonly min?: number
+    /** The placeholder of the input
+     * @type string
+     */
     readonly placeHolder?: string
+    /** If true, allows browser autocompleting
+     * @type boolean
+     */
     readonly autocomplete?: string
 }
 

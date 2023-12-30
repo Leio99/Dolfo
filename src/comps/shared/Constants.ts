@@ -77,6 +77,11 @@ export const Constants = {
     PAGINATION_LAST_PAGE: "Ultima pagina"
 }
 
+/** Function used to get a global constant
+ * @type Function
+ * @param key The key of the constant to get
+ * @returns string (constant value)
+ */
 export const getConstant = (key: keyof typeof Constants) => {
     const findConfig = (window as any).DOLFO_LANGUAGE_CONFIG
 

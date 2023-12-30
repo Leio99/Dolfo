@@ -5,10 +5,27 @@ import { createRoot } from "react-dom/client"
 import { TooltipPlacement } from "./Tooltip"
 
 interface IProps extends React.PropsWithChildren{
-    readonly content: string | React.ReactNode
+    /** The content of the popover
+     * @type ReactNode
+     * @required
+     */
+    readonly content: React.ReactNode
+    /** The position of the popover
+     * @type TooltipPlacement
+     * @default "left"
+     */
     readonly position?: TooltipPlacement
+    /** If true, the popover will show when hovering the element
+     * @type boolean
+     */
     readonly openOnOver?: boolean
+    /** Additional className for the popover
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the popover
+     * @type string
+     */
     readonly className?: string
 }
 

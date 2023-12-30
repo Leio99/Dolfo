@@ -30,7 +30,7 @@ interface InternalState{
     readonly showActions: boolean
 }
 
-export abstract class TreeView<P = any> extends React.PureComponent<P, InternalState & IState>{
+export abstract class TreeView<P = unknown> extends React.PureComponent<P, InternalState & IState>{
     constructor(props: P, state: IState){
         super(props)
 
@@ -48,7 +48,7 @@ export abstract class TreeView<P = any> extends React.PureComponent<P, InternalS
 
     abstract getData: (node: TreeNode) => TreeNode[]
 
-    abstract getLabel: (node: TreeNode) => string | React.ReactNode
+    abstract getLabel: (node: TreeNode) => React.ReactNode
 
     abstract hasChildren: (node: TreeNode) => boolean
 

@@ -5,14 +5,33 @@ export { SubMenu } from "./SubMenu"
 export { MenuItem } from "./MenuItem"
 
 export interface BaseSideMenuProps extends React.PropsWithChildren{
-    readonly className?: string
+    /** Additional className for the menu
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the menu
+     * @type string
+     */
+    readonly className?: string
+    /** Defines the color of the menu
+     * @type ButtonColors
+     */
     readonly menuColor?: ButtonColors
 }
 
 interface IProps extends BaseSideMenuProps{
+    /** Defines the direction which the menu will slide from
+     * @type "left" | "right"
+     * @default "left"
+     */
     readonly direction?: "left" | "right"
+    /** Defines if the menu is opened by default
+     * @type boolean
+     */
     readonly opened?: boolean
+    /** Function triggered when the menu is toggled
+     * @type Function
+     */
     readonly onToggle?: () => void
 }
 

@@ -4,8 +4,17 @@ import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
 interface IProps extends React.PropsWithChildren{
-    readonly style?: CSSProperties,
+    /** Additional style for the breadcrumb
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Additional className for the breadcrumb
+     * @type string
+     */
     readonly className?: string
+    /** If true, changes the style of the breadcrumb with arrows
+     * @type boolean
+     */
     readonly arrowStyle?: boolean
 }
 

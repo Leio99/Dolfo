@@ -12,10 +12,29 @@ import { Table } from "./Table"
 export type ViewType = "grid" | "card"
 
 export interface ResultViewProps extends CardTableProps, ResultsManagerProps{
+    /** The columns of the table
+     * @type IColumn[]
+     * @required
+     */
     readonly columns: IColumn[]
+    /** The datasource
+     * @type IDataColumn[]
+     * @required
+     */
     readonly data: IDataColumn[]
+    /** Defines the layout type
+     * @type ViewType
+     * @default "grid"
+     */
     readonly layoutType?: ViewType
+    /** Hides the button that toggles the layout type
+     * @type boolean
+     */
     readonly hideToggleButton?: boolean
+    /** Function triggered when the layout type changes
+     * @type Function
+     * @param viewMode ViewType
+     */
     readonly onToggleViewMode?: (viewMode: ViewType) => void
 }
 

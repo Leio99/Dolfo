@@ -1,19 +1,56 @@
-import React from "react"
+import React, { CSSProperties } from "react"
 import { formatNumber } from "../shared/utility"
 import { BaseColors } from "./Button"
 import { LoadingIcon } from "./Icon"
 
 interface IProps {
+    /** The percentage loaded
+     * @type number
+     * @required
+     */
     readonly percent: number
+    /** If true, convert thousand separator to '.' and decimal separator to ','
+     * @type boolean
+     */
     readonly convertCommas?: boolean
+    /** Show a circular progress
+     * @type boolean
+     */
     readonly circular?: boolean
+    /** The color of the progress
+     * @type BaseColors
+     * @default "blue"
+     */
     readonly color?: BaseColors
+    /** The size of the progress
+     * @type "small" | "medium" | "large"
+     * @default "small"
+     */
     readonly barSize?: "small" | "medium" | "large"
+    /** If 'circular' is 'true', defines the size of the circle
+     * @type number (in px)
+     */
     readonly circleWidth?: number
+    /** Defines if the progress is loading
+     * @type boolean
+     */
     readonly loading?: boolean
-    readonly loadingText?: string | React.ReactNode
+    /** Defines a custom text if loading
+     * @type ReactNode
+     */
+    readonly loadingText?: React.ReactNode
+    /** Additional className for the progress
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Additional className for the progress
+     * @type string
+     */
     readonly className?: string
-    readonly customCircleText?: string | React.ReactNode
+    /** If 'circular' is 'true' defines a custom text to show inside the circle
+     * @type ReactNode
+     */
+    readonly customCircleText?: React.ReactNode
 }
 
 export class Progress extends React.PureComponent<IProps>{
@@ -25,7 +62,7 @@ export class Progress extends React.PureComponent<IProps>{
         formattedPercent = props.convertCommas ? formatNumber(percent) : percent
 
         if(props.circular){
-            return <svg viewBox="0 0 36 36" className={"dolfo-circular-progress" + (props.className ? (" " + props.className) : "")} style={{ width, height: width }}>
+            return <svg viewBox="0 0 36 36" className={"dolfo-circular-progress" + (props.className ? (" " + props.className) : "")} style={{ ...props.style, width, height: width }}>
                 <defs>
                     <filter id="inset-shadow">
                         <feFlood floodColor="rgba(0, 0, 0, 0.15)"/>
@@ -44,7 +81,7 @@ export class Progress extends React.PureComponent<IProps>{
             </svg>
         }
 
-        return <div className={"dolfo-progress-line " + (props.className ? (" " + props.className) : "") + (props.loading ? " progress-loading" : "") + " " + (props.barSize || "small")}>
+        return <div className={"dolfo-progress-line " + (props.className ? (" " + props.className) : "") + (props.loading ? " progress-loading" : "") + " " + (props.barSize || "small")} style={props.style}>
             <span className="percent-text">
                 {props.loading ? (props.loadingText || <LoadingIcon spinning />) : (formattedPercent + "%")}
             </span>

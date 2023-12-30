@@ -5,7 +5,13 @@ import { BaseInputProps } from "../shared/models/InputProps"
 import { Option } from "./Option"
 
 export interface RadioButtonProps extends BaseInputProps, React.PropsWithChildren{
+    /** The name of the control inside the form
+     * @type string
+     */
     readonly controlName: string
+    /** Defines the default value of the radio input
+     * @type any
+     */
     readonly defaultValue?: any
 }
 

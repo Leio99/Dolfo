@@ -2,9 +2,19 @@ import React from "react"
 import { Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
+    /** Defines the title of the submenu
+     * @type ReactNode
+     * @required
+     */
+    readonly text: React.ReactNode
+    /** Defines if the submenu is opened
+     * @type boolean
+     */
     readonly opened?: boolean
-    readonly text: string | React.ReactNode
-    readonly onClick?:() => void
+    /** Function triggered when clicking the submenu title
+     * @type Function
+     */
+    readonly onClick?: () => void
 }
 
 interface IState{

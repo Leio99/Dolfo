@@ -10,8 +10,22 @@ import { Option } from "../form/Option"
 import { Tooltip } from "./Tooltip"
 
 interface IProps{
+    /** Defines the google calendar ID
+     * @type string
+     * @required
+     */
     readonly calendarId: string
+    /** Defines the google account API key
+     * @type string
+     * @required
+     */
     readonly apiKey: string
+    /** Function triggered when clicking the calendar event
+     * @type Function
+     * @param e CalendarEvent
+     * @param isPrev boolean (true if the event is in the previous month)
+     * @param isNext boolean (true if the event is in the following month)
+     */
     readonly onEventClick?: (e: CalendarEvent, isPrev: boolean, isNext: boolean) => void
 }
 

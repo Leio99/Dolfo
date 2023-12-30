@@ -1,13 +1,29 @@
 import React, { CSSProperties } from "react"
 
 interface CardActionsProps extends React.PropsWithChildren{
+    /** Additional className for the component
+     * @type string
+     */
     readonly className?: string
+    /** Additional style for the component
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
-    readonly layout?: "flat" | "tab"
 }
 
 interface CardProps extends CardActionsProps{
-    readonly title?: string | React.ReactNode
+    /** The type of layout of the card
+     * @type "flat" | "tab"
+     */
+    readonly layout?: "flat" | "tab"
+    /** The title fo the card
+     * @type ReactNode
+     */
+    readonly title?: React.ReactNode
+    /** Function triggered when doubleclicking the card
+     * @type Functrion
+     * @param e React.MouseEvent
+     */
     readonly onDoubleClick?: (e: React.MouseEvent) => void
 }
 

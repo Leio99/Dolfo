@@ -3,20 +3,56 @@ import ReactDOM from "react-dom"
 import { Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
-    readonly label: string | React.ReactNode
+    /** The label of the dropdown
+     * @type React.ReactNode
+     * @required
+     */
+    readonly label: React.ReactNode
+    /** If true, the dropdown won't close when clicking an option
+     * @type boolean
+     */
     readonly preventCloseOnClick?: boolean
+    /** Defines if the dropdown is disabled
+     * @type boolean
+     */
     readonly disabled?: boolean
+    /** Additional className for the dropdown
+     * @type string
+     */
     readonly className?: string
+    /** Additional style for the dropdown
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
 }
 
 interface DropDownItemProps extends React.PropsWithChildren{
+    /** Defines if the option is disabled
+     * @type boolean
+     */
     readonly disabled?: boolean
-    readonly onClick?: (e: React.MouseEvent) => void
-    readonly onMouseDown?: (e: React.MouseEvent) => void
+    /** Additional className for the option
+     * @type string
+     */
     readonly className?: string
+    /** Additional style for the option
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Determines if the option is static and not clickable
+     * @type boolean
+     */
     readonly static?: boolean
+    /** Function triggered when clicking the option
+     * @type Function
+     * @param e React.MouseEvent
+     */
+    readonly onClick?: (e: React.MouseEvent) => void
+    /** Function triggered on mouse down on the option
+     * @type Function
+     * @param e React.MouseEvent
+     */
+    readonly onMouseDown?: (e: React.MouseEvent) => void
 }
 
 interface IState{

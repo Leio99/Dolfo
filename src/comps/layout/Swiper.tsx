@@ -4,13 +4,25 @@ import Button from "./Button"
 import { Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
+    /** Defines if the swiper is opened
+     * @type boolean
+     */
     readonly opened?: boolean
 }
 
 interface SwipeProps extends React.PropsWithChildren{
-    readonly style?: CSSProperties
-    readonly className?: string
+    /** Function triggered when the 'go back' button is clicked
+     * @type Function
+     */
     readonly onGoBack?: () => void
+    /** Additional className for the swipe
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Additional className for the swipe
+     * @type string
+     */
+    readonly className?: string
 }
 
 export class Swiper extends React.PureComponent<IProps, IProps>{

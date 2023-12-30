@@ -4,6 +4,12 @@ import { getConstant } from "./Constants"
 import _ from "lodash"
 import { showInfo } from "../layout/NotificationMsg"
 
+/** Function to format a date in european style
+ * @type Function
+ * @param inputDate Date or string
+ * @param monthString boolean (if true shows the month in letters; default is 'false')
+ * @returns string (formatted date)
+ */
 export const formatDate = (inputDate: Date | string, monthString = false): string => {
     const date = new Date(inputDate),
     month = monthString ? (" " + decodeMonth(date.getMonth()).toLowerCase() + " ") : ("-" + zeroBefore(date.getMonth() + 1) + "-")
@@ -11,10 +17,28 @@ export const formatDate = (inputDate: Date | string, monthString = false): strin
     return `${zeroBefore(date.getDate()) + month + date.getFullYear()}`
 }
 
+/** Function that blurs the active element on document
+ * @type Function
+ */
 export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
 
+/** Function that checks if a date is valid
+ * @type Function
+ * @param d number (day)
+ * @param m number (month)
+ * @param y number (year)
+ * @param h number (hour)
+ * @param i number (minute)
+ * @returns boolean
+ */
 export const isValidDate = (d: number, m: number, y: number, h: number, i: number): boolean => m >= 0 && m < 12 && d > 0 && d <= daysInMonth(m, y) && h >= 0 && h < 60 && i >= 0 && i < 60 && y > 1900
 
+/** Function that checks if the month has the passed day for the year
+ * @type Function
+ * @param m number (month)
+ * @param y number (year)
+ * @returns boolean
+ */
 export const daysInMonth = (m: number, y: number) => {
     switch (m) {
         case 1: return y % 4 === 0 || y % 100 === 0 || y % 400 === 0 ? 29 : 28
@@ -26,6 +50,11 @@ export const daysInMonth = (m: number, y: number) => {
     }
 }
 
+/** Formats a number with '.' for thousands and ',' for decimals
+ * @type Function
+ * @param n number | string
+ * @returns string (formatted number)
+ */
 export const formatNumber = (n: string | number): string => {
     if(n == null) return "0"
 
@@ -36,6 +65,12 @@ export const formatNumber = (n: string | number): string => {
     return converted.replace(/\B(?=(\d{3})+(?!\d))/g, ";").replace(".",",").replace(";",".")
 }
 
+/** Function used to decode the passed month in letters
+ * @type Function
+ * @param month number
+ * @param short boolean (if true returns the first three letters; default is 'false')
+ * @returns string (month in letters)
+ */
 export const decodeMonth = (month: number, short: boolean = false): string => {
     switch(month){
         case 0: return short ? getConstant("MONTHS")[0].substring(0, 3) : getConstant("MONTHS")[0]
@@ -53,11 +88,22 @@ export const decodeMonth = (month: number, short: boolean = false): string => {
     }
 }
 
+/** Given a number, if it is < 10 it adds a '0' before it
+ * @type Function
+ * @param n number
+ * @returns string (formatted number)
+ */
 export const zeroBefore = (n: number): string => n < 10 ? ("0" + n) : n.toString()
 
-export const getCalendar = (month?: number, year?: number) => {
+/** Given a month and a year, returns a table with the calendar for that month
+ * @type Function
+ * @param month number
+ * @param year number
+ * @returns ICalendarDay[][]
+ */
+export const getCalendar = (month: number, year: number): ICalendarDay[][] => {
     let days = daysInMonth(month, year),
-    table = [],
+    table: ICalendarDay[][] = [],
     cols: ICalendarDay[] = [],
     today = new Date(),
     dateMonth = month >= 0 ? month : today.getMonth(),
@@ -139,13 +185,24 @@ export const getCalendar = (month?: number, year?: number) => {
     return table
 }
 
+/** Given a date, retrieves the time formatted
+ * @type Function
+ * @param d Date or string
+ * @returns string (formatted time)
+ */
 export const getTime = (d: string | Date): string => {
     const date = new Date(d)
 
     return `${zeroBefore(date.getHours())}:${zeroBefore(date.getMinutes())}`
 }
 
-export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
+/** Given a datasurce, exports it in CSV format
+ * @type Function
+ * @param data IDataColumn[]
+ * @param heading string[] (optional; contains the labels of the columns)
+ * @returns void
+ */
+export const downloadCSV = (data: IDataColumn[], heading?: string[]): void => {
     if(!data || !data.length) return
     
     let csvContent = "data:text/csv;charset=utf-8,"
@@ -165,23 +222,43 @@ export const downloadCSV = (data: IDataColumn[], heading?: string[]) => {
     link.remove()
 }
 
+/** Copies a text to the clipboard
+ * @type Function
+ * @param text string
+ * @param msg string (optional; the message shown on success)
+ */
 export const copyToClipBoard = (text: string, msg = getConstant("COPIED_TO_CLIPBOARD")): void => {
     navigator.clipboard.writeText(text)
     showInfo(msg)
 }
 
-export const toggleDarkTheme = () => {
+/** Function that toggles the dark theme on the page
+ * @type Function
+ */
+export const toggleDarkTheme = (): void => {
     const isDark = isDarkTheme() ? "0" : "1"
 
     document.querySelector("html").classList.toggle("dark-theme")
     localStorage.setItem("darkTheme", isDark)
 }
 
-export const isDarkTheme = () => localStorage.getItem("darkTheme") === "1"
+/** Function the checks if the dark theme is enabled
+ * @type Function
+ * @returns boolean
+ */
+export const isDarkTheme = (): boolean => localStorage.getItem("darkTheme") === "1"
 
-export const checkDarkTheme = () => isDarkTheme() && document.querySelector("html").classList.add("dark-theme")
+/** Checks if the dark theme is enabled and applies it to the body
+ * @type Function
+ */
+export const checkDarkTheme = (): void => isDarkTheme() && document.querySelector("html").classList.add("dark-theme")
 
-export const sumParentZIndex = (element: HTMLElement) => {
+/** Given an element, loops all its parents to retrieve its z-index
+ * @type Function
+ * @param element HTMLElement
+ * @returns number
+ */
+export const sumParentZIndex = (element: HTMLElement): number => {
     let sum = 0,
     temp = element
 
@@ -196,9 +273,14 @@ export const sumParentZIndex = (element: HTMLElement) => {
 
     return sum
 }
-    
-export const isElementInViewport = (el: Element): boolean => {
-    const rect = el.getBoundingClientRect()
+
+/** Function that checks if the element is inside the viewport or not
+ * @type Function
+ * @param element Element
+ * @returns boolean
+ */
+export const isElementInViewport = (element: Element): boolean => {
+    const rect = element.getBoundingClientRect()
 
     return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 }

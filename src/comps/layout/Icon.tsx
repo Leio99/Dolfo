@@ -2,18 +2,47 @@ import React, { CSSProperties } from "react"
 import { IconKey, IconType } from "../shared/models/IconModel"
 
 export interface BaseIconProps {
-    readonly type?: IconType
+    /** The key of the icon
+     * @type IconKey
+     * @required
+     */
     readonly iconKey: IconKey
+    /** The type of icon
+     * @type IconType
+     */
+    readonly type?: IconType
 }
 
 interface DefaultIconProps{
-    readonly className?: string
+    /** Defines if the icon is spinning
+     * @type boolean
+     */
     readonly spinning?: boolean
-    readonly style?: CSSProperties
-    readonly onClick?: (e: React.MouseEvent) => void
+    /** Defines a color for the icon
+     * @type string (CSS color)
+     */
     readonly color?: string
+    /** Defines if the icon has a large size
+     * @type boolean
+     */
     readonly large?: boolean
+    /** Removes the fixed width for the icon
+     * @type boolean
+     */
     readonly notFW?: boolean
+    /** Additional className for the icon
+     * @type string
+     */
+    readonly className?: string
+    /** Additional style for the icon
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Function triggered when clicking the icon
+     * @type Function
+     * @param e React.MouseEvent
+     */
+    readonly onClick?: (e: React.MouseEvent) => void
 }
 
 export type FullIconProps = DefaultIconProps & BaseIconProps

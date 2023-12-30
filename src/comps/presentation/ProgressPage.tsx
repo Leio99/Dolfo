@@ -149,6 +149,13 @@ export class ProgressPage extends React.Component{
                 type: "string",
                 required: false,
                 default: "null"
+            },
+            {
+                name: "style",
+                desc: "Additional style to apply to the progress.",
+                type: "CSSProperties",
+                required: false,
+                default: "null"
             }
         ]} />
     </>

@@ -126,6 +126,13 @@ export class StepperPage extends React.Component<MenuContentProps, {
                 default: "false"
             },
             {
+                name: "clasSName",
+                desc: "Additional clasSName for the step.",
+                type: "string",
+                required: false,
+                default: "null"
+            },
+            {
                 name: "style",
                 desc: "Additional style for the step.",
                 type: "CSSProperties",

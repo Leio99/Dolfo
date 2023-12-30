@@ -6,12 +6,28 @@ import { CloseIcon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
 interface IProps extends React.PropsWithChildren{
+    /** The type of alert
+     * @type DialogType
+     */
     readonly type?: DialogType
+    /** Additional style for the alert
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the alert
+     * @type string
+     */
     readonly className?: string
-    readonly onClose?: () => void
+    /** Defines if the alert can be closed */
     readonly closable?: boolean
+    /** Defines a custom action instead of closing
+     * @type ReactNode
+     */
     readonly customAction?: React.ReactNode
+    /** Function triggered when closing the alert
+     * @type Function
+     */
+    readonly onClose?: () => void
 }
 
 export class Alert extends React.Component<IProps>{

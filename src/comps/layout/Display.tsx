@@ -2,9 +2,21 @@ import React, { CSSProperties } from "react"
 import { BaseColors } from "./Button"
 
 interface IProps extends React.PropsWithChildren{
+    /** The color of the display
+     * @type BaseColors
+     */
     readonly color?: BaseColors
-    readonly title?: string | React.ReactNode
+    /** The title of the display
+     * @type ReactNode
+     */
+    readonly title?: React.ReactNode
+    /** Additional style for the display
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the display
+     * @type string
+     */
     readonly className?: string
 }
 

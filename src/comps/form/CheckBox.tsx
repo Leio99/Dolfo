@@ -5,6 +5,9 @@ import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
 
 export interface CheckBoxProps extends BaseInputProps{
+    /** Defines if the checkbox should be checked by default
+     * @type boolean
+     */
     readonly checked?: boolean
 }
 

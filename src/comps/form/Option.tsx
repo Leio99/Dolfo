@@ -5,13 +5,39 @@ import { blurInput } from "../shared/utility"
 import { CheckBox } from "./CheckBox"
 
 interface IProps extends BaseInputProps{
+    /** The value of the option
+     * @type any
+     * @required
+     */
     readonly value: any
-    readonly label: string | React.ReactNode
+    /** The label of the option
+     * @type ReactNode
+     */
+    readonly label: React.ReactNode
+    /** Defines if the option is selected by default
+     * @type boolean
+     */
     readonly selected?: boolean
+    /** If true, the option will show a checkbox near the label
+     * @type boolean
+     */
     readonly multiple?: boolean
+    /** If true shows a radio button
+     * @type boolean
+     */
     readonly isRadio?: boolean
+    /** The name of the control in case of radio button
+     * @type string
+     */
     readonly controlName?: string
+    /** Defines if the option is focused
+     * @type boolean
+     */
     readonly focused?: boolean
+    /** Function to retrieve a string value from the label, used for example in multiple select to show concatenated values or for searching
+     * @type Function
+     * @returns string
+     */
     readonly getLabelString?: () => string
 }
 

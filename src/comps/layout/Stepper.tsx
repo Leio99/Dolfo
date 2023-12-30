@@ -5,17 +5,46 @@ import { BaseIconProps, Icon, LoadingIcon } from "./Icon"
 type InternalStep = { readonly step: Step, readonly index: number } | string
 
 interface IProps extends React.PropsWithChildren{
+    /** Defines the current step
+     * @type number
+     * @required
+     */
     readonly currentStep: number
-    readonly className?: string
-    readonly style?: CSSProperties
+    /** Defines if the stepper is vertical
+     * @type boolean
+     */
     readonly vertical?: boolean
+    /** Additional className for the stepper
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Additional className for the stepper
+     * @type string
+     */
+    readonly className?: string
 }
 
 interface StepProps extends React.PropsWithChildren{
-    readonly title?: string
+    /** Defines the title of the step
+     * @type ReactNode
+     */
+    readonly title?: React.ReactNode
+    /** Defines custom icon for the step
+     * @type BaseIconProps
+     */
     readonly icon?: BaseIconProps
-    readonly style?: CSSProperties
+    /** Defines if the step is loading
+     * @type boolean
+     */
     readonly loading?: boolean
+    /** Additional className for the step
+     * @type CSSProperties
+     */
+    readonly style?: CSSProperties
+    /** Additional className for the step
+     * @type string
+     */
+    readonly className?: string
 }
 
 export class Stepper extends React.PureComponent<IProps>{
@@ -77,7 +106,7 @@ export class Stepper extends React.PureComponent<IProps>{
                         const style = i === 0 ? props.vertical ? step.props.style : { ...step.props.style, marginLeft } : null,
                         isCurrent = currentStep === i
 
-                        return <div className={"dolfo-step" + (isCurrent ? " current" : "")} style={style} key={i}>
+                        return <div className={"dolfo-step" + (isCurrent ? " current" : "") + (step.props.className ? (" " + step.props.className) : "")} style={style} key={i}>
                             <div className={"dolfo-step-content" + (step.props.loading ? " loading" : "")} style={step.props.style}>
                                 {step.props.loading && <div className="dolfo-step-loading">
                                     <LoadingIcon spinning style={{ fontSize: 50 }} />    

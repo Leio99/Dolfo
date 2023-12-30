@@ -2,14 +2,37 @@ import React, { CSSProperties } from "react"
 import { Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
+    /** Additional className for the slideshow
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the slideshow
+     * @type string
+     */
+    readonly className?: string
+    /** Defines if the slideshows should be automatic
+     * @type boolean
+     */
     readonly automatic?: boolean
 }
 
 interface SlideProps extends React.PropsWithChildren{
+    /** Defines if the slide is selected by default
+     * @type boolean
+     */
     readonly selected?: boolean
+    /** Defines an image background for the slide
+     * @type string
+     */
     readonly imageUrl?: string
+    /** Additional className for the slide
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the slide
+     * @type string
+     */
+    readonly className?: string
 }
 
 interface IState{
@@ -74,7 +97,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
         { slides, currentSlide } = this.state,
         marginLeft = (-currentSlide * 100) + "%"
 
-        return <div className="dolfo-slideshow" style={props.style} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
+        return <div className={"dolfo-slideshow" + (props.className ? " " + props.className : "")} style={props.style} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <div className="dolfo-prev-slide" onClick={this.prevSlide}>
                 <Icon type="fal" iconKey="chevron-left" />
             </div>
@@ -90,7 +113,7 @@ export class SlideShow extends React.PureComponent<IProps, IState>{
                         if(slide.props.imageUrl)
                             style.backgroundImage = `url('${slide.props.imageUrl}')`
 
-                        return <div className="dolfo-slide" style={style} key={i}>
+                        return <div className={"dolfo-slide" + (slide.props.className ? " " + slide.props.className : "")} style={style} key={i}>
                             {slide.props.children}
                         </div>
                     })

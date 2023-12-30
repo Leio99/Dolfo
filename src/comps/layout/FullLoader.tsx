@@ -2,8 +2,14 @@ import React from "react"
 import { createRoot } from "react-dom/client"
 import { Closable } from "../shared/models/Closable"
 
-interface FullLoaderProps{ 
+interface FullLoaderProps{
+    /** Defines the text of the loader
+     * @type string
+     */
     readonly loadingText?: string, 
+    /** Defines the type of loader
+     * @type "circle" | "balls"
+     */
     readonly type?: "circle" | "balls"
 }
 

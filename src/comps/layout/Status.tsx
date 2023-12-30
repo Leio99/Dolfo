@@ -3,9 +3,22 @@ import { DialogType } from "./Dialog"
 import { CheckIcon, ErrorCircleIcon, Icon, InfoCircleIcon, WarningIcon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
+    /** The type of status
+     * @type DialogType | "pending"
+     * @required
+     */
     readonly type: DialogType | "pending"
+    /** If true, hides the status icon
+     * @type boolean
+     */
     readonly hideIcon?: boolean
+    /** Additional className for the status
+     * @type CSSProperties
+     */
     readonly style?: CSSProperties
+    /** Additional className for the status
+     * @type string
+     */
     readonly className?: string
 }
 

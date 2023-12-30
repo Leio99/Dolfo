@@ -1,6 +1,6 @@
 {
   "name": "dolfo",
-  "version": "1.0.88",
+  "version": "1.0.89",
   "main": "main.ts",
   "dependencies": {
     "@types/gapi": "^0.0.47",
