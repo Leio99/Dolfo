@@ -1,16 +1,16 @@
 import React from "react"
-import Button from "../layout/Button"
-import { CloseCircleIcon, CloseIcon, DeleteIcon, EditIcon, Icon } from "../layout/Icon"
-import { TreeNode, TreeView } from "../layout/table/TreeView"
-import { showError } from "../layout/NotificationMsg"
-import { openInfoDialog, openLoadingDialog } from "../layout/Dialog"
-import { Status } from "../layout/Status"
-import { formatDate } from "../shared/utility"
-import { IColumn } from "../shared/models/IColumn"
-import { WhenToUse, Usage, ResultCode, Apis, ColumnApis } from "./Layouts"
-import { TreeExample } from "./Examples"
 import { goToApiBlock } from "../MenuContent"
+import Button from "../layout/Button"
+import { openInfoDialog, openLoadingDialog } from "../layout/Dialog"
+import { CloseCircleIcon, CloseIcon, DeleteIcon, EditIcon, Icon } from "../layout/Icon"
+import { showError } from "../layout/NotificationMsg"
+import { Status } from "../layout/Status"
 import { Tooltip } from "../layout/Tooltip"
+import { TreeNode, TreeView } from "../layout/table/TreeView"
+import { IColumn } from "../shared/models/IColumn"
+import { formatDate } from "../shared/utility"
+import { TreeExample } from "./Examples"
+import { Apis, ColumnApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class TreeviewPage extends TreeView{
     constructor(props: unknown){
@@ -448,6 +448,14 @@ export class TreeviewPage extends TreeView{
         </>
     }
 
+    getColumnData = (col: IColumn, node: TreeNode): React.ReactNode => {
+        if (node.type === "root" && this.hasChildren(node) && col.field === "status") {
+            return <Status type="info" hideIcon>
+                <Icon iconKey="calendar-day" type="far" /> Prossimamente
+            </Status>
+        }
+    }
+
     render = (): React.ReactNode => <>
         <WhenToUse>When you want to render a tree-view table.</WhenToUse>
         <Usage />
@@ -505,12 +513,4 @@ export class TreeviewPage extends TreeView{
         <p className="notes">Note: the state can also contain custom variables that you can use inside your component.</p>
         <ColumnApis hideData />
     </>
-
-    getColumnData = (col: IColumn, node: TreeNode): React.ReactNode => {
-        if(node.type === "root" && this.hasChildren(node) && col.field === "status"){
-            return <Status type="info" hideIcon>
-                <Icon iconKey="calendar-day" type="far" /> Prossimamente
-            </Status>
-        }
-    }
 }

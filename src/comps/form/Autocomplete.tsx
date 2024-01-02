@@ -72,12 +72,29 @@ export abstract class Autocomplete<E, K, P = unknown> extends React.Component<Au
         }, this.TIMING)
     }
 
+    /** Method to retrieve the data for the autocomplete
+     * @param filter string
+     * @returns Promise or Array (according to the passed type)
+     */
     abstract getSource: (filter: string) => Promise<E[]> | E[]
 
+    /** Method to retrieve the description of a single element, shown during the selection
+     * @param item The current item
+     * @returns string
+     */
     abstract getDescription: (item: E) => string
 
+    /** Method to retrieve the unique key of a single element, used during the selection (usually the primary key)
+     * @param item The current item
+     * @returns the type of the key passed as a type
+     */
     abstract getKey: (item: E) => K
 
+    /** Method called when clicking the single element, used to retrieve any additional information, if needed
+     * @param key The primary key of the item
+     * @returns Promise or Object (according to the passed type)
+     * @required If the autocomplete is passed a default value
+     */
     getSingle: (key: E) => Promise<E> | E
 
     componentDidMount = (): void => {

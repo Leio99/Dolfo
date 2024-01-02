@@ -1,15 +1,20 @@
+import _ from "lodash"
 import React from "react"
 import { getConstant } from "../../shared/Constants"
 import { IColumn } from "../../shared/models/IColumn"
 import Button from "../Button"
 import { Icon } from "../Icon"
-import _ from "lodash"
 import { Tooltip } from "../Tooltip"
 
 export interface TreeNode{
+    /** The type of the node
+     * @type string
+     */
     readonly type: string
+    /** The data of the node
+     * @type any
+     */
     readonly data: any
-    readonly onDoubleClick?: (node: TreeNode) => void
 }
 
 type TreeLevel = {
@@ -46,16 +51,40 @@ export abstract class TreeView<P = unknown> extends React.PureComponent<P, Inter
             this.setState({ level: this.state.autoOpen ? this.autoExpandAll() : {} })
     }
 
+    /** Method used to retrieve the data according to the passed node
+     * @param node TreeNode
+     * @returns TreeNode[]
+     */
     abstract getData: (node: TreeNode) => TreeNode[]
 
+    /** Method used to retrieve a label describing the passed node
+     * @param node TreeNode
+     * @returns ReactNode
+     */
     abstract getLabel: (node: TreeNode) => React.ReactNode
 
+    /** Method to define if the passed node has children and can be opened
+     * @param node TreeNode
+     * @returns boolean
+     */
     abstract hasChildren: (node: TreeNode) => boolean
 
+    /** Method used to manage additional actions of the passed node
+     * @param node TreeNode
+     * @returns ReactNode
+     */
     protected getActions = (_: TreeNode): React.ReactNode => null
 
+    /** Method to manage the double click on the passed node
+     * @param node TreeNode
+     */
     protected onDoubleClick: (node: TreeNode) => void
 
+    /** Method used to retrieve the content of additional columns according to the passed node
+     * @param column IColumn
+     * @param node TreeNode
+     * @returns ReactNode
+     */
     protected getColumnData = (_: IColumn, __: TreeNode): React.ReactNode => null 
 
     toggleNode = (node: TreeNode, index: string): void => {
