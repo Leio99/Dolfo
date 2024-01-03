@@ -23,6 +23,10 @@ export class StartupPage extends React.Component{
             <h6>You can import it in your index file like this:</h6>
             <div className="component-showing code">import "../node_modules/dolfo/comps/shared/styles/_dolfo.scss"</div>
         </div>
+        
+        <div className="notes">
+            <strong>Note</strong>: you need to use SASS.
+        </div>
 
         <h2>&rarr; Step 3</h2>
         <p>Import and use a component from <strong>dolfo</strong> package.</p>
