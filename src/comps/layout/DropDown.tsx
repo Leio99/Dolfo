@@ -94,8 +94,8 @@ export class DropDown extends React.Component<IProps, IState>{
             items.forEach(i => {
                 const span = document.createElement("span"),
                 label = node.querySelector(".dolfo-dropdown-label"),
-                pL = window.getComputedStyle(label, null).getPropertyValue("padding-left"),
-                pR = window.getComputedStyle(label, null).getPropertyValue("padding-right")
+                pL = window.getComputedStyle(label).getPropertyValue("padding-left"),
+                pR = window.getComputedStyle(label).getPropertyValue("padding-right")
 
                 span.innerHTML = i.innerHTML
                 span.style.position = "fixed"
@@ -114,10 +114,10 @@ export class DropDown extends React.Component<IProps, IState>{
                     maxWidth = width
             })
 
+            this.resetNodeWidth()
+
             if(node.clientWidth <= maxWidth)
                 node.style.width = maxWidth + "px"
-            else
-                node.style.width = "auto"
         })
     }
 

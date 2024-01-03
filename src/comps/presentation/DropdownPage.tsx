@@ -1,7 +1,7 @@
 import React from "react"
-import { DropDown, DropDownItem } from "../layout/DropDown"
 import { goToApiBlock } from "../MenuContent"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { DropDown, DropDownItem } from "../layout/DropDown"
+import { Apis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class DropdownPage extends React.Component{
     render = (): React.ReactNode => <>

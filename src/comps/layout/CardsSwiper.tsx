@@ -103,7 +103,7 @@ export class CardsSwiper extends React.Component<React.PropsWithChildren<IProps>
         prevBtn.style.zIndex = (maxZIndex + 2).toString()
     }
 
-    componentDidMount = () => this.event = new EventManager("resize", this.calcolaSwipers).activateOnLoad().register()
+    componentDidMount = () => this.event = new EventManager("resize", this.calcolaSwipers).activateOnRegister().register()
 
     componentWillUnmount = (): void => this.event.unregister()
 

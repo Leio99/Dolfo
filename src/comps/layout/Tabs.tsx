@@ -78,7 +78,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
 
     componentDidMount = (): void => {
         this.loadTabs()
-        this.event = new EventManager("resize", this.handleBar).activateOnLoad().register()
+        this.event = new EventManager("resize", this.handleBar).activateOnRegister().register()
     }
 
     componentWillUnmount = (): void => {

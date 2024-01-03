@@ -21,7 +21,7 @@ export class EventManager<E extends Event = Event>{
   /** Fires the event when the "register" method is called
    * @returns this
    */
-  activateOnLoad = (): this => {
+  activateOnRegister = (): this => {
     this._activateOnLoad = true
     return this
   }
