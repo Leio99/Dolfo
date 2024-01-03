@@ -1,11 +1,17 @@
-import React from "react";
-import { Constants } from "../shared/Constants";
 import _ from "lodash";
+import React from "react";
 import { Table } from "../layout/table/Table";
+import { Constants } from "../shared/Constants";
 
 export class StartupPage extends React.Component{
     render = (): React.ReactNode => <>
         <h2>&rarr; Step 1</h2>
+        <div className="component-preview">
+            <h6>Install dolfo:</h6>
+            <div className="component-showing code">npm install dolfo</div>
+        </div>
+
+        <h2>&rarr; Step 2</h2>
         <div className="component-preview">
             <h6>You need to import the main stylesheet in your SCSS file, by adding this line:</h6>
             <div className="component-showing code">@import "~dolfo/comps/shared/styles/dolfo";</div>
@@ -18,7 +24,7 @@ export class StartupPage extends React.Component{
             <div className="component-showing code">import "../node_modules/dolfo/comps/shared/styles/_dolfo.scss"</div>
         </div>
 
-        <h2>&rarr; Step 2</h2>
+        <h2>&rarr; Step 3</h2>
         <p>Import and use a component from <strong>dolfo</strong> package.</p>
 
         <h2 style={{ marginTop: 20 }}>&rarr; Configure constants</h2>
