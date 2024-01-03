@@ -1,10 +1,10 @@
 import React from "react"
-import Button from "../layout/Button"
-import { Icon } from "../layout/Icon"
 import { goToApiBlock } from "../MenuContent"
-import { ResultCode, WhenToUse, Apis } from "./Layouts"
-import { Tooltip } from "../layout/Tooltip"
+import Button from "../layout/Button"
 import { ContextMenu } from "../layout/ContextMenu"
+import { Icon } from "../layout/Icon"
+import { Tooltip } from "../layout/Tooltip"
+import { Apis, ResultCode, WhenToUse } from "./Layouts"
 
 export class ContextMenuPage extends React.Component{
     render = (): React.ReactNode => <>

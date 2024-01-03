@@ -1,6 +1,5 @@
 import _ from "lodash"
-import React, { createRef } from "react"
-import { CSSProperties } from "react"
+import React, { CSSProperties, createRef } from "react"
 import { createRoot } from "react-dom/client"
 import { getConstant } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
@@ -49,7 +48,7 @@ interface NotificationProps extends BaseNotificationProps{
 export class NotificationMsg extends React.Component<NotificationProps>{
     private ref = createRef<HTMLDivElement>()
 
-    getRef = () => this.ref.current
+    getRef = (): HTMLDivElement => this.ref.current
 
     static showError = (message: React.ReactNode): Closable => showNotification({
         message,

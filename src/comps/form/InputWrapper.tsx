@@ -1,6 +1,6 @@
 import _ from "lodash"
 import React, { CSSProperties, createRef } from "react"
-import { CloseIcon, Icon, BaseIconProps } from "../layout/Icon"
+import { BaseIconProps, CloseIcon, Icon } from "../layout/Icon"
 import { Tooltip } from "../layout/Tooltip"
 import { getConstant } from "../shared/Constants"
 
@@ -38,7 +38,7 @@ export class InputWrapper extends React.PureComponent<IProps, IState>{
         }
     }
 
-    getRef = () => this.ref.current
+    getRef = (): HTMLDivElement => this.ref.current
 
     componentDidUpdate = (prevProps: IProps) => {
         if(!_.isEqual(prevProps.value, this.props.value)){

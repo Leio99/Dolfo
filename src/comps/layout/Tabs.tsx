@@ -1,5 +1,6 @@
-import React, { CSSProperties, createRef } from "react"
 import _ from "lodash"
+import React, { CSSProperties, createRef } from "react"
+import { EventManager } from "../shared/models/EventManager"
 
 interface TabsProps extends React.PropsWithChildren{
     /** Defines if the tabs are vertical
@@ -57,6 +58,7 @@ interface IState{
 export class Tabs extends React.PureComponent<TabsProps, IState>{
     private ref = createRef<HTMLDivElement>()
     private mounted = true
+    private event: EventManager
 
     constructor(props: TabsProps) {
         super(props)
@@ -76,13 +78,12 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
 
     componentDidMount = (): void => {
         this.loadTabs()
-        window.addEventListener("resize", this.handleBar)
-        window.addEventListener("load", this.handleBar, { once: true })
+        this.event = new EventManager("resize", this.handleBar).activateOnLoad().register()
     }
 
     componentWillUnmount = (): void => {
         this.mounted = false
-        window.removeEventListener("resize", this.handleBar)
+        this.event.unregister()
     }
 
     componentDidUpdate = (prevProps: React.PropsWithChildren<TabsProps>): void => {

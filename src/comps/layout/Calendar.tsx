@@ -1,12 +1,12 @@
 import React from "react"
-import { decodeMonth, getCalendar, getTime } from "../shared/utility"
+import { Option } from "../form/Option"
+import Select from "../form/Select"
+import { getConstant } from "../shared/Constants"
 import { CalendarEvent, GoogleCalendarEvent } from "../shared/models/CalendarEvent"
+import { decodeMonth, getCalendar, getTime } from "../shared/utility"
 import Button from "./Button"
 import { openDialog, openInfoDialog } from "./Dialog"
 import { Icon } from "./Icon"
-import { getConstant } from "../shared/Constants"
-import Select from "../form/Select"
-import { Option } from "../form/Option"
 import { Tooltip } from "./Tooltip"
 
 interface IProps{
@@ -127,7 +127,7 @@ export class Calendar extends React.PureComponent<IProps, IState>{
 
     tryOpenEvent = (e: CalendarEvent, isPrev: boolean, isNext: boolean): void => this.props.onEventClick && this.props.onEventClick(e, isPrev, isNext)
 
-    openDateChange = () => {
+    openDateChange = (): void => {
         let selMonth: number,
         selYear: number
 

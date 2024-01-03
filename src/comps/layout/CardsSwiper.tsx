@@ -1,4 +1,5 @@
 import React, { CSSProperties, createRef } from "react"
+import { EventManager } from "../shared/models/EventManager"
 import { Icon } from "./Icon"
 
 interface CardProps{
@@ -32,7 +33,8 @@ interface IState{
 }
 
 export class CardsSwiper extends React.Component<React.PropsWithChildren<IProps>, IState>{
-	private ref = createRef<HTMLDivElement>()
+    private ref = createRef<HTMLDivElement>()
+    private event: EventManager
 
     constructor(props: IProps){
         super(props)
@@ -42,7 +44,7 @@ export class CardsSwiper extends React.Component<React.PropsWithChildren<IProps>
         }
     }
 
-    calcolaSwipers = () => {
+    calcolaSwipers = (): void => {
         const sw = this.ref.current, 
         cards = sw.querySelectorAll(".dolfo-swiper-card") as NodeListOf<HTMLElement>,
         current = sw.querySelector(".dolfo-swiper-card.current") as HTMLElement,
@@ -101,29 +103,25 @@ export class CardsSwiper extends React.Component<React.PropsWithChildren<IProps>
         prevBtn.style.zIndex = (maxZIndex + 2).toString()
     }
 
-    componentDidMount = () => {
-        this.calcolaSwipers()
+    componentDidMount = () => this.event = new EventManager("resize", this.calcolaSwipers).activateOnLoad().register()
 
-        window.addEventListener("resize", this.calcolaSwipers)
-    }
+    componentWillUnmount = (): void => this.event.unregister()
 
-    componentWillUnmount = () => window.removeEventListener("resize", this.calcolaSwipers)
-
-    goNext = () => {
+    goNext = (): void => {
         const { current } = this.state
 
         this.setState({ current: current === this.getCards().length - 1 ? 0 : current + 1}, this.calcolaSwipers)
     }
 
-    goPrev = () => {
+    goPrev = (): void => {
         const { current } = this.state
         
         this.setState({ current: current === 0 ? this.getCards().length - 1 : current - 1}, this.calcolaSwipers)
     }
 
-    getCards = () => React.Children.toArray(this.props.children).filter((c: any) => c.type === SwiperCard) as unknown as SwiperCard[]
+    getCards = (): SwiperCard[] => React.Children.toArray(this.props.children).filter((c: any) => c.type === SwiperCard) as unknown as SwiperCard[]
 
-    render = () => {
+    render = (): React.ReactNode => {
         const cards = this.getCards(),
         { current } = this.state,
         { className, style } = this.props

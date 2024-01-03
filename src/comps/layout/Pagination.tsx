@@ -1,10 +1,10 @@
-import React from "react"
-import { Tooltip } from "./Tooltip"
-import { getConstant } from "../shared/Constants"
-import { Icon } from "./Icon"
 import _ from "lodash"
+import React from "react"
+import { getConstant } from "../shared/Constants"
 import Button from "./Button"
 import { ContextMenu } from "./ContextMenu"
+import { Icon } from "./Icon"
+import { Tooltip } from "./Tooltip"
 
 interface IProps{
     /** Defines the page size
@@ -45,7 +45,7 @@ export class Pagination extends React.Component<IProps, IState>{
 
     changePage = (page: number) => this.setState({ page }, () => this.props.onChangePage && this.props.onChangePage(page))
 
-    render = () => {
+    render = (): React.ReactNode => {
         const { pageSize, dataSize } = this.props,
         { page } = this.state,
         pages = Math.ceil(dataSize / pageSize),

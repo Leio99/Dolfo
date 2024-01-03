@@ -56,11 +56,9 @@ export class ResultsView extends BaseExportableManager<ResultViewProps, BaseResu
             this.setState({ layoutType: this.props.layoutType })
     }
 
-    toggleLayout = () => {
-        this.setState({
-            layoutType: this.state.layoutType === "grid" ? "card" : "grid"
-        }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(this.state.layoutType))
-    }
+    toggleLayout = (): void => this.setState({
+        layoutType: this.state.layoutType === "grid" ? "card" : "grid"
+    }, () => this.props.onToggleViewMode && this.props.onToggleViewMode(this.state.layoutType))
 
     render = (): React.ReactNode => {
         const { hideToggleButton, columns, data, getTitle, exportFormat, exportable } = this.props,

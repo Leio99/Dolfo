@@ -69,7 +69,7 @@ export class Spotlight extends React.Component<IProps, IState>{
             this.props.onChangeFilter(filter)
     }
 
-    onClose = () => {
+    onClose = (): void => {
         this.setState({ visible: false, filter: "", focusedIndex: -1 })
 
         if(this.props.onClose)

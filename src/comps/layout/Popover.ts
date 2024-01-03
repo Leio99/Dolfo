@@ -2,6 +2,7 @@ import _ from "lodash"
 import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
+import { EventManager, addToRegister, unregisterAll } from "../shared/models/EventManager"
 import { TooltipPlacement } from "./Tooltip"
 
 interface IProps extends React.PropsWithChildren{
@@ -37,6 +38,7 @@ export class Popover extends React.Component<IProps>{
     private onPopoverOrNode = false
     private observer: MutationObserver
     private elementRef: PopoverElement
+    private events: EventManager[] = []
     private readonly LISTENERS = {
         popoverOrNodeMouseEnter: () => this.onPopoverOrNode = true,
         popoverOrNodeMouseLeave: () => this.onPopoverOrNode = false,
@@ -76,27 +78,21 @@ export class Popover extends React.Component<IProps>{
 
         this.observer = new MutationObserver(() => this.positionPopover(popover))
 
-        node.addEventListener(event, () => {
+        addToRegister(this.events, new EventManager(event, () => {
             document.body.appendChild(popover)
 
             this.positionPopover(popover)
 
             this.observer.observe(popover, { childList: true })
-        })
+        }, node))
 
-        popover.addEventListener("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter)
-
-        popover.addEventListener("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave)
-
-        node.addEventListener("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter)
-
-        node.addEventListener("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave)
-
-        window.addEventListener(openOnOver ? "mousemove" : event, this.LISTENERS.customEvent)
-
-        window.addEventListener("resize", this.LISTENERS.windowResizeOrScroll)
-
-        window.addEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
+        addToRegister(this.events, new EventManager("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter, popover))
+        addToRegister(this.events, new EventManager("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave, popover))
+        addToRegister(this.events, new EventManager("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter, node))
+        addToRegister(this.events, new EventManager("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave, node))
+        addToRegister(this.events, new EventManager(openOnOver ? "mousemove" : event, this.LISTENERS.customEvent))
+        addToRegister(this.events, new EventManager("resize", this.LISTENERS.windowResizeOrScroll))
+        addToRegister(this.events, new EventManager("scroll", this.LISTENERS.windowResizeOrScroll).addOptions(true))
 
         this.elementRef = popover
     }
@@ -125,31 +121,15 @@ export class Popover extends React.Component<IProps>{
         }
     }
 
-    componentWillUnmount = () => {
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
-        { openOnOver } = this.props,
-        event = openOnOver ? "mouseenter" : "click"
-
+    componentWillUnmount = (): void => {
         this.LISTENERS.customEvent(new MouseEvent(""))
 
         this.observer.disconnect()
 
-        this.elementRef.removeEventListener("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter)
-
-        this.elementRef.removeEventListener("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave)
-
-        node.removeEventListener("mouseenter", this.LISTENERS.popoverOrNodeMouseEnter)
-
-        node.removeEventListener("mouseleave", this.LISTENERS.popoverOrNodeMouseLeave)
-
-        window.removeEventListener(openOnOver ? "mousemove" : event, this.LISTENERS.customEvent)
-
-        window.removeEventListener("resize", this.LISTENERS.windowResizeOrScroll)
-
-        window.removeEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
+        unregisterAll(this.events)
     }
 
-    render = () => React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
+    render = (): React.ReactNode => React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
 
     static forceRemoveAll = (): void => {
         const popovers = document.querySelectorAll(".dolfo-popover")

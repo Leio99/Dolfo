@@ -1,5 +1,6 @@
 import React, { CSSProperties, createRef } from "react"
 import { getConstant } from "../shared/Constants"
+import { EventManager } from "../shared/models/EventManager"
 import { Icon } from "./Icon"
 import { Tooltip } from "./Tooltip"
 
@@ -46,6 +47,8 @@ interface IState{
 
 export class Accordion extends React.PureComponent<IProps, IState>{
 	private ref = createRef<HTMLDivElement>()
+	private event: EventManager
+
 	constructor(props: IProps){
 		super(props)
 		
@@ -56,18 +59,14 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 	
 	componentDidMount = (): void => {
 		this.handleAccordions(true)
-
-		window.addEventListener("resize", this.internalHandler)
+		this.event = new EventManager("resize", this.internalHandler).register()
 	}
 
-	componentWillUnmount = (): void => window.removeEventListener("resize", this.internalHandler)
+	componentWillUnmount = (): void => this.event.unregister()
     
-    componentDidUpdate = (prevProps: IProps): void => {
-        if(prevProps.opened !== this.props.opened){
-            this.setState({
-				opened: this.props.opened || false
-            }, this.handleAccordions)
-		}
+  componentDidUpdate = (prevProps: IProps): void => {
+		if(prevProps.opened !== this.props.opened)
+			this.setState({ opened: this.props.opened || false }, this.handleAccordions)
 	}
 	
 	toggleAccordion = (): void => this.setState({ opened: !this.state.opened }, () => {
@@ -99,7 +98,7 @@ export class Accordion extends React.PureComponent<IProps, IState>{
 		}, 200)
 	}
 
-	internalHandler = () => this.handleAccordions()
+	internalHandler = (): void => this.handleAccordions()
 	
 	render = (): React.ReactNode => {
 		const { props } = this,

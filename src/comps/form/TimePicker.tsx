@@ -1,13 +1,14 @@
+import _ from "lodash"
 import React, { createRef } from "react"
-import { ExtendedInputProps } from "../shared/models/InputProps"
-import { InputWrapper } from "./InputWrapper"
+import { createRoot } from "react-dom/client"
 import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
-import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
+import { getConstant } from "../shared/Constants"
+import { EventManager, addToRegister, unregisterAll } from "../shared/models/EventManager"
+import { ExtendedInputProps } from "../shared/models/InputProps"
 import { blurInput, getTime, isElementInViewport, sumParentZIndex, zeroBefore } from "../shared/utility"
-import { createRoot } from "react-dom/client"
-import _ from "lodash"
+import { InputWrapper } from "./InputWrapper"
 
 export interface TimePickerProps extends ExtendedInputProps{
     /** Defines the defalt value of the input
@@ -56,6 +57,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
     private wrapperRef = createRef<InputWrapper>()
+    private events: EventManager[] = []
     
     constructor(props: TimePickerProps){
         super(props)
@@ -67,8 +69,8 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
     }
 
     componentDidMount = (): void => {
-        window.addEventListener("resize", this.positionPicker, true)
-        window.addEventListener("scroll", this.positionPicker, true)
+        addToRegister(this.events, new EventManager("resize", this.positionPicker).addOptions(true))
+        addToRegister(this.events, new EventManager("scroll", this.positionPicker).addOptions(true))
     }
 
     componentDidUpdate = (prevProps: TimePickerProps, prevState: IState) : void=> {
@@ -91,8 +93,7 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
 
     componentWillUnmount = (): void => {
         setTimeout(() => this.root.unmount())
-        window.removeEventListener("scroll", this.positionPicker, true)
-        window.removeEventListener("resize", this.positionPicker, true)
+        unregisterAll(this.events)
     }
 
     changeTime = (): void => !this.props.disabled && this.props.onChange && this.props.onChange(this.state.value)

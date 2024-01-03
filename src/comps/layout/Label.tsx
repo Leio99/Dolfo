@@ -13,7 +13,7 @@ interface IProps{
 }
 
 export class Label extends React.Component<React.PropsWithChildren<IProps>>{
-    render = () => {
+    render = (): React.ReactNode => {
         const { props } = this
 
         return <label className={"dolfo-label" + (props.size ? " " + props.size : "") + (props.color ? " " + props.color : "")}>

@@ -1,8 +1,8 @@
-import { ICalendarDay } from "./models/ICalendarDay"
-import { IDataColumn } from "./models/IColumn"
-import { getConstant } from "./Constants"
 import _ from "lodash"
 import { showInfo } from "../layout/NotificationMsg"
+import { getConstant } from "./Constants"
+import { ICalendarDay } from "./models/ICalendarDay"
+import { IDataColumn } from "./models/IColumn"
 
 /** Function to format a date in european style
  * @type Function
@@ -20,7 +20,7 @@ export const formatDate = (inputDate: Date | string, monthString = false): strin
 /** Function that blurs the active element on document
  * @type Function
  */
-export const blurInput = () => (document.activeElement as HTMLElement)?.blur()
+export const blurInput = (): void => (document.activeElement as HTMLElement)?.blur()
 
 /** Function that checks if a date is valid
  * @type Function

@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react"
-import { Icon, LoadingIcon } from "./Icon"
 import onClickOutside from "react-onclickoutside"
+import { Icon, LoadingIcon } from "./Icon"
 
 export type BaseColors = "red" | "blue" | "green" | "black" | "orange" | "grey" | "darkblue" | "violet"
 export type ButtonColors = BaseColors | "white"
@@ -93,16 +93,16 @@ class Button extends React.PureComponent<ButtonProps, IState>{
         }
     }
 
-    togglePopup = () => {
+    togglePopup = (): void => {
         if(this.props.disabled)
             return
 
         this.setState({ openPopup: !this.state.openPopup })
     }
 
-    closePopup = () => this.setState({ openPopup: false })
+    closePopup = (): void => this.setState({ openPopup: false })
 
-    handleClickOutside = () => this.props.type === "popup" && this.props.options && this.closePopup()
+    handleClickOutside = (): void => this.props.type === "popup" && this.props.options && this.closePopup()
 
     render = (): React.ReactNode => {
         const { props } = this,

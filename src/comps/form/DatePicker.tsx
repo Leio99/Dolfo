@@ -1,15 +1,16 @@
+import _ from "lodash"
 import React, { createRef } from "react"
-import { ICalendarDay } from "../shared/models/ICalendarDay"
-import { ExtendedInputProps } from "../shared/models/InputProps"
-import { InputWrapper } from "./InputWrapper"
+import { createRoot } from "react-dom/client"
 import onClickOutside from "react-onclickoutside"
 import { Icon } from "../layout/Icon"
-import { getConstant } from "../shared/Constants"
-import TimePicker from "./TimePicker"
-import _ from "lodash"
 import { Tooltip } from "../layout/Tooltip"
-import { blurInput, zeroBefore, isValidDate, getCalendar, decodeMonth, sumParentZIndex, isElementInViewport } from "../shared/utility"
-import { createRoot } from "react-dom/client"
+import { getConstant } from "../shared/Constants"
+import { EventManager, addToRegister, unregisterAll } from "../shared/models/EventManager"
+import { ICalendarDay } from "../shared/models/ICalendarDay"
+import { ExtendedInputProps } from "../shared/models/InputProps"
+import { blurInput, decodeMonth, getCalendar, isElementInViewport, isValidDate, sumParentZIndex, zeroBefore } from "../shared/utility"
+import { InputWrapper } from "./InputWrapper"
+import TimePicker from "./TimePicker"
 
 export type DateFormats = "dd-mm-YYYY" | "d-m-YYYY" | "mm-dd-YYYY" | "m-d-YYYY" | "YYYY-mm-dd" | "YYYY-m-d"
 
@@ -51,6 +52,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
     private wrapperRef = createRef<InputWrapper>()
+    private events: EventManager[] = []
     
     constructor(props: DatePickerProps) {
         super(props)
@@ -59,8 +61,8 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
     }
 
     componentDidMount = (): void => {
-        window.addEventListener("resize", this.positionPicker, true)
-        window.addEventListener("scroll", this.positionPicker, true)
+        addToRegister(this.events, new EventManager("resize", this.positionPicker).addOptions(true))
+        addToRegister(this.events, new EventManager("scroll", this.positionPicker).addOptions(true))
     }
 
     componentDidUpdate = (prevProps: DatePickerProps, prevState: IState): void => {
@@ -80,8 +82,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
 
     componentWillUnmount = (): void => {
         setTimeout(() => this.root.unmount())
-        window.removeEventListener("scroll", this.positionPicker, true)
-        window.removeEventListener("resize", this.positionPicker, true)
+        unregisterAll(this.events)
     }
 
     composeDateFromDefault = (defaultValue: Date): IState => {

@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react"
 import ReactDOM from "react-dom"
+import { EventManager } from "../shared/models/EventManager"
 import { Icon } from "./Icon"
 
 interface IProps extends React.PropsWithChildren{
@@ -60,6 +61,8 @@ interface IState{
 }
 
 export class DropDown extends React.Component<IProps, IState>{
+    private event: EventManager
+
     constructor(props: IProps){
         super(props)
 
@@ -68,18 +71,18 @@ export class DropDown extends React.Component<IProps, IState>{
         }
     }
 
-    componentDidMount = () => window.addEventListener("resize", this.resetNodeWidth)
+    componentDidMount = () => this.event = new EventManager("resize", this.resetNodeWidth).register()
 
-    componentWillUnmount = () => window.removeEventListener("resize", this.resetNodeWidth)
+    componentWillUnmount = (): void => this.event.unregister()
 
-    resetNodeWidth = () => {
+    resetNodeWidth = (): void => {
         const node = ReactDOM.findDOMNode(this) as HTMLElement
         node.style.width = "auto"
     }
 
-    close = () => this.setState({ opened: false })
+    close = (): void => this.setState({ opened: false })
     
-    open = () => {
+    open = (): void => {
         if(this.props.disabled)
             return
 

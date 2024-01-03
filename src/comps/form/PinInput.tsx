@@ -103,7 +103,7 @@ export class PinInput extends React.Component<PinInputProps, IState>{
         onChange && onChange(Object.values(valueTmp).join(""))
     }
 
-    render = () => {
+    render = (): React.ReactNode => {
         const { props } = this,
         { value } = this.state,
         range = _.range(0, props.length)

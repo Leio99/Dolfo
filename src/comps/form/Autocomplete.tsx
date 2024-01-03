@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client"
 import { LoadingIcon } from "../layout/Icon"
 import { showError } from "../layout/NotificationMsg"
 import { getConstant } from "../shared/Constants"
+import { EventManager, addToRegister, unregisterAll } from "../shared/models/EventManager"
 import { ExtendedInputProps } from "../shared/models/InputProps"
 import { blurInput, sumParentZIndex } from "../shared/utility"
 import { InputWrapper } from "./InputWrapper"
@@ -36,8 +37,8 @@ export abstract class Autocomplete<E, K, P = unknown> extends React.Component<Au
     private typing: _.DebouncedFunc<() => void>
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
-    private observer: ResizeObserver
     private wrapperRef = createRef<InputWrapper>()
+    private events: EventManager[] = []
 
     constructor(props: AutocompleteProps<E> & P){
         super(props)
@@ -98,10 +99,9 @@ export abstract class Autocomplete<E, K, P = unknown> extends React.Component<Au
     getSingle: (key: E) => Promise<E> | E
 
     componentDidMount = (): void => {
-        window.addEventListener("click", this.clickOutside)
-        this.observer = new ResizeObserver(this.positionOptions)
-        this.observer.observe(this.rootContent)
-        window.addEventListener("scroll", this.positionOptions, true)
+        addToRegister(this.events, new EventManager("click", this.clickOutside))
+        addToRegister(this.events, new EventManager("resize", this.positionOptions))
+        addToRegister(this.events, new EventManager("scroll", this.positionOptions).addOptions(true))
 
         if(this.props.defaultValue != null)
             this.fetchDefaultValue()
@@ -120,12 +120,14 @@ export abstract class Autocomplete<E, K, P = unknown> extends React.Component<Au
 
     componentWillUnmount = (): void => {
         setTimeout(() => this.root.unmount())
-        window.removeEventListener("click", this.clickOutside)
-        window.removeEventListener("scroll", this.positionOptions, true)
-        this.observer.disconnect()
+        
+        unregisterAll(this.events)
     }
 
     clickOutside = (e: MouseEvent): void => {
+        if (!this.wrapperRef.current)
+            return
+        
         const element = e.target as Node,
         node = this.wrapperRef.current.getRef()
 

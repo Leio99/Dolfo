@@ -1,4 +1,5 @@
 import React, { CSSProperties, createRef } from "react"
+import { EventManager } from "../shared/models/EventManager"
 
 interface DisplayItemProps{
     /** The title of the displayer item
@@ -43,21 +44,22 @@ export class HorizontalDisplayItem extends React.Component<React.PropsWithChildr
 export class HorizontalDisplayer extends React.Component<React.PropsWithChildren<IProps>>{
     private readonly MOVE_SIZE = 250
     private ref = createRef<HTMLDivElement>()
+    private event: EventManager
 
-    componentDidMount = () => window.addEventListener("resize", this.reset)
+    componentDidMount = () => this.event = new EventManager("resize", this.reset).register()
 
-    componentWillUnmount = () => window.removeEventListener("resize", this.reset)
+    componentWillUnmount = (): void => this.event.unregister()
 
-    getChildren = () => React.Children.toArray(this.props.children).filter((c: any) => c.type === HorizontalDisplayItem) as unknown as HorizontalDisplayItem[]
+    getChildren = (): HorizontalDisplayItem[] => React.Children.toArray(this.props.children).filter((c: any) => c.type === HorizontalDisplayItem) as unknown as HorizontalDisplayItem[]
 
-    reset = () => {
+    reset = (): void => {
         const node = this.ref.current,
         inner = node.querySelector(".dolfo-h-display-inner") as HTMLElement
 
         inner.style.marginLeft = "0"
     }
 
-    movePrevious = () => {
+    movePrevious = (): void => {
         const node = this.ref.current,
         inner = node.querySelector(".dolfo-h-display-inner") as HTMLElement,
         margin = Number(inner.style.marginLeft.replace("px", ""))
@@ -68,7 +70,7 @@ export class HorizontalDisplayer extends React.Component<React.PropsWithChildren
             inner.style.marginLeft = (margin + this.MOVE_SIZE) + "px"
     }
 
-    moveNext = () => {
+    moveNext = (): void => {
         const node = this.ref.current,
         inner = node.querySelector(".dolfo-h-display-inner") as HTMLElement,
         margin = Number(inner.style.marginLeft.replace("px", "")),
@@ -78,12 +80,11 @@ export class HorizontalDisplayer extends React.Component<React.PropsWithChildren
         if(Math.abs(margin) + this.MOVE_SIZE > diff){
             if(diff > 0)
                 inner.style.marginLeft = -(diff + paddingRight) + "px"
-        }
-        else
+        }else
             inner.style.marginLeft = (margin - this.MOVE_SIZE) + "px"
     }
 
-    render = () => {
+    render = (): React.ReactNode => {
         const children = this.getChildren(),
         { className, style } = this.props
 

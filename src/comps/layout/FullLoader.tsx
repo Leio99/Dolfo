@@ -14,9 +14,9 @@ interface FullLoaderProps{
 }
 
 export class FullLoader extends React.Component<FullLoaderProps>{
-    componentDidMount = () => document.body.classList.add("dolfo-loader-showing")
+    componentDidMount = (): void => document.body.classList.add("dolfo-loader-showing")
 
-    componentWillUnmount = () => document.body.classList.remove("dolfo-loader-showing")
+    componentWillUnmount = (): void => document.body.classList.remove("dolfo-loader-showing")
 
     static show = (data?: FullLoaderProps): Closable => {
         const loader = document.createElement("div")

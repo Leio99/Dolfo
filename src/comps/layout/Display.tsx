@@ -21,7 +21,7 @@ interface IProps extends React.PropsWithChildren{
 }
 
 export class Display extends React.Component<IProps>{
-    render = () => {
+    render = (): React.ReactNode => {
         const { props } = this
 
         return <div className={"dolfo-display color-" + (props.color || "blue") + (props.className ? " " + props.className : "")} style={props.style}>

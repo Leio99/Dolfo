@@ -2,6 +2,7 @@ import _ from "lodash"
 import React from "react"
 import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
+import { EventManager, addToRegister, unregisterAll } from "../shared/models/EventManager"
 import { isElementInViewport } from "../shared/utility"
 
 export type TooltipPlacement = "top" | "left" | "bottom" | "right"
@@ -27,6 +28,7 @@ export class Tooltip extends React.Component<IProps>{
     private onTooltipOrNode = false
     private element: TooltipElement
     private observer: MutationObserver
+    private events: EventManager[] = []
     private readonly LISTENERS = {
         nodeClickOrLeave: () => {
             this.onTooltipOrNode = false
@@ -61,19 +63,13 @@ export class Tooltip extends React.Component<IProps>{
 
         createRoot(tooltipEl).render(tooltip)
 
-        node.addEventListener("mouseenter", this.LISTENERS.nodeMouseEnter)
-
-        node.addEventListener("mouseleave", this.LISTENERS.nodeClickOrLeave)
-
-        node.addEventListener("click", this.LISTENERS.nodeClickOrLeave)
-
-        window.addEventListener("mouseout", this.LISTENERS.windowMouseOut)
-
-        window.addEventListener("resize", this.LISTENERS.windowResizeOrScroll)
-
-        window.addEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
-        
-        window.addEventListener("click", this.LISTENERS.windowClick, true)
+        addToRegister(this.events, new EventManager("mouseenter", this.LISTENERS.nodeMouseEnter, node))
+        addToRegister(this.events, new EventManager("mouseleave", this.LISTENERS.nodeClickOrLeave, node))
+        addToRegister(this.events, new EventManager("click", this.LISTENERS.nodeClickOrLeave, node))
+        addToRegister(this.events, new EventManager("mouseout", this.LISTENERS.windowMouseOut))
+        addToRegister(this.events, new EventManager("resize", this.LISTENERS.windowResizeOrScroll))
+        addToRegister(this.events, new EventManager("scroll", this.LISTENERS.windowResizeOrScroll))
+        addToRegister(this.events, new EventManager("click", this.LISTENERS.windowClick).addOptions(true))
 
         this.element = tooltipEl
 
@@ -83,26 +79,10 @@ export class Tooltip extends React.Component<IProps>{
 
     componentDidMount = this.renderTooltip
 
-    componentWillUnmount = () => {
-        const node = ReactDOM.findDOMNode(this) as HTMLElement
-
+    componentWillUnmount = (): void => {
         this.LISTENERS.windowClick()
-        
-        node.removeEventListener("mouseenter", this.LISTENERS.nodeMouseEnter)
-
-        node.removeEventListener("mouseleave", this.LISTENERS.nodeClickOrLeave)
-
-        node.removeEventListener("click", this.LISTENERS.nodeClickOrLeave)
-
-        window.removeEventListener("mouseout", this.LISTENERS.windowMouseOut)
-
-        window.removeEventListener("resize", this.LISTENERS.windowResizeOrScroll)
-
-        window.removeEventListener("scroll", this.LISTENERS.windowResizeOrScroll, true)
-        
-        window.removeEventListener("click", this.LISTENERS.windowClick, true)
-
         this.observer.disconnect()
+        unregisterAll(this.events)
     }
 
     componentDidUpdate = (prevProps: IProps): void => {
@@ -159,5 +139,5 @@ export class Tooltip extends React.Component<IProps>{
         copy.remove()
     }
 
-    render = () => !React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
+    render = (): React.ReactNode => !React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
 }

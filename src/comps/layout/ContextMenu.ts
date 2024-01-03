@@ -2,6 +2,7 @@ import _ from "lodash"
 import React from "react"
 import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
+import { EventManager, addToRegister, unregisterAll } from "../shared/models/EventManager"
 
 export interface ContextMenuOption{
     /** The label of the option
@@ -45,6 +46,7 @@ interface IProps extends React.PropsWithChildren{
 export class ContextMenu extends React.Component<IProps>{
     private elementRef: ContextMenuElement
     private observer: MutationObserver
+    private events: EventManager[] = []
     private readonly LISTENERS = {
         windowResizeOrScroll: () => this.positionContext(this.elementRef),
         windowClick: () => this.elementRef?.remove(),
@@ -64,18 +66,18 @@ export class ContextMenu extends React.Component<IProps>{
     
                 if(item.disabled)
                     htmlItem.classList.add("disabled")
-    
-                htmlItem.addEventListener("click", (e: MouseEvent) => {
-                    if(item.disabled)
+
+                addToRegister(this.events, new EventManager("click", (e: MouseEvent) => {
+                    if (item.disabled)
                         return
-    
+
                     e.stopPropagation()
-    
+
                     item.onClick(e, htmlItem)
-    
-                    if(closeAfterClickItem || closeAfterClickItem == null)
+
+                    if (closeAfterClickItem || closeAfterClickItem == null)
                         document.body.click()
-                })
+                }, htmlItem))
     
                 if(_.isString(item.label))
                     htmlItem.innerText = item.label
@@ -99,10 +101,11 @@ export class ContextMenu extends React.Component<IProps>{
 
         document.body.click()
 
-        node.addEventListener(event, this.LISTENERS.nodeClick)
-        window.addEventListener("click", this.LISTENERS.windowClick)
-        window.addEventListener("scroll", this.LISTENERS.windowResizeOrScroll)
-        window.addEventListener("resize", this.LISTENERS.windowResizeOrScroll)
+        addToRegister(this.events, new EventManager(event, this.LISTENERS.nodeClick, node))
+        addToRegister(this.events, new EventManager("click", this.LISTENERS.windowClick))
+        addToRegister(this.events, new EventManager("scroll", this.LISTENERS.windowResizeOrScroll))
+        addToRegister(this.events, new EventManager("resize", this.LISTENERS.windowResizeOrScroll))
+
         this.observer.observe(context, { childList: true })
 
         context.classList.add("context-menu")
@@ -114,14 +117,8 @@ export class ContextMenu extends React.Component<IProps>{
     }
 
     componentWillUnmount = (): void => {
-        const node = ReactDOM.findDOMNode(this) as HTMLElement,
-        event = this.props.openWithRightClick ? "contextmenu" : "click"
-
         this.LISTENERS.windowClick()
-        node.removeEventListener(event, this.LISTENERS.nodeClick)
-        window.removeEventListener("click", this.LISTENERS.windowClick)
-        window.removeEventListener("scroll", this.LISTENERS.windowResizeOrScroll)
-        window.removeEventListener("resize", this.LISTENERS.windowResizeOrScroll)
+        unregisterAll(this.events)
         this.observer.disconnect()
     }
 
@@ -147,5 +144,5 @@ export class ContextMenu extends React.Component<IProps>{
             context.style.top = position.top + "px"
     }
 
-    render = () => !React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
+    render = (): React.ReactNode => !React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
 }

@@ -1,14 +1,15 @@
+import _ from "lodash"
 import React, { createRef } from "react"
-import { ExtendedInputProps } from "../shared/models/InputProps"
+import { createRoot } from "react-dom/client"
+import onClickOutside from "react-onclickoutside"
 import { CloseIcon, Icon, LoadingIcon } from "../layout/Icon"
+import { Tooltip } from "../layout/Tooltip"
+import { getConstant } from "../shared/Constants"
+import { EventManager, addToRegister, unregisterAll } from "../shared/models/EventManager"
+import { ExtendedInputProps } from "../shared/models/InputProps"
+import { blurInput, isElementInViewport, sumParentZIndex } from "../shared/utility"
 import { InputWrapper } from "./InputWrapper"
 import { Option } from "./Option"
-import onClickOutside from "react-onclickoutside"
-import { getConstant } from "../shared/Constants"
-import _ from "lodash"
-import { Tooltip } from "../layout/Tooltip"
-import { createRoot } from "react-dom/client"
-import { blurInput, isElementInViewport, sumParentZIndex } from "../shared/utility"
 
 export interface SelectProps extends ExtendedInputProps, React.PropsWithChildren{
     /** Defines the default value of the select
@@ -44,8 +45,8 @@ interface IState{
 class Select extends React.PureComponent<SelectProps, IState>{
     private rootContent = document.createElement("div")
     private root = createRoot(this.rootContent)
-    private observer: ResizeObserver
     private wrapperRef = createRef<InputWrapper>()
+    private events: EventManager[] = []
 
     constructor(props: SelectProps){
         super(props)
@@ -60,9 +61,8 @@ class Select extends React.PureComponent<SelectProps, IState>{
     }
 
     componentDidMount = (): void => {
-        this.observer = new ResizeObserver(this.positionOptions)
-        this.observer.observe(this.rootContent)
-        window.addEventListener("scroll", this.positionOptions, true)
+        addToRegister(this.events, new EventManager("resize", this.positionOptions))
+        addToRegister(this.events, new EventManager("scroll", this.positionOptions).addOptions(true))
     }
 
     componentDidUpdate = (prevProps: React.PropsWithChildren<SelectProps>, prevState: IState): void => {
@@ -100,8 +100,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
 
     componentWillUnmount = (): void => {
         setTimeout(() => this.root.unmount())
-        window.removeEventListener("scroll", this.positionOptions, true)
-        this.observer.disconnect()
+        unregisterAll(this.events)
     }
 
     changeOption = (value: any): void => {

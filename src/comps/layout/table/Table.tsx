@@ -2,6 +2,7 @@ import _ from "lodash"
 import React from "react"
 import { CheckBox } from "../../form/CheckBox"
 import { getConstant } from "../../shared/Constants"
+import { EventManager, addToRegister, unregisterAll } from "../../shared/models/EventManager"
 import Button from "../Button"
 import { Icon } from "../Icon"
 import { Tooltip } from "../Tooltip"
@@ -13,6 +14,7 @@ interface IState{
 
 export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
     private tmpElement: HTMLElement
+    private events: EventManager[] = []
 
     constructor(props: ResultsManagerProps){
         super(props, {
@@ -20,22 +22,19 @@ export class Table extends BaseResultsManager<ResultsManagerProps, IState>{
         })
     }
 
-    componentDidMount = () => {
-        window.addEventListener("mouseup", this.lookItem)
-        window.addEventListener("blur", this.lookItem)
+    componentDidMount = (): void => {
+        addToRegister(this.events, new EventManager("mouseup", this.lookItem))
+        addToRegister(this.events, new EventManager("blur", this.lookItem))
     }
 
-    componentWillUnmount = () => {
-        window.removeEventListener("mouseup", this.lookItem)
-        window.removeEventListener("blur", this.lookItem)
-    }
+    componentWillUnmount = (): void => unregisterAll(this.events)
 
     componentDidUpdate = (prevProps: ResultsManagerProps) => {
         if(!_.isEqual(prevProps.columns, this.props.columns))
             this.setState({ orderIndexes: this.props.columns.map((_, i) => i) })
     }
 
-    lookItem = () => this.tmpElement?.remove()
+    lookItem = (): void => this.tmpElement?.remove()
 
     shiftColumn = (from: number, to: number) => {
         if(from === to || from == null || to == null)

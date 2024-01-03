@@ -1,11 +1,9 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
-import * as serviceWorker from "./serviceWorker"
-import "./index.scss"
+import { BrowserRouter, useLocation, useNavigate } from "react-router-dom"
 import { MenuContent } from "./comps/MenuContent"
 import { checkDarkTheme } from "./comps/shared/utility"
-import { useLocation, useNavigate } from "react-router-dom"
-import { BrowserRouter } from "react-router-dom"
+import "./index.scss"
 
 const WrappedComponent = () => {
     const history: any = useNavigate(),
@@ -17,7 +15,5 @@ const WrappedComponent = () => {
 createRoot(document.getElementById("root")).render(<BrowserRouter>
     <WrappedComponent />
 </BrowserRouter>)
-
-serviceWorker.unregister()
 
 checkDarkTheme()
