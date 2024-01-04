@@ -1,9 +1,9 @@
 const ftp = require("basic-ftp"),
-Writable = require('stream').Writable,
+Writable = require("stream").Writable,
 client = new ftp.Client(),
 mutableStdout = new Writable({
     write: function (chunk, encoding, callback) {
-        if (!this.muted)
+        if(!this.muted)
             process.stdout.write(chunk, encoding)
 
         callback()
@@ -34,7 +34,7 @@ async function upload(pwd) {
 
 mutableStdout.muted = false
 
-readline.question('Insert FTP server password: ', pwd => {
+readline.question("Insert FTP server password: ", pwd => {
     upload(pwd)
     readline.close()
 })

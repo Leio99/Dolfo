@@ -40,6 +40,7 @@ export interface IColumn{
     readonly searchField?: string
     /** The type of the column
      * @type "date" | "time" | "check" | "boolean"
+     * @default uses 'field'
      */
     readonly type?: "date" | "time" | "check" | "boolean"
     /** Defines if the 'check all' checkbox is checked
@@ -60,6 +61,7 @@ export interface IColumn{
     readonly exportField?: string
     /** While in card layout, the filed will be hidden
      * @type boolean
+     * @default uses 'field'
      */
     readonly hideCard?: boolean
     /** Defines wether the 'check all' checkbox is disabled
@@ -76,6 +78,7 @@ export interface IColumn{
     readonly orderKey?: string
     /** Function triggered when the 'check all' checkbox is selected
      * @type Function
+     * @default uses 'field'
      */
     readonly onCheckAll?: () => void
 }

@@ -1,4 +1,5 @@
-const fs = require('fs'),
+const { logError, logSuccess } = require("./scriptsFn"),
+fs = require("fs"),
 args = process.argv.slice(2),
 currentDir = process.env.INIT_CWD,
 tsTemplates = ["interface", "class"]
@@ -18,7 +19,7 @@ else{
         cName = componentName[0].toUpperCase() + componentName.substring(1, componentName.length),
         extension = tsTemplates.includes(template) ? "ts" : "tsx"
         
-        fs.readFile(templateDir, 'utf8', (err, data) => {
+        fs.readFile(templateDir, "utf8", (err, data) => {
             if(err)
                 logError("Template non esistente!")
             else{
@@ -34,12 +35,4 @@ else{
             }
         })
     }
-}
-
-function logError(msg){
-    console.error("\x1b[31m", msg, "\x1b[0m")
-}
-
-function logSuccess(msg){
-    console.error("\x1b[32m", msg, "\x1b[0m")
 }

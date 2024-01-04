@@ -125,7 +125,7 @@ export abstract class Autocomplete<E, K, P = unknown> extends React.Component<Au
     }
 
     clickOutside = (e: MouseEvent): void => {
-        if (!this.wrapperRef.current)
+        if(!this.wrapperRef.current)
             return
         
         const element = e.target as Node,

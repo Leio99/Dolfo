@@ -68,14 +68,14 @@ export class ContextMenu extends React.Component<IProps>{
                     htmlItem.classList.add("disabled")
 
                 addToRegister(this.events, new EventManager("click", (e: MouseEvent) => {
-                    if (item.disabled)
+                    if(item.disabled)
                         return
 
                     e.stopPropagation()
 
                     item.onClick(e, htmlItem)
 
-                    if (closeAfterClickItem || closeAfterClickItem == null)
+                    if(closeAfterClickItem || closeAfterClickItem == null)
                         document.body.click()
                 }, htmlItem))
     

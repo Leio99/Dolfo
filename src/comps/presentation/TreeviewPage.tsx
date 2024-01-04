@@ -449,7 +449,7 @@ export class TreeviewPage extends TreeView{
     }
 
     getColumnData = (col: IColumn, node: TreeNode): React.ReactNode => {
-        if (node.type === "root" && this.hasChildren(node) && col.field === "status") {
+        if(node.type === "root" && this.hasChildren(node) && col.field === "status") {
             return <Status type="info" hideIcon>
                 <Icon iconKey="calendar-day" type="far" /> Prossimamente
             </Status>

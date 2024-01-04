@@ -1,6 +1,6 @@
 {
   "name": "dolfo",
-  "version": "1.0.104",
+  "version": "1.0.105",
   "main": "main.ts",
   "dependencies": {
     "@types/gapi": "^0.0.47",
@@ -32,11 +32,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "gen": "node scripts/generateComponent.js",
-    "altervista": "npm run build && node scripts/ftp.js",
+    "altervista": "npm run build && npm run check-updates && node scripts/ftp.js",
     "edit-package-json": "node scripts/packageEditor.js",
     "remove-useless-files": "shx rm -rf ./dist/comps/presentation && shx rm -rf ./dist/comps/MenuContent*",
     "prepare-new-version": "node scripts/prepareVersion.js",
-    "new-publish": "npm run build-npm && npm run publish-npm"
+    "new-publish": "npm run build-npm && npm run publish-npm",
+    "check-updates": "node scripts/checkUpdates.js"
   },
   "eslintConfig": {
     "extends": "react-app"

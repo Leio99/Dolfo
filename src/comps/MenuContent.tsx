@@ -1,14 +1,13 @@
 import React, { createRef } from "react"
 import { NavigateFunction, Routes } from "react-router"
-import { MenuItems } from "./presentation/Menu"
-import { Route } from "react-router-dom"
+import { Location, Route } from "react-router-dom"
+import { Switch as InputSwitch } from "./form/Switch"
 import Button from "./layout/Button"
 import { Icon } from "./layout/Icon"
-import { Switch as InputSwitch } from "./form/Switch"
-import { isDarkTheme, toggleDarkTheme } from "./shared/utility"
 import { Tooltip } from "./layout/Tooltip"
+import { MenuItems } from "./presentation/Menu"
 import { IconKey } from "./shared/models/IconModel"
-import { Location } from "react-router-dom"
+import { isDarkTheme, toggleDarkTheme } from "./shared/utility"
 
 export interface MenuContentProps{
     readonly history: NavigateFunction
@@ -71,17 +70,17 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
                 {menuBtn("darkblue")} <h4 style={{ display: "inline" }}>Dolfo</h4>
 
                 {
-                    MenuItems.filter(m => m.section === "base").map((m, i) => <MenuItem {...m} {...this.props} key={"base_" + i} />)
+                    MenuItems.filter(m => m.section === "base").map((m, i) => <MenuItem {...m} {...this.props} key={"base_" + i}>{m.title}</MenuItem>)
                 }
 
                 <div className="navigation-menu-title">Form</div>
                 {
-                    MenuItems.filter(m => m.section === "form").map((m, i) => <MenuItem {...m} {...this.props} key={"form_" + i} />)
+                    MenuItems.filter(m => m.section === "form").map((m, i) => <MenuItem {...m} {...this.props} key={"form_" + i}>{m.title}</MenuItem>)
                 }
 
                 <div className="navigation-menu-title">Layout</div>
                 {
-                    MenuItems.filter(m => m.section === "layout").map((m, i) => <MenuItem {...m} {...this.props} key={"layout_" + i} />)
+                    MenuItems.filter(m => m.section === "layout").map((m, i) => <MenuItem {...m} {...this.props} key={"layout_" + i}>{m.title}</MenuItem>)
                 }
             </div>
 
@@ -92,7 +91,7 @@ export class MenuContent extends React.Component<MenuContentProps, { readonly da
                             const Component = m.component
 
                             return <Route path={homepage + m.link} key={m.link} element={<React.Fragment>
-                                <h2 className="page-title">{menuBtn("white")} {m.children}</h2>
+                                <h2 className="page-title">{menuBtn("white")} {m.title}</h2>
                                 {React.createElement(Component, this.props)}
                             </React.Fragment>} />
                         })
@@ -112,7 +111,7 @@ export class MenuItem extends React.Component<React.PropsWithChildren<MenuConten
         document.querySelector(".navigation-menu").classList.remove("show")
     }
 
-    static findLink = (childrenTitle: string) => MenuItems.find(m => m.children === childrenTitle).link
+    static findLink = (childrenTitle: string) => MenuItems.find(m => m.title === childrenTitle).link
 
     render = () => {
         const { link, children, icon, location, history } = this.props,

@@ -1,9 +1,9 @@
 import React from "react"
-import Button from "../layout/Button"
-import { Icon, DetailIcon } from "../layout/Icon"
-import { Table } from "../layout/table/Table"
-import { Tooltip } from "../layout/Tooltip"
 import { MenuContentProps, MenuItem } from "../MenuContent"
+import Button from "../layout/Button"
+import { DetailIcon, Icon } from "../layout/Icon"
+import { Tooltip } from "../layout/Tooltip"
+import { Table } from "../layout/table/Table"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
 import { copyToClipBoard } from "../shared/utility"
 
@@ -197,7 +197,7 @@ export class ColumnApis extends React.Component<{ readonly hideData?: boolean }>
                 desc: "Defines a custom search field inside the object, instead of the passed 'field'.",
                 type: "string",
                 required: false,
-                default: "null (gets 'field')"
+                default: "null (uses 'field')"
             },
             {
                 name: "tooltip",
@@ -246,7 +246,7 @@ export class ColumnApis extends React.Component<{ readonly hideData?: boolean }>
                 desc: "Defines a custom field considered when exporting.",
                 type: "string",
                 required: false,
-                default: "null (gets 'field')"
+                default: "null (uses 'field')"
             },
             {
                 name: "onCheckAll",

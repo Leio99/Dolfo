@@ -115,7 +115,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         let newMonth,
         newYear = this.state.currentYear
 
-        if (this.state.currentMonth === 11) {
+        if(this.state.currentMonth === 11){
             newMonth = 0
             newYear += 1
         }else
@@ -131,7 +131,7 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
         let newMonth,
         newYear = this.state.currentYear
 
-        if (this.state.currentMonth === 0) {
+        if(this.state.currentMonth === 0){
             newMonth = 11
             newYear -= 1
         }else
@@ -349,13 +349,11 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
                             return <div className="dolfo-calendar-row" key={i}>
                                 {
                                     week.map(day => {
-                                        if (day.prevMonth >= 0) {
+                                        if(day.prevMonth >= 0)
                                             return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.prevMonth, day.prevYear)} key={day.day}>{day.day}</div>
-                                        }
 
-                                        if (day.nextMonth >= 0) {
+                                        if(day.nextMonth >= 0)
                                             return <div className="ext-day dolfo-calendar-cell" onClick={() => this.selectDay(day.day, day.nextMonth, day.nextYear)} key={day.day}>{day.day}</div>
-                                        }
 
                                         return <div className={"dolfo-calendar-cell" + (this.isCurrentDay(day) ? " selected" : this.isToday(day) ? " today" : "")} onClick={() => this.selectDay(day.day)} key={day.day}>{day.day}</div>
                                     })

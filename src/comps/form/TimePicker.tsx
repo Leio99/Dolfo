@@ -162,18 +162,18 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
     }
 
     keyDownHour = (e: React.KeyboardEvent): void => {
-        if(e.key === 'ArrowUp')
+        if(e.key === "ArrowUp")
             this.increaseHour()
-        else if(e.key === 'ArrowDown')
+        else if(e.key === "ArrowDown")
             this.decreaseHour()
         
         this.props.onKeyDownHour && this.props.onKeyDownHour(e)
     }
 
     keyDownMinute = (e: React.KeyboardEvent): void => {
-        if(e.key === 'ArrowUp')
+        if(e.key === "ArrowUp")
             this.increaseMinute()
-        else if(e.key === 'ArrowDown')
+        else if(e.key === "ArrowDown")
             this.decreaseMinute()
 
         this.props.onKeyDownMinute && this.props.onKeyDownMinute(e)
