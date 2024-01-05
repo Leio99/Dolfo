@@ -9,6 +9,7 @@ interface FullLoaderProps{
     readonly loadingText?: string, 
     /** Defines the type of loader
      * @type "circle" | "balls"
+     * @default "circle"
      */
     readonly type?: "circle" | "balls"
 }

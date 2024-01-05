@@ -30,17 +30,18 @@ fs.readFile("./UPDATED.md", "utf8", (err, data) => {
       fs.readFile("./package.json", "utf8", (_, packageJson) => {
         const packageJsonData = JSON.parse(packageJson)
 
-        fs.readFile("./build/updates.json", (err, data) => {
+        fs.readFile("./public/updates.json", (err, data) => {
           const prevData = err ? [] : JSON.parse(data),
-            merge = {
-              ...prevData,
-              [packageJsonData.version]: {
-                date: new Date().toISOString(),
-                updates
-              }
+          merge = {
+            ...prevData,
+            [packageJsonData.version]: {
+              date: new Date().toISOString(),
+              updates
             }
+          }
 
-          fs.writeFile("./build/updates.json", JSON.stringify(merge), () => logSuccess("File updates.json aggiornato con successo!"))
+          fs.writeFile("./build/updates.json", JSON.stringify(merge), () => logSuccess("File build/updates.json aggiornato con successo!"))
+          fs.writeFile("./public/updates.json", JSON.stringify(merge), () => logSuccess("File public/updates.json aggiornato con successo!"))
         })
       })
     }
