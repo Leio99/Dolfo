@@ -129,7 +129,7 @@ export class Popover extends React.Component<IProps>{
         unregisterAll(this.events)
     }
 
-    render = (): React.ReactNode => React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
+    render = (): React.ReactNode => !React.isValidElement(this.props.children) ? React.createElement("span", null, this.props.children) : this.props.children
 
     static forceRemoveAll = (): void => {
         const popovers = document.querySelectorAll(".dolfo-popover")
