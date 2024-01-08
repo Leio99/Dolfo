@@ -148,7 +148,8 @@ html.dark-theme{
         }
 
         &.tab-layout .dolfo-card-title{
-            background-color: $dark
+            background-color: $dark;
+            box-shadow: inset 0 -3px 0 $dark
         }
     }
 
@@ -296,15 +297,19 @@ html.dark-theme{
         &.tab-layout{
             .dolfo-tabs-links .dolfo-tab-title{
                 &.current{
-                    box-shadow: inset 0 -3px 0 $dark;
+                    box-shadow: inset 0 -3px 0 $darkThemeDark;
         
-                    &:before{
-                        background-color: $dark
+                    &, &:before{
+                        background-color: $darkThemeDark
                     }
                 }
     
-                &:not(.disabled):not(.current):hover{
-                    background-color: $darkThemeDark
+                &:not(.disabled):not(.current){
+                    background-color: $dark;
+                    
+                    &:hover{
+                        background-color: $darkThemeDark
+                    }
                 }
             }
         }
