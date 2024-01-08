@@ -63,7 +63,7 @@ interface MenuItem{
 export const MenuItems: MenuItem[] = [
     { link: "", title: "Home", section: "base", component: HomePage, icon: "info-square" },
     { link: "startup", title: "Getting started", section: "base", component: StartupPage, icon: "rocket" },
-    { link: "updates", title: "Updates history", section: "base", component: UpdatesPage, icon: "history" },
+    { link: "updates", title: "Changelog", section: "base", component: UpdatesPage, icon: "history" },
     { link: "form/autocomplete", title: "Autocomplete", section: "form", component: AutocompletePage, icon: "typewriter" },
     { link: "form/checkbox", title: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
     { link: "form/datepicker", title: "Date picker", section: "form", component: DatepickerPage, icon: "calendar-day" },

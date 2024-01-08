@@ -43,7 +43,10 @@ export class UpdatesPage extends React.Component<unknown, IState>{
 
                 <div className="all-updates">
                     {
-                        versionContent.updates.map(upd => <div key={upd.title} className="updates-list">
+                        versionContent.updates.map(r => ({
+                            ...r,
+                            list: r.list.filter(d => !!d)
+                        })).filter(upd => upd.list.length > 0).map(upd => <div key={upd.title} className="updates-list">
                             <h5>{upd.title}</h5>
                             {
                                 upd.list.map(l => <div key={l}>

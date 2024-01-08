@@ -1,6 +1,6 @@
 import React from "react"
 import { Switch } from "../form/Switch"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { Apis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class SwitchPage extends React.Component{
     render = (): React.ReactNode => <>
@@ -59,6 +59,13 @@ export class SwitchPage extends React.Component{
                 type: "string or ReactNode",
                 required: false,
                 default: "null"
+            },
+            {
+                name: "manageChange",
+                desc: "If you don't want the Switch to change its value internally (but only externally using props), set this value to 'true'.",
+                required: false,
+                type: "boolean",
+                default: "false"
             },
             {
                 name: "wrapperStyle",

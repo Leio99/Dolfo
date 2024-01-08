@@ -1,14 +1,18 @@
 import React from "react"
-import { BaseInputProps } from "../shared/models/InputProps"
 import { CheckIcon } from "../layout/Icon"
-import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
+import { getConstant } from "../shared/Constants"
+import { BaseInputProps } from "../shared/models/InputProps"
 
 export interface CheckBoxProps extends BaseInputProps{
     /** Defines if the checkbox should be checked by default
      * @type boolean
      */
     readonly checked?: boolean
+    /** Set this field to true if you don't want the switcher itself to be able to be changed internally, but only externally using props (remember to set onChange callback)
+     * @type boolean
+     */
+    readonly manageChange?: boolean
 }
 
 export class CheckBox extends React.PureComponent<CheckBoxProps, CheckBoxProps>{ 
@@ -28,9 +32,11 @@ export class CheckBox extends React.PureComponent<CheckBoxProps, CheckBoxProps>{
     onChange = (): void => {
         if(this.props.disabled) return
         
-        this.setState({
-            checked: !this.state.checked
-        }, () => this.props.onChange && this.props.onChange(this.state.checked))
+        if(!this.props.manageChange)
+            this.setState({ checked: !this.state.checked })
+        
+        if(this.props.onChange)
+            this.props.onChange(!this.state.checked)
     }
 
     checkSpace = (e: React.KeyboardEvent): void => {

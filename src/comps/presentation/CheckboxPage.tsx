@@ -1,6 +1,6 @@
 import React from "react"
 import { CheckBox } from "../form/CheckBox"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { Apis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class CheckboxPage extends React.Component{
     render = (): React.ReactNode => <>
@@ -72,6 +72,13 @@ export class CheckboxPage extends React.Component{
                 desc: "Determines whether the checkbox is required inside the form or not.",
                 type: "boolean",
                 required: false,
+                default: "false"
+            },
+            {
+                name: "manageChange",
+                desc: "If you don't want the Checkbox to change its value internally (but only externally using props), set this value to 'true'.",
+                required: false,
+                type: "boolean",
                 default: "false"
             },
             {
