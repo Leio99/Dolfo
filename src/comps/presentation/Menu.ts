@@ -51,6 +51,7 @@ import { TransferlistPage } from "./TransferlistPage"
 import { TreeviewPage } from "./TreeviewPage"
 import { UpdatesPage } from "./UpdatesPage"
 import { UploaderPage } from "./UploaderPage"
+import { RangePage } from "./RangePage"
 
 interface MenuItem{
     readonly link: string
@@ -64,11 +65,13 @@ export const MenuItems: MenuItem[] = [
     { link: "", title: "Home", section: "base", component: HomePage, icon: "info-square" },
     { link: "startup", title: "Getting started", section: "base", component: StartupPage, icon: "rocket" },
     { link: "updates", title: "Changelog", section: "base", component: UpdatesPage, icon: "history" },
+
     { link: "form/autocomplete", title: "Autocomplete", section: "form", component: AutocompletePage, icon: "typewriter" },
     { link: "form/checkbox", title: "Checkbox", section: "form", component: CheckboxPage, icon: "check-square" },
     { link: "form/datepicker", title: "Date picker", section: "form", component: DatepickerPage, icon: "calendar-day" },
     { link: "form/pin", title: "Pin input", section: "form", component: PininputPage, icon: "hashtag" },
     { link: "form/radio", title: "Radio button", section: "form", component: RadiobuttonPage, icon: "dot-circle" },
+    { link: "form/range", title: "Range", section: "form", component: RangePage, icon: "sliders-h" },
     { link: "form/select", title: "Select", section: "form", component: SelectPage, icon: "hand-pointer" },
     { link: "form/selectablelist", title: "Selectable list", section: "form", component: SelectablelistPage, icon: "tasks" },
     { link: "form/switch", title: "Switch", section: "form", component: SwitchPage, icon: "toggle-on" },
@@ -76,6 +79,7 @@ export const MenuItems: MenuItem[] = [
     { link: "form/timepicker", title: "Time picker", section: "form", component: TimepickerPage, icon: "clock" },
     { link: "form/transferlist", title: "Transfer list", section: "form", component: TransferlistPage, icon: "exchange" },
     { link: "form/uploader", title: "Uploader", section: "form", component: UploaderPage, icon: "arrow-to-top" },
+
     { link: "layout/accordion", title: "Accordion", section: "layout", component: AccordionPage, icon: "compress" },
     { link: "layout/alerts", title: "Alerts", section: "layout", component: AlertPage, icon: "comment-alt-exclamation" },
     { link: "layout/avatar", title: "Avatar", section: "layout", component: AvatarPage, icon: "user-circle" },
@@ -105,7 +109,7 @@ export const MenuItems: MenuItem[] = [
     { link: "layout/spotlight", title: "Spotlight", section: "layout", component: SpotlightPage, icon: "file-search" },
     { link: "layout/status", title: "Status tags", section: "layout", component: StatustagsPage, icon: "tags" },
     { link: "layout/stepper", title: "Stepper", section: "layout", component: StepperPage, icon: "shoe-prints" },
-    { link: "layout/swiper", title: "Swiper", section: "layout", component: SwiperPage, icon: "sliders-h" },
+    { link: "layout/swiper", title: "Swiper", section: "layout", component: SwiperPage, icon: "eye-slash" },
     { link: "layout/table", title: "Table", section: "layout", component: TablePage, icon: "table" },
     { link: "layout/tabs", title: "Tabs", section: "layout", component: TabsPage, icon: "tv-alt" },
     { link: "layout/timeline", title: "Timeline", section: "layout", component: TimelinePage, icon: "hourglass-start" },

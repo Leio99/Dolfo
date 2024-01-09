@@ -33,7 +33,7 @@ export class PininputPage extends React.Component{
 
         <ResultCode
             title="Label"
-            result={<PinInput label="I'm a pin" required length={5} />}
+            result={<PinInput label="I'm a pin" disabled required length={5} />}
             code={'<PinInput label="I\'m a pin" required length={5} />'}
         />
 

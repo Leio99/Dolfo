@@ -108,7 +108,7 @@ export class PinInput extends React.Component<PinInputProps, IState>{
         { value } = this.state,
         range = _.range(0, props.length)
 
-        return <div className={"dolfo-input-pin dolfo-form-input" + (props.className ? " " + props.className : "")} style={props.style} ref={this.ref}>
+        return <div className={"dolfo-input-pin dolfo-form-input" + (props.disabled ? " disabled" : "") + (props.className ? " " + props.className : "")} style={props.style} ref={this.ref}>
             {props.label && <label className="dolfo-input-label">
                 {props.label}
                 {props.required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
