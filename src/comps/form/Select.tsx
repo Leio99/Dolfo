@@ -324,7 +324,7 @@ class Select extends React.PureComponent<SelectProps, IState>{
                     tabIndex={-1}
                     required={props.required}
                     autoFocus={props.autoFocus}
-                    readOnly
+                    onChange={() => {}}
                 />
 
                 <span className="input-value">{this.decodeValue(value)}</span>
