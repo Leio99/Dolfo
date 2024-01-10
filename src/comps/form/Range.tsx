@@ -97,8 +97,8 @@ export class Range extends React.Component<RangeProps, IState>{
                     <span className="dolfo-input-required"> *</span>
                 </Tooltip> : <span className="dolfo-input-required"></span>} 
             </label>}
-            <input type="range" min={min} max={max} step={steps} value={value} onChange={this.onChange} disabled={disabled} onMouseUp={() => {
-                if (changeAfterRelease && onChange && !disabled)
+            <input type="range" min={min} max={max} step={steps} value={value} onChange={this.onChange} disabled={disabled} onMouseUp={e => {
+                if (changeAfterRelease && onChange && !disabled && e.nativeEvent.button === 0)
                     this.propagateChange()
             }} style={{
                 background: `linear-gradient(to right, var(--selectionblue) 0%, var(--selectionblue) ${bValue}%, ${color} ${bValue}%, ${color} 100%)`
