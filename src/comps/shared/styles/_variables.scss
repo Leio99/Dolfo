@@ -72,6 +72,9 @@ $lightColors: (
   --hoverred: #{$hoverRed};
   --roundradius: #{$roundRadius};
   --smallradius: #{$smallRadius};
+  --selectionblue: #{$selectionBlue};
+  --lightgrey: #{$lightGrey};
+  --darkhover: #{$darkThemeDarkHover};
 }
 
 @function setBtnColor($color){  

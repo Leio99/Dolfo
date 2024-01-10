@@ -1,8 +1,9 @@
+import _ from "lodash"
 import React from "react"
-import { BaseInputProps } from "../shared/models/InputProps"
 import { Tooltip } from "../layout/Tooltip"
 import { getConstant } from "../shared/Constants"
-import _ from "lodash"
+import { BaseInputProps } from "../shared/models/InputProps"
+import { isDarkTheme } from "../shared/utility"
 
 export interface RangeProps extends BaseInputProps{
     /** The minimum selectable value
@@ -36,21 +37,35 @@ export interface RangeProps extends BaseInputProps{
 
 interface IState{
     readonly value: number
+    readonly color: string
 }
 
 export class Range extends React.Component<RangeProps, IState>{
+    private observer: MutationObserver
+
     constructor(props: RangeProps){
         super(props)
 
         this.state = {
-            value: props.value != null && props.value >= props.min && props.value <= props.max && props.min ? props.value : 0
+            value: props.value != null && props.value >= props.min && props.value <= props.max && props.min ? props.value : 0,
+            color: isDarkTheme() ? "var(--darkhover)" : "var(--lightgrey)"
         }
+    }
+
+    componentDidMount = (): void => {
+        this.observer = new MutationObserver(() => this.setState({
+            color: isDarkTheme() ? "var(--darkhover)" : "var(--lightgrey)"
+        }))
+
+        this.observer.observe(document.querySelector("html"), { attributes: true })
     }
 
     componentDidUpdate = (prevProps: RangeProps): void => {
         if(prevProps.value !== this.props.value && this.props.value != null && this.props.value >= this.props.min && this.props.value <= this.props.max)
             this.setState({ value: this.props.value })
     }
+
+    componentWillUnmount = (): void => this.observer.disconnect()
 
     onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const value = Number(e.target.value),
@@ -69,21 +84,24 @@ export class Range extends React.Component<RangeProps, IState>{
 
     propagateChange = (): void => this.props.onChange(this.state.value)
     
-    render = () => {
-        const { value } = this.state,
+    render = (): React.ReactNode => {
+        const { value, color } = this.state,
         { changeAfterRelease, label, max, min, steps, required, style, disabled, className, showSteps, onChange } = this.props,
-        range = _.range(min, max + 2, steps).concat(max)
+        range = _.range(min, max, steps).concat(max),
+        bValue = (value - min) / (max - min) * 100
 
-        return <div className={"dolfo-input-range dolfo-form-input" + (disabled ? " disabled" : "") + (className ? " " + className : "")}>
+        return <div className={"dolfo-input-range dolfo-form-input" + (disabled ? " disabled" : "") + (className ? " " + className : "")} style={style}>
             {label && <label className="dolfo-input-label">
                 {label}
-                {required && <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
+                {required ? <Tooltip tooltip={getConstant("REQUIRED_FIELD")}>
                     <span className="dolfo-input-required"> *</span>
-                </Tooltip>} 
+                </Tooltip> : <span className="dolfo-input-required"></span>} 
             </label>}
-            <input type="range" min={min} max={max} step={steps} value={value} onChange={this.onChange} disabled={disabled} style={style} onMouseUp={() => {
-                if(changeAfterRelease && onChange)
+            <input type="range" min={min} max={max} step={steps} value={value} onChange={this.onChange} disabled={disabled} onMouseUp={() => {
+                if (changeAfterRelease && onChange && !disabled)
                     this.propagateChange()
+            }} style={{
+                background: `linear-gradient(to right, var(--selectionblue) 0%, var(--selectionblue) ${bValue}%, ${color} ${bValue}%, ${color} 100%)`
             }} />
             {showSteps && <div className="dolfo-input-range-steps">
                 {range.map(step => <strong key={step}>

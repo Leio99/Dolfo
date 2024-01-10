@@ -1,7 +1,10 @@
 .dolfo-input-range{
     width: 100%;
 
-    > input[type="range"]{
+    $pinWidth: 17px;
+    $sliderHeight: 8px;
+
+    > input[type="range"] {
         cursor: pointer;
         display: block;
         width: 100%;
@@ -10,24 +13,32 @@
         appearance: none;
         height: 20px;
         -webkit-appearance: none;
+        background-color: transparent;
+        height: $sliderHeight;
+        border-radius: $roundRadius;
+        position: relative;
+        z-index: 1;
 
-        &::-webkit-slider-thumb{
-            background-color: grey;
+        @mixin thumb {
+            background-color: $selectionBlue;
             appearance: none;
             -webkit-appearance: none;
-            width: 15px;
-            height: 15px;
+            width: $pinWidth;
+            height: $pinWidth;
             border-radius: $roundRadius;
-            transform: translateY(-3px)
+            border: 0
         }
 
-        &::-webkit-slider-runnable-track{
-            background-color: $lightGrey;
-            appearance: none;
-            -webkit-appearance: none;
-            height: 10px;
-            border-radius: $roundRadius;
-            border-radius: $roundRadius
+        &::-webkit-slider-thumb {
+            @include thumb
+        }
+
+        &::-moz-range-thumb {
+            @include thumb
+        }
+
+        &::-webkit-slider-runnable-track, &::-moz-range-track {
+            display: none
         }
     }
 
@@ -42,14 +53,6 @@
             pointer-events: none !important
         }
 
-        .dolfo-input-required{
-            color: $red;
-            font-size: 15px;
-            vertical-align: top;
-            position: relative;
-            top: -3px
-        }
-
         > span{
             left: 0;
             opacity: 1;
@@ -59,35 +62,27 @@
 
     .dolfo-input-range-steps{
         display: flex;
-        position: relative;
+        margin-top: 5px;
         
         strong{
-            flex: 1 1 100%;
             text-align: center;
             font-weight: 500;
-            position: relative;
-            height: 10px;
-            text-align: center;
-            border: 1px solid black;
+            margin: auto;
 
             span{
-                width: 15px;
+                width: $pinWidth;
                 display: inline-block;
-                text-align: center;
-                background-color: green;
+                text-align: center
             }
 
             &:last-child{
-                border-right-width: 2px
+                border-right-width: 2px;
+                margin-right: 0
             }
 
             &:first-child{
-                border-left-width: 2px
-            }
-                
-            &:last-child{
-                // position: absolute;
-                right: 0
+                border-left-width: 2px;
+                margin-left: 0
             }
         }
     }

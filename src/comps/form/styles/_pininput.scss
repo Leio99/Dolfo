@@ -1,6 +1,10 @@
 .dolfo-input-pin{
     text-align: center;
 
+    &.disabled label.dolfo-input-label > span{
+        pointer-events: none !important
+    }
+
     label.dolfo-input-label{
         font-size: 11px;
         text-transform: uppercase;
