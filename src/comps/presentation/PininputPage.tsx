@@ -99,7 +99,7 @@ export class PininputPage extends React.Component{
                 type: "function",
                 required: false,
                 default: "null",
-                fnParams: "Full pin"
+                fnParams: "Full pin value"
             }
         ]} />
     </>

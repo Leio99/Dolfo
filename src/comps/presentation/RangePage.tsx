@@ -105,7 +105,7 @@ export class RangePage extends React.Component{
                 type: "function",
                 required: false,
                 default: "null",
-                fnParams: "Full pin"
+                fnParams: "Range value (number)"
             }
         ]} />
     </>
