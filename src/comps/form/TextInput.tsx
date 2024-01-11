@@ -1,10 +1,11 @@
 import React from "react"
-import { FullInputProps } from "../shared/models/InputProps"
+import ReactDOM from "react-dom"
 import { Icon } from "../layout/Icon"
-import { InputWrapper } from "./InputWrapper"
-import { getConstant } from "../shared/Constants"
 import { Tooltip } from "../layout/Tooltip"
+import { getConstant } from "../shared/Constants"
 import { IconKey } from "../shared/models/IconModel"
+import { FullInputProps } from "../shared/models/InputProps"
+import { InputWrapper } from "./InputWrapper"
 
 export type InputTypes = "text" | "textarea" | "password" | "email" | "number"
 
@@ -67,6 +68,8 @@ interface IState{
 const MAX_ROWS = 5
 
 export class TextInput extends React.PureComponent<TextInputProps, IState>{
+    private initialTextareaHeight: number
+
     constructor(props: TextInputProps){
         super(props)
         
@@ -78,16 +81,20 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
         }
     }
 
+    componentDidMount = () => {
+        if(this.props.type === "textarea"){
+            const node = ReactDOM.findDOMNode(this) as HTMLElement,
+            textarea = node.querySelector("textarea")
+            
+            this.initialTextareaHeight = textarea.clientHeight
+        }
+    }
+
     componentDidUpdate = (prevProps: TextInputProps): void => {
-        let value = this.state.value,
-        inputType = this.state.inputType
-
         if(prevProps.value !== this.props.value)
-            value = this.props.value
+            this.setState({ value: this.props.value })
         if(prevProps.type !== this.props.type)
-            inputType = this.props.type
-
-        this.setState({ value, inputType })
+            this.setState({ inputType: this.props.type })
     }
 
     toggleInputType = (): void => this.setState({ inputType: this.state.inputType === "password" ? "text" : "password" })
@@ -130,12 +137,20 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
     }
 
     checkRows = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        if(this.props.expandTextarea){
-            const rows = e.target.value.split("\n").length,
-            max = this.props.rows || MAX_ROWS
+        const { expandTextarea, type, rows } = this.props
 
-            this.setState({
-                rows: rows <= max ? rows : max
+        if (expandTextarea && type === "textarea") {
+            this.setState({ rows: 1 }, () => {
+                const target = e.target as HTMLTextAreaElement,
+                newRows = target.value.split("\n").length,
+                max = rows || MAX_ROWS,
+                div = Math.ceil(target.scrollHeight / this.initialTextareaHeight),
+                whichToUse = div > newRows ? div : newRows
+                
+                console.warn(div, "div")
+                console.warn(newRows, "rows")
+
+                this.setState({ rows: whichToUse <= max ? whichToUse : max })
             })
         }
     }
