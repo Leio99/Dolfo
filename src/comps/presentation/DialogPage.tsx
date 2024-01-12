@@ -1,13 +1,13 @@
 import React from "react"
+import { MenuContentProps, MenuItem } from "../MenuContent"
 import Button from "../layout/Button"
 import { ComponentAsDialogProps, Dialog, openDialog, openDialogComponent, openInfoDialog, openLoadingDialog, openYesNoDialog } from "../layout/Dialog"
 import { DetailIcon, Icon } from "../layout/Icon"
-import { Table } from "../layout/table/Table"
 import { Tab, Tabs } from "../layout/Tabs"
 import { Tooltip } from "../layout/Tooltip"
-import { MenuContentProps, MenuItem } from "../MenuContent"
+import { Table } from "../layout/table/Table"
 import { copyToClipBoard } from "../shared/utility"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { Apis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class DialogPage extends React.Component<MenuContentProps, {
     readonly [x: string]: boolean

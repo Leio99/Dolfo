@@ -147,9 +147,6 @@ export class TextInput extends React.PureComponent<TextInputProps, IState>{
                 div = Math.ceil(target.scrollHeight / this.initialTextareaHeight),
                 whichToUse = div > newRows ? div : newRows
                 
-                console.warn(div, "div")
-                console.warn(newRows, "rows")
-
                 this.setState({ rows: whichToUse <= max ? whichToUse : max })
             })
         }

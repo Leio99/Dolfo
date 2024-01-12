@@ -24,7 +24,7 @@
         }
     }
 
-    &.loading-dialog{
+    &.loading-dialog .dolfo-dialog-inner{
         .dolfo-dialog-content{
             font-size: 21px;
             display: flex;
@@ -34,7 +34,7 @@
         }
 
         .dolfo-dialog-header, .dolfo-dialog-footer{
-            display: none
+            display: none !important
         }
     }
 
@@ -66,9 +66,11 @@
             padding: 1rem 1.3rem;
             
             &.dolfo-dialog-header{
+                display: flex;
+                align-items: center;
+
                 .dialog-close{
-                    transform: translateY(-10%);
-                    float: right
+                    margin-left: auto
                 }
 
                 .dolfo-dialog-title{
