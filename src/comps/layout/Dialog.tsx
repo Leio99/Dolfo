@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react"
+import React, { CSSProperties, createRef } from "react"
 import { createRoot } from "react-dom/client"
 import { getConstant } from "../shared/Constants"
 import { Closable } from "../shared/models/Closable"
@@ -101,6 +101,10 @@ export interface DialogFullProps extends BaseProps, React.PropsWithChildren{
      * @type boolean
      */
     readonly overflows?: boolean
+    /** If true, the dialog will be draggable using its header
+     * @type boolean
+     */
+    readonly draggable?: boolean
 }
 
 interface IState{
@@ -123,6 +127,11 @@ interface DialogProps extends DialogFullProps{
 }
 
 export class Dialog extends React.PureComponent<DialogFullProps, IState>{
+    private initPosX: number
+    private initPosY: number
+    private mouseDown = false
+    private innerRef = createRef<HTMLDivElement>()
+
     constructor(props: DialogFullProps) {
         super(props)
 
@@ -248,19 +257,44 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
         this.props.onOk && this.props.onOk()
     }
 
+    initDrag = (e: React.MouseEvent): void => {
+        this.initPosX = e.clientX
+        this.initPosY = e.clientY
+        this.mouseDown = true
+    }
+
+    stopDrag = () => this.mouseDown = false
+
+    drag = (e: React.MouseEvent) => {
+        if (this.mouseDown && this.props.visible) {
+            e.preventDefault()
+            const { clientX, clientY } = e,
+            { current } = this.innerRef,
+            left = Number(getComputedStyle(current).left.split("px")[0]),
+            top = Number(getComputedStyle(current).top.split("px")[0]),
+            newLeft = left - (this.initPosX - clientX),
+            newTop = top - (this.initPosY - clientY)
+
+            current.style.top = newTop + "px"
+            current.style.left = newLeft + "px"
+            this.initPosX = clientX
+            this.initPosY = clientY
+        }
+    }
+
     render = (): React.ReactNode => {
         const { props } = this,
         { visible } = this.state
 
-        return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "") + (props.top ? " place-top" : "") + (props.overflows ? " overflows" : "")}>
+        return <div className={"dolfo-dialog" + (visible ? " show" : "") + (props.className ? (" " + props.className) : "") + (props.top ? " place-top" : "") + (props.overflows ? " overflows" : "")} onMouseMove={props.draggable ? this.drag : null}>
             <div className="dolfo-dialog-overlay" onClick={props.clickOutside ? () => this.onClose("cancel") : null}></div>
 
-            <div className="dolfo-dialog-inner" style={{ ...props.style, width: props.width || props.style?.width }}>
-                <div className="dolfo-dialog-header">
+            <div className="dolfo-dialog-inner" ref={this.innerRef} style={{ ...props.style, width: props.width || props.style?.width }}>
+                <div className={"dolfo-dialog-header" + (props.draggable ? " draggable" : "")} onMouseDown={props.draggable ? this.initDrag : null} onMouseUp={props.draggable ? this.stopDrag : null}>
                     <h4 className="dolfo-dialog-title">{props.title}</h4>
                     {
                         !props.hideCloseX && <Tooltip tooltip={getConstant("CLOSE_TEXT")}>
-                            <Button circleBtn btnColor="white" onClick={() => this.onClose("cancel")} className="dialog-close">
+                            <Button circleBtn btnColor="white" onMouseDown={e => e.stopPropagation()} onClick={() => this.onClose("cancel")} className="dialog-close">
                                 <CloseIcon style={{ fontSize: 20 }} />
                             </Button>
                         </Tooltip>

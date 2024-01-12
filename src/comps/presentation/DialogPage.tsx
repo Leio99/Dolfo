@@ -31,7 +31,7 @@ export class DialogPage extends React.Component<MenuContentProps, {
             result={<>
                 <Button onClick={() => this.toggleDialog("first")} btnColor="blue" size="small">Open dialog</Button>
 
-                <Dialog onOk={() => this.toggleDialog("first")} onClose={() => this.toggleDialog("first")} title="I am a simple dialog" visible={this.state["first"]}>
+                <Dialog draggable onOk={() => this.toggleDialog("first")} onClose={() => this.toggleDialog("first")} title="I am a simple dialog" visible={this.state["first"]}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, placeat tempora. Repellat necessitatibus tempora consectetur minima hic maiores eveniet labore nobis illo, atque odit delectus vero debitis ratione nulla adipisci.
                 </Dialog>
             </>}
@@ -260,6 +260,13 @@ export class DialogPage extends React.Component<MenuContentProps, {
             {
                 name: "hideCloseX",
                 desc: "If true, hides the X button on the top right corner.",
+                type: "boolean",
+                required: false,
+                default: "false"
+            },
+            {
+                name: "draggable",
+                desc: "If true, the dialog will be draggable.",
                 type: "boolean",
                 required: false,
                 default: "false"
