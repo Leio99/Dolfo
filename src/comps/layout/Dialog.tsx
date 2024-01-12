@@ -265,7 +265,7 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
 
     stopDrag = () => this.mouseDown = false
 
-    drag = (e: React.MouseEvent) => {
+    drag = (e: React.MouseEvent): void => {
         if (this.mouseDown && this.props.visible) {
             e.preventDefault()
             const { clientX, clientY } = e,

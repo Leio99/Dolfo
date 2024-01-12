@@ -15,9 +15,7 @@ export class DialogPage extends React.Component<MenuContentProps, {
     constructor(props: MenuContentProps){
         super(props)
 
-        this.state = {
-
-        }
+        this.state = {}
     }
 
     toggleDialog = (key: string) => this.setState({ [key]: !this.state[key] })
@@ -40,13 +38,13 @@ export class DialogPage extends React.Component<MenuContentProps, {
         <ResultCode
             title="Draggable"
             result={<>
-                <Button onClick={() => this.toggleDialog("first")} btnColor="blue" size="small">Open dialog</Button>
+                <Button onClick={() => this.toggleDialog("drag")} btnColor="blue" size="small">Open dialog</Button>
 
-                <Dialog draggable onOk={() => this.toggleDialog("first")} onClose={() => this.toggleDialog("first")} title="I am a simple dialog" visible={this.state["first"]}>
+                <Dialog draggable onOk={() => this.toggleDialog("drag")} onClose={() => this.toggleDialog("drag")} title="I am a simple dialog" visible={this.state["drag"]}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, placeat tempora. Repellat necessitatibus tempora consectetur minima hic maiores eveniet labore nobis illo, atque odit delectus vero debitis ratione nulla adipisci.
                 </Dialog>
             </>}
-            code={'<Button onClick={() => this.toggleDialog("first")} btnColor="blue" size="small">Open simple dialog</Button>\n\n<Dialog draggable onOk={() => this.toggleDialog("first")} onClose={() => this.toggleDialog("first")} title="I am a simple dialog" visible={this.state["first"]}>\n\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, placeat tempora. Repellat necessitatibus tempora consectetur minima hic maiores eveniet labore nobis illo, atque odit delectus vero debitis ratione nulla adipisci.\n</Dialog>'}
+            code={'<Button onClick={() => this.toggleDialog("drag")} btnColor="blue" size="small">Open simple dialog</Button>\n\n<Dialog draggable onOk={() => this.toggleDialog("drag")} onClose={() => this.toggleDialog("drag")} title="I am a simple dialog" visible={this.state["drag"]}>\n\tLorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, placeat tempora. Repellat necessitatibus tempora consectetur minima hic maiores eveniet labore nobis illo, atque odit delectus vero debitis ratione nulla adipisci.\n</Dialog>'}
         />
 
         <ResultCode
