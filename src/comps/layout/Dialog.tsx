@@ -206,13 +206,14 @@ export class Dialog extends React.PureComponent<DialogFullProps, IState>{
             popup.remove()
             setTimeout(() => root.unmount())
         },
-        Component = React.createElement(Class, { ...props, close: closeFn } as React.ComponentProps<typeof Class>)
+        closable = new Closable(closeFn),
+        Component = React.createElement(Class, { ...props, close: closable.close } as React.ComponentProps<typeof Class>)
 
         document.body.appendChild(popup)
 
         root.render(Component)
         
-        return new Closable(closeFn)
+        return closable
     }
 
     private static getColor = (type: DialogProps["type"]): DialogProps["okType"] => {
