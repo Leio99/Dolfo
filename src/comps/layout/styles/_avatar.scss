@@ -1,6 +1,14 @@
 .dolfo-avatar{
     display: inline-block;
 
+    &.dolfo-avatar-alternative{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 200%;
+        border-radius: 100%
+    }
+
     img{
         width: 100%;
         height: 100%;

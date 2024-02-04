@@ -1,6 +1,6 @@
 import React from "react"
 import { Avatar } from "../layout/Avatar"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { Apis, ResultCode, Usage, WhenToUse } from "./Layouts"
 import avatarImage from "./images/avatarImage.png"
 
 export class AvatarPage extends React.Component{
@@ -12,6 +12,12 @@ export class AvatarPage extends React.Component{
             title="Simple avatar"
             result={<Avatar imageSource={avatarImage} />}
             code={'<Avatar imageSource="../avatar" />'}
+        />
+
+        <ResultCode
+            title="Alternative avatar"
+            result={<Avatar imageSource={null} alternativeStr="Leonzio" style={{ backgroundColor: "#B68AF6", color: "#fff" }} />}
+            code={'<Avatar imageSource={null} alternativeStr="Leonzio" style={{ backgroundColor: "#B68AF6", color: "#fff" }} />'}
         />
 
         <ResultCode
@@ -46,6 +52,12 @@ export class AvatarPage extends React.Component{
                 type: "string (small, medium, large, xl)",
                 required: false,
                 default: "medium"
+            },
+            {
+                name: "alternativeStr",
+                desc: "Specifices an alternative string for the avatar. If 'imageSource' is not set, it takes the first letter of the string and uses it as the avatar. You can use 'style' prop to set the background color and additional styles.",
+                type: "string",
+                required: false
             },
             {
                 name: "style",
