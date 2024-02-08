@@ -32,7 +32,7 @@ export class TablePage extends React.Component{
                 result={<Table columns={([
                     { type: "check", checkTooltip: "Check all", label: "", field: "" }
                 ] as IColumn[]).concat(this.cols)} data={this.data} />}
-                code={'<Table columns={[\n\t{ type: "check", checkTooltip: "Check all" },\n\t{ field: "firstName", label: "First name" },\n\t{ field: "lastName", label: "Last name" },\n\t{ field: "birth", label: "Date of birth", type: "date", align: "center" },\n\t{ field: "isActive", label: "Active", type: "boolean", align: "center" }\n]} data={[\n\t{ firstName: "Jack", lastName: "Nickolson", birth: new Date(1999, 3, 17), isActive: true },\n\t{ firstName: "James", lastName: "Spark", birth: new Date(1970, 11, 9), isActive: false }\n]} />'}
+                code={'<Table columns={[\n\t{ type: "check", checkTooltip: "Check all", label: "", field: "" },\n\t{ field: "firstName", label: "First name" },\n\t{ field: "lastName", label: "Last name" },\n\t{ field: "birth", label: "Date of birth", type: "date", align: "center" },\n\t{ field: "isActive", label: "Active", type: "boolean", align: "center" }\n]} data={[\n\t{ firstName: "Jack", lastName: "Nickolson", birth: new Date(1999, 3, 17), isActive: true },\n\t{ firstName: "James", lastName: "Spark", birth: new Date(1970, 11, 9), isActive: false }\n]} />'}
             />
 
             <ResultCode
