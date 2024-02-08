@@ -1,8 +1,8 @@
 import React from "react"
+import { goToApiBlock } from "../MenuContent"
 import { Icon } from "../layout/Icon"
 import { Tab, Tabs } from "../layout/Tabs"
-import { goToApiBlock } from "../MenuContent"
-import { ResultCode, WhenToUse, Usage, Apis } from "./Layouts"
+import { Apis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class TabsPage extends React.Component{
     render = (): React.ReactNode => <>
@@ -24,8 +24,8 @@ export class TabsPage extends React.Component{
 
         <ResultCode
             title="Vertical"
-            result={<Tabs vertical>
-                <Tab title="I am the first tab">
+            result={<Tabs vertical onChangeTab={console.warn}>
+                <Tab title="I am the first tab" value="Valore">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, officiis qui ut ipsam, voluptatum eius in saepe consequatur consectetur fugit perspiciatis ad doloribus placeat accusantium, omnis numquam cupiditate illo obcaecati!
                 </Tab>
                 <Tab title={<><Icon iconKey="home-alt" /> I have an icon</>}>
@@ -128,6 +128,12 @@ export class TabsPage extends React.Component{
                 type: "boolean",
                 required: false,
                 default: "false"
+            },
+            {
+                name: "value",
+                desc: "Additional value for the tab, which will be passed to the onChangeTab function.",
+                type: "any",
+                required: false
             },
             {
                 name: "className",

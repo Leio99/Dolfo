@@ -22,8 +22,9 @@ interface TabsProps extends React.PropsWithChildren{
     /** Function triggere when changing the tab
      * @type Function
      * @param index number
+     * @param value The value of the tab (if set)
      */
-    readonly onChangeTab?: (index: number) => void
+    readonly onChangeTab?: (index: number, value: any) => void
 }
 
 interface TabProps extends React.PropsWithChildren{
@@ -48,6 +49,10 @@ interface TabProps extends React.PropsWithChildren{
      * @type boolean
      */
     readonly disabled?: boolean
+    /** Defines a value for the tab, which will be passed to the onChangeTab
+     * @type any
+     */
+    readonly value?: any
 }
 
 interface IState{
@@ -109,7 +114,7 @@ export class Tabs extends React.PureComponent<TabsProps, IState>{
             currentTab: index
         }, this.handleBar)
 
-        this.props.onChangeTab && this.props.onChangeTab(index)
+        this.props.onChangeTab && this.props.onChangeTab(index, this.getChildrenTabs()[index]?.props.value)
     }
 
     handleBar = (): void => {
