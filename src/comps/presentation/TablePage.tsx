@@ -1,8 +1,8 @@
 import React from "react"
-import { Apis, ColumnApis, ResultCode, Usage, WhenToUse } from "./Layouts"
+import { goToApiBlock } from "../MenuContent"
 import { Table } from "../layout/table/Table"
 import { IColumn, IDataColumn } from "../shared/models/IColumn"
-import { goToApiBlock } from "../MenuContent"
+import { Apis, ColumnApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class TablePage extends React.Component{
     readonly cols: IColumn[] = [
@@ -30,7 +30,7 @@ export class TablePage extends React.Component{
             <ResultCode
                 title="With checkbox"
                 result={<Table columns={([
-                    { type: "check", checkTooltip: "Check all" }
+                    { type: "check", checkTooltip: "Check all", label: "", field: "" }
                 ] as IColumn[]).concat(this.cols)} data={this.data} />}
                 code={'<Table columns={[\n\t{ type: "check", checkTooltip: "Check all" },\n\t{ field: "firstName", label: "First name" },\n\t{ field: "lastName", label: "Last name" },\n\t{ field: "birth", label: "Date of birth", type: "date", align: "center" },\n\t{ field: "isActive", label: "Active", type: "boolean", align: "center" }\n]} data={[\n\t{ firstName: "Jack", lastName: "Nickolson", birth: new Date(1999, 3, 17), isActive: true },\n\t{ firstName: "James", lastName: "Spark", birth: new Date(1970, 11, 9), isActive: false }\n]} />'}
             />
