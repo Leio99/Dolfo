@@ -104,7 +104,7 @@ export class TabsPage extends React.Component{
                 type: "function",
                 required: false,
                 default: "null",
-                fnParams: "Tab index (number)"
+                fnParams: "Tab index (number), Tab value (if set)"
             }
         ]} />
 
