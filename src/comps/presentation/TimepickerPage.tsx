@@ -1,7 +1,7 @@
 import React from "react"
 import TimePicker from "../form/TimePicker"
 import { goToApiBlock, MenuContentProps } from "../MenuContent"
-import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
+import { Apis, IconApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class TimepickerPage extends React.Component<MenuContentProps>{
     render = (): React.ReactNode => <>
@@ -139,22 +139,6 @@ export class TimepickerPage extends React.Component<MenuContentProps>{
             {
                 name: "onKeyDownMinute",
                 desc: "Function triggered on minutes input key down.",
-                type: "function",
-                required: false,
-                default: "null",
-                fnParams: "Event"
-            },
-            {
-                name: "onKeyPressHour",
-                desc: "Function triggered on hours input key pressing.",
-                type: "function",
-                required: false,
-                default: "null",
-                fnParams: "Event"
-            },
-            {
-                name: "onKeyPressMinute",
-                desc: "Function triggered on minutes input key pressing.",
                 type: "function",
                 required: false,
                 default: "null",

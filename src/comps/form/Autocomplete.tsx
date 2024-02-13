@@ -310,7 +310,6 @@ export abstract class Autocomplete<E, K, P = unknown> extends React.Component<Au
                 ref={r => input = r}
                 required={props.required}
                 onKeyDown={this.onKeyDown}
-                onKeyPress={props.onKeyPress}
                 onKeyUp={this.onKeyUp}
                 onPaste={props.onPaste}
                 onFocus={this.onFocus}

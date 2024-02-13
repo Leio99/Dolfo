@@ -36,16 +36,6 @@ export interface TimePickerProps extends ExtendedInputProps{
      * @param e React.KeyboardEvent
      */
     readonly onKeyDownMinute?: (e: React.KeyboardEvent) => void
-    /** Function triggered on key press on the hours input
-     * @type Function
-     * @param e React.KeyboardEvent
-     */
-    readonly onKeyPressHour?: (e: React.KeyboardEvent) => void
-    /** Function triggered on key press on the minutes input
-     * @type Function
-     * @param e React.KeyboardEvent
-     */
-    readonly onKeyPressMinute?: (e: React.KeyboardEvent) => void
 }
 
 interface IState{
@@ -284,7 +274,6 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
                 autoFocus={props.autoFocus}
                 onChange={this.changeHour}
                 onKeyDown={this.keyDownHour}
-                onKeyPress={props.onKeyPressHour}
                 onKeyUp={props.onKeyUpHour}
             />
 
@@ -295,7 +284,6 @@ class TimePicker extends React.PureComponent<TimePickerProps, IState>{
                 disabled={props.disabled}
                 onChange={this.changeMinute}
                 onKeyDown={this.keyDownMinute}
-                onKeyPress={props.onKeyPressMinute}
                 onKeyUp={props.onKeyUpMinute}
             />
         </InputWrapper>

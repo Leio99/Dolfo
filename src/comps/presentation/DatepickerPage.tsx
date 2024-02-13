@@ -1,7 +1,7 @@
 import React from "react"
 import DatePicker from "../form/DatePicker"
 import { goToApiBlock, MenuContentProps } from "../MenuContent"
-import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
+import { Apis, IconApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class DatepickerPage extends React.Component<MenuContentProps>{
     render = (): React.ReactNode => <>
@@ -163,14 +163,6 @@ export class DatepickerPage extends React.Component<MenuContentProps>{
             {
                 name: "onKeyUp",
                 desc: "Function triggered on key up.",
-                type: "function",
-                required: false,
-                default: "null",
-                fnParams: "Event"
-            },
-            {
-                name: "onKeyPress",
-                desc: "Function triggered when pressing a key.",
                 type: "function",
                 required: false,
                 default: "null",

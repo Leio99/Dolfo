@@ -1,7 +1,7 @@
 import React from "react"
 import { TextInput } from "../form/TextInput"
 import { goToApiBlock, MenuContentProps } from "../MenuContent"
-import { ResultCode, WhenToUse, Usage, Apis, IconApis } from "./Layouts"
+import { Apis, IconApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 export class TextinputPage extends React.Component<MenuContentProps>{
     render = (): React.ReactNode => <>
@@ -10,7 +10,7 @@ export class TextinputPage extends React.Component<MenuContentProps>{
 
         <ResultCode
             title="Simple textinput"
-            result={<TextInput />}
+            result={<TextInput value="Readonly field" />}
             code={'<TextInput />'}
         />
 
@@ -262,14 +262,6 @@ export class TextinputPage extends React.Component<MenuContentProps>{
             {
                 name: "onKeyUp",
                 desc: "Function triggered on key up.",
-                type: "function",
-                required: false,
-                default: "null",
-                fnParams: "Event"
-            },
-            {
-                name: "onKeyPress",
-                desc: "Function triggered when pressing a key.",
                 type: "function",
                 required: false,
                 default: "null",

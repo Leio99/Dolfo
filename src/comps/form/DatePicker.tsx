@@ -495,7 +495,6 @@ class DatePicker extends React.PureComponent<DatePickerProps, IState>{
                 onChange={this.tryChangeDate}
                 onPaste={props.onPaste}
                 onKeyDown={this.handleKeyDown}
-                onKeyPress={props.onKeyPress}
                 onKeyUp={props.onKeyUp}
             />
         </InputWrapper>

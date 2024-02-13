@@ -57,11 +57,6 @@ export interface ExtendedInputProps extends BaseInputProps{
      * @param e React.KeyboardEvent
      */
     readonly onKeyDown?: (e: React.KeyboardEvent) => void
-    /** Function triggered on key press
-     * @type Function
-     * @param e React.KeyboardEvent
-     */
-    readonly onKeyPress?: (e: React.KeyboardEvent) => void
 }
 
 export interface FullInputProps extends ExtendedInputProps{

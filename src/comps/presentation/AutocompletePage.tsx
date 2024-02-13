@@ -1,8 +1,8 @@
 import React from "react"
+import { MenuContentProps, goToApiBlock } from "../MenuContent"
 import { Autocomplete } from "../form/Autocomplete"
 import { AutocompleteExample } from "./Examples"
-import { WhenToUse, Usage, ResultCode, Apis, IconApis } from "./Layouts"
-import { MenuContentProps, goToApiBlock } from "../MenuContent"
+import { Apis, IconApis, ResultCode, Usage, WhenToUse } from "./Layouts"
 
 interface DemoElement{
     readonly id: string
@@ -141,14 +141,6 @@ export class AutocompletePage extends React.Component<MenuContentProps>{
             {
                 name: "onKeyUp",
                 desc: "Function triggered on key up.",
-                type: "function",
-                required: false,
-                default: "null",
-                fnParams: "Event"
-            },
-            {
-                name: "onKeyPress",
-                desc: "Function triggered when pressing a key.",
                 type: "function",
                 required: false,
                 default: "null",
