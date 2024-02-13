@@ -4,18 +4,15 @@
   "main": "main.ts",
   "dependencies": {
     "@types/gapi": "^0.0.47",
-    "@types/jest": "^29.5.11",
     "@types/lodash": "^4.14.202",
-    "@types/node": "^20.10.5",
-    "@types/react": "^18.2.46",
-    "@types/react-onclickoutside": "^6.7.8",
-    "@types/react-router-dom": "^5.3.3",
+    "@types/node": "^20.11.17",
+    "@types/react": "^18.2.55",
+    "@types/react-onclickoutside": "^6.7.9",
     "node-sass": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-onclickoutside": "^6.13.0",
-    "react-router-dom": "^6.21.1",
-    "sass-loader": "^13.3.3",
+    "sass-loader": "^14.1.0",
     "typescript": "^5.3.3"
   },
   "scripts": {
@@ -55,7 +52,9 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "basic-ftp": "^5.0.4",
+    "react-router-dom": "^6.22.0",
     "react-scripts": "^5.0.1",
     "shx": "^0.3.4"
   }
